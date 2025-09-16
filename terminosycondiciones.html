@@ -12,8 +12,15 @@
   <!-- Estilos principales -->
   <link type="text/css" href="assets/css/style.css" rel="stylesheet">
   <link type="text/css" id="switcher" href="assets/css/theme-color/color.css" rel="stylesheet">
-	<meta property="og:image" content="assets/images/img.jpg">
-  
+  <meta property="og:image" content="assets/images/img.jpg">
+  <style>
+    .legal h2, .legal h3{margin-top:24px}
+    .legal ul{margin-left:1rem}
+    .cookie-table{width:100%;border-collapse:collapse;margin:12px 0}
+    .cookie-table th,.cookie-table td{border:1px solid #ddd;padding:8px;vertical-align:top}
+    .cookie-table th{background:#f7f7f7}
+    .btn-outline{display:inline-block;border:1px solid #444;padding:10px 14px;border-radius:6px}
+  </style>
 </head>
 <body>
 
@@ -33,7 +40,7 @@
   <!-- Contenido principal -->
   <main role="main">
     <section id="mu-feature">
-      <div class="container">
+      <div class="container legal">
         <div class="row">
           <div class="col-md-12">
             <div class="mu-feature-area">
@@ -44,37 +51,113 @@
               </div>
 
               <p style="text-align:justify;">
-                En esta página queremos informarte de forma clara y sencilla sobre cómo tratamos los datos personales en el sitio web <strong>Eidos</strong>.
+                En esta página te explicamos de forma clara cómo tratamos los datos personales en el sitio web
+                <strong>Eidos</strong> (<em>eidoslibro.com</em>) y cómo puedes gestionar tus preferencias de cookies.
               </p>
 
               <h3>Responsable del tratamiento</h3>
               <p><strong>Felden Vareth</strong><br>
-              📧 <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a></p>
+                📧 <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>
+              </p>
 
               <h3>Qué datos recogemos</h3>
               <ul>
-                <li>Correo electrónico y nombre: solo si nos escribes a través de nuestro email de contacto.</li>
-                <li>Datos técnicos básicos como la dirección IP o el navegador que utilizas, que pueden quedar registrados automáticamente en el servidor web por motivos de seguridad.</li>
+                <li><strong>Contacto:</strong> nombre y correo electrónico si nos escribes por email.</li>
+                <li><strong>Registros técnicos</strong> del servidor (p. ej., IP anónima, fecha/hora, agente de usuario) por seguridad y mantenimiento.</li>
+                <li><strong>Analítica web (opcional):</strong> estadísticas de uso mediante Google Analytics 4 <u>solo si aceptas cookies analíticas</u>.</li>
               </ul>
-              <p>No instalamos cookies de seguimiento ni analizamos estadísticas de navegación, salvo las imprescindibles para el correcto funcionamiento de la web.</p>
 
-              <h3>Para qué usamos los datos</h3>
+              <h3>Finalidades y base jurídica</h3>
               <ul>
-                <li>Responder a consultas recibidas por correo electrónico.</li>
-                <li>Garantizar la seguridad y el mantenimiento técnico de la web.</li>
+                <li><strong>Responder consultas</strong> por email – base jurídica: <em>interés legítimo</em> y/o <em>ejecución de petición</em>.</li>
+                <li><strong>Seguridad y mantenimiento de la web</strong> – base jurídica: <em>interés legítimo</em>.</li>
+                <li><strong>Analítica de uso con GA4</strong> – base jurídica: <em>tu consentimiento</em> (que puedes aceptar, rechazar o configurar).</li>
               </ul>
 
-              <h3>Conservación</h3>
-              <p>Los datos se conservarán únicamente el tiempo necesario para atender la consulta o cumplir con obligaciones legales.</p>
+              <h3>Cookies y tecnologías similares</h3>
+              <p>Usamos un banner de consentimiento con <strong>Google Analytics 4</strong> y <em>Consent Mode v2</em>.
+                Por defecto no activamos cookies analíticas hasta que das tu consentimiento.
+                Puedes cambiar tu preferencia en cualquier momento desde este botón:</p>
 
-              <h3>Comunicación de datos a terceros</h3>
-              <p>No compartimos tus datos con terceros, salvo obligación legal o requerimiento de autoridades competentes.</p>
+              <p><a href="#" id="manage-cookies" class="btn-outline">Gestionar preferencias de cookies</a></p>
+
+              <h4>Cookies de analítica que puede usar GA4 (si las aceptas)</h4>
+              <table class="cookie-table">
+                <thead>
+                  <tr>
+                    <th>Cookie</th>
+                    <th>Proveedor</th>
+                    <th>Finalidad</th>
+                    <th>Duración aproximada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>_ga</td>
+                    <td>Google Analytics</td>
+                    <td>Distinguir usuarios de forma anónima (ID aleatorio).</td>
+                    <td>hasta 2 años</td>
+                  </tr>
+                  <tr>
+                    <td>_ga_<em>XXXXX</em></td>
+                    <td>Google Analytics</td>
+                    <td>Mantener la sesión y medir interacciones en el sitio.</td>
+                    <td>hasta 2 años</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:.95rem;color:#555">
+                Nota: la instalación efectiva y la caducidad dependen de tu elección en el banner y de
+                la configuración del navegador/dispositivo.
+              </p>
+
+              <h3>Con quién compartimos datos</h3>
+              <p>
+                No cedemos datos a terceros salvo obligación legal. Para la analítica, utilizamos
+                <strong>Google Analytics 4</strong> (Google LLC / Google Ireland Limited) como
+                <em>encargado del tratamiento</em>.
+              </p>
+
+              <h3>Transferencias internacionales</h3>
+              <p>
+                Los servicios de Google pueden implicar transferencias internacionales. Google aplica
+                las <em>Cláusulas Contractuales Tipo</em> (SCC) y medidas complementarias. Puedes consultar
+                la documentación y condiciones de tratamiento de datos de Google en sus páginas oficiales.
+              </p>
+
+              <h3>Plazos de conservación</h3>
+              <ul>
+                <li>Consultas por email: el tiempo necesario para atenderlas y cumplir obligaciones legales.</li>
+                <li>Datos de analítica en GA4: según configuración estándar de la propiedad; no se conservan si rechazas las cookies.</li>
+              </ul>
+
+              <h3>Cómo cambiar o revocar tu consentimiento</h3>
+              <p>
+                Puedes modificar tu decisión sobre las cookies en cualquier momento con el botón
+                <a href="#" id="manage-cookies-2">“Gestionar preferencias de cookies”</a> o borrando
+                las cookies/almacenamiento del navegador para este sitio.
+              </p>
 
               <h3>Tus derechos</h3>
-              <p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación, supresión, limitación u oposición escribiendo a <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>.</p>
+              <p>
+                Puedes ejercer los derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad
+                escribiendo a <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>. Si consideras que
+                no se ha atendido correctamente, puedes reclamar ante la autoridad de control (AEPD en España).
+              </p>
 
-              <h3>Seguridad</h3>
-              <p>Adoptamos medidas técnicas y organizativas razonables para proteger tus datos frente a accesos no autorizados, pérdida o divulgación indebida.</p>
+              <h3>Medidas de seguridad</h3>
+              <p>
+                Aplicamos medidas técnicas y organizativas razonables para proteger tus datos frente a accesos no autorizados,
+                pérdida o alteración.
+              </p>
+
+              <h3>Actualizaciones de esta política</h3>
+              <p>
+                Podemos actualizar esta política para reflejar cambios legales o técnicos. Publicaremos la versión vigente
+                con la fecha de actualización.
+              </p>
+
+              <p style="color:#666;font-size:.9rem">Última actualización: septiembre 2025</p>
 
             </div>
           </div>
@@ -104,5 +187,20 @@
   <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Reabrir el banner de cookies (compatibles con tu implementación actual) -->
+  <script>
+    // Si usas la versión con 'ga_consent_v2' (modal granular)
+    function reopenConsent(){
+      try {
+        localStorage.removeItem('ga_consent_v2'); // borra la preferencia granular
+        localStorage.removeItem('consentGiven');  // por si usaste la versión simple
+      } catch(e){}
+      // Recarga para que el banner vuelva a mostrarse en la home
+      window.location.href = 'index.html';
+    }
+    document.getElementById('manage-cookies')?.addEventListener('click', function(e){ e.preventDefault(); reopenConsent(); });
+    document.getElementById('manage-cookies-2')?.addEventListener('click', function(e){ e.preventDefault(); reopenConsent(); });
+  </script>
 </body>
 </html>
