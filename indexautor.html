@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Compra – EIDOS (copia firmada)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Consigue tu ejemplar firmado de EIDOS. Tapa blanda 25€, tapa dura 36€. Instrucciones paso a paso y preguntas frecuentes." />
+  <meta name="author" content="Felden Vareth" />
+  <meta property="og:title" content="EIDOS – Copia firmada" />
+  <meta property="og:description" content="Pide tu ejemplar dedicado de EIDOS. Tapa blanda 25€, tapa dura 36€." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/images/img.jpg" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style-compra.css" />
+</head>
+<body class="eidos-body">
+  <header class="eidos-hero" role="banner" aria-label="Cabecera de compra">
+    <div class="eidos-hero__inner">
+      <div class="eidos-hero__content">
+        <p class="eidos-overline">Edición dedicada</p>
+        <h1 class="eidos-hero__title">Consigue tu ejemplar firmado de <span>EIDOS</span></h1>
+        <p class="eidos-hero__subtitle">Una novela de ciencia ficción filosófica por Felden Vareth</p>
+      </div>
+      <div class="eidos-hero__cta">
+        <a class="eidos-btn eidos-btn--ghost" href="index.html">← Volver</a>
+      </div>
+    </div>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">   
+    
+  </header>
+
+  <main id="main" role="main">
+    <!-- Oferta + Imagen -->
+    <section class="eidos-section">
+      <div class="eidos-card eidos-card--grid">
+        <div class="eidos-offer">
+          <h2 class="eidos-h2">Tu copia firmada</h2>
+          <p class="eidos-lead">Elige el formato y recibe tu libro con <strong>dedicatoria personalizada</strong>.</p>
+
+          <div class="eidos-prices">
+            <div class="eidos-price">
+              <h3 class="eidos-price__title">Tapa blanda</h3>
+              <p class="eidos-price__amount">25€</p>
+              <p class="eidos-price__note">Impresión B/N • 6x9 • Papel calidad editorial</p>
+            </div>
+            <div class="eidos-price">
+              <h3 class="eidos-price__title">Tapa dura</h3>
+              <p class="eidos-price__amount">35€</p>
+              <p class="eidos-price__note">Encuadernación premium • Ideal para regalo</p>
+            </div>
+          </div>
+
+          <ul class="eidos-bullets">
+            <li>Incluye dedicatoria (opcional, indícalo en el correo).</li>
+            <li>Envío nacional estándar (consultar internacional en las FAQ).</li>
+            <li>Pago por transferencia SEPA segura.</li>
+          </ul>
+
+          <div class="eidos-cta-row">
+            <a class="eidos-btn" href="#pasos">Pedir ahora</a>
+            <a class="eidos-btn eidos-btn--secondary" href="#faq">Preguntas frecuentes</a>
+          </div>
+        </div>
+
+        <figure class="eidos-cover">
+          <img src="assets/images/tapa.jpg" alt="Portada del libro EIDOS" />
+          <figcaption>Portada de <em>EIDOS</em></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Pasos -->
+    <section id="pasos" class="eidos-section" aria-labelledby="pasos-title">
+      <div class="eidos-card">
+        <h2 id="pasos-title" class="eidos-h2">Cómo pedir tu ejemplar</h2>
+        <div class="eidos-steps">
+          <!-- Paso 1 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">1</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Realiza la transferencia</h3>
+              <p><strong>IBAN:</strong> <span id="iban-text">ES49 1465 0100 96 1705934314</span></p>
+              <p><strong>Beneficiario:</strong> FELDEN VARETH</p>
+              <p><strong>Concepto:</strong>  EIDOS (indica formato: blanda o dura)</p>
+
+              <!-- Dos códigos QR EPC (SEPA) -->
+              <div class="eidos-qr-grid">
+                <div class="eidos-qr-card">
+                  <div class="eidos-qr__label">Tapa blanda  25 €</div>
+                  <canvas id="qr-blanda" width="140" height="140" aria-label="QR SEPA 25€ Tapa blanda"></canvas>
+                  <button class="eidos-btn eidos-btn--secondary" data-download-qr="#qr-blanda" data-filename="EIDOS_25_blanca.png">Escanea el QR</button>
+                </div>
+                <div class="eidos-qr-card">
+                  <div class="eidos-qr__label">Tapa dura  35 €</div>
+                  <canvas id="qr-dura" width="140" height="140" aria-label="QR SEPA 36€ Tapa dura"></canvas>
+                  <button class="eidos-btn eidos-btn--secondary" data-download-qr="#qr-dura" data-filename="EIDOS_36_dura.png">Escanea el QR</button>
+                </div>
+              </div>
+
+              <div class="eidos-step__row">
+                <button class="eidos-btn eidos-btn--ghost" data-copy="#iban-text">Copiar IBAN</button>
+              </div>
+              <p class="eidos-small">Si tu app bancaria no admite QR EPC, introduce los datos manualmente.</p>
+            </div>
+          </article>
+
+          <!-- Paso 2 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">2</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Envía tus datos</h3>
+              <p>Tras la transferencia, envía un correo a <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a> con:</p>
+              <ul>
+                <li>Justificante de pago</li>
+                <li>Nombre y apellidos</li>
+                <li>Dirección de envío completa</li>
+                <li>Formato elegido (blanda / dura)</li>
+                <li>Nombre para dedicatoria (si quieres)</li>
+                <li>Si es un regalo, indícalo y añadimos tarjeta</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Paso 3 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">3</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Confirmación y envío</h3>
+              <p>Recibirás un correo de confirmación. Prepararemos tu ejemplar firmado y lo enviaremos a la dirección indicada.</p>
+              <p class="eidos-small">El plazo medio de preparación es de 3–5 días laborables.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<!-- FAQ -->
+<section id="faq" class="eidos-section" aria-labelledby="faq-title">
+  <div class="eidos-card">
+    <h2 id="faq-title" class="eidos-h2">Preguntas frecuentes</h2>
+    <div class="eidos-faq">
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Incluye gastos de envío?</h3>
+        <p class="eidos-faq__a">Envío nacional estándar incluido para España peninsular. Para Islas/Internacional, consúltanos por correo antes de la compra.</p>
+      </article>
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Cómo solicito la dedicatoria?</h3>
+        <p class="eidos-faq__a">Indica en el correo el <em>nombre exacto</em> y, si quieres, una breve indicación (cumpleaños, regalo, etc.). Si es sorpresa, lo cuidamos.</p>
+      </article>
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Cuánto tarda en llegar?</h3>
+        <p class="eidos-faq__a">Preparación 3–5 días laborables + tránsito del transportista. Te avisaremos cuando salga con número de seguimiento cuando proceda.</p>
+      </article>
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Se hacen envíos internacionales?</h3>
+        <p class="eidos-faq__a">Sí. Podemos enviar fuera de España, aunque los costes y plazos de entrega varían según el país. Escríbenos antes de realizar la transferencia y te informaremos del suplemento de envío.</p>
+      </article>
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Puedo devolver un libro dedicado?</h3>
+        <p class="eidos-faq__a">No. Los ejemplares dedicados están personalizados para cada lector y, por motivos legales y logísticos, no admiten devoluciones una vez firmados. Solo en caso de defecto de impresión o daño en el envío se podrá gestionar un reemplazo.</p>
+      </article>
+      <article class="eidos-faq__item">
+        <h3 class="eidos-faq__q">¿Cuándo recibiré la confirmación de mi pedido?</h3>
+        <p class="eidos-faq__a">Una vez recibamos tu transferencia y tu correo con los datos, enviamos una confirmación en un plazo máximo de 24 horas laborables.</p>
+      </article>
+    </div>
+
+    <div class="eidos-cta-row eidos-cta-row--end">
+      <a class="eidos-btn eidos-btn--ghost" href="index.html">← Volver a la página principal</a>
+      <a class="eidos-btn eidos-btn--secondary" href="terminosycondiciones.html">Política de privacidad</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <footer class="eidos-footer" role="contentinfo">
+
+    <p>
+      Eidos Copyright © 2025 Felden Vareth / Todos los derechos reservados.
+    </p>
+  </footer>
+
+  <!-- Librería QR (ligera). Si no carga, se muestra fallback sin QR -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <!-- JS de la landing -->
+  <script src="assets/js/script-compra.js"></script>
+</body>
+</html>
