@@ -27,10 +27,8 @@ body.eidos-body{
   color: #fff;
   border-bottom: 1px solid rgba(255,255,255,.1);
   position: relative;
-  min-height: 200px; /* ajusta según lo alto que quieras el banner */
+  min-height: 200px;
 }
-
-
 
 .eidos-hero__inner{
   max-width:1100px;
@@ -80,19 +78,17 @@ body.eidos-body{
 /* Grid principal: oferta + portada a la derecha */
 .eidos-card--grid{
   display:grid;
-  grid-template-columns:1.1fr .9fr; /* texto / imagen */
+  grid-template-columns:1.1fr .9fr;
   gap:28px;
 }
 
-
 .eidos-hero__title span {
   font-family: 'Cinzel', serif;
-  font-weight: 200; /* peso normal, sin negrita */
+  font-weight: 200;
   color: #fff;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
-
 
 @media (max-width: 900px){
   .eidos-card--grid{grid-template-columns:1fr}
@@ -260,10 +256,11 @@ body.eidos-body{
   color:#0b1220;
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
   box-shadow:0 8px 26px rgba(138,180,255,.25);
-  transition:transform .08s ease, box-shadow .2s ease, filter .2s ease;
+  transition:transform .08s ease, box-shadow .2s ease, filter .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
 }
-.eidos-btn:hover{transform:translateY(-1px);filter:saturate(1.1)}
+.eidos-btn:hover{transform:translateY(-1px)}
 .eidos-btn:active{transform:translateY(0)}
+
 .eidos-btn--secondary{
   color:var(--text);
   background:transparent;
@@ -298,14 +295,13 @@ a:focus,button:focus{
   color: var(--accent);
   font-weight: 700;
 }
-
 .eidos-step a:hover,
 .eidos-faq a:hover {
   color: var(--accent-2);
   text-decoration: underline;
 }
 
-/* ----- Visibilidad de enlaces (incluye mailto) ----- */
+/* ----- Visibilidad de enlaces ----- */
 a { color: var(--accent); text-decoration: none; font-weight: 600; }
 a:hover, a:focus { color: var(--accent-2); text-decoration: underline; outline: none; }
 
@@ -333,7 +329,7 @@ a:hover, a:focus { color: var(--accent-2); text-decoration: underline; outline: 
   margin:2px 0 8px 0;
 }
 
-
+/* Ghost */
 .eidos-btn--ghost {
   color:#1b2450;
   background:#ffffff;
@@ -341,7 +337,6 @@ a:hover, a:focus { color: var(--accent-2); text-decoration: underline; outline: 
   box-shadow:0 6px 18px rgba(0,0,0,.08);
   transition: all .2s ease;
 }
-
 .eidos-btn--ghost:hover {
   background: var(--accent);
   color: #fff;
@@ -349,52 +344,72 @@ a:hover, a:focus { color: var(--accent-2); text-decoration: underline; outline: 
   box-shadow:0 6px 20px rgba(138,180,255,.45);
 }
 
-
 .eidos-hero__title,
 .eidos-hero__title span,
 .eidos-hero__subtitle,
 .eidos-overline {
-  color: #fff !important;             /* blanco puro */
+  color: #fff !important;
   text-shadow: 0 3px 8px rgba(0,0,0,0.8);
 }
 
-
-/* --- Fix responsive botón Volver en el hero --- */
+/* Fix responsive botón Volver en el hero */
 .eidos-hero__inner{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:16px;
-  flex-wrap:wrap;          /* permite que el botón baje si no cabe */
+  flex-wrap:wrap;
 }
-
 .eidos-hero__cta{ 
   flex:0 0 auto; 
   margin-left:auto;
 }
-
 .eidos-hero__cta .eidos-btn{
-  white-space:nowrap;      /* evita que se parta "Volver" */
+  white-space:nowrap;
 }
-
-/* En móviles, apila y alinea a la izquierda o centrado si prefieres */
 @media (max-width: 720px){
   .eidos-hero__inner{
     flex-direction:column;
-    align-items:flex-start;   /* o center si lo quieres centrado */
+    align-items:flex-start;
   }
   .eidos-hero__cta{
-    align-self:flex-start;    /* o center si lo quieres centrado */
+    align-self:flex-start;
     margin-left:0;
     width:100%;
   }
   .eidos-hero__cta .eidos-btn{
-    width:max-content;        /* o 100% para que sea de ancho completo */
+    width:max-content;
   }
 }
-
-/* Un pelín de ajuste tipográfico para que no rompa líneas raras */
 .eidos-hero__title{
   font-size:clamp(1.6rem, 5.2vw, 2.6rem);
   line-height:1.15;
+}
+
+/* --- FAQ: botón "Pedir ahora" a la izquierda, resto derecha --- */
+#faq .eidos-cta-row {
+  justify-content: space-between;
+}
+#faq .eidos-cta-row .eidos-btn:first-child {
+  margin-right: auto;
+}
+
+/* --- Hover en verde Eidos (#304D1D) --- */
+.eidos-btn:hover,
+.eidos-btn:focus {
+  background: #304D1D !important;
+  border-color: #304D1D !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(48, 77, 29, 0.45);
+  transform: translateY(-1px);
+  filter: none;
+}
+.eidos-btn--secondary:hover,
+.eidos-btn--secondary:focus,
+.eidos-btn--ghost:hover,
+.eidos-btn--ghost:focus {
+  background: #304D1D !important;
+  border-color: #304D1D !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(48, 77, 29, 0.45);
 }
