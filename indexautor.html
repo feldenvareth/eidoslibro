@@ -13,7 +13,239 @@
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style-compra.css" />
- 
+
+
+    <!-- ============================================================
+         Google Analytics 4 + Consent Mode v2 (Granular RGPD)
+         ============================================================ -->
+    <script>
+      // Capa de datos y helper
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      // 1) Consentimiento por defecto: TODO DENEGADO (antes de cargar gtag.js)
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+
+      // Utilidad: aplicar un objeto de consentimiento {analytics_storage, ad_*}
+      function applyConsentObject(obj){
+        gtag('consent', 'update', obj);
+        try { localStorage.setItem('ga_consent_v2', JSON.stringify(obj)); } catch(e){}
+      }
+
+      // 2) Restaurar preferencia guardada (si existe) ANTES de inicializar GA
+      (function applyStoredConsent(){
+        try {
+          const raw = localStorage.getItem('ga_consent_v2');
+          if (!raw) return;
+          const saved = JSON.parse(raw);
+          if (saved && typeof saved === 'object') {
+            applyConsentObject(saved);
+            window.__gaConsentPref = saved;
+          }
+        } catch(e){}
+      })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+    <script>
+      // 3) Inicializar GA4 sin enviar page_view automáticamente
+      gtag('js', new Date());
+      gtag('config', 'G-SCSFPYKJTX', { send_page_view: false });
+
+      // 4) Si ya había analytics_storage:'granted', enviar page_view ahora
+      try {
+        if (window.__gaConsentPref && window.__gaConsentPref.analytics_storage === 'granted') {
+          gtag('event', 'page_view');
+        }
+      } catch(e){}
+    </script>
+
+    <!-- Banner + Modal de consentimiento -->
+    <style>
+      #consent-banner{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:#f7f7f7;border-top:1px solid #ddd;padding:12px}
+      #consent-banner p{margin:0 0 8px}
+      #consent-banner .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+      #consent-banner button{border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+      #consent-accept{background:#1a73e8;color:#fff}
+      #consent-reject{background:#eaeaea}
+      #consent-config{background:#fff;border:1px solid #ccc}
+
+      .consent-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10001;display:none}
+      .consent-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;z-index:10002;width:min(520px,92vw);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none}
+      .consent-modal header{padding:14px 16px;border-bottom:1px solid #eee;font-weight:600}
+      .consent-modal .content{padding:14px 16px;max-height:60vh;overflow:auto}
+      .consent-modal .row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
+      .consent-modal .row:last-child{border-bottom:none}
+      .consent-modal h4{margin:.2rem 0}
+      .consent-modal p{margin:.2rem 0;color:#555;font-size:.95rem}
+      .consent-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eee}
+      .consent-actions button{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+      .btn-primary{background:#1a73e8;color:#fff}
+      .btn-ghost{background:#eaeaea}
+      .switch{position:relative;display:inline-block;width:44px;height:24px}
+      .switch input{opacity:0;width:0;height:0}
+      .slider{position:absolute;cursor:pointer;inset:0;background:#ccc;transition:.2s;border-radius:24px}
+      .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;top:3px;background:white;transition:.2s;border-radius:50%}
+      input:checked + .slider{background:#1a73e8}
+      input:checked + .slider:before{transform:translateX(20px)}
+    </style>
+  </head>
+  <body>
+
+    <!-- Banner -->
+    <div id="consent-banner" hidden>
+      <p>Usamos cookies analíticas (Google Analytics) y puedes elegir tus preferencias.
+        Más info en nuestra <a href="terminosycondiciones.html" rel="noopener">Política de Privacidad</a>.
+      </p>
+      <div class="btns">
+        <button id="consent-accept">Aceptar todo</button>
+        <button id="consent-reject">Rechazar</button>
+        <button id="consent-config">Configurar</button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="consent-modal-backdrop" id="consent-backdrop"></div>
+    <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title">
+      <header id="consent-modal-title">Preferencias de privacidad</header>
+      <div class="content">
+        <div class="row">
+          <div>
+            <label class="switch" title="Activar/desactivar cookies de medición">
+              <input type="checkbox" id="toggle-analytics">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div>
+            <h4>Analíticas (Google Analytics)</h4>
+            <p>Nos ayudan a entender el uso del sitio. Sin publicidad ni seguimiento entre sitios.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label class="switch" title="Publicidad personalizada y medición de anuncios">
+              <input type="checkbox" id="toggle-ads">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div>
+            <h4>Publicidad (opcional)</h4>
+            <p>Permite almacenamiento de anuncios, datos de usuario y personalización. Desactívalo si no quieres publicidad personalizada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="consent-actions">
+        <button class="btn-ghost" id="consent-cancel">Cancelar</button>
+        <button class="btn-primary" id="consent-save">Guardar preferencias</button>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        const banner   = document.getElementById('consent-banner');
+        const acceptBt = document.getElementById('consent-accept');
+        const rejectBt = document.getElementById('consent-reject');
+        const configBt = document.getElementById('consent-config');
+
+        const modal    = document.getElementById('consent-modal');
+        const backdrop = document.getElementById('consent-backdrop');
+        const saveBt   = document.getElementById('consent-save');
+        const cancelBt = document.getElementById('consent-cancel');
+
+        const tgAnalytics = document.getElementById('toggle-analytics');
+        const tgAds       = document.getElementById('toggle-ads');
+
+        function showBanner(){ banner.hidden = false; }
+        function hideBanner(){ banner.hidden = true; }
+
+        function openModal(){
+          // Cargar estado actual desde localStorage (o defaults denied)
+          let saved = null;
+          try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
+          const anaGranted = saved?.analytics_storage === 'granted';
+          const adsGranted = (saved?.ad_storage === 'granted'
+                           && saved?.ad_user_data === 'granted'
+                           && saved?.ad_personalization === 'granted');
+
+          tgAnalytics.checked = !!anaGranted;
+          tgAds.checked       = !!adsGranted;
+
+          backdrop.style.display = 'block';
+          modal.style.display = 'block';
+        }
+        function closeModal(){
+          backdrop.style.display = 'none';
+          modal.style.display = 'none';
+        }
+
+        function sendPageViewIfNeeded(){
+          // Enviar PV solo si hay analytics_storage:'granted'
+          try {
+            const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+            if (saved.analytics_storage === 'granted') {
+              gtag('event', 'page_view');
+            }
+          } catch(e){}
+        }
+
+        function acceptAll(){
+          const obj = {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          };
+          applyConsentObject(obj);
+          hideBanner();
+          sendPageViewIfNeeded();
+        }
+        function rejectAll(){
+          const obj = {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          };
+          applyConsentObject(obj);
+          hideBanner();
+        }
+
+        function saveGranular(){
+          const obj = {
+            analytics_storage: tgAnalytics.checked ? 'granted' : 'denied',
+            ad_storage:        tgAds.checked ? 'granted' : 'denied',
+            ad_user_data:      tgAds.checked ? 'granted' : 'denied',
+            ad_personalization:tgAds.checked ? 'granted' : 'denied'
+          };
+          applyConsentObject(obj);
+          closeModal();
+          hideBanner();
+          sendPageViewIfNeeded();
+        }
+
+        // Mostrar u ocultar el banner al cargar
+        window.addEventListener('load', function(){
+          let hasChoice = false;
+          try {
+            const raw = localStorage.getItem('ga_consent_v2');
+            if (raw) hasChoice = true;
+          } catch(e){}
+          if (!hasChoice) showBanner();
+        });
+
+        acceptBt.addEventListener('click', acceptAll);
+        rejectBt.addEventListener('click', rejectAll);
+        configBt.addEventListener('click', openModal);
+        saveBt.addEventListener('click', saveGranular);
+        cancelBt.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+      })();
+    </script>
+
 
 </head>
 <body class="eidos-body">
