@@ -2330,3 +2330,10 @@ button:focus {
   text-indent: 2em;                        /* sangría de 2em, ajusta a gusto */
   line-height: 1.6;
 }
+
+.mu-note-musica{
+  margin-top: 6px;
+  font-size: 1.00rem;
+  color: #000;
+  font-style: italic;
+}
