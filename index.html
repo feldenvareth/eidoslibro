@@ -119,8 +119,78 @@
       input:checked + .slider{background:#1a73e8}
       input:checked + .slider:before{transform:translateX(20px)}
     </style>
+    
+    
+    
+   <style>
+  #audio-toggle{
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 10050;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 12px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+  #audio-toggle:hover{ background: rgba(0,0,0,.75); }
+ 
+    
+    
+.audio-ctrl{
+  position: fixed;
+  right: 14px; bottom: 14px;
+  z-index: 10050;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 999px;
+  background: rgba(0,0,0,.6); color:#fff; backdrop-filter: blur(4px);
+}
+.audio-ctrl button{
+  border:0; background: transparent; color:#fff; cursor:pointer; font-size:18px;
+}
+.audio-ctrl input[type="range"]{
+  width: 120px; accent-color: #fff;
+}
+.audio-ctrl:hover{ background: rgba(0,0,0,.75); }
+@media (max-width: 480px){
+  .audio-ctrl input[type="range"]{ width: 90px; }
+}
+    
+    
+ </style>   
+    
+    
+    
+    
   </head>
   <body>
+
+
+
+<!-- Música de fondo -->
+<audio id="bg-audio"
+       src="assets/audio/seventh.mp3"
+       preload="auto"
+       loop
+       playsinline></audio>
+
+<!-- Mini-control de audio -->
+<div id="audio-ctrl" class="audio-ctrl" role="group" aria-label="Música de fondo">
+  <button id="audio-toggle" aria-label="Reproducir/pausar">
+    <span id="audio-toggle-icon">🔊</span>
+  </button>
+  <input id="audio-volume" type="range" min="0" max="100" step="1" value="50" aria-label="Volumen">
+</div>
+
+
+
+
+
+
+
 
     <!-- Banner -->
     <div id="consent-banner" hidden>
@@ -701,7 +771,7 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
                 <div class="mu-title-area">
                   <h2 class="mu-heading-title">CONTACTA</h2>
                   <span class="mu-title-dot"></span>
-                  <p>Si tienes alguna duda, por favor, ponte en contacto con nosotros</p>
+                  <p>Si tienes alguna duda, por favor, ponte en contacto</p>
                 </div>
 
                 <!-- Start Contact Content -->
@@ -751,6 +821,9 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
                   </div>
                 </div>
                 <!-- End Contact Content -->
+                
+                
+<p class="mu-note-musica">Nota: Si has leído <em>Eidos</em>, sabrás que esta música tiene un significado en la novela.</p>
 
               </div>
             </div>
@@ -791,6 +864,206 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
     <script src="assets/js/kanalytics.js"></script>
 
     <script src="assets/filtro/filter.js"></script>
+    
+    
+    
+<script>
+(function(){
+  // ==== Config ====
+  const FADE_IN_MS = 1000; // 1s
+
+  // ==== DOM ====
+  const audio  = document.getElementById('bg-audio');
+  const toggle = document.getElementById('audio-toggle');
+  const icon   = document.getElementById('audio-toggle-icon');
+  const slider = document.getElementById('audio-volume');
+
+  // ==== Estado ====
+  let started = false;
+  let firstGestureHooked = false;
+
+  // Preferencias
+  let userMuted = false;
+  try {
+    const savedMuted  = localStorage.getItem('bg_audio_muted');
+    const savedVolume = localStorage.getItem('bg_audio_volume');
+    if (savedMuted === 'true') userMuted = true;
+    audio.volume = Number.isFinite(parseFloat(savedVolume))
+      ? Math.max(0, Math.min(1, parseFloat(savedVolume)))
+      : 0.5;
+  } catch(e){}
+  slider.value = Math.round(audio.volume * 100);
+
+  function savePrefs(){
+    try {
+      localStorage.setItem('bg_audio_muted',  String(userMuted));
+      localStorage.setItem('bg_audio_volume', String(audio.volume));
+    } catch(e){}
+  }
+
+  function setIcon(){
+    icon.textContent = (audio.paused || userMuted || audio.volume === 0) ? '🔇' : '🔊';
+  }
+
+  // Fade lineal
+  function fadeTo(target = 0.5, duration = 600){
+    return new Promise(res=>{
+      const stepMs = 40;
+      const steps  = Math.max(1, Math.round(duration / stepMs));
+      const start  = audio.volume;
+      let i = 0;
+      const iv = setInterval(()=>{
+        i++;
+        audio.volume = start + (target - start) * (i/steps);
+        if (i>=steps){ clearInterval(iv); res(); }
+      }, stepMs);
+    });
+  }
+
+  // Hook primer gesto (para desmutear si hizo falta arrancar en mute)
+  function hookFirstGestureOnce(){
+    if (firstGestureHooked) return;
+    firstGestureHooked = true;
+    const onFirst = async () => {
+      document.removeEventListener('click', onFirst);
+      document.removeEventListener('keydown', onFirst);
+      document.removeEventListener('touchstart', onFirst);
+      userMuted = false;
+      try {
+        if (audio.paused) await audio.play();
+        audio.muted = false;
+        audio.volume = 0;
+        await fadeTo(slider.value/100, FADE_IN_MS);
+      } catch(e){}
+      savePrefs(); setIcon();
+    };
+    document.addEventListener('click', onFirst);
+    document.addEventListener('keydown', onFirst);
+    document.addEventListener('touchstart', onFirst, {passive:true});
+  }
+
+  // Autoplay + fallbacks
+  async function startAuto(){
+    if (userMuted || Number(slider.value) === 0) { setIcon(); return; }
+
+    try {
+      audio.muted  = false;
+      audio.volume = 0;
+      await audio.play();            // puede fallar por políticas
+      started = true;
+      await fadeTo(slider.value/100, FADE_IN_MS);
+    } catch(e) {
+      // Fallback: reproducir en mute y esperar el primer gesto
+      try {
+        audio.muted  = true;
+        audio.volume = 0;
+        await audio.play();
+        started = true;
+        hookFirstGestureOnce();
+      } catch(e2){
+        hookFirstGestureOnce();
+      }
+    }
+    setIcon();
+  }
+
+  // --- Controles UI ---
+  toggle.addEventListener('click', async () => {
+    if (audio.paused){
+      userMuted = false;
+      try{
+        audio.muted = false;
+        audio.volume = 0;
+        await audio.play();
+        await fadeTo(slider.value/100, FADE_IN_MS);
+        started = true;
+      }catch(e){
+        hookFirstGestureOnce();
+      }
+    } else {
+      userMuted = true;
+      await fadeTo(0, 150);
+      audio.pause();
+    }
+    savePrefs(); setIcon();
+  });
+
+  slider.addEventListener('input', async (e) => {
+    const v = Math.max(0, Math.min(100, Number(e.target.value))) / 100;
+    audio.volume = v;
+    userMuted = v === 0;
+    savePrefs();
+    if ((audio.paused || audio.muted) && v > 0){
+      try{
+        audio.muted = false;
+        audio.volume = 0;
+        await audio.play();
+        await fadeTo(v, 250);
+        started = true;
+      }catch(e){
+        hookFirstGestureOnce();
+      }
+    }
+    setIcon();
+  });
+
+  // Pausar con el vídeo
+  const playBtn  = document.querySelector('.mu-video-play-btn');
+  const closeBtn = document.querySelector('.mu-video-close-btn');
+  if (playBtn){
+    playBtn.addEventListener('click', () => { if (!audio.paused) audio.pause(); setIcon(); });
+  }
+  if (closeBtn){
+    closeBtn.addEventListener('click', async () => {
+      if (!userMuted && slider.value > 0){
+        try{
+          audio.muted = false;
+          audio.volume = 0;
+          await audio.play();
+          await fadeTo(slider.value/100, 300);
+        }catch(e){
+          hookFirstGestureOnce();
+        }
+      }
+      setIcon();
+    });
+  }
+
+  // Pausa al cambiar de pestaña; reanuda al volver
+  document.addEventListener('visibilitychange', async () => {
+    if (document.hidden){
+      if (!audio.paused) audio.pause();
+    } else if (!userMuted && slider.value > 0){
+      try{
+        audio.muted = false;
+        audio.volume = 0;
+        await audio.play();
+        await fadeTo(slider.value/100, 250);
+      }catch(e){
+        hookFirstGestureOnce();
+      }
+    }
+    setIcon();
+  });
+
+  // Volver desde el historial (bfcache) en Safari/Chrome
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted){ setIcon(); if (!userMuted) startAuto(); }
+  });
+
+  // Inicio
+  window.addEventListener('load', () => {
+    if (userMuted || audio.volume === 0) { audio.pause(); }
+    startAuto();
+    setIcon();
+  });
+})();
+
+
+
+</script>
+    
+    
   </body>
 </html>
 
