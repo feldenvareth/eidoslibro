@@ -36,7 +36,8 @@
     
       
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
     <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
@@ -58,7 +59,7 @@
     <!-- Fonts -->
 
     <!-- Open Sans for body and title font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,400;0,600;0,700;0,800&display=swap" rel="stylesheet">
  
  
 	
@@ -162,7 +163,7 @@
                         
                         
 						<!-- image based logo -->
-						<!-- <a class="mu-logo" href="#"><img src="assets/images/logo.png" alt="logo img"></a> -->
+						<!-- <a class="mu-logo" href="#"><img src="assets/images/logo.png" alt="logo img" loading="lazy" decoding="async"></a> -->
 					</div>
 					<!-- End Logo -->
 
@@ -170,7 +171,7 @@
 					<div class="mu-header-featured-area">
 						<div class="mu-header-featured-img">
                         
-							<img src="assets/images/eidos.png" alt="Libro Eidos">
+							<img src="assets/images/eidos.png" alt="Libro Eidos" loading="lazy" decoding="async">
                             
 						  <p>&nbsp; </p>
                           
@@ -269,11 +270,12 @@
 
     <script src="assets/js/kanalytics.source.js"></script>
     <script src="assets/js/kanalytics.js"></script>
-		<script src="assets/filtro/filter.js"></script>
+		<script src="assets/filtro/filter.js" defer></script>
     
     
 	
     
-  </body>
+    <script src="assets/js/optimize.js" defer></script>
+</body>
 </html>
 
