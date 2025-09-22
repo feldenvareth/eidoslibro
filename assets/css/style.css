@@ -815,7 +815,7 @@ button:focus {
 .mu-video-overlay {
 	display: inline;
 	float: left;
-	opacity: 0.8;
+	opacity: 0.5;
 	width: 100%;
 }
 
@@ -888,7 +888,9 @@ button:focus {
 }
 
 .mu-video-iframe-area {
-	background-color: rgba(0,0,0,0.84);
+	background-color: rgba(0,0,0,0.80);
+	background: transparent !important;
+    opacity: 1 !important;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -903,7 +905,19 @@ button:focus {
 	-webkit-transition: all 0.5s;
 	-o-transition: all 0.5s;
 	transition: all 0.5s;
+	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
 }
+
+.mu-video-iframe-area::before{
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.95);     /* ajusta el “oscuro” aquí */
+  z-index: 0;
+}
+.mu-video-iframe{ position: relative; z-index: 1; }
+
+
+
 
 .mu-video-iframe-display {
 	display: block;
@@ -912,6 +926,16 @@ button:focus {
 .mu-video-iframe-area iframe {
 
 }
+
+.mu-video-iframe{
+  background: #000 !important;  /* evita transparencia dentro del propio iframe */
+  opacity: 1 !important;   
+  	box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+  
+       /* por si algún estilo previo bajaba la opacidad */
+}
+
+
 
 
 
@@ -1270,57 +1294,6 @@ button:focus {
 
 
 
-/*--------------------*/
-/* Documentación */
-/*--------------------*/
-
-#mu-docs {
-	background-image: url("../images/docs-bg.webp");
-	background-position: center center;
-	background-size: cover;
-	background-attachment: fixed;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-#mu-docs::before {
-	
-	
-	
-	
- background: linear-gradient(rgba(228,189,255,0.9), rgba(89,24,153,0.9)),
-                linear-gradient(white, white);	
-
-	bottom: 0;
-	content: '';
-	left: 0;
-	top: 0;
-	right: 0;
-	position: absolute;
-	opacity: 0.84;
-}
-
-.mu-docs-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-docs-area .mu-title,
-.mu-docs-area p {
-	color: #fff;
-}
-
-.mu-docs-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	margin-top: 50px;
-}
 
 
 
@@ -1333,122 +1306,6 @@ button:focus {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*--------------------*/
-/* ejemplos */
-/*--------------------*/
-
-#mu-ejemplos {
-	background-image: url("../images/ejemplos-bg.webp");
-	background-position: center center;
-	background-size: cover;
-	background-attachment: fixed;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-#mu-ejemplos::before {
-	background: rgba(0,0,0,0.8);
-	bottom: 0;
-	content: '';
-	left: 0;
-	top: 0;
-	right: 0;
-	position: absolute;
-	opacity: 0.84;
-}
-
-.mu-ejemplos-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-ejemplos-area .mu-title,
-.mu-ejemplos-area p {
-	color: #fff;
-}
-
-.mu-ejemplos-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	margin-top: 50px;
-}
-
-
-/*--------------------*/
-/* Colaboraciones */
-/*--------------------*/
-
-#mu-colaboraciones {
-	background-image: url("../images/colabora-bg.webp");
-	background-position: center center;
-	background-size: cover;
-	background-attachment: fixed;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-#mu-colaboraciones::before {
- background: linear-gradient(rgba(228,189,255,0.9), rgba(89,24,153,0.9)),
-                linear-gradient(white, white);	
-
-	bottom: 0;
-	content: '';
-	left: 0;
-	top: 0;
-	right: 0;
-	position: absolute;
-	opacity: 0.84;
-}
-
-.mu-colaboraciones-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-colaboraciones-area .mu-title,
-.mu-colaboraciones-area p {
-	color: #fff;
-}
-
-.mu-colaboraciones-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	margin-top: 50px;
-}
 
 
 
@@ -1501,270 +1358,6 @@ button:focus {
 	text-align: center;
 	margin-top: 50px;
 }
-
-
-
-
-
-
-
-/*--------------------*/
-/* BLOG */
-/*--------------------*/
-
-
-#mu-blog {
-	background-color: #fff;
-	display: inline;
-	float: left;
-	width: 100%;
-}
-
-.mu-blog-area {
-	display: inline;
-	float: left;
-	padding: 100px 0;
-	width: 100%;
-}
-
-.mu-blog-content{
-	display: inline;
-	float: left;
-	margin-top: 50px;
-	width: 100%;
-}
-
-.mu-blog-slider {
-
-}
-
-.mu-single-blog {
-	padding: 0 10px;
-	outline: none;
-	-webkit-transition: all 0.3s ease 0s;
-	transition: all 0.3s ease 0s;
-}
-
-.mu-blogt-slider .slick-next {
-	right: -60px;
-}
-
-.mu-blog-slider .slick-prev {
-	left: -60px;
-}
-
-.mu-blog-slider .slick-next,
-.mu-blog-slider .slick-prev {
-	background-color: transparent;
-}
-
-
-
-
-
-/*--------------------*/
-/* FAQ */
-/*--------------------*/
-
-#mu-faq {
-	background-color: #f8f8f8;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-.mu-faq-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-faq-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	padding: 0 150px;
-	margin-top: 50px;
-}
-
-.mu-faq-content .panel-default {
-	border-color: #fff;
-	box-shadow: 0 2px 3px 0 rgba(0,0,0,0.06);
-}
-
-.mu-faq-content .panel-default > .panel-heading {
-	color: #333;
-	background-color: #fff;
-	border-color: #ddd;
-	padding: 0;
-
-}
-
-.mu-faq-content .panel-default > .panel-heading + .panel-collapse > .panel-body {
-	text-align: left;
-}
-
-
-.mu-faq-content .panel-title {
-	text-align: left;
-}
-
-.mu-faq-content .panel-title a {
-	display: block;
-	padding: 12px 15px;
-	-webkit-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;
-}
-
-.mu-faq-content .panel-title a>span {
-	margin-right: 5px;
-}
-
-
-
-
-
-/*--------------------*/
-/* certificaciones */
-/*--------------------*/
-
-#mu-certificaciones  {
-	background-image: url("../images/formacion-bg.webp");
-	background-position: center center;
-	background-size: cover;
-	background-attachment: fixed;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-#mu-certificaciones::before {
- background: linear-gradient(rgba(228,189,255,0.9), rgba(89,24,153,0.9)),
-                linear-gradient(white, white);	
-
-	bottom: 0;
-	content: '';
-	left: 0;
-	top: 0;
-	right: 0;
-	position: absolute;
-	opacity: 0.84;
-}
-
-.mu-certificaciones-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-certificaciones-area .mu-title,
-.mu-certificaciones-area p {
-	color: #fff;
-}
-.mu-certificaciones-area h3 {
-	color: #fff;
-}
-.mu-certificaciones-area h4 {
-	color: #fff;
-}
-
-
-
-
-.mu-certificaciones-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	margin-top: 50px;
-}
-
-
-
-
-
-
-
-
-
-
-/*--------------------*/
-/* carpas */
-/*--------------------*/
-
-#mu-carpas  {
-	background-image: url("../images/carpa-bg.webp");
-	background-position: center center;
-	background-size: cover;
-	background-attachment: fixed;
-	display: inline;
-	float: left;
-	position: relative;
-	width: 100%;
-}
-
-#mu-carpas::before {
-	background: rgba(0,0,0,0.8);
-
-	bottom: 0;
-	content: '';
-	left: 0;
-	top: 0;
-	right: 0;
-	position: absolute;
-	opacity: 0.84;
-}
-
-.mu-carpas-area {
-	display: inline;
-	float: left;
-	padding: 150px 0;
-	width: 100%;
-}
-
-.mu-carpas-area .mu-title,
-.mu-carpas-area p {
-	color: #fff;
-}
-.mu-carpas-area h3 {
-	color: #fff;
-}
-.mu-carpas-area h4 {
-	color: #fff;
-}
-
-
-
-
-.mu-carpas-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	margin-top: 50px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2337,4 +1930,30 @@ button:focus {
   color: #000;
   font-style: italic;
 }
+
+
+
+/* Bajar el vídeo en móviles sin cambiar tamaño ni opacidad */
+@media (max-width: 600px){
+  /* deja todo igual y solo añade margen superior relativo a la pantalla */
+  .mu-video-iframe{
+    margin-top: calc(12svh + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+
+/* En apaisado bajamos un poco menos */
+@media (max-width: 900px) and (orientation: landscape){
+  .mu-video-iframe{
+    margin-top: calc(6svh + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+
+
+
+
+
+
+
+
+
 

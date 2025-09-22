@@ -75,24 +75,32 @@
   });
 
   window.addEventListener('pageshow', setIcon);
+  
+  
 
   // ===== YOUTUBE (lazy load + stop audio on close + resume bg music) =====
-  function openVideo(){
-    area?.classList.add('open');
-
-    // remember state and pause bg music
-    wasPlayingBeforeVideo = !!(audio && !audio.paused && audio.volume > 0);
-    if (audio && !audio.paused){ audio.pause(); setIcon(); }
-
-    if (iframe && !iframe.src){
-      let url = iframe.dataset?.src || '';
-      // enable JS API so stopVideo works
-      if (url && !/enablejsapi=1/.test(url)){
-        url += (url.includes('?') ? '&' : '?') + 'enablejsapi=1';
-      }
-      if (url) iframe.src = url;
-    }
+function openVideo(){
+  // Saca el modal al <body> para que no herede opacidad de ancestros
+  if (area && area.parentElement !== document.body) {
+    document.body.appendChild(area);
   }
+
+  area?.classList.add('open');
+  document.body.classList.add('no-scroll');
+
+  // recuerda si sonaba la música y páusala (tu código actual)
+  wasPlayingBeforeVideo = !!(audio && !audio.paused && audio.volume > 0);
+  if (audio && !audio.paused){ audio.pause(); setIcon(); }
+
+  if (iframe && !iframe.src){
+    let url = iframe.dataset?.src || '';
+    if (url && !/enablejsapi=1/.test(url)){
+      url += (url.includes('?') ? '&' : '?') + 'enablejsapi=1';
+    }
+    if (url) iframe.src = url;
+  }
+}
+
 
   function closeVideo(){
     area?.classList.remove('open');
