@@ -390,7 +390,12 @@
                 <h1>Una certeza inquietante: Si mantenemos nuestra naturaleza… nuestra naturaleza nos acompañará.</h1>
 
                 <div class="mu-app-download-area">
-                  <a class="mu-google-btn" href="docs/eidosprimeroscapitulos.pdf" target="_blank"><i class="fa-solid fa-file-lines"></i><span>Descarga algunos capítulos</span></a>
+                
+                
+                  <a class="mu-google-btn" href="docs/eidosprimeroscapitulos.pdf" target="_blank">
+                  <i class="fa-solid fa-file-lines"></i><span>Descarga algunos capítulos</span></a>
+                  
+                  
                   <p>&nbsp; </p>
                   <a class="mu-google-btn" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
   <i class="fa-brands fa-amazon"></i>
@@ -887,6 +892,45 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
     
     
     <script src="assets/js/optimize.js" defer></script>
+    
+    
+   <script>
+(function(){
+  // Comprueba si el usuario ha concedido analytics (según tu banner RGPD)
+  function hasAnalyticsConsent(){
+    try {
+      const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+      return saved.analytics_storage === 'granted';
+    } catch(e){ return false; }
+  }
+
+  // Envía el evento a GA4
+  function trackSampleDownload(){
+    if (!hasAnalyticsConsent()) return; // Respeta RGPD
+    try {
+      gtag('event', 'file_download', {
+        file_name: 'eidosprimeroscapitulos.pdf',
+        file_extension: 'pdf',
+        link_text: 'Descarga algunos capítulos',
+        link_url: location.origin + '/docs/eidosprimeroscapitulos.pdf'
+      });
+    } catch(e){}
+  }
+
+  // Espera al DOM y engancha el click al enlace del PDF
+  document.addEventListener('DOMContentLoaded', function(){
+    var link = document.querySelector('a.mu-google-btn[href="docs/eidosprimeroscapitulos.pdf"]');
+    if (link) link.addEventListener('click', trackSampleDownload);
+  });
+})();
+</script>
+ 
+    
+    
+    
+    
+    
+    
 </body>
 </html>
 
