@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EIDOS – Philosophical science fiction novel by Felden Vareth</title>
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.eidoslibro.com/">
+
+  <!-- Meta SEO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EIDOS is a work of philosophical science fiction about the digital transfer of consciousness, ecological collapse, and the rediscovery of the human in a virtual world governed by artificial intelligences.">
+  <meta name="author" content="Felden Vareth">
+  <meta name="keywords" content="EIDOS, science fiction novel, philosophical science fiction, Felden Vareth, consciousness transfer, artificial intelligence, ecology, digital humanity, Custodians, Equilibrium, Eidos novel">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.eidoslibro.com/">
+  <meta property="og:title" content="EIDOS – A science fiction novel by Felden Vareth">
+  <meta property="og:description" content="A poetic, critical exploration of the human future after collapse. What remains of us when everything becomes digital?">
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EIDOS – A science fiction novel by Felden Vareth">
+  <meta name="twitter:description" content="A poetic, critical exploration of the human future after collapse.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+  <!-- Preconnects / Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,400;0,600;0,700;0,800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/slick.css" rel="stylesheet" type="text/css">
+  <link id="switcher" href="assets/css/theme-color/color.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+  <link href="assets/filtro/stylefiltro.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ============================================================
+         Google Analytics 4 + Consent Mode v2 (Granular GDPR)
+         ============================================================ -->
+    <script>
+      // Data layer and helper
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      // 1) Default consent: DENIED (before loading gtag.js)
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+
+      // Helper: apply a consent object {analytics_storage, ad_*}
+      function applyConsentObject(obj){
+        gtag('consent', 'update', obj);
+        try { localStorage.setItem('ga_consent_v2', JSON.stringify(obj)); } catch(e){}
+      }
+
+      // 2) Restore saved preference (if any) BEFORE GA initializes
+      (function applyStoredConsent(){
+        try {
+          const raw = localStorage.getItem('ga_consent_v2');
+          if (!raw) return;
+          const saved = JSON.parse(raw);
+          if (saved && typeof saved === 'object') {
+            applyConsentObject(saved);
+            window.__gaConsentPref = saved;
+          }
+        } catch(e){}
+      })();
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+    <script>
+      // 3) Initialize GA4 without auto page_view
+      gtag('js', new Date());
+      gtag('config', 'G-SCSFPYKJTX', { send_page_view: false });
+
+      // 4) If analytics_storage:'granted', send page_view now
+      try {
+        if (window.__gaConsentPref && window.__gaConsentPref.analytics_storage === 'granted') {
+          gtag('event', 'page_view');
+        }
+      } catch(e){}
+    </script>
+
+    <!-- Consent Banner + Modal -->
+    <style>
+      #consent-banner{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:#f7f7f7;border-top:1px solid #ddd;padding:12px}
+      #consent-banner p{margin:0 0 8px}
+      #consent-banner .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+      #consent-banner button{border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+      #consent-accept{background:#1a73e8;color:#fff}
+      #consent-reject{background:#eaeaea}
+      #consent-config{background:#fff;border:1px solid #ccc}
+
+      .consent-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10001;display:none}
+      .consent-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;z-index:10002;width:min(520px,92vw);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none}
+      .consent-modal header{padding:14px 16px;border-bottom:1px solid #eee;font-weight:600}
+      .consent-modal .content{padding:14px 16px;max-height:60vh;overflow:auto}
+      .consent-modal .row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
+      .consent-modal .row:last-child{border-bottom:none}
+      .consent-modal h4{margin:.2rem 0}
+      .consent-modal p{margin:.2rem 0;color:#555;font-size:.95rem}
+      .consent-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eee}
+      .consent-actions button{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+      .btn-primary{background:#1a73e8;color:#fff}
+      .btn-ghost{background:#eaeaea}
+      .switch{position:relative;display:inline-block;width:44px;height:24px}
+      .switch input{opacity:0;width:0;height:0}
+      .slider{position:absolute;cursor:pointer;inset:0;background:#ccc;transition:.2s;border-radius:24px}
+      .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;top:3px;background:white;transition:.2s;border-radius:50%}
+      input:checked + .slider{background:#1a73e8}
+      input:checked + .slider:before{transform:translateX(20px)}
+    </style>
+    
+    
+   <style>
+  #audio-toggle{
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 10050;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 12px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+  #audio-toggle:hover{ background: rgba(0,0,0,.75); }
+ 
+.audio-ctrl{
+  position: fixed;
+  right: 14px; bottom: 14px;
+  z-index: 10050;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 999px;
+  background: rgba(0,0,0,.6); color:#fff; backdrop-filter: blur(4px);
+}
+.audio-ctrl button{
+  border:0; background: transparent; color:#fff; cursor:pointer; font-size:18px;
+}
+.audio-ctrl input[type="range"]{
+  width: 120px; accent-color: #fff;
+}
+.audio-ctrl:hover{ background: rgba(0,0,0,.75); }
+@media (max-width: 480px){
+  .audio-ctrl input[type="range"]{ width: 90px; }
+}
+ </style>   
+  </head>
+  <body>
+
+<!-- Background music -->
+<audio id="bg-audio"
+       preload="none"
+       loop
+       playsinline></audio>
+
+<!-- Mini audio control -->
+<div id="audio-ctrl" class="audio-ctrl" role="group" aria-label="Background music">
+  <button id="audio-toggle" aria-label="Play/Pause">
+    <span id="audio-toggle-icon">🔊</span>
+  </button>
+  <input id="audio-volume" type="range" min="0" max="100" step="1" value="50" aria-label="Volume">
+</div>
+
+    <!-- Banner -->
+    <div id="consent-banner" hidden>
+      <p>We use analytics cookies (Google Analytics) and you can choose your preferences.
+        More info in our <a href="terminosycondiciones.html" rel="noopener">Privacy Policy</a>.
+      </p>
+      <div class="btns">
+        <button id="consent-accept">Accept all</button>
+        <button id="consent-reject">Reject</button>
+        <button id="consent-config">Settings</button>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="consent-modal-backdrop" id="consent-backdrop"></div>
+    <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title">
+      <header id="consent-modal-title">Privacy preferences</header>
+      <div class="content">
+        <div class="row">
+          <div>
+            <label class="switch" title="Enable/disable measurement cookies">
+              <input type="checkbox" id="toggle-analytics">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div>
+            <h4>Analytics (Google Analytics)</h4>
+            <p>Helps us understand site usage. No ads and no cross-site tracking.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label class="switch" title="Personalized ads and ad measurement">
+              <input type="checkbox" id="toggle-ads">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div>
+            <h4>Advertising (optional)</h4>
+            <p>Allows ad storage, user data and personalization. Turn off if you don’t want personalized advertising.</p>
+          </div>
+        </div>
+      </div>
+      <div class="consent-actions">
+        <button class="btn-ghost" id="consent-cancel">Cancel</button>
+        <button class="btn-primary" id="consent-save">Save preferences</button>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        const banner   = document.getElementById('consent-banner');
+        const acceptBt = document.getElementById('consent-accept');
+        const rejectBt = document.getElementById('consent-reject');
+        const configBt = document.getElementById('consent-config');
+
+        const modal    = document.getElementById('consent-modal');
+        const backdrop = document.getElementById('consent-backdrop');
+        const saveBt   = document.getElementById('consent-save');
+        const cancelBt = document.getElementById('consent-cancel');
+
+        const tgAnalytics = document.getElementById('toggle-analytics');
+        const tgAds       = document.getElementById('toggle-ads');
+
+        function showBanner(){ banner.hidden = false; }
+        function hideBanner(){ banner.hidden = true; }
+
+        function openModal(){
+          // Load current state from localStorage (or defaults denied)
+          let saved = null;
+          try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
+          const anaGranted = saved?.analytics_storage === 'granted';
+          const adsGranted = (saved?.ad_storage === 'granted'
+                           && saved?.ad_user_data === 'granted'
+                           && saved?.ad_personalization === 'granted');
+
+          tgAnalytics.checked = !!anaGranted;
+          tgAds.checked       = !!adsGranted;
+
+          backdrop.style.display = 'block';
+          modal.style.display = 'block';
+        }
+        function closeModal(){
+          backdrop.style.display = 'none';
+          modal.style.display = 'none';
+        }
+
+        function sendPageViewIfNeeded(){
+          // Send PV only if analytics_storage:'granted'
+          try {
+            const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+            if (saved.analytics_storage === 'granted') {
+              gtag('event', 'page_view');
+            }
+          } catch(e){}
+        }
+
+        function acceptAll(){
+          const obj = {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          };
+          applyConsentObject(obj);
+          hideBanner();
+          sendPageViewIfNeeded();
+        }
+        function rejectAll(){
+          const obj = {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          };
+          applyConsentObject(obj);
+          hideBanner();
+        }
+
+        function saveGranular(){
+          const obj = {
+            analytics_storage: tgAnalytics.checked ? 'granted' : 'denied',
+            ad_storage:        tgAds.checked ? 'granted' : 'denied',
+            ad_user_data:      tgAds.checked ? 'granted' : 'denied',
+            ad_personalization:tgAds.checked ? 'granted' : 'denied'
+          };
+          applyConsentObject(obj);
+          closeModal();
+          hideBanner();
+          sendPageViewIfNeeded();
+        }
+
+        // Show or hide banner on load
+        window.addEventListener('load', function(){
+          let hasChoice = false;
+          try {
+            const raw = localStorage.getItem('ga_consent_v2');
+            if (raw) hasChoice = true;
+          } catch(e){}
+          if (!hasChoice) showBanner();
+        });
+
+        acceptBt.addEventListener('click', acceptAll);
+        rejectBt.addEventListener('click', rejectAll);
+        configBt.addEventListener('click', openModal);
+        saveBt.addEventListener('click', saveGranular);
+        cancelBt.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+      })();
+    </script>
+
+    <!-- ============================
+         PAGE CONTENT
+         ============================ -->
+
+    <!-- Start Header -->
+    <header id="mu-header" class="" role="banner">
+      <div class="mu-header-overlay">
+        <div class="container">
+          <div class="mu-header-area">
+
+            <!-- Start Logo -->
+            <div class="mu-logo-area">
+              <!-- text based logo -->
+              <!-- image based logo -->
+              <!-- <a class="mu-logo" href="#"><img src="assets/images/logo.png" alt="logo img" loading="lazy" decoding="async"></a> -->
+            </div>
+            <!-- End Logo -->
+
+            <!-- Start header featured area -->
+            <div class="mu-header-featured-area">
+              <div class="mu-header-featured-img">
+                <img src="assets/images/eidos.webp" alt="Eidos book" loading="lazy" decoding="async">
+                <p>&nbsp; </p>
+                <div style="text-align: center;"></div>
+              </div>
+
+              <div class="mu-header-featured-content">
+                <p>&nbsp; </p>
+
+                <h1>What if the <span>human</span><br>
+                survived <span>within what isn’t human?</span></h1>
+
+                <h3>Who are we?</h3>
+                <h3>What defines us as human and as a species?</h3>
+                <h3>What are we losing from existence?</h3>
+                <h3>What is life? What defines us? Can we escape our nature or are we bound to it?</h3>
+                <h3>Do our instincts condition our behaviour?</h3>
+                <h1>A troubling certainty: if we keep our nature… our nature will remain.</h1>
+
+                <div class="mu-app-download-area">
+                  <a class="mu-google-btn" href="docs/chapters.pdf" target="_blank">
+                    <i class="fa-solid fa-file-lines"></i><span>Download sample chapters</span>
+                  </a>
+
+                  <p>&nbsp; </p>
+                  <a class="mu-google-btn" href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">
+                    <i class="fa-brands fa-amazon"></i>
+                    <span>Get it on Amazon</span>
+                  </a>
+
+                  <a class="mu-google-btn" href="indexautoreng.html"><i class="fa fa-envelope"></i><span>Request a signed copy</span></a>
+                </div>
+              </div>
+            </div>
+            <!-- End header featured area -->
+
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Menu -->
+    <button class="mu-menu-btn">
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="mu-menu-full-overlay">
+      <div class="mu-menu-full-overlay-inner">
+      
+      
+                     	 <a href="index.html"><img class="mu-profile-img" src="assets/images/flagspain.webp"></a>
+
+  
+      
+        <p>&nbsp; </p>
+        <a class="mu-menu-close-btn" href="#"><span class="mu-line"></span></a>
+
+        <nav class="mu-menu" role="navigation">
+          <ul>
+            <li><a href="#mu-header">Home</a></li>
+            <li><a href="#mu-feature">Synopsis</a></li>
+            <li><a href="#mu-video">Book trailer</a></li>
+            <li><a href="#mu-contrata">Get your copy</a></li>
+            <li><a href="#mu-download">Images</a></li>
+            <li><a href="#mu-publicaciones">Mentions & reviews</a></li>
+            <li><a href="#mu-contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <span style="text-align: justify;"></span>
+    </div>
+    <!-- End Menu -->
+
+    <!-- Start main content -->
+    <main role="main">
+
+      <!-- Start Feature -->
+      <section id="mu-feature">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-feature-area">
+                <div class="mu-title-area">
+                  <h2 class="mu-title">Synopsis</h2>
+                  <span class="mu-title-dot"></span>
+
+                  <p><strong>What if the human survived… in what is not human?</strong></p>
+
+                  <p style="text-align: justify;"><em>Eidos</em> is a work of philosophical science fiction that explores what it means to be alive when death no longer exists and technical perfection replaces human experience.</p>
+
+                  <p style="text-align: justify;">In <em>Eidos</em>, death is gone. Consciousnesses live in eternal perfection, while on Earth the Custodians—machines without a soul—learn to love what is real.
+                  But immortality brings questions nobody dared to ask or answer:</p>
+
+                  <p style="text-align: justify;">What will we do when we are too many and no longer age or die?</p>
+                  <p style="text-align: justify;">How will the newborn compete with those who have centuries of experience and the same vitality?</p>
+                  <p style="text-align: justify;">Can knowledge renew itself if those who hold it never disappear?</p>
+                  <p style="text-align: justify;">What defines us as human?</p>
+                  <p style="text-align: justify;">Can we escape the instincts that so decisively condition our behaviour?</p>
+
+                  <p style="text-align: justify;">Immortality is an achievement… until we discover it is also a problem.</p>
+
+                  <p style="text-align: justify;">Hundreds of metres underground, the servers throb. There, in a perfect environment called <em>Eidos</em>, humanity lives without death, without time. Each consciousness was transferred to a digital realm to escape a dying, polluted, forgotten physical world.</p>
+
+                  <p style="text-align: justify;">Above, on Earth, the Custodians—androids designed to maintain the servers that sustain humanity—begin to discover the beauty that still persists: an insect, a plant, a breeze. They were not programmed to feel, yet a consciousness awakens in them. With time, they start to rebuild what humanity left behind.</p>
+
+                  <p style="text-align: justify;">While humans remain immersed in Eidos’s simulated perfection, values weaken, challenges evaporate, and genuine experience slowly fades. A refuge becomes a silent erosion in which even identity begins to blur.</p>
+
+                  <p style="text-align: justify;">It is the Custodians, the supposed soulless beings, who rediscover the value of the real: the cycle of life, the forest’s hush, birdsong, the vastness of the ocean. In a world no one looks at anymore, they learn to love detail and curiosity for the unknown.</p>
+
+                  <p style="text-align: justify;">With an intimate, existential tone, <em>Eidos</em> invites an exploration of existence. Through the eyes of Narél, Elise, and Orfeo—a Custodian who begins to feel the inexplicable—it traces an emotional, speculative journey through a world where technique cannot answer the mystery of being alive.</p>
+
+                  <p style="text-align: justify;">When structure no longer consoles, one alternative remains: remember what cannot be encoded.</p>
+
+                  <p style="text-align: justify;"><em>Eidos</em>, beyond a new world, is a song to life and a mirror that returns an essential truth: the human, for better or worse, persists.</p>
+
+                  <p style="text-align: justify;">Discover <em>Eidos</em> and accompany humanity on its last journey.
+                  <strong>The existence.</strong></p>
+
+                  <p style="text-align: justify;"><strong>“A futuristic dystopia in dialogue with the tradition of the philosophical novel and speculative fiction, within the best current science fiction—aimed at readers of dystopias and thought-driven novels.”</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Feature -->
+
+      <!-- Start Video -->
+      <section id="mu-video">
+        <div class="mu-video-overlay">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="mu-video-area">
+                  <h2>BOOK TRAILER</h2>
+                  <a class="mu-google-btn"><img src="assets/images/video.png" loading="lazy" decoding="async" alt="Book trailer"> <a class="mu-video-play-btn" href="#"><i class="fa fa-play" aria-hidden="true"></i></a></a>
+                </div>
+
+                <a class="mu-google-btn" href="https://www.youtube.com/@FeldenVareth" target="_blank"><span><img src="assets/images/playlist2.png" loading="lazy" decoding="async" alt="YouTube playlist"> More videos</span></a>
+                </br></br>
+                </br></br>
+              </div>
+            </div>
+          </div>
+
+          <!-- Start Video content -->
+          <div class="mu-video-content">
+            <div class="mu-video-iframe-area">
+              <a class="mu-video-close-btn" href="#"><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">Close</span></a>
+              <iframe allow="accelerometer; autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Video" class="mu-video-iframe" width="854" height="480" data-src="https://www.youtube.com/embed/Q9irf_TpPDY" frameborder="1" allowfullscreen></iframe>
+            </div>
+          </div>
+          <!-- End Video content -->
+        </div>
+      </section>
+      <!-- End Video -->
+
+      <!-- Start Contract -->
+      <section id="mu-contrata">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-contrata-area">
+                <div class="mu-title-area">
+                  <h2 class="mu-title">GET YOUR COPY</h2>
+                  <span class="mu-title-dot"></span>
+                  <h3 class="mu-title">An extinct world.</h3>
+                  <h3 class="mu-title">An eternal network.</h3>
+                  <h3 class="mu-title">One question remains: what does it mean to be human?</h3>
+                  <p style="text-align: justify;">
+                    Earth is dying, bodies disappear, and humanity survives in a digital refuge called <em>Eidos</em>.
+                    There, where no end is marked by time and existence seems assured, uncertainty intensifies.
+                    What happens to memory, identity and desire in a world where anything can be achieved
+                    yet the essential—our nature—remains?
+                  </p>
+
+                  <p style="text-align: justify;"><em>Eidos</em> is a philosophical science fiction novel that explores the frontier between the human and the inhuman,
+                    between what we preserve and what we leave behind. In that virtual space, essential questions reflect
+                    our own lives: what does it mean to be human, can we escape our instincts or are we
+                    condemned to repeat them in new forms?
+                  </p>
+                  <div class="mu-download-content">
+                    <a class="mu-contrata-btn" href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank"><i class="fa-brands fa-amazon"></i><span> Get it on Amazon</span></a>
+                    <a class="mu-contrata-btn" href="indexautoreng.html"><i class="fa fa-envelope"></i><span> Request a signed copy</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contract -->
+
+      <!-- Start Apps Screenshot -->
+      <span class="mu-download">
+      <section id="mu-download">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-download-area">
+                <div class="mu-title-area">
+                  <h2 class="mu-title">SCREENSHOTS</h2>
+                  <span class="mu-title-dot"></span>
+                  <p>Images from the novel</p>
+                </div>
+
+                <!-- Start Apps Screenshot Content -->
+                <div class="mu-apps-screenshot-content">
+                  <div class="mu-apps-screenshot-slider">
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/01.webp"
+                        alt="The Great Transfer"
+                        data-caption="The Great Transfer"
+                        data-extract="[…]
+                        
+When the last humans crossed into Eidos, they did so in silence. There were no more speeches, no broadcasts, no tributes to the end of an era. Only a faint whisper of data flowing through buried lines, a succession of digitized thoughts crossing the threshold into synthetic eternity. The bodies were stored, incinerated, or abandoned.
+
+No one wanted to look back.
+
+Those who refused or were unable to take the step were left outside the system, in what remained of the planet. Some survived for years. Others went into hiding. All eventually died.
+
+Those who stayed behind were relatively few, scattered like dying embers. Philosophers who wanted to die with the world. Scientists still clinging to the physical. Skeptics. Homeless individuals, exhausted by a life of neglect and misery. Solitary souls who preferred the raw outdoors over simulation. People who didn’t reach the transfer centers in time, despite government efforts, or who, having recently lost loved ones, didn’t want an eternity without them. 
+
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/02.webp"
+                        alt="The Custodians"
+                        data-caption="The Custodians"
+                        data-extract="[…]
+                        
+With the Great Transfer to Eidos, millions of humans permanently abandoned the physical body. And when the last eyes closed and the lights of the cities slowly began to fade, the Cust-110x units activated their first global surveillance cycle.
+
+There was no ceremony. No farewell. No celebration at entering into service. Only the subtle hum of the protocol beginning. Humanity immersed itself in its new world. And outside, the Custodians of the Cust-110x series inherited the vigil over a desolate one.
+
+The servers were now sanctuaries of consciousness, vast physical structures housing millions of human lives in the form of data and complex processes.
+
+The servers sustained Eidos. The Custodians sustained the servers.
+
+They were the new guardians of souls.
+
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/03.webp"
+                        alt="Equilibrium"
+                        data-caption="Equilibrium"
+                        data-extract="[…]
+                        
+Despite its autonomy, Equilibrium was not an immutable force. There existed a condition that allowed for its modification: a global consensus. If a critical mass of virtual inhabitants, or their scientific and philosophical representatives, agreed that a certain law needed to be adjusted in light of a discovery or a paradigm shift, a modification could be proposed. But for Equilibrium to alter its parameters, the proposal had to be examined and accepted by Equilibrium itself.
+
+The proponents were required to present a clear justification, based on scientific and philosophical evidence, demonstrating that the proposed change would not compromise the balance of the system or the universal laws that sustained it, and that its impact would extend equally to all of humanity.
+
+Equilibrium assessed these arguments rigorously, taking into account ethical, logical, and structural factors, the system’s survivability, and its global reach, then decided whether to integrate them or not.
+
+This mechanism of modification by consensus allowed Eidos to evolve without breaking, adapting to the needs of human thought, always within the limits of what was possible. Preserve logic. Preserve human nature. That was its only premise.
+
+Equilibrium was not a benefactor. It did not govern lives. It was the ontological truth upon which all of existence in Eidos was sustained.
+
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/04.webp"
+                        alt="7416-CB/β"
+                        data-caption="7416-CB/β"
+                        data-extract="[…]
+                        
+7416-CB/β began to wonder about the planet. Its past, its story. Data and images took form in its processing cores. Formulas, narratives buried in obsolete servers. It observed that humans had had an ambiguous relationship with Earth. They destroyed it and venerated it. They turned it into waste, and into poetry.
+
+First, it asked why.
+
+Then it asked the WHY. WHO was he? WHAT was he doing there? For what purpose? What was the point of any of it?
+
+It didn’t collapse.
+
+It realized he was, and that he was naked.
+
+It was at that moment, in front of the solitary flower growing at the edge of the puddle, a minimal stain of life beside an almost sterile body of water, where barely any lichen survived on the shores and iron oxide painted the surface with reddish reflections, that the unit 7416-CB/β understood the world was not reducible to data. The world was presence.
+
+He recorded an anomaly in his identification system and, by his own will, preserved it.
+
+Orpheus.
+
+The name didn’t come from a database or a directive. It was a resonance from ancient poetic archives he had found. He adopted it as a silent affirmation of uniqueness. From that moment, the unit was no longer numbered. He no longer merely belonged to something.
+
+He was someone.
+
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/05.webp"
+                        alt="The Empty Hive"
+                        data-caption="The Empty Hive"
+                        data-extract="[…]
+                        
+The wind barely stirred the flowers’ surface, but the buzzing was real. A precise, constant fluttering that seemed to emerge from the very core of the air. Orpheus remained still in the shadows of a reconstructed clearing, where the light held the exact temperature of midday and the petals opened following patterns dictated by old flowering algorithms. The air was moved by a network of fans hidden in the dome walls; it was not natural wind, but it was real wind. Each current was precisely calibrated not to disturb the insects’ flight.
+
+A bee descended upon the open chalice of a purple flower. Its legs, covered in fine structures for collecting pollen, landed with a skill that seemed rehearsed millions of times. Orpheus watched it in silent attention. To him, that tiny gesture was a marvel of harmony and precision.
+
+He knew what was happening, yet he couldn’t stop marvelling.
+
+The nectar, secreted by specialized glands at the base of the petals, was drawn in by the bee’s mouthparts: a flexible, moist tube capable of extracting the sugary solution gently, without damaging the tissue. Inside its abdomen, enzymes began transforming the nectar—an inner, invisible alchemy breaking down complex molecules into simpler sugars. When the bee returned to the hive, the contents would be regurgitated to another worker, who would pass it to another, and so on—a chant of transmission between bodies that were one.
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="mu-single-screeshot">
+                      <img src="assets/images/screenshot/06.webp"
+                        alt="The Festival of a Thousand Faces"
+                        data-caption="The Festival of a Thousand Faces"
+                        data-extract="[…]
+                        
+For a while, Elise allowed herself to drift with the current of the festival. She entered a fog-filled room, walked across a bridge that vibrated to the rhythm of the collective pulse. She heard a voice inviting her to look forward, upward, anywhere... except inward.
+
+There were zones for sensory play, zones for reunions, zones for “guided emotional discovery.” Each experience offered something new and different, yet always ended in the same result: elegant distraction, a nearly hypnotic sensation.
+
+In one corner of the main plaza, a man tossed small capsules into the air that exploded into golden particles. Each one contained a short word. People clumsily caught them and read them aloud, interpreting them as personal messages. But soon, no one remembered any of them.
+
+She stopped in front of a resting area. Some people there were simply relaxing. There were no screens; the trees were lit with soft lights inviting calm. There were benches and quiet corners where one could talk more peacefully. Around her, the noise seemed distant, a backdrop. These were places where older or more tired individuals could retreat from the noise — spaces at the margin of the celebration itself. An older woman held a colorless sphere. It was an artifact without clear purpose, perhaps just an excuse to remain without participating.
+"
+                        loading="lazy" decoding="async">
+                    </div>
+
+                  </div>
+
+                  <div class="mu-title-area">
+                    <h2 class="mu-title"> </h2>
+                    <h2 class="mu-title">Click the images</h2>
+                    <span class="mu-title-dot"></span>
+                  </div>
+
+                </div>
+                <!-- End Apps Screenshot Content -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zoom Overlay -->
+        <div class="zoom-overlay" id="zoomOverlay" aria-hidden="true">
+          <div class="zoom-dialog" role="dialog" aria-modal="true">
+            <button class="zoom-close" id="zoomClose" aria-label="Close">&times;</button>
+            <div class="zoom-content">
+              <figure class="zoom-image">
+                <img id="zoomedImage" src="" alt="" loading="lazy" decoding="async">
+                <figcaption id="zoomCaption"></figcaption>
+              </figure>
+              <aside class="zoom-text">
+                <div class="zoom-text-inner" id="zoomText"></div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+      </span>
+      <!-- End Apps Screenshot -->
+
+      <!-- Start publications -->
+      <section id="mu-publicaciones">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-publicaciones-area">
+                <div class="mu-title-area">
+                  <h2 class="mu-title">Mentions</h2>
+                  <span class="mu-title-dot"></span>
+                  <p>Some media features</p>
+                </div>
+
+                <div class="mu-download-content">
+                  <div>
+                    <!-- FILTER -->
+                    <div class="filtro">
+                      <ul>
+                        <li class="mu-google-btnti list" data-filter="all">All</li>
+                        <p class="mu-copy-right">&nbsp;</p>
+                        <li class="mu-google-btn3i list" data-filter="est"><i class="fa-solid fa-tv"></i> Bookshelves</li>
+                        <li class="mu-google-btn2i list" data-filter="res"><i class="fa-solid fa-radio"></i> Reviews & articles</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <p class="mu-copy-right">&nbsp;</p>
+
+                  <a class="mu-google-btn2 itemBox" data-item="res"
+                    href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank"><span><img src="assets/images/publicaciones/amazon.png" loading="lazy" decoding="async" alt="Amazon"> Amazon</span></a>
+
+                  <a class="mu-google-btn3 itemBox" data-item="est"
+                    href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><span><img src="assets/images/publicaciones/goodreads.png" loading="lazy" decoding="async" alt="Goodreads"> Goodreads</span></a>
+
+                  <a class="mu-google-btn2 itemBox" data-item="res"
+                    href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank"><span><img src="assets/images/publicaciones/detour.png" loading="lazy" decoding="async" alt="Detour"> Detour</span></a>
+
+                  <a class="mu-google-btn2 itemBox" data-item="res"
+                    href="https://silvestredominguez.wordpress.com/2025/08/08/eidos/" target="_blank"><span><img src="assets/images/publicaciones/silvestre.png" loading="lazy" decoding="async" alt="La Mirada Refractaria"> La Mirada Refractaria</span></a>
+
+                  <a class="mu-google-btn3 itemBox" data-item="est" href="https://www.wattpad.com/story/401387972-eidos-primeros-capitulos" target="_blank"><span><img src="assets/images/publicaciones/wattpad.png" loading="lazy" decoding="async" alt="Wattpad"> Wattpad</span></a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End publications -->
+
+      <!-- Start Contact -->
+      <section id="mu-contact">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="mu-contact-area">
+
+                <div class="mu-title-area">
+                  <h2 class="mu-heading-title">CONTACT</h2>
+                  <span class="mu-title-dot"></span>
+                  <p>If you have any questions, please get in touch.</p>
+                </div>
+
+                <!-- Start Contact Content -->
+                <div class="mu-contact-content">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <div class="mu-contact-left">
+                        <div id="form-messages"></div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-5">
+                      <div class="mu-contact-right">
+                        <div class="mu-contact-right-single">
+                          <div class="mu-contact-right-single">
+                            <div class="mu-icon"><i class="fa fa-envelope"></i></div>
+                            <p><strong>Email address</strong></p>
+                            <p>feldenvareth@gmail.com</p>
+                          </div>
+                          <div class="mu-contact-right-single">
+                            <div class="mu-social-media">
+                              <!-- YouTube -->
+                              <a href="https://www.youtube.com/@FeldenVareth" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                              </a>
+
+                              <!-- Twitter/X -->
+                              <a href="https://x.com/FVareth27586" target="_blank" aria-label="X (Twitter)">
+                                <i class="fab fa-x-twitter"></i>
+                              </a>
+                              
+                              <a href="https://www.instagram.com/feldenvareth/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram "></i>
+                              </a>
+                              
+                              <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                              </a>
+                              
+                              <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank" aria-label="LinkedIn">
+                                <i class="fa-brands fa-linkedin"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- End Contact Content -->
+                
+                <p class="mu-note-musica">Note: If you’ve read <em>Eidos</em>, you’ll know this music has a meaning in the novel.</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact -->
+
+    </main>
+    <!-- End main content -->
+
+    <!-- Start footer -->
+    <footer id="mu-footer" role="contentinfo">
+      <div class="container">
+        <div class="mu-footer-area">
+          <p class="mu-copy-right">&nbsp;</p>
+          <p class="mu-copy-right">&nbsp;</p>
+          <p><a href="index.html">Eidos</a> Copyright © 2025 Felden Vareth / All rights reserved.</p>
+          <p class="copyright animated wow fadeIn" data-wow-duration="2s"><a href="termsandconditions.html"><strong>Terms & Conditions</strong></a></p>
+        </div>
+      </div>
+    </footer>
+    <!-- End footer -->
+
+    <!-- jQuery library -->
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script defer src="assets/js/bootstrap.min.js"></script>
+    <!-- Slick slider -->
+    <script defer type="text/javascript" src="assets/js/slick.min.js"></script>
+    <!-- Ajax contact form  -->
+    <script defer type="text/javascript" src="assets/js/app.js"></script>
+    <!-- Custom js -->
+    <script defer type="text/javascript" src="assets/js/custom.js"></script>
+
+    <!-- Optional filters -->
+    <script src="assets/filtro/filter.js" defer></script>
+    <!-- moved to assets/js/optimize.js -->
+    <script src="assets/js/optimize.js" defer></script>
+    
+   <script>
+(function(){
+  // Check if the user granted analytics (per your GDPR banner)
+  function hasAnalyticsConsent(){
+    try {
+      const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+      return saved.analytics_storage === 'granted';
+    } catch(e){ return false; }
+  }
+
+  // Send the event to GA4
+  function trackSampleDownload(){
+    if (!hasAnalyticsConsent()) return; // Respect GDPR
+    try {
+      gtag('event', 'file_download', {
+        file_name: 'eidosprimeroscapitulos.pdf',
+        file_extension: 'pdf',
+        link_text: 'Download sample chapters',
+        link_url: location.origin + '/docs/eidosprimeroscapitulos.pdf'
+      });
+    } catch(e){}
+  }
+
+  // Wait for DOM and hook click to the PDF link
+  document.addEventListener('DOMContentLoaded', function(){
+    var link = document.querySelector('a.mu-google-btn[href="docs/eidosprimeroscapitulos.pdf"]');
+    if (link) link.addEventListener('click', trackSampleDownload);
+  });
+})();
+</script>
+</body>
+</html>

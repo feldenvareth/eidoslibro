@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="utf-8">
+  <title>Privacy Policy – EIDOS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+  <!-- Bootstrap -->
+  <link type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Main styles -->
+  <link type="text/css" href="assets/css/style.css" rel="stylesheet">
+  <link type="text/css" id="switcher" href="assets/css/theme-color/color.css" rel="stylesheet">
+  <!-- Font Awesome (for the arrow icon) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+
+  <meta property="og:image" content="https://eidoslibro.com/assets/images/img_v2.jpg">
+
+  <style>
+    .legal h2, .legal h3{margin-top:24px}
+    .legal ul{margin-left:1rem}
+    .cookie-table{width:100%;border-collapse:collapse;margin:12px 0}
+    .cookie-table th,.cookie-table td{border:1px solid #ddd;padding:8px;vertical-align:top}
+    .cookie-table th{background:#f7f7f7}
+    .btn-outline{display:inline-block;border:1px solid #444;padding:10px 14px;border-radius:6px}
+  </style>
+
+  <!-- ============================================================
+       Google Analytics 4 + Consent Mode v2 (Granular GDPR)
+       ============================================================ -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+
+    function applyConsentObject(obj){
+      gtag('consent', 'update', obj);
+      try { localStorage.setItem('ga_consent_v2', JSON.stringify(obj)); } catch(e){}
+    }
+
+    (function applyStoredConsent(){
+      try {
+        const raw = localStorage.getItem('ga_consent_v2');
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object') {
+          applyConsentObject(saved);
+          window.__gaConsentPref = saved;
+        }
+      } catch(e){}
+    })();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-SCSFPYKJTX', { send_page_view: false });
+
+    try {
+      if (window.__gaConsentPref && window.__gaConsentPref.analytics_storage === 'granted') {
+        gtag('event', 'page_view');
+      }
+    } catch(e){}
+  </script>
+
+  <!-- Consent Banner + Modal -->
+  <style>
+    #consent-banner{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:#f7f7f7;border-top:1px solid #ddd;padding:12px}
+    #consent-banner p{margin:0 0 8px}
+    #consent-banner .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    #consent-banner button{border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+    #consent-accept{background:#1a73e8;color:#fff}
+    #consent-reject{background:#eaeaea}
+    #consent-config{background:#fff;border:1px solid #ccc}
+
+    .consent-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10001;display:none}
+    .consent-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;z-index:10002;width:min(520px,92vw);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none}
+    .consent-modal header{padding:14px 16px;border-bottom:1px solid #eee;font-weight:600}
+    .consent-modal .content{padding:14px 16px;max-height:60vh;overflow:auto}
+    .consent-modal .row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
+    .consent-modal .row:last-child{border-bottom:none}
+    .consent-modal h4{margin:.2rem 0}
+    .consent-modal p{margin:.2rem 0;color:#555;font-size:.95rem}
+    .consent-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eee}
+    .consent-actions button{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .btn-primary{background:#1a73e8;color:#fff}
+    .btn-ghost{background:#eaeaea}
+    .switch{position:relative;display:inline-block;width:44px;height:24px}
+    .switch input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;inset:0;background:#ccc;transition:.2s;border-radius:24px}
+    .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;top:3px;background:white;transition:.2s;border-radius:50%}
+    input:checked + .slider{background:#1a73e8}
+    input:checked + .slider:before{transform:translateX(20px)}
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div id="consent-banner" hidden>
+    <p>We use analytics cookies (Google Analytics) and you can choose your preferences.
+      More info in our <a href="terminosycondiciones.html" rel="noopener">Privacy Policy</a>.
+    </p>
+    <div class="btns">
+      <button id="consent-accept">Accept all</button>
+      <button id="consent-reject">Reject</button>
+      <button id="consent-config">Settings</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="consent-modal-backdrop" id="consent-backdrop"></div>
+  <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title">
+    <header id="consent-modal-title">Privacy preferences</header>
+    <div class="content">
+      <div class="row">
+        <div>
+          <label class="switch" title="Enable/disable measurement cookies">
+            <input type="checkbox" id="toggle-analytics">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div>
+          <h4>Analytics (Google Analytics)</h4>
+          <p>Helps us understand site usage. No ads and no cross-site tracking.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label class="switch" title="Personalised ads and ad measurement">
+            <input type="checkbox" id="toggle-ads">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div>
+          <h4>Advertising (optional)</h4>
+          <p>Allows ad storage, user data and personalisation. Turn it off if you don’t want personalised advertising.</p>
+        </div>
+      </div>
+    </div>
+    <div class="consent-actions">
+      <button class="btn-ghost" id="consent-cancel">Cancel</button>
+      <button class="btn-primary" id="consent-save">Save preferences</button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const banner   = document.getElementById('consent-banner');
+      const acceptBt = document.getElementById('consent-accept');
+      const rejectBt = document.getElementById('consent-reject');
+      const configBt = document.getElementById('consent-config');
+
+      const modal    = document.getElementById('consent-modal');
+      const backdrop = document.getElementById('consent-backdrop');
+      const saveBt   = document.getElementById('consent-save');
+      const cancelBt = document.getElementById('consent-cancel');
+
+      const tgAnalytics = document.getElementById('toggle-analytics');
+      const tgAds       = document.getElementById('toggle-ads');
+
+      function showBanner(){ banner.hidden = false; }
+      function hideBanner(){ banner.hidden = true; }
+
+      function openModal(){
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
+        const anaGranted = saved?.analytics_storage === 'granted';
+        const adsGranted = (saved?.ad_storage === 'granted'
+                         && saved?.ad_user_data === 'granted'
+                         && saved?.ad_personalization === 'granted');
+        tgAnalytics.checked = !!anaGranted;
+        tgAds.checked       = !!adsGranted;
+        backdrop.style.display = 'block';
+        modal.style.display = 'block';
+      }
+      function closeModal(){
+        backdrop.style.display = 'none';
+        modal.style.display = 'none';
+      }
+
+      function sendPageViewIfNeeded(){
+        try {
+          const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+          if (saved.analytics_storage === 'granted') {
+            gtag('event', 'page_view');
+          }
+        } catch(e){}
+      }
+
+      function acceptAll(){
+        const obj = {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        };
+        applyConsentObject(obj);
+        hideBanner();
+        sendPageViewIfNeeded();
+      }
+      function rejectAll(){
+        const obj = {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        };
+        applyConsentObject(obj);
+        hideBanner();
+      }
+      function saveGranular(){
+        const obj = {
+          analytics_storage: tgAnalytics.checked ? 'granted' : 'denied',
+          ad_storage:        tgAds.checked ? 'granted' : 'denied',
+          ad_user_data:      tgAds.checked ? 'granted' : 'denied',
+          ad_personalization:tgAds.checked ? 'granted' : 'denied'
+        };
+        applyConsentObject(obj);
+        closeModal();
+        hideBanner();
+        sendPageViewIfNeeded();
+      }
+
+      window.addEventListener('load', function(){
+        let hasChoice = false;
+        try {
+          const raw = localStorage.getItem('ga_consent_v2');
+          if (raw) hasChoice = true;
+        } catch(e){}
+        if (!hasChoice) showBanner();
+      });
+
+      acceptBt.addEventListener('click', acceptAll);
+      rejectBt.addEventListener('click', rejectAll);
+      configBt.addEventListener('click', openModal);
+      saveBt.addEventListener('click', saveGranular);
+      cancelBt.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+
+      // Internal links in the legal text open the modal
+      function openConsentFromPolicy(e){
+        e?.preventDefault?.();
+        openModal();
+      }
+      document.getElementById('manage-cookies')?.addEventListener('click', openConsentFromPolicy);
+      document.getElementById('manage-cookies-2')?.addEventListener('click', openConsentFromPolicy);
+    })();
+  </script>
+
+  <!-- Simple header -->
+  <header id="mu-header" role="banner">
+    <div class="mu-header-overlay">
+      <div class="container">
+        <div class="mu-header-area">
+          <h1 style="color:#fff; text-align:center; margin-top:40px;">
+            Privacy Policy
+          </h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main role="main">
+    <section id="mu-feature">
+      <div class="container legal">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="mu-feature-area">
+
+              <div class="mu-title-area">
+                <h2 class="mu-title">Protecting your data</h2>
+                <span class="mu-title-dot"></span>
+              </div>
+
+              <p style="text-align:justify;">
+                On this page we explain clearly how we process personal data on the
+                <strong>Eidos</strong> website (<em>eidoslibro.com</em>) and how you can manage your cookie preferences.
+              </p>
+
+              <h3>Data controller</h3>
+              <p><strong>Felden Vareth</strong><br>
+                📧 <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>
+              </p>
+
+              <h3>What data we collect</h3>
+              <ul>
+                <li><strong>Contact:</strong> name and email address if you write to us by email.</li>
+                <li><strong>Technical server logs</strong> (e.g., anonymised IP, date/time, user agent) for security and maintenance.</li>
+                <li><strong>Web analytics (optional):</strong> usage statistics via Google Analytics 4 <u>only if you accept analytics cookies</u>.</li>
+              </ul>
+
+              <h3>Purposes and legal basis</h3>
+              <ul>
+                <li><strong>Responding to enquiries</strong> by email – legal basis: <em>legitimate interest</em> and/or <em>performance of a request</em>.</li>
+                <li><strong>Website security and maintenance</strong> – legal basis: <em>legitimate interest</em>.</li>
+                <li><strong>Usage analytics with GA4</strong> – legal basis: <em>your consent</em> (which you can accept, reject or configure).</li>
+              </ul>
+
+              <h3>Cookies and similar technologies</h3>
+              <p>We use a consent banner with <strong>Google Analytics 4</strong> and <em>Consent Mode v2</em>.
+                By default we do not activate analytics cookies until you give your consent.
+                You can change your preference at any time using this button:</p>
+
+              <p><a href="#" id="manage-cookies" class="btn-outline">Manage cookie preferences</a></p>
+
+              <h4>Analytics cookies that GA4 may use (if you accept)</h4>
+              <table class="cookie-table">
+                <thead>
+                  <tr>
+                    <th>Cookie</th>
+                    <th>Provider</th>
+                    <th>Purpose</th>
+                    <th>Approximate duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>_ga</td>
+                    <td>Google Analytics</td>
+                    <td>Distinguish users anonymously (random ID).</td>
+                    <td>up to 2 years</td>
+                  </tr>
+                  <tr>
+                    <td>_ga_<em>XXXXX</em></td>
+                    <td>Google Analytics</td>
+                    <td>Maintain session and measure on-site interactions.</td>
+                    <td>up to 2 years</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:.95rem;color:#555">
+                Note: actual installation and expiry depend on your banner choice and your browser/device settings.
+              </p>
+
+              <h3>Who we share data with</h3>
+              <p>
+                We do not disclose data to third parties except when legally required. For analytics we use
+                <strong>Google Analytics 4</strong> (Google LLC / Google Ireland Limited) as a
+                <em>processor</em>.
+              </p>
+
+              <h3>International transfers</h3>
+              <p>
+                Google services may involve international transfers. Google applies
+                <em>Standard Contractual Clauses</em> (SCCs) and supplementary measures. You can consult
+                Google’s official documentation and data processing terms on their websites.
+              </p>
+
+              <h3>Retention periods</h3>
+              <ul>
+                <li>Email enquiries: the time necessary to handle them and meet legal obligations.</li>
+                <li>Analytics data in GA4: according to the property’s standard configuration; not retained if you refuse cookies.</li>
+              </ul>
+
+              <h3>How to change or withdraw your consent</h3>
+              <p>
+                You can modify your decision about cookies at any time using the
+                <a href="#" id="manage-cookies-2">“Manage cookie preferences”</a> button, or by clearing
+                cookies/storage in your browser for this site.
+              </p>
+
+              <h3>Your rights</h3>
+              <p>
+                You may exercise your rights of access, rectification, erasure, restriction, objection and portability
+                by writing to <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>. If you believe your
+                request has not been handled properly, you may lodge a complaint with the supervisory authority
+                (AEPD in Spain).
+              </p>
+
+              <h3>Security measures</h3>
+              <p>
+                We apply reasonable technical and organisational measures to protect your data against unauthorised access,
+                loss or alteration.
+              </p>
+
+              <h3>Updates to this policy</h3>
+              <p>
+                We may update this policy to reflect legal or technical changes. We will publish the current version
+                with the update date.
+              </p>
+
+              <p style="color:#666;font-size:.9rem">Last updated: September 2025</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back button -->
+    <div style="text-align:center; margin:40px 0;">
+      <a class="mu-contrata-btn" href="indexeng.html">
+        <i class="fa fa-arrow-left"></i> Back to the website
+      </a>
+      
+      <a class="mu-contrata-btn" href="indexautoreng.html">
+      <i class="fa fa-envelope"></i>Request a signed copy
+      </a>
+
+      
+      
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="mu-footer" role="contentinfo">
+    <div class="container">
+      <div class="mu-footer-area">
+        <p class="mu-copy-right">&nbsp;</p>
+        <p><a href="indexeng.html">Eidos</a> Copyright © 2025 Felden Vareth / All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/optimize.js" defer></script>
+</body>
+</html>
