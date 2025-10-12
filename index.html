@@ -371,8 +371,26 @@
             <!-- Start header featured area -->
             <div class="mu-header-featured-area">
               <div class="mu-header-featured-img">
-                <img src="assets/images/eidos.webp" alt="Libro Eidos" loading="lazy" decoding="async">
-                <p>&nbsp; </p>
+                <img src="assets/images/eidosnavidad.png" alt="Libro Eidos" loading="lazy" decoding="async">
+                
+                
+                
+                
+						  <p>&nbsp; </p>
+                          
+
+      <div style="text-align: center;">
+							
+<a data-toggle="tooltip" title="Feliz NAvidad" aria-label="TExti">
+    <img src="assets/images/feliznavidad.png" alt="Feliz Naviadad">
+</a>          
+                
+                
+                          </div>
+                
+                
+                
+                
                 <div style="text-align: center;"></div>
               </div>
 
@@ -701,6 +719,21 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
 " loading="lazy" decoding="async">
                     </div>
 
+
+                    <div class="mu-single-screeshot video-slide" data-video-src="docs/navidad.mp4" data-title="Navidad">
+                      <button class="video-thumb" type="button" aria-label="Reproducir vídeo «Navidad»">
+                        <img src="assets/images/video.png" alt="Vídeo Navidad" loading="lazy" decoding="async">
+                        <span class="play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>
+                      </button>
+                    </div>
+
+                    <div class="mu-single-screeshot video-slide" data-video-src="docs/presentacion.mp4" data-title="Presentación">
+                      <button class="video-thumb" type="button" aria-label="Reproducir vídeo «Presentacion»">
+                        <img src="assets/images/video.png" alt="Vídeo Presentación" loading="lazy" decoding="async">
+                        <span class="play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>
+                      </button>
+                    </div>
+
                   </div>
 
                   <div class="mu-title-area">
@@ -943,6 +976,139 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
     
     
     
+
+    <style>
+      /* Estilos para vídeos en el carrusel */
+      .mu-apps-screenshot-slider .video-thumb{position:relative;display:block;width:100%;border:0;background:transparent;padding:0;cursor:pointer;}
+      .mu-apps-screenshot-slider .video-thumb img{display:block;width:100%;height:auto;}
+      .mu-apps-screenshot-slider .video-thumb .play-icon{
+        position:absolute;right:12px;bottom:12px;line-height:1;
+        background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:10px 12px;font-size:18px
+      }
+      .mu-apps-screenshot-slider .slide-video{display:block;width:100%;height:auto;max-height:70vh;outline:none}
+    </style>
+
+    <script>
+      // Vídeos perezosos dentro del carrusel
+      (function(){
+        // --- Bloqueo del altavoz mientras haya reproducción en el carrusel ---
+        var __audioToggleBlocked = false;
+        function getAudioToggle(){ return document.getElementById('audio-toggle'); }
+        function getAudioIcon(){ return document.getElementById('audio-toggle-icon'); }
+
+        function isAnySlideVideoPlaying(){
+          try{
+            var playing = false;
+            document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+              try{ if (!v.paused && !v.ended) playing = true; }catch(e){}
+            });
+            return playing;
+          }catch(e){ return false; }
+        }
+
+        function blockAudioToggle(){
+          try{
+            if (__audioToggleBlocked) return;
+            var btn = getAudioToggle(); var ico = getAudioIcon();
+            if (btn){ btn.setAttribute('disabled','disabled'); }
+            if (ico){
+              if (!ico.getAttribute('data-prev')) ico.setAttribute('data-prev', ico.textContent || '');
+              ico.textContent = '🔇'; // altavoz tachado
+            }
+            __audioToggleBlocked = true;
+          }catch(e){}
+        }
+
+        function unblockAudioToggleIfSafe(){
+          try{
+            if (isAnySlideVideoPlaying()) return; // aún hay un vídeo activo
+            var btn = getAudioToggle(); var ico = getAudioIcon();
+            if (btn){ btn.removeAttribute('disabled'); }
+            if (ico){
+              var prev = ico.getAttribute('data-prev');
+              if (prev !== null){ ico.textContent = prev; ico.removeAttribute('data-prev'); }
+            }
+            __audioToggleBlocked = false;
+          }catch(e){}
+        }
+
+        // Pausa música de fondo si está sonando
+        function pauseBgAudio(){
+          try{
+            var a = document.getElementById('bg-audio');
+            if (a && !a.paused) a.pause();
+          }catch(e){}
+        }
+
+        // Pausa cualquier otro <video> del carrusel distinto al proporcionado
+        function pauseOtherVideos(current){
+          try{
+            document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+              if (v !== current){
+                try{ v.pause(); }catch(e){}
+              }
+            });
+              setTimeout(unblockAudioToggleIfSafe, 80);
+          }catch(e){}
+        }
+
+        function initVideoSlides(){
+          var btns = document.querySelectorAll('.mu-apps-screenshot-slider .video-slide .video-thumb');
+          btns.forEach(function(btn){
+            btn.addEventListener('click', function(ev){
+              var slide = ev.currentTarget.closest('.video-slide');
+              var src   = slide.getAttribute('data-video-src') || '';
+              // Crear el <video> SOLO cuando el usuario hace clic
+              var video = document.createElement('video');
+              video.setAttribute('controls', '');
+              video.setAttribute('playsinline', '');
+              video.setAttribute('preload', 'none');
+              video.className = 'slide-video';
+              var source = document.createElement('source');
+              try{ source.src = encodeURI(src); }catch(e){ source.src = src; }
+              source.type = 'video/mp4';
+              video.appendChild(source);
+
+              // Eventos para asegurar exclusividad y silenciar música
+              video.addEventListener('play', function(){ blockAudioToggle();
+                pauseBgAudio();
+                pauseOtherVideos(video);
+              });
+              ['pause','ended'].forEach(function(evt){ video.addEventListener(evt, function(){ setTimeout(unblockAudioToggleIfSafe, 60); }); });
+
+              // Reemplaza el thumbnail por el video
+              slide.innerHTML = '';
+              slide.appendChild(video);
+
+              // Intenta reproducir inmediatamente tras crear
+              pauseBgAudio();
+              pauseOtherVideos(video);
+              try { video.play(); } catch(e){}
+            }, { once: true }); // asegura que solo se cree una vez
+          });
+        }
+
+        // Pausar cualquier video del carrusel cuando cambie el slide (requiere Slick + jQuery)
+        function hookSlickPause(){
+          try{
+            if (!window.jQuery) return;
+            var $ = window.jQuery;
+            $('.mu-apps-screenshot-slider').on('beforeChange', function(){
+              document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+                try { v.pause(); v.currentTime = 0; } catch(e){}
+              });
+            });
+          }catch(e){}
+        }
+
+        // DOM listo
+        if (document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', function(){ initVideoSlides(); hookSlickPause(); setTimeout(unblockAudioToggleIfSafe, 0); setTimeout(unblockAudioToggleIfSafe, 0); });
+        } else {
+          initVideoSlides(); hookSlickPause(); setTimeout(unblockAudioToggleIfSafe, 0);
+        }
+      })();</script>
+
 </body>
 </html>
 
