@@ -371,7 +371,7 @@
             <!-- Start header featured area -->
             <div class="mu-header-featured-area">
               <div class="mu-header-featured-img">
-                <img src="assets/images/eidosnavidad.png" alt="Libro Eidos" loading="lazy" decoding="async">
+                <img src="assets/images/eidos.png" alt="Libro Eidos" loading="lazy" decoding="async">
                 
                 
                 
@@ -991,6 +991,22 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
     <script>
       // Vídeos perezosos dentro del carrusel
       (function(){
+        // Recordaremos si pausamos la música automáticamente por un vídeo
+        var __bgAudioAutoPaused = false;
+
+        function getBgAudio(){ return document.getElementById('bg-audio'); }
+
+        function resumeBgAudioIfSafe(){
+          try{
+            // Solo reanudamos si nosotros la pausamos y no queda ningún vídeo del carrusel activo
+            if (!__bgAudioAutoPaused) return;
+            if (isAnySlideVideoPlaying()) return;
+            var a = getBgAudio();
+            if (!a) return;
+            a.play && a.play().then(function(){ __bgAudioAutoPaused = false; }).catch(function(){});
+          }catch(e){}
+        }
+
         // --- Bloqueo del altavoz mientras haya reproducción en el carrusel ---
         var __audioToggleBlocked = false;
         function getAudioToggle(){ return document.getElementById('audio-toggle'); }
@@ -1036,7 +1052,7 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
         function pauseBgAudio(){
           try{
             var a = document.getElementById('bg-audio');
-            if (a && !a.paused) a.pause();
+            if (a && !a.paused){ __bgAudioAutoPaused = true; a.pause(); }
           }catch(e){}
         }
 
@@ -1074,7 +1090,7 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
                 pauseBgAudio();
                 pauseOtherVideos(video);
               });
-              ['pause','ended'].forEach(function(evt){ video.addEventListener(evt, function(){ setTimeout(unblockAudioToggleIfSafe, 60); }); });
+              ['pause','ended'].forEach(function(evt){ video.addEventListener(evt, function(){ setTimeout(function(){ unblockAudioToggleIfSafe(); resumeBgAudioIfSafe(); }, 60); }); });
 
               // Reemplaza el thumbnail por el video
               slide.innerHTML = '';
@@ -1097,6 +1113,7 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
               document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
                 try { v.pause(); v.currentTime = 0; } catch(e){}
               });
+              setTimeout(function(){ unblockAudioToggleIfSafe(); resumeBgAudioIfSafe(); }, 80);
             });
           }catch(e){}
         }
