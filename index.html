@@ -173,7 +173,70 @@
     
     
     
-  </head>
+  
+<style>
+/* Centrado del video dentro de su slide del carrusel */
+.mu-apps-screenshot-slider .video-slide{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+}
+.mu-apps-screenshot-slider .video-slide .slide-video{
+  display:block;
+  width:100%;           /* mantener proporción natural */
+  height:auto;
+  max-width:100%;
+  max-height:70vh;
+  margin:0 auto;
+  object-fit:contain;
+}
+@media (max-width: 768px){
+  .mu-apps-screenshot-slider .video-slide .slide-video{ max-height:60vh; }
+}
+</style>
+
+
+<style>
+/* Fuerza centrado vertical en slick usando flex en el track */
+.mu-apps-screenshot-slider .slick-track{
+  display:flex !important;
+  align-items:center !important;
+}
+.mu-apps-screenshot-slider .slick-slide{
+  height:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.mu-apps-screenshot-slider .slick-slide > div{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+}
+.mu-apps-screenshot-slider .mu-single-screeshot,
+.mu-apps-screenshot-slider .video-slide{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:100% !important;
+}
+/* El video ocupa ancho completo, pero no más de 70vh de alto */
+.mu-apps-screenshot-slider .video-slide .slide-video{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:70vh !important;
+  margin:0 auto !important;
+  object-fit:contain !important;
+}
+@media (max-width: 768px){
+  .mu-apps-screenshot-slider .video-slide .slide-video{ max-height:60vh !important; }
+}
+</style>
+
+</head>
   <body>
 
 
@@ -1117,7 +1180,23 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
               var src   = slide.getAttribute('data-video-src') || '';
               // Crear el <video> SOLO cuando el usuario hace clic
               var video = document.createElement('video');
-              video.setAttribute('controls', '');
+              
+              // Centramos el slide y el video para que se ajuste al espacio disponible
+              try {
+                slide.style.display = 'flex'; slide.style.height='100%';
+                slide.style.alignItems = 'center';
+                slide.style.justifyContent = 'center';
+              } catch(e){}
+              try {
+                video.style.display   = 'block';
+                video.style.margin    = '0 auto';
+                video.style.width     = '100%';
+                video.style.height    = 'auto';
+                video.style.maxWidth  = '100%';
+                video.style.maxHeight = '70vh';
+                video.style.objectFit = 'contain';
+              } catch(e){}
+video.setAttribute('controls', '');
               video.setAttribute('playsinline', '');
               video.setAttribute('preload', 'none');
               video.className = 'slide-video';
