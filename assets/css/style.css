@@ -569,7 +569,7 @@ button:focus {
 /* Menu overlay */
 
 .mu-menu-full-overlay {
-	background-color: rgba(0, 0, 0, 0.94);
+	background-color: rgba(0, 0, 0, 0.9);
 	color: #fff;
 	height: 100%;
 	left: 0;
