@@ -236,6 +236,84 @@
 }
 </style>
 
+
+<style>
+/* ===== Acordeón de reseñas: corrección mobile y anti-letras-en-columna ===== */
+#mu-resena .panel-title a{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  line-height:1.5;
+  text-decoration:none;
+  /* clave para que los elementos puedan saltar a la siguiente línea */
+  flex-wrap: wrap;
+}
+#mu-resena .panel-title a .fa-plus,
+#mu-resena .panel-title .toggle{
+  flex:0 0 16px;
+  width:16px;
+  margin-top:2px;
+}
+#mu-resena .panel-title .rating{
+  flex:0 0 auto;
+  white-space:nowrap;
+  line-height:1;
+  margin-top:2px;
+}
+/* El título no debe comprimirse a 1px: damos base y un mínimo */
+#mu-resena .panel-title .review-text{
+  flex:1 1 320px;     /* ancho base cómodo */
+  min-width:160px;    /* evita columna vertical */
+  word-break: normal; /* no romper palabras por letras */
+  overflow-wrap: break-word;
+}
+#mu-resena .panel-title .text-danger,
+#mu-resena .panel-title .text-success{
+  white-space:nowrap;
+  margin-left:6px;
+}
+
+/* En pantallas estrechas movemos meta a otra línea y dejamos el título a 100% */
+@media (max-width: 600px){
+  #mu-resena .panel-title .review-text{
+    flex-basis:100%;
+  }
+  #mu-resena .panel-title .text-danger,
+  #mu-resena .panel-title .text-success{
+    flex:0 0 100%;     /* Fuerza salto de línea */
+    margin-left:26px;  /* sangría igual a + (16) + gap (10) */
+  }
+}
+</style>
+
+
+<style>
+/* ===== Acordeón de reseñas: equilibrio desktop + móvil ===== */
+/* Desktop por defecto: en una sola línea, meta a la derecha */
+#mu-resena .panel-title a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  line-height:1.5;
+  flex-wrap: nowrap;                 /* NO envolver en escritorio */
+  text-decoration:none;
+}
+#mu-resena .panel-title a .fa-plus,
+#mu-resena .panel-title .toggle{ flex:0 0 16px; width:16px; }
+#mu-resena .panel-title .rating{ flex:0 0 auto; white-space:nowrap; line-height:1; }
+#mu-resena .panel-title .review-text{ flex:1 1 auto; min-width:0; word-break:normal; overflow-wrap:break-word; }
+#mu-resena .panel-title .text-danger{ order:2; margin-left:auto; white-space:nowrap; }   /* (Compra verificada) pegado a la derecha */
+#mu-resena .panel-title .text-success{ order:3; margin-left:12px; white-space:nowrap; }  /* fecha a la derecha del anterior */
+
+/* Móvil: envolvemos, el título ocupa la línea completa y los metadatos bajan */
+@media (max-width: 600px){
+  #mu-resena .panel-title a{ align-items:flex-start; flex-wrap: wrap; }
+  #mu-resena .panel-title .review-text{ order:1; flex-basis:100%; }
+  #mu-resena .panel-title .text-danger{ order:2; margin-left:26px; }   /* sangría = icono + gap */
+  #mu-resena .panel-title .text-success{ order:3; margin-left:10px; }
+}
+</style>
+
 </head>
   <body>
 
@@ -933,7 +1011,7 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
 					<div class="col-md-12">
 						<div class="mu-resena-area">
 							<div class="mu-title-area">
-								<h2 class="mu-title">Reseñas
+								<h2 class="mu-title">Algunas de las Reseñas
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
                             <small class="fa fa-star text-warning"></small>
@@ -957,19 +1035,21 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse18" aria-expanded="true">
 							  		   <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>		 Sorprendente		 
+          <i class="fa fa-star"></i>  <span class="text-success">13/10/2025</span> 
+          
+          
+        </span>		 Ramñon: Una intensa y conmovedora experiencia literaria. Absolutamente recomendable.	 
 							              </a>
 							            </h4>
 							          </div>
-							          <div id="collapse1" class="panel-collapse collapse in">
+							          <div id="collapse18" class="panel-collapse collapse in">
 							            <div class="panel-body">
                                         
                                         
@@ -986,25 +1066,26 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
 							        </div>
 
 
+
+
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-		   <i class="fa fa-plus toggle"></i>
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse17">
+		   						  		   <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Magnífica novela de ficción filosófica
-							              </a>
+          <i class="fa fa-star"></i> <span class="text-success">29/09/2025</span>
+        </span>		  Almuidena:  Diferente y sorprendente     </a>
 							            </h4>
 							          </div>
-							          <div id="collapse2" class="panel-collapse collapse">
+							          <div id="collapse17" class="panel-collapse collapse">
 							            <div class="panel-body">
                                         
-      Magnífica novela de ficción filosófica, el autor propone una infinidad de preguntas existenciales, algunas de las cuales ofrece respuestas audaces en un futuro distópico. Si quieres leer algo totalmente diferente esta propuesta es súper recomendable. 
+     No suelo leer libros con esta temática pero un buen amigo, me lo recomendó y la verdad es que me ha sorprendido gratamente, me alegro de haberle dado una oportunidad porque es un libro diferente, aporta, hace pensar y disfrutas con su lectura. Sin duda alguna, lo recomendaría.
 
 </br>  </br>
 <a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
@@ -1019,49 +1100,69 @@ Se detuvo frente a un espacio de reposo. Allí, algunas personas simplemente des
 
 
 
-                                    
+
+
+
+
+
+
+
+
+
+
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapsea">
-		   <i class="fa fa-plus toggle"></i>
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse16">
+		   						  		   <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Eidos
-							              </a>
+          <i class="fa fa-star"></i>   <span class="text-success">13/10/2025</span> 
+        </span>		  Mónica C.G:  Magnífica novela de ficción filosófica.  <span class="text-danger">(Compra verificada) </span>   </a>
 							            </h4>
 							          </div>
-							          <div id="collapsea" class="panel-collapse collapse">
+							          <div id="collapse16" class="panel-collapse collapse">
 							            <div class="panel-body">
-Eidos, del escritor Felden Vareth, me ha cautivado desde las primeras páginas con un planteamiento que conmueve, pero que también, en algunos momentos, nos incomoda y llena de interrogantes. Preguntas que no son fáciles de responder, pero que nos obligan a mirar nuestro presente, esta época en que la tecnología nos promete tantos beneficios, pero que a su vez resulta una amenaza que puede acabar con aquello que nos hace humanos.</br></br>
-Con una prosa elegante y precisa, la novela posee un trasfondo filosófico muy profundo, a la vez que nos hace reflexionar sobre las consecuencias de habitar un mundo donde nada envejece ni termina, y que puede llegar a convertirse en un espejismo sin sentido ni propósito.
-Una experiencia literaria que no nos dejará indiferentes. Muy recomendable, sin duda.           </br>  </br>
-<a href="https://www.goodreads.com/book/show/236113959-eidos" class="mu-contrata-btn">Goodreads</a>                           
+                                        
+      Magnífica novela de ficción filosófica, el autor propone una infinidad de preguntas existenciales, algunas de las cuales ofrece respuestas audaces en un futuro distópico. Si quieres leer algo totalmente diferente esta propuesta es súper recomendable. 
+
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+
+ 
+ 
+ </div>
+							          </div>
+							        </div>
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">
+							                 <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">06/08/2025</span> 
+        </span> Eduardo A.V:   No te deja indiferente <span class="text-danger">(Compra verificada) </span>      </a>
+							            </h4>
+							          </div>
+							          <div id="collapse15" class="panel-collapse collapse">
+							            <div class="panel-body">
+Una historia original, amena, que no te deja indiferente. Yo por lo menos, me he quedado pensando en muchas otros caminos que son posibles sobre la idea base. Es decir, la base es muy muy buena y la trama también, dejando abiertas otras muchas posibilidades. Recomendable.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
                                       
                                          </div>
 							          </div>
 							        </div>
-                                    
-                                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1069,19 +1170,18 @@ Una experiencia literaria que no nos dejará indiferentes. Muy recomendable, sin
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse14">
 		   <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Extraordinary 
-							              </a>
+          <i class="fa fa-star"></i> <span class="text-success">05/08/2025</span>
+        </span>  Extraordinary <span class="text-danger">(Compra verificada) </span>     </a>
 							            </h4>
 							          </div>
-							          <div id="collapse3" class="panel-collapse collapse">
+							          <div id="collapse14" class="panel-collapse collapse">
 							            <div class="panel-body">
 En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de buscar sentido a lo que nos hace humanos y lo que significa estar vivo. Distopia futurista muy bien planteada. Espero pronto, otro volumen o la serie de TV, con impaciencia.
 </br>  </br>
@@ -1090,6 +1190,310 @@ En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de
 							          </div>
 							        </div>
                                     
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">
+		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">31/07/2025</span>
+        </span>  Miguel. A. Q: Sorprendente		 
+							             <span class="text-danger">(Compra verificada) </span>    </a>
+							            </h4>
+							          </div>
+							          <div id="collapse13" class="panel-collapse collapse">
+							            <div class="panel-body">
+    Acabo de leer el reciente libro titulado Eidos, escrito por Felden Vareth, y puedo afirmar que hacia mucho tiempo un pensamiento cientifico no me había sorprendido tanto como lo ha hecho este. Ha conseguido unir en una sola obra diferentes temas trascendentales que a veces nos solemos plantear, como son por ejemplo la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma, que el que no los llega a entender en su plenitud, no tiene ninguna dificultad en el seguimiento de la obra en general, esa característica es difícil de encontrar en un libro de ciencia ficción pero apoyándose totalmente en la ciencia actual. Si leeis el libro, cosa que os aconsejo, encontrareis situaciones que tal vez ya hayáis pensado, pero con una trascendencia y efectos que van más allá de lo que normalmente imaginamos. Leed el libro, os gustará y sorprenderá.
+    </br>  </br>
+                                        
+<a href="https://www.goodreads.com/book/show/236113959-eidos" class="mu-contrata-btn">Goodreads</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
+                                          
+          <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">25/07/2025</span> 
+        </span>
+           Juanjo P: Una novela fascinante, una paradoja brillante.   <span class="text-danger">(Compra verificada) </span>      </a>
+							            </h4>
+							          </div>
+							          <div id="collapse12" class="panel-collapse collapse">
+							            <div class="panel-body">
+Lo humano permanece en lo no humano, las emociones y sensaciones desarrollándose en quienes están programados para entender un mundo sin ellas. Buah! Una pasada de historia contada con un rigor impresionante aún siendo ciencia ficción. Lo imposible tendiendo la mano a lo posible. Gracias por esta obra de arte.                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">
+						   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">20/07/2025</span> 
+        </span> Cliente Amazon; Una gran novela. Muy recomendable. Distinta     
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse11" class="panel-collapse collapse">
+							            <div class="panel-body">
+   Una sorpresa de un autor que no conocía. Un placer de lectura y de las conclusiones a las que invita.
+</br></br>
+Eidos es una obra que desarma en silencio, sin recurrir al espectáculo. Propone un mundo coherente y al mismo tiempo inquietante, donde las preguntas sobre la identidad, el sentido y el destino de lo humano emergen con naturalidad, sin forzarlas.
+</br></br>
+El estilo es sobrio, preciso, y logra crear una atmósfera que acompaña el contenido filosófico sin entorpecer el ritmo. Agradezco especialmente el respeto con que trata al lector: plantea dilemas complejos sin simplificarlos, sin guiarlos hacia respuestas fáciles. Los Custodios, las memorias digitales, como extrapola las situaciones actuales a ese entorno, las tensiones sociales etc. todo está elaborado con una sensibilidad que sorprende.
+</br></br>
+Más que una novela de ciencia ficción, es una invitación a pensar en lo que esatmos haciendo, en lo que estamos dejando atrás y en lo que estamos conservando. Hay escenas que se quedan flotando días después y situaciones que reflejan nuestra propia época.
+</br></br>
+Recomendadísimo para quienes disfrutan de obras que perduran más allá del cierre del libro.
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+
+							            </div>
+							         </div>
+							       </div>
+                                     
+
+
+                                    
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse10">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">16/07/2025</span>
+        </span> Carlos: Para lectores exigentes a los que les guste reflexionar sobre hacia donde podría ir la humanidad   
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse10" class="panel-collapse collapse">
+							            <div class="panel-body">
+							           Todo un descubrimiento este libro, hoy comencé a leerlo y me he leído del tirón más de 140 páginas, la lectura te engancha y lees página tras página son poder parar, pero reflexionando sobre el pánico que da imaginar lo que podría llegar a ser un mundo como el de Eidos, además está tan bien escrito y argumentado todo que te llegas a plantear lo que realmente es la consciencia y si realmente podríamos vivir en una realidad como la que plantea el libro. Me gusta que la trama te describe una historia, pero te hace reflexionar sobre otras muchas historias que se podrían llegar a contar por lo que el potencial que tiene es prácticamente infinito.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+                                    
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">14/07/2025</span> 
+        </span> Luis:  Novela muy entretenida  <span class="text-danger">(Compra verificada) </span>   
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse9" class="panel-collapse collapse">
+							            <div class="panel-body">
+							       Una novela sorprendente de lectura muy entretenida. Una trama de ciencia ficción que engancha, con un trasfondo que invita a la reflexión.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">14/07/2025</span> 
+        </span> Mariano:  Una forma distinta de ver el mundo  <span class="text-danger">(Compra verificada) </span>  
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse8" class="panel-collapse collapse">
+							            <div class="panel-body">
+							      Muy recomendable  </br>  </br>
+Es muy interesante
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <span class="text-success">30/06/2025</span> 
+        </span> Bego: Libro de recomendable lectura <span class="text-danger">(Compra verificada) </span>   
+							              </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse7" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+Esta novela ha sido uno de mis grandes descubrimientos de este verano. Se trata de una obra de ciencia ficción que nos presenta dos mundos y múltiples situaciones que invitan a la reflexión sobre temas muy diversos. Cada capítulo podría funcionar como una postal autónoma, con escenas y personajes que se sostienen por sí mismos, pero que al leerse en conjunto se entrelazan con delicadeza para formar una novela coherente y profunda. Un libro para leer con atención y dejarse llevar. Totalmente recomendable.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">28/06/2025</span> 
+        </span> Luisma <span class="text-danger">(Compra verificada) </span>   
+							              </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse6" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+Muy interesante y muy recomendable su lectura. Distinto a otros libros que he leído. Se ha convertido en uno de mis favoritos.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+                                    
+                                    
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">20/06/2025</span> 
+        </span> Javier G. V: Vale la pena. No te deja indiferente. No es uno más.   </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse5" class="panel-collapse collapse">
+							            <div class="panel-body">
+							        Hace tiempo que no leo ciencia ficción. Por mis manos han pasado Las Fundaciones de Asimov, algunas de las Odiseas de Clarke, otros grandes que no menciono por no extenderme, y otros que no menciono porque han caído en el olvido.</br></br>
+
+Este no lo voy a olvidar. Es una de esas narraciones que tienen ese "algo" especial que queda en el recuerdo. No lo voy a calificar, pero sí a clasificar: en mi librería, en la estantería de los brillantes.
+</br></br>
+Muy recomendable.   
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                                  
+										</div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
 
 
 
@@ -1106,8 +1510,9 @@ En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span> Muy recomendable
+          <i class="fa fa-star"></i>   <span class="text-success">16/06/2025</span> 
+        </span> Aitor: Muy recomendable  <span class="text-danger">(Compra verificada)  </span> 
+							      
 							              </a>
 							            </h4>
 							          </div>
@@ -1115,28 +1520,75 @@ En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de
 							            <div class="panel-body">
                                         
 Me habían recomendado este libro y tenía muchas ganas de leerlo. Muy entretenido y muy filosófico a la vez. Te vas metiendo en la trama desde el principio. Dos mundos paralelos entre lo humano virtual y las máquinas cada vez más humanas.. te deja pensativo… Super recomendable, me ha gustado mucho.	
-</br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>						            </div>
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
+							            </div>
 							          </div>
 							        </div>
-                                    
-                                    
+
+
+
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+							          <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">16/06/2025</span> 
+        </span>  Casilda: Lectura entretenida y recomendable para cualquier edad <span class="text-danger">(Compra verificada) </span>   </a>
+							            </h4>
+							          </div>
+							          <div id="collapse3" class="panel-collapse collapse">
+							            <div class="panel-body">
+Muy recomendable. Me ha cautivado desde el principio por su imaginacion lógica y posible. Un libro de entorno futurista pero con una trama muy actual donde el futuro se alínea con el anhelo del ser humano contemporáneo. Su trama mezcla magistramente acción y secuencia ágil de acontecimientos, con las preguntas vitales del hombre del s.XXI.
+ </br>  </br>
+Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aun no se ha desvanecido.
+ </br>  </br>
+La lectura ligera pero rica en detalles, consigue mantener la imaginación y la atención del lector, genera curiosidad y necesidad de desvelar lo que viene después.
+ </br>  </br>
+Es un libro que no deja indiferente.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
 		   <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Relato inesperado, visionario y genuino
-							              </a>
+          <i class="fa fa-star"></i>  <span class="text-success">16/06/2025</span>
+        </span>  Fátima Q.P: Relato inesperado, visionario y genuino
+							          <span class="text-danger">(Compra verificada) </span>    </a>
 							            </h4>
 							          </div>
-							          <div id="collapse5" class="panel-collapse collapse">
+							          <div id="collapse2" class="panel-collapse collapse">
 							            <div class="panel-body">
 Voy solo por la página 71 y estoy disfrutando mucho del desarrollo … de como el
 Autor se ha tenido que documentar, de la reflexión tan profunda que requiere y de la tremenda imaginación. Lo empecé leyendo una una novela de distópica y lo estoy viendo más como una reflexión filosófica que vamos a terner que hacer más pronto que tarde.
@@ -1158,98 +1610,8 @@ Autor se ha tenido que documentar, de la reflexión tan profunda que requiere y 
                                     
                                     
                                     
-
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-					   <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span> Para lectores exigentes a los que les guste reflexionar sobre hacia donde podría ir la humanidad 
-							              </a>
-							            </h4>
-							          </div>
-							          <div id="collapse6" class="panel-collapse collapse">
-							            <div class="panel-body">
-							           Todo un descubrimiento este libro, hoy comencé a leerlo y me he leído del tirón más de 140 páginas, la lectura te engancha y lees página tras página son poder parar, pero reflexionando sobre el pánico que da imaginar lo que podría llegar a ser un mundo como el de Eidos, además está tan bien escrito y argumentado todo que te llegas a plantear lo que realmente es la consciencia y si realmente podríamos vivir en una realidad como la que plantea el libro. Me gusta que la trama te describe una historia, pero te hace reflexionar sobre otras muchas historias que se podrían llegar a contar por lo que el potencial que tiene es prácticamente infinito.
-                                       </br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
-							            </div>
-							          </div>
-							        </div>
-
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
-					   <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span> Vale la pena. No te deja indiferente. No es uno más.           </a>
-							            </h4>
-							          </div>
-							          <div id="collapse7" class="panel-collapse collapse">
-							            <div class="panel-body">
-							        Hace tiempo que no leo ciencia ficción. Por mis manos han pasado Las Fundaciones de Asimov, algunas de las Odiseas de Clarke, otros grandes que no menciono por no extenderme, y otros que no menciono porque han caído en el olvido.</br></br>
-
-Este no lo voy a olvidar. Es una de esas narraciones que tienen ese "algo" especial que queda en el recuerdo. No lo voy a calificar, pero sí a clasificar: en mi librería, en la estantería de los brillantes.
-</br></br>
-Muy recomendable.   
-</br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                                  
-										</div>
-							          </div>
-							        </div>
                                     
                                     
-                                    
-                                    
-                                    
-                                    
-
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
-						   <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span> Una gran novela. Muy recomendable. Distinta
-							              </a>
-							            </h4>
-							          </div>
-							          <div id="collapse8" class="panel-collapse collapse">
-							            <div class="panel-body">
-   Una sorpresa de un autor que no conocía. Un placer de lectura y de las conclusiones a las que invita.
-</br></br>
-Eidos es una obra que desarma en silencio, sin recurrir al espectáculo. Propone un mundo coherente y al mismo tiempo inquietante, donde las preguntas sobre la identidad, el sentido y el destino de lo humano emergen con naturalidad, sin forzarlas.
-</br></br>
-El estilo es sobrio, preciso, y logra crear una atmósfera que acompaña el contenido filosófico sin entorpecer el ritmo. Agradezco especialmente el respeto con que trata al lector: plantea dilemas complejos sin simplificarlos, sin guiarlos hacia respuestas fáciles. Los Custodios, las memorias digitales, como extrapola las situaciones actuales a ese entorno, las tensiones sociales etc. todo está elaborado con una sensibilidad que sorprende.
-</br></br>
-Más que una novela de ciencia ficción, es una invitación a pensar en lo que esatmos haciendo, en lo que estamos dejando atrás y en lo que estamos conservando. Hay escenas que se quedan flotando días después y situaciones que reflejan nuestra propia época.
-</br></br>
-Recomendadísimo para quienes disfrutan de obras que perduran más allá del cierre del libro.
-</br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>
-
-							            </div>
-							         </div>
-							       </div>
-                                     
-
 
 
 
@@ -1258,19 +1620,19 @@ Recomendadísimo para quienes disfrutan de obras que perduran más allá del cie
 							        <div class="panel panel-default">
 							          <div class="panel-heading">
 							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
 							    <i class="fa fa-plus toggle"></i>
 		 <span class="rating text-warning">
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Una maravilla de la ciencia ficción, incluso para quienes no somos del género.
-							              </a>
+          <i class="fa fa-star"></i>  <span class="text-success">04/06/2025</span>  
+        </span> Marisa M; Una maravilla de la ciencia ficción, incluso para quienes no somos del género.
+							            </a>
 							            </h4>
 							          </div>
-							          <div id="collapse9" class="panel-collapse collapse">
+							          <div id="collapse1" class="panel-collapse collapse">
 							            <div class="panel-body">
 No suelo leer ciencia ficción, pero este libro me enganchó desde el principio. Tiene un ritmo tranquilo, casi hipnótico, y te va metiendo poco a poco en un mundo que da vértigo por lo real que parece. Lo que más me impresionó fue cómo plantea cosas muy humanas y sociales de la actualidad sin caer en discursos. Acabé con muchas preguntas en la cabeza. Muy recomendable. Una lectura fascinante, incluso para quienes preferimos otros géneros. Agunos capitulos, como el de "Donde inicia el infinito", me han parecido profundamente poéticos, y otros como el de "7416.." muy emotivos. El entorno futurista y los custodios son la excusa perfecta para acabar preguntándote, de verdad, qué es vivir y dónde esta el valor de la vida. Un final sorprendente.
                                       
@@ -1283,93 +1645,7 @@ No suelo leer ciencia ficción, pero este libro me enganchó desde el principio.
                                     
 
 
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse10">
-							          <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>  Lectura entretenida y recomendable para cualquier edad
-							              </a>
-							            </h4>
-							          </div>
-							          <div id="collapse10" class="panel-collapse collapse">
-							            <div class="panel-body">
-Muy recomendable. Me ha cautivado desde el principio por su imaginacion lógica y posible. Un libro de entorno futurista pero con una trama muy actual donde el futuro se alínea con el anhelo del ser humano contemporáneo. Su trama mezcla magistramente acción y secuencia ágil de acontecimientos, con las preguntas vitales del hombre del s.XXI.
- </br>  </br>
-Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aun no se ha desvanecido.
- </br>  </br>
-La lectura ligera pero rica en detalles, consigue mantener la imaginación y la atención del lector, genera curiosidad y necesidad de desvelar lo que viene después.
- </br>  </br>
-Es un libro que no deja indiferente.
-                                      
-           </br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
-                                      
-                                         </div>
-							          </div>
-							        </div>
-                                    
 
-
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">
-							                 <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>   No te deja indiferente
-							              </a>
-							            </h4>
-							          </div>
-							          <div id="collapse11" class="panel-collapse collapse">
-							            <div class="panel-body">
-Una historia original, amena, que no te deja indiferente. Yo por lo menos, me he quedado pensando en muchas otros caminos que son posibles sobre la idea base. Es decir, la base es muy muy buena y la trama también, dejando abiertas otras muchas posibilidades. Recomendable.
-                                      
-           </br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
-                                      
-                                         </div>
-							          </div>
-							        </div>
-
-
-
-							        <div class="panel panel-default">
-							          <div class="panel-heading">
-							            <h4 class="panel-title">
-							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-                                          
-          <i class="fa fa-plus toggle"></i>
-		 <span class="rating text-warning">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-        </span>
-           Una novela fascinante, una paradoja brillante.            </a>
-							            </h4>
-							          </div>
-							          <div id="collapse12" class="panel-collapse collapse">
-							            <div class="panel-body">
-Lo humano permanece en lo no humano, las emociones y sensaciones desarrollándose en quienes están programados para entender un mundo sin ellas. Buah! Una pasada de historia contada con un rigor impresionante aún siendo ciencia ficción. Lo imposible tendiendo la mano a lo posible. Gracias por esta obra de arte.                                      
-           </br>  </br>
-<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" class="mu-contrata-btn">AMAZON</a>                           
-                                      
-                                         </div>
-							          </div>
-							        </div>
 
 
 
