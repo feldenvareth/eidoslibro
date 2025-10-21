@@ -1381,13 +1381,13 @@ button:focus {
 	width: 100%;
 }
 
-.mu-resena-content {
-	display: inline;
-	float: left;
-	width: 100%;
-	text-align: center;
-	padding: 0 150px;
-	margin-top: 50px;
+.mu-resena-content{
+  display:inline;
+  float:left;
+  width:100%;
+  text-align:left;
+  padding:0 120px;
+  margin-top:50px;
 }
 
 .mu-resena-content .panel-default {
@@ -1423,6 +1423,23 @@ button:focus {
 .mu-resena-content .panel-title a>span {
 	margin-right: 5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2022,3 +2039,12 @@ button:focus {
 
 
 
+
+
+/* === Fix reseñas: ancho útil y alineación en móvil === */
+@media (max-width: 991px){
+  #mu-resena .mu-resena-content{ padding:0 32px; }
+}
+@media (max-width: 640px){
+  #mu-resena .mu-resena-content{ padding:0 14px; }
+}
