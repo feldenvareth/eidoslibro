@@ -237,81 +237,59 @@
 </style>
 
 
+
+
+
+
+
+
 <style>
-/* ===== Acordeón de reseñas: corrección mobile y anti-letras-en-columna ===== */
+/* === Reseñas: layout limpio + legible en móvil === */
 #mu-resena .panel-title a{
   display:flex;
   align-items:flex-start;
-  gap:10px;
-  line-height:1.5;
+  gap:8px;
+  flex-wrap:wrap;                 /* puede saltar de línea en móvil */
+  line-height:1.45;
   text-decoration:none;
-  /* clave para que los elementos puedan saltar a la siguiente línea */
-  flex-wrap: wrap;
+  text-align:left;
 }
-#mu-resena .panel-title a .fa-plus,
 #mu-resena .panel-title .toggle{
-  flex:0 0 16px;
-  width:16px;
+  flex:0 0 14px;                  /* ancho del + */
+  width:14px;
   margin-top:2px;
 }
 #mu-resena .panel-title .rating{
   flex:0 0 auto;
   white-space:nowrap;
   line-height:1;
-  margin-top:2px;
 }
-/* El título no debe comprimirse a 1px: damos base y un mínimo */
-#mu-resena .panel-title .review-text{
-  flex:1 1 320px;     /* ancho base cómodo */
-  min-width:160px;    /* evita columna vertical */
-  word-break: normal; /* no romper palabras por letras */
-  overflow-wrap: break-word;
-}
+/* meta (fecha / compra verificada) sin romperse */
 #mu-resena .panel-title .text-danger,
 #mu-resena .panel-title .text-success{
   white-space:nowrap;
-  margin-left:6px;
 }
-
-/* En pantallas estrechas movemos meta a otra línea y dejamos el título a 100% */
-@media (max-width: 600px){
-  #mu-resena .panel-title .review-text{
-    flex-basis:100%;
-  }
+/* Cuerpo del acordeón: más ancho útil y sin cortar palabras */
+#mu-resena .panel-body{
+  padding:12px 12px 8px 12px;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:break-word;
+  hyphens:auto;
+  line-height:1.55;
+  text-align:left;
+}
+/* Móvil: la fecha y compra verificada bajan con leve sangría */
+@media (max-width:600px){
   #mu-resena .panel-title .text-danger,
   #mu-resena .panel-title .text-success{
-    flex:0 0 100%;     /* Fuerza salto de línea */
-    margin-left:26px;  /* sangría igual a + (16) + gap (10) */
+    flex:0 0 100%;
+    margin-left:14px;             /* bajo el + */
+    margin-top:2px;
   }
 }
-</style>
-
-
-<style>
-/* ===== Acordeón de reseñas: equilibrio desktop + móvil ===== */
-/* Desktop por defecto: en una sola línea, meta a la derecha */
-#mu-resena .panel-title a{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  line-height:1.5;
-  flex-wrap: nowrap;                 /* NO envolver en escritorio */
-  text-decoration:none;
-}
-#mu-resena .panel-title a .fa-plus,
-#mu-resena .panel-title .toggle{ flex:0 0 16px; width:16px; }
-#mu-resena .panel-title .rating{ flex:0 0 auto; white-space:nowrap; line-height:1; }
-#mu-resena .panel-title .review-text{ flex:1 1 auto; min-width:0; word-break:normal; overflow-wrap:break-word; }
-#mu-resena .panel-title .text-danger{ order:2; margin-left:auto; white-space:nowrap; }   /* (Compra verificada) pegado a la derecha */
-#mu-resena .panel-title .text-success{ order:3; margin-left:12px; white-space:nowrap; }  /* fecha a la derecha del anterior */
-
-/* Móvil: envolvemos, el título ocupa la línea completa y los metadatos bajan */
-@media (max-width: 600px){
-  #mu-resena .panel-title a{ align-items:flex-start; flex-wrap: wrap; }
-  #mu-resena .panel-title .review-text{ order:1; flex-basis:100%; }
-  #mu-resena .panel-title .text-danger{ order:2; margin-left:26px; }   /* sangría = icono + gap */
-  #mu-resena .panel-title .text-success{ order:3; margin-left:10px; }
-}
+/* Cortafuegos por si alguna hoja global aplica break-all */
+#mu-resena, #mu-resena *{ word-break:normal !important; }
 </style>
 
 </head>
@@ -698,7 +676,7 @@
           <div class="mu-video-content">
             <div class="mu-video-iframe-area">
               <a class="mu-video-close-btn" href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-              <iframe allow="accelerometer; autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Video" class="mu-video-iframe" width="854" height="480" data-src="https://www.youtube.com/embed/Q9irf_TpPDY" frameborder="1" allowfullscreen></iframe>
+              <iframe allow="accelerometer; autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Video" class="mu-video-iframe" width="854" height="480" data-src="https://www.youtube-nocookie.com/embed/Q9irf_TpPDY?enablejsapi=1&playsinline=1&rel=0&modestbranding=1&origin=https%3A%2F%2Fwww.eidoslibro.com" frameborder="1" allowfullscreen title="Presentación Eidos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
             </div>
           </div>
           <!-- End Video content -->
@@ -2052,6 +2030,27 @@ video.setAttribute('controls', '');
           initVideoSlides(); hookSlickPause(); setTimeout(unblockAudioToggleIfSafe, 0);
         }
       })();</script>
+
+
+<script>
+// Establece ?origin= correcto en el iframe de YouTube solo cuando hay HTTP(S)
+// Evita el error 153 al abrir el archivo localmente (file://)
+(function(){
+  var iframe = document.querySelector('#mu-video iframe');
+  if(!iframe) return;
+  try{
+    var u = new URL(iframe.src);
+    if (location.protocol === 'http:' || location.protocol === 'https:') {
+      u.searchParams.set('origin', location.origin);
+      iframe.src = u.toString();
+    } else {
+      // file:// — quitamos origin si viniera hardcodeado
+      u.searchParams.delete('origin');
+      iframe.src = u.toString();
+    }
+  }catch(e){}
+})();
+</script>
 
 </body>
 </html>
