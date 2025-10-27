@@ -654,35 +654,64 @@
       <!-- End Feature -->
 
 
-      <!-- Start Video -->
-      <section id="mu-video">
-        <div class="mu-video-overlay">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="mu-video-area">
-                  <h2>VÍDEO PRESENTACIÓN</h2>
-                  <a class="mu-google-btn"><img src="assets/images/video.png" loading="lazy" decoding="async"> </a> <a class="mu-video-play-btn" href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                </div>
-
-                <a class="mu-google-btn" href="https://www.youtube.com/@FeldenVareth" target="_blank"></i><span> 	<img src="assets/images/playlist2.png"  loading="lazy" decoding="async"> Más Videos</span></a>
-                </br></br>
-                </br></br>
-              </div>
-            </div>
+<!-- Start Video -->
+<section id="mu-video">
+  <div class="mu-video-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-video-area">
+            <h2>VÍDEO PRESENTACIÓN</h2>
+            <a class="mu-google-btn">
+              <img src="assets/images/video.png" loading="lazy" decoding="async" alt="Vídeo">
+            </a>
+            <a class="mu-video-play-btn" href="#">
+              <i class="fa fa-play" aria-hidden="true"></i>
+            </a>
           </div>
 
-          <!-- Start Video content -->
-          <div class="mu-video-content">
-            <div class="mu-video-iframe-area">
-              <a class="mu-video-close-btn" href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-              <iframe allow="accelerometer; autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Video" class="mu-video-iframe" width="854" height="480" data-src="https://www.youtube-nocookie.com/embed/Q9irf_TpPDY?enablejsapi=1&playsinline=1&rel=0&modestbranding=1&origin=https%3A%2F%2Fwww.eidoslibro.com" frameborder="1" allowfullscreen title="Presentación Eidos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-            </div>
-          </div>
-          <!-- End Video content -->
+          <a class="mu-google-btn" href="https://www.youtube.com/@FeldenVareth" target="_blank" rel="noopener">
+            <span>
+              <img src="assets/images/playlist2.png" loading="lazy" decoding="async" alt="Playlist">
+              Más Videos
+            </span>
+          </a>
+          <br><br>
+          <br><br>
         </div>
-      </section>
-      <!-- End Video -->
+      </div>
+    </div>
+
+    <!-- Start Video content -->
+    <div class="mu-video-content">
+      <div class="mu-video-iframe-area">
+        <a class="mu-video-close-btn" href="#">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+
+        <!-- IMPORTANTE:
+             - Sin atributos duplicados
+             - Sin enablejsapi/origin para evitar Error 153 si no estás en ese dominio
+             - Usa data-src si tu JS lo activa al pulsar play; cambia a src si quieres que cargue siempre -->
+        <iframe
+          class="mu-video-iframe"
+          width="854"
+          height="480"
+          title="Presentación Eidos"
+          loading="lazy"
+          data-src="https://www.youtube.com/embed/Q9irf_TpPDY?playsinline=1&rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+    </div>
+    <!-- End Video content -->
+  </div>
+</section>
+<!-- End Video -->>
 
 
 
