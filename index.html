@@ -1695,14 +1695,22 @@ No suelo leer ciencia ficción, pero este libro me enganchó desde el principio.
                   <a class="mu-google-btn2 itemBox" data-item="res"
                     href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank"></i><span> 	<img src="assets/images/publicaciones/amazon.png"  loading="lazy" decoding="async"> Amazon</span></a>
 
+
+
+<a class="mu-google-btn itemBox js-open-yt" data-item="otr" href="https://youtu.be/sqOVepZNm9s">
+  <span><img src="assets/images/publicaciones/youtube.png" alt="YouTube" loading="lazy" decoding="async"> Teaser</span>
+</a>
+
+
+
+
                   <a class="mu-google-btn3 itemBox" data-item="est"
                     href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"></i><span> 	<img src="assets/images/publicaciones/goodreads.png"  loading="lazy" decoding="async"> Goodreads </span></a>
                     
                     
                   <a class="mu-google-btn itemBox" data-item="otr" href="docs/dossierprensa.pdf"></i><span> 	<img src="assets/images/publicaciones/dosier.png"  loading="lazy" decoding="async"> Dosier de Prensa </span></a>
                     
-                    
-
+                  
                   <a class="mu-google-btn2 itemBox" data-item="res"
                     href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank"></i><span> 	<img src="assets/images/publicaciones/detour.png"  loading="lazy" decoding="async"> Detour </span></a>
 
@@ -1711,9 +1719,11 @@ No suelo leer ciencia ficción, pero este libro me enganchó desde el principio.
 
                   <a class="mu-google-btn3 itemBox" data-item="est" href="https://www.wattpad.com/story/401387972-eidos-primeros-capitulos" target="_blank"></i><span> 	<img src="assets/images/publicaciones/wattpad.png"  loading="lazy" decoding="async"> wattpad </span></a>
                   
-                  <a class="mu-google-btn itemBox" data-item="otr" href="https://youtu.be/xDTEcWXPncs"></i><span> 	<img src="assets/images/publicaciones/youtube.png"  loading="lazy" decoding="async"> Debate </span></a>
                   
-                  
+
+<a class="mu-google-btn itemBox js-open-yt" data-item="otr" href="https://youtu.be/xDTEcWXPncs">
+  <span><img src="assets/images/publicaciones/youtube.png" alt="YouTube" loading="lazy" decoding="async"> Debate</span>
+</a>
                   
                   
                   
@@ -1940,7 +1950,7 @@ No suelo leer ciencia ficción, pero este libro me enganchó desde el principio.
             if (btn){ btn.setAttribute('disabled','disabled'); }
             if (ico){
               if (!ico.getAttribute('data-prev')) ico.setAttribute('data-prev', ico.textContent || '');
-              ico.textContent = 'ðŸ”‡'; // altavoz tachado
+              ico.textContent = '\u{1F507}'; // 🔇 // altavoz tachado
             }
             __audioToggleBlocked = true;
           }catch(e){}
@@ -2075,6 +2085,150 @@ video.setAttribute('controls', '');
 </script>
 
 
+
+
+
+
+
+
+
+<!-- Popup YouTube exclusivo para “Debate” -->
+<div id="yt-overlay" class="mu-video-iframe-area"
+     style="display:none;background:rgba(0,0,0,.80)!important;z-index:10040;">
+  <a class="mu-video-close-btn" href="#">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </a>
+  <iframe id="yt-overlay-iframe" class="mu-video-iframe" width="854" height="480" title="YouTube Debate"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+(function(){
+  // ----- refs del popup YT -----
+  var overlay = document.getElementById('yt-overlay');
+  var iframe  = document.getElementById('yt-overlay-iframe');
+  if(!overlay || !iframe) return;
+
+  var closeBtn = overlay.querySelector('.mu-video-close-btn');
+
+  // ----- detección de helpers globales (si existen) -----
+  var hasSiteFns = {
+    pause:  typeof window.pauseBgAudio === 'function',
+    resume: typeof window.resumeBgAudioIfSafe === 'function',
+    block:  typeof window.blockAudioToggle === 'function',
+    unblk:  typeof window.unblockAudioToggleIfSafe === 'function'
+  };
+
+  // ----- fallback de audio (si no hay helpers globales) -----
+  var __ytAutoPaused = false;
+  function fallbackBlockToggle(){
+    try{
+      var btn = document.getElementById('audio-toggle');
+      var ico = document.getElementById('audio-toggle-icon');
+      if (btn) btn.setAttribute('disabled','disabled');
+      if (ico){
+        if (!ico.getAttribute('data-prev')) ico.setAttribute('data-prev', ico.textContent || '');
+       ico.textContent = '\u{1F507}'; // 🔇
+      }
+    }catch(e){}
+  }
+  function fallbackUnblockToggle(){
+    try{
+      var btn = document.getElementById('audio-toggle');
+      var ico = document.getElementById('audio-toggle-icon');
+      if (btn) btn.removeAttribute('disabled');
+      if (ico){
+        var prev = ico.getAttribute('data-prev');
+        if (prev !== null){ ico.textContent = prev; ico.removeAttribute('data-prev'); }
+      }
+    }catch(e){}
+  }
+  function fallbackPauseBg(){
+    try{
+      var a = document.getElementById('bg-audio');
+      if (a && !a.paused){ a.pause(); __ytAutoPaused = true; }
+      // pausa vídeos del carrusel, como haces en tu sitio
+      document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+        try{ v.pause(); }catch(e){}
+      });
+    }catch(e){}
+  }
+  function fallbackResumeBg(){
+    try{
+      if (__ytAutoPaused){
+        var a = document.getElementById('bg-audio');
+        if (a && a.play) a.play().catch(function(){});
+        __ytAutoPaused = false;
+      }
+    }catch(e){}
+  }
+
+  // ----- util -----
+  function toEmbed(u){
+    try{
+      var url = new URL(u, location.href);
+      if (url.hostname.indexOf('youtu.be') > -1){
+        var id = url.pathname.slice(1);
+        var t  = url.searchParams.get('t');
+        return 'https://www.youtube.com/embed/'+id+'?playsinline=1&rel=0&modestbranding=1&autoplay=1'
+               +(t?('&start='+(parseInt(t,10)||0)):'');
+      }
+      if (url.hostname.indexOf('youtube.com') > -1){
+        var id = url.searchParams.get('v');
+        var t  = url.searchParams.get('t');
+        if (id) return 'https://www.youtube.com/embed/'+id+'?playsinline=1&rel=0&modestbranding=1&autoplay=1'
+                     +(t?('&start='+(parseInt(t,10)||0)):'');
+      }
+      return u;
+    }catch(e){ return u; }
+  }
+
+  // ----- abrir / cerrar -----
+  function openPopup(url){
+    var src = toEmbed(url);
+    try{
+      var u = new URL(src, location.href);
+      if (/^https?:$/.test(location.protocol)) u.searchParams.set('origin', location.origin);
+      src = u.toString();
+    }catch(e){}
+
+    // AUDIO — exactamente igual que otros multimedia:
+    if (hasSiteFns.block) { try{ window.blockAudioToggle(); }catch(e){} } else { fallbackBlockToggle(); }
+    if (hasSiteFns.pause) { try{ window.pauseBgAudio(); }catch(e){} } else { fallbackPauseBg(); }
+
+    overlay.style.display = 'block';
+    overlay.style.background = 'rgba(0,0,0,.80)';
+    document.body.style.overflow = 'hidden';
+    iframe.removeAttribute('loading');
+    iframe.src = 'about:blank';
+    requestAnimationFrame(function(){ iframe.src = src; });
+  }
+
+  function closePopup(){
+    overlay.style.display = 'none';
+    iframe.src = 'about:blank';
+    document.body.style.overflow = '';
+
+    // AUDIO — reanudar/desbloquear como hace el sitio
+    setTimeout(function(){
+      if (hasSiteFns.unblk) { try{ window.unblockAudioToggleIfSafe(); }catch(e){} } else { fallbackUnblockToggle(); }
+      if (hasSiteFns.resume){ try{ window.resumeBgAudioIfSafe(); }catch(e){} } else { fallbackResumeBg(); }
+    }, 60);
+  }
+
+  // ----- eventos -----
+  document.querySelectorAll('.js-open-yt').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      openPopup(e.currentTarget.href);
+    });
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function(e){ e.preventDefault(); closePopup(); });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePopup(); });
+})();
+</script>
 
 
 
