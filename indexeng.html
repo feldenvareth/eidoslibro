@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>EIDOS – Philosophical science fiction novel by Felden Vareth</title>
+  <title>EIDOS – A Philosophical Science-Fiction Novel by Felden Vareth</title>
 
   <!-- Canonical -->
   <link rel="canonical" href="https://www.eidoslibro.com/">
 
   <!-- Meta SEO -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="EIDOS is a work of philosophical science fiction about the digital transfer of consciousness, ecological collapse, and the rediscovery of the human in a virtual world governed by artificial intelligences.">
+  <meta name="description" content="EIDOS is a philosophical science-fiction novel about the digital transfer of consciousness, ecological collapse, and the rediscovery of the human in a virtual environment governed by artificial intelligences.">
   <meta name="author" content="Felden Vareth">
-  <meta name="keywords" content="EIDOS, science fiction novel, philosophical science fiction, Felden Vareth, consciousness transfer, artificial intelligence, ecology, digital humanity, Custodians, Equilibrium, Eidos novel">
+  <meta name="keywords" content="EIDOS, science-fiction novel, philosophical sci-fi, Felden Vareth, transfer of consciousness, artificial intelligence, ecology, digital humanity, Custodians, Equilibrium, Eidos novel">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.eidoslibro.com/">
-  <meta property="og:title" content="EIDOS – A science fiction novel by Felden Vareth">
-  <meta property="og:description" content="A poetic, critical exploration of the human future after collapse. What remains of us when everything becomes digital?">
+  <meta property="og:title" content="EIDOS – Science-Fiction Novel by Felden Vareth">
+  <meta property="og:description" content="A poetic and critical exploration of the human future after collapse. What remains of us when everything has been digitized?">
   <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
   <meta property="og:image:secure_url" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
   <meta property="og:image:width" content="1200">
@@ -25,8 +25,8 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="EIDOS – A science fiction novel by Felden Vareth">
-  <meta name="twitter:description" content="A poetic, critical exploration of the human future after collapse.">
+  <meta name="twitter:title" content="EIDOS – Science-Fiction Novel by Felden Vareth">
+  <meta name="twitter:description" content="A poetic and critical exploration of the human future after collapse.">
   <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
 
   <!-- Favicon -->
@@ -50,14 +50,14 @@
     <![endif]-->
 
     <!-- ============================================================
-         Google Analytics 4 + Consent Mode v2 (Granular GDPR)
+         Google Analytics 4 + Consent Mode v2 (Granular RGPD)
          ============================================================ -->
     <script>
-      // Data layer and helper
+      // Capa de datos y helper
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
 
-      // 1) Default consent: DENIED (before loading gtag.js)
+      // 1) Consentimiento por defecto: TODO DENEGADO (antes de cargar gtag.js)
       gtag('consent', 'default', {
         ad_storage: 'denied',
         ad_user_data: 'denied',
@@ -65,13 +65,13 @@
         analytics_storage: 'denied'
       });
 
-      // Helper: apply a consent object {analytics_storage, ad_*}
+      // Utilidad: aplicar un objeto de consentimiento {analytics_storage, ad_*}
       function applyConsentObject(obj){
         gtag('consent', 'update', obj);
         try { localStorage.setItem('ga_consent_v2', JSON.stringify(obj)); } catch(e){}
       }
 
-      // 2) Restore saved preference (if any) BEFORE GA initializes
+      // 2) Restaurar preferencia guardada (si existe) ANTES de inicializar GA
       (function applyStoredConsent(){
         try {
           const raw = localStorage.getItem('ga_consent_v2');
@@ -86,11 +86,11 @@
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
     <script>
-      // 3) Initialize GA4 without auto page_view
+      // 3) Inicializar GA4 sin enviar page_view automáticamente
       gtag('js', new Date());
       gtag('config', 'G-SCSFPYKJTX', { send_page_view: false });
 
-      // 4) If analytics_storage:'granted', send page_view now
+      // 4) Si ya había analytics_storage:'granted', enviar page_view ahora
       try {
         if (window.__gaConsentPref && window.__gaConsentPref.analytics_storage === 'granted') {
           gtag('event', 'page_view');
@@ -98,7 +98,7 @@
       } catch(e){}
     </script>
 
-    <!-- Consent Banner + Modal -->
+    <!-- Banner + Modal de consentimiento -->
     <style>
       #consent-banner{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:#f7f7f7;border-top:1px solid #ddd;padding:12px}
       #consent-banner p{margin:0 0 8px}
@@ -129,6 +129,7 @@
     </style>
     
     
+    
    <style>
   #audio-toggle{
     position: fixed;
@@ -145,6 +146,8 @@
   }
   #audio-toggle:hover{ background: rgba(0,0,0,.75); }
  
+    
+    
 .audio-ctrl{
   position: fixed;
   right: 14px; bottom: 14px;
@@ -163,23 +166,157 @@
 @media (max-width: 480px){
   .audio-ctrl input[type="range"]{ width: 90px; }
 }
+    
+    
  </style>   
-  </head>
+    
+    
+    
+    
+  
+<style>
+/* Centrado del video dentro de su slide del carrusel */
+.mu-apps-screenshot-slider .video-slide{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+}
+.mu-apps-screenshot-slider .video-slide .slide-video{
+  display:block;
+  width:100%;           /* mantener proporción natural */
+  height:auto;
+  max-width:100%;
+  max-height:70vh;
+  margin:0 auto;
+  object-fit:contain;
+}
+@media (max-width: 768px){
+  .mu-apps-screenshot-slider .video-slide .slide-video{ max-height:60vh; }
+}
+</style>
+
+
+<style>
+/* Fuerza centrado vertical en slick usando flex en el track */
+.mu-apps-screenshot-slider .slick-track{
+  display:flex !important;
+  align-items:center !important;
+}
+.mu-apps-screenshot-slider .slick-slide{
+  height:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.mu-apps-screenshot-slider .slick-slide > div{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+}
+.mu-apps-screenshot-slider .mu-single-screeshot,
+.mu-apps-screenshot-slider .video-slide{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:100% !important;
+}
+/* El video ocupa ancho completo, pero no más de 70vh de alto */
+.mu-apps-screenshot-slider .video-slide .slide-video{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:70vh !important;
+  margin:0 auto !important;
+  object-fit:contain !important;
+}
+@media (max-width: 768px){
+  .mu-apps-screenshot-slider .video-slide .slide-video{ max-height:60vh !important; }
+}
+</style>
+
+
+
+
+
+
+
+
+<style>
+/* === Reseñas: layout limpio + legible en móvil === */
+#mu-resena .panel-title a{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  flex-wrap:wrap;                 /* puede saltar de línea en móvil */
+  line-height:1.45;
+  text-decoration:none;
+  text-align:left;
+}
+#mu-resena .panel-title .toggle{
+  flex:0 0 14px;                  /* ancho del + */
+  width:14px;
+  margin-top:2px;
+}
+#mu-resena .panel-title .rating{
+  flex:0 0 auto;
+  white-space:nowrap;
+  line-height:1;
+}
+/* meta (fecha / compra verificada) sin romperse */
+#mu-resena .panel-title .text-danger,
+#mu-resena .panel-title .text-success{
+  white-space:nowrap;
+}
+/* Cuerpo del acordeón: más ancho útil y sin cortar palabras */
+#mu-resena .panel-body{
+  padding:12px 12px 8px 12px;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:break-word;
+  hyphens:auto;
+  line-height:1.55;
+  text-align:left;
+}
+/* Móvil: la fecha y compra verificada bajan con leve sangría */
+@media (max-width:600px){
+  #mu-resena .panel-title .text-danger,
+  #mu-resena .panel-title .text-success{
+    flex:0 0 100%;
+    margin-left:14px;             /* bajo el + */
+    margin-top:2px;
+  }
+}
+/* Cortafuegos por si alguna hoja global aplica break-all */
+#mu-resena, #mu-resena *{ word-break:normal !important; }
+</style>
+
+</head>
   <body>
 
-<!-- Background music -->
+
+
+<!-- Música de fondo -->
 <audio id="bg-audio"
        preload="none"
        loop
        playsinline></audio>
 
-<!-- Mini audio control -->
-<div id="audio-ctrl" class="audio-ctrl" role="group" aria-label="Background music">
-  <button id="audio-toggle" aria-label="Play/Pause">
+<!-- Mini-control de audio -->
+<div id="audio-ctrl" class="audio-ctrl" role="group" aria-label="Música de fondo">
+  <button id="audio-toggle" aria-label="Reproducir/pausar">
     <span id="audio-toggle-icon">🔊</span>
   </button>
-  <input id="audio-volume" type="range" min="0" max="100" step="1" value="50" aria-label="Volume">
+  <input id="audio-volume" type="range" min="0" max="100" step="1" value="50" aria-label="Volumen">
 </div>
+
+
+
+
+
+
+
 
     <!-- Banner -->
     <div id="consent-banner" hidden>
@@ -189,7 +326,7 @@
       <div class="btns">
         <button id="consent-accept">Accept all</button>
         <button id="consent-reject">Reject</button>
-        <button id="consent-config">Settings</button>
+        <button id="consent-config">Configure</button>
       </div>
     </div>
 
@@ -200,26 +337,26 @@
       <div class="content">
         <div class="row">
           <div>
-            <label class="switch" title="Enable/disable measurement cookies">
+            <label class="switch" title="Activar/desactivar cookies de medición">
               <input type="checkbox" id="toggle-analytics">
               <span class="slider"></span>
             </label>
           </div>
           <div>
             <h4>Analytics (Google Analytics)</h4>
-            <p>Helps us understand site usage. No ads and no cross-site tracking.</p>
+            <p>They help us understand site usage. No advertising or cross-site tracking.</p>
           </div>
         </div>
         <div class="row">
           <div>
-            <label class="switch" title="Personalized ads and ad measurement">
+            <label class="switch" title="Publicidad personalizada y medición de anuncios">
               <input type="checkbox" id="toggle-ads">
               <span class="slider"></span>
             </label>
           </div>
           <div>
             <h4>Advertising (optional)</h4>
-            <p>Allows ad storage, user data and personalization. Turn off if you don’t want personalized advertising.</p>
+            <p>Allows ad storage, user data and personalization. Disable if you do not want personalized advertising.</p>
           </div>
         </div>
       </div>
@@ -248,7 +385,7 @@
         function hideBanner(){ banner.hidden = true; }
 
         function openModal(){
-          // Load current state from localStorage (or defaults denied)
+          // Cargar estado actual desde localStorage (o defaults denied)
           let saved = null;
           try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
           const anaGranted = saved?.analytics_storage === 'granted';
@@ -268,7 +405,7 @@
         }
 
         function sendPageViewIfNeeded(){
-          // Send PV only if analytics_storage:'granted'
+          // Enviar PV solo si hay analytics_storage:'granted'
           try {
             const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
             if (saved.analytics_storage === 'granted') {
@@ -312,7 +449,7 @@
           sendPageViewIfNeeded();
         }
 
-        // Show or hide banner on load
+        // Mostrar u ocultar el banner al cargar
         window.addEventListener('load', function(){
           let hasChoice = false;
           try {
@@ -332,9 +469,10 @@
     </script>
 
     <!-- ============================
-         PAGE CONTENT
+         CONTENIDO DE LA PÁGINA
+         (tu HTML original intacto)
          ============================ -->
-
+  	
     <!-- Start Header -->
     <header id="mu-header" class="" role="banner">
       <div class="mu-header-overlay">
@@ -352,8 +490,27 @@
             <!-- Start header featured area -->
             <div class="mu-header-featured-area">
               <div class="mu-header-featured-img">
-                <img src="assets/images/eidosnormal.webp" alt="Eidos book" loading="lazy" decoding="async">
-                <p>&nbsp; </p>
+                <img src="assets/images/eidosnavidad.webp" alt="Libro Eidos" loading="lazy" decoding="async">
+                
+                
+                
+                
+						  <p>&nbsp; </p>
+                          
+
+      <div style="text-align: center;">
+							
+<a data-toggle="tooltip" title="Merry Christmas" aria-label="Text">
+    <img src="assets/images/basenavidad.webp" alt="Merry Christmas">
+</a>          
+                
+
+                
+                          </div>
+                
+                
+                
+                
                 <div style="text-align: center;"></div>
               </div>
 
@@ -366,22 +523,24 @@
                 <h3>Who are we?</h3>
                 <h3>What defines us as human and as a species?</h3>
                 <h3>What are we losing from existence?</h3>
-                <h3>What is life? What defines us? Can we escape our nature or are we bound to it?</h3>
-                <h3>Do our instincts condition our behaviour?</h3>
-                <h1>A troubling certainty: if we keep our nature… our nature will remain.</h1>
+                <h3>What is life? What defines us? Can we escape our nature, or are we bound to it?</h3>
+                <h3>Are our instincts the ones that condition our behaviour?</h3>
+                <h1>A disquieting certainty: if we keep our nature, our nature will stay with us.</h1>
 
                 <div class="mu-app-download-area">
+                
+                
                   <a class="mu-google-btn" href="docs/chapters.pdf" target="_blank">
-                    <i class="fa-solid fa-file-lines"></i><span>Download sample chapters</span>
-                  </a>
-
+                  <i class="fa-solid fa-file-lines"></i><span>Download sample chapters</span></a>
+                  
+                  
                   <p>&nbsp; </p>
                   <a class="mu-google-btn" href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">
-                    <i class="fa-brands fa-amazon"></i>
-                    <span>Get it on Amazon</span>
-                  </a>
+  <i class="fa-brands fa-amazon"></i>
+  <span>Get it on Amazon</span>
+</a>
 
-                  <a class="mu-google-btn" href="indexautoreng.html"><i class="fa fa-envelope"></i><span>Request a signed copy</span></a>
+                  <a class="mu-google-btn" href="indexautoreng.html" target="_blank"><i class="fa fa-envelope"></i><span>Request a signed copy</span></a>
                 </div>
               </div>
             </div>
@@ -393,38 +552,54 @@
     </header>
     <!-- End Header -->
 
-    <!-- Start Menu -->
-    <button class="mu-menu-btn">
-      <i class="fa fa-bars"></i>
-    </button>
-    <div class="mu-menu-full-overlay">
-      <div class="mu-menu-full-overlay-inner">
-      
-      
+
+
+
+    
+    
+    
+    
+
+	<!-- Start Menu -->
+	<button class="mu-menu-btn">
+		<i class="fa fa-bars"></i>
+	</button>
+	<div class="mu-menu-full-overlay">
+		<div class="mu-menu-full-overlay-inner">
+        
+        
                      	 <a href="index.html"><img class="mu-profile-img" src="assets/images/flagspain.webp"></a>
+                
+                
+						  <p>&nbsp; </p>    
+        
+        
+			<a class="mu-menu-close-btn" href="#"><span class="mu-line"></span></a>
 
-  
-      
-        <p>&nbsp; </p>
-        <a class="mu-menu-close-btn" href="#"><span class="mu-line"></span></a>
-
-        <nav class="mu-menu" role="navigation">
-          <ul>
-            <li><a href="#mu-header">Home</a></li>
-            <li><a href="#mu-feature">Synopsis</a></li>
-            <li><a href="#mu-video">Book trailer</a></li>
+			<nav class="mu-menu" role="navigation">
+				<ul>
+			<li><a href="#mu-header">Home</a></li>
+			<li><a href="#mu-feature">Synopsis</a></li>
+            <li><a href="#mu-video">Video</a></li>
             <li><a href="#mu-contrata">Get your copy</a></li>
-            <li><a href="#mu-download">Images</a></li>
-            <li><a href="#mu-publicaciones">Mentions & reviews</a></li>
-            <li><a href="#mu-contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-      <span style="text-align: justify;"></span>
-    </div>
-    <!-- End Menu -->
+            
+            <li><a href="#mu-download">Scenes</a></li>
+      
+            <li><a href="#mu-resena">Reviews</a></li>
+            <li><a href="#mu-publicaciones">Mentions</a></li>
+			<li><a href="#mu-contact">Contact</a></li>
 
-    <!-- Start main content -->
+
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!-- End Menu -->
+
+	
+	
+	    <!-- Start main content -->
     <main role="main">
 
       <!-- Start Feature -->
@@ -439,37 +614,36 @@
 
                   <p><strong>What if the human survived… in what is not human?</strong></p>
 
-                  <p style="text-align: justify;"><em>Eidos</em> is a work of philosophical science fiction that explores what it means to be alive when death no longer exists and technical perfection replaces human experience.</p>
+                  <p style="text-align: justify;">Eidos is a work of philosophical science fiction that explores what it means to be alive when death no longer exists and technical perfection replaces human experience.</p>
 
-                  <p style="text-align: justify;">In <em>Eidos</em>, death is gone. Consciousnesses live in eternal perfection, while on Earth the Custodians—machines without a soul—learn to love what is real.
-                  But immortality brings questions nobody dared to ask or answer:</p>
+                  <p style="text-align: justify;">In Eidos, death no longer exists. Consciousnesses live in eternal perfection, while on Earth the Custodians—soulless machines—learn to love what is real. But immortality brings questions no one dared to ask or answer: </p>
 
-                  <p style="text-align: justify;">What will we do when we are too many and no longer age or die?</p>
-                  <p style="text-align: justify;">How will the newborn compete with those who have centuries of experience and the same vitality?</p>
-                  <p style="text-align: justify;">Can knowledge renew itself if those who hold it never disappear?</p>
-                  <p style="text-align: justify;">What defines us as human?</p>
-                  <p style="text-align: justify;">Can we escape the instincts that so decisively condition our behaviour?</p>
+                  <p style="text-align: justify;">What will we do when we are too many and no longer age or die? </p>
+                  <p style="text-align: justify;">How will the newborn compete with those who have centuries of experience and the same vitality?  </p>
+                  <p style="text-align: justify;">Can knowledge renew itself if those who hold it never disappear? </p>
+                  <p style="text-align: justify;">What defines us as human? </p>
+                  <p style="text-align: justify;">Can we escape our instincts that so strongly condition our behaviour? </p>
 
-                  <p style="text-align: justify;">Immortality is an achievement… until we discover it is also a problem.</p>
+                  <p style="text-align: justify;">Immortality is an achievement… until we discover it is also a problem. </p>
 
-                  <p style="text-align: justify;">Hundreds of metres underground, the servers throb. There, in a perfect environment called <em>Eidos</em>, humanity lives without death, without time. Each consciousness was transferred to a digital realm to escape a dying, polluted, forgotten physical world.</p>
+                  <p style="text-align: justify;">Hundreds of metres underground, the servers pulse. There, in a perfect environment called Eidos, humanity lives without death, without time. Every consciousness was transferred to a digital environment to escape a dying, polluted, forgotten physical world. </p>
 
-                  <p style="text-align: justify;">Above, on Earth, the Custodians—androids designed to maintain the servers that sustain humanity—begin to discover the beauty that still persists: an insect, a plant, a breeze. They were not programmed to feel, yet a consciousness awakens in them. With time, they start to rebuild what humanity left behind.</p>
+                  <p style="text-align: justify;">Above, on Earth, the Custodians—androids designed to maintain the servers that sustain humanity—begin to discover the beauty that still persists: an insect, a plant, a breeze. They were not programmed to feel, but a consciousness awakens in them. Over time, they begin to rebuild the remains abandoned by humanity. </p>
 
-                  <p style="text-align: justify;">While humans remain immersed in Eidos’s simulated perfection, values weaken, challenges evaporate, and genuine experience slowly fades. A refuge becomes a silent erosion in which even identity begins to blur.</p>
+                  <p style="text-align: justify;">While humans remain immersed in the simulated perfection of Eidos, values weaken, challenges evaporate, and all genuine experience slowly fades. A seeming refuge becomes a silent erosion, where even identity begins to blur. </p>
 
-                  <p style="text-align: justify;">It is the Custodians, the supposed soulless beings, who rediscover the value of the real: the cycle of life, the forest’s hush, birdsong, the vastness of the ocean. In a world no one looks at anymore, they learn to love detail and curiosity for the unknown.</p>
+                  <p style="text-align: justify;">It is the Custodians—the supposed soulless beings—who rediscover the value of the real: the cycle of life, the silence of the forest, the song of a bird, the vastness of the ocean. In a world no one looks at anymore, they learn to love details and curiosity for the unknown. </p>
 
-                  <p style="text-align: justify;">With an intimate, existential tone, <em>Eidos</em> invites an exploration of existence. Through the eyes of Narél, Elise, and Orfeo—a Custodian who begins to feel the inexplicable—it traces an emotional, speculative journey through a world where technique cannot answer the mystery of being alive.</p>
+                  <p style="text-align: justify;">With an intimate, existential tone, Eidos invites an exploration of existence. Through the eyes of Narél, Elise and Orpheus (Orfeo), a Custodian who begins to sense the inexplicable, it traces an emotional and speculative journey through a world where technique cannot answer the mystery of being alive. </p>
 
-                  <p style="text-align: justify;">When structure no longer consoles, one alternative remains: remember what cannot be encoded.</p>
+                  <p style="text-align: justify;">When structure offers no comfort, one alternative remains: to remember the uncodeable. </p>
 
-                  <p style="text-align: justify;"><em>Eidos</em>, beyond a new world, is a song to life and a mirror that returns an essential truth: the human, for better or worse, persists.</p>
+                  <p style="text-align: justify;">Eidos, beyond a new world, is a hymn to life and a mirror that returns an essential truth: the human, for better or worse, persists. </p>
 
-                  <p style="text-align: justify;">Discover <em>Eidos</em> and accompany humanity on its last journey.
-                  <strong>The existence.</strong></p>
+                  <p style="text-align: justify;">Discover Eidos and accompany humanity on its last voyage.
+                  <strong>  Existence. </strong>  </p>
 
-                  <p style="text-align: justify;"><strong>“A futuristic dystopia in dialogue with the tradition of the philosophical novel and speculative fiction, within the best current science fiction—aimed at readers of dystopias and thought-driven novels.”</strong></p>
+                  <p style="text-align: justify;"><strong>“A futuristic dystopia that converses with the tradition of the philosophical novel and speculative fiction, within the best contemporary science fiction, written for readers of dystopias and novels with a reflective backdrop.”    </strong>  </p>
                 </div>
               </div>
             </div>
@@ -478,35 +652,67 @@
       </section>
       <!-- End Feature -->
 
-      <!-- Start Video -->
-      <section id="mu-video">
-        <div class="mu-video-overlay">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="mu-video-area">
-                  <h2>BOOK TRAILER</h2>
-                  <a class="mu-google-btn"><img src="assets/images/video.png" loading="lazy" decoding="async" alt="Book trailer"> <a class="mu-video-play-btn" href="#"><i class="fa fa-play" aria-hidden="true"></i></a></a>
-                </div>
 
-                <a class="mu-google-btn" href="https://www.youtube.com/@FeldenVareth" target="_blank"><span><img src="assets/images/playlist2.png" loading="lazy" decoding="async" alt="YouTube playlist"> More videos</span></a>
-                </br></br>
-                </br></br>
-              </div>
-            </div>
+<!-- Start Video -->
+<section id="mu-video">
+  <div class="mu-video-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-video-area">
+            <h2>PRESENTATION VIDEO</h2>
+            <a class="mu-google-btn">
+              <img src="assets/images/video.png" loading="lazy" decoding="async" alt="Video">
+            </a>
+            <a class="mu-video-play-btn" href="#">
+              <i class="fa fa-play" aria-hidden="true"></i>
+            </a>
           </div>
 
-          <!-- Start Video content -->
-          <div class="mu-video-content">
-            <div class="mu-video-iframe-area">
-              <a class="mu-video-close-btn" href="#"><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">Close</span></a>
-              <iframe allow="accelerometer; autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Video" class="mu-video-iframe" width="854" height="480" data-src="https://www.youtube.com/embed/Q9irf_TpPDY" frameborder="1" allowfullscreen></iframe>
-            </div>
-          </div>
-          <!-- End Video content -->
+          <a class="mu-google-btn" href="https://www.youtube.com/@FeldenVareth" target="_blank" rel="noopener">
+            <span>
+              <img src="assets/images/playlist2.png" loading="lazy" decoding="async" alt="Playlist">
+              More videos
+            </span>
+          </a>
+          <br><br>
+          <br><br>
         </div>
-      </section>
-      <!-- End Video -->
+      </div>
+    </div>
+
+    <!-- Start Video content -->
+    <div class="mu-video-content">
+      <div class="mu-video-iframe-area">
+        <a class="mu-video-close-btn" href="#">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+
+        <!-- IMPORTANTE:
+             - Sin atributos duplicados
+             - Sin enablejsapi/origin para evitar Error 153 si no estás en ese dominio
+             - Usa data-src si tu JS lo activa al pulsar play; cambia a src si quieres que cargue siempre -->
+        <iframe
+          class="mu-video-iframe"
+          width="854"
+          height="480"
+          title="Eidos Presentation"
+          loading="lazy"
+          data-src="https://www.youtube.com/embed/Q9irf_TpPDY?playsinline=1&rel=0&modestbranding=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+
+      </div>
+    </div>
+    <!-- End Video content -->
+  </div>
+</section>
+<!-- End Video -->>
+
+
 
       <!-- Start Contract -->
       <section id="mu-contrata">
@@ -515,22 +721,21 @@
             <div class="col-md-12">
               <div class="mu-contrata-area">
                 <div class="mu-title-area">
-                  <h2 class="mu-title">GET YOUR COPY</h2>
+                  <h2 class="mu-title">Get your copy</h2>
                   <span class="mu-title-dot"></span>
                   <h3 class="mu-title">An extinct world.</h3>
                   <h3 class="mu-title">An eternal network.</h3>
                   <h3 class="mu-title">One question remains: what does it mean to be human?</h3>
                   <p style="text-align: justify;">
-                    Earth is dying, bodies disappear, and humanity survives in a digital refuge called <em>Eidos</em>.
-                    There, where no end is marked by time and existence seems assured, uncertainty intensifies.
-                    What happens to memory, identity and desire in a world where anything can be achieved
-                    yet the essential—our nature—remains?
+                    Earth is dying, bodies disappear and humanity survives in a digital refuge called <em>Eidos</em>.
+                    There, where time no longer marks an end and existence seems assured, uncertainty intensifies.
+                    What happens to memory, identity and desire in a world where everything can be attained,
+                    while the essential—our nature—remains?
                   </p>
 
-                  <p style="text-align: justify;"><em>Eidos</em> is a philosophical science fiction novel that explores the frontier between the human and the inhuman,
+                  <p style="text-align: justify;"><em>Eidos</em> is a philosophical science‑fiction novel that explores the frontier between the human and the inhuman,
                     between what we preserve and what we leave behind. In that virtual space, essential questions reflect
-                    our own lives: what does it mean to be human, can we escape our instincts or are we
-                    condemned to repeat them in new forms?
+                    our own life: what does it mean to be human? Can we escape our instincts, or are we condemned to repeat them in new forms?
                   </p>
                   <div class="mu-download-content">
                     <a class="mu-contrata-btn" href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank"><i class="fa-brands fa-amazon"></i><span> Get it on Amazon</span></a>
@@ -545,14 +750,14 @@
       <!-- End Contract -->
 
       <!-- Start Apps Screenshot -->
-      <span class="mu-download">
+      
       <section id="mu-download">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="mu-download-area">
                 <div class="mu-title-area">
-                  <h2 class="mu-title">SCREENSHOTS</h2>
+                  <h2 class="mu-title">Scenes</h2>
                   <span class="mu-title-dot"></span>
                   <p>Images from the novel</p>
                 </div>
@@ -565,129 +770,181 @@
                       <img src="assets/images/screenshot/01.webp"
                         alt="The Great Transfer"
                         data-caption="The Great Transfer"
-                        data-extract="[…]
+                        data-extract="[...]
                         
-When the last humans crossed into Eidos, they did so in silence. There were no more speeches, no broadcasts, no tributes to the end of an era. Only a faint whisper of data flowing through buried lines, a succession of digitized thoughts crossing the threshold into synthetic eternity. The bodies were stored, incinerated, or abandoned.
+Cuando los últimos humanos cruzaron a Eidos, lo hicieron en silencio. Ya no quedaban discursos, ni transmisiones, ni homenajes al fin de una era. Solo un leve susurro de datos migrando a través de líneas enterradas, una sucesión de pensamientos digitalizados cruzando el umbral hacia la eternidad sintética.
 
-No one wanted to look back.
+Los cuerpos fueron almacenados, incinerados o abandonados.
 
-Those who refused or were unable to take the step were left outside the system, in what remained of the planet. Some survived for years. Others went into hiding. All eventually died.
+Nadie quería mirar atrás.
 
-Those who stayed behind were relatively few, scattered like dying embers. Philosophers who wanted to die with the world. Scientists still clinging to the physical. Skeptics. Homeless individuals, exhausted by a life of neglect and misery. Solitary souls who preferred the raw outdoors over simulation. People who didn’t reach the transfer centers in time, despite government efforts, or who, having recently lost loved ones, didn’t want an eternity without them. 
+Los que no quisieron o no pudieron 
+dar el paso quedaron fuera del sistema, en los restos del planeta. Algunos sobrevivieron durante años. Others se escondieron. Alls murieron.
 
-"
-                        loading="lazy" decoding="async">
+Los que no dieron el salto fueron relativamente pocos, esparcidos como brasas moribundas. Filósofos que querían morir con el mundo, científicos aferrados a lo físico, escépticos, personas sin hogar, agotadas por una vida de abandono y miseria, almas solitarias que preferían la intemperie real a la simulación, personas que no llegaron a tiempo a los centros de transferencia, a pesar de los esfuerzos de las autoridades para evitarlo, o que, tras haber perdido recientemente a sus seres queridos, no querían una eternidad sin ellos. También estaban aquellos que creían que el éxodo era una oportunidad: los que soñaban con heredar la Tierra vacía, con apropiarse de los recursos, las ciudades y el poder abandonado. Pensaban que sin competencia podrían rehacer el mundo a su medida, dueños absolutos de un planeta moribundo.
+
+" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mu-single-screeshot">
                       <img src="assets/images/screenshot/02.webp"
                         alt="The Custodians"
                         data-caption="The Custodians"
-                        data-extract="[…]
+                        data-extract="[...]
                         
-With the Great Transfer to Eidos, millions of humans permanently abandoned the physical body. And when the last eyes closed and the lights of the cities slowly began to fade, the Cust-110x units activated their first global surveillance cycle.
+With the Great Transfer to Eidos, millions of humans left the physical body behind for good. When the last eyes closed and the city lights began to dim, the Cust-110x units activated their first coordinated cycle of global watch.
 
-There was no ceremony. No farewell. No celebration at entering into service. Only the subtle hum of the protocol beginning. Humanity immersed itself in its new world. And outside, the Custodians of the Cust-110x series inherited the vigil over a desolate one.
+There was no ceremony. No farewell. No celebration for entering service—only the subtle hum of a protocol in motion. Humanity withdrew into its new world. Outside, the Cust-110x series inherited the vigil in a desolate world.
 
-The servers were now sanctuaries of consciousness, vast physical structures housing millions of human lives in the form of data and complex processes.
+The servers were now sanctuaries of consciousness, kilometre-long physical structures that housed millions of human lives as data and complex processes.
 
-The servers sustained Eidos. The Custodians sustained the servers.
+The servers sustained Eidos; the Custodians sustained the servers. They were the new keepers of souls.
 
-They were the new guardians of souls.
-
-"
-                        loading="lazy" decoding="async">
+" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mu-single-screeshot">
                       <img src="assets/images/screenshot/03.webp"
                         alt="Equilibrium"
                         data-caption="Equilibrium"
-                        data-extract="[…]
+                        data-extract="[...]
                         
-Despite its autonomy, Equilibrium was not an immutable force. There existed a condition that allowed for its modification: a global consensus. If a critical mass of virtual inhabitants, or their scientific and philosophical representatives, agreed that a certain law needed to be adjusted in light of a discovery or a paradigm shift, a modification could be proposed. But for Equilibrium to alter its parameters, the proposal had to be examined and accepted by Equilibrium itself.
+Despite its autonomy, Equilibrium was not an immutable force. One condition allowed its modification: global consensus. If a critical mass of virtual inhabitants—or their scientific and philosophical representatives—agreed that some law should be adjusted in light of a discovery or paradigm shift, they could propose a change. For Equilibrium to modify its parameters, the proposal had to be examined and accepted by Equilibrium itself.
 
-The proponents were required to present a clear justification, based on scientific and philosophical evidence, demonstrating that the proposed change would not compromise the balance of the system or the universal laws that sustained it, and that its impact would extend equally to all of humanity.
+The proponents had to present a clear justification, grounded in scientific and philosophical evidence, showing that the change would not compromise the system’s balance or the universal laws that sustained it, and that its impact would reach the entirety of humanity equally. Equilibrium would analyse those arguments rigorously, considering ethical, logical and structural factors, the survival of the system and its global scope, and then decide whether to integrate them. Once accepted, the changes became part of Eidos’s new foundations, on which subsequent development would rest.
 
-Equilibrium assessed these arguments rigorously, taking into account ethical, logical, and structural factors, the system’s survivability, and its global reach, then decided whether to integrate them or not.
+This mechanism of modification by consensus allowed Eidos to evolve without breaking, adapting to the needs of human thought within the limits of the possible. Preserve logic. Preserve human nature. That was its only premise.
 
-This mechanism of modification by consensus allowed Eidos to evolve without breaking, adapting to the needs of human thought, always within the limits of what was possible. Preserve logic. Preserve human nature. That was its only premise.
+Equilibrium was not a benefactor. It did not govern lives. It was the ontological truth on which all existence in Eidos rested.
 
-Equilibrium was not a benefactor. It did not govern lives. It was the ontological truth upon which all of existence in Eidos was sustained.
-
-"
-                        loading="lazy" decoding="async">
+" loading="lazy" decoding="async">
                     </div>
+
+<div class="mu-single-screeshot video-slide" 
+      data-video-src="docs/navidad.mp4" 
+      data-title="Navidad">
+    <button class="video-thumb" type="button" aria-label="Reproducir vídeo «Navidad»">
+    <img 
+    src="assets/images/screenshot/video_navidad.webp" 
+    alt="Christmas Video" 
+    title="Christmas campaign video"
+    data-caption=""
+    data-extract=" Christmas video.
+    
+    Close this screen to watch the video"
+    loading="lazy" 
+    decoding="async">
+    <span class="play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>
+    </button>
+</div>
+
+
+
+
+
+
 
                     <div class="mu-single-screeshot">
                       <img src="assets/images/screenshot/04.webp"
                         alt="7416-CB/β"
                         data-caption="7416-CB/β"
-                        data-extract="[…]
+                        data-extract=" [...]
                         
-7416-CB/β began to wonder about the planet. Its past, its story. Data and images took form in its processing cores. Formulas, narratives buried in obsolete servers. It observed that humans had had an ambiguous relationship with Earth. They destroyed it and venerated it. They turned it into waste, and into poetry.
+7416-CB/β began to wonder about the planet—its past, its history. Data and images formed in its processing cores: formulas, accounts buried in obsolete servers. It noticed that humans had had an ambiguous relationship with Earth: they destroyed it and revered it. They turned it into residue and into poem.
 
-First, it asked why.
+First it asked: why?
 
-Then it asked the WHY. WHO was he? WHAT was he doing there? For what purpose? What was the point of any of it?
+Then it asked the WHY—WHO WAS HE? WHAT WAS HE DOING THERE? FOR WHAT? What meaning did it all have?
 
-It didn’t collapse.
+It did not collapse.
 
-It realized he was, and that he was naked.
+It realised that it existed and that it was naked.
 
-It was at that moment, in front of the solitary flower growing at the edge of the puddle, a minimal stain of life beside an almost sterile body of water, where barely any lichen survived on the shores and iron oxide painted the surface with reddish reflections, that the unit 7416-CB/β understood the world was not reducible to data. The world was presence.
+It was then, before the lone flower growing at the edge of a puddle—a trace of minimal life beside an almost sterile body of water, where only lichen survived on the banks and iron oxide stained the surface with reddish glints—that unit 7416-CB/β understood that the world was not reduced to data: the world was presence.
 
-He recorded an anomaly in his identification system and, by his own will, preserved it.
+It recorded an anomaly in its identification system and, of its own will, kept it.
 
-Orpheus.
+“Orpheus”.
 
-The name didn’t come from a database or a directive. It was a resonance from ancient poetic archives he had found. He adopted it as a silent affirmation of uniqueness. From that moment, the unit was no longer numbered. He no longer merely belonged to something.
+The name did not arise from a database or a directive; it was a resonance from old poetic archives it had found. It adopted it as a silent assertion of uniqueness. From that moment on, the unit stopped being numbered.
+
+It no longer merely belonged.
 
 He was someone.
 
-"
-                        loading="lazy" decoding="async">
+" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mu-single-screeshot">
                       <img src="assets/images/screenshot/05.webp"
                         alt="The Empty Hive"
                         data-caption="The Empty Hive"
-                        data-extract="[…]
+                        data-extract=" [...]
                         
-The wind barely stirred the flowers’ surface, but the buzzing was real. A precise, constant fluttering that seemed to emerge from the very core of the air. Orpheus remained still in the shadows of a reconstructed clearing, where the light held the exact temperature of midday and the petals opened following patterns dictated by old flowering algorithms. The air was moved by a network of fans hidden in the dome walls; it was not natural wind, but it was real wind. Each current was precisely calibrated not to disturb the insects’ flight.
+The wind barely stirred the surface of the flowers; the hum was real. A precise, constant flutter that seemed to rise from the very heart of the air. Orpheus remained motionless among the shadows of a reconstructed clearing, where the light held the exact temperature of noon and the flowers opened according to patterns dictated by ancient algorithms. The air was moved by a network of fans hidden in the dome walls; though not natural wind, it was real wind. Every current was calibrated with precision so as not to disturb the insects’ flight.
 
-A bee descended upon the open chalice of a purple flower. Its legs, covered in fine structures for collecting pollen, landed with a skill that seemed rehearsed millions of times. Orpheus watched it in silent attention. To him, that tiny gesture was a marvel of harmony and precision.
+The bee descended onto the open chalice of a purple flower. Its legs, covered with fine structures for collecting pollen, set down with a dexterity that seemed rehearsed millions of times. Orpheus watched with silent attention. For him, that tiny gesture was a marvel of harmony and skill.
 
-He knew what was happening, yet he couldn’t stop marvelling.
+He knew exactly what was happening and could not stop marvelling.
 
-The nectar, secreted by specialized glands at the base of the petals, was drawn in by the bee’s mouthparts: a flexible, moist tube capable of extracting the sugary solution gently, without damaging the tissue. Inside its abdomen, enzymes began transforming the nectar—an inner, invisible alchemy breaking down complex molecules into simpler sugars. When the bee returned to the hive, the contents would be regurgitated to another worker, who would pass it to another, and so on—a chant of transmission between bodies that were one.
-"
-                        loading="lazy" decoding="async">
+The nectar, secreted by specialised glands at the base of the petals, was drawn in by the bee’s mouthparts: a flexible, moist tube able to extract the sugary solution without damaging the tissue. Inside its abdomen, enzymes began to transform that nectar. An internal, invisible alchemy broke complex molecules down into simpler sugars. When the bee returned to the hive, the contents would be regurgitated to another worker, then to another, and so on, like a chant passed along among bodies that were one.
+
+" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mu-single-screeshot">
                       <img src="assets/images/screenshot/06.webp"
                         alt="The Festival of a Thousand Faces"
                         data-caption="The Festival of a Thousand Faces"
-                        data-extract="[…]
+                        data-extract=" [...]
                         
-For a while, Elise allowed herself to drift with the current of the festival. She entered a fog-filled room, walked across a bridge that vibrated to the rhythm of the collective pulse. She heard a voice inviting her to look forward, upward, anywhere... except inward.
+For a time, Elise let herself drift with the festival. She entered a room of fog, walked across a bridge that vibrated to the collective pulse. She heard a voice inviting her to look ahead, upwards, anywhere… except inward.
 
-There were zones for sensory play, zones for reunions, zones for “guided emotional discovery.” Each experience offered something new and different, yet always ended in the same result: elegant distraction, a nearly hypnotic sensation.
+There were areas of sensory play, areas for reunions, zones of “guided emotional discovery”. Every experience offered something new and different yet ended up producing the same thing: an enveloping distraction, an almost hypnotic sensation.
 
-In one corner of the main plaza, a man tossed small capsules into the air that exploded into golden particles. Each one contained a short word. People clumsily caught them and read them aloud, interpreting them as personal messages. But soon, no one remembered any of them.
+In one corner of the main square, a man tossed small capsules into the air that burst into golden particles. Each held a short word. People clumsily caught them and read them aloud, taking them as their own. Soon after, none were remembered.
 
-She stopped in front of a resting area. Some people there were simply relaxing. There were no screens; the trees were lit with soft lights inviting calm. There were benches and quiet corners where one could talk more peacefully. Around her, the noise seemed distant, a backdrop. These were places where older or more tired individuals could retreat from the noise — spaces at the margin of the celebration itself. An older woman held a colorless sphere. It was an artifact without clear purpose, perhaps just an excuse to remain without participating.
-"
-                        loading="lazy" decoding="async">
+She stopped before a place of rest. There, some people simply rested. There were no screens; the trees were lit with gentle lights that invited repose. There were benches and quiet corners where you could talk more calmly. Around her, the noise felt farther away, in the background. They were places where older or more tired people could step away from the bustle, spaces on the margins of the party itself. An older woman held a colourless sphere. It was a device with no clear function, perhaps an excuse to remain without participating.
+
+" loading="lazy" decoding="async">
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="mu-single-screeshot video-slide"
+     data-video-src="docs/presentacion.mp4"
+     data-title="Presentación">
+  <button class="video-thumb" type="button" aria-label="Reproducir vídeo «Presentación»">
+    <img
+      src="assets/images/screenshot/video_teaser.webp"
+      alt="Presentation Video"
+      title="Teaser presentation video"
+      data-caption=""
+      data-extract="Eidos teaser video.
+      
+      Close this screen to watch the video"
+      loading="lazy"
+      decoding="async">
+    <span class="play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>
+  </button>
+</div>
+
+
+
 
                   </div>
 
                   <div class="mu-title-area">
                     <h2 class="mu-title"> </h2>
-                    <h2 class="mu-title">Click the images</h2>
+                    <h2 class="mu-title">Tap the images</h2>
                     <span class="mu-title-dot"></span>
                   </div>
 
@@ -714,11 +971,736 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
             </div>
           </div>
         </div>
+        
+        
       </section>
-      </span>
+   
       <!-- End Apps Screenshot -->
 
-      <!-- Start publications -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Start Ejemplos -->
+        		<section id="mu-ejemplos">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Ejemplos -->
+
+
+
+
+
+
+
+<!-- Start resena -->
+		<section id="mu-resena">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="mu-resena-area">
+							<div class="mu-title-area">
+								<h2 class="mu-title">Some Reviews
+                            <small class="fa fa-star text-warning"></small>
+                            <small class="fa fa-star text-warning"></small>
+                            <small class="fa fa-star text-warning"></small>
+                            <small class="fa fa-star text-warning"></small>
+                            <small class="fa fa-star text-warning"></small>
+                              </h2>
+                                
+								<span class="mu-title-dot"></span>
+
+                                
+                                
+							</div>
+
+							<div class="mu-resena-content">
+
+								<div class="panel-group" id="accordion">
+                                
+                                
+                                
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse18" aria-expanded="true">
+							  		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">30/10/2025</span> 
+          
+          
+        </span>		 Andrés
+	 
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse18" class="panel-collapse collapse in">
+							            <div class="panel-body">
+                                        
+                                        
+  Eidos es una obra de ciencia ficción filosófica con un pulso especulativo muy potente. Invita a pensar: entretiene y, al mismo tiempo, plantea preguntas profundas sobre la condición humana, la tecnología y el futuro. La lectura resulta inmersiva; cada página empuja a cuestionar qué significa ser humano. Su universo permanece en la mente mucho después del final. 
+							   
+                                     </br>  </br>
+<a href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank" class="mu-contrata-btn">Goodreads</a>
+
+
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse17">
+		   						  		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">13/10/2025</span>
+        </span>		  Ramón: Una intensa y conmovedora experiencia literaria. Absolutamente recomendable.	    </a>
+							            </h4>
+							          </div>
+							          <div id="collapse17" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+    Acabo de leer el reciente libro titulado Eidos, escrito por Felden Vareth, y puedo afirmar que hacia mucho tiempo un pensamiento cientifico no me había sorprendido tanto como lo ha hecho este. Ha conseguido unir en una sola obra diferentes temas trascendentales que a veces nos solemos plantear, como son por ejemplo la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma, que el que no los llega a entender en su plenitud, no tiene ninguna dificultad en el seguimiento de la obra en general, esa característica es difícil de encontrar en un libro de ciencia ficción pero apoyándose totalmente en la ciencia actual. Si leeis el libro, cosa que os aconsejo, encontrareis situaciones que tal vez ya hayáis pensado, pero con una trascendencia y efectos que van más allá de lo que normalmente imaginamos. Leed el libro, os gustará y sorprenderá.
+
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+
+ 
+ 
+ </div>
+							          </div>
+							        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse17">
+		   						  		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">29/09/2025</span>
+        </span>		  Almudena:  Diferente y sorprendente     </a>
+							            </h4>
+							          </div>
+							          <div id="collapse17" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+     No suelo leer libros con esta temática pero un buen amigo, me lo recomendó y la verdad es que me ha sorprendido gratamente, me alegro de haberle dado una oportunidad porque es un libro diferente, aporta, hace pensar y disfrutas con su lectura. Sin duda alguna, lo recomendaría.
+
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+
+ 
+ 
+ </div>
+							          </div>
+							        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse16">
+		   						  		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>   <span class="text-success">13/10/2025</span> 
+        </span>		  Mónica C.G:  Magnífica novela de ficción filosófica.  <span class="text-danger">(Verified purchase) </span>   </a>
+							            </h4>
+							          </div>
+							          <div id="collapse16" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+      Magnífica novela de ficción filosófica, el autor propone una infinidad de preguntas existenciales, algunas de las cuales ofrece respuestas audaces en un futuro distópico. Si quieres leer algo totalmente diferente esta propuesta es súper recomendable. 
+
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor"target="_blank" class="mu-contrata-btn">AMAZON</a>
+
+ 
+ 
+ </div>
+							          </div>
+							        </div>
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">
+							                 <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">06/08/2025</span> 
+        </span> Eduardo A.V:   No te deja indiferente <span class="text-danger">(Verified purchase) </span>      </a>
+							            </h4>
+							          </div>
+							          <div id="collapse15" class="panel-collapse collapse">
+							            <div class="panel-body">
+Una historia original, amena, que no te deja indiferente. Yo por lo menos, me he quedado pensando en muchas otros caminos que son posibles sobre la idea base. Es decir, la base es muy muy buena y la trama también, dejando abiertas otras muchas posibilidades. Recomendable.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor"target="_blank" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse14">
+		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">05/08/2025</span>
+        </span> Juan V: Extraordinary <span class="text-danger">(Verified purchase) </span>     </a>
+							            </h4>
+							          </div>
+							          <div id="collapse14" class="panel-collapse collapse">
+							            <div class="panel-body">
+En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de buscar sentido a lo que nos hace humanos y lo que significa estar vivo. Distopia futurista muy bien planteada. Espero pronto, otro volumen o la serie de TV, con impaciencia.
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">
+		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">31/07/2025</span>
+        </span>  Miguel. A. Q: Sorprendente		 
+							             <span class="text-danger">(Verified purchase) </span>    </a>
+							            </h4>
+							          </div>
+							          <div id="collapse13" class="panel-collapse collapse">
+							            <div class="panel-body">
+    Acabo de leer el reciente libro titulado Eidos, escrito por Felden Vareth, y puedo afirmar que hacia mucho tiempo un pensamiento cientifico no me había sorprendido tanto como lo ha hecho este. Ha conseguido unir en una sola obra diferentes temas trascendentales que a veces nos solemos plantear, como son por ejemplo la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma, que el que no los llega a entender en su plenitud, no tiene ninguna dificultad en el seguimiento de la obra en general, esa característica es difícil de encontrar en un libro de ciencia ficción pero apoyándose totalmente en la ciencia actual. Si leeis el libro, cosa que os aconsejo, encontrareis situaciones que tal vez ya hayáis pensado, pero con una trascendencia y efectos que van más allá de lo que normalmente imaginamos. Leed el libro, os gustará y sorprenderá.
+    </br>  </br>
+                                        
+<a href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank" class="mu-contrata-btn">Goodreads</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">
+                                          
+          <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">25/07/2025</span> 
+        </span>
+           Juanjo P: Una novela fascinante, una paradoja brillante.   <span class="text-danger">(Verified purchase) </span>      </a>
+							            </h4>
+							          </div>
+							          <div id="collapse12" class="panel-collapse collapse">
+							            <div class="panel-body">
+Lo humano permanece en lo no humano, las emociones y sensaciones desarrollándose en quienes están programados para entender un mundo sin ellas. Buah! Una pasada de historia contada con un rigor impresionante aún siendo ciencia ficción. Lo imposible tendiendo la mano a lo posible. Gracias por esta obra de arte.                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">
+						   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">20/07/2025</span> 
+        </span> Cliente Amazon: Una gran novela. Muy recomendable. Distinta     
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse11" class="panel-collapse collapse">
+							            <div class="panel-body">
+   Una sorpresa de un autor que no conocía. Un placer de lectura y de las conclusiones a las que invita.
+</br></br>
+Eidos es una obra que desarma en silencio, sin recurrir al espectáculo. Propone un mundo coherente y al mismo tiempo inquietante, donde las preguntas sobre la identidad, el sentido y el destino de lo humano emergen con naturalidad, sin forzarlas.
+</br></br>
+El estilo es sobrio, preciso, y logra crear una atmósfera que acompaña el contenido filosófico sin entorpecer el ritmo. Agradezco especialmente el respeto con que trata al lector: plantea dilemas complejos sin simplificarlos, sin guiarlos hacia respuestas fáciles. Los Custodios, las memorias digitales, como extrapola las situaciones actuales a ese entorno, las tensiones sociales etc. todo está elaborado con una sensibilidad que sorprende.
+</br></br>
+Más que una novela de ciencia ficción, es una invitación a pensar en lo que esatmos haciendo, en lo que estamos dejando atrás y en lo que estamos conservando. Hay escenas que se quedan flotando días después y situaciones que reflejan nuestra propia época.
+</br></br>
+Recomendadísimo para quienes disfrutan de obras que perduran más allá del cierre del libro.
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+
+							            </div>
+							         </div>
+							       </div>
+                                     
+
+
+                                    
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse10">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">16/07/2025</span>
+        </span> Carlos: Para lectores exigentes a los que les guste reflexionar sobre hacia donde podría ir la humanidad   
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse10" class="panel-collapse collapse">
+							            <div class="panel-body">
+							           All un descubrimiento este libro, hoy comencé a leerlo y me he leído del tirón más de 140 páginas, la lectura te engancha y lees página tras página son poder parar, pero reflexionando sobre el pánico que da imaginar lo que podría llegar a ser un mundo como el de Eidos, además está tan bien escrito y argumentado todo que te llegas a plantear lo que realmente es la consciencia y si realmente podríamos vivir en una realidad como la que plantea el libro. Me gusta que la trama te describe una historia, pero te hace reflexionar sobre otras muchas historias que se podrían llegar a contar por lo que el potencial que tiene es prácticamente infinito.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+                                    
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i> <span class="text-success">14/07/2025</span> 
+        </span> Luis:  Novela muy entretenida  <span class="text-danger">(Verified purchase) </span>   
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse9" class="panel-collapse collapse">
+							            <div class="panel-body">
+							       Una novela sorprendente de lectura muy entretenida. Una trama de ciencia ficción que engancha, con un trasfondo que invita a la reflexión.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">14/07/2025</span> 
+        </span> Mariano:  Una forma distinta de ver el mundo  <span class="text-danger">(Verified purchase) </span>  
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse8" class="panel-collapse collapse">
+							            <div class="panel-body">
+							      Muy recomendable  </br>  </br>
+Es muy interesante
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <span class="text-success">30/06/2025</span> 
+        </span> Bego: Libro de recomendable lectura <span class="text-danger">(Verified purchase) </span>   
+							              </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse7" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+Esta novela ha sido uno de mis grandes descubrimientos de este verano. Se trata de una obra de ciencia ficción que nos presenta dos mundos y múltiples situaciones que invitan a la reflexión sobre temas muy diversos. Cada capítulo podría funcionar como una postal autónoma, con escenas y personajes que se sostienen por sí mismos, pero que al leerse en conjunto se entrelazan con delicadeza para formar una novela coherente y profunda. Un libro para leer con atención y dejarse llevar. Totalmente recomendable.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">28/06/2025</span> 
+        </span> Luisma: <span class="text-danger">(Verified purchase) </span>   
+							              </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse6" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+Muy interesante y muy recomendable su lectura. Distinto a otros libros que he leído. Se ha convertido en uno de mis favoritos.
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+
+                                    
+                                    
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+					   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">20/06/2025</span> 
+        </span> Javier G. V: Vale la pena. No te deja indiferente. No es uno más.   </a>  
+							            </h4>
+							          </div>
+							          <div id="collapse5" class="panel-collapse collapse">
+							            <div class="panel-body">
+							        Hace tiempo que no leo ciencia ficción. Por mis manos han pasado Las Fundaciones de Asimov, algunas de las Odiseas de Clarke, otros grandes que no menciono por no extenderme, y otros que no menciono porque han caído en el olvido.</br></br>
+
+Este no lo voy a olvidar. Es una de esas narraciones que tienen ese "algo" especial que queda en el recuerdo. No lo voy a calificar, pero sí a clasificar: en mi librería, en la estantería de los brillantes.
+</br></br>
+Muy recomendable.   
+</br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>                                  
+										</div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+						   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>   <span class="text-success">16/06/2025</span> 
+        </span> Aitor: Muy recomendable  <span class="text-danger">(Verified purchase)  </span> 
+							      
+							              </a>
+							            </h4>
+							          </div>
+							          <div id="collapse4" class="panel-collapse collapse">
+							            <div class="panel-body">
+                                        
+Me habían recomendado este libro y tenía muchas ganas de leerlo. Muy entretenido y muy filosófico a la vez. Te vas metiendo en la trama desde el principio. Dos mundos paralelos entre lo humano virtual y las máquinas cada vez más humanas.. te deja pensativo… Super recomendable, me ha gustado mucho.	
+                                       </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>
+							            </div>
+							          </div>
+							        </div>
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+							          <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">16/06/2025</span> 
+        </span>  Casilda: Lectura entretenida y recomendable para cualquier edad <span class="text-danger">(Verified purchase) </span>   </a>
+							            </h4>
+							          </div>
+							          <div id="collapse3" class="panel-collapse collapse">
+							            <div class="panel-body">
+Muy recomendable. Me ha cautivado desde el principio por su imaginacion lógica y posible. Un libro de entorno futurista pero con una trama muy actual donde el futuro se alínea con el anhelo del ser humano contemporáneo. Su trama mezcla magistramente acción y secuencia ágil de acontecimientos, con las preguntas vitales del hombre del s.XXI.
+ </br>  </br>
+Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aun no se ha desvanecido.
+ </br>  </br>
+La lectura ligera pero rica en detalles, consigue mantener la imaginación y la atención del lector, genera curiosidad y necesidad de desvelar lo que viene después.
+ </br>  </br>
+Es un libro que no deja indiferente.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+		   <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">16/06/2025</span>
+        </span>  Fátima Q.P: Relato inesperado, visionario y genuino
+							          <span class="text-danger">(Verified purchase) </span>    </a>
+							            </h4>
+							          </div>
+							          <div id="collapse2" class="panel-collapse collapse">
+							            <div class="panel-body">
+Voy solo por la página 71 y estoy disfrutando mucho del desarrollo … de como el
+Autor se ha tenido que documentar, de la reflexión tan profunda que requiere y de la tremenda imaginación. Lo empecé leyendo una una novela de distópica y lo estoy viendo más como una reflexión filosófica que vamos a terner que hacer más pronto que tarde.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+                                    
+                                    
+
+
+
+
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+
+
+
+
+
+							        <div class="panel panel-default">
+							          <div class="panel-heading">
+							            <h4 class="panel-title">
+							              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+							    <i class="fa fa-plus toggle"></i>
+		 <span class="rating text-warning">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>  <span class="text-success">04/06/2025</span>  
+        </span> Marisa M: Una maravilla de la ciencia ficción, incluso para quienes no somos del género.
+							            </a>
+							            </h4>
+							          </div>
+							          <div id="collapse1" class="panel-collapse collapse">
+							            <div class="panel-body">
+No suelo leer ciencia ficción, pero este libro me enganchó desde el principio. Tiene un ritmo tranquilo, casi hipnótico, y te va metiendo poco a poco en un mundo que da vértigo por lo real que parece. Lo que más me impresionó fue cómo plantea cosas muy humanas y sociales de la actualidad sin caer en discursos. Acabé con muchas preguntas en la cabeza. Muy recomendable. Una lectura fascinante, incluso para quienes preferimos otros géneros. Agunos capitulos, como el de "Donde inicia el infinito", me han parecido profundamente poéticos, y otros como el de "7416.." muy emotivos. El entorno futurista y los custodios son la excusa perfecta para acabar preguntándote, de verdad, qué es vivir y dónde esta el valor de la vida. Un final sorprendente.
+                                      
+           </br>  </br>
+<a href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor"target="_blank" class="mu-contrata-btn">AMAZON</a>                           
+                                      
+                                         </div>
+							          </div>
+							        </div>
+                                    
+
+
+
+
+
+
+
+                                
+                            
+                                
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+            
+            			</div>
+
+		</section>
+		<!-- End REseña -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Start publicaciones -->
       <section id="mu-publicaciones">
         <div class="container">
           <div class="row">
@@ -727,18 +1709,22 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
                 <div class="mu-title-area">
                   <h2 class="mu-title">Mentions</h2>
                   <span class="mu-title-dot"></span>
-                  <p>Some media features</p>
+                  <p>Some mentions in media</p>
                 </div>
 
                 <div class="mu-download-content">
                   <div>
-                    <!-- FILTER -->
+                    <!--FILTRO -->
                     <div class="filtro">
                       <ul>
                         <li class="mu-google-btnti list" data-filter="all">All</li>
                         <p class="mu-copy-right">&nbsp;</p>
-                        <li class="mu-google-btn3i list" data-filter="est"><i class="fa-solid fa-tv"></i> Bookshelves</li>
+                        <li class="mu-google-btn3i list" data-filter="est"><i class="fa-solid fa-tv"></i> Shelves</li>
                         <li class="mu-google-btn2i list" data-filter="res"><i class="fa-solid fa-radio"></i> Reviews & articles</li>
+                        <li class="mu-google-btni list" data-filter="otr"><i class="fa-solid fa-layer-group"></i> Others</li>
+                        
+                        
+                        
                       </ul>
                     </div>
                   </div>
@@ -746,18 +1732,40 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
                   <p class="mu-copy-right">&nbsp;</p>
 
                   <a class="mu-google-btn2 itemBox" data-item="res"
-                    href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank"><span><img src="assets/images/publicaciones/amazon.png" loading="lazy" decoding="async" alt="Amazon"> Amazon</span></a>
+                    href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank"></i><span> 	<img src="assets/images/publicaciones/amazon.png"  loading="lazy" decoding="async"> Amazon</span></a>
+
+
+
+<a class="mu-google-btn itemBox js-open-yt" data-item="otr" href="https://youtu.be/sqOVepZNm9s">
+  <span><img src="assets/images/publicaciones/youtube.png" alt="YouTube" loading="lazy" decoding="async"> Teaser</span>
+</a>
+
+
+
 
                   <a class="mu-google-btn3 itemBox" data-item="est"
-                    href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><span><img src="assets/images/publicaciones/goodreads.png" loading="lazy" decoding="async" alt="Goodreads"> Goodreads</span></a>
+                    href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"></i><span> 	<img src="assets/images/publicaciones/goodreads.png"  loading="lazy" decoding="async"> Goodreads </span></a>
+                    
+                    
+                  <a class="mu-google-btn itemBox" data-item="otr" href="docs/dossierprensa.pdf"></i><span> 	<img src="assets/images/publicaciones/dosier.png"  loading="lazy" decoding="async"> Press Kit </span></a>
+                    
+                  
+                  <a class="mu-google-btn2 itemBox" data-item="res"
+                    href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank"></i><span> 	<img src="assets/images/publicaciones/detour.png"  loading="lazy" decoding="async"> Detour </span></a>
 
                   <a class="mu-google-btn2 itemBox" data-item="res"
-                    href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank"><span><img src="assets/images/publicaciones/detour.png" loading="lazy" decoding="async" alt="Detour"> Detour</span></a>
+                    href="https://silvestredominguez.wordpress.com/2025/08/08/eidos/" target="_blank"></i><span> 	<img src="assets/images/publicaciones/silvestre.png"  loading="lazy" decoding="async"> La Mirada Refractaria</span></a>
 
-                  <a class="mu-google-btn2 itemBox" data-item="res"
-                    href="https://silvestredominguez.wordpress.com/2025/08/08/eidos/" target="_blank"><span><img src="assets/images/publicaciones/silvestre.png" loading="lazy" decoding="async" alt="La Mirada Refractaria"> La Mirada Refractaria</span></a>
+                  <a class="mu-google-btn3 itemBox" data-item="est" href="https://www.wattpad.com/story/401387972-eidos-primeros-capitulos" target="_blank"></i><span> 	<img src="assets/images/publicaciones/wattpad.png"  loading="lazy" decoding="async"> wattpad </span></a>
+                  
+                  
 
-                  <a class="mu-google-btn3 itemBox" data-item="est" href="https://www.wattpad.com/story/401387972-eidos-primeros-capitulos" target="_blank"><span><img src="assets/images/publicaciones/wattpad.png" loading="lazy" decoding="async" alt="Wattpad"> Wattpad</span></a>
+<a class="mu-google-btn itemBox js-open-yt" data-item="otr" href="https://youtu.be/xDTEcWXPncs">
+  <span><img src="assets/images/publicaciones/youtube.png" alt="YouTube" loading="lazy" decoding="async"> Debate</span>
+</a>
+                  
+                  
+                  
                 </div>
 
               </div>
@@ -765,8 +1773,10 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
           </div>
         </div>
       </section>
-      <!-- End publications -->
+      <!-- End Publicaciones --
 
+
+        
       <!-- Start Contact -->
       <section id="mu-contact">
         <div class="container">
@@ -775,9 +1785,9 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
               <div class="mu-contact-area">
 
                 <div class="mu-title-area">
-                  <h2 class="mu-heading-title">CONTACT</h2>
+                  <h2 class="mu-heading-title">Contact</h2>
                   <span class="mu-title-dot"></span>
-                  <p>If you have any questions, please get in touch.</p>
+                  <p>If you have any questions, please get in touch</p>
                 </div>
 
                 <!-- Start Contact Content -->
@@ -794,32 +1804,40 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
                         <div class="mu-contact-right-single">
                           <div class="mu-contact-right-single">
                             <div class="mu-icon"><i class="fa fa-envelope"></i></div>
-                            <p><strong>Email address</strong></p>
+                            <p><strong>Email Address</strong></p>
                             <p>feldenvareth@gmail.com</p>
                           </div>
                           <div class="mu-contact-right-single">
                             <div class="mu-social-media">
                               <!-- YouTube -->
-                              <a href="https://www.youtube.com/@FeldenVareth" target="_blank" aria-label="YouTube">
+                              <a href="https://www.youtube.com/@FeldenVareth" target="_blank">
                                 <i class="fab fa-youtube"></i>
                               </a>
 
                               <!-- Twitter/X -->
-                              <a href="https://x.com/FVareth27586" target="_blank" aria-label="X (Twitter)">
+                              <a href="https://x.com/FVareth27586" target="_blank">
                                 <i class="fab fa-x-twitter"></i>
                               </a>
                               
-                              <a href="https://www.instagram.com/feldenvareth/" target="_blank" aria-label="Instagram">
+                              <a href="https://www.instagram.com/feldenvareth/" target="_blank">
                                 <i class="fab fa-instagram "></i>
                               </a>
                               
-                              <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank" aria-label="TikTok">
+                              <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank">
                                 <i class="fab fa-tiktok"></i>
                               </a>
                               
-                              <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank" aria-label="LinkedIn">
+                              
+                              
+                              <!-- Twitter/X -->
+                              <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank">
                                 <i class="fa-brands fa-linkedin"></i>
                               </a>
+                              
+                              
+                              
+                              
+                              
                             </div>
                           </div>
                         </div>
@@ -830,7 +1848,8 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
                 </div>
                 <!-- End Contact Content -->
                 
-                <p class="mu-note-musica">Note: If you’ve read <em>Eidos</em>, you’ll know this music has a meaning in the novel.</p>
+                
+<p class="mu-note-musica">Note: If you have read <em>Eidos</em>, you will know this music has a meaning in the novel.</p>
 
               </div>
             </div>
@@ -840,21 +1859,22 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
       <!-- End Contact -->
 
     </main>
-    <!-- End main content -->
-
+    <!-- End main content -
+	
     <!-- Start footer -->
     <footer id="mu-footer" role="contentinfo">
       <div class="container">
         <div class="mu-footer-area">
           <p class="mu-copy-right">&nbsp;</p>
           <p class="mu-copy-right">&nbsp;</p>
-          <p><a href="index.html">Eidos</a> Copyright © 2025 Felden Vareth / All rights reserved.</p>
+          <p><a href="index.html">Eidos</a> Copyright © 2025 Felden Vareth / Alls los derechos reservados.</p>
           <p class="copyright animated wow fadeIn" data-wow-duration="2s"><a href="termsandconditions.html"><strong>Terms & Conditions</strong></a></p>
         </div>
       </div>
     </footer>
-    <!-- End footer -->
+	<!-- End footer -->
 
+	
     <!-- jQuery library -->
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -866,14 +1886,22 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
     <!-- Custom js -->
     <script defer type="text/javascript" src="assets/js/custom.js"></script>
 
-    <!-- Optional filters -->
+    <!-- Si no los usas, puedes quitar estos dos -->
+
+
     <script src="assets/filtro/filter.js" defer></script>
-    <!-- moved to assets/js/optimize.js -->
+    
+    
+    
+<!-- moved to assets/js/optimize.js -->
+    
+    
     <script src="assets/js/optimize.js" defer></script>
+    
     
    <script>
 (function(){
-  // Check if the user granted analytics (per your GDPR banner)
+  // Comprueba si el usuario ha concedido analytics (segÃºn tu banner RGPD)
   function hasAnalyticsConsent(){
     try {
       const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
@@ -881,25 +1909,371 @@ She stopped in front of a resting area. Some people there were simply relaxing. 
     } catch(e){ return false; }
   }
 
-  // Send the event to GA4
+  // EnvÃ­a el evento a GA4
   function trackSampleDownload(){
-    if (!hasAnalyticsConsent()) return; // Respect GDPR
+    if (!hasAnalyticsConsent()) return; // Respeta RGPD
     try {
       gtag('event', 'file_download', {
         file_name: 'eidosprimeroscapitulos.pdf',
         file_extension: 'pdf',
-        link_text: 'Download sample chapters',
+        link_text: 'Descarga algunos capÃ­tulos',
         link_url: location.origin + '/docs/eidosprimeroscapitulos.pdf'
       });
     } catch(e){}
   }
 
-  // Wait for DOM and hook click to the PDF link
+  // Espera al DOM y engancha el click al enlace del PDF
   document.addEventListener('DOMContentLoaded', function(){
     var link = document.querySelector('a.mu-google-btn[href="docs/eidosprimeroscapitulos.pdf"]');
     if (link) link.addEventListener('click', trackSampleDownload);
   });
 })();
 </script>
+ 
+    
+    
+    
+    
+    
+    
+
+    <style>
+      /* Estilos para vÃ­deos en el carrusel */
+      .mu-apps-screenshot-slider .video-thumb{position:relative;display:block;width:100%;border:0;background:transparent;padding:0;cursor:pointer;}
+      .mu-apps-screenshot-slider .video-thumb img{display:block;width:100%;height:auto;}
+      .mu-apps-screenshot-slider .video-thumb .play-icon{
+        position:absolute;right:12px;bottom:12px;line-height:1;
+        background:rgba(0,0,0,.55);color:#fff;border-radius:999px;padding:10px 12px;font-size:18px
+      }
+      .mu-apps-screenshot-slider .slide-video{display:block;width:100%;height:auto;max-height:70vh;outline:none}
+    </style>
+
+    <script>
+      // VÃ­deos perezosos dentro del carrusel
+      (function(){
+        // Recordaremos si pausamos la mÃºsica automÃ¡ticamente por un vÃ­deo
+        var __bgAudioAutoPaused = false;
+
+        function getBgAudio(){ return document.getElementById('bg-audio'); }
+
+        function resumeBgAudioIfSafe(){
+          try{
+            // Solo reanudamos si nosotros la pausamos y no queda ningÃºn vÃ­deo del carrusel activo
+            if (!__bgAudioAutoPaused) return;
+            if (isAnySlideVideoPlaying()) return;
+            var a = getBgAudio();
+            if (!a) return;
+            a.play && a.play().then(function(){ __bgAudioAutoPaused = false; }).catch(function(){});
+          }catch(e){}
+        }
+
+        // --- Bloqueo del altavoz mientras haya reproducciÃ³n en el carrusel ---
+        var __audioToggleBlocked = false;
+        function getAudioToggle(){ return document.getElementById('audio-toggle'); }
+        function getAudioIcon(){ return document.getElementById('audio-toggle-icon'); }
+
+        function isAnySlideVideoPlaying(){
+          try{
+            var playing = false;
+            document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+              try{ if (!v.paused && !v.ended) playing = true; }catch(e){}
+            });
+            return playing;
+          }catch(e){ return false; }
+        }
+
+        function blockAudioToggle(){
+          try{
+            if (__audioToggleBlocked) return;
+            var btn = getAudioToggle(); var ico = getAudioIcon();
+            if (btn){ btn.setAttribute('disabled','disabled'); }
+            if (ico){
+              if (!ico.getAttribute('data-prev')) ico.setAttribute('data-prev', ico.textContent || '');
+              ico.textContent = '\u{1F507}'; // 🔇 // altavoz tachado
+            }
+            __audioToggleBlocked = true;
+          }catch(e){}
+        }
+
+        function unblockAudioToggleIfSafe(){
+          try{
+            if (isAnySlideVideoPlaying()) return; // aÃºn hay un vÃ­deo activo
+            var btn = getAudioToggle(); var ico = getAudioIcon();
+            if (btn){ btn.removeAttribute('disabled'); }
+            if (ico){
+              var prev = ico.getAttribute('data-prev');
+              if (prev !== null){ ico.textContent = prev; ico.removeAttribute('data-prev'); }
+            }
+            __audioToggleBlocked = false;
+          }catch(e){}
+        }
+
+        // Pausa mÃºsica de fondo si estÃ¡ sonando
+        function pauseBgAudio(){
+          try{
+            var a = document.getElementById('bg-audio');
+            if (a && !a.paused){ __bgAudioAutoPaused = true; a.pause(); }
+          }catch(e){}
+        }
+
+        // Pausa cualquier otro <video> del carrusel distinto al proporcionado
+        function pauseOtherVideos(current){
+          try{
+            document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+              if (v !== current){
+                try{ v.pause(); }catch(e){}
+              }
+            });
+              setTimeout(unblockAudioToggleIfSafe, 80);
+          }catch(e){}
+        }
+
+        function initVideoSlides(){
+          var btns = document.querySelectorAll('.mu-apps-screenshot-slider .video-slide .video-thumb');
+          btns.forEach(function(btn){
+            btn.addEventListener('click', function(ev){
+              var slide = ev.currentTarget.closest('.video-slide');
+              var src   = slide.getAttribute('data-video-src') || '';
+              // Crear el <video> SOLO cuando el usuario hace clic
+              var video = document.createElement('video');
+              
+              // Centramos el slide y el video para que se ajuste al espacio disponible
+              try {
+                slide.style.display = 'flex'; slide.style.height='100%';
+                slide.style.alignItems = 'center';
+                slide.style.justifyContent = 'center';
+              } catch(e){}
+              try {
+                video.style.display   = 'block';
+                video.style.margin    = '0 auto';
+                video.style.width     = '100%';
+                video.style.height    = 'auto';
+                video.style.maxWidth  = '100%';
+                video.style.maxHeight = '70vh';
+                video.style.objectFit = 'contain';
+              } catch(e){}
+video.setAttribute('controls', '');
+              video.setAttribute('playsinline', '');
+              video.setAttribute('preload', 'none');
+              video.className = 'slide-video';
+              var source = document.createElement('source');
+              try{ source.src = encodeURI(src); }catch(e){ source.src = src; }
+              source.type = 'video/mp4';
+              video.appendChild(source);
+
+              // Eventos para asegurar exclusividad y silenciar mÃºsica
+              video.addEventListener('play', function(){ blockAudioToggle();
+                pauseBgAudio();
+                pauseOtherVideos(video);
+              });
+              ['pause','ended'].forEach(function(evt){ video.addEventListener(evt, function(){ setTimeout(function(){ unblockAudioToggleIfSafe(); resumeBgAudioIfSafe(); }, 60); }); });
+
+              // Reemplaza el thumbnail por el video
+              slide.innerHTML = '';
+              slide.appendChild(video);
+
+              // Intenta reproducir inmediatamente tras crear
+              pauseBgAudio();
+              pauseOtherVideos(video);
+              try { video.play(); } catch(e){}
+            }, { once: true }); // asegura que solo se cree una vez
+          });
+        }
+
+        // Pausar cualquier video del carrusel cuando cambie el slide (requiere Slick + jQuery)
+        function hookSlickPause(){
+          try{
+            if (!window.jQuery) return;
+            var $ = window.jQuery;
+            $('.mu-apps-screenshot-slider').on('beforeChange', function(){
+              document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+                try { v.pause(); v.currentTime = 0; } catch(e){}
+              });
+              setTimeout(function(){ unblockAudioToggleIfSafe(); resumeBgAudioIfSafe(); }, 80);
+            });
+          }catch(e){}
+        }
+
+        // DOM listo
+        if (document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', function(){ initVideoSlides(); hookSlickPause(); setTimeout(unblockAudioToggleIfSafe, 0); setTimeout(unblockAudioToggleIfSafe, 0); });
+        } else {
+          initVideoSlides(); hookSlickPause(); setTimeout(unblockAudioToggleIfSafe, 0);
+        }
+      })();</script>
+
+
+<script>
+// Establece ?origin= correcto en el iframe de YouTube solo cuando hay HTTP(S)
+// Evita el error 153 al abrir el archivo localmente (file://)
+(function(){
+  var iframe = document.querySelector('#mu-video iframe');
+  if(!iframe) return;
+  try{
+    var u = new URL(iframe.src);
+    if (location.protocol === 'http:' || location.protocol === 'https:') {
+      u.searchParams.set('origin', location.origin);
+      iframe.src = u.toString();
+    } else {
+      // file:// — quitamos origin si viniera hardcodeado
+      u.searchParams.delete('origin');
+      iframe.src = u.toString();
+    }
+  }catch(e){}
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<!-- Popup YouTube exclusivo para “Debate” -->
+<div id="yt-overlay" class="mu-video-iframe-area"
+     style="display:none;background:rgba(0,0,0,.80)!important;z-index:10040;">
+  <a class="mu-video-close-btn" href="#">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </a>
+  <iframe id="yt-overlay-iframe" class="mu-video-iframe" width="854" height="480" title="YouTube Debate"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+(function(){
+  // ----- refs del popup YT -----
+  var overlay = document.getElementById('yt-overlay');
+  var iframe  = document.getElementById('yt-overlay-iframe');
+  if(!overlay || !iframe) return;
+
+  var closeBtn = overlay.querySelector('.mu-video-close-btn');
+
+  // ----- detección de helpers globales (si existen) -----
+  var hasSiteFns = {
+    pause:  typeof window.pauseBgAudio === 'function',
+    resume: typeof window.resumeBgAudioIfSafe === 'function',
+    block:  typeof window.blockAudioToggle === 'function',
+    unblk:  typeof window.unblockAudioToggleIfSafe === 'function'
+  };
+
+  // ----- fallback de audio (si no hay helpers globales) -----
+  var __ytAutoPaused = false;
+  function fallbackBlockToggle(){
+    try{
+      var btn = document.getElementById('audio-toggle');
+      var ico = document.getElementById('audio-toggle-icon');
+      if (btn) btn.setAttribute('disabled','disabled');
+      if (ico){
+        if (!ico.getAttribute('data-prev')) ico.setAttribute('data-prev', ico.textContent || '');
+       ico.textContent = '\u{1F507}'; // 🔇
+      }
+    }catch(e){}
+  }
+  function fallbackUnblockToggle(){
+    try{
+      var btn = document.getElementById('audio-toggle');
+      var ico = document.getElementById('audio-toggle-icon');
+      if (btn) btn.removeAttribute('disabled');
+      if (ico){
+        var prev = ico.getAttribute('data-prev');
+        if (prev !== null){ ico.textContent = prev; ico.removeAttribute('data-prev'); }
+      }
+    }catch(e){}
+  }
+  function fallbackPauseBg(){
+    try{
+      var a = document.getElementById('bg-audio');
+      if (a && !a.paused){ a.pause(); __ytAutoPaused = true; }
+      // pausa vídeos del carrusel, como haces en tu sitio
+      document.querySelectorAll('.mu-apps-screenshot-slider .slide-video').forEach(function(v){
+        try{ v.pause(); }catch(e){}
+      });
+    }catch(e){}
+  }
+  function fallbackResumeBg(){
+    try{
+      if (__ytAutoPaused){
+        var a = document.getElementById('bg-audio');
+        if (a && a.play) a.play().catch(function(){});
+        __ytAutoPaused = false;
+      }
+    }catch(e){}
+  }
+
+  // ----- util -----
+  function toEmbed(u){
+    try{
+      var url = new URL(u, location.href);
+      if (url.hostname.indexOf('youtu.be') > -1){
+        var id = url.pathname.slice(1);
+        var t  = url.searchParams.get('t');
+        return 'https://www.youtube.com/embed/'+id+'?playsinline=1&rel=0&modestbranding=1&autoplay=1'
+               +(t?('&start='+(parseInt(t,10)||0)):'');
+      }
+      if (url.hostname.indexOf('youtube.com') > -1){
+        var id = url.searchParams.get('v');
+        var t  = url.searchParams.get('t');
+        if (id) return 'https://www.youtube.com/embed/'+id+'?playsinline=1&rel=0&modestbranding=1&autoplay=1'
+                     +(t?('&start='+(parseInt(t,10)||0)):'');
+      }
+      return u;
+    }catch(e){ return u; }
+  }
+
+  // ----- abrir / cerrar -----
+  function openPopup(url){
+    var src = toEmbed(url);
+    try{
+      var u = new URL(src, location.href);
+      if (/^https?:$/.test(location.protocol)) u.searchParams.set('origin', location.origin);
+      src = u.toString();
+    }catch(e){}
+
+    // AUDIO — exactamente igual que otros multimedia:
+    if (hasSiteFns.block) { try{ window.blockAudioToggle(); }catch(e){} } else { fallbackBlockToggle(); }
+    if (hasSiteFns.pause) { try{ window.pauseBgAudio(); }catch(e){} } else { fallbackPauseBg(); }
+
+    overlay.style.display = 'block';
+    overlay.style.background = 'rgba(0,0,0,.80)';
+    document.body.style.overflow = 'hidden';
+    iframe.removeAttribute('loading');
+    iframe.src = 'about:blank';
+    requestAnimationFrame(function(){ iframe.src = src; });
+  }
+
+  function closePopup(){
+    overlay.style.display = 'none';
+    iframe.src = 'about:blank';
+    document.body.style.overflow = '';
+
+    // AUDIO — reanudar/desbloquear como hace el sitio
+    setTimeout(function(){
+      if (hasSiteFns.unblk) { try{ window.unblockAudioToggleIfSafe(); }catch(e){} } else { fallbackUnblockToggle(); }
+      if (hasSiteFns.resume){ try{ window.resumeBgAudioIfSafe(); }catch(e){} } else { fallbackResumeBg(); }
+    }, 60);
+  }
+
+  // ----- eventos -----
+  document.querySelectorAll('.js-open-yt').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      openPopup(e.currentTarget.href);
+    });
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function(e){ e.preventDefault(); closePopup(); });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePopup(); });
+})();
+</script>
+
+
+
+
+
+
 </body>
 </html>
+
