@@ -77,7 +77,7 @@
         } catch(e){}
       })();
     </script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
 <script>
       // 3) Inicializar GA4 sin enviar page_view automáticamente
       gtag('js', new Date());
@@ -265,47 +265,61 @@
 /* Cortafuegos por si alguna hoja global aplica break-all */
 #mu-resena, #mu-resena *{ word-break:normal !important; }
 </style>
-<script type="application/ld+json">{
+
+
+
+<!-- ===== INICIO: RICH SNIPPETS EIDOS ===== -->
+
+<!-- BOOK -->
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "Book",
+  "@id": "https://www.eidoslibro.com/#book",
   "name": "Eidos",
   "author": {
     "@type": "Person",
     "name": "Felden Vareth"
   },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Felden Vareth (autopublicación)"
+  },
+  "datePublished": "2025-10-02",
   "inLanguage": "es",
   "bookFormat": "https://schema.org/EBook",
-  "genre": [
-    "Ciencia ficción",
-    "Filosofía"
-  ],
+  "genre": ["Ciencia ficción", "Filosofía"],
   "description": "EIDOS es una novela de ciencia ficción filosófica sobre la transferencia digital de la consciencia, el colapso ecológico y el redescubrimiento de lo humano en un entorno virtual controlado por inteligencias artificiales.",
   "url": "https://www.eidoslibro.com/",
   "image": "https://www.eidoslibro.com/assets/images/img_v2.jpg",
   "sameAs": [
     "https://www.amazon.es/dp/B0FCR5ZPBJ"
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "26"
-  }
-}</script><script type="application/ld+json">{
+  ]
+}
+</script>
+<!-- BLOQUE OPCIONAL (COMENTADO) PARA PEGAR DENTRO DEL JSON-LD DE ARRIBA:
+     Pega este objeto justo antes del cierre "}" de Book, con una coma previa.
+     Actívalo cuando quieras mostrar la valoración agregada.
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "5.0",      // <-- promedio
+  "reviewCount": "26"        // <-- número de reseñas
+}
+-->
+
+
+<!-- BLOQUE OPCIONAL (ofertas) PARA PEGAR DENTRO DEL JSON-LD DE ARRIBA: -->
+<!--
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "Product",
+  "@id": "https://www.eidoslibro.com/#product",
   "name": "Eidos",
   "image": "https://www.eidoslibro.com/assets/images/img_v2.jpg",
   "description": "EIDOS es una novela de ciencia ficción filosófica.",
-  "brand": {
-    "@type": "Brand",
-    "name": "Felden Vareth"
-  },
+  "brand": { "@type": "Brand", "name": "Felden Vareth" },
   "sku": "EIDOS-EBK-001",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "26"
-  },
   "offers": {
     "@type": "Offer",
     "price": "9.99",
@@ -313,27 +327,41 @@
     "availability": "https://schema.org/InStock",
     "url": "https://www.amazon.es/dp/B0FCR5ZPBJ"
   }
-}</script><script type="application/ld+json">{
+}
+</script>
+-->
+
+<!-- BLOQUE OPCIONAL (COMENTADO) PARA PEGAR DENTRO DEL JSON-LD DE ARRIBA:
+     Si quieres también valoración a nivel de Product, pega este objeto con coma previa.
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "5.0",      // <-- promedio
+  "reviewCount": "26"        // <-- número de reseñas
+}
+-->
+
+
+<!-- BREADCRUMB -->
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://www.eidoslibro.com/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Eidos",
-      "item": "https://www.eidoslibro.com/"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.eidoslibro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Eidos",  "item": "https://www.eidoslibro.com/" }
   ]
-}</script></head>
+}
+</script>
+
+<!-- ===== FIN: RICH SNIPPETS EIDOS ===== -->
+
+
+
+
+
 <body>
 <!-- Música de fondo -->
-<audio id="bg-audio" loop="" playsinline="" preload="none"></audio>
+<audio id="bg-audio" loop playsinline="" preload="none"></audio>
 <!-- Mini-control de audio -->
 <div aria-label="Música de fondo" class="audio-ctrl" id="audio-ctrl" role="group">
 <button aria-label="Reproducir/pausar" id="audio-toggle">
@@ -1498,19 +1526,19 @@ No suelo leer ciencia ficción, pero este libro me enganchó desde el principio.
 </footer>
 <!-- End footer -->
 <!-- jQuery library -->
-<script defer="" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script defer="" src="assets/js/bootstrap.min.js"></script>
+<script defer src="assets/js/bootstrap.min.js"></script>
 <!-- Slick slider -->
-<script defer="" src="assets/js/slick.min.js" type="text/javascript"></script>
+<script defer src="assets/js/slick.min.js" type="text/javascript"></script>
 <!-- Ajax contact form  -->
-<script defer="" src="assets/js/app.js" type="text/javascript"></script>
+<script defer src="assets/js/app.js" type="text/javascript"></script>
 <!-- Custom js -->
-<script defer="" src="assets/js/custom.js" type="text/javascript"></script>
+<script defer src="assets/js/custom.js" type="text/javascript"></script>
 <!-- Si no los usas, puedes quitar estos dos -->
-<script defer="" src="assets/filtro/filter.js"></script>
+<script defer src="assets/filtro/filter.js"></script>
 <!-- moved to assets/js/optimize.js -->
-<script defer="" src="assets/js/optimize.js"></script>
+<script defer src="assets/js/optimize.js"></script>
 <script>
 (function(){
   // Comprueba si el usuario ha concedido analytics (segÃºn tu banner RGPD)
