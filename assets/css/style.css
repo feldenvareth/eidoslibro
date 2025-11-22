@@ -1427,9 +1427,10 @@ button:focus {
 
 
 
-
-
-
+.panel-body {
+  text-align: justify;
+  hyphens: none;
+}
 
 
 
