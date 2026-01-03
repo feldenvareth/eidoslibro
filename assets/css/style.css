@@ -1366,6 +1366,18 @@ button:focus {
 /* FAQ */
 /*--------------------*/
 
+
+.title-accordeon{
+  font-family: 'Cinzel', serif;
+  font-size: 2em;          /* 200% del tamaño base (equivale a 200% de p) */
+  letter-spacing: 0.06em;
+ 					 /* text-transform: uppercase; */
+  line-height: 1.1;        /* evita que descuadre la altura del panel */
+
+  
+}
+
+
 #mu-resenay {
 	background-color: #f8f8f8;
 	display: inline;
