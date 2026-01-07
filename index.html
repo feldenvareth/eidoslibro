@@ -2615,5 +2615,230 @@ video.setAttribute('controls', '');
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePopup(); });
 })();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve -->
+<!-- CAPA DE NIEVE -->
+<div id="snow-layer" aria-hidden="true"></div>
+
+<!-- BOTÓN ON / OFF -->
+<button id="snow-toggle" aria-pressed="true">❄️ Nieve: ON</button>
+
+<style>
+  /* ===== NIEVE ===== */
+  #snow-layer {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .snowflake {
+    position: absolute;
+    top: -15vh;
+    left: 0;
+
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(255,255,255,0.95),
+      rgba(255,255,255,0.2)
+    );
+
+    opacity: var(--opacity);
+    filter: blur(var(--blur));
+
+    transform: translateX(var(--x)) translateY(-15vh);
+
+    animation:
+      fall var(--duration) linear var(--delay) infinite,
+      sway var(--swayDuration) ease-in-out var(--delay) infinite;
+
+    will-change: transform;
+  }
+
+  @keyframes fall {
+    from {
+      transform: translateX(var(--x)) translateY(-15vh);
+    }
+    to {
+      transform: translateX(calc(var(--x) + var(--drift))) translateY(110vh);
+    }
+  }
+
+  @keyframes sway {
+    0%, 100% {
+      margin-left: calc(var(--sway) * -1);
+    }
+    50% {
+      margin-left: var(--sway);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #snow-layer { display: none; }
+  }
+
+  /* ===== BOTÓN ===== */
+  #snow-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10000;
+
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+
+    backdrop-filter: blur(4px);
+  }
+
+  #snow-toggle:hover {
+    background: rgba(0,0,0,0.75);
+  }
+</style>
+
+<script>
+  (function () {
+    const layer = document.getElementById("snow-layer");
+    const toggle = document.getElementById("snow-toggle");
+    if (!layer || !toggle) return;
+
+    const CONFIG = {
+      maxFlakes: 80,
+      spawnIntervalMs: 140,
+      minSize: 2,
+      maxSize: 10,
+      minDuration: 7,
+      maxDuration: 15,
+      maxDrift: 120
+    };
+
+    if (window.innerWidth < 768) {
+      CONFIG.maxFlakes = 45;
+      CONFIG.spawnIntervalMs = 200;
+    }
+
+    let flakes = 0;
+    let intervalId = null;
+    let enabled = localStorage.getItem("snow-enabled") !== "false";
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    function createFlake() {
+      if (!enabled || flakes >= CONFIG.maxFlakes) return;
+
+      const flake = document.createElement("div");
+      flake.className = "snowflake";
+
+      const size = rand(CONFIG.minSize, CONFIG.maxSize);
+      const x = rand(0, 100);
+      const duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
+      const delay = rand(0, 2);
+      const opacity = rand(0.35, 0.95);
+      const drift = (Math.random() < 0.5 ? -1 : 1) * rand(20, CONFIG.maxDrift);
+      const sway = rand(8, 26);
+      const swayDuration = rand(2.5, 6);
+      const blur = rand(0, 1.4);
+
+      flake.style.setProperty("--size", size + "px");
+      flake.style.setProperty("--x", x + "vw");
+      flake.style.setProperty("--duration", duration + "s");
+      flake.style.setProperty("--delay", delay + "s");
+      flake.style.setProperty("--opacity", opacity);
+      flake.style.setProperty("--drift", drift + "px");
+      flake.style.setProperty("--sway", sway + "px");
+      flake.style.setProperty("--swayDuration", swayDuration + "s");
+      flake.style.setProperty("--blur", blur + "px");
+
+      layer.appendChild(flake);
+      flakes++;
+
+      setTimeout(() => {
+        flake.remove();
+        flakes = Math.max(0, flakes - 1);
+      }, (duration + delay + 1) * 1000);
+    }
+
+    function startSnow() {
+      if (intervalId) return;
+
+      enabled = true;
+      localStorage.setItem("snow-enabled", "true");
+
+      toggle.textContent = "❄️ Nieve: ON";
+      toggle.setAttribute("aria-pressed", "true");
+
+      for (let i = 0; i < 20; i++) createFlake();
+      intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
+    }
+
+    function stopSnow() {
+      enabled = false;
+      localStorage.setItem("snow-enabled", "false");
+
+      toggle.textContent = "❄️ Nieve: OFF";
+      toggle.setAttribute("aria-pressed", "false");
+
+      clearInterval(intervalId);
+      intervalId = null;
+
+      layer.innerHTML = "";
+      flakes = 0;
+    }
+
+    toggle.addEventListener("click", () => {
+      enabled ? stopSnow() : startSnow();
+    });
+
+    enabled ? startSnow() : stopSnow();
+  })();
+
+  
+  
+  
+    //   Más nieve:
+    // maxFlakes: 120 y spawnIntervalMs: 100
+
+    // Más viento:
+    // maxDrift: 180
+
+    // Más balanceo:
+    // cambia rand(8, 26) por rand(12, 40)
+
+    // Más suave:
+    // sube minDuration / maxDuration
+
+  
+  
+  
+  
+</script>
+
+
+
+
+
+
+
+
 </body>
 </html>
