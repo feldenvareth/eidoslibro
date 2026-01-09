@@ -2640,14 +2640,13 @@ video.setAttribute('controls', '');
 
 
 <!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve -->
-<!-- CAPA DE NIEVE -->
 <div id="snow-layer" aria-hidden="true"></div>
 
 <!-- BOTÓN ON / OFF -->
-<button id="snow-toggle" aria-pressed="true">❄️ Nieve: ON</button>
+<button id="snow-toggle" aria-pressed="true"> Partículas: ON</button>
 
 <style>
-  /* ===== NIEVE ===== */
+  /* ===== POLVO EN SUSPENSIÓN ===== */
   #snow-layer {
     position: fixed;
     inset: 0;
@@ -2658,47 +2657,59 @@ video.setAttribute('controls', '');
 
   .snowflake {
     position: absolute;
-    top: -15vh;
-    left: 0;
+    left: var(--x);
+    top: var(--y);
 
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
+    width: var(--w);
+    height: var(--h);
 
+    /* No todas redondas */
+    border-radius: var(--radius);
+
+    /* Tonos tierra apagados */
     background: radial-gradient(
       circle at 30% 30%,
-      rgba(255,255,255,0.95),
-      rgba(255,255,255,0.2)
+      rgba(var(--r), var(--g), var(--b), 0.95),
+      rgba(var(--r), var(--g), var(--b), 0.18)
     );
 
-    opacity: var(--opacity);
     filter: blur(var(--blur));
+    opacity: 0; /* controlado por fade */
 
-    transform: translateX(var(--x)) translateY(-15vh);
+    transform: translate3d(0, 0, 0);
 
     animation:
-      fall var(--duration) linear var(--delay) infinite,
-      sway var(--swayDuration) ease-in-out var(--delay) infinite;
+      float var(--duration) linear var(--delay) 1 forwards,
+      wobble var(--wobbleDuration) ease-in-out var(--delay) infinite,
+      fade var(--duration) linear var(--delay) 1 forwards,
+      breathe var(--breatheDuration) ease-in-out var(--delay) infinite;
 
-    will-change: transform;
+    will-change: transform, opacity, filter;
   }
 
-  @keyframes fall {
-    from {
-      transform: translateX(var(--x)) translateY(-15vh);
-    }
-    to {
-      transform: translateX(calc(var(--x) + var(--drift))) translateY(110vh);
-    }
+  @keyframes float {
+    0%   { transform: translate3d(0, 0, 0) rotate(var(--rot0)); }
+    33%  { transform: translate3d(var(--dx1), var(--dy1), 0) rotate(var(--rot1)); }
+    66%  { transform: translate3d(var(--dx2), var(--dy2), 0) rotate(var(--rot2)); }
+    100% { transform: translate3d(var(--dx3), var(--dy3), 0) rotate(var(--rot3)); }
   }
 
-  @keyframes sway {
-    0%, 100% {
-      margin-left: calc(var(--sway) * -1);
-    }
-    50% {
-      margin-left: var(--sway);
-    }
+  @keyframes wobble {
+    0%, 100% { margin-left: calc(var(--wobble) * -1); margin-top: calc(var(--wobble) * 0.35); }
+    50%      { margin-left: var(--wobble);            margin-top: calc(var(--wobble) * -0.35); }
+  }
+
+  @keyframes fade {
+    0%   { opacity: 0; }
+    12%  { opacity: var(--opacity); }
+    78%  { opacity: var(--opacity); }
+    100% { opacity: 0; }
+  }
+
+  /* “Respira” muy suave: simula acercarse/alejarse sin cantar */
+  @keyframes breathe {
+    0%, 100% { filter: blur(var(--blur)); }
+    50%      { filter: blur(var(--blur2)); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -2735,26 +2746,39 @@ video.setAttribute('controls', '');
     const toggle = document.getElementById("snow-toggle");
     if (!layer || !toggle) return;
 
-    const CONFIG = {
-      maxFlakes: 80,
-      spawnIntervalMs: 140,
-      minSize: 2,
-      maxSize: 10,
-      minDuration: 7,
-      maxDuration: 15,
-      maxDrift: 120
-    };
+const CONFIG = {
+  maxFlakes: 140,        // antes 98
+  spawnIntervalMs: 95,   // antes 140
+  minSize: 3,
+  maxSize: 18,
+  minDuration: 9,        // antes 12
+  maxDuration: 20        // antes 26
+};
 
     if (window.innerWidth < 768) {
-      CONFIG.maxFlakes = 45;
-      CONFIG.spawnIntervalMs = 200;
+      CONFIG.maxFlakes = 55;
+      CONFIG.spawnIntervalMs = 220;
+      CONFIG.minDuration = 12;
+      CONFIG.maxDuration = 24;
     }
 
     let flakes = 0;
     let intervalId = null;
     let enabled = localStorage.getItem("snow-enabled") !== "false";
+	
+	// Factores de velocidad (100% a 160%)
+    const SPEED_STEPS = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
 
     const rand = (min, max) => Math.random() * (max - min) + min;
+
+    const PALETTE = [
+      [196,160,96],
+      [170,124,72],
+      [152,106,72],
+      [138,88,58],
+      [164,118,80],
+      [124,72,52]
+    ];
 
     function createFlake() {
       if (!enabled || flakes >= CONFIG.maxFlakes) return;
@@ -2762,25 +2786,108 @@ video.setAttribute('controls', '');
       const flake = document.createElement("div");
       flake.className = "snowflake";
 
+		// Factores de velocidad (100% a 160%)
+		const SPEED_STEPS = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
+		
+      // Tamaño base
       const size = rand(CONFIG.minSize, CONFIG.maxSize);
-      const x = rand(0, 100);
-      const duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
-      const delay = rand(0, 2);
-      const opacity = rand(0.35, 0.95);
-      const drift = (Math.random() < 0.5 ? -1 : 1) * rand(20, CONFIG.maxDrift);
-      const sway = rand(8, 26);
-      const swayDuration = rand(2.5, 6);
-      const blur = rand(0, 1.4);
 
-      flake.style.setProperty("--size", size + "px");
+      // Variantes de forma (la mayoría suaves, unas pocas más elípticas)
+      const stretch = rand(0.75, 1.35); // elipse ligera
+      const w = size * stretch;
+      const h = size / stretch;
+
+      // Radios “orgánicos” (a veces círculo, a veces irregular sutil)
+      const irregular = Math.random() < 0.35;
+      const radius = irregular
+        ? `${rand(35, 65)}% ${rand(35, 65)}% ${rand(35, 65)}% ${rand(35, 65)}%`
+        : "50%";
+		
+		
+
+      // Nacen en cualquier parte
+      const x = rand(-5, 105);
+      const y = rand(-5, 105);
+
+	const durationBase = rand(CONFIG.minDuration, CONFIG.maxDuration);
+	const delay = rand(0, 2.2);
+		// Velocidad variable por partícula (100% → 160%)
+	const speedFactor = SPEED_STEPS[Math.floor(Math.random() * SPEED_STEPS.length)];
+
+		// Duración real: más velocidad = menos duración
+	const duration = durationBase / speedFactor;
+
+
+
+      // Opacidad atmosférica
+      const opacity = rand(0.16, 0.40);
+
+      // Blur por partícula (más variedad)
+      const blurBase = rand(0.9, 3.2) + (size / 18);
+
+      // Blur “respiración” (cambio muy suave)
+      const blur2 = blurBase + rand(-0.35, 0.75);
+
+      // Movimiento predominio horizontal
+      const horiz = rand(70, 250) * (Math.random() < 0.5 ? -1 : 1);
+
+      const dy1 = rand(-22, 55);
+      const dy2 = rand(-18, 72);
+      const dy3 = rand(8, 88);
+
+      const dx1 = horiz * rand(0.25, 0.45);
+      const dx2 = horiz * rand(0.55, 0.8);
+      const dx3 = horiz;
+
+      const jitterX1 = rand(-40, 40);
+      const jitterX2 = rand(-40, 40);
+      const jitterY1 = rand(-22, 22);
+      const jitterY2 = rand(-22, 22);
+
+      // Rotación mínima (casi imperceptible, da vida a las elipses)
+      const rot0 = rand(-6, 6);
+      const rot1 = rot0 + rand(-10, 10);
+      const rot2 = rot1 + rand(-10, 10);
+      const rot3 = rot2 + rand(-10, 10);
+
+      const [r, g, b] = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+      flake.style.setProperty("--r", r);
+      flake.style.setProperty("--g", g);
+      flake.style.setProperty("--b", b);
+
+      flake.style.setProperty("--w", w.toFixed(2) + "px");
+      flake.style.setProperty("--h", h.toFixed(2) + "px");
+      flake.style.setProperty("--radius", radius);
+
       flake.style.setProperty("--x", x + "vw");
+      flake.style.setProperty("--y", y + "vh");
+
+      flake.style.setProperty("--dx1", (dx1 + jitterX1) + "px");
+      flake.style.setProperty("--dy1", (dy1 + jitterY1) + "px");
+      flake.style.setProperty("--dx2", (dx2 + jitterX2) + "px");
+      flake.style.setProperty("--dy2", (dy2 + jitterY2) + "px");
+      flake.style.setProperty("--dx3", dx3 + "px");
+      flake.style.setProperty("--dy3", dy3 + "px");
+
       flake.style.setProperty("--duration", duration + "s");
       flake.style.setProperty("--delay", delay + "s");
       flake.style.setProperty("--opacity", opacity);
-      flake.style.setProperty("--drift", drift + "px");
-      flake.style.setProperty("--sway", sway + "px");
-      flake.style.setProperty("--swayDuration", swayDuration + "s");
-      flake.style.setProperty("--blur", blur + "px");
+
+      flake.style.setProperty("--blur", blurBase.toFixed(2) + "px");
+      flake.style.setProperty("--blur2", blur2.toFixed(2) + "px");
+
+      const wobble = rand(6, 20);
+      const wobbleDuration = rand(3.5, 8.5) / (0.85 + speedFactor * 0.15);
+      flake.style.setProperty("--wobble", wobble + "px");
+      flake.style.setProperty("--wobbleDuration", wobbleDuration + "s");
+
+      const breatheDuration = rand(4.5, 10.5) / (0.9 + speedFactor * 0.10);
+      flake.style.setProperty("--breatheDuration", breatheDuration + "s");
+
+      flake.style.setProperty("--rot0", rot0 + "deg");
+      flake.style.setProperty("--rot1", rot1 + "deg");
+      flake.style.setProperty("--rot2", rot2 + "deg");
+      flake.style.setProperty("--rot3", rot3 + "deg");
 
       layer.appendChild(flake);
       flakes++;
@@ -2788,7 +2895,7 @@ video.setAttribute('controls', '');
       setTimeout(() => {
         flake.remove();
         flakes = Math.max(0, flakes - 1);
-      }, (duration + delay + 1) * 1000);
+      }, (duration + delay + 0.5) * 1000);
     }
 
     function startSnow() {
@@ -2797,10 +2904,10 @@ video.setAttribute('controls', '');
       enabled = true;
       localStorage.setItem("snow-enabled", "true");
 
-      toggle.textContent = "❄️ Nieve: ON";
+      toggle.textContent = "Partículas: ON";
       toggle.setAttribute("aria-pressed", "true");
 
-      for (let i = 0; i < 20; i++) createFlake();
+      for (let i = 0; i < 40; i++) createFlake();
       intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
     }
 
@@ -2808,7 +2915,7 @@ video.setAttribute('controls', '');
       enabled = false;
       localStorage.setItem("snow-enabled", "false");
 
-      toggle.textContent = "❄️ Nieve: OFF";
+      toggle.textContent = "Partículas: OFF";
       toggle.setAttribute("aria-pressed", "false");
 
       clearInterval(intervalId);
@@ -2824,33 +2931,7 @@ video.setAttribute('controls', '');
 
     enabled ? startSnow() : stopSnow();
   })();
-
-  
-  
-  
-    //   Más nieve:
-    // maxFlakes: 120 y spawnIntervalMs: 100
-
-    // Más viento:
-    // maxDrift: 180
-
-    // Más balanceo:
-    // cambia rand(8, 26) por rand(12, 40)
-
-    // Más suave:
-    // sube minDuration / maxDuration
-
-  
-  
-  
-  
 </script>
-
-
-
-
-
-
 
 
 </body>
