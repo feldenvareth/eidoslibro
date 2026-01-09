@@ -2642,8 +2642,22 @@ video.setAttribute('controls', '');
 <!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve --><!-- Capa de nieve -->
 <div id="snow-layer" aria-hidden="true"></div>
 
-<!-- BOTÓN ON / OFF -->
-<button id="snow-toggle" aria-pressed="true"> Partículas: ON</button>
+<!-- CONTROL Polvo (botón + barra) -->
+<div class="snow-ctrl" id="snow-ctrl" role="group" aria-label="Polvo">
+  <button id="snow-toggle" aria-label="Activar/desactivar polvo" aria-pressed="true" type="button">
+    <span id="snow-toggle-icon">🫧</span>
+  </button>
+
+  <input
+    id="snow-density"
+    type="range"
+    min="0"
+    max="100"
+    step="1"
+    value="50"
+    aria-label="Densidad de polvo"
+  />
+</div>
 
 <style>
   /* ===== POLVO EN SUSPENSIÓN ===== */
@@ -2663,10 +2677,8 @@ video.setAttribute('controls', '');
     width: var(--w);
     height: var(--h);
 
-    /* No todas redondas */
     border-radius: var(--radius);
 
-    /* Tonos tierra apagados */
     background: radial-gradient(
       circle at 30% 30%,
       rgba(var(--r), var(--g), var(--b), 0.95),
@@ -2674,7 +2686,7 @@ video.setAttribute('controls', '');
     );
 
     filter: blur(var(--blur));
-    opacity: 0; /* controlado por fade */
+    opacity: 0;
 
     transform: translate3d(0, 0, 0);
 
@@ -2706,7 +2718,6 @@ video.setAttribute('controls', '');
     100% { opacity: 0; }
   }
 
-  /* “Respira” muy suave: simula acercarse/alejarse sin cantar */
   @keyframes breathe {
     0%, 100% { filter: blur(var(--blur)); }
     50%      { filter: blur(var(--blur2)); }
@@ -2716,27 +2727,47 @@ video.setAttribute('controls', '');
     #snow-layer { display: none; }
   }
 
-  /* ===== BOTÓN ===== */
-  #snow-toggle {
+  /* ===== CONTROL (tipo audio) ===== */
+  .snow-ctrl{
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 10000;
 
-    padding: 8px 14px;
-    border-radius: 20px;
-    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 10px;
+    border-radius: 999px;
 
     background: rgba(0,0,0,0.6);
     color: #fff;
-    font-size: 14px;
-    cursor: pointer;
 
     backdrop-filter: blur(4px);
   }
 
-  #snow-toggle:hover {
+  .snow-ctrl:hover {
     background: rgba(0,0,0,0.75);
+  }
+
+  #snow-toggle{
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0 4px;
+  }
+
+  #snow-density{
+    width: 120px;
+    accent-color: #fff;
+  }
+
+  @media (max-width: 480px){
+    #snow-density{ width: 90px; }
   }
 </style>
 
@@ -2744,31 +2775,42 @@ video.setAttribute('controls', '');
   (function () {
     const layer = document.getElementById("snow-layer");
     const toggle = document.getElementById("snow-toggle");
-    if (!layer || !toggle) return;
+    const iconEl = document.getElementById("snow-toggle-icon");
+    const densityEl = document.getElementById("snow-density");
+    if (!layer || !toggle || !densityEl) return;
 
-const CONFIG = {
-  maxFlakes: 140,        // antes 98
-  spawnIntervalMs: 95,   // antes 140
-  minSize: 3,
-  maxSize: 18,
-  minDuration: 9,        // antes 12
-  maxDuration: 20        // antes 26
-};
+    // Ajustes “topes” (sube/baja aquí el máximo)
+    const CONFIG = {
+      maxFlakes: 2000,       // techo desktop (MUCHO más)
+      spawnIntervalMs: 35,   // frecuencia desktop (un poco más rápido)
+      minSize: 3,
+      maxSize: 18,
+      minDuration: 9,
+      maxDuration: 20
+    };
 
+    // Ajuste móvil
     if (window.innerWidth < 768) {
-      CONFIG.maxFlakes = 55;
-      CONFIG.spawnIntervalMs = 220;
+      CONFIG.maxFlakes = 650;      // techo móvil
+      CONFIG.spawnIntervalMs = 85; // frecuencia móvil
       CONFIG.minDuration = 12;
       CONFIG.maxDuration = 24;
     }
 
+    const BASE_MAX_FLAKES = CONFIG.maxFlakes;
+    const BASE_SPAWN_MS   = CONFIG.spawnIntervalMs;
+
     let flakes = 0;
     let intervalId = null;
-    let enabled = localStorage.getItem("snow-enabled") !== "false";
-	
-	// Factores de velocidad (100% a 160%)
-    const SPEED_STEPS = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
 
+    let enabled = localStorage.getItem("snow-enabled") !== "false";
+
+    // Default a mitad (50) si no hay guardado
+    let density = parseInt(localStorage.getItem("snow-density") || "50", 10);
+    density = Number.isFinite(density) ? Math.max(0, Math.min(100, density)) : 50;
+    densityEl.value = String(density);
+
+    const SPEED_STEPS = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
     const rand = (min, max) => Math.random() * (max - min) + min;
 
     const PALETTE = [
@@ -2786,49 +2828,31 @@ const CONFIG = {
       const flake = document.createElement("div");
       flake.className = "snowflake";
 
-		// Factores de velocidad (100% a 160%)
-		const SPEED_STEPS = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
-		
-      // Tamaño base
       const size = rand(CONFIG.minSize, CONFIG.maxSize);
 
-      // Variantes de forma (la mayoría suaves, unas pocas más elípticas)
-      const stretch = rand(0.75, 1.35); // elipse ligera
+      const stretch = rand(0.75, 1.35);
       const w = size * stretch;
       const h = size / stretch;
 
-      // Radios “orgánicos” (a veces círculo, a veces irregular sutil)
       const irregular = Math.random() < 0.35;
       const radius = irregular
         ? `${rand(35, 65)}% ${rand(35, 65)}% ${rand(35, 65)}% ${rand(35, 65)}%`
         : "50%";
-		
-		
 
-      // Nacen en cualquier parte
       const x = rand(-5, 105);
       const y = rand(-5, 105);
 
-	const durationBase = rand(CONFIG.minDuration, CONFIG.maxDuration);
-	const delay = rand(0, 2.2);
-		// Velocidad variable por partícula (100% → 160%)
-	const speedFactor = SPEED_STEPS[Math.floor(Math.random() * SPEED_STEPS.length)];
+      const durationBase = rand(CONFIG.minDuration, CONFIG.maxDuration);
+      const delay = rand(0, 2.2);
 
-		// Duración real: más velocidad = menos duración
-	const duration = durationBase / speedFactor;
+      const speedFactor = SPEED_STEPS[Math.floor(Math.random() * SPEED_STEPS.length)];
+      const duration = durationBase / speedFactor;
 
-
-
-      // Opacidad atmosférica
       const opacity = rand(0.16, 0.40);
 
-      // Blur por partícula (más variedad)
       const blurBase = rand(0.9, 3.2) + (size / 18);
-
-      // Blur “respiración” (cambio muy suave)
       const blur2 = blurBase + rand(-0.35, 0.75);
 
-      // Movimiento predominio horizontal
       const horiz = rand(70, 250) * (Math.random() < 0.5 ? -1 : 1);
 
       const dy1 = rand(-22, 55);
@@ -2844,7 +2868,6 @@ const CONFIG = {
       const jitterY1 = rand(-22, 22);
       const jitterY2 = rand(-22, 22);
 
-      // Rotación mínima (casi imperceptible, da vida a las elipses)
       const rot0 = rand(-6, 6);
       const rot1 = rot0 + rand(-10, 10);
       const rot2 = rot1 + rand(-10, 10);
@@ -2903,19 +2926,17 @@ const CONFIG = {
 
       enabled = true;
       localStorage.setItem("snow-enabled", "true");
-
-      toggle.textContent = "Partículas: ON";
       toggle.setAttribute("aria-pressed", "true");
 
-      for (let i = 0; i < 40; i++) createFlake();
+      const burst = Math.max(20, Math.round((BASE_MAX_FLAKES * 0.12) * (density / 100)));
+      for (let i = 0; i < burst; i++) createFlake();
+
       intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
     }
 
     function stopSnow() {
       enabled = false;
       localStorage.setItem("snow-enabled", "false");
-
-      toggle.textContent = "Partículas: OFF";
       toggle.setAttribute("aria-pressed", "false");
 
       clearInterval(intervalId);
@@ -2925,14 +2946,72 @@ const CONFIG = {
       flakes = 0;
     }
 
+    function applyDensity(val){
+      const prev = density;
+      density = Math.max(0, Math.min(100, val|0));
+      localStorage.setItem("snow-density", String(density));
+
+      if (density === 0){
+        stopSnow();
+        if (iconEl) iconEl.textContent = "⦸";
+        return;
+      }
+
+      if (iconEl) iconEl.textContent = "🫧";
+
+      const t = density / 100;
+
+      // 3%..100% del techo base (más rango útil)
+      CONFIG.maxFlakes = Math.max(12, Math.round(BASE_MAX_FLAKES * (0.03 + 0.97 * t)));
+
+      // Boost al subir para que se note (más fuerte)
+      if (enabled){
+        const delta = density - prev;
+        if (delta > 0){
+          const boost = Math.min(
+            600,
+            Math.round((delta / 100) * BASE_MAX_FLAKES * 0.22)
+          );
+          for (let i = 0; i < boost; i++) createFlake();
+        }
+
+        while (flakes > CONFIG.maxFlakes){
+          const last = layer.lastElementChild;
+          if (!last) break;
+          last.remove();
+          flakes = Math.max(0, flakes - 1);
+        }
+      }
+    }
+
     toggle.addEventListener("click", () => {
-      enabled ? stopSnow() : startSnow();
+      if (enabled){
+        stopSnow();
+      } else {
+        const current = parseInt(densityEl.value || "0", 10) || 0;
+        if (current <= 0) densityEl.value = "50";
+        applyDensity(parseInt(densityEl.value, 10));
+        startSnow();
+      }
     });
 
-    enabled ? startSnow() : stopSnow();
+    densityEl.addEventListener("input", (e) => {
+      const v = parseInt(e.target.value, 10) || 0;
+      applyDensity(v);
+
+      if (!enabled && v > 0){
+        startSnow();
+      }
+    });
+
+    // Init
+    applyDensity(density);
+    densityEl.value = String(density);
+
+    if (enabled && density > 0) startSnow();
+    else stopSnow();
   })();
 </script>
-
 
 </body>
 </html>
