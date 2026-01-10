@@ -2647,8 +2647,8 @@ video.setAttribute('controls', '');
 <!-- Control Ceniza (2 burbujas: arriba icono+texto, abajo slider) -->
 <div class="ash-ctrl" id="ash-ctrl" role="group" aria-label="Ceniza">
   <button id="ash-toggle" class="ash-pill ash-top" type="button" aria-pressed="true">
-    <span class="ash-icon" aria-hidden="true">🔥</span>
-    <span class="ash-title">Ceniza</span>
+    <span class="ash-icon" aria-hidden="true">⁖⁖</span>
+    <span class="ash-title"> </span>
   </button>
 
   <div class="ash-pill ash-bottom" aria-label="Densidad de ceniza">
@@ -2658,127 +2658,153 @@ video.setAttribute('controls', '');
 </div>
 
 <style>
-  #snow-layer{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-    z-index:20000;
-    transform:none !important;
-  }
+#snow-layer{
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20000;
+  transform: none !important;
+}
 
-  /* ====== PARTÍCULAS (TU CÓDIGO INTACTO) ====== */
-  .snowflake{
-    position:absolute;
-    top:-15vh;
-    left:0;
+/* ====== PARTÍCULAS (con “profundidad” y formas variadas) ====== */
+.snowflake{
+  position: absolute;
+  top: -15vh;
+  left: 0;
 
-    width:var(--w);
-    height:var(--h);
-    border-radius:999px;
+  width: var(--w);
+  height: var(--h);
 
-    background: rgba(var(--r), var(--g), var(--b), var(--opacity));
-    filter: blur(var(--blur));
-    box-shadow: 0 0 2px rgba(0,0,0,.35);
+  /* ✅ forma variable (redonda / más “grano”) */
+  border-radius: var(--round, 999px);
 
-    transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt));
-    animation: fall var(--duration) linear var(--delay) infinite;
-    will-change: transform;
-  }
+  background: rgba(var(--r), var(--g), var(--b), var(--opacity));
+  filter: blur(var(--blur));
+  box-shadow: 0 0 2px rgba(0,0,0,.35);
 
-  @keyframes fall{
-    from { transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)); }
-    to   { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(var(--tilt)); }
-  }
+  transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt));
+  animation: fall var(--duration) linear var(--delay) infinite;
+  will-change: transform;
+}
 
-  /* ====== UI CENIZA (2 BURBUJAS) ====== */
+@keyframes fall{
+  from { transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)); }
+  to   { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(var(--tilt)); }
+}
+
+/* ====== UI CENIZA (2 BURBUJAS SUPERPUESTAS) ====== */
+.ash-ctrl{
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 20001;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0;
+  pointer-events: auto;
+}
+
+.ash-pill{
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+  padding: 8px 10px;
+
+  border-radius: 999px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+
+.ash-pill:hover{ background: rgba(0,0,0,.75); }
+
+.ash-top{
+  display: inline-flex;
+  align-self: flex-start;
+
+  padding: 7px 10px;
+  gap: 8px;
+
+  border: 0;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 2;
+  margin-bottom: -10px;
+}
+
+.ash-icon{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  line-height: 1;
+  width: 20px;
+}
+
+.ash-top.is-off .ash-icon::after{
+  content: "";
+  position: absolute;
+
+  width: 20px;
+  height: 2px;
+
+  background: rgba(255,255,255,.95);
+  transform: rotate(-35deg);
+  border-radius: 2px;
+
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  box-shadow: 0 0 2px rgba(0,0,0,.35);
+}
+
+.ash-title{
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.ash-bottom{
+  justify-content: space-between;
+  gap: 10px;
+
+  position: relative;
+  z-index: 1;
+}
+
+.ash-bottom input[type="range"]{
+  width: 120px;
+  accent-color: #fff;
+}
+
+.ash-pct{
+  font-size: 13px;
+  opacity: .95;
+  min-width: 40px;
+  text-align: right;
+}
+
+@media (max-width: 480px){
+  .ash-bottom input[type="range"]{ width: 90px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #snow-layer,
   .ash-ctrl{
-    position: fixed;
-    left: 14px;
-    bottom: 14px;
-    z-index: 20001;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    pointer-events: auto;
+    display: none;
   }
-
-  .ash-pill{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding: 8px 10px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.6);
-    color:#fff;
-    backdrop-filter: blur(4px);
-  }
-  .ash-pill:hover{ background: rgba(0,0,0,.75); }
-
-  /* ✅ CAMBIO 1: burbuja superior más pequeña, se ajusta al contenido */
-  .ash-top{
-    display: inline-flex;
-    align-self: flex-start;
-    padding: 7px 10px;
-    gap: 8px;
-    border: 0;
-    cursor: pointer;
-  }
-
-  .ash-icon{
-    position: relative;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 18px;
-    line-height: 1;
-    width: 20px;
-  }
-
-  .ash-top.is-off .ash-icon::after{
-    content:"";
-    position:absolute;
-    width: 20px;
-    height: 2px;
-    background: rgba(255,255,255,.95);
-    transform: rotate(-35deg);
-    border-radius: 2px;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    box-shadow: 0 0 2px rgba(0,0,0,.35);
-  }
-
-  .ash-title{
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .2px;
-  }
-
-  .ash-bottom{
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .ash-bottom input[type="range"]{
-    width: 120px;
-    accent-color: #fff;
-  }
-
-  .ash-pct{
-    font-size: 13px;
-    opacity: .95;
-    min-width: 40px;
-    text-align: right;
-  }
-
-  @media (max-width: 480px){
-    .ash-bottom input[type="range"]{ width: 90px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    #snow-layer, .ash-ctrl{ display:none; }
-  }
+}
 </style>
 
 <script>
@@ -2791,8 +2817,8 @@ video.setAttribute('controls', '');
   if(!layer || !ctrl || !toggleBtn || !slider || !pctEl) return;
 
   const CONFIG = {
-    maxFlakes: 120,
-    spawnIntervalMs: 90,
+    maxFlakes: 420,
+    spawnIntervalMs: 45,
 
     minW: 2.2, maxW: 7.2,
     minH: 1.4, maxH: 5.0,
@@ -2820,15 +2846,13 @@ video.setAttribute('controls', '');
     sparkScaleMin: 0.7,
     sparkScaleMax: 1.3,
 
-    /* ✅ CAMBIO 2: parte del spawn entra desde la derecha para evitar el “triángulo vacío” */
-    spawnSideChance: 0.28,     // 28% nacen desde el borde derecho
-    sideXMinVw: 102,           // empiezan un pelín fuera
+    spawnSideChance: 0.28,
+    sideXMinVw: 102,
     sideXMaxVw: 118,
-    sideYMinVh: -10,           // altura de entrada variada (puede nacer a media altura)
+    sideYMinVh: -10,
     sideYMaxVh: 85
   };
 
-  // móvil: menos agresivo
   if (window.innerWidth < 768){
     CONFIG.maxFlakes = 70;
     CONFIG.spawnIntervalMs = 140;
@@ -2847,7 +2871,6 @@ video.setAttribute('controls', '');
 
   const rand = (min,max)=> Math.random()*(max-min)+min;
 
-  // ---- viento global con rachas ----
   let windNow = rand(CONFIG.windBaseMin, CONFIG.windBaseMax);
   let windTarget = windNow;
   let gustTimer = null;
@@ -2889,6 +2912,9 @@ video.setAttribute('controls', '');
     const isSpark = Math.random() < CONFIG.sparkChance;
     const isBig   = !isSpark && (Math.random() < CONFIG.bigChance);
 
+    /* ✅ Profundidad 0..1 (0 = lejos, 1 = cerca) */
+    const depth = Math.pow(Math.random(), 1.6);
+
     let w = rand(CONFIG.minW, CONFIG.maxW);
     let h = rand(CONFIG.minH, CONFIG.maxH);
 
@@ -2900,9 +2926,17 @@ video.setAttribute('controls', '');
       w *= s; h *= s;
     }
 
+    /* ✅ Perspectiva: cerca más grande */
+    const sizeScale = 0.55 + depth * 1.10; // 0.55..1.65
+    w *= sizeScale;
+    h *= sizeScale;
+
     let duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
     if (isSpark) duration *= rand(0.55, 0.85);
     if (isBig)   duration *= rand(0.95, 1.25);
+
+    /* ✅ Velocidad: lejos cae más lento, cerca más rápido */
+    duration *= (1.25 - depth * 0.55); // lejos 1.25x, cerca 0.70x
 
     const delay = rand(0, 1.5);
     const tilt  = Math.round(rand(-70, 70)) + "deg";
@@ -2927,9 +2961,16 @@ video.setAttribute('controls', '');
     if (isSpark) opacity = rand(0.55, 0.90);
     if (isBig)   opacity = rand(0.35, 0.78);
 
+    /* ✅ Opacidad: cerca más visible, lejos más tenue */
+    opacity *= (0.55 + depth * 0.85);
+    opacity = Math.min(opacity, 0.95);
+
     let blur = rand(0.0, 0.9);
     if (isSpark) blur = rand(0.0, 0.4);
     if (isBig)   blur = rand(0.2, 1.2);
+
+    /* ✅ Blur: lejos más blur, cerca más nítido */
+    blur += (1 - depth) * 0.9;
 
     let local = rand(CONFIG.windLocalMin, CONFIG.windLocalMax);
     if (isSpark) local *= rand(1.2, 1.9);
@@ -2937,21 +2978,22 @@ video.setAttribute('controls', '');
 
     let drift = -Math.round(Math.abs(windNow + local));
 
-    /* ✅ CAMBIO 2: origen mixto (arriba o derecha) */
     const fromRight = Math.random() < CONFIG.spawnSideChance;
 
     let x;
     let startY;
 
     if (fromRight){
-      x = rand(CONFIG.sideXMinVw, CONFIG.sideXMaxVw);      // fuera a la derecha
-      startY = rand(CONFIG.sideYMinVh, CONFIG.sideYMaxVh); // altura variada
+      x = rand(CONFIG.sideXMinVw, CONFIG.sideXMaxVw);
+      startY = rand(CONFIG.sideYMinVh, CONFIG.sideYMaxVh);
     } else {
-      x = rand(0, 100);   // normal (arriba)
-      startY = -15;       // igual que antes
+      x = rand(0, 100);
+      startY = -15;
     }
 
-    // aplicar variables
+    /* ✅ Forma variable: mayoría redondas, algunas “grano” */
+    const round = (Math.random() < 0.72) ? 999 : Math.round(rand(2, 10));
+
     flake.style.setProperty("--w", w + "px");
     flake.style.setProperty("--h", h + "px");
     flake.style.setProperty("--x", x + "vw");
@@ -2967,8 +3009,8 @@ video.setAttribute('controls', '');
     flake.style.setProperty("--blur", blur + "px");
     flake.style.setProperty("--tilt", tilt);
     flake.style.setProperty("--drift", drift + "px");
+    flake.style.setProperty("--round", round + "px");
 
-    // startY solo cambia el arranque real (sin tocar la animación global)
     flake.style.top = startY + "vh";
 
     if (isSpark){
@@ -2985,9 +3027,9 @@ video.setAttribute('controls', '');
   }
 
   function sliderToMultiplier(v){
-    const n = Math.max(0, Math.min(100, Number(v) || 0));
-									// importante  cambia el nuemro de faleks maximo 
-    return (n / 100) * (window.innerWidth < 768 ? 20 : 100);	
+    const n = Math.max(0, Math.min(100, Number(v) || 0)) / 100;
+    const curved = Math.pow(n, 1.9);
+    return curved * 2;
   }
 
   function updateIconByState(isOn){
@@ -3010,7 +3052,10 @@ video.setAttribute('controls', '');
   function startEmission(){
     if (intervalId) return;
     startWind();
-    for(let i=0;i<35;i++) createFlake();
+
+    const burst = (window.innerWidth < 768) ? 35 : 140;
+    for(let i=0;i<burst;i++) createFlake();
+
     intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
   }
 
@@ -3020,22 +3065,18 @@ video.setAttribute('controls', '');
 
     const mult = sliderToMultiplier(val);
 
-    try { localStorage.setItem("ash-density", String(val)); } catch(e){}
-
     if (mult <= 0){
       updateIconByState(false);
       stopEmission(true);
-      try { localStorage.setItem("snow-enabled", "false"); } catch(e){}
       return;
     }
 
     updateIconByState(true);
-    try { localStorage.setItem("snow-enabled", "true"); } catch(e){}
 
     CONFIG.maxFlakes = Math.round(BASE.maxFlakes * mult);
 
     const desiredInterval = BASE.spawnIntervalMs / mult;
-    CONFIG.spawnIntervalMs = Math.max(20, Math.round(desiredInterval));
+    CONFIG.spawnIntervalMs = Math.max(12, Math.round(desiredInterval));
 
     if (intervalId){
       clearInterval(intervalId);
@@ -3059,8 +3100,7 @@ video.setAttribute('controls', '');
       slider.value = 0;
       applyDensityFromSlider();
     } else {
-      const restore = lastNonZero > 0 ? lastNonZero : 50;
-      slider.value = restore;
+      slider.value = lastNonZero;
       applyDensityFromSlider();
     }
   });
@@ -3071,19 +3111,8 @@ video.setAttribute('controls', '');
   });
 
   (function init(){
-    let savedDensity = null;
-    try { savedDensity = localStorage.getItem("ash-density"); } catch(e){}
-    if (savedDensity !== null && savedDensity !== ""){
-      slider.value = String(Math.max(0, Math.min(100, Number(savedDensity) || 0)));
-    }
-
-    let enabled = true;
-    try { enabled = localStorage.getItem("snow-enabled") !== "false"; } catch(e){}
-    if (!enabled) slider.value = 0;
-
-    const v = Number(slider.value) || 0;
-    if (v > 0) lastNonZero = v;
-
+    slider.value = 50;
+    lastNonZero = 50;
     applyDensityFromSlider();
   })();
 })();
