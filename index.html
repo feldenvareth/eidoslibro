@@ -2817,6 +2817,7 @@ video.setAttribute('controls', '');
   if(!layer || !ctrl || !toggleBtn || !slider || !pctEl) return;
 
   const CONFIG = {
+    /* Desktop */
     maxFlakes: 420,
     spawnIntervalMs: 45,
 
@@ -2853,6 +2854,7 @@ video.setAttribute('controls', '');
     sideYMaxVh: 85
   };
 
+  // móvil: mantener ligero
   if (window.innerWidth < 768){
     CONFIG.maxFlakes = 70;
     CONFIG.spawnIntervalMs = 140;
@@ -2871,6 +2873,7 @@ video.setAttribute('controls', '');
 
   const rand = (min,max)=> Math.random()*(max-min)+min;
 
+  // ---- viento global con rachas ----
   let windNow = rand(CONFIG.windBaseMin, CONFIG.windBaseMax);
   let windTarget = windNow;
   let gustTimer = null;
@@ -2882,7 +2885,10 @@ video.setAttribute('controls', '');
       base += rand(CONFIG.gustBoostMin, CONFIG.gustBoostMax);
     }
     windTarget = Math.min(base, CONFIG.windBaseMax + CONFIG.gustBoostMax);
-    gustTimer = setTimeout(pickNewWindTarget, Math.round(rand(CONFIG.gustIntervalMinMs, CONFIG.gustIntervalMaxMs)));
+    gustTimer = setTimeout(
+      pickNewWindTarget,
+      Math.round(rand(CONFIG.gustIntervalMinMs, CONFIG.gustIntervalMaxMs))
+    );
   }
 
   function windTick(){
@@ -2912,8 +2918,8 @@ video.setAttribute('controls', '');
     const isSpark = Math.random() < CONFIG.sparkChance;
     const isBig   = !isSpark && (Math.random() < CONFIG.bigChance);
 
-    /* ✅ Profundidad 0..1 (0 = lejos, 1 = cerca) */
-    const depth = Math.pow(Math.random(), 1.6);
+    /* ✅ Profundidad “usable” (evita demasiadas invisibles) */
+    const depth = 0.25 + 0.75 * Math.pow(Math.random(), 0.9); // 0.25..1
 
     let w = rand(CONFIG.minW, CONFIG.maxW);
     let h = rand(CONFIG.minH, CONFIG.maxH);
@@ -2926,8 +2932,8 @@ video.setAttribute('controls', '');
       w *= s; h *= s;
     }
 
-    /* ✅ Perspectiva: cerca más grande */
-    const sizeScale = 0.55 + depth * 1.10; // 0.55..1.65
+    /* ✅ Perspectiva: siempre visible, pero con capas */
+    const sizeScale = 0.80 + depth * 0.85; // 0.80..1.65
     w *= sizeScale;
     h *= sizeScale;
 
@@ -2935,8 +2941,8 @@ video.setAttribute('controls', '');
     if (isSpark) duration *= rand(0.55, 0.85);
     if (isBig)   duration *= rand(0.95, 1.25);
 
-    /* ✅ Velocidad: lejos cae más lento, cerca más rápido */
-    duration *= (1.25 - depth * 0.55); // lejos 1.25x, cerca 0.70x
+    /* ✅ Velocidad: lejos más lento, cerca más rápido (suave) */
+    duration *= (1.15 - depth * 0.35); // lejos 1.15x, cerca 0.80x
 
     const delay = rand(0, 1.5);
     const tilt  = Math.round(rand(-70, 70)) + "deg";
@@ -2961,16 +2967,16 @@ video.setAttribute('controls', '');
     if (isSpark) opacity = rand(0.55, 0.90);
     if (isBig)   opacity = rand(0.35, 0.78);
 
-    /* ✅ Opacidad: cerca más visible, lejos más tenue */
-    opacity *= (0.55 + depth * 0.85);
+    /* ✅ Opacidad: sube suelo (para que no “desaparezcan”) */
+    opacity *= (0.80 + depth * 0.45);
     opacity = Math.min(opacity, 0.95);
 
     let blur = rand(0.0, 0.9);
     if (isSpark) blur = rand(0.0, 0.4);
     if (isBig)   blur = rand(0.2, 1.2);
 
-    /* ✅ Blur: lejos más blur, cerca más nítido */
-    blur += (1 - depth) * 0.9;
+    /* ✅ Blur extra muy suave (profundidad sin matar visibilidad) */
+    blur += (1 - depth) * 0.25;
 
     let local = rand(CONFIG.windLocalMin, CONFIG.windLocalMax);
     if (isSpark) local *= rand(1.2, 1.9);
@@ -2991,7 +2997,7 @@ video.setAttribute('controls', '');
       startY = -15;
     }
 
-    /* ✅ Forma variable: mayoría redondas, algunas “grano” */
+    /* ✅ Forma variable (si tu CSS usa border-radius: var(--round,999px)) */
     const round = (Math.random() < 0.72) ? 999 : Math.round(rand(2, 10));
 
     flake.style.setProperty("--w", w + "px");
@@ -3026,6 +3032,7 @@ video.setAttribute('controls', '');
     }, (duration + delay + 1) * 1000);
   }
 
+  /* Slider efectivo: curva perceptual + 100% = 2x */
   function sliderToMultiplier(v){
     const n = Math.max(0, Math.min(100, Number(v) || 0)) / 100;
     const curved = Math.pow(n, 1.9);
@@ -3063,7 +3070,10 @@ video.setAttribute('controls', '');
     const val = Number(slider.value) || 0;
     pctEl.textContent = val + "%";
 
-    const mult = sliderToMultiplier(val);
+    let mult = sliderToMultiplier(val);
+
+    // ✅ evita “vacío” cuando no es 0%
+    if (val > 0) mult = Math.max(mult, 0.18);
 
     if (mult <= 0){
       updateIconByState(false);
@@ -3110,6 +3120,7 @@ video.setAttribute('controls', '');
     applyDensityFromSlider();
   });
 
+  /* INIT: siempre 50% */
   (function init(){
     slider.value = 50;
     lastNonZero = 50;
@@ -3117,6 +3128,7 @@ video.setAttribute('controls', '');
   })();
 })();
 </script>
+
 
 
 
