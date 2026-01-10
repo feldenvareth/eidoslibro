@@ -2641,14 +2641,13 @@ video.setAttribute('controls', '');
 
 
 <!-- ===== CENIZA / POLVO (PARTÍCULAS ORIGINALES + SLIDER DENSIDAD) ===== -->
-<!-- ===== CENIZA / POLVO (PARTÍCULAS INTACTAS + UI SIMÉTRICA EN 2 BURBUJAS) ===== -->
+<!-- ===== CENIZA / POLVO (PARTÍCULAS + UI 2 BURBUJAS) ===== -->
 <div id="snow-layer" aria-hidden="true"></div>
 
-<!-- Control Ceniza (2 burbujas: arriba icono+texto, abajo slider) -->
 <div class="ash-ctrl" id="ash-ctrl" role="group" aria-label="Ceniza">
   <button id="ash-toggle" class="ash-pill ash-top" type="button" aria-pressed="true">
-    <span class="ash-icon" aria-hidden="true">⁖⁖</span>
-    <span class="ash-title"> </span>
+    <span class="ash-icon" aria-hidden="true">⠿</span>
+    <span class="ash-title">Ceniza</span>
   </button>
 
   <div class="ash-pill ash-bottom" aria-label="Densidad de ceniza">
@@ -2667,7 +2666,7 @@ video.setAttribute('controls', '');
   transform: none !important;
 }
 
-/* ====== PARTÍCULAS (con “profundidad” y formas variadas) ====== */
+/* ====== PARTÍCULAS (ceniza irregular real) ====== */
 .snowflake{
   position: absolute;
   top: -15vh;
@@ -2676,21 +2675,22 @@ video.setAttribute('controls', '');
   width: var(--w);
   height: var(--h);
 
-  /* ✅ forma variable (redonda / más “grano”) */
-  border-radius: var(--round, 999px);
+  /* ✅ borde suave, pero la forma real la da clip-path */
+  border-radius: 2px;
+  clip-path: var(--clip, none);
 
   background: rgba(var(--r), var(--g), var(--b), var(--opacity));
   filter: blur(var(--blur));
   box-shadow: 0 0 2px rgba(0,0,0,.35);
 
-  transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt));
+  transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg));
   animation: fall var(--duration) linear var(--delay) infinite;
   will-change: transform;
 }
 
 @keyframes fall{
-  from { transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)); }
-  to   { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(var(--tilt)); }
+  from { transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg)); }
+  to   { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg)); }
 }
 
 /* ====== UI CENIZA (2 BURBUJAS SUPERPUESTAS) ====== */
@@ -2818,7 +2818,7 @@ video.setAttribute('controls', '');
 
   const CONFIG = {
     /* Desktop */
-    maxFlakes: 420,
+    maxFlakes: 280,
     spawnIntervalMs: 45,
 
     minW: 2.2, maxW: 7.2,
@@ -2932,10 +2932,32 @@ video.setAttribute('controls', '');
       w *= s; h *= s;
     }
 
-    /* ✅ Perspectiva: siempre visible, pero con capas */
+    /* ✅ Perspectiva (capas) */
     const sizeScale = 0.80 + depth * 0.85; // 0.80..1.65
     w *= sizeScale;
     h *= sizeScale;
+
+    /* ✅ Siluetas irregulares tipo ceniza (papel quemado) */
+    const CLIPS = [
+      "polygon(12% 18%, 26% 8%, 44% 14%, 62% 6%, 78% 18%, 90% 36%, 82% 56%, 92% 74%, 70% 88%, 50% 78%, 30% 92%, 14% 74%, 22% 54%, 8% 38%)",
+      "polygon(10% 30%, 22% 12%, 44% 10%, 58% 18%, 72% 8%, 88% 26%, 78% 40%, 90% 58%, 76% 82%, 56% 90%, 46% 78%, 26% 86%, 12% 64%, 20% 46%)",
+      "polygon(14% 24%, 30% 10%, 52% 12%, 70% 20%, 86% 18%, 92% 42%, 84% 54%, 90% 72%, 74% 88%, 52% 84%, 38% 92%, 20% 76%, 10% 52%, 18% 38%)",
+      "polygon(18% 16%, 34% 8%, 54% 14%, 66% 10%, 82% 22%, 92% 40%, 80% 52%, 88% 70%, 72% 90%, 50% 78%, 34% 90%, 16% 72%, 10% 46%)",
+      /* más “fibra”/astilla */
+      "polygon(22% 10%, 38% 14%, 52% 6%, 66% 16%, 78% 10%, 92% 28%, 74% 44%, 88% 58%, 70% 74%, 52% 92%, 38% 78%, 22% 92%, 10% 70%, 24% 50%, 8% 32%)"
+    ];
+
+    // más “lámina” que “pastilla” (plana/irregular)
+    w *= rand(0.85, 1.55);
+    h *= rand(0.55, 1.20);
+
+    const clip = isBig || Math.random() < 0.15
+  ? CLIPS[(Math.random() * CLIPS.length) | 0]
+  : "none";
+	
+	
+	
+    const spin = Math.round(rand(-45, 45)) + "deg";
 
     let duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
     if (isSpark) duration *= rand(0.55, 0.85);
@@ -2967,7 +2989,7 @@ video.setAttribute('controls', '');
     if (isSpark) opacity = rand(0.55, 0.90);
     if (isBig)   opacity = rand(0.35, 0.78);
 
-    /* ✅ Opacidad: sube suelo (para que no “desaparezcan”) */
+    /* ✅ Opacidad: sube suelo (para que no desaparezcan) */
     opacity *= (0.80 + depth * 0.45);
     opacity = Math.min(opacity, 0.95);
 
@@ -2976,7 +2998,7 @@ video.setAttribute('controls', '');
     if (isBig)   blur = rand(0.2, 1.2);
 
     /* ✅ Blur extra muy suave (profundidad sin matar visibilidad) */
-    blur += (1 - depth) * 0.25;
+    blur += (1 - depth) * 0.10;
 
     let local = rand(CONFIG.windLocalMin, CONFIG.windLocalMax);
     if (isSpark) local *= rand(1.2, 1.9);
@@ -2997,9 +3019,6 @@ video.setAttribute('controls', '');
       startY = -15;
     }
 
-    /* ✅ Forma variable (si tu CSS usa border-radius: var(--round,999px)) */
-    const round = (Math.random() < 0.72) ? 999 : Math.round(rand(2, 10));
-
     flake.style.setProperty("--w", w + "px");
     flake.style.setProperty("--h", h + "px");
     flake.style.setProperty("--x", x + "vw");
@@ -3015,7 +3034,9 @@ video.setAttribute('controls', '');
     flake.style.setProperty("--blur", blur + "px");
     flake.style.setProperty("--tilt", tilt);
     flake.style.setProperty("--drift", drift + "px");
-    flake.style.setProperty("--round", round + "px");
+
+    flake.style.setProperty("--clip", clip);
+    flake.style.setProperty("--spin", spin);
 
     flake.style.top = startY + "vh";
 
@@ -3072,7 +3093,7 @@ video.setAttribute('controls', '');
 
     let mult = sliderToMultiplier(val);
 
-    // ✅ evita “vacío” cuando no es 0%
+    // evita “vacío” cuando no es 0%
     if (val > 0) mult = Math.max(mult, 0.18);
 
     if (mult <= 0){
@@ -3128,10 +3149,6 @@ video.setAttribute('controls', '');
   })();
 })();
 </script>
-
-
-
-
 
 
 </body>
