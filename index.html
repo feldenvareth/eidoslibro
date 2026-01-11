@@ -2641,13 +2641,15 @@ video.setAttribute('controls', '');
 
 
 <!-- ===== CENIZA / POLVO (PARTÍCULAS ORIGINALES + SLIDER DENSIDAD) ===== -->
+
+
 <!-- ===== CENIZA / POLVO (PARTÍCULAS + UI 2 BURBUJAS) ===== -->
-<div id="snow-layer" aria-hidden="true"></div>
+<div id="snow-layer" aria-hidden="true"></div> 
 
 <div class="ash-ctrl" id="ash-ctrl" role="group" aria-label="Ceniza">
   <button id="ash-toggle" class="ash-pill ash-top" type="button" aria-pressed="true">
-    <span class="ash-icon" aria-hidden="true">⠿</span>
-    <span class="ash-title">Ceniza</span>
+    <span class="ash-icon" aria-hidden="true">·˙·•˙</span>
+    <span class="ash-title"> Ceniza</span>
   </button>
 
   <div class="ash-pill ash-bottom" aria-label="Densidad de ceniza">
@@ -2675,8 +2677,8 @@ video.setAttribute('controls', '');
   width: var(--w);
   height: var(--h);
 
-  /* ✅ borde suave, pero la forma real la da clip-path */
-  border-radius: 2px;
+  /* ✅ CAMBIO: radio variable para que las "sin clip" no parezcan rectángulos clonados */
+  border-radius: var(--br, 3px);
   clip-path: var(--clip, none);
 
   background: rgba(var(--r), var(--g), var(--b), var(--opacity));
@@ -2873,6 +2875,15 @@ video.setAttribute('controls', '');
 
   const rand = (min,max)=> Math.random()*(max-min)+min;
 
+  /* ✅ CLIPS fuera: no se recrea por partícula */
+  const CLIPS = [
+    "polygon(12% 18%, 26% 8%, 44% 14%, 62% 6%, 78% 18%, 90% 36%, 82% 56%, 92% 74%, 70% 88%, 50% 78%, 30% 92%, 14% 74%, 22% 54%, 8% 38%)",
+    "polygon(10% 30%, 22% 12%, 44% 10%, 58% 18%, 72% 8%, 88% 26%, 78% 40%, 90% 58%, 76% 82%, 56% 90%, 46% 78%, 26% 86%, 12% 64%, 20% 46%)",
+    "polygon(14% 24%, 30% 10%, 52% 12%, 70% 20%, 86% 18%, 92% 42%, 84% 54%, 90% 72%, 74% 88%, 52% 84%, 38% 92%, 20% 76%, 10% 52%, 18% 38%)",
+    "polygon(18% 16%, 34% 8%, 54% 14%, 66% 10%, 82% 22%, 92% 40%, 80% 52%, 88% 70%, 72% 90%, 50% 78%, 34% 90%, 16% 72%, 10% 46%)",
+    "polygon(22% 10%, 38% 14%, 52% 6%, 66% 16%, 78% 10%, 92% 28%, 74% 44%, 88% 58%, 70% 74%, 52% 92%, 38% 78%, 22% 92%, 10% 70%, 24% 50%, 8% 32%)"
+  ];
+
   // ---- viento global con rachas ----
   let windNow = rand(CONFIG.windBaseMin, CONFIG.windBaseMax);
   let windTarget = windNow;
@@ -2918,8 +2929,7 @@ video.setAttribute('controls', '');
     const isSpark = Math.random() < CONFIG.sparkChance;
     const isBig   = !isSpark && (Math.random() < CONFIG.bigChance);
 
-    /* ✅ Profundidad “usable” (evita demasiadas invisibles) */
-    const depth = 0.25 + 0.75 * Math.pow(Math.random(), 0.9); // 0.25..1
+    const depth = 0.25 + 0.75 * Math.pow(Math.random(), 0.9);
 
     let w = rand(CONFIG.minW, CONFIG.maxW);
     let h = rand(CONFIG.minH, CONFIG.maxH);
@@ -2932,39 +2942,29 @@ video.setAttribute('controls', '');
       w *= s; h *= s;
     }
 
-    /* ✅ Perspectiva (capas) */
-    const sizeScale = 0.80 + depth * 0.85; // 0.80..1.65
+    const sizeScale = 0.80 + depth * 0.85;
     w *= sizeScale;
     h *= sizeScale;
 
-    /* ✅ Siluetas irregulares tipo ceniza (papel quemado) */
-    const CLIPS = [
-      "polygon(12% 18%, 26% 8%, 44% 14%, 62% 6%, 78% 18%, 90% 36%, 82% 56%, 92% 74%, 70% 88%, 50% 78%, 30% 92%, 14% 74%, 22% 54%, 8% 38%)",
-      "polygon(10% 30%, 22% 12%, 44% 10%, 58% 18%, 72% 8%, 88% 26%, 78% 40%, 90% 58%, 76% 82%, 56% 90%, 46% 78%, 26% 86%, 12% 64%, 20% 46%)",
-      "polygon(14% 24%, 30% 10%, 52% 12%, 70% 20%, 86% 18%, 92% 42%, 84% 54%, 90% 72%, 74% 88%, 52% 84%, 38% 92%, 20% 76%, 10% 52%, 18% 38%)",
-      "polygon(18% 16%, 34% 8%, 54% 14%, 66% 10%, 82% 22%, 92% 40%, 80% 52%, 88% 70%, 72% 90%, 50% 78%, 34% 90%, 16% 72%, 10% 46%)",
-      /* más “fibra”/astilla */
-      "polygon(22% 10%, 38% 14%, 52% 6%, 66% 16%, 78% 10%, 92% 28%, 74% 44%, 88% 58%, 70% 74%, 52% 92%, 38% 78%, 22% 92%, 10% 70%, 24% 50%, 8% 32%)"
-    ];
-
-    // más “lámina” que “pastilla” (plana/irregular)
     w *= rand(0.85, 1.55);
     h *= rand(0.55, 1.20);
 
-    const clip = isBig || Math.random() < 0.15
-  ? CLIPS[(Math.random() * CLIPS.length) | 0]
-  : "none";
-	
-	
-	
+    const clip = (isBig || Math.random() < 0.15)
+      ? CLIPS[(Math.random() * CLIPS.length) | 0]
+      : "none";
+
+    /* ✅ CAMBIO: borde variable cuando NO hay clip (evita “cuadraditos”) */
+    const br = (clip === "none")
+      ? (Math.round(rand(2, 10)) + "px")
+      : "2px";
+
     const spin = Math.round(rand(-45, 45)) + "deg";
 
     let duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
     if (isSpark) duration *= rand(0.55, 0.85);
     if (isBig)   duration *= rand(0.95, 1.25);
 
-    /* ✅ Velocidad: lejos más lento, cerca más rápido (suave) */
-    duration *= (1.15 - depth * 0.35); // lejos 1.15x, cerca 0.80x
+    duration *= (1.15 - depth * 0.35);
 
     const delay = rand(0, 1.5);
     const tilt  = Math.round(rand(-70, 70)) + "deg";
@@ -2989,7 +2989,6 @@ video.setAttribute('controls', '');
     if (isSpark) opacity = rand(0.55, 0.90);
     if (isBig)   opacity = rand(0.35, 0.78);
 
-    /* ✅ Opacidad: sube suelo (para que no desaparezcan) */
     opacity *= (0.80 + depth * 0.45);
     opacity = Math.min(opacity, 0.95);
 
@@ -2997,7 +2996,6 @@ video.setAttribute('controls', '');
     if (isSpark) blur = rand(0.0, 0.4);
     if (isBig)   blur = rand(0.2, 1.2);
 
-    /* ✅ Blur extra muy suave (profundidad sin matar visibilidad) */
     blur += (1 - depth) * 0.10;
 
     let local = rand(CONFIG.windLocalMin, CONFIG.windLocalMax);
@@ -3037,6 +3035,7 @@ video.setAttribute('controls', '');
 
     flake.style.setProperty("--clip", clip);
     flake.style.setProperty("--spin", spin);
+    flake.style.setProperty("--br", br);
 
     flake.style.top = startY + "vh";
 
@@ -3053,7 +3052,6 @@ video.setAttribute('controls', '');
     }, (duration + delay + 1) * 1000);
   }
 
-  /* Slider efectivo: curva perceptual + 100% = 2x */
   function sliderToMultiplier(v){
     const n = Math.max(0, Math.min(100, Number(v) || 0)) / 100;
     const curved = Math.pow(n, 1.9);
@@ -3093,7 +3091,6 @@ video.setAttribute('controls', '');
 
     let mult = sliderToMultiplier(val);
 
-    // evita “vacío” cuando no es 0%
     if (val > 0) mult = Math.max(mult, 0.18);
 
     if (mult <= 0){
@@ -3141,7 +3138,6 @@ video.setAttribute('controls', '');
     applyDensityFromSlider();
   });
 
-  /* INIT: siempre 50% */
   (function init(){
     slider.value = 50;
     lastNonZero = 50;
@@ -3149,6 +3145,9 @@ video.setAttribute('controls', '');
   })();
 })();
 </script>
+
+
+
 
 
 </body>
