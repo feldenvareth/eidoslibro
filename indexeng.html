@@ -2724,7 +2724,508 @@ video.setAttribute('controls', '');
 
 
 
+<!-- ===== CENIZA / POLVO (PARTÍCULAS + UI 2 BURBUJAS) ===== -->
+<div id="snow-layer" aria-hidden="true"></div> 
 
+<div class="ash-ctrl" id="ash-ctrl" role="group" aria-label="Ceniza">
+  <button id="ash-toggle" class="ash-pill ash-top" type="button" aria-pressed="true">
+    <span class="ash-icon" aria-hidden="true">·˙·•˙</span>
+    <span class="ash-title"> Ash</span>
+  </button>
+
+  <div class="ash-pill ash-bottom" aria-label="Densidad de ceniza">
+    <input id="ash-density" type="range" min="0" max="100" step="1" value="50" aria-label="Densidad" />
+    <span id="ash-density-pct" class="ash-pct">50%</span>
+  </div>
+</div>
+
+<style>
+#snow-layer{
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20000;
+  transform: none !important;
+}
+
+/* ====== PARTÍCULAS (ceniza irregular real) ====== */
+.snowflake{
+  position: absolute;
+  top: -15vh;
+  left: 0;
+
+  width: var(--w);
+  height: var(--h);
+
+  /* ✅ CAMBIO: radio variable para que las "sin clip" no parezcan rectángulos clonados */
+  border-radius: var(--br, 3px);
+  clip-path: var(--clip, none);
+
+  background: rgba(var(--r), var(--g), var(--b), var(--opacity));
+  filter: blur(var(--blur));
+  box-shadow: 0 0 2px rgba(0,0,0,.35);
+
+  transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg));
+  animation: fall var(--duration) linear var(--delay) infinite;
+  will-change: transform;
+}
+
+@keyframes fall{
+  from { transform: translate3d(var(--x), -15vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg)); }
+  to   { transform: translate3d(calc(var(--x) + var(--drift)), 110vh, 0) rotate(var(--tilt)) rotate(var(--spin, 0deg)); }
+}
+
+/* ====== UI CENIZA (2 BURBUJAS SUPERPUESTAS) ====== */
+.ash-ctrl{
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 20001;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 0;
+  pointer-events: auto;
+}
+
+.ash-pill{
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+  padding: 8px 10px;
+
+  border-radius: 999px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+
+.ash-pill:hover{ background: rgba(0,0,0,.75); }
+
+.ash-top{
+  display: inline-flex;
+  align-self: flex-start;
+
+  padding: 7px 10px;
+  gap: 8px;
+
+  border: 0;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 2;
+  margin-bottom: -10px;
+}
+
+.ash-icon{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  line-height: 1;
+  width: 20px;
+}
+
+.ash-top.is-off .ash-icon::after{
+  content: "";
+  position: absolute;
+
+  width: 20px;
+  height: 2px;
+
+  background: rgba(255,255,255,.95);
+  transform: rotate(-35deg);
+  border-radius: 2px;
+
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  box-shadow: 0 0 2px rgba(0,0,0,.35);
+}
+
+.ash-title{
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.ash-bottom{
+  justify-content: space-between;
+  gap: 10px;
+
+  position: relative;
+  z-index: 1;
+}
+
+.ash-bottom input[type="range"]{
+  width: 120px;
+  accent-color: #fff;
+}
+
+.ash-pct{
+  font-size: 13px;
+  opacity: .95;
+  min-width: 40px;
+  text-align: right;
+}
+
+@media (max-width: 480px){
+  .ash-bottom input[type="range"]{ width: 90px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  #snow-layer,
+  .ash-ctrl{
+    display: none;
+  }
+}
+</style>
+
+<script>
+(function(){
+  const layer     = document.getElementById("snow-layer");
+  const ctrl      = document.getElementById("ash-ctrl");
+  const toggleBtn = document.getElementById("ash-toggle");
+  const slider    = document.getElementById("ash-density");
+  const pctEl     = document.getElementById("ash-density-pct");
+  if(!layer || !ctrl || !toggleBtn || !slider || !pctEl) return;
+
+  const CONFIG = {
+    /* Desktop */
+    maxFlakes: 280,
+    spawnIntervalMs: 45,
+
+    minW: 2.2, maxW: 7.2,
+    minH: 1.4, maxH: 5.0,
+    minDuration: 6,
+    maxDuration: 12,
+
+    windBaseMin: 260,
+    windBaseMax: 900,
+
+    windLocalMin: 0,
+    windLocalMax: 420,
+
+    gustIntervalMinMs: 900,
+    gustIntervalMaxMs: 2600,
+    gustBoostMin: 220,
+    gustBoostMax: 900,
+    windSmoothing: 0.10,
+
+    bigChance: 0.10,
+    sparkChance: 0.035,
+
+    bigScaleMin: 1.4,
+    bigScaleMax: 2.4,
+
+    sparkScaleMin: 0.7,
+    sparkScaleMax: 1.3,
+
+    spawnSideChance: 0.28,
+    sideXMinVw: 102,
+    sideXMaxVw: 118,
+    sideYMinVh: -10,
+    sideYMaxVh: 85
+  };
+
+  // móvil: mantener ligero
+  if (window.innerWidth < 768){
+    CONFIG.maxFlakes = 70;
+    CONFIG.spawnIntervalMs = 140;
+    CONFIG.windBaseMax = 720;
+    CONFIG.windLocalMax = 320;
+    CONFIG.spawnSideChance = 0.22;
+  }
+
+  const BASE = {
+    maxFlakes: CONFIG.maxFlakes,
+    spawnIntervalMs: CONFIG.spawnIntervalMs
+  };
+
+  let flakes = 0;
+  let intervalId = null;
+
+  const rand = (min,max)=> Math.random()*(max-min)+min;
+
+  /* ✅ CLIPS fuera: no se recrea por partícula */
+  const CLIPS = [
+    "polygon(12% 18%, 26% 8%, 44% 14%, 62% 6%, 78% 18%, 90% 36%, 82% 56%, 92% 74%, 70% 88%, 50% 78%, 30% 92%, 14% 74%, 22% 54%, 8% 38%)",
+    "polygon(10% 30%, 22% 12%, 44% 10%, 58% 18%, 72% 8%, 88% 26%, 78% 40%, 90% 58%, 76% 82%, 56% 90%, 46% 78%, 26% 86%, 12% 64%, 20% 46%)",
+    "polygon(14% 24%, 30% 10%, 52% 12%, 70% 20%, 86% 18%, 92% 42%, 84% 54%, 90% 72%, 74% 88%, 52% 84%, 38% 92%, 20% 76%, 10% 52%, 18% 38%)",
+    "polygon(18% 16%, 34% 8%, 54% 14%, 66% 10%, 82% 22%, 92% 40%, 80% 52%, 88% 70%, 72% 90%, 50% 78%, 34% 90%, 16% 72%, 10% 46%)",
+    "polygon(22% 10%, 38% 14%, 52% 6%, 66% 16%, 78% 10%, 92% 28%, 74% 44%, 88% 58%, 70% 74%, 52% 92%, 38% 78%, 22% 92%, 10% 70%, 24% 50%, 8% 32%)"
+  ];
+
+  // ---- viento global con rachas ----
+  let windNow = rand(CONFIG.windBaseMin, CONFIG.windBaseMax);
+  let windTarget = windNow;
+  let gustTimer = null;
+  let rafId = null;
+
+  function pickNewWindTarget(){
+    let base = rand(CONFIG.windBaseMin, CONFIG.windBaseMax);
+    if (Math.random() < 0.75){
+      base += rand(CONFIG.gustBoostMin, CONFIG.gustBoostMax);
+    }
+    windTarget = Math.min(base, CONFIG.windBaseMax + CONFIG.gustBoostMax);
+    gustTimer = setTimeout(
+      pickNewWindTarget,
+      Math.round(rand(CONFIG.gustIntervalMinMs, CONFIG.gustIntervalMaxMs))
+    );
+  }
+
+  function windTick(){
+    windNow += (windTarget - windNow) * CONFIG.windSmoothing;
+    rafId = requestAnimationFrame(windTick);
+  }
+
+  function startWind(){
+    stopWind();
+    pickNewWindTarget();
+    windTick();
+  }
+
+  function stopWind(){
+    if (gustTimer) clearTimeout(gustTimer);
+    gustTimer = null;
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  function createFlake(){
+    if (flakes >= CONFIG.maxFlakes) return;
+
+    const flake = document.createElement("div");
+    flake.className = "snowflake";
+
+    const isSpark = Math.random() < CONFIG.sparkChance;
+    const isBig   = !isSpark && (Math.random() < CONFIG.bigChance);
+
+    const depth = 0.25 + 0.75 * Math.pow(Math.random(), 0.9);
+
+    let w = rand(CONFIG.minW, CONFIG.maxW);
+    let h = rand(CONFIG.minH, CONFIG.maxH);
+
+    if (isBig){
+      const s = rand(CONFIG.bigScaleMin, CONFIG.bigScaleMax);
+      w *= s; h *= s;
+    } else if (isSpark){
+      const s = rand(CONFIG.sparkScaleMin, CONFIG.sparkScaleMax);
+      w *= s; h *= s;
+    }
+
+    const sizeScale = 0.80 + depth * 0.85;
+    w *= sizeScale;
+    h *= sizeScale;
+
+    w *= rand(0.85, 1.55);
+    h *= rand(0.55, 1.20);
+
+    const clip = (isBig || Math.random() < 0.15)
+      ? CLIPS[(Math.random() * CLIPS.length) | 0]
+      : "none";
+
+    /* ✅ CAMBIO: borde variable cuando NO hay clip (evita “cuadraditos”) */
+    const br = (clip === "none")
+      ? (Math.round(rand(2, 10)) + "px")
+      : "2px";
+
+    const spin = Math.round(rand(-45, 45)) + "deg";
+
+    let duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
+    if (isSpark) duration *= rand(0.55, 0.85);
+    if (isBig)   duration *= rand(0.95, 1.25);
+
+    duration *= (1.15 - depth * 0.35);
+
+    const delay = rand(0, 1.5);
+    const tilt  = Math.round(rand(-70, 70)) + "deg";
+
+    let shade = rand(90, 170);
+    let warm  = rand(-6, 14);
+
+    if (isSpark){
+      shade = rand(140, 210);
+      warm  = rand(20, 60);
+    }
+    if (isBig){
+      shade = rand(70, 140);
+      warm  = rand(-10, 8);
+    }
+
+    const r = Math.round(shade + warm);
+    const g = Math.round(shade + warm * 0.55);
+    const b = Math.round(shade - rand(6, 30));
+
+    let opacity = rand(0.28, 0.65);
+    if (isSpark) opacity = rand(0.55, 0.90);
+    if (isBig)   opacity = rand(0.35, 0.78);
+
+    opacity *= (0.80 + depth * 0.45);
+    opacity = Math.min(opacity, 0.95);
+
+    let blur = rand(0.0, 0.9);
+    if (isSpark) blur = rand(0.0, 0.4);
+    if (isBig)   blur = rand(0.2, 1.2);
+
+    blur += (1 - depth) * 0.10;
+
+    let local = rand(CONFIG.windLocalMin, CONFIG.windLocalMax);
+    if (isSpark) local *= rand(1.2, 1.9);
+    if (isBig)   local *= rand(0.8, 1.2);
+
+    let drift = -Math.round(Math.abs(windNow + local));
+
+    const fromRight = Math.random() < CONFIG.spawnSideChance;
+
+    let x;
+    let startY;
+
+    if (fromRight){
+      x = rand(CONFIG.sideXMinVw, CONFIG.sideXMaxVw);
+      startY = rand(CONFIG.sideYMinVh, CONFIG.sideYMaxVh);
+    } else {
+      x = rand(0, 100);
+      startY = -15;
+    }
+
+    flake.style.setProperty("--w", w + "px");
+    flake.style.setProperty("--h", h + "px");
+    flake.style.setProperty("--x", x + "vw");
+
+    flake.style.setProperty("--duration", duration + "s");
+    flake.style.setProperty("--delay", delay + "s");
+
+    flake.style.setProperty("--r", r);
+    flake.style.setProperty("--g", g);
+    flake.style.setProperty("--b", b);
+    flake.style.setProperty("--opacity", opacity);
+
+    flake.style.setProperty("--blur", blur + "px");
+    flake.style.setProperty("--tilt", tilt);
+    flake.style.setProperty("--drift", drift + "px");
+
+    flake.style.setProperty("--clip", clip);
+    flake.style.setProperty("--spin", spin);
+    flake.style.setProperty("--br", br);
+
+    flake.style.top = startY + "vh";
+
+    if (isSpark){
+      flake.style.boxShadow = "0 0 4px rgba(255,180,90,.45)";
+    }
+
+    layer.appendChild(flake);
+    flakes++;
+
+    setTimeout(()=>{
+      flake.remove();
+      flakes = Math.max(0, flakes - 1);
+    }, (duration + delay + 1) * 1000);
+  }
+
+  function sliderToMultiplier(v){
+    const n = Math.max(0, Math.min(100, Number(v) || 0)) / 100;
+    const curved = Math.pow(n, 1.9);
+    return curved * 2;
+  }
+
+  function updateIconByState(isOn){
+    toggleBtn.classList.toggle("is-off", !isOn);
+    toggleBtn.setAttribute("aria-pressed", isOn ? "true" : "false");
+  }
+
+  function stopEmission(clearNow){
+    if (intervalId){
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+    stopWind();
+    if (clearNow){
+      layer.innerHTML = "";
+      flakes = 0;
+    }
+  }
+
+  function startEmission(){
+    if (intervalId) return;
+    startWind();
+
+    const burst = (window.innerWidth < 768) ? 35 : 140;
+    for(let i=0;i<burst;i++) createFlake();
+
+    intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
+  }
+
+  function applyDensityFromSlider(){
+    const val = Number(slider.value) || 0;
+    pctEl.textContent = val + "%";
+
+    let mult = sliderToMultiplier(val);
+
+    if (val > 0) mult = Math.max(mult, 0.18);
+
+    if (mult <= 0){
+      updateIconByState(false);
+      stopEmission(true);
+      return;
+    }
+
+    updateIconByState(true);
+
+    CONFIG.maxFlakes = Math.round(BASE.maxFlakes * mult);
+
+    const desiredInterval = BASE.spawnIntervalMs / mult;
+    CONFIG.spawnIntervalMs = Math.max(12, Math.round(desiredInterval));
+
+    if (intervalId){
+      clearInterval(intervalId);
+      intervalId = setInterval(createFlake, CONFIG.spawnIntervalMs);
+    } else {
+      startEmission();
+    }
+  }
+
+  let lastNonZero = 50;
+
+  function rememberLastNonZero(){
+    const v = Number(slider.value) || 0;
+    if (v > 0) lastNonZero = v;
+  }
+
+  toggleBtn.addEventListener("click", ()=>{
+    const v = Number(slider.value) || 0;
+    if (v > 0){
+      rememberLastNonZero();
+      slider.value = 0;
+      applyDensityFromSlider();
+    } else {
+      slider.value = lastNonZero;
+      applyDensityFromSlider();
+    }
+  });
+
+  slider.addEventListener("input", ()=>{
+    rememberLastNonZero();
+    applyDensityFromSlider();
+  });
+
+  (function init(){
+    slider.value = 50;
+    lastNonZero = 50;
+    applyDensityFromSlider();
+  })();
+})();
+</script>
 
 
 </body>
