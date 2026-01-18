@@ -2061,3 +2061,52 @@ button:focus {
 @media (max-width: 640px){
   #mu-resena .mu-resena-content{ padding:0 14px; }
 }
+
+
+
+
+
+
+
+
+/* ===== PUBLICACIONES: respetar hover original + blindar ACTIVO ===== */
+
+/* (Opcional) un pelín más apagados los NO activos en reposo */
+#mu-publicaciones .mu-filter .list:not(.is-active){
+  opacity: .90;
+}
+
+/* (Opcional) al hacer hover, vuelve a 1 (sin tocar colores/fondo) */
+#mu-publicaciones .mu-filter .list:not(.is-active):hover{
+  opacity: 1;
+}
+
+/* ACTIVO: se distingue en reposo */
+#mu-publicaciones .mu-filter .list.is-active{
+  opacity: 1;
+  outline: 2px solid rgba(255,255,255,.85);
+  outline-offset: 2px;
+  border-radius: 50px;
+  background: rgba(255,255,255,.12);
+  transform: translateY(-1px);
+}
+
+/* ACTIVO: BLINDADO en hover/focus para que NO se ponga blanco+verde */
+#mu-publicaciones .mu-filter .list.is-active:hover,
+#mu-publicaciones .mu-filter .list.is-active:focus{
+  background: rgba(255,255,255,.12) !important;
+  color: #fff !important;            /* evita que el template lo ponga verde */
+}
+
+/* también iconos/texto internos del activo */
+#mu-publicaciones .mu-filter .list.is-active i,
+#mu-publicaciones .mu-filter .list.is-active:hover i,
+#mu-publicaciones .mu-filter .list.is-active:focus i{
+  color: #fff !important;
+}
+
+/* (Opcional) imagen del activo */
+#mu-publicaciones .mu-filter .list.is-active img{
+  transform: scale(1.05);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
