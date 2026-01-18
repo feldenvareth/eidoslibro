@@ -2213,7 +2213,7 @@ Más que una simple colección de relatos, el libro se siente como una expansió
                   <li class="mu-google-btnti list is-active" data-filter-book="all">
                     <img decoding="async" loading="lazy" src="assets/images/eidospeq.jpg"/>&nbsp;
                     <img decoding="async" loading="lazy" src="assets/images/eidospeqrelatos.jpg"/>
-                    <span style="margin-left:8px;">Todos</span>
+                    <span style="margin-left:8px;"></span>
                   </li>
                   <p class="mu-copy-right">&nbsp;</p>
                   <li class="mu-google-btn3i list" data-filter-book="eidos">
@@ -2391,7 +2391,7 @@ Más que una simple colección de relatos, el libro se siente como una expansió
   const statusEl = document.getElementById('mu-publicaciones-status');
 
   const typeLabels = { all: 'Todos los medios', est: 'Estanterías', res: 'Reseñas y artículos', otr: 'Otros' };
-  const bookLabels = { all: 'Todos los libros', eidos: 'Eidos', relatos: 'Eidos relatos' };
+  const bookLabels = { all: 'Ambos libros', eidos: 'Eidos', relatos: 'Eidos relatos' };
 
   function setActive(btns, activeAttr, value) {
     btns.forEach(b => b.classList.toggle('is-active', b.getAttribute(activeAttr) === value));
@@ -2399,7 +2399,8 @@ Más que una simple colección de relatos, el libro se siente como una expansió
 
   function updateStatus() {
     if (!statusEl) return;
-    statusEl.innerHTML = 'Mostrando: <strong>' + typeLabels[activeType] + '</strong> · <strong>' + bookLabels[activeBook] + '</strong>';
+statusEl.innerHTML =
+  'Mostrando: <strong>' + bookLabels[activeBook] + '</strong> · <strong>' + typeLabels[activeType] + '</strong>';
   }
 
   function applyFilters() {
@@ -2438,6 +2439,10 @@ Más que una simple colección de relatos, el libro se siente como una expansió
   applyFilters();
 })();
 </script>
+        
+        
+              <!-- End Publicaciones --
+        
         
       <!-- Start Contact -->
 <section id="mu-contact">
