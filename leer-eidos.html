@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leer Eidos</title>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    function hasAnalyticsConsent(){
+      try {
+        const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+        return saved.analytics_storage === 'granted';
+      } catch(e){
+        return false;
+      }
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-SCSFPYKJTX', { send_page_view: true });
+
+    if (hasAnalyticsConsent()) {
+      try {
+        localStorage.setItem('opened_chapter_eidos', 'yes');
+        gtag('event', 'chapter_open', {
+          book: 'eidos'
+        });
+      } catch(e){}
+    }
+  </script>
+</head>
+<body style="margin:0;">
+  <iframe
+    src="docs/eidosprimeroscapitulos.pdf"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;"
+    width="100%"
+    height="100%">
+  </iframe>
+</body>
+</html>
