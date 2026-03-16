@@ -1450,6 +1450,57 @@ button:focus {
 
 
 
+/*--------------------*/
+/* BLOG */
+/*--------------------*/
+
+
+#mu-blog {
+	background-color: #fff;
+	display: inline;
+	float: left;
+	width: 100%;
+}
+
+.mu-blog-area {
+	display: inline;
+	float: left;
+	padding: 100px 0;
+	width: 100%;
+}
+
+.mu-blog-content{
+	display: inline;
+	float: left;
+	margin-top: 50px;
+	width: 100%;
+}
+
+.mu-blog-slider {
+
+}
+
+.mu-single-blog {
+	padding: 0 10px;
+	outline: none;
+	-webkit-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+.mu-blogt-slider .slick-next {
+	right: -60px;
+}
+
+.mu-blog-slider .slick-prev {
+	left: -60px;
+}
+
+.mu-blog-slider .slick-next,
+.mu-blog-slider .slick-prev {
+	background-color: transparent;
+}
+
+
 
 
 
@@ -2110,3 +2161,4 @@ button:focus {
   transform: scale(1.05);
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
 }
+
