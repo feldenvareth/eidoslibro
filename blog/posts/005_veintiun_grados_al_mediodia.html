@@ -85,7 +85,6 @@
             height: auto;
         }
 
-
         .imagen-lateralde {
             float: right;
             margin: 10px 0 10px 20px;
@@ -214,6 +213,7 @@
             color: #fff;
             cursor: default;
             pointer-events: none;
+            opacity: 0.75;
         }
 
         .cta-image {
@@ -226,7 +226,11 @@
             border-radius: 6px;
             display: block;
             margin: 0 auto;
-            opacity: 0.9;
+        }
+
+        .cta-image.disabled {
+            opacity: 0.75;
+            pointer-events: none;
         }
 
         .cta-note {
@@ -309,7 +313,7 @@
 			<div class="wrapper content_header clearfix">
 				<div class="work_nav">
 					<ul class="btn clearfix">
-						<li><a href="#" class="previous" data-title="Por ahora  no hay mas"></a></li>
+						<li><a href="#" class="previous" data-title="Por ahora no hay más"></a></li>
 						<li><a href="../index.html" class="grid" data-title="Relatos"></a></li>
 						<li><a href="004_ecos_de_otra_vida.html" class="next" data-title="Ecos de otra vida"></a></li>
 					</ul>
@@ -346,7 +350,7 @@
 
 					<div class="meta-item">
 						<span class="meta-icon">📝</span>
-						<span><strong>2.430 palabras</strong></span>
+						<span><strong>2.450 palabras</strong></span>
 					</div>
 
 					<div class="meta-item">
@@ -380,7 +384,7 @@
 					<h3>Lectura y descarga disponibles próximamente</h3>
 
 					<p class="cta-intro">
-						<strong>Ecos de otra vida</strong> estará disponible en esta página en cuanto se publique su versión de lectura y descarga.
+						<strong>21 grados al mediodía</strong> estará disponible en esta página en cuanto se publique su versión de lectura y descarga.
 						También se añadirá aquí la opción de compra en Amazon.
 					</p>
 
@@ -390,24 +394,23 @@
 							<p>La versión gratuita en web y PDF se activará próximamente.</p>
 							<span class="cta-button primary disabled">Próximamente</span>
 
-							<div class="cta-image">
-								<img src="../img/posts/post_005/pdf.jpg" alt="Descarga en PDF de Ecos de otra vida próximamente disponible">
+							<div class="cta-image disabled">
+								<img src="../img/posts/post_005/pdf.jpg" alt="Descarga en PDF de 21 grados al mediodía próximamente disponible">
 							</div>
 
 							<p class="cta-note">En cuanto esté disponible, podrás leerlo aquí y descargar el PDF.</p>
 						</div>
 
 						<div class="cta-card cta-buy">
-							<h4>Compra en Amazon</h4>
-							<p>La edición de apoyo al autor, puedes reservarla en Amazon por 0,99 €.</p>
+							<h4>Apoya al autor</h4>
+							<p>La edición de apoyo al autor, puedes reservarla en Amazon.</p>
                             
-							<a class="cta-button secondary" href="https://www.amazon.es/dp/B0GT7CCFJJ" target="_blank" rel="noopener">Próximamente</a>
-                            
+							<a class="cta-button secondary" href="https://www.amazon.es/dp/B0GT7CCFJJ" target="_blank" rel="noopener">Comprar en Amazon</a>
                             
 							<div class="cta-image">
-    								<a href="https://www.amazon.es/dp/B0GT7CCFJJ" target="_blank" rel="noopener">
-                        
-								<img src="../img/posts/post_005/kindle.jpg" alt="Compra en Amazon de Ecos de otra vida próximamente disponible"> </a>
+    							<a href="https://www.amazon.es/dp/B0GT7CCFJJ" target="_blank" rel="noopener">
+									<img src="../img/posts/post_005/kindle.jpg" alt="Comprar 21 grados al mediodía en Amazon Kindle">
+								</a>
 							</div>
 
 							<p class="cta-note">Puedes reservar ya tu copia en Amazon.</p>
