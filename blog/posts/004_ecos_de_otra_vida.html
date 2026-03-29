@@ -438,6 +438,46 @@
 		</section>
 	</section>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const fechaActual = new Date();
+    const fechaActivacion = new Date("2026-04-01");
+
+    if (fechaActual >= fechaActivacion) {
+        // Botón
+        const boton = document.querySelector(".cta-free .cta-button");
+        boton.classList.remove("disabled");
+        boton.classList.add("primary");
+        boton.textContent = "Leer ahora";
+        
+        // Convertir en enlace
+        const enlace = document.createElement("a");
+        enlace.href = "leer_004_ecos_de_otra_vida.html";
+        enlace.className = boton.className;
+        enlace.textContent = boton.textContent;
+
+        boton.parentNode.replaceChild(enlace, boton);
+
+        // Imagen
+        const imagenContainer = document.querySelector(".cta-free .cta-image");
+        imagenContainer.classList.remove("disabled");
+
+        const img = imagenContainer.querySelector("img");
+
+        const enlaceImg = document.createElement("a");
+        enlaceImg.href = "leer_004_ecos_de_otra_vida.html";
+        enlaceImg.appendChild(img);
+
+        imagenContainer.appendChild(enlaceImg);
+    }
+});
+</script>
+
+
+
+
+
 </body>
 </html>
 
