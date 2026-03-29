@@ -439,43 +439,84 @@
 	</section>
 
 
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const fechaActual = new Date();
-    const fechaActivacion = new Date("2026-04-01");
+    const fechaActivacion = new Date("2026-04-01T00:00:00");
 
     if (fechaActual >= fechaActivacion) {
-        // Botón
-        const boton = document.querySelector(".cta-free .cta-button");
-        boton.classList.remove("disabled");
-        boton.classList.add("primary");
-        boton.textContent = "Leer ahora";
-        
-        // Convertir en enlace
-        const enlace = document.createElement("a");
-        enlace.href = "leer_004_ecos_de_otra_vida.html";
-        enlace.className = boton.className;
-        enlace.textContent = boton.textContent;
 
-        boton.parentNode.replaceChild(enlace, boton);
+        /* ===== CABECERA CTA ===== */
+        const tituloCTA = document.querySelector(".cta-relato h3");
+        if (tituloCTA) {
+            tituloCTA.textContent = "Lee o descarga gratis el relato";
+        }
 
-        // Imagen
-        const imagenContainer = document.querySelector(".cta-free .cta-image");
-        imagenContainer.classList.remove("disabled");
+        const introCTA = document.querySelector(".cta-intro");
+        if (introCTA) {
+            introCTA.textContent = "Puedes leer Ecos de otra vida directamente desde la web o descargarlo en PDF sin coste. Si quieres apoyar al autor, también está disponible en Amazon.";
+        }
 
-        const img = imagenContainer.querySelector("img");
+        /* ===== TARJETA GRATUITA ===== */
+        const cardFree = document.querySelector(".cta-free");
+        if (cardFree) {
 
-        const enlaceImg = document.createElement("a");
-        enlaceImg.href = "leer_004_ecos_de_otra_vida.html";
-        enlaceImg.appendChild(img);
+            const titulo = cardFree.querySelector("h4");
+            const descripcion = cardFree.querySelector("p");
 
-        imagenContainer.appendChild(enlaceImg);
+            if (titulo) titulo.textContent = "Opción gratuita";
+            if (descripcion) descripcion.textContent = "Accede al relato completo y descarga el PDF.";
+
+            const nota = cardFree.querySelector(".cta-note");
+            if (nota) nota.remove();
+
+            const boton = cardFree.querySelector(".cta-button");
+            if (boton) {
+                boton.classList.remove("disabled");
+                boton.textContent = "Leer o descargar gratis";
+
+                const enlace = document.createElement("a");
+                enlace.href = "leer_004_ecos_de_otra_vida.html";
+                enlace.className = boton.className;
+                enlace.textContent = boton.textContent;
+
+                boton.parentNode.replaceChild(enlace, boton);
+            }
+
+            const imagenContainer = cardFree.querySelector(".cta-image");
+            if (imagenContainer) {
+                imagenContainer.classList.remove("disabled");
+
+                const img = imagenContainer.querySelector("img");
+                if (img) {
+                    const enlaceImg = document.createElement("a");
+                    enlaceImg.href = "leer_004_ecos_de_otra_vida.html";
+                    enlaceImg.appendChild(img);
+
+                    imagenContainer.innerHTML = "";
+                    imagenContainer.appendChild(enlaceImg);
+
+                    img.alt = "Leer o descargar gratis Ecos de otra vida en web y PDF";
+                }
+            }
+        }
+
+        /* ===== TARJETA AMAZON ===== */
+        const cardBuy = document.querySelector(".cta-buy");
+        if (cardBuy) {
+
+            const descripcionBuy = cardBuy.querySelector("p");
+            if (descripcionBuy) {
+                descripcionBuy.textContent = "También puedes comprar el relato en Amazon.";
+            }
+
+            const notaBuy = cardBuy.querySelector(".cta-note");
+            if (notaBuy) notaBuy.remove();
+        }
     }
 });
 </script>
-
-
-
 
 
 </body>
