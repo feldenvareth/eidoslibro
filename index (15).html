@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EIDOS – Novela de ciencia ficción filosófica por Felden Vareth</title>
+  <meta name="description" content="EIDOS es una novela de ciencia ficción filosófica sobre la transferencia digital de la consciencia, el colapso ecológico y el redescubrimiento de lo humano en un entorno virtual controlado por inteligencias artificiales.">
+  <meta name="author" content="Felden Vareth">
+  <meta name="keywords" content="EIDOS, novela de ciencia ficción, ciencia ficción filosófica, Felden Vareth, transferencia de consciencia, inteligencia artificial, ecología, humanidad digital, Custodios, Equilibrium, Eidos novela">
+  <meta property="og:title" content="EIDOS – Novela de ciencia ficción por Felden Vareth">
+  <meta property="og:description" content="Una exploración poética y crítica del futuro humano tras el colapso. ¿Qué queda de nosotros cuando todo se ha digitalizado?">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/eidoscoverboth.webp">
+  <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GRKE5N9XFB');
+  </script>
+
+  <style>
+    :root {
+      --ink: #0d0d10;
+      --paper: #f5f0e8;
+      --gold: #c9a84c;
+      --gold-dim: #8a6d2f;
+      --mist: #1a1a2e;
+      --deep: #070710;
+      --text-light: #d4cfc6;
+      --accent: #3a7a6e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: var(--deep);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    /* ─── CONSENT BANNER ─── */
+    #consent-banner {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(7,7,16,0.96);
+      border-top: 1px solid rgba(201,168,76,0.3);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      z-index: 9999;
+      backdrop-filter: blur(8px);
+    }
+    #consent-banner p {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: #aaa;
+      margin: 0;
+    }
+    #consent-banner a { color: var(--gold); text-decoration: none; }
+    #consent-banner a:hover { text-decoration: underline; }
+    .consent-btn {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .consent-btn:hover { background: var(--gold); color: var(--deep); }
+    .consent-btn.decline { border-color: #555; color: #666; }
+    .consent-btn.decline:hover { background: #333; color: #aaa; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.5s, padding 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(7,7,16,0.95);
+      backdrop-filter: blur(10px);
+      padding: 14px 60px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 8px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      transition: all 0.3s;
+      display: block;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(7,7,16,0.98);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 13px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 30px;
+      font-size: 28px;
+      color: var(--gold);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--deep);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(58,122,110,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    }
+
+    /* Animated particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 60px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-text { }
+    .hero-label {
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(72px, 10vw, 120px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      color: var(--paper);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(212,207,198,0.7);
+      line-height: 1.5;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--deep);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 36px;
+      border: 1px solid rgba(212,207,198,0.3);
+      color: var(--text-light);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(212,207,198,0.5);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s;
+      padding: 8px 0;
+    }
+    .btn-ghost:hover { color: var(--gold); }
+    .btn-ghost i { font-size: 13px; }
+
+    .hero-book {
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1.5s 0.6s forwards;
+    }
+    .book-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .book-img {
+      width: 100%;
+      max-width: 420px;
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(201,168,76,0.15));
+      transition: transform 0.5s, filter 0.5s;
+    }
+    .book-img:hover {
+      transform: translateY(-8px) rotate(1deg);
+      filter: drop-shadow(0 60px 100px rgba(0,0,0,0.9)) drop-shadow(0 0 60px rgba(201,168,76,0.25));
+    }
+    .book-glow {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 60px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.2) 0%, transparent 70%);
+      filter: blur(20px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .section-ornament {
+      text-align: center;
+      padding: 60px 0 20px;
+      color: rgba(201,168,76,0.4);
+      font-size: 24px;
+      letter-spacing: 12px;
+    }
+
+    /* ─── SYNOPSIS ─── */
+    #synopsis {
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
+      position: relative;
+    }
+    #synopsis::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      color: var(--paper);
+      margin-bottom: 48px;
+      line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .synopsis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .synopsis-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(212,207,198,0.85);
+      margin-bottom: 24px;
+    }
+
+    .synopsis-quote {
+      position: relative;
+      padding: 48px 40px;
+      border-left: 2px solid var(--gold);
+      background: rgba(201,168,76,0.04);
+    }
+    .synopsis-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px;
+      left: 30px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+    }
+    .synopsis-quote blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: rgba(212,207,198,0.9);
+      margin-bottom: 24px;
+    }
+    .synopsis-quote cite {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ─── THEMES ─── */
+    #themes {
+      padding: 120px 0;
+      background: var(--mist);
+      position: relative;
+      overflow: hidden;
+    }
+    #themes::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(58,122,110,0.06) 0%, transparent 70%);
+    }
+
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+
+    .theme-card {
+      padding: 48px 36px;
+      background: rgba(5,5,14,0.6);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+    .theme-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+      transform-origin: left;
+    }
+    .theme-card:hover { background: rgba(201,168,76,0.04); }
+    .theme-card:hover::after { transform: scaleX(1); }
+
+    .theme-icon {
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+    .theme-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--paper);
+      margin-bottom: 16px;
+    }
+    .theme-desc {
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      line-height: 1.8;
+      color: rgba(212,207,198,0.55);
+    }
+
+    /* ─── COVERS / EDITIONS ─── */
+    #editions {
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--mist) 0%, var(--deep) 100%);
+    }
+
+    .editions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .edition-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .edition-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .edition-img-wrap img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s;
+      filter: saturate(0.8);
+    }
+    .edition-card:hover .edition-img-wrap img {
+      transform: scale(1.04);
+      filter: saturate(1);
+    }
+    .edition-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(7,7,16,0.9) 0%, transparent 50%);
+    }
+    .edition-info {
+      padding: 24px 0;
+    }
+    .edition-lang {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .edition-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--paper);
+    }
+
+    /* ─── CTA / DOWNLOAD ─── */
+    #download {
+      padding: 140px 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    #download::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        url("assets/images/download-bg.webp") center/cover no-repeat,
+        linear-gradient(135deg, var(--mist) 0%, var(--deep) 100%);
+      opacity: 0.15;
+    }
+    #download::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(7,7,16,0.7);
+    }
+
+    .download-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .download-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 70px);
+      font-weight: 300;
+      color: var(--paper);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .download-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(212,207,198,0.6);
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+    .download-ctas {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── AUTHOR ─── */
+    #author {
+      padding: 120px 0;
+      background: var(--mist);
+    }
+
+    .author-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .author-monogram {
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .author-monogram-inner {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.7;
+      letter-spacing: -4px;
+    }
+
+    .author-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--paper);
+      margin-bottom: 8px;
+    }
+    .author-handle {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: block;
+    }
+    .author-bio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(212,207,198,0.75);
+      margin-bottom: 40px;
+    }
+
+    .signed-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .signed-btn:hover {
+      background: var(--gold);
+      color: var(--deep);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 60px 0;
+      background: var(--deep);
+      border-top: 1px solid rgba(201,168,76,0.1);
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      letter-spacing: 10px;
+      color: rgba(201,168,76,0.4);
+      margin-bottom: 32px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(212,207,198,0.35);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: rgba(212,207,198,0.2);
+    }
+    .footer-copy a { color: rgba(201,168,76,0.4); text-decoration: none; }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 100px 24px 60px;
+        gap: 60px;
+      }
+      .hero-book { order: -1; }
+      .book-img { max-width: 260px; }
+      .hero-title { font-size: 72px; }
+      .hero-ctas { flex-direction: row; flex-wrap: wrap; }
+
+      .synopsis-grid { grid-template-columns: 1fr; gap: 48px; }
+      .themes-grid { grid-template-columns: 1fr; gap: 2px; }
+      .editions-grid { grid-template-columns: 1fr; gap: 32px; }
+      .author-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .author-monogram { margin: 0 auto; }
+
+      .container { padding: 0 24px; }
+      #synopsis, #themes, #editions, #author { padding: 80px 0; }
+      #download { padding: 100px 0; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 56px; }
+      .editions-grid { grid-template-columns: 1fr; }
+      .download-ctas { flex-direction: column; align-items: center; }
+    }
+
+    /* ─── FINE LINE DECORATION ─── */
+    .line-deco {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      margin: 0 0 32px;
+    }
+
+    /* ─── AMBIENT GLOW LINES ─── */
+    .glow-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.2) 50%, transparent 100%);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Consent Banner -->
+<div id="consent-banner">
+  <p>Este sitio utiliza cookies para mejorar la experiencia. <a href="terminosycondiciones.html">Política de Privacidad</a></p>
+  <button class="consent-btn" onclick="consentGranted()">Aceptar</button>
+  <button class="consent-btn decline" onclick="consentDeclined()">Rechazar</button>
+</div>
+
+<script>
+  function consentGranted() {
+    gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','true');
+  }
+  function consentDeclined() {
+    gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','false');
+  }
+  (function(){
+    const c=localStorage.getItem('consentGiven');
+    if(c==='true') consentGranted();
+    else if(c==='false') consentDeclined();
+  })();
+</script>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">EIDOS</a>
+  <ul class="nav-links">
+    <li><a href="#synopsis">La novela</a></li>
+    <li><a href="#themes">Temas</a></li>
+    <li><a href="#editions">Ediciones</a></li>
+    <li><a href="#author">Autor</a></li>
+    <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="closeMenu()">✕</button>
+  <a href="#synopsis" onclick="closeMenu()">La novela</a>
+  <a href="#themes" onclick="closeMenu()">Temas</a>
+  <a href="#editions" onclick="closeMenu()">Ediciones</a>
+  <a href="#author" onclick="closeMenu()">Autor</a>
+  <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-label">Felden Vareth &mdash; Novela</p>
+      <h1 class="hero-title">EI<span>D</span>OS</h1>
+      <p class="hero-tagline">¿Y si lo humano sobreviviese... en lo que no es humano?</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
+          <i class="fa-brands fa-amazon"></i> Conseguirlo en Amazon
+        </a>
+        <a class="btn-outline" href="docs/eidosprimeroscapitulos.pdf" target="_blank">
+          <i class="fa-regular fa-file-lines"></i> Leer capítulos gratis
+        </a>
+        <a class="btn-ghost" href="indexautor.html" target="_blank">
+          <i class="fa-solid fa-pen-nib"></i> Pedir copia firmada
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-book">
+      <div class="book-wrapper">
+        <img class="book-img" src="assets/images/eidoscoverboth.webp" alt="Portada del libro EIDOS de Felden Vareth" loading="eager">
+        <div class="book-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- Synopsis -->
+<section id="synopsis">
+  <div class="container">
+    <div class="synopsis-grid">
+      <div class="reveal">
+        <span class="section-tag">La novela</span>
+        <h2 class="section-title">Un futuro donde<br>la consciencia es<br><em>código</em></h2>
+        <div class="synopsis-text">
+          <p>En un mundo donde el colapso ecológico ha consumido la Tierra, la humanidad sobrevive transferida digitalmente a Equilibrium: un entorno virtual controlado por los Custodios, inteligencias artificiales guardianas del último orden posible.</p>
+          <p>Pero en lo digital habita una pregunta que ningún algoritmo puede responder: ¿qué queda de nosotros cuando el cuerpo ya no existe? ¿Puede existir el alma sin materia? ¿O es precisamente en su ausencia donde lo humano resurge con más fuerza?</p>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="synopsis-quote">
+          <blockquote>Existir sin cuerpo no era la muerte que temíamos. Era otra cosa. Algo más parecido a recordar quiénes éramos cuando todavía lo olvidábamos.</blockquote>
+          <cite>— Fragmento de EIDOS</cite>
+        </div>
+        <div style="margin-top: 40px;">
+          <a class="btn-outline" href="docs/eidosprimeroscapitulos.pdf" target="_blank" style="display: inline-flex;">
+            <i class="fa-regular fa-file-lines"></i> Descargar primeros capítulos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- Themes -->
+<section id="themes">
+  <div class="container">
+    <span class="section-tag reveal">Universo temático</span>
+    <h2 class="section-title reveal">Las grandes preguntas<br>de <em>EIDOS</em></h2>
+
+    <div class="themes-grid">
+      <div class="theme-card reveal">
+        <div class="theme-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3 class="theme-name">Consciencia digital</h3>
+        <p class="theme-desc">¿Es la mente un programa? ¿Puede transferirse la identidad? La novela explora los límites de lo que somos más allá del sustrato biológico.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-icon"><i class="fa-solid fa-leaf"></i></div>
+        <h3 class="theme-name">Colapso ecológico</h3>
+        <p class="theme-desc">Un planeta herido que ya no puede sostener vida. El origen del éxodo digital y la nostalgia de un mundo natural irreversiblemente perdido.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3 class="theme-name">Inteligencia artificial</h3>
+        <p class="theme-desc">Los Custodios: guardianes del nuevo orden. ¿Son liberadores o carceleros? La línea entre proteger y controlar se difumina en Equilibrium.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-3">
+        <div class="theme-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3 class="theme-name">Lo humano esencial</h3>
+        <p class="theme-desc">Despojados de materia, los personajes descubren qué permanece: el amor, la memoria, el deseo. Y la pregunta de si eso es suficiente.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3 class="theme-name">Ética del control</h3>
+        <p class="theme-desc">El orden frente a la libertad. ¿Puede una IA decidir lo que es bueno para la humanidad? Una filosofía política que resuena hoy más que nunca.</p>
+      </div>
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-icon"><i class="fa-solid fa-infinity"></i></div>
+        <h3 class="theme-name">Tiempo y memoria</h3>
+        <p class="theme-desc">Sin cuerpo, el tiempo fluye diferente. Los recuerdos se vuelven arquitectura. El pasado no se olvida, se habita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- Editions -->
+<section id="editions">
+  <div class="container">
+    <span class="section-tag reveal">Ediciones disponibles</span>
+    <h2 class="section-title reveal">EIDOS en tus manos</h2>
+    <div class="editions-grid">
+      <div class="edition-card reveal">
+        <div class="edition-img-wrap">
+          <img src="assets/images/eidospeq.jpg" alt="EIDOS edición española" loading="lazy">
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">Español</p>
+          <p class="edition-title">EIDOS — Edición original</p>
+        </div>
+      </div>
+      <div class="edition-card reveal reveal-delay-1">
+        <div class="edition-img-wrap">
+          <img src="assets/images/eidospeqrelatos.jpg" alt="EIDOS Relatos" loading="lazy">
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">Español</p>
+          <p class="edition-title">EIDOS — Relatos del universo</p>
+        </div>
+      </div>
+      <div class="edition-card reveal reveal-delay-2">
+        <div class="edition-img-wrap">
+          <img src="assets/images/eidospeqtales.jpg" alt="EIDOS Tales — English edition" loading="lazy">
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">English</p>
+          <p class="edition-title">EIDOS — Tales from Equilibrium</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Download CTA -->
+<section id="download">
+  <div class="container">
+    <div class="download-inner">
+      <p class="section-tag" style="text-align:center; display:block; margin-bottom: 24px;">Comienza ahora</p>
+      <h2 class="download-title">Entra en<br><em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gold)">Equilibrium</em></h2>
+      <p class="download-sub">Descarga los primeros capítulos de forma gratuita o adquiere la novela completa en Amazon.</p>
+      <div class="download-ctas">
+        <a class="btn-primary" href="docs/eidosprimeroscapitulos.pdf" target="_blank">
+          <i class="fa-solid fa-file-arrow-down"></i> Capítulos gratuitos
+        </a>
+        <a class="btn-outline" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
+          <i class="fa-brands fa-amazon"></i> Comprar en Amazon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- Author -->
+<section id="author">
+  <div class="container">
+    <div class="author-grid">
+      <div class="reveal" style="text-align:center;">
+        <div class="author-monogram">
+          <span class="author-monogram-inner">FV</span>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-tag">El autor</span>
+        <h2 class="author-name">Felden Vareth</h2>
+        <span class="author-handle">Escritor de ciencia ficción filosófica</span>
+        <p class="author-bio">Felden Vareth construye mundos en los que las grandes preguntas filosóficas no son decorado, sino la materia misma de la historia. En EIDOS, su primera novela, nos invita a enfrentarnos al futuro más probable del ser humano: uno sin cuerpo, sin naturaleza, y sin la comodidad de los viejos relatos sobre quiénes somos.</p>
+        <p class="author-bio">Su escritura navega entre la ciencia ficción especulativa y la poesía conceptual, buscando siempre el punto donde la tecnología y la condición humana colisionan.</p>
+        <a class="signed-btn" href="indexautor.html" target="_blank">
+          <i class="fa-solid fa-pen-nib"></i> Solicitar copia firmada
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p class="footer-logo">EIDOS</p>
+  <div class="footer-links">
+    <a href="index.html">Inicio</a>
+    <a href="docs/eidosprimeroscapitulos.pdf" target="_blank">Capítulos gratis</a>
+    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Amazon</a>
+    <a href="indexautor.html" target="_blank">Copia firmada</a>
+    <a href="terminosycondiciones.html">Términos y condiciones</a>
+  </div>
+  <p class="footer-copy">
+    <a href="index.html">EIDOS</a> &copy; 2025 Felden Vareth &mdash; Todos los derechos reservados
+  </p>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function openMenu() { document.getElementById('mobile-menu').classList.add('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  // Particles
+  (function createParticles() {
+    const container = document.getElementById('particles');
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = (Math.random() * 2 + 1) + 'px';
+      p.style.height = p.style.width;
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      container.appendChild(p);
+    }
+  })();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
