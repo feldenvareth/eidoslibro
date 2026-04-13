@@ -91,9 +91,9 @@ nav.s{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--rule);padding:14
 .icf:hover img,.ic:hover img{transform:scale(1.05);filter:brightness(.62) saturate(1.05)}
 .iov{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.93) 0%,rgba(5,5,5,.03) 55%)}
 .icc{position:absolute;bottom:0;left:0;right:0;padding:22px 20px}
-.icat{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gl);margin-bottom:6px}
-.iname{font-family:'EB Garamond',serif;font-size:22px;color:#fff;line-height:1.2;margin-bottom:6px}
-.icf .iname{font-size:34px}
+.icat{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gl);margin-bottom:10px;opacity:.85}
+.iname{font-family:'EB Garamond',serif;font-size:28px;color:#fff;line-height:1.15;margin-bottom:8px;font-weight:300;letter-spacing:.02em}
+.icf .iname{font-size:44px;font-weight:300;letter-spacing:.01em}
 .iq{font-family:'EB Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .icf .iq{-webkit-line-clamp:3;font-size:17px}
 .praise{background:var(--gp);border-top:1px solid rgba(181,133,74,.14);padding:80px 64px}
@@ -139,20 +139,70 @@ footer{background:#0b0b0b;padding:26px 64px;display:flex;justify-content:space-b
 .fsoc a{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.24);text-decoration:none;transition:color .2s}
 .fsoc a:hover{color:var(--gl)}
 @keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* ── TABLET (≤1024px) ── */
+@media(max-width:1024px){
+  .bg{grid-template-columns:repeat(4,1fr)}
+  .ig{grid-template-columns:1fr 1fr}.icf{grid-row:span 2}
+  .foco-content{gap:40px;padding:52px 40px}
+  .about,.gallery,.iw,.books,.praise,.contact{padding:72px 40px}
+}
+/* ── MOBILE LANDSCAPE + SMALL TABLET (≤960px) ── */
 @media(max-width:960px){
   .h-btxt-main{font-size:11px;letter-spacing:.12em}
   .h-btxt-sub{font-size:10px;letter-spacing:.18em}
   .h-badge{padding:8px 14px;gap:8px;max-width:85%;bottom:16px;left:16px}
   nav{padding:18px 20px}nav.s{padding:12px 20px}.nr{display:none}
-  .hero{grid-template-columns:1fr;min-height:auto}.h-photo{height:62vw;min-height:280px}.h-right{padding:44px 20px 56px}
-  .about{padding:68px 20px}
-  .foco-content{grid-template-columns:1fr;gap:40px;padding:52px 20px}
-  .gallery,.iw,.books,.praise,.contact{padding:68px 20px}
-  .gal-grid{grid-template-columns:1fr;grid-template-rows:auto}.gp.tall{grid-row:span 1;height:220px}.gp{height:220px}
-  .ig{grid-template-columns:1fr}.icf{grid-row:span 1;min-height:auto}.ic{height:200px}
-  .bg{grid-template-columns:repeat(3,1fr);gap:12px}.pqg{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .h-photo{height:56vw;min-height:260px}
+  .h-right{padding:40px 24px 52px}
+  .h-name{font-size:clamp(3rem,10vw,5rem)}
+  .about{padding:60px 24px}
+  .foco-content{grid-template-columns:1fr;gap:36px;padding:48px 24px}
+  .gallery,.iw,.books,.praise,.contact{padding:60px 24px}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gp.tall{grid-row:span 1;height:200px}.gp{height:200px}
+  .ig{grid-template-columns:1fr 1fr}.icf{grid-row:span 2;min-height:400px}.ic{height:200px}
+  .bg{grid-template-columns:repeat(3,1fr);gap:14px}
+  .book3d{width:100px;height:150px}.book3d-cover{width:100px;height:150px}
+  .book3d-spine{width:14px;height:150px;left:-14px}
+  .book3d-shadow{width:120px}
+  .pqg{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   footer{padding:20px;flex-direction:column;gap:12px}
+  .cfr{grid-template-columns:1fr}
+}
+/* ── MOBILE (≤600px) ── */
+@media(max-width:600px){
+  .h-btxt-main{font-size:10px;letter-spacing:.1em}
+  .h-badge{max-width:90%;bottom:14px;left:12px;padding:7px 12px}
+  .h-photo{height:70vw;min-height:220px}
+  .h-right{padding:32px 16px 44px}
+  .h-name{font-size:clamp(2.8rem,12vw,4rem)}
+  .h-role{font-size:20px}
+  .sh{font-size:clamp(28px,7vw,40px)}
+  .about,.gallery,.iw,.books,.praise,.contact{padding:48px 16px}
+  .foco-content{padding:40px 16px}
+  .gal-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .gp,.gp.tall{grid-row:span 1;height:56vw}
+  .ig{grid-template-columns:1fr}.icf{grid-row:span 1;min-height:auto;height:64vw}.ic{height:52vw}
+  .bg{grid-template-columns:repeat(2,1fr);gap:20px 12px}
+  .book3d{width:90px;height:135px}.book3d-cover{width:90px;height:135px}
+  .book3d-spine{width:12px;height:135px;left:-12px}
+  .stats{grid-template-columns:1fr 1fr}.stat{padding:24px 12px}
+  .stat-n{font-size:38px}
+  .iw-hd{flex-direction:column;align-items:flex-start;gap:12px}
+  .bhd{flex-direction:column;gap:12px}
+  nav{padding:14px 16px}
+  footer{padding:16px}
+  .cfr{grid-template-columns:1fr}
+}
+/* ── SMALL MOBILE (≤380px) ── */
+@media(max-width:380px){
+  .bg{grid-template-columns:repeat(2,1fr);gap:16px 8px}
+  .book3d{width:80px;height:120px}.book3d-cover{width:80px;height:120px}
+  .book3d-spine{width:10px;height:120px;left:-10px}
+  .h-name{font-size:clamp(2.4rem,13vw,3.4rem)}
+  .stat-n{font-size:32px}
 }
 </style>
 </head>
@@ -267,7 +317,7 @@ footer{background:#0b0b0b;padding:26px 64px;display:flex;justify-content:space-b
 
 <section class="iw" id="entrevistas">
   <div class="iw-hd reveal">
-    <div><p class="sey">Ha entrevistado a</p><h2 class="sh">Entrevistas<br><em>destacadas</em></h2></div>
+    <div><h2 class="sh" style="white-space:nowrap">Ha entrevistado <em>a</em></h2></div>
     <a href="https://okdiario.com/autor/maria-zabay/" target="_blank">Ver todas →</a>
   </div>
   <div class="ig">
