@@ -1435,6 +1435,197 @@
 }
 
 
+/* ─── MENTIONS ─── */
+#mentions {
+  padding: 90px 0;
+  background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
+  position: relative;
+}
+
+#mentions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+}
+
+.mentions-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 30px 0 20px;
+}
+
+.mentions-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mentions-filter {
+  appearance: none;
+  border: 1px solid rgba(201,168,76,0.18);
+  background: rgba(5,5,14,0.35);
+  color: rgba(212,207,198,0.68);
+  padding: 8px 12px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.mentions-filter:hover {
+  border-color: rgba(201,168,76,0.36);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.mentions-filter.is-active {
+  background: rgba(201,168,76,0.07);
+  border-color: rgba(201,168,76,0.42);
+  color: var(--gold);
+  box-shadow: 0 0 16px rgba(201,168,76,0.05);
+}
+
+.mentions-status {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(212,207,198,0.46);
+  margin-bottom: 26px;
+}
+
+.mentions-status strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.mentions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.mention-card {
+  display: block;
+  text-decoration: none;
+  padding: 18px 16px;
+  background: rgba(5,5,14,0.35);
+  border: 1px solid rgba(201,168,76,0.12);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.18),
+    0 0 0 1px rgba(201,168,76,0.02) inset;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.2s ease;
+}
+
+.mention-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.04);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.28),
+    0 0 18px rgba(201,168,76,0.05);
+}
+
+.mention-kicker {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.mention-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--paper);
+  margin-bottom: 8px;
+}
+
+.mention-meta {
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+  color: rgba(212,207,198,0.52);
+}
+
+.mention-card.is-hidden {
+  display: none;
+}
+
+.mention-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(212,207,198,0.5);
+}
+
+.mention-meta i {
+  font-size: 12px;
+  color: rgba(201,168,76,0.7);
+  transition: color 0.3s ease;
+}
+
+.mention-card:hover .mention-meta i {
+  color: var(--gold);
+}
+
+.mention-card:hover .mention-meta {
+  color: rgba(212,207,198,0.75);
+}
+
+.mention-meta span {
+  letter-spacing: 0.5px;
+}
+
+
+
+
+@media (max-width: 1100px) {
+  .mentions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  #mentions {
+    padding: 80px 0;
+  }
+
+  .mentions-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .mention-title {
+    font-size: 20px;
+  }
+
+  .mentions-filter-group {
+    gap: 8px;
+  }
+
+  .mentions-filter {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
 
 
 
@@ -1821,6 +2012,7 @@
     <li><a href="#download">Comienza</a></li>
     <li><a href="#scenes">Escenas</a></li>
     <li><a href="#reviews">Reseñas</a></li>
+    <li><a href="#mentions">Menciones</a></li>
     <li><a href="#author">Autor</a></li>
     <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
   </ul>
@@ -1840,6 +2032,8 @@
   <a href="#download" onclick="closeMenu()">Comienza</a>
   <a href="#scenes" onclick="closeMenu()">Escenas</a>
   <a href="#reviews" onclick="closeMenu()">Reseñas</a>
+  <a href="#mentions" onclick="closeMenu()">Menciones</a>
+  
   <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
 </div>
@@ -2251,7 +2445,7 @@
 </section>
 
 
-
+<div class="glow-line"></div>
 
 
 
@@ -2338,7 +2532,7 @@
 
 
 
-
+<div class="glow-line"></div>
 
 
 
@@ -2718,22 +2912,12 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
   
   
   
-  
-  
-  
-  
-  
 </section>
 
 
 
 
-
-
-
-
-
-
+<div class="glow-line"></div>
 
 
 
@@ -3274,6 +3458,237 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
 
 
 <div class="glow-line"></div>
+
+
+
+<section id="mentions">
+  <div class="container">
+    <span class="section-tag reveal">Menciones</span>
+    <h2 class="section-title reveal">Reseñas y <em>medios</em></h2>
+    <p class="stories-intro reveal">
+      Algunas referencias, reseñas y apariciones de <em>EIDOS</em> y <em>EIDOS Relatos</em>.
+    </p>
+
+    <div class="mentions-filters reveal">
+      <div class="mentions-filter-group">
+        <button class="mentions-filter is-active" data-book="all">Ambos libros</button>
+        <button class="mentions-filter" data-book="eidos">Eidos</button>
+        <button class="mentions-filter" data-book="relatos">Relatos</button>
+      </div>
+
+      <div class="mentions-filter-group">
+        <button class="mentions-filter is-active" data-type="all">Todos</button>
+        <button class="mentions-filter" data-type="res">Reseñas</button>
+        <button class="mentions-filter" data-type="est">Estanterías</button>
+        <button class="mentions-filter" data-type="otr">Otros</button>
+      </div>
+    </div>
+
+    <p id="mentions-status" class="mentions-status reveal">
+      Mostrando: <strong>Ambos libros</strong> · <strong>Todos</strong>
+    </p>
+
+    <div class="mentions-grid reveal">
+
+      <!-- INSTAGRAM -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DVtskMsDeQ1/" target="_blank">
+        <span class="mention-kicker">Reseña · Eidos</span>
+        <h3 class="mention-title">@escritora_esmeralda</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </div>
+      </a>
+
+      <!-- AMAZON -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank">
+        <span class="mention-kicker">Reseñas · Eidos</span>
+        <h3 class="mention-title">Amazon</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-amazon"></i>
+          <span>Opiniones de lectores</span>
+        </div>
+      </a>
+
+      <!-- INSTAGRAM -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DWPF-6sMLpS/" target="_blank">
+        <span class="mention-kicker">Reseña · Eidos</span>
+        <h3 class="mention-title">@adol_books</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </div>
+      </a>
+
+      <!-- YOUTUBE -->
+      <a class="mention-card" data-book="eidos" data-type="otr" href="https://youtu.be/aKgbU9wE-bQ" target="_blank">
+        <span class="mention-kicker">Vídeo · Eidos</span>
+        <h3 class="mention-title">Tráiler</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-youtube"></i>
+          <span>YouTube</span>
+        </div>
+      </a>
+
+      <!-- INSTAGRAM -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DTpuCMzjWNN/" target="_blank">
+        <span class="mention-kicker">Reseña · Eidos</span>
+        <h3 class="mention-title">@legadodeyara_books</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </div>
+      </a>
+
+      <!-- GOODREADS -->
+      <a class="mention-card" data-book="eidos" data-type="est" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank">
+        <span class="mention-kicker">Estantería · Eidos</span>
+        <h3 class="mention-title">Goodreads</h3>
+        <div class="mention-meta">
+          <i class="fa-solid fa-book"></i>
+          <span>Ficha del libro</span>
+        </div>
+      </a>
+
+      <!-- RELATOS INSTAGRAM -->
+      <a class="mention-card" data-book="relatos" data-type="res" href="https://www.instagram.com/p/DUS1TGxDHV4/" target="_blank">
+        <span class="mention-kicker">Reseña · Relatos</span>
+        <h3 class="mention-title">@erikka_books</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </div>
+      </a>
+
+      <!-- INSTAGRAM -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DVAyJirjdTW/" target="_blank">
+        <span class="mention-kicker">Reseña · Eidos</span>
+        <h3 class="mention-title">@el_vicio_de_leer</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram</span>
+        </div>
+      </a>
+
+      <!-- PDF -->
+      <a class="mention-card" data-book="eidos" data-type="otr" href="docs/dossierprensa.pdf" target="_blank">
+        <span class="mention-kicker">Material · Eidos</span>
+        <h3 class="mention-title">Dosier de prensa</h3>
+        <div class="mention-meta">
+          <i class="fa-regular fa-file-lines"></i>
+          <span>PDF</span>
+        </div>
+      </a>
+
+      <!-- ARTÍCULO -->
+      <a class="mention-card" data-book="eidos" data-type="res" href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank">
+        <span class="mention-kicker">Artículo · Eidos</span>
+        <h3 class="mention-title">Detour</h3>
+        <div class="mention-meta">
+          <i class="fa-solid fa-globe"></i>
+          <span>Entrevista</span>
+        </div>
+      </a>
+
+      <!-- YOUTUBE RELATOS -->
+      <a class="mention-card" data-book="relatos" data-type="otr" href="https://youtu.be/1qu0agW0v_Q?" target="_blank">
+        <span class="mention-kicker">Vídeo · Relatos</span>
+        <h3 class="mention-title">Teaser</h3>
+        <div class="mention-meta">
+          <i class="fa-brands fa-youtube"></i>
+          <span>YouTube</span>
+        </div>
+      </a>
+
+      <!-- GOODREADS RELATOS -->
+      <a class="mention-card" data-book="relatos" data-type="est" href="https://www.goodreads.com/book/show/245427075-eidos-relatos" target="_blank">
+        <span class="mention-kicker">Estantería · Relatos</span>
+        <h3 class="mention-title">Goodreads</h3>
+        <div class="mention-meta">
+          <i class="fa-solid fa-book"></i>
+          <span>Ficha del libro</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>  
+  
+  <script>
+(function () {
+  let activeBook = 'all';
+  let activeType = 'all';
+
+  const cards = Array.from(document.querySelectorAll('.mention-card'));
+  const status = document.getElementById('mentions-status');
+  const filterButtons = Array.from(document.querySelectorAll('.mentions-filter'));
+
+  const labels = {
+    book: {
+      all: 'Ambos libros',
+      eidos: 'Eidos',
+      relatos: 'Eidos Relatos'
+    },
+    type: {
+      all: 'Todos',
+      res: 'Reseñas y artículos',
+      est: 'Estanterías',
+      otr: 'Otros'
+    }
+  };
+
+  function updateStatus() {
+    status.innerHTML = `Mostrando: <strong>${labels.book[activeBook]}</strong> · <strong>${labels.type[activeType]}</strong>`;
+  }
+
+  function applyFilters() {
+    cards.forEach(card => {
+      const cardBook = card.getAttribute('data-book');
+      const cardType = card.getAttribute('data-type');
+
+      const matchesBook = activeBook === 'all' || cardBook === activeBook;
+      const matchesType = activeType === 'all' || cardType === activeType;
+
+      card.classList.toggle('is-hidden', !(matchesBook && matchesType));
+    });
+
+    updateStatus();
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const group = this.parentElement;
+      group.querySelectorAll('.mentions-filter').forEach(btn => btn.classList.remove('is-active'));
+      this.classList.add('is-active');
+
+      if (this.dataset.book) {
+        activeBook = this.dataset.book;
+      }
+
+      if (this.dataset.type) {
+        activeType = this.dataset.type;
+      }
+
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+})();
+</script>
+  
+  
+  
+  
+</section>
+
+
+<div class="glow-line"></div>
+
+
+
+
+
 
 
 <section id="author">
