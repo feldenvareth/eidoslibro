@@ -3,19 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EIDOS – Novela de ciencia ficción filosófica por Felden Vareth</title>
-  <meta name="description" content="EIDOS es una novela de ciencia ficción filosófica sobre la transferencia digital de la consciencia, el colapso ecológico y el redescubrimiento de lo humano en un entorno virtual controlado por inteligencias artificiales.">
+
+  <title>EIDOS | Novela de ciencia ficción filosófica de Felden Vareth</title>
+  <meta name="description" content="EIDOS, novela de ciencia ficción filosófica de Felden Vareth. Una historia sobre transferencia digital de la consciencia, colapso ecológico, inteligencia artificial e identidad humana.">
   <meta name="author" content="Felden Vareth">
-  <meta name="keywords" content="EIDOS, novela de ciencia ficción, ciencia ficción filosófica, Felden Vareth, transferencia de consciencia, inteligencia artificial, ecología, humanidad digital, Custodios, Equilibrium, Eidos novela">
-  <meta property="og:title" content="EIDOS – Novela de ciencia ficción por Felden Vareth">
-  <meta property="og:description" content="Una exploración poética y crítica del futuro humano tras el colapso. ¿Qué queda de nosotros cuando todo se ha digitalizado?">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#0b1020">
+
+  <link rel="canonical" href="https://www.eidoslibro.com/">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.ico">
+
+  <meta property="og:locale" content="es_ES">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/images/eidoscoverboth.webp">
-  <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+  <meta property="og:site_name" content="EIDOS">
+  <meta property="og:title" content="EIDOS | Novela de ciencia ficción filosófica de Felden Vareth">
+  <meta property="og:description" content="Una novela sobre consciencia digital, inteligencia artificial, colapso ecológico y la pregunta por lo humano.">
+  <meta property="og:url" content="https://www.eidoslibro.com/">
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+  <meta property="og:image:alt" content="Portada de la novela EIDOS de Felden Vareth">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EIDOS | Novela de ciencia ficción filosófica de Felden Vareth">
+  <meta name="twitter:description" content="Consciencia digital, colapso ecológico e identidad humana en la novela EIDOS.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "EIDOS",
+    "url": "https://www.eidoslibro.com/",
+    "inLanguage": "es"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "EIDOS",
+    "author": {
+      "@type": "Person",
+      "name": "Felden Vareth"
+    },
+    "url": "https://www.eidoslibro.com/",
+    "image": "https://www.eidoslibro.com/assets/images/img_v2.jpg",
+    "inLanguage": "es",
+    "genre": [
+      "Ciencia ficción",
+      "Ciencia ficción filosófica"
+    ],
+    "description": "Novela de ciencia ficción filosófica sobre la transferencia digital de la consciencia, el colapso ecológico y el redescubrimiento de lo humano en un entorno virtual.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EIDOS"
+    }
+  }
+  </script>
 
   <!-- Google tag (gtag.js) -->
   <script>
@@ -35,7 +85,6 @@
     gtag('js', new Date());
     gtag('config', 'G-GRKE5N9XFB');
   </script>
-
   <style>
     :root {
       --ink: #0d0d10;
@@ -142,31 +191,58 @@
     .nav-links a:hover { color: var(--gold); }
 
     /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      width: 24px;
-      height: 1px;
-      background: var(--gold);
-      transition: all 0.3s;
-      display: block;
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(7,7,16,0.98);
-      z-index: 99;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-    }
+   .hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+  z-index: 101;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+	
+	.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(7,7,16,0.98);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  padding: 90px 24px 30px;
+  overflow-y: auto;
+}
+	
+	
+	
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
       font-size: 13px;
@@ -177,15 +253,6 @@
       transition: color 0.3s;
     }
     .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close {
-      position: absolute;
-      top: 24px; right: 30px;
-      font-size: 28px;
-      color: var(--gold);
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
 
     /* ─── HERO ─── */
     #hero {
@@ -580,10 +647,40 @@
     }
 
     /* ─── COVERS / EDITIONS ─── */
-    #editions {
-      padding: 120px 0;
-      background: linear-gradient(180deg, var(--mist) 0%, var(--deep) 100%);
-    }
+	
+  #editions {
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  background: none;
+}
+
+#editions::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    url("assets/images/img_v2.jpg") center/cover no-repeat;
+  opacity: 0.18;
+  z-index: 0;
+}
+
+#editions::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7,7,16,0.72);
+  z-index: 1;
+}
+
+#editions .container {
+  position: relative;
+  z-index: 2;
+}
+	
+	
+	
+	
 
 .editions-grid {
   display: grid;
@@ -1714,10 +1811,12 @@
 <!-- Navigation -->
 <nav id="navbar">
   <a class="nav-logo" href="#hero">EIDOS</a>
+
   <ul class="nav-links">
     <li><a href="#synopsis">La novela</a></li>
     <li><a href="#themes">Temas</a></li>
-    <li><a href="#editions">Ediciones</a></li>
+    <li><a href="#video">Vídeo</a></li>
+    <li><a href="#editions">Volúmenes</a></li>
     <li><a href="#stories">Relatos</a></li>
     <li><a href="#download">Comienza</a></li>
     <li><a href="#scenes">Escenas</a></li>
@@ -1725,23 +1824,53 @@
     <li><a href="#author">Autor</a></li>
     <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
   </ul>
-  <div class="hamburger" onclick="openMenu()">
+
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" role="button">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-close" onclick="closeMenu()">✕</button>
   <a href="#synopsis" onclick="closeMenu()">La novela</a>
   <a href="#themes" onclick="closeMenu()">Temas</a>
-  <a href="#editions" onclick="closeMenu()">Ediciones</a>
+  <a href="#video" onclick="closeMenu()">Vídeo</a>
+  <a href="#editions" onclick="closeMenu()">Volúmenes</a>
   <a href="#stories" onclick="closeMenu()">Relatos</a>
+  <a href="#download" onclick="closeMenu()">Comienza</a>
   <a href="#scenes" onclick="closeMenu()">Escenas</a>
-  <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="#reviews" onclick="closeMenu()">Reseñas</a>
+  <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
 </div>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+
+    menu.classList.toggle('open');
+    burger.classList.toggle('active');
+
+    const isOpen = menu.classList.contains('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  function closeMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+
+    menu.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900) {
+      closeMenu();
+    }
+  });
+</script>
 
 <!-- Hero -->
 <section id="hero">
@@ -1821,10 +1950,11 @@
 <p>  Plantea preguntas:</p>
 
 <p>¿Quiénes somos?<br>
-<p>¿Qué nos define como humanos y como especie?<br>
-<p>¿Qué estamos perdiendo de la existencia?<br>
-<p>¿Qué es la vida? ¿Qué nos define? ¿Podemos escapar de nuestra naturaleza o estamos sometidos a ella?<br>
-<p>¿Son nuestros instintos los que condicionan nuestros comportamientos?</p>
+¿Qué nos define como humanos y como especie?<br>
+¿Qué estamos perdiendo de la existencia?<br>
+¿Qué es la vida? <br>
+¿Podemos escapar de nuestra naturaleza o estamos sometidos a ella?<br>
+¿Son nuestros instintos los que condicionan nuestros comportamientos?</p>
         
         
         </div>
@@ -2074,14 +2204,15 @@
 <div class="glow-line"></div>
 
 <!-- Editions -->
+
+
 <section id="editions">
   <div class="container">
-    <span class="section-tag reveal">Ediciones disponibles</span>
+    <span class="section-tag reveal">Volúmenes disponibles</span>
     <h2 class="section-title reveal">EIDOS <em>en tus manos</em></h2>
     <div class="editions-grid">
       <div class="edition-card reveal">
-        <div class="edition-img-wrap">
-          <img src="assets/images/tapa.jpg" alt="EIDOS edición española" loading="lazy">
+        <div class="edition-img-wrap"> <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank"><img src="assets/images/tapa.jpg" alt="EIDOS edición española" loading="lazy"></a>
           <div class="edition-overlay"></div>
         </div>
         <div class="edition-info">
@@ -2090,8 +2221,7 @@
         </div>
       </div>
       <div class="edition-card reveal reveal-delay-1">
-        <div class="edition-img-wrap">
-          <img src="assets/images/taparelatos.jpg" alt="EIDOS Relatos" loading="lazy">
+        <div class="edition-img-wrap"> <a href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank"><img src="assets/images/taparelatos.jpg" alt="EIDOS Relatos" loading="lazy"></a>
           <div class="edition-overlay"></div>
         </div>
         <div class="edition-info">
