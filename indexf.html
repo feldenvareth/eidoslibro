@@ -177,11 +177,11 @@
     }
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 20px;
       list-style: none;
     }
     .nav-links a {
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--text-light);
@@ -1864,6 +1864,14 @@
       .editions-grid { grid-template-columns: 1fr; gap: 32px; }
       .author-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
       .author-monogram { margin: 0 auto; }
+	  .author-side {
+    position: static;
+  top: auto;
+  align-self: auto;
+  margin-bottom: 8px;
+}
+	  
+	  
 
       .container { padding: 0 24px; }
       #synopsis, #themes, #editions, #author { padding: 80px 0; }
@@ -2005,8 +2013,8 @@
 
   <ul class="nav-links">
     <li><a href="#synopsis">La novela</a></li>
-    <li><a href="#themes">Temas</a></li>
     <li><a href="#video">Vídeo</a></li>
+    <li><a href="#themes">Temas</a></li>
     <li><a href="#editions">Volúmenes</a></li>
     <li><a href="#stories">Relatos</a></li>
     <li><a href="#download">Comienza</a></li>
@@ -2025,8 +2033,8 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="#synopsis" onclick="closeMenu()">La novela</a>
-  <a href="#themes" onclick="closeMenu()">Temas</a>
   <a href="#video" onclick="closeMenu()">Vídeo</a>
+  <a href="#themes" onclick="closeMenu()">Temas</a>
   <a href="#editions" onclick="closeMenu()">Volúmenes</a>
   <a href="#stories" onclick="closeMenu()">Relatos</a>
   <a href="#download" onclick="closeMenu()">Comienza</a>
