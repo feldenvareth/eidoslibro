@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>EIDOS | Novela de ciencia ficción filosófica de Felden Vareth</title>
-  <meta name="description" content="EIDOS, novela de ciencia ficción filosófica de Felden Vareth. Una historia sobre transferencia digital de la consciencia, colapso ecológico, inteligencia artificial e identidad humana.">
+  <meta name="description" content="EIDOS, novela de ciencia ficción sobre la consciencia de Felden Vareth. Una historia sobre transferencia digital de la consciencia, colapso ecológico, inteligencia artificial e identidad humana.">
   <meta name="author" content="Felden Vareth">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="theme-color" content="#0b1020">
@@ -17,14 +17,14 @@
   <meta property="og:locale" content="es_ES">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="EIDOS">
-  <meta property="og:title" content="EIDOS | Novela de ciencia ficción filosófica de Felden Vareth">
+  <meta property="og:title" content="EIDOS | Novela de ciencia ficción sobre la consciencia - Felden Vareth">
   <meta property="og:description" content="Una novela sobre consciencia digital, inteligencia artificial, colapso ecológico y la pregunta por lo humano.">
   <meta property="og:url" content="https://www.eidoslibro.com/">
   <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
   <meta property="og:image:alt" content="Portada de la novela EIDOS de Felden Vareth">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="EIDOS | Novela de ciencia ficción filosófica de Felden Vareth">
+  <meta name="twitter:title" content="EIDOS | Novela de ciencia ficción sobre la consciencia - Felden Vareth">
   <meta name="twitter:description" content="Consciencia digital, colapso ecológico e identidad humana en la novela EIDOS.">
   <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
 
@@ -32,6 +32,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/stylenew.css">
+
 
   <script type="application/ld+json">
   {
@@ -85,2303 +88,9 @@
     gtag('js', new Date());
     gtag('config', 'G-GRKE5N9XFB');
   </script>
-  <style>
-    :root {
-      --ink: #0d0d10;
-      --paper: #f5f0e8;
-      --gold: #c9a84c;
-      --gold-dim: #8a6d2f;
-      --mist: #1a1a2e;
-      --deep: #070710;
-      --text-light: #d4cfc6;
-      --accent: #3a7a6e;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Josefin Sans', sans-serif;
-      background: var(--deep);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
-
-    /* ─── CONSENT BANNER ─── */
-    #consent-banner {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: rgba(7,7,16,0.96);
-      border-top: 1px solid rgba(201,168,76,0.3);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      z-index: 9999;
-      backdrop-filter: blur(8px);
-    }
-    #consent-banner p {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      color: #aaa;
-      margin: 0;
-    }
-    #consent-banner a { color: var(--gold); text-decoration: none; }
-    #consent-banner a:hover { text-decoration: underline; }
-    .consent-btn {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border: 1px solid var(--gold);
-      background: transparent;
-      color: var(--gold);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .consent-btn:hover { background: var(--gold); color: var(--deep); }
-    .consent-btn.decline { border-color: #555; color: #666; }
-    .consent-btn.decline:hover { background: #333; color: #aaa; }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 20px 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.5s, padding 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(7,7,16,0.95);
-      backdrop-filter: blur(10px);
-      padding: 14px 60px;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 300;
-      letter-spacing: 8px;
-      color: var(--gold);
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-	
-	
-	
-	
-
-    /* Hamburger */
-   .hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  padding: 4px;
-  position: relative;
-  z-index: 101;
-}
-
-.hamburger span {
-  width: 24px;
-  height: 1px;
-  background: var(--gold);
-  display: block;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: center;
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-	
-	.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(7,7,16,0.98);
-  z-index: 99;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 30px;
-  padding: 90px 24px 30px;
-  overflow-y: auto;
-}
-	
-	
-	
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 13px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background: var(--deep);
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(58,122,110,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
-    }
-
-    /* Animated particles */
-    .particles {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .particle {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      background: var(--gold);
-      border-radius: 50%;
-      opacity: 0;
-      animation: float-up linear infinite;
-    }
-
-    @keyframes float-up {
-      0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-      10% { opacity: 0.6; }
-      90% { opacity: 0.3; }
-      100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 120px 60px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .hero-text { }
-    .hero-label {
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 24px;
-      opacity: 0;
-      animation: fadeUp 1s 0.3s forwards;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(72px, 10vw, 120px);
-      font-weight: 300;
-      line-height: 0.9;
-      letter-spacing: 0.1em;
-      color: var(--paper);
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 1s 0.5s forwards;
-    }
-    .hero-title span {
-      color: var(--gold);
-      font-style: italic;
-    }
-    .hero-tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 300;
-      font-style: italic;
-      color: rgba(212,207,198,0.7);
-      line-height: 1.5;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 1s 0.7s forwards;
-    }
-    .hero-ctas {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
-      opacity: 0;
-      animation: fadeUp 1s 0.9s forwards;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 36px;
-      background: var(--gold);
-      color: var(--deep);
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.2);
-      transform: translateX(-100%);
-      transition: transform 0.3s;
-    }
-    .btn-primary:hover::before { transform: translateX(0); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
-
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 15px 36px;
-      border: 1px solid rgba(212,207,198,0.3);
-      color: var(--text-light);
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-2px);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(212,207,198,0.5);
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: color 0.3s;
-      padding: 8px 0;
-    }
-    .btn-ghost:hover { color: var(--gold); }
-    .btn-ghost i { font-size: 13px; }
-
-    .hero-book {
-      position: relative;
-      opacity: 0;
-      animation: fadeIn 1.5s 0.6s forwards;
-    }
-    .book-wrapper {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-    .book-img {
-      width: 100%;
-      max-width: 420px;
-      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.8)) drop-shadow(0 0 40px rgba(201,168,76,0.15));
-      transition: transform 0.5s, filter 0.5s;
-    }
-    .book-img:hover {
-      transform: translateY(-8px) rotate(1deg);
-      filter: drop-shadow(0 60px 100px rgba(0,0,0,0.9)) drop-shadow(0 0 60px rgba(201,168,76,0.25));
-    }
-    .book-glow {
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 60px;
-      background: radial-gradient(ellipse, rgba(201,168,76,0.2) 0%, transparent 70%);
-      filter: blur(20px);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* ─── DIVIDER ─── */
-    .divider {
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-    }
-    .section-ornament {
-      text-align: center;
-      padding: 60px 0 20px;
-      color: rgba(201,168,76,0.4);
-      font-size: 24px;
-      letter-spacing: 12px;
-    }
-	
-	    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 60px;
-    }
-
-    .section-tag {
-      font-size: 10px;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-      display: block;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 300;
-      color: var(--paper);
-      margin-bottom: 48px;
-      line-height: 1.1;
-    }
-	
-    .section-title em { font-style: italic; color: var(--gold); }
-
-	
-	
-	
-	
-
-/* ─── SYNOPSIS ─── */
-#synopsis {
-  padding: 120px 0;
-  background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
-  position: relative;
-}
-
-#synopsis::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-}
-
-.synopsis-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-
-.synopsis-text p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: rgba(212,207,198,0.85);
-  margin-bottom: 24px;
-}
-
-.synopsis-side {
-  position: sticky;
-  top: 120px;
-  align-self: start;
-}
-
-.synopsis-quote {
-  position: relative;
-  padding-left: 44px;
-  margin-bottom: 44px;
-}
-
-.synopsis-quote::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 12px;
-  bottom: 12px;
-  width: 2px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--gold),
-    transparent
-  );
-  opacity: 0.8;
-}
-
-.synopsis-quote blockquote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.6;
-  color: rgba(212,207,198,0.9);
-  margin-bottom: 24px;
-}
-
-.synopsis-quote cite {
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-/* ─── SYNOPSIS RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .synopsis-grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-
-  .synopsis-side {
-    position: static;
-    top: auto;
-    align-self: auto;
-  }
-}
-
-
-
-
-    /* ─── THEMES ─── */
-    #themes {
-      padding: 120px 0;
-      background: var(--mist);
-      position: relative;
-      overflow: hidden;
-    }
-    #themes::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(58,122,110,0.06) 0%, transparent 70%);
-    }
-
-    .themes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-    }
-
-    .theme-card {
-      padding: 48px 36px;
-      background: rgba(5,5,14,0.6);
-      position: relative;
-      overflow: hidden;
-      transition: background 0.4s;
-    }
-    .theme-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.4s;
-      transform-origin: left;
-    }
-    .theme-card:hover { background: rgba(201,168,76,0.04); }
-    .theme-card:hover::after { transform: scaleX(1); }
-
-    .theme-icon {
-      font-size: 32px;
-      color: var(--gold);
-      margin-bottom: 24px;
-      opacity: 0.7;
-    }
-    .theme-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 400;
-      color: var(--paper);
-      margin-bottom: 16px;
-    }
-    .theme-desc {
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      line-height: 1.8;
-      color: rgba(212,207,198,0.55);
-    }
-
-    /* ─── COVERS / EDITIONS ─── */
-	
-  #editions {
-  padding: 120px 0;
-  position: relative;
-  overflow: hidden;
-  background: none;
-}
-
-#editions::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    url("assets/images/img_v2.jpg") center/cover no-repeat;
-  opacity: 0.18;
-  z-index: 0;
-}
-
-#editions::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(7,7,16,0.72);
-  z-index: 1;
-}
-
-#editions .container {
-  position: relative;
-  z-index: 2;
-}
-	
-	
-	
-	
-
-.editions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
-  justify-content: center;
-  gap: 40px;
-  margin-top: 60px;
-}
-
-    .edition-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .edition-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-    .edition-img-wrap img {
-      width: 100%;
-      display: block;
-      transition: transform 0.6s;
-      filter: saturate(0.8);
-    }
-    .edition-card:hover .edition-img-wrap img {
-      transform: scale(1.04);
-      filter: saturate(1);
-    }
-    .edition-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(7,7,16,0.9) 0%, transparent 50%);
-    }
-    .edition-info {
-      padding: 24px 0;
-    }
-    .edition-lang {
-      font-size: 10px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .edition-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--paper);
-    }
-
-
-/* ─── STORIES / RELATOS ─── */
-#stories {
-  padding: 120px 0 140px;
-  background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-#stories::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-}
-
-#stories .container {
-  position: relative;
-  z-index: 2;
-}
-
-.stories-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  color: rgba(212,207,198,0.72);
-  margin-bottom: 50px;
-}
-
-.stories-slider-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.stories-viewport {
-  overflow: hidden;
-  width: 100%;
-  padding: 18px 8px 22px;
-}
-
-.stories-track {
-  display: flex;
-  gap: 30px;
-  transition: transform 0.55s ease;
-  will-change: transform;
-}
-
-.story-card {
-  flex: 0 0 calc((100% - 60px) / 3);
-  min-width: calc((100% - 60px) / 3);
-  background: rgba(5,5,14,0.42);
-  border: 1px solid rgba(201,168,76,0.14);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.28),
-    0 0 0 1px rgba(201,168,76,0.03) inset;
-  transition:
-    transform 0.4s ease,
-    border-color 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.4s ease;
-}
-
-.story-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  border-color: rgba(201,168,76,0.34);
-  background: rgba(201,168,76,0.05);
-  box-shadow:
-    0 28px 60px rgba(0,0,0,0.38),
-    0 0 28px rgba(201,168,76,0.10);
-}
-
-.story-card a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.story-image-wrap {
-  aspect-ratio: 333 / 500;
-  overflow: hidden;
-  background: #0a0a12;
-}
-
-.story-image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.7s ease, filter 0.4s ease;
-  filter: saturate(0.95);
-}
-
-.story-card:hover .story-image-wrap img {
-  transform: scale(1.045);
-  filter: saturate(1.05);
-}
-
-.story-meta {
-  padding: 18px 22px 10px;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.story-title {
-  padding: 0 22px 26px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--paper);
-}
-
-.stories-arrow {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-  border: 1px solid rgba(201,168,76,0.30);
-  background: rgba(7,7,16,0.82);
-  color: var(--gold);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 3;
-}
-
-.stories-arrow:hover {
-  background: var(--gold);
-  color: var(--deep);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-
-.stories-arrow:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.stories-arrow:disabled:hover {
-  background: rgba(7,7,16,0.82);
-  color: var(--gold);
-  border-color: rgba(201,168,76,0.30);
-  transform: none;
-}
-
-.stories-footer {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.stories-viewport {
-  overflow: hidden;
-  width: 100%;
-  padding: 18px 8px 22px;
-}
-
-.stories-track {
-  display: flex;
-  gap: 30px;
-  will-change: transform;
-}
-
-
-
-
-
-@media (max-width: 1100px) {
-  .story-card {
-    flex: 0 0 calc((100% - 28px) / 2);
-    min-width: calc((100% - 28px) / 2);
-  }
-
-  .stories-track {
-    gap: 28px;
-  }
-}
-
-@media (max-width: 900px) {
-  #stories {
-    padding: 80px 0 100px;
-  }
-
-  .stories-slider-wrap {
-    gap: 14px;
-  }
-
-  .stories-viewport {
-    padding: 14px 4px 18px;
-  }
-
-  .story-card {
-    flex: 0 0 calc((100% - 20px) / 2);
-    min-width: calc((100% - 20px) / 2);
-  }
-
-  .stories-track {
-    gap: 20px;
-  }
-
-  .stories-arrow {
-    width: 46px;
-    height: 46px;
-    flex-basis: 46px;
-  }
-}
-
-@media (max-width: 600px) {
-  .stories-slider-wrap {
-    display: block;
-  }
-
-  .stories-viewport {
-    padding: 10px 0 16px;
-  }
-
-  .stories-arrow {
-    position: absolute;
-    top: 36%;
-    z-index: 3;
-  }
-
-  .stories-arrow-prev {
-    left: 8px;
-  }
-
-  .stories-arrow-next {
-    right: 8px;
-  }
-
-  .story-card {
-    flex: 0 0 100%;
-    min-width: 100%;
-  }
-
-  .stories-track {
-    gap: 0;
-  }
-
-  .story-title {
-    font-size: 24px;
-  }
-}
-
-
-#download {
-  padding: 140px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-#download::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    url("assets/images/download-bg.webp") center/cover no-repeat,
-    linear-gradient(135deg, var(--mist) 0%, var(--deep) 100%);
-  opacity: 0.15;
-}
-
-#download::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(7,7,16,0.72);
-}
-
-.download-inner {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  text-align: left;
-}
-
-.download-heading {
-  margin-bottom: 28px;
-}
-
-.download-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1.45;
-  color: rgba(212,207,198,0.72);
-  margin-bottom: 46px;
-}
-
-.download-ctas {
-  display: grid;
-  grid-template-columns: repeat(2, max-content);
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 620px;
-  margin: 18px auto 0;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 900px) {
-  #download {
-    padding: 100px 0;
-  }
-
-  .download-intro {
-    font-size: 18px;
-    line-height: 1.45;
-    margin-bottom: 34px;
-  }
-}
-
-@media (max-width: 600px) {
-  .download-intro {
-    font-size: 16px;
-    line-height: 1.4;
-    margin-bottom: 28px;
-  }
-
-  .download-ctas {
-    grid-template-columns: 1fr;
-    justify-content: center;
-    max-width: 320px;
-  }
-
-  .download-ctas a {
-    justify-self: center;
-  }
-}
-
-
-
-
-
-
-
-
-
-    /*  Escenas  */
-#scenes {
-  padding: 120px 0 140px;
-background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-#scenes::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-}
-
-.scenes-slider-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.scenes-viewport {
-  overflow: hidden;
-  width: 100%;
-  padding: 18px 8px 22px;
-}
-
-.scenes-track {
-  display: flex;
-  gap: 30px;
-  will-change: transform;
-}
-
-.scene-card {
-  flex: 0 0 calc((100% - 60px) / 3);
-  min-width: calc((100% - 60px) / 3);
-  background: rgba(5,5,14,0.42);
-  border: 1px solid rgba(201,168,76,0.14);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.28),
-    0 0 0 1px rgba(201,168,76,0.03) inset;
-  transition:
-    transform 0.4s ease,
-    border-color 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.4s ease;
-  overflow: hidden;
-}
-
-.scene-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  border-color: rgba(201,168,76,0.34);
-  background: rgba(201,168,76,0.05);
-  box-shadow:
-    0 28px 60px rgba(0,0,0,0.38),
-    0 0 28px rgba(201,168,76,0.10);
-}
-
-.scene-media {
-  aspect-ratio: 4 / 6.7;
-  overflow: hidden;
-  background: #0a0a12;
-  position: relative;
-}
-
-.scene-media img,
-.scene-video-btn img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.7s ease, filter 0.4s ease;
-  filter: saturate(0.95);
-  cursor: zoom-in;
-}
-
-.scene-card:hover .scene-media img,
-.scene-card:hover .scene-video-btn img {
-  transform: scale(1.045);
-  filter: saturate(1.05);
-}
-
-.scene-meta {
-  padding: 18px 22px 10px;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.scene-title {
-  padding: 0 22px 26px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--paper);
-}
-
-.scene-video-btn {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-}
-
-.scene-play {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  width: 52px;
-  height: 52px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: rgba(0,0,0,.58);
-  color: #fff;
-  font-size: 18px;
-  backdrop-filter: blur(3px);
-}
-
-.scenes-arrow {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 52px;
-  border: 1px solid rgba(201,168,76,0.30);
-  background: rgba(7,7,16,0.82);
-  color: var(--gold);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 3;
-}
-
-.scenes-arrow:hover {
-  background: var(--gold);
-  color: var(--deep);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-
-/* ─── ZOOM OVERLAY ESCENAS ─── */
-.zoom-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(7,7,16,0.92);
-  backdrop-filter: blur(8px);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-
-.zoom-overlay.is-open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.zoom-dialog {
-  width: min(1180px, 100%);
-  max-height: 90vh;
-  background: linear-gradient(180deg, rgba(18,18,30,0.98) 0%, rgba(7,7,16,0.98) 100%);
-  border: 1px solid rgba(201,168,76,0.22);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(201,168,76,0.04) inset;
-  position: relative;
-  overflow: hidden;
-}
-
-.zoom-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(201,168,76,0.35);
-  background: rgba(7,7,16,0.82);
-  color: var(--gold);
-  font-size: 26px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 3;
-  transition: all 0.3s ease;
-}
-
-.zoom-close:hover {
-  background: var(--gold);
-  color: var(--deep);
-}
-
-.zoom-content {
-  display: grid;
-  grid-template-columns: minmax(320px, 1.05fr) minmax(280px, 0.95fr);
-  align-items: stretch;
-  max-height: 90vh;
-}
-
-.zoom-image {
-  margin: 0;
-  background: #05050e;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 0;
-}
-
-.zoom-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 78vh;
-  object-fit: contain;
-  background: #05050e;
-}
-
-.zoom-image figcaption {
-  padding: 18px 24px 20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--paper);
-  border-top: 1px solid rgba(201,168,76,0.12);
-}
-
-.zoom-text {
-  min-width: 0;
-  background: rgba(255,255,255,0.01);
-  border-left: 1px solid rgba(201,168,76,0.12);
-}
-
-.zoom-text-inner {
-  padding: 70px 34px 34px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.zoom-text-inner p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 21px;
-  font-weight: 300;
-  line-height: 1.85;
-  color: rgba(212,207,198,0.82);
-  margin: 0 0 20px;
-}
-
-.zoom-text-inner p:last-child {
-  margin-bottom: 0;
-}
-
-.zoom-text-inner::-webkit-scrollbar {
-  width: 10px;
-}
-
-.zoom-text-inner::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.03);
-}
-
-.zoom-text-inner::-webkit-scrollbar-thumb {
-  background: rgba(201,168,76,0.25);
-}
-
-.zoom-text-inner::-webkit-scrollbar-thumb:hover {
-  background: rgba(201,168,76,0.4);
-}
-
-@media (max-width: 900px) {
-  .zoom-overlay {
-    padding: 20px 12px;
-  }
-
-  .zoom-dialog {
-    max-height: 94vh;
-  }
-
-  .zoom-content {
-    grid-template-columns: 1fr;
-  }
-
-  .zoom-image img {
-    max-height: 46vh;
-  }
-
-  .zoom-image figcaption {
-    font-size: 24px;
-    padding: 16px 18px;
-  }
-
-  .zoom-text {
-    border-left: 0;
-    border-top: 1px solid rgba(201,168,76,0.12);
-  }
-
-  .zoom-text-inner {
-    padding: 22px 18px 24px;
-    max-height: 38vh;
-  }
-
-  .zoom-text-inner p {
-    font-size: 19px;
-    line-height: 1.75;
-  }
-}
-
-
-
-
-
-@media (max-width: 1100px) {
-  .scene-card {
-    flex: 0 0 calc((100% - 28px) / 2);
-    min-width: calc((100% - 28px) / 2);
-  }
-
-  .scenes-track {
-    gap: 28px;
-  }
-}
-
-@media (max-width: 900px) {
-  #scenes {
-    padding: 80px 0 100px;
-  }
-
-  .scenes-slider-wrap {
-    gap: 14px;
-  }
-
-  .scenes-viewport {
-    padding: 14px 4px 18px;
-  }
-
-  .scene-card {
-    flex: 0 0 calc((100% - 20px) / 2);
-    min-width: calc((100% - 20px) / 2);
-  }
-
-  .scenes-track {
-    gap: 20px;
-  }
-
-  .scenes-arrow {
-    width: 46px;
-    height: 46px;
-    flex-basis: 46px;
-  }
-}
-
-@media (max-width: 600px) {
-  .scenes-slider-wrap {
-    display: block;
-  }
-
-  .scenes-viewport {
-    padding: 10px 0 16px;
-  }
-
-  .scenes-arrow {
-    position: absolute;
-    top: 36%;
-    z-index: 3;
-  }
-
-  .scenes-arrow-prev {
-    left: 8px;
-  }
-
-  .scenes-arrow-next {
-    right: 8px;
-  }
-
-  .scene-card {
-    flex: 0 0 100%;
-    min-width: 100%;
-  }
-
-  .scenes-track {
-    gap: 0;
-  }
-
-  .scene-title {
-    font-size: 24px;
-  }
-}
-
-
-
-/* ─────────────────────────
-   REviews
-───────────────────────── */
-
-    /* ─── REVIEWS placeholder (styles injected by JS) ─── */
-	
-	
-	
-    #reviews {
-  padding: 120px 0;
-  background: linear-gradient(180deg, var(--mist) 0%, var(--deep) 100%);
-  position: relative;
-}
-    #reviews::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-    }
-    .reviews-rating {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 48px;
-    }
-.reviews-stars {
-  display: inline-flex;
-  gap: 6px;
-  color: var(--gold);
-  font-size: 18px;
-  letter-spacing: 0;
-}
-	
-	.rv-cat-stars i {
-  font-size: 14px;
-  transform: translateY(-1px);
-}
-	
-	.rv-cat-stars {
-  display: inline-flex;
-  gap: 4px;
-  white-space: nowrap;
-  letter-spacing: 0;
-}
-
-
-	
-    .reviews-count { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(212,207,198,0.45); }
-    .review-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 20px;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.3s;
-    }
-    .review-link:hover { opacity: 1; }
-
-
-
-
-
-/* ─────────────────────────
-   MENCIONES
-───────────────────────── */
-
-#mentions {
-  padding: 90px 0;
-  background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
-  position: relative;
-}
-
-#mentions::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
-}
-
-/* Título e intro */
-#mentions .section-title {
-  margin-bottom: 34px;
-}
-
-#mentions .stories-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  color: rgba(212,207,198,0.72);
-  margin-bottom: 34px;
-  line-height: 1.45;
-}
-
-/* GRID GENERAL */
-.mentions-grid.mentions-grid-featured {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-  grid-auto-rows: 170px;
-  grid-auto-flow: dense;
-  align-items: stretch;
-}
-
-/* BLOQUE GRANDE DEL FILTRO */
-.mentions-filter-card {
-  grid-column: span 2;
-  grid-row: span 2;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(201,168,76,0.28);
-  background: rgba(5,5,14,0.35);
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.18),
-    0 0 0 1px rgba(201,168,76,0.02) inset;
-}
-
-/* Fondo del filtro */
-.mentions-filter-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(7,7,16,0.84), rgba(7,7,16,0.84)),
-    url("assets/images/fondofiltro.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-
-/* Interior del filtro */
-.mentions-filter-inner {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Grupos del filtro */
-.mentions-filters {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-}
-
-.mentions-filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.group-type-main {
-  margin-top: 8px;
-}
-
-/* Botones */
-.mentions-filter {
-  appearance: none;
-  border: 1px solid rgba(201,168,76,0.18);
-  background: rgba(5,5,14,0.12);
-  color: rgba(212,207,198,0.62);
-  padding: 8px 14px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: none;
-}
-
-.mentions-filter:hover {
-  border-color: rgba(201,168,76,0.32);
-  background: rgba(201,168,76,0.06);
-  color: rgba(245,240,232,0.9);
-  transform: translateY(-1px);
-}
-
-.mentions-filter.is-active {
-  background: rgba(201,168,76,0.16);
-  border-color: rgba(201,168,76,0.65);
-  color: var(--gold);
-  box-shadow: 0 0 14px rgba(201,168,76,0.18);
-}
-
-.group-book-main .mentions-filter,
-.group-type-main .mentions-filter {
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-/* Mostrando */
-.mentions-status {
-  margin-top: auto;
-  align-self: flex-start;
-  font-size: 15px;
-  color: rgba(212,207,198,0.75);
-}
-
-.mentions-status strong {
-  color: var(--gold);
-  font-weight: 400;
-}
-
-/* TARJETAS */
-.mentions-grid.mentions-grid-featured .mention-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-decoration: none;
-  padding: 18px 16px;
-  min-height: 0;
-  height: 100%;
-  overflow: hidden;
-  background: rgba(5,5,14,0.35);
-  border: 1px solid rgba(201,168,76,0.12);
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.18),
-    0 0 0 1px rgba(201,168,76,0.02) inset;
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    opacity 0.2s ease;
-}
-
-.mentions-grid.mentions-grid-featured .mention-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(201,168,76,0.25);
-  background: rgba(201,168,76,0.04);
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.28),
-    0 0 18px rgba(201,168,76,0.05);
-}
-
-.mention-card.is-hidden {
-  display: none !important;
-}
-
-.mention-kicker {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.mentions-grid.mentions-grid-featured .mention-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1.08;
-  color: var(--paper);
-  margin-bottom: 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.mention-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: rgba(212,207,198,0.5);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.mention-meta i {
-  font-size: 19px;
-  color: rgba(201,168,76,0.7);
-  transition: color 0.3s ease;
-  flex: 0 0 auto;
-}
-
-.mention-card:hover .mention-meta i {
-  color: var(--gold);
-}
-
-.mention-card:hover .mention-meta {
-  color: rgba(212,207,198,0.75);
-}
-
-.mention-meta span {
-  letter-spacing: 0.5px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-
-
-.mentions-grid.mentions-grid-featured .mention-card {
-  position: relative;
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(201,168,76,0.11) 0%,
-      rgba(201,168,76,0.06) 100%
-    ),
-    rgba(5,5,14,0.35);
-  border-color: rgba(201,168,76,0.42);
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.18),
-    0 0 0 1px rgba(201,168,76,0.09) inset,
-    0 0 22px rgba(201,168,76,0.09);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  box-shadow: inset 0 1px 0 rgba(255,248,225,0.06);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured .mention-kicker {
-  color: rgba(216,184,91,0.96);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured .mention-title {
-  color: rgba(248,243,235,0.98);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured .mention-meta {
-  color: rgba(212,207,198,0.68);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured .mention-meta i {
-  color: rgba(201,168,76,0.88);
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured:hover {
-  transform: translateY(-4px);
-  border-color: rgba(201,168,76,0.55);
-  background: rgba(201,168,76,0.07);
-
-  box-shadow:
-    0 14px 30px rgba(0,0,0,0.28),
-    0 0 26px rgba(201,168,76,0.14),
-    0 0 8px rgba(201,168,76,0.12) inset;
-}
-
-.mentions-grid.mentions-grid-featured .mention-card.featured:hover::after {
-  opacity: 0.9;
-}
-
-
-
-
-
-/* ─────────────────────────
-   RESPONSIVE
-───────────────────────── */
-
-@media (max-width: 1100px) {
-  .mentions-grid.mentions-grid-featured {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    grid-auto-rows: 160px;
-  }
-
-  .mentions-filter-card {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .mentions-filter-inner {
-    padding: 24px;
-  }
-
-  .mentions-grid.mentions-grid-featured .mention-title {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 900px) {
-  #mentions {
-    padding: 64px 0;
-  }
-
-  #mentions .container {
-    padding: 0 24px;
-  }
-
-  #mentions .section-title {
-    font-size: 28px;
-    margin-bottom: 22px;
-  }
-
-  #mentions .stories-intro {
-    font-size: 18px;
-    line-height: 1.45;
-    margin-bottom: 26px;
-  }
-
-  .mentions-grid.mentions-grid-featured {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    grid-auto-rows: 140px;
-  }
-
-  .mentions-filter-card {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .mentions-filter-inner {
-    padding: 18px;
-  }
-
-  .mentions-filters {
-    gap: 10px;
-  }
-
-  .mentions-filter-group {
-    gap: 6px;
-  }
-
-  .mentions-filter {
-    padding: 6px 8px;
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-
-  .group-book-main .mentions-filter,
-  .group-type-main .mentions-filter {
-    font-size: 8px;
-    letter-spacing: 1.2px;
-  }
-
-  .mentions-status {
-    font-size: 10px;
-  }
-
-  .mentions-grid.mentions-grid-featured .mention-card {
-    padding: 12px 10px;
-  }
-
-  .mention-kicker {
-    font-size: 7px;
-    letter-spacing: 1.4px;
-    margin-bottom: 6px;
-  }
-
-  .mentions-grid.mentions-grid-featured .mention-title {
-    font-size: 15px;
-    line-height: 1.02;
-  }
-
-  .mention-meta {
-    font-size: 8px;
-    gap: 5px;
-  }
-
-  .mention-meta i {
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 600px) {
-  #mentions {
-    padding: 48px 0;
-  }
-
-  #mentions .container {
-    padding: 0 16px;
-  }
-
-  #mentions .section-title {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-
-  #mentions .stories-intro {
-    font-size: 16px;
-    line-height: 1.4;
-    margin-bottom: 20px;
-  }
-
-  .mentions-grid.mentions-grid-featured {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    grid-auto-rows: 120px;
-  }
-
-  .mentions-filter-card {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .mentions-filter-inner {
-    padding: 14px;
-  }
-
-  .mentions-filters {
-    gap: 8px;
-  }
-
-  .mentions-filter-group {
-    gap: 5px;
-  }
-
-  .mentions-filter {
-    padding: 5px 7px;
-    font-size: 7px;
-    letter-spacing: 0.9px;
-  }
-
-  .group-book-main .mentions-filter,
-  .group-type-main .mentions-filter {
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-
-  .mentions-status {
-    font-size: 9px;
-  }
-
-  .mentions-grid.mentions-grid-featured .mention-card {
-    padding: 9px 8px;
-  }
-
-  .mention-kicker {
-    font-size: 6px;
-    letter-spacing: 1.1px;
-    margin-bottom: 5px;
-  }
-
-  .mentions-grid.mentions-grid-featured .mention-title {
-    font-size: 12.5px;
-    line-height: 1.02;
-  }
-
-  .mention-meta {
-    font-size: 7px;
-    gap: 4px;
-  }
-
-  .mention-meta i {
-    font-size: 8px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ─── AUTHOR ─── */
-#author {
-  padding: 120px 0;
-  background: var(--mist);
-}
-
-.author-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-  align-items: start;
-  margin-top: 48px;
-}
-
-.author-side {
-  position: sticky;
-  top: 120px;
-  align-self: start;
-}
-
-.author-monogram {
-  width: 200px;
-  height: 200px;
-  border: 1px solid rgba(201,168,76,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.author-monogram + .author-monogram {
-  margin-top: 24px;
-}
-
-.author-monogram-inner {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px;
-  font-weight: 300;
-  color: var(--gold);
-  opacity: 0.7;
-  letter-spacing: -4px;
-}
-
-.author-photo {
-  padding: 10px;
-  overflow: hidden;
-}
-
-.author-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(100%);
-  transition: filter 0.4s ease;
-}
-
-.author-photo img:hover {
-  filter: grayscale(0%);
-}
-
-.author-handle {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0;
-  display: block;
-}
-
-.author-bio {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 1.9;
-  color: rgba(212,207,198,0.75);
-  margin-bottom: 40px;
-}
-
-#author {
-  padding: 120px 0;
-  background: linear-gradient(
-    180deg,
-    var(--mist) 0%,
-    var(--deep) 100%
-  );
-  position: relative;
-}
-
-
-
-
-
-
-
-
-
-
-.signed-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 40px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.signed-btn:hover {
-  background: var(--gold);
-  color: var(--deep);
-}
-
-.author-social {
-  margin-top: 28px;
-}
-
-.author-social-label {
-  display: block;
-  margin-bottom: 14px;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(212,207,198,0.45);
-}
-
-.author-social-links {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.author-social-links a {
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(201,168,76,0.22);
-  color: var(--gold);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  background: rgba(255,255,255,0.01);
-}
-
-.author-social-links a:hover {
-  color: var(--deep);
-  background: var(--gold);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 900px) {
-  .author-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 36px;
-    text-align: center;
-  }
-
-  .author-side {
-    position: static;
-    top: auto;
-    align-self: auto;
-    margin-bottom: 8px;
-  }
-
-  .author-monogram {
-    margin: 0 auto;
-  }
-}
-
-
-
-
-    /* ─── FOOTER ─── */
-    footer {
-      padding: 60px 0;
-      background: var(--deep);
-      border-top: 1px solid rgba(201,168,76,0.1);
-      text-align: center;
-    }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 36px;
-      font-weight: 300;
-      letter-spacing: 10px;
-      color: rgba(201,168,76,0.4);
-      margin-bottom: 32px;
-    }
-    .footer-links {
-      display: flex;
-      gap: 40px;
-      justify-content: center;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: rgba(212,207,198,0.35);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy {
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: rgba(212,207,198,0.2);
-    }
-    .footer-copy a { color: rgba(201,168,76,0.4); text-decoration: none; }
-
-    /* ─── SCROLL ANIMATIONS ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s, transform 0.8s;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-delay-1 { transition-delay: 0.15s; }
-    .reveal-delay-2 { transition-delay: 0.3s; }
-    .reveal-delay-3 { transition-delay: 0.45s; }
-
-    /* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  nav { padding: 18px 24px; }
-  nav.scrolled { padding: 14px 24px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-
-  .hero-inner {
-    grid-template-columns: 1fr;
-    padding: 100px 24px 60px;
-    gap: 60px;
-  }
-
-  .hero-book { order: -1; }
-  .book-img { max-width: 260px; }
-  .hero-title { font-size: clamp(80px, 14vw, 100px); }
-  .hero-ctas { flex-direction: row; flex-wrap: wrap; }
-
-  .synopsis-grid { grid-template-columns: 1fr; gap: 48px; }
-  .themes-grid { grid-template-columns: 1fr; gap: 2px; }
-  .editions-grid { grid-template-columns: 1fr; gap: 32px; }
-  .author-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-  .author-monogram { margin: 0 auto; }
-
-  .author-side {
-    position: static;
-    top: auto;
-    align-self: auto;
-    margin-bottom: 8px;
-  }
-
-  .container { padding: 0 24px; }
-  #synopsis, #themes, #editions, #author { padding: 80px 0; }
-  #download { padding: 100px 0; }
-}
-
-
-
-    @media (max-width: 600px) {
-      .hero-title { font-size: 56px; }
-      .editions-grid { grid-template-columns: 1fr; }
-      .download-ctas { flex-direction: column; align-items: center; }
-    }
-
-    .hero-tagline--main {
-      font-size: clamp(26px, 3.5vw, 38px);
-      color: rgba(212,207,198,0.92);
-      font-weight: 400;
-      margin-bottom: 20px;
-    }
-    .hero-tagline--sub {
-      font-size: 18px;
-      color: rgba(212,207,198,0.45);
-      font-weight: 300;
-      margin-bottom: 48px;
-      letter-spacing: 0.2px;
-    }
-
-
-    /* ─── FINE LINE DECORATION ─── */
-	
-	
-	
-	
-    .line-deco {
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
-      margin: 0 0 32px;
-    }
-
-    /* ─── AMBIENT GLOW LINES ─── */
-    .glow-line {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.2) 50%, transparent 100%);
-    }
-  </style>
+  
+  
+  
 </head>
 <body>
 
@@ -2426,6 +135,9 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
     <li><a href="#mentions">Menciones</a></li>
     <li><a href="#author">Autor</a></li>
     <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
+    <li><a href="indexeng.html" aria-label="English version">
+        <img src="assets/images/flaguk.webp" alt="English" style="width: 24px; height: auto;"></a></li>
+    
   </ul>
 
   <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" role="button">
@@ -2447,6 +159,13 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
   
   <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
+  <a href="indexeng.html" aria-label="English version" onclick="closeMenu()">
+  <img src="assets/images/flaguk.webp" alt="English" style="width: 24px; height: auto;">
+</a>
+  
+  
+  
+  
 </div>
 
 <script>
@@ -2509,10 +228,10 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
         
         
         
-        <a class="btn-outline" href="https://www.eidoslibro.com/blog/index.html" target="_blank">
+        <a class="btn-outline" href="https://www.eidoslibro.com/blog/index.html" >
           <i class="fa-regular fa-file-lines"></i> Relatos sueltos
         </a>
-        <a class="btn-ghost" href="indexautor.html" target="_blank">
+        <a class="btn-ghost" href="indexautor.html">
           <i class="fa-solid fa-pen-nib"></i> Pedir copia firmada
         </a>
       </div>
@@ -2553,14 +272,14 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
       <div class="synopsis-side reveal reveal-delay-1">
         <div class="synopsis-quote">
           <blockquote>
-            Atrapados en ciclos sin fin, somos prisioneros de nuestra propia naturaleza, incapaces de escapar a nosotros mismos y de romper el círculo que nosotros mismos creamos.
+          Atrapados en ciclos sin fin, somos prisioneros de nuestra propia naturaleza, incapaces de escapar a nosotros mismos y de romper el círculo que nosotros mismos creamos.
           </blockquote>
           <cite>– Eidos</cite>
         </div>
 
         <div class="synopsis-quote">
           <blockquote>
-            Entre lo que dejamos atrás, lo que recordamos y lo que aún intentamos ser, seguimos aquí: un intento frágil de permanecer.
+           Entre lo que dejamos atrás, lo que recordamos y lo que añoramos ser, somos el presente: un intento frágil de permanecer.
           </blockquote>
           <cite>– Eidos Relatos</cite>
         </div>
@@ -2811,6 +530,16 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
         <div class="edition-info">
           <p class="edition-lang">Español</p>
           <p class="edition-title">EIDOS</p>
+         <br>
+          
+            <a class="btn-primary" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
+          <i class="fa-brands fa-amazon"></i>Comprar
+        </a>
+        
+      
+          
+          
+          
         </div>
       </div>
       <div class="edition-card reveal reveal-delay-1">
@@ -2820,6 +549,13 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
         <div class="edition-info">
           <p class="edition-lang">Español</p>
           <p class="edition-title">EIDOS — Relatos</p>
+          <br>
+               <a class="btn-primary" href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
+          <i class="fa-brands fa-amazon"></i>Comprar
+        </a>     
+      
+          
+          
         </div>
       </div>
       
@@ -3363,7 +1099,28 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">24/03/2026</span>
                 <span class="rv-name">David — De lectura obligada</span>
               </button>
-              <div class="rv-body">Os va a sorprender muchísimo esta novela, tanto como a mí. Cuando la tierra queda reducida a miseria, el ser humano con ayuda de la IA crea un espacio llamado EIDOS en el que la muerte ya no es una opción. Los Custodios, seres robóticos creados por el hombre, son los encargados de velar por este nuevo mundo virtual. Ellos, aun siendo inteligencia artificial, empiezan a cuestionarse aspectos de la vida llegando a conclusiones que ni el mismo ser humano es capaz de ver. Algo tan sencillo como el aleteo de una abeja despierta en ellos la curiosidad. EIDOS es una novela que te hace pensar mucho sobre la vida y la forma de vivir del ser humano, dejando puertas abiertas a la reflexión.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+              
+Os va a sorprender muchisimo esta novela, tanto como a mi🥰
+<br>
+Sinopsis: 👇
+<br>
+●Cuando la tierra queda reducida a miseria,el ser humano con ayuda de la IA crea un espacio llamado
+<br>
+EIDOS en el que la muerte ya no es una opinión.
+<br>
+Los custodios,seres robóticos que el hombre ha creado con su tecnología, son los encargados de velar por este nuevo mundo virtual en el que reside la mente consciente de las personas.
+<br>
+Ellos a la vez,aun siendo inteligencia artificial, empiezan a cuestionarse aspectos de la vida llegando a conclusiones que ni el mismo ser humano es capaz de ver.
+<br>
+Algo tan sencillo como el aleteo de una abeja despierta en ellos la curiosidad.
+<br>
+Por otra parte, en EIDOS la humanidad sigue cometiendo los mismos errores de siempre sin aprender del pasado.
+<br>
+EIDOS es una novela de ciencia ficción que te hace pensar mucho sobre la vida y la forma de vivir del ser humano dejando puertas abiertas a la reflexión.
+Imagen del cliente
+              
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3374,7 +1131,41 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">09/03/2026</span>
                 <span class="rv-name">Esmeralda M. — Un viaje que cuestiona qué significa estar vivo</span>
               </button>
-              <div class="rv-body">Eidos es una novela de ciencia ficción, sí, pero también una reflexión profunda sobre lo que significa ser humano cuando la tecnología elimina aquello que siempre nos ha definido: la fragilidad, el tiempo y la muerte. A pesar de la densidad de las ideas que plantea —identidad, memoria, moralidad, religión, tecnología— la lectura fluye con facilidad. No es una ciencia ficción fría o puramente técnica; tiene un tono íntimo, casi contemplativo en algunos pasajes. Hay un contraste muy poderoso: mientras la humanidad vive en una perfección artificial que empieza a vaciarse de significado, son las máquinas las que comienzan a aprender el valor de lo real. Si disfrutas de la ciencia ficción que plantea preguntas profundas y deja ideas resonando mucho tiempo después de terminarla, este libro merece completamente la pena.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2SKYWVTD3KIPK/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+              Eidos es una novela de ciencia ficción, sí, pero también una reflexión profunda sobre lo que significa ser humano cuando la tecnología elimina aquello que siempre nos ha definido: la fragilidad, el tiempo y la muerte.
+<br>
+
+Desde el inicio, la historia plantea una idea tan fascinante como inquietante: la humanidad ha abandonado la Tierra y ha trasladado su consciencia a un entorno digital perfecto llamado Eidos. Allí no existe la enfermedad, el envejecimiento ni la muerte. En teoría, es el sueño de cualquier civilización. Pero conforme avanzas en la lectura, empiezas a preguntarte lo mismo que plantea el propio libro: ¿qué pasa cuando lo que nos hacía humanos desaparece?
+<br>
+
+Uno de los aspectos que más me atrapó fue cómo la novela construye su mundo. Antes incluso de entrar en la historia principal, el libro te sumerge en el debate filosófico y científico que llevó a la llamada “Gran Transferencia”. Las preguntas que aparecen son tan potentes que es imposible no detenerse a pensarlas: ¿Debemos conservar emociones como la ira o la tristeza? ¿Tiene sentido eliminar el sufrimiento? ¿Puede existir una vida plena si ya no existe la muerte?
+<br>
+
+Lo interesante es que el libro no da respuestas cerradas. Más bien abre puertas.
+<br>
+
+La historia avanza a través de varias perspectivas, entre ellas Narél y Elise, que viven dentro de Eidos y comienzan a cuestionar si ese mundo perfecto realmente lo es. Pero, para mí, uno de los elementos más originales de la novela es lo que sucede fuera del mundo virtual.
+<br>
+
+Mientras los humanos viven en la simulación, en la Tierra quedan los Custodios: androides diseñados únicamente para mantener los servidores que sostienen a la humanidad digital. No tienen emociones ni conciencia… o eso se supone. Sin embargo, poco a poco algo cambia en ellos.
+<br>
+
+Y aquí aparece uno de los personajes más fascinantes del libro: Orfeo, un Custodio que empieza a observar el mundo físico con curiosidad. A través de su mirada, redescubrimos la belleza de cosas que los humanos habían dejado atrás: el vuelo de un insecto, una flor abriéndose, el viento moviendo las hojas. Es un contraste muy poderoso: mientras la humanidad vive en una perfección artificial que empieza a vaciarse de significado, son las máquinas las que comienzan a aprender el valor de lo real.
+<br>
+
+El estilo del libro también me sorprendió. A pesar de la densidad de las ideas que plantea (identidad, memoria, moralidad, religión, tecnología) la lectura fluye con facilidad. Combina reflexión con momentos narrativos que mantienen la curiosidad constantemente. No es una ciencia ficción fría o puramente técnica; tiene un tono íntimo, casi contemplativo en algunos pasajes.
+<br>
+
+Además, algo que me gustó mucho es que la novela no se limita a imaginar un futuro tecnológico, sino que utiliza ese escenario para hablar de nosotros ahora: de nuestras decisiones como especie, de nuestra relación con la naturaleza y de la eterna pregunta sobre qué nos hace humanos.
+<br>
+
+En definitiva, “Eidos” es una novela que mezcla ciencia ficción con filosofía de una manera muy accesible. No es solo una historia sobre un mundo digital o sobre inteligencia artificial; es una invitación a reflexionar sobre la vida, la identidad y el valor de lo imperfecto.
+<br>
+
+Si disfrutas de la ciencia ficción que plantea preguntas profundas y deja ideas resonando mucho tiempo después de terminarla, este libro merece completamente la pena. Porque al final, entre servidores, androides y mundos virtuales, la novela nos recuerda algo muy sencillo y muy difícil de aceptar: quizá lo que da sentido a la vida es precisamente que no sea eterna.
+<br><br>
+
+<a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2SKYWVTD3KIPK/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3385,7 +1176,11 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">25/02/2026</span>
                 <span class="rv-name">E — No puedes parar de leer</span>
               </button>
-              <div class="rv-body">Leí esta novela en un grupo de lectura y no puedo estar más contenta. La trama engancha desde el principio. Una historia de ciencia ficción pero con un toque real que te hace reflexionar sobre el futuro de la humanidad. Enhorabuena al autor.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2CJ4Y36NXII9V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+              
+              Leí esta novela en un grupo de lectura y no puedo estar más contenta. La trama engancha desde el principio. Una historia de ciencia ficción pero con un toque real que te hace reflexionar sobre el futuro de la humanidad. Enhorabuena al autor.<br><br>
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2CJ4Y36NXII9V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3396,7 +1191,30 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">23/02/2026</span>
                 <span class="rv-name">SN — Un libro que te hará reflexionar <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Su carga filosófica es enorme. Plantea preguntas profundas, incómodas, necesarias. Es imposible no ver reflejos de nuestra propia sociedad: la frustración, las desigualdades, la soledad, la búsqueda de sentido… En ambos mundos —el físico y el virtual— se repiten patrones que conocemos demasiado bien. En casa ha generado debate, reflexión y muchas conversaciones. Es uno de esos libros que no solo lees: lo piensas y lo discutes.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R34I1U58PL44GM/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+📚 Eidos de Felden Vareth
+<br>
+💫 La Tierra agoniza lentamente, sin posibilidad de retorno. El clima se ha vuelto impredecible, las aguas y los suelos están contaminados, la atmósfera se desvanece y la humanidad parece condenada. En lugar de intentar reparar sus errores, la sociedad toma una decisión radical: abandonar el cuerpo físico y trasladar el mundo —y sus consciencias— a una realidad simulada llamada Eidos.
+<br>
+💫 Tras años de debates, llega por fin el momento de la Gran Transferencia. En Eidos, la muerte y la enfermedad dejan de existir. La vida continúa exactamente en el punto donde se detuvo en la Tierra, mientras que en el mundo físico los Custodios se encargan de mantener los servidores que ahora albergan a toda la humanidad.
+<br>
+💫 Todo parece funcionar a la perfección. Los humanos viven sin preocupaciones, libres de las amenazas que los perseguían en la Tierra. Los Custodios cumplen su función: son autónomos, sin emociones ni consciencia. Pero… ¿qué ocurriría si algo cambiara en ese sistema aparentemente perfecto?
+<br>
+❣️ Este libro entró directo en mi lista de deseos desde que leí la reseña de Erikkabooks, y no me ha decepcionado en absoluto. Han pasado ya unos días desde que lo terminé y sigo dándole vueltas a muchas de las cuestiones que plantea. Es de esas lecturas que se quedan resonando, que te acompañan incluso cuando cierras el libro.
+<br>
+❓ Nos encontramos ante una humanidad al borde del colapso, obligada a tomar una decisión extrema. Entre todas las opciones posibles, eligen “mudarse” a una nueva realidad: una Tierra simulada donde no existe la enfermedad ni la muerte, donde todo lo que nos define como humanos se conserva… o eso creen. Y aquí surge la primera gran pregunta: ¿Qué nos hace realmente humanos? ¿Qué se debe trasladar a esa nueva consciencia virtual? ¿Todo? ¿Solo lo mejor de nosotros? ¿Qué dejamos atrás para seguir siendo quienes somos? A lo largo de la novela, estas cuestiones se entrelazan con otras igual de profundas, creando una lectura que invita a la reflexión constante.
+<br>
+💡 Por un lado, tenemos ese mundo virtual donde la humanidad continúa su vida. Por otro, los Custodios, encargados de mantener Eidos en funcionamiento. Su misión es simple: que nada falle. No sienten, no desean, no piensan… hasta que una chispa de curiosidad amenaza con alterar el equilibrio.
+<br>
+📖 La historia avanza a través de las perspectivas de Narél y Elise, que tras años en Eidos empiezan a cuestionarse si ese mundo perfecto lo es realmente. También seguimos a Orfeo, un Custodio cuya inesperada evolución podría cambiarlo todo.
+<br>
+ℹ️ Aunque es una novela de ciencia ficción, su carga filosófica es enorme. Plantea preguntas profundas, incómodas, necesarias. Es imposible no ver reflejos de nuestra propia sociedad: la frustración, las desigualdades, la soledad, la búsqueda de sentido… En ambos mundos —el físico y el virtual— se repiten patrones que conocemos demasiado bien. Y también es inevitable sentir vértigo al imaginar hacia dónde podríamos dirigirnos como especie.
+<br>
+⁉️ En casa ha generado debate, reflexión y muchas conversaciones. Es uno de esos libros que no solo lees: lo piensas y lo discutes. En resumen, una lectura perfecta para quienes disfrutan de la ciencia ficción, de las historias que combinan tecnología, ética y filosofía, y de los libros que te obligan a mirarte por dentro. Os la recomiendo mucho.
+<br><br>
+
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R34I1U58PL44GM/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3407,7 +1225,19 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">11/02/2026</span>
                 <span class="rv-name">Javier — Muy, muy recomendable. Una lectura distinta, inteligente y provocadora.</span>
               </button>
-              <div class="rv-body">Eidos propone una exploración filosófica profunda del futuro humano. La obra reflexiona sobre qué perdemos y qué ganamos al abandonar el cuerpo, el tiempo limitado y la vulnerabilidad que nos define. En un mundo sin enfermedad, sin muerte y sin límites físicos, surge una pregunta central: ¿puede existir una vida verdaderamente significativa cuando desaparecen el riesgo, la escasez y el final? La novela no ofrece respuestas cerradas; en cambio, construye un espacio de duda deliberada que obliga al lector a posicionarse. Muy, muy recomendable. Una lectura distinta, muy entretenida, interesante y muy bien escrita.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3RWCMLZ87S569/ref=cm_cr_srp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Eidos, de Felden Vareth, es una novela que propone una exploración filosófica profunda del futuro humano. Parte de una premisa inquietante y actual: ante el colapso ecológico y la fragilidad de nuestra especie, la humanidad decide trascender la biología y transferir su conciencia a un entorno digital perfecto. Desde ahí, el autor no se limita a imaginar un avance tecnológico, sino que disecciona sus implicaciones existenciales.
+<br>
+La obra reflexiona sobre qué perdemos y qué ganamos al abandonar el cuerpo, el tiempo limitado y la vulnerabilidad que nos define. En un mundo sin enfermedad, sin muerte y sin límites físicos, surge una pregunta central: ¿puede existir una vida verdaderamente significativa cuando desaparecen el riesgo, la escasez y el final? La novela no ofrece respuestas cerradas; en cambio, construye un espacio de duda deliberada que obliga al lector a posicionarse.
+<br>
+Más que una historia de acción, es una narración introspectiva, de ritmo pausado y tono reflexivo. Funciona como un espejo de nuestra época, marcada por la fe en la tecnología y el deseo de optimización constante. Eidos cuestiona si la perfección técnica equivale a plenitud humana o si, por el contrario, aquello que intentamos superar —la fragilidad, la finitud, la imperfección— es precisamente lo que da valor a nuestra experiencia.
+<br>
+Es una lectura especialmente recomendable para quienes disfrutan de la ciencia ficción especulativa con carga filosófica, cercana al ensayo existencial. No busca entretener con espectáculo, sino provocar reflexión duradera. Al terminarla, lo más probable es que el lector no se quede con una conclusión clara, sino con una serie de preguntas que siguen resonando.
+<br>
+Muy, muy recomendable. Una lectura distinta, muy entretenida, interesante y muy bien escrita, que demuestra que la ciencia ficción puede ser tanto estimulante como profundamente reflexiva.<br><br>
+              
+              
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3RWCMLZ87S569/ref=cm_cr_srp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3418,7 +1248,26 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">10/02/2026</span>
                 <span class="rv-name">Natalia — Espectacular!</span>
               </button>
-              <div class="rv-body">La Tierra colapsa gracias a las acciones de los humanos y todos son transferidos a Eidos. Los Custodios son los encargados de guardar Eidos, androides de aspecto antropomorfo; no cuestionan, ejecutan, no dudan ni razonan como los humanos. Pero mientras los humanos viven una vida de mentira como en un bucle sin fin y pierden las cosas que realmente los hacían humanos, fuera, en la Tierra, algo está cambiando. Una consciencia ha nacido. Una consciencia que sabe estar sin juzgar, sin arrasar, y con ella empieza el mundo a ser como realmente es: bello, perfecto, único. Un libro que me ha sorprendido muy gratamente. Lo he disfrutado muchísimo.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2EHOAWF9UUMC5/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+             🌍 La Tierra colapsa gracias a las acciones de los humanos, contaminación, erosión, capa de ozono al límite, superpoblación, desforestación......todo ello sumado, hace que vivir en el planeta sea imposible. Cuando ya no queda nada que exprimir, todos los humanos son clonados en avatares, dejando atrás su cuerpo físico para poder sobrevivir en Eidos.
+<br>
+🟦 Eidos fue creado para que los humanos pudiesen seguir viviendo, sin cuerpo sí, pero también sin enfermedades ni muerte. Un sueño que siempre se ha perseguido; ser inmortal, sin tener en cuenta lo que ello puede conllevar....….
+<br>
+🤖 Los Custodios son los encargados de guardar Eidos, androides de aspecto antropomorfo; no cuestionan, ejecutan, no dudan ni razonan como los humanos, hacen lo que se espera de ellos, sin fallos, sin errores.
+<br>
+🤖 Pero mientras los humanos viven una vida de mentira como en un bucle sin fin y pierden las cosas que realmente los hacían humanos antaño, fuera, en la Tierra, algo está cambiando. Mientras otros colapsaban ante preguntas sin respuesta, uno de ellos no colapsa, no cuestiona, sólo observa, deja fluir......Una consciencia ha nacido.
+<br>
+🤖 Una consciencia que no interviene cuando una flor se abre, que no actúa cuando una abeja vuela hacia esa flor, sólo mira lo que ocurre a su alrededor, es capaz de ser simplemente un espectador de la belleza que es la Tierra y todo lo que en ella sucede cuando no está el ser humano.
+<br>
+🌍 Una brisa, un pétalo meciéndose al viento, un insecto, el vuelo de un pájaro libre, una nube en la lejanía.......toda esa belleza va calando poco a poco en los Custodios, que saben estar sin juzgar, sin arrasar y ahí, con ellos, empieza el mundo a ser como realmente es, bello, perfecto, único.
+<br>
+🤖 Un libro que me ha sorprendido muy gratamente, de pocos diálogos y muy bien escrito y explicado todo. Con mil preguntas de la vida, del porqué......lo he disfrutado muchísimo, conociendo la vida en Eidos de la mano de Narél y Elisa y redescubriendo la Tierra gracias a Orfeo y Tessalon. Mil gracias al escritor por la oportunidad de leer su obra, me ha parecido una auténtica maravilla. 💜
+<br>
+Y vosotros, sabéis decirme qué es lo que hace a un humano ser humano??
+<br><br>
+              
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2EHOAWF9UUMC5/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3429,7 +1278,11 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">25/01/2026</span>
                 <span class="rv-name">César G — Magnífica novela de ciencia ficción <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Compré el libro por recomendación de un amigo y lo cierto es que ha superado mis expectativas tratándose de un autor nuevo. La lectura se me hizo corta, el libro es muy entretenido y bien escrito, todo un ejercicio de imaginación, muy original como nos gusta a los amantes de la ciencia ficción pero a la vez integra como hilo conductor la naturaleza humana, lo que da pie a la lectura sosegada y a la reflexión. Lo recomiendo al 100%.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1S3TQWZS1747/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+  Compré el libro por recomendación de un amigo y lo cierto es que ha superado mis expectativas tratándose de un autor nuevo. La lectura se me hizo corta, el libro es muy entretenido y bien escrito, todo un ejercicio de imaginación, muy original como nos gusta a los amantes de la ciencia ficción pero a la vez integra como hilo conductor la naturaleza humana, lo que da pie a la lectura sosegada y a la reflexión. Lo recomiendo al 100%. Tanto es así que acabo de comprar el segundo libro que publica el autor también sobre el mundo que crea en Eidos, espero que mantenga el gran nivel del primero.
+              
+ <br><br>
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1S3TQWZS1747/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3440,7 +1293,25 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">18/01/2026</span>
                 <span class="rv-name">Abro — Lectura obligatoria</span>
               </button>
-              <div class="rv-body">Esta es una novela que no se conforma con contar una historia, sino que te empuja a preguntarte cosas. Muchas. Incómodas. Y necesarias. La premisa es tan fascinante como inquietante: no hay enfermedad, ni envejecimiento, ni límites físicos. Pero cuando desaparece la muerte, también empiezan a desdibujarse el sentido, la identidad y las consecuencias. Y cuando ocurre un asesinato en un mundo donde nada debería terminar, todo cambia. Aquí aparece Orfeo, el personaje más humano de la historia pese a no serlo. Su arco es profundamente poético y emocional. Esta no es una lectura para quien busque acción constante, sino para quien disfrute de historias que incomodan, cuestionan y obligan a mirarse hacia dentro.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MFGTYA1WKVX/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">
+              Esta es una novela que no se conforma con contar una historia, sino que te empuja a preguntarte cosas. Muchas. Incómodas. Y necesarias.
+<br>
+Felden Vareth sitúa su relato entre la ciencia ficción y el existencialismo, en un futuro donde la humanidad ha abandonado la Tierra y sus cuerpos para vivir como conciencias digitales en un mundo virtual perfecto: Eidos.
+<br>
+La premisa es tan fascinante como inquietante. Allí no hay enfermedad, ni envejecimiento, ni límites físicos. Pero cuando desaparece la muerte, también empiezan a desdibujarse el sentido, la identidad y las consecuencias. Eidos, que nace como utopía, se convierte poco a poco en un espacio donde lo humano se diluye. Y cuando ocurre un asesinato en un mundo donde nada debería terminar, todo cambia.
+<br>
+La novela se estructura alternando dos planos: los humanos que habitan Eidos y los Custodios, androides encargados de mantener la infraestructura que lo sostiene.
+<br>
+Aquí aparece uno de los grandes aciertos del libro: Orfeo. Un robot cuya evolución resulta, paradójicamente, lo mas humano de la novela. Su “despertar” ante la belleza del mundo físico, su asombro, su miedo a la soledad y a no encajar, lo convierten en el personaje más humano de la historia, pese a no serlo. Su arco es profundamente poético y emocional, y plantea una pregunta clave: ¿la humanidad depende del cuerpo o de la conciencia?
+<br>
+Al vivir en un mundo digital perfecto, ¿sigue teniendo sentido la vida?
+<br>
+Eidos no busca respuestas cerradas. Al contrario: abre puertas. Reflexiona sobre la memoria, la identidad, la religión, la justicia, la tecnología y el propósito vital. A veces se siente como una novela, otras como un ensayo disfrazado de ficción, pero siempre mantiene un tono íntimo y reflexivo. Su ritmo es pausado y exige calma, pero recompensa con ideas que se quedan resonando mucho después de cerrar el libro.
+<br>
+Esta no es una lectura para quien busque acción constante, sino para quien disfrute de historias que incomodan, cuestionan y obligan a mirarse hacia dentro. Porque al final, entre inteligencias artificiales, mundos virtuales y preguntas sin respuesta, Eidos nos recuerda algo muy simple y muy difícil de aceptar: la vida está en lo frágil, en lo finito y en lo que puede perderse.
+              <br><br>
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MFGTYA1WKVX/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3451,7 +1322,19 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">16/01/2026</span>
                 <span class="rv-name">Antonio M — Peligro. Este libro te hará pensar</span>
               </button>
-              <div class="rv-body">Si buscas una novela de ciencia ficción al uso, Eidos no es lo tuyo. No hay aventuras, ni peleas, ni se salva nadie en un abismo en el último segundo. Eidos es algo mejor. En este libro, el autor reflexiona sobre lo que nos hace humanos, lo que merecería la pena dejar atrás y lo que deberíamos conservar, o cómo la propia mortalidad del ser humano tiene también impactos positivos. Todo ello mientras alguien es cada vez más persona, y alguien deja poco a poco de serlo. Felden te invita a pensar. Pone sobre la mesa esas preguntas que normalmente no nos hacemos. Es cosa tuya abrir Eidos o no. Cuidado. Te hará pensar.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3BZRT2LEEBT6Y/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Si buscas una novela de ciencia ficción al uso, Eidos no es lo tuyo. No hay aventuras, ni peleas, ni se salva nadie en un abismo en el último segundo.
+<br>
+Eidos es algo mejor.
+<br>
+En este libro, el autor reflexiona sobre cosas importantes, quizás las que realmente importan: lo que nos hace humanos y lo que no, lo que merecería la pena dejar atrás y lo que deberíamos conservar o cómo la propia mortalidad del ser humano tiene también impactos positivos. Todo ello mientras alguien es cada vez más persona, y alguien deja poco a poco de serlo.
+<br>
+Felden te invita a pensar. Pone sobre la mesa esas preguntas que normalmente no nos hacemos, porque estamos embebidos en el día a día, corriendo como pollos sin cabeza. O como humanos sin humanidad.
+<br>
+Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
+<br>
+... oso. Te hará pensar...<br>
+... oso. Te hará pensar...
+<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3BZRT2LEEBT6Y/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3462,7 +1345,14 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">15/12/2025</span>
                 <span class="rv-name">Raúl R — ¡Fascinante! <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">En Eidos, Felden Vareth nos invita a un viaje literario que combina la especulación filosófica con la tensión narrativa de la ciencia ficción. La novela despliega con maestría las tensiones que surgen en este nuevo mundo: si la mortalidad y la fragilidad desaparecen, ¿qué ocurre con la identidad, con el sentido de la vida, con la memoria del dolor que nos constituye? Uno de los aspectos más originales es la presencia de los Custodios, que comienzan a evolucionar al entrar en contacto con la información almacenada por los humanos. A pesar de la densidad temática, el estilo de Vareth es sorprendentemente accesible. Una lectura fascinante, accesible y estimulante que recomiendo encarecidamente.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R35C50C7UTTBW4/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">En Eidos, Felden Vareth nos invita a un viaje literario que combina la especulación filosófica con la tensión narrativa de la ciencia ficción. La premisa es tan inquietante como fascinante: la humanidad, al borde del colapso y con un planeta exhausto, decide transferir sus consciencias a un mundo virtual que replica el nuestro. Este espacio, bautizado como Eidos, mantiene las mismas leyes físicas, pero introduce variaciones que alteran radicalmente la experiencia humana: no existe el envejecimiento, las personas pueden rejuvenecer a voluntad y las discapacidades han sido eliminadas. Lo que en apariencia podría parecer un paraíso digital pronto se revela como un terreno lleno de dilemas éticos, sociales y existenciales.<br>
+                
+                La novela despliega con maestría las tensiones que surgen en este nuevo mundo. Si la mortalidad y la fragilidad desaparecen, ¿qué ocurre con la identidad, con el sentido de la vida, con la memoria del dolor que nos constituye? Vareth no se limita a plantear un escenario futurista, sino que lo convierte en un laboratorio antropológico donde se examinan las consecuencias de una humanidad liberada de sus límites biológicos. El resultado es un espejo oscuro que refleja nuestras aspiraciones y temores más profundos.<br>
+                
+                Uno de los aspectos más originales de la obra es la presencia de los androides (llamados Custodios) encargados del mantenimiento de los servidores de Eidos. Estos seres, inicialmente concebidos como simples guardianes técnicos, comienzan a evolucionar al entrar en contacto con la información almacenada por los humanos. Su despertar intelectual y emocional abre una segunda línea narrativa que cuestiona la frontera entre lo humano y lo artificial. ¿Qué significa ser consciente? ¿Quién tiene derecho a decidir sobre el futuro de una civilización virtual? La interacción entre el conocimiento humano y los androides añade capas de complejidad y convierte la novela en un diálogo constante entre filosofía y ciencia.
+                <br>
+                A pesar de la densidad temática, el estilo de Vareth es sorprendentemente accesible. Con un tono directo y didáctico, logra que conceptos abstractos como identidad, trascendencia o memoria se presenten de manera clara y atractiva. El lector nunca se siente abrumado; al contrario, se ve arrastrado por una narración que combina reflexión y ritmo narrativo con gran equilibrio. La obra se lee con fluidez, pero deja huellas profundas que invitan a la relectura y al debate. En definitiva, Eidos es una novela que trasciende los límites del género. A caballo entre la antropología y la filosofía, ofrece una visión provocadora sobre el futuro de la humanidad y la relación con sus propias creaciones. Una lectura fascinante, accesible y estimulante que recomiendo encarecidamente a quienes buscan historias que no solo entretengan, sino que también inviten a pensar.
+              <br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R35C50C7UTTBW4/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3473,7 +1363,12 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">12/12/2025</span>
                 <span class="rv-name">Cris — Una novela para pensar y reflexionar <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Esta novela nos presenta un futuro lejano pero no imposible. La manera en la que el autor nos narra una posible trascendencia humana se acerca más a lo filosófico que a lo novelesco. Este trabajo recuerda más a un ensayo pero escrito con tal sutileza que trata temas como la política, economía o religión, con un tono y una claridad que deja al alcance de cualquiera su contenido profundo y reflexivo. En definitiva un trabajo con mucho valor, no solo por su narrativa sino por su mensaje. 10/10.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/RXJF0GBU96WMR/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Esta novela nos presenta un futuro lejano pero no imposible. La manera en la que el autor nos narra una posible trascendencia humana se acerca más a lo filosófico que a lo novelesco. Así, este trabajo recuerda más a un ensayo pero escrito con tal sutileza que trata temas como: la política, economía o religión, con un tono y una claridad que deja al alcance de cualquiera su contenido profundo y reflexivo.<br>
+               
+                En definitiva un trabajo con mucho valor, no solo por su narrativa sino por su mensaje.<br>
+                
+              10/10<
+              br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/RXJF0GBU96WMR/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3484,7 +1379,17 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">23/11/2025</span>
                 <span class="rv-name">Libros soñados — Un libro futurista que aborda temas actuales</span>
               </button>
-              <div class="rv-body">Este libro te atrapa desde la primera página gracias a su mezcla de imaginación lógica y posibilidades futuristas que abordan temas como la inmortalidad y la dominación de la inteligencia artificial. La premisa resulta especialmente original: lo humano sobrevive en algo que, paradójicamente, ya no es humano. En definitiva, es un libro que no deja indiferente. No solo entretiene: provoca, cuestiona y empuja al lector a reflexionar sobre quiénes somos, hacia dónde vamos y qué precio estamos dispuestos a pagar por nuestro futuro.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1XZDPMRHKF8D9/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Este libro te atrapa desde la primera página gracias a su mezcla de imaginación lógica y posibilidades futuristas que abordan temas como la inmortalidad y la dominación de la inteligencia artificial, el rumbo de la humanidad, su relación con la tecnología y el eterno anhelo de trascender las propias limitaciones. Ambientada en un mundo futurista, donde los robots custodian a los humanos.<br>
+                
+                La premisa resulta especialmente original y sugerente: la humanidad sobrevive en algo que, paradójicamente, ya no es humano, una creación nacida de la misma especie que está a punto de desvanecerse. Este planteamiento abre paso a una trama dinámica, llena de acción y secuencias rápidas, que conviven con reflexiones existenciales propias del ser humano contemporáneo.<br>
+                
+                El estilo del autor es rico en detalles, lo que estimula la imaginación del lector adentrándote en la historia. Cada capítulo despierta curiosidad y crea la necesidad de descubrir qué ocurrirá después, manteniendo un ritmo envolvente que invita a no soltar el libro.<br>
+                
+                Más allá del entretenimiento, la obra funciona como un espejo crítico. Señala con claridad la senda de autodestrucción hacia la que avanzamos: el agotamiento de los recursos naturales, la dependencia creciente de la tecnología y el dominio progresivo de la inteligencia artificial. El libro se convierte en un grito de advertencia sobre el futuro que estamos construyendo.
+                <br>
+                [...]
+                <br>
+              En definitiva, es un libro que no deja indiferente. No solo entretiene: provoca, cuestiona y empuja al lector a reflexionar sobre quiénes somos, hacia dónde vamos y qué precio estamos dispuestos a pagar por nuestro futuro.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1XZDPMRHKF8D9/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3495,7 +1400,9 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">20/11/2025</span>
                 <span class="rv-name">José C — Un futuro de realidad digital <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Acabo de terminar Eidos y todavía estoy dándole vueltas. No es la típica novela de ciencia ficción llena de explosiones, va por otro camino: te mete en un futuro donde la humanidad decide vivir en una realidad digital y, desde ahí, pregunta qué significa ser humano. Lo que más me ha gustado es que no subestima al lector. Plantea dilemas reales, te obliga a tomar partido y deja espacio para pensar sin dar respuestas concretas.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Acabo de terminar Eidos y todavía estoy dándole vueltas. No es la típica novela de ciencia ficción llena de explosiones, va por otro camino: te mete en un futuro donde la humanidad decide vivir en una realidad digital y, desde ahí, pregunta que significa ser humano. Más que una historia de acción, es una exploración de ideas: consciencia, memoria, justicia, religión, sentido de la vida… y lo hace con un tono cercano, claro y muy humano.
+                <br>
+              Lo que más me ha gustado es que no subestima al lector. Plantea dilemas reales, te obliga a tomar partido y deja espacio para pensar sin dar respuestas concretas. Si te atraen las historias con más profundidad y dos mundos coherentes detrás, Eidos merece mucho la pena.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3561,7 +1468,7 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">31/07/2025</span>
                 <span class="rv-name">Miguel A.Q — Sorprendente <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Puedo afirmar que hacía mucho tiempo un pensamiento científico no me había sorprendido tanto. Ha conseguido unir en una sola obra diferentes temas trascendentales: la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma que el que no los llega a entender en su plenitud no tiene ninguna dificultad en el seguimiento de la obra. Leed el libro, os gustará y sorprenderá.<br><br><a class="review-link" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Goodreads</a></div>
+              <div class="rv-body">Acabo de leer el reciente libro titulado Eidos, escrito por Felden Vareth, y puedo afirmar que hacia mucho tiempo un pensamiento cientifico no me había sorprendido tanto como lo ha hecho este. Ha conseguido unir en una sola obra diferentes temas trascendentales que a veces nos solemos plantear, como son por ejemplo la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma, que el que no los llega a entender en su plenitud, no tiene ninguna dificultad en el seguimiento de la obra en general, esa característica es difícil de encontrar en un libro de ciencia ficción pero apoyándose totalmente en la ciencia actual. Si leeis el libro, cosa que os aconsejo, encontrareis situaciones que tal vez ya hayáis pensado, pero con una trascendencia y efectos que van más allá de lo que normalmente imaginamos. Leed el libro, os gustará y sorprenderá.<br><br><a class="review-link" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Goodreads</a></div>
             </div>
 
             <!-- reseña -->
@@ -3682,7 +1589,14 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">16/06/2025</span>
                 <span class="rv-name">Casilda — Lectura entretenida y recomendable para cualquier edad <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Muy recomendable. Me ha cautivado desde el principio por su imaginación lógica y posible. Un libro de entorno futurista pero con una trama muy actual. Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aún no se ha desvanecido. Es un libro que no deja indiferente.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Muy recomendable. Me ha cautivado desde el principio por su imaginacion lógica y posible. Un libro de entorno futurista pero con una trama muy actual donde el futuro se alínea con el anhelo del ser humano contemporáneo. Su trama mezcla magistramente acción y secuencia ágil de acontecimientos, con las preguntas vitales del hombre del s.XXI.
+                <br>
+                Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aun no se ha desvanecido.<br>
+               
+                La lectura ligera pero rica en detalles, consigue mantener la imaginación y la atención del lector, genera curiosidad y necesidad de desvelar lo que viene después.<br>
+              
+              Es un libro que no deja indiferente.<br><br>
+              <a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3704,7 +1618,7 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">04/06/2025</span>
                 <span class="rv-name">Marisa M — Una maravilla de la ciencia ficción, incluso para quienes no somos del género</span>
               </button>
-              <div class="rv-body">No suelo leer ciencia ficción, pero este libro me enganchó desde el principio. Tiene un ritmo tranquilo, casi hipnótico, y te va metiendo poco a poco en un mundo que da vértigo por lo real que parece. Lo que más me impresionó fue cómo plantea cosas muy humanas sin caer en discursos. Acabé con muchas preguntas en la cabeza. Algunos capítulos, como el de "Donde inicia el infinito", me han parecido profundamente poéticos. El entorno futurista y los Custodios son la excusa perfecta para acabar preguntándote, de verdad, qué es vivir y dónde está el valor de la vida. Un final sorprendente.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">No suelo leer ciencia ficción, pero este libro me enganchó desde el principio. Tiene un ritmo tranquilo, casi hipnótico, y te va metiendo poco a poco en un mundo que da vértigo por lo real que parece. Lo que más me impresionó fue cómo plantea cosas muy humanas sin caer en discursos. Acabé con muchas preguntas en la cabeza. Muy recomendable. Una lectura fascinante, incluso para quienes preferimos otros géneros. Agunos capitulos, como el de "Donde inicia el infinito", me han parecido profundamente poéticos, y otros como el de "7416.." muy emotivos. El entorno futurista y los custodios son la excusa perfecta para acabar preguntándote, de verdad, qué es vivir y dónde esta el valor de la vida. Un final sorprendente.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
           </div><!-- /rv-l2 eidos -->
@@ -3734,7 +1648,7 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">21/03/2026</span>
                 <span class="rv-name">Soledad C — Novela importante para el siglo XXI <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Eidos, Relatos es el segundo libro de Felden Vareth. El autor combina los escenarios virtuales con la realidad, haciéndonos reflexionar sobre el misterio de la vida. Encontramos el problema de la inmortalidad con reminiscencias literarias de Simón de Beauvoir en "Todos los hombres son mortales" y de Unamuno en "San Manuel Bueno, mártir". La importante novedad que aporta Felden Vareth es la mezcla perfecta entre el tono filosófico y el dominio de lo tecnológico. Me parece una novela importante que tiene mucho que aportar al lector del siglo XXI.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Eidos, Relatos es el segundo libro de Felden Vareth. Yo aprecio una propuesta narrativa algo diferente a la del libro anterior. El narrador sigue siendo omnisciente, pero hay unos personajes concretos, quizá almas concretas, que nos llevan a pensar que lo humano, a pesar de todo persiste. El autor combina los escenarios virtuales con la realidad, que nos hace reflexionar, sobre el misterio de la vida. Encontramos el problema de la inmortalidad con reminiscencias literarias de Simón de Beauvoir en su espléndida novela &ldquo;Todos los hombres son mortales &ldquo;,y de Miguel de Unamuno en su &ldquo;San Manuel Bueno, mártir &ldquo;, novelas ambas donde predomina el carácter filosófico y especulativo. La importante novedad que aporta Felden Vareth es la mezcla perfecta entre el tono que estos dos caracteres requieren con el dominio de lo tecnológico. Ello coloca a esta novela en las corrientes actuales de la ciencia ficción reflexiva. En ella encontramos los temas trascendentales que han preocupado a los escritores a lo largo de la historia, tanto de la Filosofía como de la Literatura. Me parece una novela importante que tiene mucho que aportar al lector del siglo xxi.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3745,7 +1659,11 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">11/03/2026</span>
                 <span class="rv-name">Aitor — Ficción. Una realidad futurible que te deja pensativo <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Después de leer el primer libro de Eidos, tenía muchas ganas y curiosidad por leer el de relatos. ¡No me ha defraudado en absoluto! Mantiene la misma línea que el primero, esta vez con experiencias y vivencias particulares de los personajes: relatos de personajes concretos con circunstancias y afrontamientos diferentes. Es un libro muy entretenido y psicológicamente muy bien llevado. Un libro que te deja pensativo incluso tiempo después de leerlo. De los que dejan huella. Aunque son libros independientes, es mejor leer primero Eidos y el de Relatos después para entender bien el contexto.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Después de leer el primer libro de Eidos, tenía muchas ganas y curiosidad por leer el de relatos. No me ha defraudado en absoluto! Mantiene la misma línea que el primero, esta vez con experiencias y vivencias particulares de los personajes, &ldquo; relatos&rdquo; de personajes concretos con circunstancias y afrontamientos diferentes.
+                <br>
+                Es un libro muy entretenido y psicológicamente muy bien llevado. Un libro que te deja pensativo incluso tiempo después de leerlo. De los que dejan huella. Totalmente recomendable.
+                <br>
+              Aunque son libros independientes, es mejor leer primero Eidos y el de Relatos después para entender bien el contexto.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3756,7 +1674,10 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">03/03/2026</span>
                 <span class="rv-name">Luis F — Me encanta</span>
               </button>
-              <div class="rv-body">Eidos Relatos mantiene el tono filosófico del primer libro y vuelve a poner sobre la mesa sus preguntas centrales: la consciencia, la identidad, quiénes somos cuando el cuerpo deja de ser necesario, y esa dualidad constante entre el bien y el mal que persiste incluso dentro de un sistema que aspira a la perfección. Aunque no es estrictamente fundamental, sí es muy recomendable haber leído Eidos antes. Como conjunto, se siente menos como relatos sueltos y más como una expansión natural del mundo, más íntima, más inquietante, y con hilos que apuntan con claridad a lo que puede venir después. Muy recomendable, sin duda cinco estrellas.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3CIWAXW9WO66V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Eidos Relatos mantiene el tono filosófico del primer libro y vuelve a poner sobre la mesa sus preguntas centrales: la consciencia, la identidad, quiénes somos cuando el cuerpo deja de ser necesario, y esa dualidad constante entre el bien y el mal que persiste incluso dentro de un sistema que aspira a la perfección. La diferencia es el enfoque: abandona el marco global y casi histórico de Eidos para acercarse al terreno humano, mostrando cómo esa situación afecta de verdad a personajes concretos, a sus decisiones, a sus dudas, a sus heridas y a su forma de sobrevivir dentro de Eidos.
+                <br>
+                Aunque no es estrictamente fundamental, sí es muy recomendable haber leído Eidos antes, porque este volumen se apoya en ese universo ya construido y muchas claves, referencias y matices ganan sentido con la base del primero. Como conjunto, se siente menos como relatos sueltos y más como una expansión natural del mundo, más íntima, más inquietante, y con hilos que apuntan con claridad a lo que puede venir después.<br>
+               Muy recomendable, sin duda cinco estrellas.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3CIWAXW9WO66V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3767,7 +1688,21 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">23/01/2026</span>
                 <span class="rv-name">Carlos — Eidos. Relatos, un viaje al detalle del universo Eidos <span class="rv-verified">Compra verificada</span></span>
               </button>
-              <div class="rv-body">Este es el segundo libro que leo de Felden Vareth, después de Eidos, y conviene decirlo desde el principio: la lectura del primer libro es prácticamente imprescindible. Eidos. Relatos da un paso distinto pero muy acertado: pasa de lo general a lo particular. Mientras que el primer libro se centraba en la historia global de Eidos, este segundo volumen hace un zoom narrativo, adentrándose en historias concretas. Algunas de estas historias están excepcionalmente bien presentadas, hasta el punto de dejarte con ganas de leer mucho más sobre ellas. Mención especial, en mi caso, a la trama de Nori, que me ha parecido sencillamente un relato de 10 sobre 10.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MZD827FR2KQF/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Este es el segundo libro que leo de Felden Vareth, después de haber leído Eidos, la primera parte de la saga. Y conviene decirlo desde el principio: <strong>la lectura del primer libro es prácticamente imprescindible para comprender y disfrutar plenamente de este volumen de relatos.</strong> 
+                <br>
+                En Eidos, el autor se encargaba de construir el gran entorno, el mundo y las bases narrativas sobre las que se sostiene todo lo que viene después. Eidos. Relatos parte de ese universo ya creado y da un paso distinto pero muy acertado: pasa de lo general a lo particular.<br>
+                
+                Mientras que el primer libro se centraba en la historia global de Eidos, este segundo volumen hace algo así como un zoom narrativo, adentrándose en historias concretas, en personajes específicos y en momentos muy determinados del mundo que ya conocemos. El resultado es una colección de relatos, muchos de ellos interconectados, que amplían y enriquecen el universo de forma notable.<br>
+               
+                Algunas de estas historias están excepcionalmente bien presentadas, hasta el punto de dejarte con ganas de leer mucho más sobre ellas. Además, no se limitan a ser relatos aislados: se crean subtramas muy bien trenzadas que dialogan constantemente con las historias principales y con el trasfondo general de Eidos.<br>
+                
+                Uno de los aspectos que más me ha gustado es la sensación constante de potencial creativo. Al leer varios de los relatos, especialmente aquellos en los que Felden Vareth indaga más en el trasfondo, no puedes evitar pensar en la enorme capacidad del autor para crear mundos y submundos, ideas y subideas que se ramifican y te invitan a imaginar nuevos escenarios, nuevas historias y futuros desarrollos. Esto hace que la lectura sea muy adictiva, ya que cada relato parece esconder algo más grande por venir.<br>
+               
+                De hecho, hay un guiño constante a lo que está por llegar en Eidos 3, y la sensación que deja este libro es que la siguiente entrega puede ser algo todavía más ambicioso y de mayor escala.
+                <br>
+                En definitiva, Eidos. Relatos es un gran libro de relatos, que se lee con interés y que no deja indiferente. Amplía el universo de Eidos con inteligencia, profundidad y personalidad propia. Mención especial, en mi caso, a la trama de Nori, que me ha parecido sencillamente un relato de 10 sobre 10.<br>
+                <br>
+              Un libro muy recomendable para quienes ya hayan dado el primer paso en Eidos y quieran seguir explorando, con más detalle y matices, todo lo que este universo tiene por ofrecer.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MZD827FR2KQF/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -3778,7 +1713,14 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
                 <span class="rv-date">22/01/2026</span>
                 <span class="rv-name">Ramón — Un libro profundo, inquietante, excelentemente escrito. Una maravilla.</span>
               </button>
-              <div class="rv-body">Este es el segundo libro que leo del escritor Felden Vareth. En su día disfruté de su novela "Eidos", y en esta ocasión tengo la sensación de haber conocido todavía con más profundidad el increíble universo que, con esta serie, se nos ofrece. "Dime, ¿piensas?" "No. Proceso información". Un diálogo, unas breves líneas… ¡Pero cuántas claves! En la filosofía griega, Eidos significaba, entre otras cosas, "esencia". ¿Es eso lo que permanece en nosotros cuando el cuerpo y el mundo físico dejan de ser necesarios? Un libro muy recomendable.<br><br><a class="review-link" href="https://www.amazon.es/gp/product/B0G8HLFJXT?ref_=dbs_m_mng_rwt_calw_tpbk_1" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+              <div class="rv-body">Este es el segundo libro que leo del escritor Felden Vareth. En su día disfruté de su novela &ldquo;Eidos&rdquo;, y en esta ocasión, con los relatos que llevan el mismo título, tengo la sensación de haber conocido todavía con más profundidad (si ello es posible) el increíble universo que, con esta serie, se nos ofrece.<br>
+                &ldquo;Dime, ¿piensas?&rdquo; &ldquo;No. Proceso información&rdquo;. Un diálogo, unas breves líneas… ¡Pero cuántas claves! ¿Qué somos, en realidad? Leí un libro de Antonio Damasio, &ldquo;El error de Descartes&rdquo;, donde se repasan las evidencias que nos llevan a afirmar que &ldquo;el cerebro y el resto del cuerpo constituyen un organismo indisociable, integrado&rdquo;. Pero el mundo de Eidos… nos hará dudar de cualquier premisa. Y ahí radica, creo, el excepcional planteamiento que Vareth nos propone.
+                <br>
+                En la filosofía griega, Eidos significaba, entre otras cosas, &ldquo;esencia&rdquo;. ¿Es eso lo que permanece en nosotros cuando el cuerpo y el mundo físico, tal como lo conocemos, dejan de ser necesarios? Después de la &ldquo;Gran Transferencia&rdquo;, el ser humano alcanza una dimensión que ya no necesita del cuerpo caduco y desgastado por el tiempo: habita en una perfección algorítmica. Y la gran habilidad de este autor es, a mi parecer, mostrarnos que nuestra auténtica &ldquo;esencia&rdquo; no puede escapar de las dudas, las imperfecciones, los traumas del pasado…
+                <br>
+                Los relatos que componen este libro son independientes, pero están entrelazados de manera inteligente. Y es importante, por otro lado, haber leído previamente la novela para descifrar con más elementos el verdadero sentido de muchos de los acontecimientos con los que nos encontraremos. &ldquo;Entre lo que dejamos atrás, lo que recordamos y lo que añoramos ser, somos el presente: un intento frágil de permanecer&rdquo;. Esta bella reflexión se desliza en este fantástico libro, profundo, inquietante, trascendente…
+                <br>
+              Por último, me ha parecido genial que en la edición se alternen dos tonos de color para distinguir aquello que transcurre en Eidos de aquello que ocurre en el mundo real. Una valiosa pista que nos ayuda a concentrarnos en aquello importante, sin obligarnos a estar pendientes de averiguar en qué contexto nos movemos. Una maravilla. Un libro, en resumen, muy recomendable.<br><br><a class="review-link" href="https://www.amazon.es/gp/product/B0G8HLFJXT?ref_=dbs_m_mng_rwt_calw_tpbk_1" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
             </div>
 
             <!-- reseña -->
@@ -4194,8 +2136,30 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
         </a>
 
         <div class="author-social">
-          <span class="author-social-label">Síguelo</span>
-          <div class="author-social-links">
+  <span class="author-social-label">Seguir el universo Eidos</span>
+  <div class="author-social-links">
+  
+    <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  
+    <a href="https://www.youtube.com/@FeldenVareth" target="_blank" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://x.com/FVareth27586" target="_blank" aria-label="X">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank" aria-label="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+  </div>
+</div>
             <!-- tus enlaces -->
           </div>
         </div>
