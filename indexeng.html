@@ -131,8 +131,12 @@
 <li><a href="#reviews">Reviews</a></li>
 <li><a href="#mentions">Mentions</a></li>
 <li><a href="#author">Author</a></li>
-<li><a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">Buy on Amazon</a></li>    <li><a href="index.html" aria-label="English version">
-        <img src="assets/images/flagspain.webp" alt="Español" style="width: 24px; height: auto;"></a></li>
+<li><a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">Buy on Amazon</a></li>
+
+
+<a href="index.html" class="lang-switch" aria-label="Versión en español">
+  <img src="assets/images/flagspain.webp" alt="Español" style="width: 24px; height: auto;">
+</a>
 
     
     
@@ -156,7 +160,9 @@
 <a href="#mentions" onclick="closeMenu()">Mentions</a>
 <a href="#author" onclick="closeMenu()">Author</a>
 <a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank" onclick="closeMenu()">Buy on Amazon</a>
-    <a href="index.html" aria-label="English version" onclick="closeMenu()">
+
+
+<a href="index.html" class="lang-switch" aria-label="Versión en español" onclick="closeMenu()">
   <img src="assets/images/flagspain.webp" alt="Español" style="width: 24px; height: auto;">
 </a>
 
@@ -2252,6 +2258,65 @@ Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
 
   buildInfiniteTrack();
 })();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const langLinks = document.querySelectorAll(".lang-switch");
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  const navbar = document.getElementById("navbar");
+
+  function getCurrentSection() {
+    const navHeight = navbar ? navbar.offsetHeight : 0;
+    const triggerY = navHeight + 120;
+
+    let current = "hero";
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= triggerY) {
+        current = section.id;
+      }
+    });
+
+    return current;
+  }
+
+  function saveCurrentSection() {
+    const current = getCurrentSection();
+    sessionStorage.setItem("eidosCurrentSection", current);
+  }
+
+  saveCurrentSection();
+  window.addEventListener("scroll", saveCurrentSection, { passive: true });
+  window.addEventListener("resize", saveCurrentSection);
+
+  langLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetBase = this.getAttribute("href");
+      const currentSection = sessionStorage.getItem("eidosCurrentSection") || "hero";
+
+      window.location.href = targetBase + "#" + currentSection;
+    });
+  });
+
+  const targetHash = window.location.hash.replace("#", "");
+  if (targetHash) {
+    const targetEl = document.getElementById(targetHash);
+    if (targetEl) {
+      requestAnimationFrame(() => {
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const y = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({ top: y, behavior: "auto" });
+      });
+    } else {
+      history.replaceState(null, "", window.location.pathname);
+    }
+  }
+});
 </script>
 
 
