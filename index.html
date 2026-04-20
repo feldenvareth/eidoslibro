@@ -522,62 +522,234 @@
   <div class="container">
     <span class="section-tag reveal">Volúmenes disponibles</span>
     <h2 class="section-title reveal">EIDOS <em>en tus manos</em></h2>
+
     <div class="editions-grid">
+
       <div class="edition-card reveal">
-        <div class="edition-img-wrap"> <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank"><img src="assets/images/tapa.jpg" alt="EIDOS edición española" loading="lazy"></a>
+        <div class="edition-img-wrap edition-media" data-video="docs/_eidos.mp4">
+          <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
+            <img src="assets/images/tapa.jpg" alt="EIDOS edición española" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapa.jpg"
+            ></video>
+          </a>
           <div class="edition-overlay"></div>
         </div>
+
         <div class="edition-info">
           <p class="edition-lang">Español</p>
           <p class="edition-title">EIDOS</p>
-         <br>
-          
-            <a class="btn-primary" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
-          <i class="fa-brands fa-amazon"></i>Comprar
-        </a>
-        
-      
-          
-          
-          
+          <br>
+          <a class="btn-primary" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
+            <i class="fa-brands fa-amazon"></i>Comprar
+          </a>
         </div>
       </div>
+
       <div class="edition-card reveal reveal-delay-1">
-        <div class="edition-img-wrap"> <a href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank"><img src="assets/images/taparelatos.jpg" alt="EIDOS Relatos" loading="lazy"></a>
+        <div class="edition-img-wrap edition-media" data-video="docs/_eidosrelatos.mp4">
+          <a href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
+            <img src="assets/images/taparelatos.jpg" alt="EIDOS Relatos" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/taparelatos.jpg"
+            ></video>
+          </a>
           <div class="edition-overlay"></div>
         </div>
+
         <div class="edition-info">
           <p class="edition-lang">Español</p>
           <p class="edition-title">EIDOS — Relatos</p>
           <br>
-               <a class="btn-primary" href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
-          <i class="fa-brands fa-amazon"></i>Comprar
-        </a>     
-      
-          
-          
+          <a class="btn-primary" href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
+            <i class="fa-brands fa-amazon"></i>Comprar
+          </a>
         </div>
       </div>
-      
-      <!-- 
-      
-      <div class="edition-card reveal reveal-delay-2">
-        <div class="edition-img-wrap">
-          <img src="assets/images/eidospeqtales.jpg" alt="EIDOS Tales — English edition" loading="lazy">
-          <div class="edition-overlay"></div>
-        </div>
-        <div class="edition-info">
-          <p class="edition-lang">Español</p>
-          <p class="edition-title">EIDOS — Relatos independientes</p>
-        </div>
-      </div>
-      
-       -->
-      
-      
+
     </div>
   </div>
+  
+  <style>
+/* ===== VIDEO HOVER EN EDICIONES ===== */
+
+.edition-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.edition-media > a {
+  display: block;
+  position: relative;
+}
+
+/* Imagen y vídeo ocupan exactamente el mismo espacio */
+.edition-media img,
+.edition-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Vídeo superpuesto */
+.edition-media video.edition-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* clave para que encaje perfecto */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: #000;
+}
+
+/* Estado activo (cuando haces hover o click) */
+.edition-media.is-playing video.edition-video {
+  opacity: 1;
+}
+
+.edition-media.is-playing img {
+  opacity: 0;
+}
+
+/* Transición suave de la imagen */
+.edition-media img {
+  transition: opacity 0.3s ease;
+}
+
+/* Mantener overlay funcionando correctamente */
+.edition-media .edition-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Opcional: mejora visual en hover */
+.edition-media:hover {
+  cursor: pointer;
+}
+
+/* Ajustes móvil */
+@media (max-width: 768px) {
+  .edition-media video.edition-video {
+    transition: opacity 0.25s ease;
+  }
+}
+</style>
+  
+  
+  
+  
+  <script>
+(function () {
+  const cards = document.querySelectorAll('.edition-media');
+  if (!cards.length) return;
+
+  const isTouchDevice =
+    window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo(video, src) {
+    if (video.dataset.loaded === 'true') return;
+
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo(card) {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    loadVideo(video, src);
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo(card) {
+    const video = card.querySelector('.edition-video');
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  cards.forEach(card => {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    // Precarga ligera cuando el bloque entra en pantalla
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // solo asignamos src cuando se acerca, no al cargar toda la web
+          loadVideo(video, src);
+          obs.unobserve(card);
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+
+    observer.observe(card);
+
+    if (!isTouchDevice) {
+      card.addEventListener('mouseenter', () => playVideo(card));
+      card.addEventListener('mouseleave', () => stopVideo(card));
+    } else {
+      // En móvil: primer toque reproduce, segundo toque sigue el enlace
+      const link = card.querySelector('a');
+
+      card.addEventListener('click', function (e) {
+        if (!card.classList.contains('is-playing')) {
+          e.preventDefault();
+          playVideo(card);
+        }
+      });
+
+      card.addEventListener('mouseleave', () => stopVideo(card));
+
+      document.addEventListener('click', function (e) {
+        if (!card.contains(e.target)) {
+          stopVideo(card);
+        }
+      });
+    }
+
+    video.addEventListener('ended', function () {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+  });
+})();
+</script>
+  
+  
+  
+  
+  
+  
 </section>
+
+
+
+
 
 
 <div class="glow-line"></div>
