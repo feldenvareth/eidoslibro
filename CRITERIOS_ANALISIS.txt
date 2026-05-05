@@ -1,0 +1,27 @@
+CRITERIOS V14 PRO
+
+Objetivo: detectar señales de compra o señales de venta para horizonte swing 1-3 meses.
+
+Reglas generales:
+- El diario define el sesgo principal.
+- El timeframe 1h confirma timing de entrada.
+- La señal se clasifica por bloques ponderados, no por suma plana.
+- Las fichas muestran indicadores a favor, neutros y en contra.
+- El histórico mide fiabilidad y profit factor.
+
+Bloques clave:
+1. Tendencia diaria: dirección de precio mediante EMA20/EMA50.
+2. Estructura de mercado: HH/HL, LH/LL, BOS, retesteo.
+3. Momentum: MACD, histograma, ROC, ADX/DI.
+4. Osciladores: RSI, divergencias, CCI, Estocástico, Williams.
+5. Volumen institucional: VWAP diario rolling, Volume Profile aproximado, acumulación/distribución.
+6. Flujo de dinero: OBV, MFI, CMF, ADL.
+7. Volatilidad: compresión/expansión mediante BB width y ATR ratio.
+8. Confirmación 1h: EMA, MACD, Heikin Ashi, VWAP intradía.
+9. Contexto sectorial: ticker frente a ETF/proxy sectorial.
+10. Calidad histórica: fiabilidad, casos y profit factor.
+
+Notas:
+- El Volume Profile es aproximado, calculado con cierre y volumen, no con datos tick-by-tick.
+- El contexto sectorial de IBEX usa proxies europeos disponibles en Yahoo cuando existen.
+- Si el histórico es débil con muestra suficiente, la señal puede bajarse a vigilancia.

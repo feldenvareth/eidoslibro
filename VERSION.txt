@@ -1,0 +1,8 @@
+V15 PRO - 2026-05-05
+- Fix critico: _clean_for_signal no hace dropna masivo, solo valida ultima fila
+- Fix: _state_for_direction y osciladores toleran NaN sin crashear
+- Fix: canslim usa bloque 'volumen_institucional'+'flujo_dinero' (no 'volumen')
+- Fix: add_canslim_block integra CAN SLIM en weighted_ratio real (no solo decorativo)
+- Fix: state.py TTL de 30 dias, señales caducadas se purgan al cargar
+- Fix: tickers Nasdaq actualizados (FANG eliminado, SMCI/TTD/NTRA/COIN/PLTR añadidos)
+
