@@ -1263,7 +1263,7 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
         <i class="fa-solid fa-star"></i>
       </div>
-      <span class="reviews-count">46 reseñas en Amazon</span>
+      <span class="reviews-count">       </span>
     </div>
 
     <!-- NIVEL 1: dos categorías -->
@@ -1274,7 +1274,7 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
         <button class="rv-cat-btn" aria-expanded="false">
           <span class="rv-cat-toggle"><i class="fa-solid fa-plus"></i></span>
           <span class="rv-cat-label">EIDOS</span>
-          <span class="rv-cat-count">34 reseñas</span>
+          <span class="rv-cat-count">    </span>
           <span class="rv-cat-stars">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -1283,6 +1283,31 @@ En realidad, le bastaba con el eco que devolvía la pared. Soñaba con el moment
         </button>
         <div class="rv-cat-body">
           <div class="rv-l2" data-group="eidos">
+          
+          
+          
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">15/05/2026</span>
+                <span class="rv-name">Daniel — Un libro maravilloso</span>
+              </button>
+              <div class="rv-body">
+
+
+Eidos me ha parecido una novela de ciencia ficción con ideas muy potentes y muy bien desarrolladas. He disfrutado mucho de toda la lectura, pero especialmente de cómo aborda la terraformación de la Tierra y de todo el capítulo relacionado con el universo, que me pareció fascinante.
+<br>
+Además, tiene algo que para mí es muy difícil de conseguir: despertar emoción a través de sus ideas. Hacía mucho tiempo que una novela de ciencia ficción no lograba transmitirme esa sensación.
+<br>
+Una lectura muy recomendable para quienes disfrutan de la ciencia ficción con grandes conceptos y reflexión de fondo.
+
+          
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+          
+          
 
             <!-- reseña -->
             <div class="rv-item">
@@ -1823,7 +1848,7 @@ Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
         <button class="rv-cat-btn" aria-expanded="false">
           <span class="rv-cat-toggle"><i class="fa-solid fa-plus"></i></span>
           <span class="rv-cat-label">EIDOS — Relatos</span>
-          <span class="rv-cat-count">12 reseñas</span>
+          <span class="rv-cat-count">                 </span>
           <span class="rv-cat-stars">
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -1988,7 +2013,48 @@ Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
 
     </div><!-- /rv-l1 -->
   </div>
+  
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Categorías
+  const categories = document.querySelectorAll(".rv-cat");
+
+  let totalReviews = 0;
+
+  categories.forEach(cat => {
+
+    // Cuenta las reseñas dentro de la categoría
+    const reviews = cat.querySelectorAll(".rv-item");
+    const count = reviews.length;
+
+    totalReviews += count;
+
+    // Actualiza el contador de la categoría
+    const countEl = cat.querySelector(".rv-cat-count");
+
+    if (countEl) {
+      countEl.textContent = `${count} reseñas`;
+    }
+
+  });
+
+  // Actualiza contador total superior
+  const totalEl = document.querySelector(".reviews-count");
+
+  if (totalEl) {
+    totalEl.textContent = `${totalReviews} reseñas en Amazon`;
+  }
+
+});
+</script>
+  
+  
+  
+  
 </section>
+
+
 
 
 <div class="glow-line"></div>
@@ -2035,6 +2101,16 @@ Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
           </p>
         </div>
       </div>
+
+
+<!-- INSTAGRAM -->
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DYehw6aDPoC/" target="_blank">
+  <span class="mention-kicker">Reseña · Eidos</span>
+  <h3 class="mention-title">@cronicasdelaciudadela
+</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
 
 <!-- INSTAGRAM -->
 <a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DVtskMsDeQ1/" target="_blank">
