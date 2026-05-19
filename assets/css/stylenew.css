@@ -1609,6 +1609,33 @@ background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
   letter-spacing: 2px;
 }
 
+
+/* Contador */
+.mentions-counter {
+  position: absolute;
+  left: 50%;
+  top: 68%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  font-family: "Josefin Sans", sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+
+  color: rgba(201, 168, 76, 0.88);
+
+  text-shadow:
+    0 0 10px rgba(201, 168, 76, 0.22),
+    0 0 22px rgba(201, 168, 76, 0.10);
+
+  pointer-events: none;
+}
+
+
+
+
+
 /* Mostrando */
 .mentions-status {
   margin-top: auto;
