@@ -2075,7 +2075,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="mentions-filter-bg"></div>
 
         <div class="mentions-filter-inner">
+        
+    <div id="mentions-counter" class="mentions-counter">0</div>      
+        
           <div class="mentions-filters">
+          
          <div class="mentions-filter-group group-book-main">
   <button class="mentions-filter is-active" data-book="all">Ambos libros</button>
 </div>
@@ -2101,6 +2105,15 @@ document.addEventListener("DOMContentLoaded", () => {
           </p>
         </div>
       </div>
+
+
+<!-- INSTAGRAM -->
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DYfbcBkCsyI/" target="_blank">
+  <span class="mention-kicker">Reseña · Eidos</span>
+  <h3 class="mention-title">@nosconvertimosenquijotes
+</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
 
 
 <!-- INSTAGRAM -->
@@ -2284,6 +2297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const cards = Array.from(document.querySelectorAll('.mention-card'));
   const status = document.getElementById('mentions-status');
+  const counter = document.getElementById('mentions-counter');
   const filterButtons = Array.from(document.querySelectorAll('.mentions-filter'));
 
   const labels = {
@@ -2305,15 +2319,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyFilters() {
+    let visibleCount = 0;
+
     cards.forEach(card => {
       const cardBook = card.getAttribute('data-book');
       const cardType = card.getAttribute('data-type');
 
       const matchesBook = activeBook === 'all' || cardBook === activeBook;
       const matchesType = activeType === 'all' || cardType === activeType;
+      const isVisible = matchesBook && matchesType;
 
-      card.classList.toggle('is-hidden', !(matchesBook && matchesType));
+      card.classList.toggle('is-hidden', !isVisible);
+
+      if (isVisible) visibleCount++;
     });
+
+    if (counter) counter.textContent = visibleCount;
 
     updateStatus();
   }
