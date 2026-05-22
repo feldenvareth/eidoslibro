@@ -50,6 +50,24 @@
     "inLanguage":"es"
   }
   </script>
+  
+  <!-- Google tag (gtag.js) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied'
+  });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GRKE5N9XFB');
+</script>
+  
+  
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -132,5 +150,36 @@
   </div>
   <button class="scroll-top" type="button" aria-label="Volver arriba">↑</button>
   <script src="../js/blog.js"></script>
+  
+  
+  <!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+  <p style="margin:0">Este sitio utiliza cookies analíticas para mejorar la experiencia. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Política de Privacidad</a></p>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Aceptar</button>
+    <button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Rechazar</button>
+  </div>
+</div>
+<script>
+  function consentGranted() {
+    gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','true');
+  }
+  function consentDeclined() {
+    gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','false');
+  }
+  (function(){
+    const c = localStorage.getItem('consentGiven');
+    if(c === 'true') consentGranted();
+    else if(c === 'false') consentDeclined();
+    else document.getElementById('consent-banner').style.display='flex';
+  })();
+</script>
+  
+  
+  
 </body>
 </html>
