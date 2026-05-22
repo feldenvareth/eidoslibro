@@ -1,35 +1,503 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta charset="utf-8">
-  <title>Política de Privacidad – EIDOS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidad y Condiciones | EIDOS</title>
+  <meta name="description" content="Política de privacidad, cookies, condiciones de uso y participación en el blog de Eidos.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#050608">
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
-  <!-- Bootstrap -->
-  <link type="text/css" href="assets/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Estilos principales -->
-  <link type="text/css" href="assets/css/style.css" rel="stylesheet">
-  <link type="text/css" id="switcher" href="assets/css/theme-color/color.css" rel="stylesheet">
-  <!-- Font Awesome (para el icono de flecha) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+  <link rel="canonical" href="https://www.eidoslibro.com/terminosycondiciones.html">
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
 
-  <meta property="og:image" content="https://eidoslibro.com/assets/images/img_v2.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EIDOS">
+  <meta property="og:title" content="Política de Privacidad y Condiciones | EIDOS">
+  <meta property="og:description" content="Información legal sobre privacidad, cookies, comentarios y uso del sitio web de Eidos.">
+  <meta property="og:url" content="https://www.eidoslibro.com/terminosycondiciones.html">
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    .legal h2, .legal h3{margin-top:24px}
-    .legal ul{margin-left:1rem}
-    .cookie-table{width:100%;border-collapse:collapse;margin:12px 0}
-    .cookie-table th,.cookie-table td{border:1px solid #ddd;padding:8px;vertical-align:top}
-    .cookie-table th{background:#f7f7f7}
-    .btn-outline{display:inline-block;border:1px solid #444;padding:10px 14px;border-radius:6px}
+    :root {
+      --deep: #050608;
+      --mist: #11151c;
+      --gold: #c9a84c;
+      --gold-soft: #e1c56a;
+      --paper: #f5f0e8;
+      --text: #d4cfc6;
+      --muted: #a9a393;
+      --line: rgba(201,168,76,.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Josefin Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 10%, rgba(201,168,76,.07), transparent 65%),
+        radial-gradient(ellipse 50% 60% at 10% 90%, rgba(58,122,110,.08), transparent 65%),
+        linear-gradient(180deg, var(--deep), var(--mist));
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    a:hover { color: var(--gold-soft); }
+
+    .legal-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px clamp(22px, 5vw, 60px);
+      background: rgba(5,6,8,.72);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+
+    .nav-logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      letter-spacing: .28em;
+      color: var(--gold);
+    }
+
+    .legal-nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .legal-hero {
+      min-height: 46vh;
+      display: flex;
+      align-items: center;
+      padding: 130px clamp(22px, 7vw, 80px) 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .legal-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(5,6,8,.70), rgba(5,6,8,.94)),
+        url("assets/images/header-bg.webp") center/cover no-repeat;
+      z-index: -2;
+    }
+
+    .legal-hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.45), transparent);
+    }
+
+    .legal-hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .kicker {
+      color: var(--gold);
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      font-size: .75rem;
+      margin: 0 0 22px;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 300;
+      color: var(--paper);
+      font-size: clamp(3.2rem, 8vw, 6.8rem);
+      line-height: .95;
+      margin: 0 0 26px;
+    }
+
+    .hero-intro {
+      max-width: 760px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      color: rgba(245,240,232,.76);
+      margin: 0;
+    }
+
+    .legal-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 70px clamp(22px, 5vw, 60px) 90px;
+    }
+
+    .legal-card {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(201,168,76,.16);
+      border-radius: 28px;
+      padding: clamp(26px, 5vw, 54px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.34);
+    }
+
+    .legal-card h2,
+    .legal-card h3,
+    .legal-card h4 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      color: var(--paper);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .legal-card h2 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      margin: 0 0 28px;
+      color: var(--gold);
+    }
+
+    .legal-card h3 {
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      margin: 46px 0 14px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(201,168,76,.14);
+    }
+
+    .legal-card h4 {
+      font-size: 1.35rem;
+      margin: 28px 0 12px;
+      color: var(--gold-soft);
+    }
+
+    .legal-card p,
+    .legal-card li {
+      color: rgba(212,207,198,.86);
+      font-size: 1rem;
+    }
+
+    .legal-card ul {
+      padding-left: 1.25rem;
+      margin: 12px 0 24px;
+    }
+
+    .legal-card li {
+      margin-bottom: 10px;
+    }
+
+    .legal-note {
+      padding: 18px 20px;
+      margin: 26px 0;
+      border: 1px solid rgba(201,168,76,.18);
+      background: rgba(201,168,76,.055);
+      border-radius: 18px;
+      color: rgba(245,240,232,.82);
+    }
+
+    .cookie-table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 16px;
+      border: 1px solid rgba(201,168,76,.16);
+    }
+
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: rgba(5,6,8,.45);
+    }
+
+    .cookie-table th,
+    .cookie-table td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: rgba(212,207,198,.84);
+    }
+
+    .cookie-table th {
+      color: var(--gold);
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      background: rgba(201,168,76,.07);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-size: .76rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      border: 1px solid rgba(201,168,76,.58);
+      color: var(--paper);
+      background: rgba(201,168,76,.08);
+      cursor: pointer;
+      transition: all .25s ease;
+      font-family: "Josefin Sans", system-ui, sans-serif;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--deep);
+    }
+
+    .btn.gold {
+      background: var(--gold);
+      color: var(--deep);
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .btn.gold:hover {
+      background: var(--gold-soft);
+      border-color: var(--gold-soft);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 42px 22px 58px;
+      border-top: 1px solid rgba(201,168,76,.12);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    /* Consent banner */
+    #consent-banner {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10000;
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(5,6,8,.96);
+
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+    }
+
+    #consent-banner p {
+      margin: 0 0 12px;
+      color: rgba(212,207,198,.84);
+      font-size: .92rem;
+    }
+
+    #consent-banner .btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #consent-banner button,
+    .consent-actions button {
+      border: 1px solid rgba(201,168,76,.45);
+      background: rgba(201,168,76,.08);
+      color: var(--paper);
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: "Josefin Sans", sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: .72rem;
+    }
+
+    #consent-accept,
+    .consent-actions .btn-primary {
+      background: var(--gold);
+      color: var(--deep);
+      border-color: var(--gold);
+    }
+
+    .consent-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.58);
+      z-index: 10001;
+      display: none;
+    }
+
+    .consent-modal {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10002;
+      width: min(540px, 92vw);
+      display: none;
+      background: #080a10;
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: 22px;
+      box-shadow: 0 25px 100px rgba(0,0,0,.65);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .consent-modal header {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(201,168,76,.14);
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold);
+      font-size: 1.5rem;
+    }
+
+    .consent-modal .content {
+      padding: 18px 20px;
+      max-height: 60vh;
+      overflow: auto;
+    }
+
+    .consent-modal .row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .consent-modal h4 {
+      margin: 0 0 6px;
+      color: var(--paper);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.25rem;
+    }
+
+    .consent-modal p {
+      margin: 0;
+      color: rgba(212,207,198,.72);
+      font-size: .92rem;
+      line-height: 1.6;
+    }
+
+    .consent-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(201,168,76,.14);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 25px;
+      margin-top: 4px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: rgba(255,255,255,.18);
+      transition: .2s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 19px;
+      width: 19px;
+      left: 3px;
+      top: 3px;
+      background: var(--paper);
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background: var(--gold);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(21px);
+      background: var(--deep);
+    }
+
+    @media (max-width: 760px) {
+      .legal-nav {
+        padding: 18px 20px;
+      }
+
+      .legal-nav-links {
+        gap: 12px;
+        font-size: .64rem;
+      }
+
+      .nav-logo {
+        font-size: 24px;
+        letter-spacing: .22em;
+      }
+
+      .legal-hero {
+        padding: 118px 22px 58px;
+      }
+
+      .legal-card {
+        border-radius: 22px;
+      }
+
+      .btn-row,
+      #consent-banner .btns,
+      .consent-actions {
+        flex-direction: column;
+      }
+
+      .btn,
+      #consent-banner button,
+      .consent-actions button {
+        width: 100%;
+      }
+    }
   </style>
 
-  <!-- ============================================================
-       Google Analytics 4 + Consent Mode v2 (Granular RGPD)
-       ============================================================ -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -58,6 +526,7 @@
       } catch(e){}
     })();
   </script>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
   <script>
     gtag('js', new Date());
@@ -69,43 +538,23 @@
       }
     } catch(e){}
   </script>
-
-  <!-- Banner + Modal de consentimiento -->
-  <style>
-    #consent-banner{position:fixed;left:0;right:0;bottom:0;z-index:10000;background:#f7f7f7;border-top:1px solid #ddd;padding:12px}
-    #consent-banner p{margin:0 0 8px}
-    #consent-banner .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-    #consent-banner button{border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
-    #consent-accept{background:#1a73e8;color:#fff}
-    #consent-reject{background:#eaeaea}
-    #consent-config{background:#fff;border:1px solid #ccc}
-
-    .consent-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10001;display:none}
-    .consent-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;z-index:10002;width:min(520px,92vw);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none}
-    .consent-modal header{padding:14px 16px;border-bottom:1px solid #eee;font-weight:600}
-    .consent-modal .content{padding:14px 16px;max-height:60vh;overflow:auto}
-    .consent-modal .row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
-    .consent-modal .row:last-child{border-bottom:none}
-    .consent-modal h4{margin:.2rem 0}
-    .consent-modal p{margin:.2rem 0;color:#555;font-size:.95rem}
-    .consent-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eee}
-    .consent-actions button{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
-    .btn-primary{background:#1a73e8;color:#fff}
-    .btn-ghost{background:#eaeaea}
-    .switch{position:relative;display:inline-block;width:44px;height:24px}
-    .switch input{opacity:0;width:0;height:0}
-    .slider{position:absolute;cursor:pointer;inset:0;background:#ccc;transition:.2s;border-radius:24px}
-    .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;top:3px;background:white;transition:.2s;border-radius:50%}
-    input:checked + .slider{background:#1a73e8}
-    input:checked + .slider:before{transform:translateX(20px)}
-  </style>
 </head>
+
 <body>
 
-  <!-- Banner -->
+  <nav class="legal-nav">
+    <a class="nav-logo" href="index.html">EIDOS</a>
+    <div class="legal-nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="relatos/index.html">Relatos</a>
+    </div>
+  </nav>
+
   <div id="consent-banner" hidden>
-    <p>Usamos cookies analíticas (Google Analytics) y puedes elegir tus preferencias.
-      Más info en nuestra <a href="terminosycondiciones.html" rel="noopener">Política de Privacidad</a>.
+    <p>
+      Usamos cookies analíticas para mejorar la experiencia. Puedes aceptar, rechazar o configurar tus preferencias.
+      Más información en esta política de privacidad.
     </p>
     <div class="btns">
       <button id="consent-accept">Aceptar todo</button>
@@ -114,41 +563,221 @@
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="consent-modal-backdrop" id="consent-backdrop"></div>
   <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title">
     <header id="consent-modal-title">Preferencias de privacidad</header>
     <div class="content">
       <div class="row">
         <div>
-          <label class="switch" title="Activar/desactivar cookies de medición">
+          <label class="switch" title="Activar o desactivar cookies de medición">
             <input type="checkbox" id="toggle-analytics">
             <span class="slider"></span>
           </label>
         </div>
         <div>
-          <h4>Analíticas (Google Analytics)</h4>
-          <p>Nos ayudan a entender el uso del sitio. Sin publicidad ni seguimiento entre sitios.</p>
+          <h4>Analíticas</h4>
+          <p>Nos ayudan a entender el uso del sitio mediante Google Analytics 4. Sin publicidad ni seguimiento entre sitios.</p>
         </div>
       </div>
       <div class="row">
         <div>
-          <label class="switch" title="Publicidad personalizada y medición de anuncios">
+          <label class="switch" title="Activar o desactivar publicidad personalizada">
             <input type="checkbox" id="toggle-ads">
             <span class="slider"></span>
           </label>
         </div>
         <div>
-          <h4>Publicidad (opcional)</h4>
-          <p>Permite almacenamiento de anuncios, datos de usuario y personalización. Desactívalo si no quieres publicidad personalizada.</p>
+          <h4>Publicidad opcional</h4>
+          <p>Permite almacenamiento de anuncios, datos de usuario y personalización. Puedes mantenerlo desactivado.</p>
         </div>
       </div>
     </div>
     <div class="consent-actions">
       <button class="btn-ghost" id="consent-cancel">Cancelar</button>
-      <button class="btn-primary" id="consent-save">Guardar preferencias</button>
+      <button class="btn-primary" id="consent-save">Guardar</button>
     </div>
   </div>
+
+  <header class="legal-hero">
+    <div class="legal-hero-inner">
+      <p class="kicker">Eidos · Información legal</p>
+      <h1>Política de privacidad y condiciones</h1>
+      <p class="hero-intro">
+        Información sobre privacidad, cookies, comentarios, participación en el blog y uso del sitio web de Eidos.
+      </p>
+    </div>
+  </header>
+
+  <main class="legal-shell">
+    <article class="legal-card">
+      <h2>Protección de tus datos</h2>
+
+      <p>
+        En esta página se explica de forma clara cómo se tratan los datos personales en el sitio web
+        <strong>Eidos</strong> (<em>eidoslibro.com</em>) y cómo puedes gestionar tus preferencias de cookies.
+      </p>
+
+      <h3>Responsable del tratamiento</h3>
+      <p>
+        <strong>Felden Vareth</strong><br>
+        <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>
+      </p>
+
+      <h3>Qué datos recogemos</h3>
+      <ul>
+        <li><strong>Contacto:</strong> nombre y correo electrónico si escribes por email.</li>
+        <li><strong>Registros técnicos:</strong> datos técnicos del servidor, como IP, fecha, hora o agente de usuario, por seguridad y mantenimiento.</li>
+        <li><strong>Analítica web opcional:</strong> estadísticas de uso mediante Google Analytics 4, solo si aceptas cookies analíticas.</li>
+      </ul>
+
+      <h3>Comentarios y participación en el blog</h3>
+
+      <p>
+        Algunas secciones del blog permiten la participación pública mediante comentarios
+        integrados a través de GitHub Discussions/Giscus.
+      </p>
+
+      <p>
+        Cada usuario es el único responsable de los contenidos, opiniones y mensajes
+        publicados bajo su cuenta de GitHub, respondiendo personalmente de cualquier
+        vulneración legal o perjuicio que pudiera derivarse de los mismos.
+      </p>
+
+      <p>
+        La participación en el blog implica la aceptación de las presentes condiciones
+        de uso y de las normas básicas de convivencia y respeto.
+      </p>
+
+      <p>
+        Eidos no comparte necesariamente las opiniones publicadas por terceros y se
+        reserva el derecho de moderar, ocultar o eliminar, sin previo aviso, comentarios
+        ofensivos, discriminatorios, difamatorios, amenazas, mensajes de odio, spam,
+        ataques personales o cualquier contenido que pueda considerarse inapropiado,
+        ilícito o contrario a la finalidad del sitio.
+      </p>
+
+      <p>
+        El uso del sistema de comentarios puede implicar el tratamiento técnico de datos
+        por parte de GitHub y Giscus conforme a sus respectivas políticas y condiciones.
+      </p>
+
+      <h3>Finalidades y base jurídica</h3>
+      <ul>
+        <li><strong>Responder consultas por email:</strong> interés legítimo y/o ejecución de petición.</li>
+        <li><strong>Seguridad y mantenimiento de la web:</strong> interés legítimo.</li>
+        <li><strong>Analítica de uso con GA4:</strong> consentimiento del usuario.</li>
+      </ul>
+
+      <h3>Cookies y tecnologías similares</h3>
+      <p>
+        Se utiliza un banner de consentimiento con <strong>Google Analytics 4</strong> y Consent Mode v2.
+        Por defecto no se activan cookies analíticas hasta que das tu consentimiento.
+      </p>
+
+      <div class="btn-row">
+        <a href="#" id="manage-cookies" class="btn gold">Gestionar cookies</a>
+      </div>
+
+      <h4>Cookies de analítica que puede usar GA4 si las aceptas</h4>
+
+      <div class="cookie-table-wrap">
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie</th>
+              <th>Proveedor</th>
+              <th>Finalidad</th>
+              <th>Duración aproximada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>_ga</td>
+              <td>Google Analytics</td>
+              <td>Distinguir usuarios de forma anónima mediante un ID aleatorio.</td>
+              <td>Hasta 2 años</td>
+            </tr>
+            <tr>
+              <td>_ga_XXXXX</td>
+              <td>Google Analytics</td>
+              <td>Mantener la sesión y medir interacciones en el sitio.</td>
+              <td>Hasta 2 años</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="legal-note">
+        La instalación efectiva y la caducidad de las cookies dependen de tu elección en el banner y de la configuración del navegador o dispositivo.
+      </p>
+
+      <h3>Con quién compartimos datos</h3>
+      <p>
+        No se ceden datos a terceros salvo obligación legal. Para la analítica, se utiliza
+        <strong>Google Analytics 4</strong> (Google LLC / Google Ireland Limited) como
+        <em>encargado del tratamiento</em>. En las zonas de comentarios del blog pueden
+        intervenir técnicamente <strong>GitHub Discussions</strong> y <strong>Giscus</strong>,
+        conforme a sus propias políticas y condiciones.
+      </p>
+
+      <h3>Transferencias internacionales</h3>
+      <p>
+        Los servicios de Google pueden implicar transferencias internacionales. Google aplica
+        Cláusulas Contractuales Tipo y medidas complementarias. Puedes consultar la documentación
+        y condiciones de tratamiento de datos de Google en sus páginas oficiales.
+      </p>
+
+      <h3>Plazos de conservación</h3>
+      <ul>
+        <li>Consultas por email: el tiempo necesario para atenderlas y cumplir obligaciones legales.</li>
+        <li>Datos de analítica en GA4: según configuración estándar de la propiedad. No se conservan si rechazas las cookies.</li>
+      </ul>
+
+      <h3>Cómo cambiar o revocar tu consentimiento</h3>
+      <p>
+        Puedes modificar tu decisión sobre las cookies en cualquier momento desde este botón o borrando
+        las cookies y el almacenamiento del navegador para este sitio.
+      </p>
+
+      <div class="btn-row">
+        <a href="#" id="manage-cookies-2" class="btn">Gestionar preferencias de cookies</a>
+      </div>
+
+      <h3>Tus derechos</h3>
+      <p>
+        Puedes ejercer los derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad
+        escribiendo a <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>. Si consideras que
+        no se ha atendido correctamente, puedes reclamar ante la autoridad de control, AEPD en España.
+      </p>
+
+      <h3>Medidas de seguridad</h3>
+      <p>
+        Se aplican medidas técnicas y organizativas razonables para proteger los datos frente a accesos no autorizados,
+        pérdida o alteración.
+      </p>
+
+      <h3>Actualizaciones de esta política</h3>
+      <p>
+        Esta política puede actualizarse para reflejar cambios legales o técnicos. La versión vigente se publicará en esta página.
+      </p>
+
+      <p class="legal-note">Última actualización: mayo 2026</p>
+
+      <div class="btn-row">
+        <a class="btn gold" href="index.html">Volver a Eidos</a>
+        <a class="btn" href="blog/index.html">Ir al blog</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <p>
+      © Felden Vareth ·
+      <a href="index.html">Eidos</a> ·
+      <a href="blog/index.html">Blog</a> ·
+      <a href="relatos/index.html">Relatos</a>
+    </p>
+  </footer>
 
   <script>
     (function(){
@@ -172,14 +801,17 @@
         let saved = null;
         try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
         const anaGranted = saved?.analytics_storage === 'granted';
-        const adsGranted = (saved?.ad_storage === 'granted'
-                         && saved?.ad_user_data === 'granted'
-                         && saved?.ad_personalization === 'granted');
+        const adsGranted = (
+          saved?.ad_storage === 'granted' &&
+          saved?.ad_user_data === 'granted' &&
+          saved?.ad_personalization === 'granted'
+        );
         tgAnalytics.checked = !!anaGranted;
-        tgAds.checked       = !!adsGranted;
+        tgAds.checked = !!adsGranted;
         backdrop.style.display = 'block';
         modal.style.display = 'block';
       }
+
       function closeModal(){
         backdrop.style.display = 'none';
         modal.style.display = 'none';
@@ -205,6 +837,7 @@
         hideBanner();
         sendPageViewIfNeeded();
       }
+
       function rejectAll(){
         const obj = {
           analytics_storage: 'denied',
@@ -215,12 +848,13 @@
         applyConsentObject(obj);
         hideBanner();
       }
+
       function saveGranular(){
         const obj = {
           analytics_storage: tgAnalytics.checked ? 'granted' : 'denied',
-          ad_storage:        tgAds.checked ? 'granted' : 'denied',
-          ad_user_data:      tgAds.checked ? 'granted' : 'denied',
-          ad_personalization:tgAds.checked ? 'granted' : 'denied'
+          ad_storage: tgAds.checked ? 'granted' : 'denied',
+          ad_user_data: tgAds.checked ? 'granted' : 'denied',
+          ad_personalization: tgAds.checked ? 'granted' : 'denied'
         };
         applyConsentObject(obj);
         closeModal();
@@ -237,226 +871,23 @@
         if (!hasChoice) showBanner();
       });
 
-      acceptBt.addEventListener('click', acceptAll);
-      rejectBt.addEventListener('click', rejectAll);
-      configBt.addEventListener('click', openModal);
-      saveBt.addEventListener('click', saveGranular);
-      cancelBt.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', closeModal);
+      acceptBt?.addEventListener('click', acceptAll);
+      rejectBt?.addEventListener('click', rejectAll);
+      configBt?.addEventListener('click', openModal);
+      saveBt?.addEventListener('click', saveGranular);
+      cancelBt?.addEventListener('click', closeModal);
+      backdrop?.addEventListener('click', closeModal);
 
-      // Enlaces internos del texto legal abren el modal
-      function openConsentFromPolicy(e){
-        e?.preventDefault?.();
+      document.getElementById('manage-cookies')?.addEventListener('click', function(e){
+        e.preventDefault();
         openModal();
-      }
-      document.getElementById('manage-cookies')?.addEventListener('click', openConsentFromPolicy);
-      document.getElementById('manage-cookies-2')?.addEventListener('click', openConsentFromPolicy);
+      });
+
+      document.getElementById('manage-cookies-2')?.addEventListener('click', function(e){
+        e.preventDefault();
+        openModal();
+      });
     })();
   </script>
-
-  <!-- Header sencillo -->
-  <header id="mu-header" role="banner">
-    <div class="mu-header-overlay">
-      <div class="container">
-        <div class="mu-header-area">
-          <h1 style="color:#fff; text-align:center; margin-top:40px;">
-            Política de Privacidad
-          </h1>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Contenido principal -->
-  <main role="main">
-    <section id="mu-feature">
-      <div class="container legal">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="mu-feature-area">
-
-              <div class="mu-title-area">
-                <h2 class="mu-title">Protección de tus datos</h2>
-                <span class="mu-title-dot"></span>
-              </div>
-
-              <p style="text-align:justify;">
-                En esta página te explicamos de forma clara cómo tratamos los datos personales en el sitio web
-                <strong>Eidos</strong> (<em>eidoslibro.com</em>) y cómo puedes gestionar tus preferencias de cookies.
-              </p>
-
-              <h3>Responsable del tratamiento</h3>
-              <p><strong>Felden Vareth</strong><br>
-                📧 <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>
-              </p>
-
-              <h3>Qué datos recogemos</h3>
-              <ul>
-                <li><strong>Contacto:</strong> nombre y correo electrónico si nos escribes por email.</li>
-                <li><strong>Registros técnicos</strong> del servidor (p. ej., IP anónima, fecha/hora, agente de usuario) por seguridad y mantenimiento.</li>
-                <li><strong>Analítica web (opcional):</strong> estadísticas de uso mediante Google Analytics 4 <u>solo si aceptas cookies analíticas</u>.</li>
-              </ul>
-
-
-
-<h3>Comentarios y participación en el blog</h3>
-
-<p>
-  Algunas secciones del blog permiten la participación pública mediante comentarios
-  integrados a través de GitHub Discussions/Giscus.
-</p>
-
-<p>
-  Cada usuario es el único responsable de los contenidos, opiniones y mensajes
-  publicados bajo su cuenta de GitHub, respondiendo personalmente de cualquier
-  vulneración legal o perjuicio que pudiera derivarse de los mismos.
-</p>
-
-<p>
-  La participación en el blog implica la aceptación de las presentes condiciones
-  de uso y de las normas básicas de convivencia y respeto.
-</p>
-
-<p>
-  Eidos no comparte necesariamente las opiniones publicadas por terceros y se
-  reserva el derecho de moderar, ocultar o eliminar, sin previo aviso, comentarios
-  ofensivos, discriminatorios, difamatorios, amenazas, mensajes de odio, spam,
-  ataques personales o cualquier contenido que pueda considerarse inapropiado,
-  ilícito o contrario a la finalidad del sitio.
-</p>
-
-<p>
-  El uso del sistema de comentarios puede implicar el tratamiento técnico de datos
-  por parte de GitHub y Giscus conforme a sus respectivas políticas y condiciones.
-</p>
-
-              <h3>Finalidades y base jurídica</h3>
-              <ul>
-                <li><strong>Responder consultas</strong> por email – base jurídica: <em>interés legítimo</em> y/o <em>ejecución de petición</em>.</li>
-                <li><strong>Seguridad y mantenimiento de la web</strong> – base jurídica: <em>interés legítimo</em>.</li>
-                <li><strong>Analítica de uso con GA4</strong> – base jurídica: <em>tu consentimiento</em> (que puedes aceptar, rechazar o configurar).</li>
-              </ul>
-
-              <h3>Cookies y tecnologías similares</h3>
-              <p>Usamos un banner de consentimiento con <strong>Google Analytics 4</strong> y <em>Consent Mode v2</em>.
-                Por defecto no activamos cookies analíticas hasta que das tu consentimiento.
-                Puedes cambiar tu preferencia en cualquier momento desde este botón:</p>
-
-              <p><a href="#" id="manage-cookies" class="btn-outline">Gestionar preferencias de cookies</a></p>
-
-              <h4>Cookies de analítica que puede usar GA4 (si las aceptas)</h4>
-              <table class="cookie-table">
-                <thead>
-                  <tr>
-                    <th>Cookie</th>
-                    <th>Proveedor</th>
-                    <th>Finalidad</th>
-                    <th>Duración aproximada</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>_ga</td>
-                    <td>Google Analytics</td>
-                    <td>Distinguir usuarios de forma anónima (ID aleatorio).</td>
-                    <td>hasta 2 años</td>
-                  </tr>
-                  <tr>
-                    <td>_ga_<em>XXXXX</em></td>
-                    <td>Google Analytics</td>
-                    <td>Mantener la sesión y medir interacciones en el sitio.</td>
-                    <td>hasta 2 años</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p style="font-size:.95rem;color:#555">
-                Nota: la instalación efectiva y la caducidad dependen de tu elección en el banner y de
-                la configuración del navegador/dispositivo.
-              </p>
-
-              <h3>Con quién compartimos datos</h3>
-           <p>
-  No cedemos datos a terceros salvo obligación legal. Para la analítica, utilizamos
-  <strong>Google Analytics 4</strong> (Google LLC / Google Ireland Limited) como
-  <em>encargado del tratamiento</em>. En las zonas de comentarios del blog pueden
-  intervenir técnicamente <strong>GitHub Discussions</strong> y <strong>Giscus</strong>,
-  conforme a sus propias políticas y condiciones.
-</p>
-
-              <h3>Transferencias internacionales</h3>
-              <p>
-                Los servicios de Google pueden implicar transferencias internacionales. Google aplica
-                las <em>Cláusulas Contractuales Tipo</em> (SCC) y medidas complementarias. Puedes consultar
-                la documentación y condiciones de tratamiento de datos de Google en sus páginas oficiales.
-              </p>
-
-              <h3>Plazos de conservación</h3>
-              <ul>
-                <li>Consultas por email: el tiempo necesario para atenderlas y cumplir obligaciones legales.</li>
-                <li>Datos de analítica en GA4: según configuración estándar de la propiedad; no se conservan si rechazas las cookies.</li>
-              </ul>
-
-              <h3>Cómo cambiar o revocar tu consentimiento</h3>
-              <p>
-                Puedes modificar tu decisión sobre las cookies en cualquier momento con el botón
-                <a href="#" id="manage-cookies-2">“Gestionar preferencias de cookies”</a> o borrando
-                las cookies/almacenamiento del navegador para este sitio.
-              </p>
-
-
-
-
-
-
-
-              <h3>Tus derechos</h3>
-              <p>
-                Puedes ejercer los derechos de acceso, rectificación, supresión, limitación, oposición y portabilidad
-                escribiendo a <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a>. Si consideras que
-                no se ha atendido correctamente, puedes reclamar ante la autoridad de control (AEPD en España).
-              </p>
-
-              <h3>Medidas de seguridad</h3>
-              <p>
-                Aplicamos medidas técnicas y organizativas razonables para proteger tus datos frente a accesos no autorizados,
-                pérdida o alteración.
-              </p>
-
-              <h3>Actualizaciones de esta política</h3>
-              <p>
-                Podemos actualizar esta política para reflejar cambios legales o técnicos. Publicaremos la versión vigente
-                con la fecha de actualización.
-              </p>
-
-              <p style="color:#666;font-size:.9rem">Última actualización: Mayo  2026</p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Botón volver -->
-    <div style="text-align:center; margin:40px 0;">
-      <a class="mu-contrata-btn" href="index.html">
-        <i class="fa fa-arrow-left"></i> Volver a la web
-      </a>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer id="mu-footer" role="contentinfo">
-    <div class="container">
-      <div class="mu-footer-area">
-        <p class="mu-copy-right">&nbsp;</p>
-        <p><a href="index.html">Eidos</a> Copyright © 2025 Felden Vareth / Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/optimize.js" defer></script>
 </body>
 </html>
