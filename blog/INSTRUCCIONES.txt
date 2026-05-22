@@ -1,0 +1,59 @@
+EIDOS Blog Microsite v3
+
+Descomprime la carpeta /blog en la raíz del repositorio eidoslibro.
+
+Cambios incluidos:
+- Enlaces de "Seguir leyendo" corregidos para evitar recomendar el propio artículo.
+- JSON-LD con inLanguage="es" en el blog y en los artículos.
+- Bloque de comentarios preparado para Giscus con data-theme="dark".
+- Sección de newsletter añadida en /blog/index.html.
+- CTA de newsletter añadido en los artículos.
+- CSS y JS siguen organizados en /blog/css/ y /blog/js/.
+
+Importante sobre la newsletter:
+GitHub Pages es estático. Para guardar correos, gestionar bajas y cumplir correctamente con comunicaciones comerciales, conecta el formulario a un servicio externo como Brevo, Mailchimp, MailerLite, Buttondown, ConvertKit o similar.
+
+En /blog/index.html busca:
+<form class="newsletter-form" action="#" method="post">
+
+Sustituye action="#" por el endpoint que te dé el servicio elegido.
+
+Cada envío real de newsletter debe incluir enlace de baja automática.
+
+
+CONFIGURACIÓN FINAL RECOMENDADA
+
+1. Descomprime la carpeta blog/ en la raíz del repositorio de eidoslibro.com, al mismo nivel que index.html, assets/ y relatos/.
+
+2. Para comentarios con Giscus:
+   - En GitHub, entra en el repositorio.
+   - Ve a Settings > Features y activa Discussions.
+   - Crea una categoría llamada Comentarios, preferiblemente tipo Open-ended discussion.
+   - Instala/activa la app de Giscus para ese repositorio si te lo solicita.
+   - Entra en https://giscus.app/es y configura:
+     Repositorio: TU-USUARIO/TU-REPOSITORIO
+     Mapping: pathname
+     Categoría: Comentarios
+     Tema: dark
+     Idioma: español
+   - Copia el script generado y sustituye el bloque comentado de Giscus en cada artículo.
+
+3. Moderación:
+   - Los comentarios aparecen automáticamente.
+   - Puedes borrar comentarios, cerrar discusiones o bloquear usuarios desde GitHub Discussions.
+   - GitHub enviará notificaciones según la configuración de tu cuenta/repositorio.
+
+4. Newsletter con Brevo:
+   - Crea una cuenta en Brevo y una lista de suscriptores.
+   - Crea un formulario de suscripción.
+   - Sustituye en blog/index.html el action="#" del formulario por la URL o endpoint que proporcione Brevo.
+   - Revisa que el texto legal y el enlace de privacidad estén adaptados a tu web.
+
+
+v5: Ajustado logotipo superior tipo EIDOS, partículas doradas ascendentes y corrección de letra capital para que no afecte a newsletter/comentarios.
+
+
+V6: Partículas ajustadas para aparecer solo dentro del hero/primer bloque, usando el comportamiento visual del index principal de Eidos.
+
+
+Versión v7: partículas confinadas exclusivamente al hero del blog, con el mismo patrón CSS/JS del index principal. Eliminadas de artículos individuales.
