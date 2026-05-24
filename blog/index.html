@@ -33,6 +33,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/blog.css">
 
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -89,7 +92,7 @@
     <header class="hero reveal">
       <div class="particles" id="particles" aria-hidden="true"></div>
       <p class="kicker">Felden Vareth · Archivo de ideas</p>
-      <h1>Ensayos desde el universo Eidos</h1>
+      <h1>Ensayos desde el universo EIDOS</h1>
       <p class="hero-text">Un espacio para pensar la consciencia, la inteligencia artificial, la identidad, la memoria y el futuro humano desde la ciencia ficción filosófica.</p>
       <div class="hero-actions">
         <a class="btn gold" href="#articulos">Leer artículos</a>
@@ -174,21 +177,69 @@
       </section>
 
       <section class="newsletter reveal" id="newsletter" aria-labelledby="newsletter-title">
-        <div class="newsletter-copy">
-          <p class="kicker">Actualizaciones de Eidos</p>
-          <h2 id="newsletter-title">Recibe nuevos ensayos y noticias del universo Eidos.</h2>
-          <p>Suscríbete para recibir avisos de nuevos artículos, lanzamientos, relatos y novedades editoriales. Sin ruido, solo contenido relacionado con Eidos.</p>
-        </div>
 
         <!-- Sustituye el atributo action por el endpoint real de tu servicio de newsletter: Brevo, Mailchimp, Buttondown, MailerLite, etc. -->
-        <form class="newsletter-form" action="#" method="post">
-          <label class="sr-only" for="newsletter-email">Correo electrónico</label>
-          <input id="newsletter-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
-          <button class="btn gold" type="submit">Suscribirme</button>
-          <p class="newsletter-legal">
-            Al suscribirte aceptas recibir comunicaciones sobre Eidos. Todos los envíos deberán incluir un enlace para darte de baja.
+        
+        
+        
+        
+<div class="sib-form">
+  <div id="sib-form-container" class="sib-form-container">
+
+    <div id="sib-container" class="sib-container--large sib-container--vertical">
+
+      <form id="newsletter-form"
+        method="POST"
+        action="https://35319964.sibforms.com/serve/MUIFAD62shompJKTVSOrBTp2z4O0dyoAE4f2lzrqeWAU_tRrPfD-bgTiT-p4FX-9R8Rl1CLQZBYy8kBAlvcdZv2Du01YmGjuuBbg0WBdSdyye7DCUwOnEhZ9TXJebIdmNpbsc9AVvOr_dXUp6kaSQJlZmrJ5EEC5gSjPfJeENwJqfRTXuK77ERJg8chQOveEsUatC5ASWm6NNmW1PA=="
+        data-type="subscription">
+
+        <div class="newsletter-box">
+
+          <h2>Transmisiones desde EIDOS</h2>
+
+          <p>
+            Recibe nuevos relatos, artículos y futuras transmisiones desde el universo de Eidos.
           </p>
-        </form>
+
+          <input
+            type="email"
+            id="EMAIL"
+            name="EMAIL"
+            placeholder="Tu correo electrónico"
+            autocomplete="email"
+            required
+          >
+
+          <button type="submit">
+            RECIBIR TRANSMISIONES
+          </button>
+
+          <p class="newsletter-legal">
+            Al suscribirte aceptas recibir comunicaciones relacionadas con Eidos y sus futuras publicaciones.
+          </p>
+
+        </div>
+
+        <input
+          type="text"
+          name="email_address_check"
+          value=""
+          class="input--hidden">
+
+        <input
+          type="hidden"
+          name="locale"
+          value="es">
+
+      </form>
+
+    </div>
+  </div>
+</div>        
+        
+        
+        
+        
       </section>
 
     </main>
@@ -232,7 +283,23 @@
 </script>
   
   
-  
+  <script>
+window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
+window.LOCALE = 'es';
+
+window.EMAIL_INVALID_MESSAGE =
+"La información proporcionada no es válida.";
+
+window.REQUIRED_ERROR_MESSAGE =
+"Este campo no puede quedar vacío.";
+
+window.GENERIC_INVALID_MESSAGE =
+"La información proporcionada no es válida.";
+
+var AUTOHIDE = Boolean(0);
+</script>
+
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
   
   
 </body>
