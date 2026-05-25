@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transmisión verificada · EIDOS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <meta name="theme-color" content="#050608">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root{
+      --gold:#c9a84c;
+      --gold-dim:rgba(201,168,76,.18);
+      --bg:#050608;
+      --surface:rgba(255,255,255,.03);
+      --text:#e8e0d0;
+      --muted:#7a7060;
+      --ff-serif:'Cormorant Garamond', Georgia, serif;
+      --ff-sans:'Josefin Sans', system-ui, sans-serif;
+    }
+
+    html,body{
+      height:100%;
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--ff-sans);
+      overflow-x:hidden;
+    }
+
+    .bg-layer{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 100%, rgba(201,168,76,.04) 0%, transparent 60%);
+    }
+
+    .shell{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:40px 24px;
+    }
+
+    .card{
+      max-width:560px;
+      width:100%;
+      background:var(--surface);
+      border:1px solid var(--gold-dim);
+      padding:64px 56px;
+      text-align:center;
+      backdrop-filter:blur(12px);
+    }
+
+    .icon{
+      width:80px;
+      height:80px;
+      margin:0 auto 36px;
+      border-radius:50%;
+      border:1px solid var(--gold);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+      font-size:2rem;
+      box-shadow:0 0 25px rgba(201,168,76,.15);
+    }
+
+    .kicker{
+      font-size:.7rem;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:20px;
+    }
+
+    h1{
+      font-family:var(--ff-serif);
+      font-size:clamp(2rem,5vw,2.8rem);
+      font-weight:600;
+      margin-bottom:20px;
+      line-height:1.1;
+    }
+
+    h1 em{
+      color:var(--gold);
+      font-style:italic;
+    }
+
+    .body-text{
+      font-size:.9rem;
+      line-height:1.9;
+      color:var(--muted);
+      margin-bottom:40px;
+    }
+
+    .body-text strong{
+      color:var(--text);
+      font-weight:400;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 36px;
+      background:linear-gradient(135deg, rgba(201,168,76,.95), rgba(155,122,42,.9));
+      color:#080808;
+      text-decoration:none;
+      border-radius:999px;
+      font-size:.72rem;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      transition:.25s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.1);
+    }
+
+    .footer{
+      margin-top:40px;
+      font-size:.72rem;
+      color:rgba(122,112,96,.5);
+    }
+
+    .footer a{
+      color:rgba(201,168,76,.6);
+      text-decoration:none;
+    }
+
+    .brand{
+      position:fixed;
+      top:28px;
+      left:36px;
+      z-index:10;
+      text-decoration:none;
+      line-height:1;
+    }
+
+    .brand-word{
+      display:block;
+      font-family:var(--ff-serif);
+      font-size:1.2rem;
+      font-weight:600;
+      letter-spacing:.12em;
+      color:#f0e8d8;
+    }
+
+    .brand-sub{
+      display:block;
+      font-size:.52rem;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+
+    @media (max-width:560px){
+      .card{
+        padding:48px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<a class="brand" href="../index.html">
+  <span class="brand-word">EIDOS</span>
+  <span class="brand-sub">Blog</span>
+</a>
+
+<main class="shell">
+
+  <div class="card">
+
+    <div class="icon">✓</div>
+
+    <p class="kicker">Verificación completada</p>
+
+    <h1>Transmisión <em>activada</em></h1>
+
+    <p class="body-text">
+      Tu dirección de correo ha sido verificada correctamente.<br><br>
+      Ya formas parte de las transmisiones de <strong>EIDOS</strong>.
+      A partir de ahora recibirás nuevos relatos, artículos y futuras señales desde el universo EIDOS.
+    </p>
+
+    <a class="btn" href="https://www.eidoslibro.com/blog/">
+      Entrar al blog
+    </a>
+
+  </div>
+
+  <p class="footer">
+    © Felden Vareth ·
+    <a href="../index.html">eidoslibro.com</a> ·
+    <a href="../terminosycondiciones.html">Privacidad</a>
+  </p>
+
+</main>
+
+</body>
+</html>
