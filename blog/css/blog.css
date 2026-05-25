@@ -199,3 +199,94 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
 .hero > :not(.particles){position:relative;z-index:2;}
 @media (max-width:900px){.hero{min-height:auto;padding:78px 0 56px}.hero .particles{width:100vw}.hero h1{font-size:clamp(3.1rem,16vw,5.2rem)}}
 @media (max-width:520px){.hero h1{font-size:3.15rem}}
+
+
+
+/* Artículos · estilo general */
+
+.article-content{
+  opacity:1 !important;
+  transform:none !important;
+}
+
+/* Capitular editorial */
+
+.drop-intro{
+    overflow:hidden;
+}
+
+.dropcap{
+    float:left;
+    font-family:'Cormorant Garamond', serif;
+    font-size:6rem;
+    line-height:.72;
+    color:#c9a84c;
+    margin-right:.12em;
+    margin-top:.02em;
+}
+
+.after-drop{
+    display:block;
+    padding-top:1.7em;
+}
+
+/* Enlaces dentro de artículos */
+
+.article-content a{
+    display:inline-block;
+    color:#c9a84c;
+    text-decoration:none;
+    font-family:'Josefin Sans', sans-serif;
+    font-size:.82rem;
+    letter-spacing:.04em;
+    border:1px solid rgba(201,168,76,.22);
+    border-radius:999px;
+    padding:.45rem .75rem;
+    background:rgba(201,168,76,.055);
+    transition:all .25s ease;
+}
+
+.article-content a:hover{
+    color:#050608;
+    background:#c9a84c;
+    border-color:#c9a84c;
+}
+
+/* Tablas de artículos */
+
+.article-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:2rem 0;
+    font-size:.95rem;
+}
+
+.article-table th,
+.article-table td{
+    padding:14px;
+    border-bottom:1px solid rgba(201,168,76,.18);
+    text-align:left;
+    vertical-align:top;
+}
+
+.article-table th{
+    color:#c9a84c;
+    background:rgba(201,168,76,.06);
+}
+
+@media (max-width:760px){
+    .dropcap{
+        font-size:4.2rem;
+    }
+
+    .after-drop{
+        padding-top:1.45em;
+    }
+
+    .article-table{
+        display:block;
+        overflow-x:auto;
+        white-space:normal;
+    }
+}
+

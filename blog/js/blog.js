@@ -196,7 +196,7 @@
       if(!link || !meta) return;
 
       const href = link.getAttribute('href');
-      const cacheKey = `eidos-reading-time:${href}`;
+      const cacheKey = `eidos-reading-time-v2:${href}`;
 
       try{
         const cached = sessionStorage.getItem(cacheKey);
@@ -224,6 +224,8 @@
   }
 
   updateArchiveReadingTimes();
+
+
 
   // Barra de progreso de lectura.
   const progress = document.querySelector('.reading-progress span');
@@ -288,3 +290,7 @@
     window.addEventListener('scroll', toggleScrollTop, {passive:true});
   }
 })();
+
+
+
+
