@@ -123,7 +123,38 @@
   });
   applyArchiveFilters();
 
-  // Cálculo automático del tiempo de lectura.
+  // Mostrar fecha en .meta y ordenar por fecha via CSS order.
+  (function showDatesAndOrder(){
+    if(!cards.length) return;
+
+    // Recoger fechas y calcular orden CSS (mas reciente = order mas bajo).
+    var dated = cards
+      .map(function(card){
+        return { card: card, ts: new Date((card.dataset.date || '1970-01-01') + 'T00:00:00').getTime() };
+      })
+      .filter(function(item){ return !isNaN(item.ts); })
+      .sort(function(a, b){ return b.ts - a.ts; });
+
+    dated.forEach(function(item, index){
+      item.card.style.order = String(index);
+    });
+
+    // Mostrar fecha legible en .meta.
+    cards.forEach(function(card){
+      var dateStr = card.dataset.date;
+      if(!dateStr) return;
+      var meta = card.querySelector('.meta');
+      if(!meta) return;
+      var date = new Date(dateStr + 'T00:00:00');
+      if(isNaN(date)) return;
+      var formatted = date.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+      if(meta.textContent.indexOf(formatted) === -1){
+        meta.textContent = meta.textContent.trimEnd() + ' · ' + formatted;
+      }
+    });
+  })();
+
+  // Calculo automatico del tiempo de lectura.
   const articleContent = document.querySelector('[data-article-content], .article-content');
   const WORDS_PER_MINUTE = 220;
 
@@ -290,7 +321,4 @@
     window.addEventListener('scroll', toggleScrollTop, {passive:true});
   }
 })();
-
-
-
 
