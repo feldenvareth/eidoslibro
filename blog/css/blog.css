@@ -132,8 +132,37 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
 
 
 
+.reading-progress {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  background: rgba(255,255,255,.08);
+}
 
+.reading-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  transition: width .12s linear;
+}
 
+.reading-progress-article {
+  top: 0;
+}
+
+.reading-progress-article span {
+  background: linear-gradient(90deg, #c9a84c, #f0d27a);
+}
+
+.reading-progress-forum {
+  top: 3px;
+}
+
+.reading-progress-forum span {
+  background: linear-gradient(90deg, #4fa66a, #8ed39f);
+}
 
 
 
