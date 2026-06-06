@@ -258,18 +258,47 @@
 
 
 
-  // Barra de progreso de lectura.
-  const progress = document.querySelector('.reading-progress span');
-  function updateProgress(){
-    if(!progress || !articleContent) return;
-    const rect = articleContent.getBoundingClientRect();
-    const total = articleContent.offsetHeight - window.innerHeight;
-    const read = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
-    progress.style.width = `${Math.round((read / Math.max(total, 1)) * 100)}%`;
+// Barras de progreso: artículo + zona de conversación.
+const articleProgress = document.querySelector('.reading-progress-article span');
+const forumProgress = document.querySelector('.reading-progress-forum span');
+const forumStart = document.querySelector('.related, .newsletter-mini, #comentarios');
+
+function calculateProgressForElement(element){
+  if(!element) return 0;
+
+  const rect = element.getBoundingClientRect();
+  const total = element.offsetHeight - window.innerHeight;
+  const read = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+
+  return Math.round((read / Math.max(total, 1)) * 100);
+}
+
+function updateProgress(){
+  if(articleProgress && articleContent){
+    articleProgress.style.width = `${calculateProgressForElement(articleContent)}%`;
   }
-  updateProgress();
-  window.addEventListener('scroll', updateProgress, {passive:true});
-  window.addEventListener('resize', updateProgress);
+
+  if(forumProgress && forumStart){
+    const forumRect = forumStart.getBoundingClientRect();
+    const documentHeight = document.documentElement.scrollHeight;
+    const forumTop = window.scrollY + forumRect.top;
+    const total = documentHeight - forumTop - window.innerHeight;
+    const read = window.scrollY - forumTop;
+
+    const pct = Math.round(
+      Math.min(Math.max(read, 0), Math.max(total, 1)) / Math.max(total, 1) * 100
+    );
+
+    forumProgress.style.width = `${pct}%`;
+  }
+}
+
+updateProgress();
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+
+ 
+  
 
   // Tabla de contenidos automática solo si el artículo tiene subtítulos h2 reales.
   const toc = document.querySelector('[data-toc]');
