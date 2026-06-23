@@ -254,6 +254,21 @@ h1, h2, h3, h4, h5, h6{
 
 
 
+.filter-container {
+    margin: 30px 0 30px 30px;
+    color: #6fd3ff;
+    font-family: "raleway-regular", arial;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+.filter-container label {
+    color: #6fd3ff;
+    font-weight: bold;
+}
+
+
+
 
 
 /*  Main  */
