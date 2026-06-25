@@ -411,13 +411,13 @@
 							<h4>Apoya al autor</h4>
 							<p>La edición de apoyo al autor, puedes reservarla en Amazon.</p>
                             
-							<a class="cta-button secondary disabled" href="#" target="_blank" rel="noopener">Próximamente en Amazon</a>
+							<a class="cta-button secondary" href="https://www.amazon.es/dp/B0H18XQ6D1" target="_blank" rel="noopener">Resérvalo en Amazon</a>
                             
-							<div class="cta-image disabled">
-								<img src="../img/posts/post_007/kindle.jpg" alt="Comprar La misma luz en Amazon Kindle próximamente">
+							<div class="cta-image">
+								<a href="https://www.amazon.es/dp/B0H18XQ6D1" target="_blank" rel="noopener">
+									<img src="../img/posts/post_007/kindle.jpg" alt="Reserva La misma luz en Amazon Kindle">
+								</a>
 							</div>
-
-							<p class="cta-note">Próximamente podrás adquirir tu copia en Amazon.</p>
 						</div>
 					</div>
 				</div>
@@ -501,13 +501,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const notaBuy = cardBuy.querySelector(".cta-note");
             if (notaBuy) notaBuy.remove();
 
-            // Activar botón Amazon cuando esté disponible
-            // const botonBuy = cardBuy.querySelector(".cta-button");
-            // if (botonBuy) {
-            //     botonBuy.classList.remove("disabled");
-            //     botonBuy.href = "https://www.amazon.es/dp/XXXXXXXXX";
-            //     botonBuy.textContent = "Comprar en Amazon";
-            // }
+            const botonBuy = cardBuy.querySelector(".cta-button");
+            if (botonBuy) {
+                botonBuy.textContent = "Cómpralo en Amazon";
+            }
+
+            const imgBuy = cardBuy.querySelector(".cta-image img");
+            if (imgBuy) {
+                imgBuy.alt = "Compra La misma luz en Amazon Kindle";
+            }
+
         }
     }
 });
