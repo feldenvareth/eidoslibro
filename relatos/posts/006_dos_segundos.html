@@ -15,13 +15,10 @@
 	<meta property="og:type" content="article">
 	<meta property="og:site_name" content="Eidos">
 	<meta property="og:url" content="https://www.eidoslibro.com/blog/posts/006_dos_segundos.html">
-	<meta property="og:image" content="https://www.eidoslibro.com/blog/img/posts/post_006/show.jpg">
     <meta property="og:locale" content="es_ES">
 
-    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Dos segundos | Relato de ciencia ficción del universo Eidos">
     <meta name="twitter:description" content="Relato de ciencia ficción ambientado en Eidos sobre el miedo, la culpa y todo lo que puede romperse en un instante.">
-    <meta name="twitter:image" content="https://www.eidoslibro.com/blog/img/posts/post_006/show.jpg">
 
     <link rel="canonical" href="https://www.eidoslibro.com/blog/posts/006_dos_segundos.html">
     
@@ -31,6 +28,23 @@
     <link rel="shortcut icon" type="image/icon" href="https://www.eidoslibro.com/assets/images/favicon.ico"/>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    
+<meta property="og:image" content="https://www.eidoslibro.com/relatos/img/posts/post_006/a.jpg">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/relatos/img/posts/post_006/a.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.eidoslibro.com/relatos/img/posts/post_006/a.jpg">    
+    
+    
+    
+    
+    
+    
+    
 
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
@@ -50,7 +64,7 @@
       "inLanguage": "es",
       "genre": ["Ciencia ficción", "Relato", "Distopía"],
       "url": "https://www.eidoslibro.com/blog/posts/006_dos_segundos.html",
-      "image": "https://www.eidoslibro.com/blog/img/posts/post_006/show.jpg",
+      "image": "https://www.eidoslibro.com/relatos/img/posts/post_006/a.jpg",
       "isPartOf": {
         "@type": "CreativeWorkSeries",
         "name": "Eidos"
@@ -363,6 +377,63 @@
 						<span><strong> Junio 2026</strong></span>
 					</div>
 				</div>
+
+
+<style>
+.copiar-enlace-container {
+    margin-top: 28px;
+    margin-bottom: 18px;
+}
+
+.mensaje-copiado {
+    display: none;
+    margin-top: 10px;
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 15px;
+}
+</style>
+
+<div class="copiar-enlace-container">
+
+    <button id="copiarEnlace" class="cta-button secondary">
+        🔗 Copiar enlace
+    </button>
+
+    <div id="mensajeCopiado" class="mensaje-copiado">
+        ✅ ¡Enlace copiado!
+    </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementById("copiarEnlace").addEventListener("click", async function () {
+
+        try {
+            await navigator.clipboard.writeText(window.location.href);
+
+            const msg = document.getElementById("mensajeCopiado");
+            msg.style.display = "block";
+
+            setTimeout(function () {
+                msg.style.display = "none";
+            }, 2000);
+
+        } catch (err) {
+            alert("No se pudo copiar el enlace.");
+        }
+
+    });
+
+});
+</script>
+
+
+
+
+
 
 				<p>
 					Una carretera casi vacía. Un cruce nocturno. Un gesto mal interpretado.
