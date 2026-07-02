@@ -113,7 +113,41 @@
     <main>
       <section class="section reveal" id="archivo" aria-labelledby="archivo-title">
         <div class="feature">
+        
+ <!--   Imagen fija    
           <div class="feature-img" aria-hidden="true"></div>
+    -->   
+          
+          
+ <!--   Video       -->   
+ 
+ 
+         <div class="feature-img" aria-hidden="true">
+    <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+        <source src="articulos/images/03/video.mp4" type="video/mp4">
+    </video>
+</div>
+ 
+     <style>
+.feature-img{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+}
+
+.feature-img video{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    border-radius:inherit;
+}
+</style>               
+          
+          
+          
+          
+          
           <div class="feature-copy">
             <p class="kicker">Una biblioteca lateral de Eidos</p>
             <h2 id="archivo-title">Más allá de la novela.</h2>

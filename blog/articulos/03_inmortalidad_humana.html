@@ -96,7 +96,53 @@ gtag('config', 'G-GRKE5N9XFB');
 <button class="btn share-btn" data-share="" type="button">Copiar enlace</button>
 </div>
 </header>
-<div aria-hidden="true" class="article-cover reveal" style="background-image:url('images/03/fondo.jpg')"></div>
+
+   <!--   para imagen estatica    
+   
+   
+<div aria-hidden="true" class="article-cover reveal"
+     style="background-image:url('images/03/fondo.jpg')"></div>
+
+-->
+
+<!--   Para video
+
+-->
+
+<div class="article-cover reveal">
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata">
+        <source src="images/03/video.mp4" type="video/mp4">
+    </video>
+</div>
+
+
+<style>
+.article-cover{
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.article-cover video{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+</style>
+
+
+
+
+
+
+
 <aside class="article-toc reveal" data-toc="" hidden="">
 <p class="kicker">Mapa del post</p>
 <nav aria-label="Tabla de contenidos"></nav>
