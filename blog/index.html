@@ -128,24 +128,29 @@
     </video>
 </div>
  
-     <style>
+<style>
+
 .feature-img{
-    position:relative;
-    overflow:hidden;
-    border-radius:28px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    background: #000 !important;
 }
 
 .feature-img video{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    border-radius:inherit;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: contain;
+    object-position: center center;
+
+    background: #000;
 }
-</style>               
-          
-          
-          
+
+</style>          
           
           
           <div class="feature-copy">
