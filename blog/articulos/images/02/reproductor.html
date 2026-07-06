@@ -22,7 +22,7 @@
 <body>
 <main class="page">
 <a class="top-link" href="../../02_mente_humana.html">← Volver al artículo</a>
-<section class="cover" aria-label="Portada del audio"><div class="hero"><p class="kicker">Eidos · Neurociencia</p><h1>¿Podremos copiar una mente humana?</h1><p class="meta">Conversación · 21 min</p></div></section>
+<section class="cover" aria-label="Portada del audio"><div class="hero"><p class="kicker">Eidos · Neurociencia</p><h1>¿Podremos copiar una mente humana?</h1><p class="meta" id="metaDuration">Conversación</p></div></section>
 <section class="card" aria-label="Reproductor de audio">
 <p class="intro"><strong>Esta conversación no reproduce el artículo.</strong></p>
 <p class="intro">Es un diálogo inspirado en sus ideas que desarrolla nuevas preguntas, ejemplos y reflexiones.</p>
@@ -35,11 +35,12 @@
 </main>
 <audio id="audio" preload="metadata" src="mente_humana_conversacion.mp3"></audio>
 <script>
-const audio=document.getElementById('audio'),playBtn=document.getElementById('playBtn'),backBtn=document.getElementById('backBtn'),forwardBtn=document.getElementById('forwardBtn'),seek=document.getElementById('seek'),currentTimeEl=document.getElementById('currentTime'),durationEl=document.getElementById('duration'),status=document.getElementById('status'),volume=document.getElementById('volume'),volumeValue=document.getElementById('volumeValue'),muteBtn=document.getElementById('muteBtn');
+const audio=document.getElementById('audio'),playBtn=document.getElementById('playBtn'),backBtn=document.getElementById('backBtn'),forwardBtn=document.getElementById('forwardBtn'),seek=document.getElementById('seek'),currentTimeEl=document.getElementById('currentTime'),durationEl=document.getElementById('duration'),status=document.getElementById('status'),volume=document.getElementById('volume'),volumeValue=document.getElementById('volumeValue'),muteBtn=document.getElementById('muteBtn'),metaDuration=document.getElementById('metaDuration');
 function fmt(t){if(!isFinite(t))return'0:00';const m=Math.floor(t/60),s=Math.floor(t%60).toString().padStart(2,'0');return `${m}:${s}`}
+function fmtMinutes(t){if(!isFinite(t))return'';const mins=Math.round(t/60);return mins+' min'}
 function updateVolumeUI(){const pct=Math.round(audio.volume*100);volume.value=audio.volume;volumeValue.textContent=pct+'%';muteBtn.textContent=audio.muted||audio.volume===0?'🔇':'🔊'}
 audio.volume=1;updateVolumeUI();
-audio.addEventListener('loadedmetadata',()=>{durationEl.textContent=fmt(audio.duration);status.textContent='Listo para reproducir'});
+audio.addEventListener('loadedmetadata',()=>{durationEl.textContent=fmt(audio.duration);status.textContent='Listo para reproducir';metaDuration.textContent='Conversación · '+fmtMinutes(audio.duration)});
 audio.addEventListener('error',()=>{status.textContent='No se encontró el archivo de audio'});
 audio.addEventListener('timeupdate',()=>{currentTimeEl.textContent=fmt(audio.currentTime);if(audio.duration)seek.value=(audio.currentTime/audio.duration)*100});
 audio.addEventListener('ended',()=>{playBtn.textContent='▶';status.textContent='Finalizado'});
