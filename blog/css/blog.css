@@ -173,6 +173,103 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
   background: linear-gradient(90deg, #4fa66a, #8ed39f);
 }
 
+/* Video inicial */
+
+.article-cover{
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+}
+
+.article-cover video{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+
+
+
+
+
+/* Imagen a la izquerda dentro del texto */
+
+
+
+.inline-figure {
+  margin: 0.25rem 1.75rem 1rem 0;
+  max-width: 280px;
+}
+
+.inline-figure-left {
+  float: left;
+}
+
+.inline-figure-right {
+  float: right;
+  margin-left: 1.75rem;
+  margin-right: 0;
+}
+
+.inline-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+.inline-figure figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  font-style: italic;
+  color: #aaa390;
+}
+
+@media (max-width: 640px) {
+  .inline-figure {
+    float: none;
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Nota marginal */
+.marginal-note {
+  float: right;
+  width: 240px;
+  margin: 0.25rem 0 1rem 1.75rem;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid rgba(201,168,76,.45);
+  background: rgba(201,168,76,.05);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #aaa390;
+}
+
+.marginal-note p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .marginal-note {
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
 
 
 
