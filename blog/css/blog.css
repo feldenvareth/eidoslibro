@@ -294,14 +294,129 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
   }
 }
 
+/* ==========================================================
+   Lector en voz alta
+   ========================================================== */
 
+.read-aloud-widget{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+}
 
+.read-aloud-player{
+    width:min(720px,100%);
+    margin-top:10px;
+    padding:18px 20px;
+    border:1px solid rgba(201,168,76,.24);
+    border-radius:22px;
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(10px);
+}
 
+.read-aloud-controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
 
+.read-progress{
+    width:100%;
+    margin:18px 0 10px;
+    accent-color:#c9a84c;
+    cursor:pointer;
+}
 
+.read-status{
+    margin:0;
+    color:var(--muted);
+    font-size:.86rem;
+    line-height:1.5;
+    text-align:center;
+    font-family:'Josefin Sans',system-ui,sans-serif;
+}
 
+.read-aloud-controls .btn:disabled,
+.read-aloud-controls .btn.disabled,
+.read-floating-player .btn:disabled,
+.read-floating-player .btn.disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    pointer-events:none;
+    transform:none;
+}
 
+/* ==========================================================
+   Mini reproductor flotante
+   ========================================================== */
 
+.read-floating-player{
+    position:fixed;
+    left:50%;
+    bottom:24px;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:10px 14px;
+    border:1px solid rgba(201,168,76,.28);
+    border-radius:999px;
+    background:rgba(18,18,18,.88);
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35),
+        0 0 0 1px rgba(255,255,255,.03);
+
+    opacity:0;
+    transform:translate(-50%,20px);
+    pointer-events:none;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.read-floating-player.visible{
+    opacity:1;
+    transform:translate(-50%,0);
+    pointer-events:auto;
+}
+
+.read-floating-player[hidden]{
+    display:none;
+}
+
+.read-floating-player .btn{
+    min-width:44px;
+    min-height:44px;
+    padding:0 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+}
+
+@media (max-width:700px){
+    .read-floating-player{
+        bottom:14px;
+        padding:8px 10px;
+        gap:6px;
+    }
+
+    .read-floating-player .btn{
+        min-width:40px;
+        min-height:40px;
+        padding:0 10px;
+        font-size:.9rem;
+    }
+}
 
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

@@ -351,3 +351,372 @@ window.addEventListener('resize', updateProgress);
   }
 })();
 
+
+/* ==========================================================
+   LECTOR EN VOZ ALTA CON MINI REPRODUCTOR + FLOTANTE
+   ========================================================== */
+
+(function () {
+    const openBtn = document.querySelector(".read-aloud-open");
+    const player = document.querySelector(".read-aloud-player");
+    const pauseBtn = document.querySelector(".read-pause");
+    const stopBtn = document.querySelector(".read-stop");
+    const prevBtn = document.querySelector(".read-prev");
+    const nextBtn = document.querySelector(".read-next");
+    const progress = document.querySelector(".read-progress");
+    const status = document.querySelector(".read-status");
+    const article = document.querySelector("[data-article-content]");
+
+    const floating = document.querySelector(".read-floating-player");
+    const floatingPrev = document.querySelector(".read-floating-prev");
+    const floatingPause = document.querySelector(".read-floating-pause");
+    const floatingNext = document.querySelector(".read-floating-next");
+    const floatingStop = document.querySelector(".read-floating-stop");
+
+    if (!openBtn || !player || !pauseBtn || !stopBtn || !progress || !status || !article) return;
+
+    if (!("speechSynthesis" in window)) {
+        openBtn.textContent = "Lectura no disponible";
+        openBtn.disabled = true;
+        return;
+    }
+
+    let chunks = [];
+    let current = 0;
+    let isReading = false;
+    let isPaused = false;
+    let internalCancel = false;
+    let voice = null;
+
+    function getBestSpanishVoice() {
+        const voices = speechSynthesis.getVoices();
+
+        const preferred = [
+            "Microsoft Elvira Online (Natural) - Spanish (Spain)",
+            "Microsoft Alvaro Online (Natural) - Spanish (Spain)",
+            "Microsoft Helena",
+            "Microsoft Alvaro",
+            "Google español de España",
+            "Google español",
+            "Mónica",
+            "Jorge"
+        ];
+
+        for (const name of preferred) {
+            const found = voices.find(v => v.name === name);
+            if (found) return found;
+        }
+
+        return voices.find(v => v.lang === "es-ES") ||
+               voices.find(v => v.lang && v.lang.startsWith("es")) ||
+               null;
+    }
+
+    function buildChunks() {
+        const elements = Array.from(article.querySelectorAll("h2, h3, p, blockquote, li"))
+            .filter(el => {
+                return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus");
+            });
+
+        chunks = elements
+            .map(el => {
+                const tag = el.tagName.toLowerCase();
+                const text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
+                return text ? { tag, text, element: el } : null;
+            })
+            .filter(Boolean);
+
+        progress.min = 0;
+        progress.max = Math.max(chunks.length - 1, 0);
+        progress.value = current;
+    }
+
+    function setStatus(text) {
+        status.textContent = text;
+    }
+
+    function cancelSpeech() {
+        internalCancel = true;
+        speechSynthesis.cancel();
+
+        setTimeout(function () {
+            internalCancel = false;
+        }, 200);
+    }
+
+    function previousSectionIndex() {
+        for (let i = current - 1; i >= 0; i--) {
+            if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
+        }
+        return -1;
+    }
+
+    function nextSectionIndex() {
+        for (let i = current + 1; i < chunks.length; i++) {
+            if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
+        }
+        return -1;
+    }
+
+    function updateButtons() {
+        const hasPrev = previousSectionIndex() !== -1;
+        const hasNext = nextSectionIndex() !== -1;
+
+        if (prevBtn) {
+            prevBtn.disabled = !hasPrev;
+            prevBtn.classList.toggle("disabled", !hasPrev);
+        }
+
+        if (nextBtn) {
+            nextBtn.disabled = !hasNext;
+            nextBtn.classList.toggle("disabled", !hasNext);
+        }
+
+        if (floatingPrev) {
+            floatingPrev.disabled = !hasPrev;
+            floatingPrev.classList.toggle("disabled", !hasPrev);
+        }
+
+        if (floatingNext) {
+            floatingNext.disabled = !hasNext;
+            floatingNext.classList.toggle("disabled", !hasNext);
+        }
+
+        pauseBtn.textContent = isPaused ? "▶ Reanudar" : "⏸ Pausar";
+
+        if (floatingPause) {
+            floatingPause.textContent = isPaused ? "▶" : "⏸";
+            floatingPause.title = isPaused ? "Reanudar" : "Pausar";
+        }
+    }
+
+    function syncFloatingVisibility() {
+        if (!floating) return;
+
+        const playerOpen = !player.hidden;
+        const rect = player.getBoundingClientRect();
+        const playerVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+        if (playerOpen && !playerVisible) {
+            floating.hidden = false;
+            requestAnimationFrame(function () {
+                floating.classList.add("visible");
+            });
+        } else {
+            floating.classList.remove("visible");
+            setTimeout(function () {
+                if (!floating.classList.contains("visible")) {
+                    floating.hidden = true;
+                }
+            }, 250);
+        }
+    }
+
+    function scrollToCurrentBlock() {
+        const block = chunks[current];
+
+        if (!block || !block.element) return;
+
+        block.element.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    function openPlayer() {
+        player.hidden = false;
+        openBtn.hidden = true;
+        syncFloatingVisibility();
+    }
+
+    function closePlayer() {
+        cancelSpeech();
+
+        isReading = false;
+        isPaused = false;
+        current = 0;
+
+        progress.value = 0;
+        player.hidden = true;
+        openBtn.hidden = false;
+
+        if (floating) {
+            floating.classList.remove("visible");
+            floating.hidden = true;
+        }
+
+        pauseBtn.textContent = "⏸ Pausar";
+        setStatus("Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.");
+        updateButtons();
+    }
+
+    function finishReading() {
+        closePlayer();
+    }
+
+    function speakCurrent() {
+        if (!chunks.length || current >= chunks.length) {
+            finishReading();
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(chunks[current].text);
+
+        utterance.lang = "es-ES";
+        utterance.rate = 0.88;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        if (voice) utterance.voice = voice;
+
+        utterance.onstart = function () {
+            isReading = true;
+            isPaused = false;
+            progress.value = current;
+
+            setStatus("Leyendo bloque " + (current + 1) + " de " + chunks.length + ".");
+            updateButtons();
+            syncFloatingVisibility();
+        };
+
+        utterance.onend = function () {
+            if (internalCancel) return;
+
+            current++;
+            progress.value = current;
+
+            if (current >= chunks.length) {
+                finishReading();
+            } else {
+                updateButtons();
+                speakCurrent();
+            }
+        };
+
+        utterance.onerror = function () {
+            if (internalCancel) return;
+
+            isReading = false;
+            isPaused = false;
+            setStatus("La lectura se ha interrumpido.");
+            updateButtons();
+            syncFloatingVisibility();
+        };
+
+        speechSynthesis.speak(utterance);
+    }
+
+    function startReading(fromIndex, shouldScroll) {
+        if (!chunks.length) buildChunks();
+
+        if (!chunks.length) {
+            setStatus("No hay texto para leer.");
+            return;
+        }
+
+        current = Math.max(0, Math.min(fromIndex, chunks.length - 1));
+        progress.value = current;
+
+        voice = getBestSpanishVoice();
+
+        if (shouldScroll) {
+            scrollToCurrentBlock();
+        }
+
+        cancelSpeech();
+
+        setTimeout(function () {
+            speakCurrent();
+        }, 240);
+    }
+
+    function jumpTo(newIndex) {
+        if (!chunks.length) buildChunks();
+
+        if (newIndex < 0 || newIndex >= chunks.length) return;
+
+        isReading = false;
+        isPaused = false;
+
+        startReading(newIndex, true);
+    }
+
+    openBtn.addEventListener("click", function () {
+        buildChunks();
+        current = 0;
+        openPlayer();
+        startReading(0, false);
+    });
+
+    pauseBtn.addEventListener("click", function () {
+        if (!isReading && !isPaused) return;
+
+        if (isPaused) {
+            speechSynthesis.resume();
+            isPaused = false;
+            setStatus("Lectura reanudada.");
+        } else {
+            speechSynthesis.pause();
+            isPaused = true;
+            setStatus("Lectura pausada.");
+        }
+
+        updateButtons();
+        syncFloatingVisibility();
+    });
+
+    stopBtn.addEventListener("click", closePlayer);
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+            const target = previousSectionIndex();
+            if (target !== -1) jumpTo(target);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+            const target = nextSectionIndex();
+            if (target !== -1) jumpTo(target);
+        });
+    }
+
+    progress.addEventListener("input", function () {
+        jumpTo(Number(progress.value));
+    });
+
+    if (floatingPrev && prevBtn) {
+        floatingPrev.addEventListener("click", function () {
+            prevBtn.click();
+        });
+    }
+
+    if (floatingPause) {
+        floatingPause.addEventListener("click", function () {
+            pauseBtn.click();
+        });
+    }
+
+    if (floatingNext && nextBtn) {
+        floatingNext.addEventListener("click", function () {
+            nextBtn.click();
+        });
+    }
+
+    if (floatingStop) {
+        floatingStop.addEventListener("click", function () {
+            stopBtn.click();
+        });
+    }
+
+    speechSynthesis.onvoiceschanged = function () {
+        voice = getBestSpanishVoice();
+    };
+
+    window.addEventListener("scroll", syncFloatingVisibility, { passive:true });
+    window.addEventListener("resize", syncFloatingVisibility);
+
+    window.addEventListener("beforeunload", function () {
+        speechSynthesis.cancel();
+    });
+})();
