@@ -521,27 +521,44 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         }
     }
 
-    function syncFloatingVisibility() {
-        if (!floating) return;
+function syncFloatingVisibility() {
+    if (!floating) return;
 
-        const playerOpen = !player.hidden;
-        const rect = player.getBoundingClientRect();
-        const playerVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    const isMobile = window.innerWidth <= 900;
 
-        if (playerOpen && !playerVisible) {
-            floating.hidden = false;
-            requestAnimationFrame(function () {
-                floating.classList.add("visible");
-            });
-        } else {
-            floating.classList.remove("visible");
-            setTimeout(function () {
-                if (!floating.classList.contains("visible")) {
-                    floating.hidden = true;
-                }
-            }, 250);
-        }
+    // En móvil, si el lector está abierto, mantenemos siempre visible el miniwidget.
+    if (isMobile && openBtn.hidden && (isReading || isPaused)) {
+        floating.hidden = false;
+
+        requestAnimationFrame(function () {
+            floating.classList.add("visible");
+        });
+
+        return;
     }
+
+    const playerOpen = !player.hidden;
+    const rect = player.getBoundingClientRect();
+    const playerVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (playerOpen && !playerVisible) {
+        floating.hidden = false;
+
+        requestAnimationFrame(function () {
+            floating.classList.add("visible");
+        });
+    } else {
+        floating.classList.remove("visible");
+
+        setTimeout(function () {
+            if (!floating.classList.contains("visible")) {
+                floating.hidden = true;
+            }
+        }, 250);
+    }
+}	
+	
+	
 
     function scrollToCurrentBlock() {
         const block = chunks[current];
@@ -553,11 +570,32 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         });
     }
 
-    function openPlayer() {
-        player.hidden = false;
-        openBtn.hidden = true;
-        syncFloatingVisibility();
+
+
+function openPlayer() {
+    openBtn.hidden = true;
+
+    if (window.innerWidth <= 900) {
+        player.hidden = true;
+
+        if (floating) {
+            floating.hidden = false;
+
+            requestAnimationFrame(function () {
+                floating.classList.add("visible");
+            });
+        }
+
+        return;
     }
+
+    player.hidden = false;
+    syncFloatingVisibility();
+}
+
+
+
+
 
     function closePlayer() {
         cancelSpeech();
