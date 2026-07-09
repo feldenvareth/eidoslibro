@@ -349,6 +349,43 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
     transform:none;
 }
 
+
+.read-speed-label{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    min-height:44px;
+    padding:0 14px;
+    border:1px solid rgba(201,168,76,.24);
+    border-radius:999px;
+    color:var(--muted);
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    background:rgba(255,255,255,.03);
+    font-family:'Josefin Sans',system-ui,sans-serif;
+}
+
+.read-speed{
+    border:none;
+    outline:none;
+    background:transparent;
+    color:var(--text);
+    font:inherit;
+    cursor:pointer;
+}
+
+.read-speed option{
+    background:#11151c;
+    color:#eee8d8;
+}
+
+
+
+
+
+
+
 /* ==========================================================
    Mini reproductor flotante
    ========================================================== */

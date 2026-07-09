@@ -366,6 +366,7 @@ window.addEventListener('resize', updateProgress);
     const progress = document.querySelector(".read-progress");
     const status = document.querySelector(".read-status");
     const article = document.querySelector("[data-article-content]");
+    const speedSelects = document.querySelectorAll(".read-speed");
 
     const floating = document.querySelector(".read-floating-player");
     const floatingPrev = document.querySelector(".read-floating-prev");
@@ -387,6 +388,36 @@ window.addEventListener('resize', updateProgress);
     let isPaused = false;
     let internalCancel = false;
     let voice = null;
+    let readingSpeed = 1;
+
+    try {
+        const savedSpeed = localStorage.getItem("eidos-read-speed");
+        if (savedSpeed) readingSpeed = Number(savedSpeed) || 1;
+    } catch (error) {}
+
+    function syncSpeedSelects() {
+        speedSelects.forEach(function (select) {
+            select.value = String(readingSpeed);
+        });
+    }
+
+    speedSelects.forEach(function (select) {
+        select.addEventListener("change", function () {
+            readingSpeed = Number(select.value) || 1;
+
+            try {
+                localStorage.setItem("eidos-read-speed", String(readingSpeed));
+            } catch (error) {}
+
+            syncSpeedSelects();
+
+            if (isReading && !isPaused) {
+                startReading(current, false);
+            }
+        });
+    });
+
+    syncSpeedSelects();
 
     function getBestSpanishVoice() {
         const voices = speechSynthesis.getVoices();
@@ -415,7 +446,7 @@ window.addEventListener('resize', updateProgress);
     function buildChunks() {
         const elements = Array.from(article.querySelectorAll("h2, h3, p, blockquote, li"))
             .filter(el => {
-                return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus");
+return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus, .article-bibliography");
             });
 
         chunks = elements
@@ -514,7 +545,6 @@ window.addEventListener('resize', updateProgress);
 
     function scrollToCurrentBlock() {
         const block = chunks[current];
-
         if (!block || !block.element) return;
 
         block.element.scrollIntoView({
@@ -563,7 +593,7 @@ window.addEventListener('resize', updateProgress);
         const utterance = new SpeechSynthesisUtterance(chunks[current].text);
 
         utterance.lang = "es-ES";
-        utterance.rate = 0.88;
+        utterance.rate = readingSpeed;
         utterance.pitch = 1;
         utterance.volume = 1;
 
@@ -574,7 +604,7 @@ window.addEventListener('resize', updateProgress);
             isPaused = false;
             progress.value = current;
 
-            setStatus("Leyendo bloque " + (current + 1) + " de " + chunks.length + ".");
+            setStatus("Leyendo bloque " + (current + 1) + " de " + chunks.length + " · Velocidad " + readingSpeed + "x.");
             updateButtons();
             syncFloatingVisibility();
         };
@@ -654,7 +684,7 @@ window.addEventListener('resize', updateProgress);
         if (isPaused) {
             speechSynthesis.resume();
             isPaused = false;
-            setStatus("Lectura reanudada.");
+            setStatus("Lectura reanudada · Velocidad " + readingSpeed + "x.");
         } else {
             speechSynthesis.pause();
             isPaused = true;
