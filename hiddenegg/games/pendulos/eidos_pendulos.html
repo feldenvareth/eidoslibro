@@ -71,19 +71,16 @@
 </div>
 <div id="msg">Mueve el ratón o toca para empezar · pulsa para disparar</div>
 <button id="game-btn" type="button">Reiniciar</button>
+<script src="/hiddenegg/games/eidos-content.js"></script>
+
 <script>
-const BG_IMAGES=[
-  '/assets/images/tapa.jpg','/assets/images/taparelatos.jpg','/assets/images/tapatales.jpg',
-  '/assets/images/eidoscoverboth.webp','/assets/images/screenshot/04.webp','/assets/images/screenshot/05.webp',
-  '/assets/images/screenshot/06.webp','/assets/images/screenshot/ivn3.webp','/assets/images/screenshot/03.webp',
-  '/assets/images/screenshot/rel1.webp','/assets/images/screenshot/video_navidad.webp','/assets/images/screenshot/video_teaser.webp'
-];
-const QUOTES=[
-`La forma cae. El patrón continúa.`,
-`Cada impacto deja una estructura. Cada estructura altera el camino.`,
-`Nada desaparece del todo: cambia de función.`,
-`La memoria no es una imagen inmóvil. Es una trayectoria que aprende a desviarse.`
-];
+const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
+  images: [],
+  quotes: []
+};
+
+const BG_IMAGES = EIDOS_CONTENT.images;
+const QUOTES = EIDOS_CONTENT.quotes;
 
 const cv=document.getElementById('c');
 const ctx=cv.getContext('2d');
@@ -213,7 +210,11 @@ function createField(x,y,color){
     pulse:Math.random()*Math.PI*2,
     color,
     trapped:0,
-    dead:false
+    dead:false,
+    autoCollapse:false,
+    collapseElapsed:0,
+    collapseDuration:0,
+    collapseStartRadius:0
   });
   burst(x,y,color,18);
 }
@@ -267,10 +268,67 @@ function hitCrawler(c,hitIndex,bx,by){
 function hitField(f){
   f.hp--;
   f.r=Math.max(10,f.maxR*(f.hp/f.maxHp));
+
+  // Si ya se está cerrando solo, cada disparo acelera el colapso.
+  if(f.autoCollapse){
+    f.collapseElapsed+=700;
+    f.collapseStartRadius=Math.min(f.collapseStartRadius,f.r);
+  }
+
   updateScore(f.hp>0?18:90);
   burst(f.x,f.y,f.color,f.hp>0?8:24);
+
   if(f.hp<=0)f.dead=true;
 }
+function updateFieldAutoCollapse(dt){
+  const noPendulums=pendulums.every(p=>!p.alive);
+  const noCores=fallingCores.length===0;
+  const noCrawlers=crawlers.every(c=>!c.alive);
+
+  // Solo empieza cuando ya no queda ningún enemigo y únicamente permanecen pozos.
+  if(!(noPendulums&&noCores&&noCrawlers&&fields.length>0))return;
+
+  for(const f of fields){
+    if(f.dead)continue;
+
+    if(!f.autoCollapse){
+      f.autoCollapse=true;
+      f.collapseElapsed=0;
+      f.collapseStartRadius=f.r;
+
+      // Los pequeños tardan 3 s y los grandes hasta 6 s.
+      const minRadius=10;
+      const maxRadius=46;
+      const sizeFactor=Math.max(
+        0,
+        Math.min(1,(f.r-minRadius)/(maxRadius-minRadius))
+      );
+
+      f.collapseDuration=3000+sizeFactor*3000;
+    }
+
+    f.collapseElapsed+=dt;
+
+    const progress=Math.min(
+      1,
+      f.collapseElapsed/f.collapseDuration
+    );
+
+    // Se contrae hacia su propio centro, cada vez más deprisa.
+    const eased=1-Math.pow(1-progress,2.4);
+    f.r=Math.max(
+      0,
+      f.collapseStartRadius*(1-eased)
+    );
+
+    if(progress>=1||f.r<=1.2){
+      f.dead=true;
+      burst(f.x,f.y,f.color,26);
+      updateScore(60);
+    }
+  }
+}
+
 function loseLife(){
   lives--;livesEl.textContent=lives>0?'♥ '.repeat(lives).trim():'×';enemyBullets=[];player.hitFlash=18;burst(player.x,player.y,'#e8c49a',22);
   if(lives<=0){over=true;msg.textContent='Fin de la secuencia · '+score+' puntos';gameBtn.textContent='Reiniciar';gameBtn.onclick=restart;gameBtn.style.display='inline-block';}
@@ -416,6 +474,8 @@ function update(dt,now){
   }
   for(const q of particles){q.x+=q.vx*dt/16.667;q.y+=q.vy*dt/16.667;q.vx*=.985;q.vy*=.985;q.life-=dt/16.667;}
   particles=particles.filter(q=>q.life>0);
+
+  updateFieldAutoCollapse(dt);
   fields=fields.filter(f=>!f.dead);
 
   const donePendulums=pendulums.every(p=>!p.alive);
@@ -463,6 +523,15 @@ function draw(){
     ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,f.r,0,Math.PI*2);ctx.fill();
     ctx.strokeStyle=f.color;ctx.globalAlpha=.78;ctx.lineWidth=2;
     ctx.beginPath();ctx.arc(0,0,f.r+3+wave*2,0,Math.PI*2);ctx.stroke();
+
+    if(f.autoCollapse){
+      const closing=Math.min(1,f.collapseElapsed/f.collapseDuration);
+      ctx.globalAlpha=.28+.38*closing;
+      ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.arc(0,0,Math.max(2,f.r*(1.22-closing*.34)),0,Math.PI*2);
+      ctx.stroke();
+    }
     ctx.globalAlpha=.34;ctx.lineWidth=1;
     ctx.beginPath();ctx.arc(0,0,f.r*.72,0,Math.PI*1.55);ctx.stroke();
     ctx.beginPath();ctx.arc(0,0,f.r*.48,Math.PI*.35,Math.PI*1.9);ctx.stroke();
