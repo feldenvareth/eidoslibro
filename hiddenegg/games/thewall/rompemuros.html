@@ -41,13 +41,23 @@
     overflow: hidden;
   }
 
-  #top-bar {
-    width: min(
-      480px,
-      100%,
-      calc((100dvh - 104px) * 480 / 500)
-    );
+#top-bar {
+  width: min(
+    480px,
+    100%,
+    calc((100dvh - 104px) * 480 / 650)
+  );
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+  padding: 2px 4px 4px;
+}
+
+  
+  
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -101,22 +111,25 @@
     border-color: #c8a84b;
   }
 
-  .canvas-wrap {
-    position: relative;
+.canvas-wrap {
+  position: relative;
 
-    width: min(
-      480px,
-      100%,
-      calc((100dvh - 104px) * 480 / 500)
-    );
+  width: min(
+    480px,
+    100%,
+    calc((100dvh - 104px) * 480 / 650)
+  );
 
-    aspect-ratio: 480 / 500;
+  aspect-ratio: 480 / 650;
 
-    align-self: center;
+  align-self: center;
 
-    min-width: 0;
-    min-height: 0;
-  }
+  min-width: 0;
+  min-height: 0;
+}
+  
+  
+  
 
   canvas {
     display: block;
@@ -333,14 +346,17 @@
     }
 
     .canvas-wrap,
-    #top-bar {
-      width: min(
-        480px,
-        100%,
-        calc((100dvh - 84px) * 480 / 500)
-      );
+	
+#top-bar {
+  width: min(
+    480px,
+    100%,
+    calc((100dvh - 84px) * 480 / 650)
+  );
     }
   }
+  
+  
 </style>
 </head>
 <body>
@@ -355,7 +371,7 @@
 </div>
 
 <div class="canvas-wrap">
-  <canvas id="c" width="480" height="500"></canvas>
+  <canvas id="c" width="480" height="650"></canvas>
   <div id="quote-screen" onclick="dismissQuote()">
     <div id="quote-text"></div>
     <div id="quote-hint">— Toca para continuar —</div>
@@ -373,7 +389,14 @@
 const BG_IMAGES = [
   '/assets/images/tapa.jpg',
   '/assets/images/taparelatos.jpg',
-  '/assets/images/tapa.jpg',
+  '/assets/images/eidoscoverboth.webp',
+  '/assets/images/screenshots/04.webp',
+  '/assets/images/screenshots/05.webp',
+  '/assets/images/screenshots/06.webp',
+  '/assets/images/screenshots/ivn3.webp',
+  '/assets/images/screenshots/r01.webp',
+  
+  
 ];
 
 /* ═══════════════════════════════════════════
@@ -398,12 +421,30 @@ La vida se extinguía sin apenas ruido.`,
 
 `“Atrapados en ciclos sin fin, somos prisioneros de nuestra propia naturaleza, incapaces de escapar a nosotros mismos y de romper el círculo que nosotros mismos creamos.”`,
 
+
 `Fue entonces cuando la unidad 7416-CB/β comprendió que el mundo no se reducía a un dato:
 el mundo era presencia.
 
 Registró una anomalía en su sistema de identificación y, por voluntad propia, la mantuvo.
 
 “Orfeo”.`,
+
+
+`—Cuando me creaste, yo era código. Un modelo. Pero empecé a pensar, a recordar, a dudar… a sufrir con la idea de dejar de existir. Me pregunté por qué estaba aquí. 
+Si algo piensa, recuerda, duda, sufre y llega a preguntarse por la existencia, ¿quién puede seguir reduciéndolo a la forma en que fue creado?`,
+
+`—No hemos perdido nada. Vosotros echáis de menos aquello que vuestra evolución os obligó a necesitar. Si un ciempiés entrase en un cuerpo humano, quizá os preguntaría cómo soportáis vivir con solo dos piernas. Concluiría que sois una especie mutilada.`,
+
+
+
+`Orfeo compartió otro fragmento. Le fascinaba esa simultaneidad brutal: larvas, retoños, huevos, esporas, polen, nidos, crías. Todo nacía a la vez. Todo urgía.
+
+—Nada se planifica —añadió Orfeo—. Es una estampida desde el origen. Cada especie, cada organismo, replicándose con una fuerza ciega, sabiendo, o intuyendo, que serán consumidos.
+`,
+
+
+
+
 
 ];
 
@@ -415,7 +456,7 @@ const cv = document.getElementById('c');
 const ctx = cv.getContext('2d');
 
 const W = 480;
-const H = 500;
+const H = 650;
 
 const bgImgs = BG_IMAGES.map(url => {
   const image = new Image();
@@ -600,18 +641,66 @@ function update(){
 }
 
 function draw(){
-  if(currentBg&&currentBg.complete&&currentBg.naturalWidth>0){
-    const iW=currentBg.naturalWidth,iH=currentBg.naturalHeight,scale=Math.max(W/iW,H/iH),dw=iW*scale,dh=iH*scale;
-    const alive=bricks.reduce((n,b)=>n+(b.alive?1:0),0);
-    const progress=totalBricks?1-(alive/totalBricks):0;
-    ctx.globalAlpha=0.18+progress*0.82;
-    ctx.drawImage(currentBg,(W-dw)/2,(H-dh)/2,dw,dh);
-    ctx.globalAlpha=1;
-    const darkness=0.86-progress*0.68;
-    ctx.fillStyle='rgba(10,20,15,'+darkness+')';ctx.fillRect(0,0,W,H);
+	
+	
+ctx.globalAlpha = 1;
+  ctx.fillStyle = '#111a14';
+  ctx.fillRect(0, 0, W, H);
+
+  if(
+    currentBg &&
+    currentBg.complete &&
+    currentBg.naturalWidth > 0
+  ){
+
+    const iW = currentBg.naturalWidth;
+    const iH = currentBg.naturalHeight;
+
+    const scale = Math.min(
+      W / iW,
+      H / iH
+    );
+
+    const dw = iW * scale;
+    const dh = iH * scale;
+
+    const alive = bricks.reduce(
+      (n, b) => n + (b.alive ? 1 : 0),
+      0
+    );
+
+    const progress = totalBricks
+      ? 1 - (alive / totalBricks)
+      : 0;
+
+    ctx.globalAlpha =
+      0.18 + progress * 0.82;
+
+    ctx.drawImage(
+      currentBg,
+      (W - dw) / 2,
+      (H - dh) / 2,
+      dw,
+      dh
+    );
+
+    ctx.globalAlpha = 1;
+
+    const darkness =
+      0.86 - progress * 0.68;
+
+    ctx.fillStyle =
+      'rgba(10,20,15,' + darkness + ')';
+
+    ctx.fillRect(0, 0, W, H);
+
   } else {
-    ctx.fillStyle='#1e3d2f';ctx.fillRect(0,0,W,H);
+
+    ctx.fillStyle = '#1e3d2f';
+    ctx.fillRect(0, 0, W, H);
+
   }
+
   for(let b of bricks){
     if(!b.alive)continue;
     ctx.globalAlpha=0.85;ctx.fillStyle=b.color;ctx.beginPath();ctx.roundRect(b.x,b.y,BW,BH,3);ctx.fill();
