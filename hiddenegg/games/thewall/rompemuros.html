@@ -42,6 +42,10 @@
   }
 
 #top-bar {
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
+
   width: min(
     480px,
     100%,
@@ -56,15 +60,7 @@
   padding: 2px 4px 4px;
 }
 
-  
-  
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    gap: 10px;
-    padding: 2px 4px 4px;
-  }
 
   #hud {
     display: flex;
@@ -345,16 +341,16 @@
       font-size: 12px;
     }
 
-    .canvas-wrap,
+
 	
+.canvas-wrap,
 #top-bar {
   width: min(
     480px,
     100%,
     calc((100dvh - 84px) * 480 / 650)
   );
-    }
-  }
+}
   
   
 </style>
