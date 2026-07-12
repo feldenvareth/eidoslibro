@@ -116,17 +116,20 @@
     width: 62px; height: 62px; background: #1e3d2f;
     border: 2px solid #c8a84b; border-radius: 50%; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.5); transition: transform .2s;
-    font-size: 13px; color: #f5ecd0; letter-spacing: 1px; text-align: center;
-    line-height: 1.2;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.5); transition: transform .2s; font-size: 26px;
   }
   #eidos-btn:hover { transform: scale(1.1); }
   #eidos-panel {
     display: none; position: fixed; bottom: 100px; right: 24px; z-index: 9998;
+    width: min(502px, calc(100vw - 32px));
+    height: min(580px, calc(100dvh - 124px));
+    min-height: 320px;
     border: 2px solid #4a7c6f; border-radius: 12px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.7); overflow: hidden;
+    background: #111a14;
+    flex-direction: column;
   }
-  #eidos-panel.open { display: block; }
+  #eidos-panel.open { display: flex; }
   #eidos-panel-header {
     background: #111a14; color: #f5ecd0;
     display: flex; justify-content: space-between; align-items: center;
@@ -136,37 +139,53 @@
     background: none; border: none; color: #888; font-size: 20px; cursor: pointer;
   }
   #eidos-close:hover { color: #fff; }
-  #eidos-frame { display: block; border: none; width: 502px; height: 600px; }
+  #eidos-frame { display: block; border: none; width: 100%; height: 100%; min-height: 0; flex: 1 1 auto; background: #111a14; }
+
+  @media (max-width: 600px) {
+    #eidos-launcher { bottom: 14px; right: 14px; }
+    #eidos-btn { width: 54px; height: 54px; font-size: 23px; }
+    #eidos-bubble { max-width: calc(100vw - 28px); white-space: normal; text-align: center; }
+    #eidos-panel {
+      inset: 8px;
+      width: auto;
+      height: auto;
+      min-height: 0;
+      border-radius: 10px;
+    }
+    #eidos-panel-header { padding: 7px 10px; font-size: 13px; }
+  }
 </style>
 
 <div id="eidos-launcher">
-  <div id="eidos-bubble">Destruye la forma</div>
-  <div id="eidos-btn" onclick="toggleEidos()">E I D O S</div>
+  <div id="eidos-bubble">Destruye la forma · 🟡</div>
+  <div id="eidos-btn" onclick="toggleEidos()">🟡</div>
 </div>
 
 <div id="eidos-panel">
   <div id="eidos-panel-header">
     <span>E I D O S</span>
-    <button id="eidos-close" onclick="toggleEidos()">&#x2715;</button>
+    <button id="eidos-close" onclick="toggleEidos()">✕</button>
   </div>
-  <!-- ↓↓↓ CAMBIA ESTA URL por la ruta de tu rompemuros.html ↓↓↓ -->
-  <iframe id="eidos-frame" src="/hiddenegg/games/thewall/rompemuros.html"></iframe>
+  <!-- ↓↓↓ CAMBIA ESTA URL POR LA RUTA DE TU ARCHIVO rompemuros.html ↓↓↓ -->
+  <iframe id="eidos-frame" src="https://eidosfilm.com/juegos/rompemuros.html"></iframe>
 </div>
 
 <script>
   function toggleEidos() {
-    var p = document.getElementById('eidos-panel');
-    var b = document.getElementById('eidos-bubble');
+    const p = document.getElementById('eidos-panel');
+    const b = document.getElementById('eidos-bubble');
     p.classList.toggle('open');
     b.style.display = p.classList.contains('open') ? 'none' : 'block';
   }
-  // Escucha el boton Cerrar desde dentro del iframe
-  window.addEventListener('message', function(e) {
-    if (e.data === 'cerrar-eidos') toggleEidos();
+  window.addEventListener('message', function(event) {
+    if (event.data === 'cerrar-eidos') {
+      const p = document.getElementById('eidos-panel');
+      const b = document.getElementById('eidos-bubble');
+      p.classList.remove('open');
+      b.style.display = 'block';
+    }
   });
 </script>
-
-
 
 
 <!-- Consent Banner -->
