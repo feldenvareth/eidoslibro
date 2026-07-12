@@ -352,6 +352,7 @@ window.addEventListener('resize', updateProgress);
 })();
 
 
+
 /* ==========================================================
    LECTOR EN VOZ ALTA CON MINI REPRODUCTOR + FLOTANTE
    ========================================================== */
@@ -373,11 +374,69 @@ window.addEventListener('resize', updateProgress);
     const floatingPause = document.querySelector(".read-floating-pause");
     const floatingNext = document.querySelector(".read-floating-next");
     const floatingStop = document.querySelector(".read-floating-stop");
+    const floatingStatus = document.querySelector(".read-floating-status");
 
     if (!openBtn || !player || !pauseBtn || !stopBtn || !progress || !status || !article) return;
 
+    // Textos de la interfaz del lector, en español e inglés. Se elige el
+    // idioma según el atributo lang de la página/artículo (detectPageLang),
+    // así que un artículo con lang="en" muestra todo el widget en inglés
+    // sin tocar el HTML de cada página.
+    const STRINGS = {
+        es: {
+            openLabel: "🎧 Escuchar con el navegador",
+            unavailable: "Lectura no disponible",
+            prevLabel: "⏮ Sección anterior",
+            pauseLabel: "⏸ Pausar",
+            resumeLabel: "▶ Reanudar",
+            nextLabel: "⏭ Siguiente sección",
+            stopLabel: "■ Detener",
+            speedLabel: "Velocidad",
+            prevTitle: "Sección anterior",
+            pauseTitle: "Pausar",
+            resumeTitle: "Reanudar",
+            nextTitle: "Siguiente sección",
+            stopTitle: "Detener",
+            defaultStatus: "Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.",
+            reading: function (i, total, speed) {
+                return "Leyendo bloque " + i + " de " + total + " · Velocidad " + speed + "x.";
+            },
+            resumed: function (speed) {
+                return "Lectura reanudada · Velocidad " + speed + "x.";
+            },
+            paused: "Lectura pausada.",
+            interrupted: "La lectura se ha interrumpido.",
+            noText: "No hay texto para leer."
+        },
+        en: {
+            openLabel: "🎧 Listen in your browser",
+            unavailable: "Reading unavailable",
+            prevLabel: "⏮ Previous section",
+            pauseLabel: "⏸ Pause",
+            resumeLabel: "▶ Resume",
+            nextLabel: "⏭ Next section",
+            stopLabel: "■ Stop",
+            speedLabel: "Speed",
+            prevTitle: "Previous section",
+            pauseTitle: "Pause",
+            resumeTitle: "Resume",
+            nextTitle: "Next section",
+            stopTitle: "Stop",
+            defaultStatus: "Automatic browser narration. Voice quality may vary by device.",
+            reading: function (i, total, speed) {
+                return "Reading block " + i + " of " + total + " · Speed " + speed + "x.";
+            },
+            resumed: function (speed) {
+                return "Reading resumed · Speed " + speed + "x.";
+            },
+            paused: "Reading paused.",
+            interrupted: "Reading was interrupted.",
+            noText: "No text to read."
+        }
+    };
+
     if (!("speechSynthesis" in window)) {
-        openBtn.textContent = "Lectura no disponible";
+        openBtn.textContent = STRINGS[detectPageLang()].unavailable;
         openBtn.disabled = true;
         return;
     }
@@ -389,6 +448,54 @@ window.addEventListener('resize', updateProgress);
     let internalCancel = false;
     let voice = null;
     let readingSpeed = 1;
+
+    // Idioma detectado de la página/artículo. Se calcula ya aquí (no solo en
+    // buildChunks) para poder traducir las etiquetas del widget desde el
+    // principio, incluso antes de que el usuario le dé a "Escuchar".
+    let pageLang = detectPageLang(); // "es" o "en"
+    let utteranceLang = pageLang === "en" ? "en-US" : "es-ES"; // BCP47 usado en el utterance
+    let T = STRINGS[pageLang];
+
+    // Aplica las etiquetas estáticas del widget (botones, título del select
+    // de velocidad, mensaje de estado inicial) en el idioma detectado.
+    function applyStaticLabels() {
+        openBtn.textContent = T.openLabel;
+
+        if (prevBtn) { prevBtn.textContent = T.prevLabel; prevBtn.title = T.prevTitle; }
+        if (nextBtn) { nextBtn.textContent = T.nextLabel; nextBtn.title = T.nextTitle; }
+        if (stopBtn) { stopBtn.textContent = T.stopLabel; stopBtn.title = T.stopTitle; }
+        if (pauseBtn) { pauseBtn.textContent = T.pauseLabel; pauseBtn.title = T.pauseTitle; }
+
+        if (floatingPrev) floatingPrev.title = T.prevTitle;
+        if (floatingNext) floatingNext.title = T.nextTitle;
+        if (floatingStop) floatingStop.title = T.stopTitle;
+        if (floatingPause) { floatingPause.textContent = "⏸"; floatingPause.title = T.pauseTitle; }
+
+        speedSelects.forEach(function (select) {
+            const label = select.closest(".read-speed-label");
+            if (!label) return;
+            for (const node of label.childNodes) {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
+                    node.textContent = " " + T.speedLabel + " ";
+                    return;
+                }
+            }
+        });
+
+        status.textContent = T.defaultStatus;
+        if (floatingStatus) floatingStatus.textContent = T.defaultStatus;
+    }
+
+    applyStaticLabels();
+
+    // Marcado del párrafo/bloque que se está leyendo.
+    // (Antes se iluminaba palabra a palabra con un temporizador estimado + el evento
+    // "onboundary" del navegador, pero ese evento es poco fiable con muchas voces y el
+
+    // desfase se notaba mucho en párrafos largos. Marcar el bloque completo es exacto
+    // siempre, porque se activa justo cuando el motor de voz empieza a leerlo.)
+    let highlightedEl = null;
+    const HIGHLIGHT_CLASS = "read-highlight";
 
     try {
         const savedSpeed = localStorage.getItem("eidos-read-speed");
@@ -419,10 +526,22 @@ window.addEventListener('resize', updateProgress);
 
     syncSpeedSelects();
 
-    function getBestSpanishVoice() {
+    function detectPageLang() {
+        const raw = (
+            article.getAttribute("lang") ||
+            article.closest("[lang]")?.getAttribute("lang") ||
+            document.documentElement.getAttribute("lang") ||
+            "es"
+        ).toLowerCase();
+
+        if (raw.startsWith("en")) return "en";
+        return "es";
+    }
+
+    function getBestVoiceForLang(lang) {
         const voices = speechSynthesis.getVoices();
 
-        const preferred = [
+        const preferredEs = [
             "Microsoft Elvira Online (Natural) - Spanish (Spain)",
             "Microsoft Alvaro Online (Natural) - Spanish (Spain)",
             "Microsoft Helena",
@@ -433,9 +552,29 @@ window.addEventListener('resize', updateProgress);
             "Jorge"
         ];
 
-        for (const name of preferred) {
+        const preferredEn = [
+            "Microsoft Aria Online (Natural) - English (United States)",
+            "Microsoft Guy Online (Natural) - English (United States)",
+            "Microsoft Libby Online (Natural) - English (United Kingdom)",
+            "Microsoft Ryan Online (Natural) - English (United Kingdom)",
+            "Google US English",
+            "Google UK English Female",
+            "Google UK English Male",
+            "Samantha",
+            "Daniel"
+        ];
+
+        const preferredList = lang === "en" ? preferredEn : preferredEs;
+
+        for (const name of preferredList) {
             const found = voices.find(v => v.name === name);
             if (found) return found;
+        }
+
+        if (lang === "en") {
+            return voices.find(v => v.lang === "en-US") ||
+                   voices.find(v => v.lang && v.lang.startsWith("en")) ||
+                   null;
         }
 
         return voices.find(v => v.lang === "es-ES") ||
@@ -444,6 +583,9 @@ window.addEventListener('resize', updateProgress);
     }
 
     function buildChunks() {
+        pageLang = detectPageLang();
+        utteranceLang = pageLang === "en" ? "en-US" : "es-ES";
+
         const elements = Array.from(article.querySelectorAll("h2, h3, p, blockquote, li"))
             .filter(el => {
 return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus, .article-bibliography");
@@ -453,7 +595,7 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
             .map(el => {
                 const tag = el.tagName.toLowerCase();
                 const text = (el.innerText || el.textContent || "").replace(/\s+/g, " ").trim();
-                return text ? { tag, text, element: el } : null;
+                return text ? { tag, text, element: el, words: null } : null;
             })
             .filter(Boolean);
 
@@ -464,6 +606,27 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
 
     function setStatus(text) {
         status.textContent = text;
+        if (floatingStatus) floatingStatus.textContent = text;
+    }
+
+    function setHighlight(el) {
+        if (highlightedEl && highlightedEl !== el) {
+            highlightedEl.classList.remove(HIGHLIGHT_CLASS);
+        }
+
+        if (el) {
+            el.classList.add(HIGHLIGHT_CLASS);
+        }
+
+        highlightedEl = el;
+    }
+
+    function clearHighlight() {
+        if (highlightedEl) {
+            highlightedEl.classList.remove(HIGHLIGHT_CLASS);
+        }
+
+        highlightedEl = null;
     }
 
     function cancelSpeech() {
@@ -475,10 +638,25 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         }, 200);
     }
 
-    function previousSectionIndex() {
-        for (let i = current - 1; i >= 0; i--) {
+    // Índice del encabezado (h2/h3) que abre la sección a la que pertenece
+    // el bloque "fromIndex". Si no hay ningún encabezado antes, la sección
+    // "actual" es el principio mismo del artículo (índice 0).
+    function sectionStartIndex(fromIndex) {
+        for (let i = fromIndex; i >= 0; i--) {
             if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
         }
+        return 0;
+    }
+
+    // Encabezado de la sección ANTERIOR a la que contiene "fromIndex".
+    // -1 si ya estamos en la primera sección del artículo.
+    function previousSectionIndex(fromIndex) {
+        const start = sectionStartIndex(fromIndex);
+
+        for (let i = start - 1; i >= 0; i--) {
+            if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
+        }
+
         return -1;
     }
 
@@ -490,7 +668,9 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
     }
 
     function updateButtons() {
-        const hasPrev = previousSectionIndex() !== -1;
+        // El botón "anterior" siempre tiene algo que hacer mientras haya bloques
+        // que leer: como mínimo, reiniciar la sección actual desde su principio.
+        const hasPrev = chunks.length > 0;
         const hasNext = nextSectionIndex() !== -1;
 
         if (prevBtn) {
@@ -513,11 +693,11 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
             floatingNext.classList.toggle("disabled", !hasNext);
         }
 
-        pauseBtn.textContent = isPaused ? "▶ Reanudar" : "⏸ Pausar";
+        pauseBtn.textContent = isPaused ? T.resumeLabel : T.pauseLabel;
 
         if (floatingPause) {
             floatingPause.textContent = isPaused ? "▶" : "⏸";
-            floatingPause.title = isPaused ? "Reanudar" : "Pausar";
+            floatingPause.title = isPaused ? T.resumeTitle : T.pauseTitle;
         }
     }
 
@@ -604,6 +784,8 @@ function openPlayer() {
         isPaused = false;
         current = 0;
 
+        clearHighlight();
+
         progress.value = 0;
         player.hidden = true;
         openBtn.hidden = false;
@@ -613,8 +795,8 @@ function openPlayer() {
             floating.hidden = true;
         }
 
-        pauseBtn.textContent = "⏸ Pausar";
-        setStatus("Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.");
+        pauseBtn.textContent = T.pauseLabel;
+        setStatus(T.defaultStatus);
         updateButtons();
     }
 
@@ -630,7 +812,7 @@ function openPlayer() {
 
         const utterance = new SpeechSynthesisUtterance(chunks[current].text);
 
-        utterance.lang = "es-ES";
+        utterance.lang = utteranceLang;
         utterance.rate = readingSpeed;
         utterance.pitch = 1;
         utterance.volume = 1;
@@ -642,7 +824,9 @@ function openPlayer() {
             isPaused = false;
             progress.value = current;
 
-            setStatus("Leyendo bloque " + (current + 1) + " de " + chunks.length + " · Velocidad " + readingSpeed + "x.");
+            setHighlight(chunks[current].element);
+
+            setStatus(T.reading(current + 1, chunks.length, readingSpeed));
             updateButtons();
             syncFloatingVisibility();
         };
@@ -666,7 +850,8 @@ function openPlayer() {
 
             isReading = false;
             isPaused = false;
-            setStatus("La lectura se ha interrumpido.");
+            clearHighlight();
+            setStatus(T.interrupted);
             updateButtons();
             syncFloatingVisibility();
         };
@@ -678,14 +863,14 @@ function openPlayer() {
         if (!chunks.length) buildChunks();
 
         if (!chunks.length) {
-            setStatus("No hay texto para leer.");
+            setStatus(T.noText);
             return;
         }
 
         current = Math.max(0, Math.min(fromIndex, chunks.length - 1));
         progress.value = current;
 
-        voice = getBestSpanishVoice();
+        voice = getBestVoiceForLang(pageLang);
 
         if (shouldScroll) {
             scrollToCurrentBlock();
@@ -722,11 +907,11 @@ function openPlayer() {
         if (isPaused) {
             speechSynthesis.resume();
             isPaused = false;
-            setStatus("Lectura reanudada · Velocidad " + readingSpeed + "x.");
+            setStatus(T.resumed(readingSpeed));
         } else {
             speechSynthesis.pause();
             isPaused = true;
-            setStatus("Lectura pausada.");
+            setStatus(T.paused);
         }
 
         updateButtons();
@@ -735,10 +920,29 @@ function openPlayer() {
 
     stopBtn.addEventListener("click", closePlayer);
 
+    // Un clic en "anterior" lleva al principio de la sección donde estás
+    // ahora mismo. Si ya estás en ese punto (o llega un segundo clic rápido,
+    // como en cualquier reproductor de podcasts), salta a la sección anterior.
+    let lastPrevClickAt = 0;
+    const PREV_DOUBLE_CLICK_MS = 600;
+
     if (prevBtn) {
         prevBtn.addEventListener("click", function () {
-            const target = previousSectionIndex();
-            if (target !== -1) jumpTo(target);
+            if (!chunks.length) return;
+
+            const now = Date.now();
+            const isQuickSecondClick = now - lastPrevClickAt < PREV_DOUBLE_CLICK_MS;
+            lastPrevClickAt = now;
+
+            const sectionStart = sectionStartIndex(current);
+            const alreadyAtSectionStart = current <= sectionStart;
+
+            if (isQuickSecondClick || alreadyAtSectionStart) {
+                const target = previousSectionIndex(current);
+                jumpTo(target !== -1 ? target : 0);
+            } else {
+                jumpTo(sectionStart);
+            }
         });
     }
 
@@ -760,6 +964,7 @@ function openPlayer() {
     }
 
     if (floatingPause) {
+
         floatingPause.addEventListener("click", function () {
             pauseBtn.click();
         });
@@ -778,7 +983,7 @@ function openPlayer() {
     }
 
     speechSynthesis.onvoiceschanged = function () {
-        voice = getBestSpanishVoice();
+        voice = getBestVoiceForLang(pageLang);
     };
 
     window.addEventListener("scroll", syncFloatingVisibility, { passive:true });
