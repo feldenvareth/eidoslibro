@@ -27,7 +27,6 @@
   }
 
 
-  // Partículas doradas ascendentes, limitadas al primer bloque visual como en la portada principal.
   (function createParticles(){
     const container = document.querySelector('.hero #particles');
     if(!container) return;
@@ -74,7 +73,6 @@
     });
   });
 
-  // Buscador y filtros del archivo.
   const searchInput = document.querySelector('#article-search');
   const filterButtons = document.querySelectorAll('.tag-filter');
   const cards = Array.from(document.querySelectorAll('.post-card'));
@@ -123,11 +121,9 @@
   });
   applyArchiveFilters();
 
-  // Mostrar fecha en .meta y ordenar por fecha via CSS order.
   (function showDatesAndOrder(){
     if(!cards.length) return;
 
-    // Recoger fechas y calcular orden CSS (mas reciente = order mas bajo).
     var dated = cards
       .map(function(card){
         return { card: card, ts: new Date((card.dataset.date || '1970-01-01') + 'T00:00:00').getTime() };
@@ -139,7 +135,6 @@
       item.card.style.order = String(index);
     });
 
-    // Mostrar fecha legible en .meta.
     cards.forEach(function(card){
       var dateStr = card.dataset.date;
       if(!dateStr) return;
@@ -154,7 +149,6 @@
     });
   })();
 
-  // Calculo automatico del tiempo de lectura.
   const articleContent = document.querySelector('[data-article-content], .article-content');
   const WORDS_PER_MINUTE = 220;
 
@@ -171,7 +165,6 @@
     if(!root) return '';
     const clone = root.cloneNode(true);
 
-    // No contar elementos auxiliares: relacionados, newsletter, comentarios, Giscus, botones, navegación, etc.
     clone.querySelectorAll([
       '.related',
       '.newsletter-mini',
@@ -210,14 +203,11 @@
     metaElement.textContent = parts.join(' · ');
   }
 
-  // En página de artículo: calcula sobre el texto real del artículo.
   if(articleContent){
     const articleMeta = document.querySelector('.article-meta');
     updateMetaReadingTime(articleMeta, estimateReadingMinutesFromText(getReadableArticleText(articleContent)));
   }
 
-  // En archivo/listado: intenta leer cada artículo enlazado y calcular su duración real.
-  // En GitHub Pages funciona directamente. Si se abre el HTML como archivo local, usa una estimación de respaldo.
   async function updateArchiveReadingTimes(){
     if(!cards.length) return;
 
@@ -256,51 +246,40 @@
 
   updateArchiveReadingTimes();
 
+  const articleProgress = document.querySelector('.reading-progress-article span');
+  const forumProgress = document.querySelector('.reading-progress-forum span');
+  const forumStart = document.querySelector('.related, .newsletter-mini, #comentarios');
 
-
-// Barras de progreso: artículo + zona de conversación.
-const articleProgress = document.querySelector('.reading-progress-article span');
-const forumProgress = document.querySelector('.reading-progress-forum span');
-const forumStart = document.querySelector('.related, .newsletter-mini, #comentarios');
-
-function calculateProgressForElement(element){
-  if(!element) return 0;
-
-  const rect = element.getBoundingClientRect();
-  const total = element.offsetHeight - window.innerHeight;
-  const read = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
-
-  return Math.round((read / Math.max(total, 1)) * 100);
-}
-
-function updateProgress(){
-  if(articleProgress && articleContent){
-    articleProgress.style.width = `${calculateProgressForElement(articleContent)}%`;
+  function calculateProgressForElement(element){
+    if(!element) return 0;
+    const rect = element.getBoundingClientRect();
+    const total = element.offsetHeight - window.innerHeight;
+    const read = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+    return Math.round((read / Math.max(total, 1)) * 100);
   }
 
-  if(forumProgress && forumStart){
-    const forumRect = forumStart.getBoundingClientRect();
-    const documentHeight = document.documentElement.scrollHeight;
-    const forumTop = window.scrollY + forumRect.top;
-    const total = documentHeight - forumTop - window.innerHeight;
-    const read = window.scrollY - forumTop;
+  function updateProgress(){
+    if(articleProgress && articleContent){
+      articleProgress.style.width = `${calculateProgressForElement(articleContent)}%`;
+    }
 
-    const pct = Math.round(
-      Math.min(Math.max(read, 0), Math.max(total, 1)) / Math.max(total, 1) * 100
-    );
-
-    forumProgress.style.width = `${pct}%`;
+    if(forumProgress && forumStart){
+      const forumRect = forumStart.getBoundingClientRect();
+      const documentHeight = document.documentElement.scrollHeight;
+      const forumTop = window.scrollY + forumRect.top;
+      const total = documentHeight - forumTop - window.innerHeight;
+      const read = window.scrollY - forumTop;
+      const pct = Math.round(
+        Math.min(Math.max(read, 0), Math.max(total, 1)) / Math.max(total, 1) * 100
+      );
+      forumProgress.style.width = `${pct}%`;
+    }
   }
-}
 
-updateProgress();
-window.addEventListener('scroll', updateProgress, {passive:true});
-window.addEventListener('resize', updateProgress);
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, {passive:true});
+  window.addEventListener('resize', updateProgress);
 
- 
-  
-
-  // Tabla de contenidos automática solo si el artículo tiene subtítulos h2 reales.
   const toc = document.querySelector('[data-toc]');
   const tocNav = toc ? toc.querySelector('nav') : null;
   if(toc && tocNav && articleContent){
@@ -319,7 +298,6 @@ window.addEventListener('resize', updateProgress);
     }
   }
 
-  // Copiar enlace del artículo.
   document.querySelectorAll('[data-share]').forEach(button => {
     button.addEventListener('click', async () => {
       const original = button.textContent;
@@ -338,7 +316,6 @@ window.addEventListener('resize', updateProgress);
     });
   });
 
-  // Volver arriba.
   const scrollTop = document.querySelector('.scroll-top');
   function toggleScrollTop(){
     if(!scrollTop) return;
@@ -378,10 +355,6 @@ window.addEventListener('resize', updateProgress);
 
     if (!openBtn || !player || !pauseBtn || !stopBtn || !progress || !status || !article) return;
 
-    // Textos de la interfaz del lector, en español e inglés. Se elige el
-    // idioma según el atributo lang de la página/artículo (detectPageLang),
-    // así que un artículo con lang="en" muestra todo el widget en inglés
-    // sin tocar el HTML de cada página.
     const STRINGS = {
         es: {
             openLabel: "🎧 Escuchar con el navegador",
@@ -449,15 +422,10 @@ window.addEventListener('resize', updateProgress);
     let voice = null;
     let readingSpeed = 1;
 
-    // Idioma detectado de la página/artículo. Se calcula ya aquí (no solo en
-    // buildChunks) para poder traducir las etiquetas del widget desde el
-    // principio, incluso antes de que el usuario le dé a "Escuchar".
-    let pageLang = detectPageLang(); // "es" o "en"
-    let utteranceLang = pageLang === "en" ? "en-US" : "es-ES"; // BCP47 usado en el utterance
+    let pageLang = detectPageLang();
+    let utteranceLang = pageLang === "en" ? "en-US" : "es-ES";
     let T = STRINGS[pageLang];
 
-    // Aplica las etiquetas estáticas del widget (botones, título del select
-    // de velocidad, mensaje de estado inicial) en el idioma detectado.
     function applyStaticLabels() {
         openBtn.textContent = T.openLabel;
 
@@ -488,12 +456,6 @@ window.addEventListener('resize', updateProgress);
 
     applyStaticLabels();
 
-    // Marcado del párrafo/bloque que se está leyendo.
-    // (Antes se iluminaba palabra a palabra con un temporizador estimado + el evento
-    // "onboundary" del navegador, pero ese evento es poco fiable con muchas voces y el
-
-    // desfase se notaba mucho en párrafos largos. Marcar el bloque completo es exacto
-    // siempre, porque se activa justo cuando el motor de voz empieza a leerlo.)
     let highlightedEl = null;
     const HIGHLIGHT_CLASS = "read-highlight";
 
@@ -511,13 +473,10 @@ window.addEventListener('resize', updateProgress);
     speedSelects.forEach(function (select) {
         select.addEventListener("change", function () {
             readingSpeed = Number(select.value) || 1;
-
             try {
                 localStorage.setItem("eidos-read-speed", String(readingSpeed));
             } catch (error) {}
-
             syncSpeedSelects();
-
             if (isReading && !isPaused) {
                 startReading(current, false);
             }
@@ -533,7 +492,6 @@ window.addEventListener('resize', updateProgress);
             document.documentElement.getAttribute("lang") ||
             "es"
         ).toLowerCase();
-
         if (raw.startsWith("en")) return "en";
         return "es";
     }
@@ -588,7 +546,7 @@ window.addEventListener('resize', updateProgress);
 
         const elements = Array.from(article.querySelectorAll("h2, h3, p, blockquote, li"))
             .filter(el => {
-return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus, .article-bibliography");
+                return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscus, .article-bibliography");
             });
 
         chunks = elements
@@ -613,34 +571,21 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         if (highlightedEl && highlightedEl !== el) {
             highlightedEl.classList.remove(HIGHLIGHT_CLASS);
         }
-
-        if (el) {
-            el.classList.add(HIGHLIGHT_CLASS);
-        }
-
+        if (el) el.classList.add(HIGHLIGHT_CLASS);
         highlightedEl = el;
     }
 
     function clearHighlight() {
-        if (highlightedEl) {
-            highlightedEl.classList.remove(HIGHLIGHT_CLASS);
-        }
-
+        if (highlightedEl) highlightedEl.classList.remove(HIGHLIGHT_CLASS);
         highlightedEl = null;
     }
 
     function cancelSpeech() {
         internalCancel = true;
         speechSynthesis.cancel();
-
-        setTimeout(function () {
-            internalCancel = false;
-        }, 200);
+        setTimeout(function () { internalCancel = false; }, 200);
     }
 
-    // Índice del encabezado (h2/h3) que abre la sección a la que pertenece
-    // el bloque "fromIndex". Si no hay ningún encabezado antes, la sección
-    // "actual" es el principio mismo del artículo (índice 0).
     function sectionStartIndex(fromIndex) {
         for (let i = fromIndex; i >= 0; i--) {
             if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
@@ -648,15 +593,11 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         return 0;
     }
 
-    // Encabezado de la sección ANTERIOR a la que contiene "fromIndex".
-    // -1 si ya estamos en la primera sección del artículo.
     function previousSectionIndex(fromIndex) {
         const start = sectionStartIndex(fromIndex);
-
         for (let i = start - 1; i >= 0; i--) {
             if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
         }
-
         return -1;
     }
 
@@ -668,30 +609,13 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
     }
 
     function updateButtons() {
-        // El botón "anterior" siempre tiene algo que hacer mientras haya bloques
-        // que leer: como mínimo, reiniciar la sección actual desde su principio.
         const hasPrev = chunks.length > 0;
         const hasNext = nextSectionIndex() !== -1;
 
-        if (prevBtn) {
-            prevBtn.disabled = !hasPrev;
-            prevBtn.classList.toggle("disabled", !hasPrev);
-        }
-
-        if (nextBtn) {
-            nextBtn.disabled = !hasNext;
-            nextBtn.classList.toggle("disabled", !hasNext);
-        }
-
-        if (floatingPrev) {
-            floatingPrev.disabled = !hasPrev;
-            floatingPrev.classList.toggle("disabled", !hasPrev);
-        }
-
-        if (floatingNext) {
-            floatingNext.disabled = !hasNext;
-            floatingNext.classList.toggle("disabled", !hasNext);
-        }
+        if (prevBtn) { prevBtn.disabled = !hasPrev; prevBtn.classList.toggle("disabled", !hasPrev); }
+        if (nextBtn) { nextBtn.disabled = !hasNext; nextBtn.classList.toggle("disabled", !hasNext); }
+        if (floatingPrev) { floatingPrev.disabled = !hasPrev; floatingPrev.classList.toggle("disabled", !hasPrev); }
+        if (floatingNext) { floatingNext.disabled = !hasNext; floatingNext.classList.toggle("disabled", !hasNext); }
 
         pauseBtn.textContent = isPaused ? T.resumeLabel : T.pauseLabel;
 
@@ -701,81 +625,53 @@ return !el.closest(".related, .newsletter-mini, .comments, .comment-note, .giscu
         }
     }
 
-function syncFloatingVisibility() {
-    if (!floating) return;
+    function syncFloatingVisibility() {
+        if (!floating) return;
 
-    const isMobile = window.innerWidth <= 900;
+        const isMobile = window.innerWidth <= 900;
 
-    // En móvil, si el lector está abierto, mantenemos siempre visible el miniwidget.
-    if (isMobile && openBtn.hidden && (isReading || isPaused)) {
-        floating.hidden = false;
+        if (isMobile && openBtn.hidden && (isReading || isPaused)) {
+            floating.hidden = false;
+            requestAnimationFrame(function () { floating.classList.add("visible"); });
+            return;
+        }
 
-        requestAnimationFrame(function () {
-            floating.classList.add("visible");
-        });
+        const playerOpen = !player.hidden;
+        const rect = player.getBoundingClientRect();
+        const playerVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-        return;
+        if (playerOpen && !playerVisible) {
+            floating.hidden = false;
+            requestAnimationFrame(function () { floating.classList.add("visible"); });
+        } else {
+            floating.classList.remove("visible");
+            setTimeout(function () {
+                if (!floating.classList.contains("visible")) floating.hidden = true;
+            }, 250);
+        }
     }
-
-    const playerOpen = !player.hidden;
-    const rect = player.getBoundingClientRect();
-    const playerVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-    if (playerOpen && !playerVisible) {
-        floating.hidden = false;
-
-        requestAnimationFrame(function () {
-            floating.classList.add("visible");
-        });
-    } else {
-        floating.classList.remove("visible");
-
-        setTimeout(function () {
-            if (!floating.classList.contains("visible")) {
-                floating.hidden = true;
-            }
-        }, 250);
-    }
-}	
-	
-	
 
     function scrollToCurrentBlock() {
         const block = chunks[current];
         if (!block || !block.element) return;
-
-        block.element.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        block.element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    function openPlayer() {
+        openBtn.hidden = true;
 
-
-function openPlayer() {
-    openBtn.hidden = true;
-
-    if (window.innerWidth <= 900) {
-        player.hidden = true;
-
-        if (floating) {
-            floating.hidden = false;
-
-            requestAnimationFrame(function () {
-                floating.classList.add("visible");
-            });
+        if (window.innerWidth <= 900) {
+            player.hidden = true;
+            if (floating) {
+                floating.hidden = false;
+                requestAnimationFrame(function () { floating.classList.add("visible"); });
+            }
+            return;
         }
 
-        return;
+        player.hidden = false;
+        syncFloatingVisibility();
     }
-
-    player.hidden = false;
-    syncFloatingVisibility();
-}
-
-
-
-
 
     function closePlayer() {
         cancelSpeech();
@@ -798,6 +694,9 @@ function openPlayer() {
         pauseBtn.textContent = T.pauseLabel;
         setStatus(T.defaultStatus);
         updateButtons();
+
+        // ▼▼▼ AÑADIDO: avisa al widget del juego que el lector ha parado ▼▼▼
+        document.dispatchEvent(new CustomEvent('eidos-reader-stop'));
     }
 
     function finishReading() {
@@ -823,9 +722,7 @@ function openPlayer() {
             isReading = true;
             isPaused = false;
             progress.value = current;
-
             setHighlight(chunks[current].element);
-
             setStatus(T.reading(current + 1, chunks.length, readingSpeed));
             updateButtons();
             syncFloatingVisibility();
@@ -833,10 +730,8 @@ function openPlayer() {
 
         utterance.onend = function () {
             if (internalCancel) return;
-
             current++;
             progress.value = current;
-
             if (current >= chunks.length) {
                 finishReading();
             } else {
@@ -847,7 +742,6 @@ function openPlayer() {
 
         utterance.onerror = function () {
             if (internalCancel) return;
-
             isReading = false;
             isPaused = false;
             clearHighlight();
@@ -872,25 +766,18 @@ function openPlayer() {
 
         voice = getBestVoiceForLang(pageLang);
 
-        if (shouldScroll) {
-            scrollToCurrentBlock();
-        }
+        if (shouldScroll) scrollToCurrentBlock();
 
         cancelSpeech();
 
-        setTimeout(function () {
-            speakCurrent();
-        }, 240);
+        setTimeout(function () { speakCurrent(); }, 240);
     }
 
     function jumpTo(newIndex) {
         if (!chunks.length) buildChunks();
-
         if (newIndex < 0 || newIndex >= chunks.length) return;
-
         isReading = false;
         isPaused = false;
-
         startReading(newIndex, true);
     }
 
@@ -899,6 +786,9 @@ function openPlayer() {
         current = 0;
         openPlayer();
         startReading(0, false);
+
+        // ▼▼▼ AÑADIDO: avisa al widget del juego que el lector ha arrancado ▼▼▼
+        document.dispatchEvent(new CustomEvent('eidos-reader-start'));
     });
 
     pauseBtn.addEventListener("click", function () {
@@ -920,9 +810,6 @@ function openPlayer() {
 
     stopBtn.addEventListener("click", closePlayer);
 
-    // Un clic en "anterior" lleva al principio de la sección donde estás
-    // ahora mismo. Si ya estás en ese punto (o llega un segundo clic rápido,
-    // como en cualquier reproductor de podcasts), salta a la sección anterior.
     let lastPrevClickAt = 0;
     const PREV_DOUBLE_CLICK_MS = 600;
 
@@ -958,35 +845,26 @@ function openPlayer() {
     });
 
     if (floatingPrev && prevBtn) {
-        floatingPrev.addEventListener("click", function () {
-            prevBtn.click();
-        });
+        floatingPrev.addEventListener("click", function () { prevBtn.click(); });
     }
 
     if (floatingPause) {
-
-        floatingPause.addEventListener("click", function () {
-            pauseBtn.click();
-        });
+        floatingPause.addEventListener("click", function () { pauseBtn.click(); });
     }
 
     if (floatingNext && nextBtn) {
-        floatingNext.addEventListener("click", function () {
-            nextBtn.click();
-        });
+        floatingNext.addEventListener("click", function () { nextBtn.click(); });
     }
 
     if (floatingStop) {
-        floatingStop.addEventListener("click", function () {
-            stopBtn.click();
-        });
+        floatingStop.addEventListener("click", function () { stopBtn.click(); });
     }
 
     speechSynthesis.onvoiceschanged = function () {
         voice = getBestVoiceForLang(pageLang);
     };
 
-    window.addEventListener("scroll", syncFloatingVisibility, { passive:true });
+    window.addEventListener("scroll", syncFloatingVisibility, { passive: true });
     window.addEventListener("resize", syncFloatingVisibility);
 
     window.addEventListener("beforeunload", function () {
