@@ -527,7 +527,7 @@ const bgImgs = BG_IMAGES.map(url => {
   return image;
 });
 
-let currentBg = bgImgs[0];
+let currentBg = null;
 
 const BEST_SCORE_KEY = 'eidosRompemurosBestScore';
 
@@ -894,8 +894,21 @@ function nextLevel(){
   loop();
 }
 function restart(){
-  score=0;lives=3;over=false;win=false;level=1;quoteBag=[];imageBag=[];lastQuoteIndex=-1;lastImageIndex=0;currentBg=bgImgs[0];
-  initBricks(1);resetBall();
+  score=0;
+  lives=3;
+  over=false;
+  win=false;
+  level=1;
+
+  quoteBag=[];
+  imageBag=[];
+  lastQuoteIndex=-1;
+  lastImageIndex=-1;
+
+  currentBg=nextBackground();
+
+  initBricks(1);
+  resetBall();
   document.getElementById('game-btn').style.display='none';
   document.getElementById('msg').textContent='Mueve el rat\u00f3n para empezar';
   document.getElementById('scoreEl').textContent='Puntos: 0';
@@ -1235,8 +1248,7 @@ function loop(){
   requestAnimationFrame(frame);
 }
 
-currentBg = bgImgs[0];
-lastImageIndex = 0;
+currentBg = nextBackground();
 document.getElementById('bestEl').textContent = 'Récord: ' + bestScore;
 updateSpeedControl();
 initBricks(1);

@@ -69,7 +69,7 @@
     <div id="quote-hint">— Toca para continuar —</div>
   </div>
 </div>
-<div id="msg">Mueve el ratón o toca para empezar · pulsa para disparar</div>
+<div id="msg">Mueve el ratón o toca para empezar · disparo automático</div>
 <button id="game-btn" type="button">Reiniciar</button>
 <script src="/hiddenegg/games/eidos-content.js"></script>
 
@@ -81,6 +81,60 @@ const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
 
 const BG_IMAGES = EIDOS_CONTENT.images;
 const QUOTES = EIDOS_CONTENT.quotes;
+
+let bgCarousel=[];
+let lastBgIndex=-1;
+let quoteCarousel=[];
+let lastQuoteIndex=-1;
+
+function shuffleArray(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function refillBackgroundCarousel(){
+  bgCarousel=shuffleArray(BG_IMAGES.map((_,index)=>index));
+
+  if(bgCarousel.length>1&&bgCarousel[0]===lastBgIndex){
+    const swapIndex=1+Math.floor(Math.random()*(bgCarousel.length-1));
+    [bgCarousel[0],bgCarousel[swapIndex]]=[bgCarousel[swapIndex],bgCarousel[0]];
+  }
+}
+
+function selectNextBackground(){
+  if(!bgImgs.length){
+    bgIndex=-1;
+    currentBg=null;
+    return;
+  }
+
+  if(!bgCarousel.length)refillBackgroundCarousel();
+
+  bgIndex=bgCarousel.shift();
+  lastBgIndex=bgIndex;
+  currentBg=bgImgs[bgIndex];
+}
+
+function refillQuoteCarousel(){
+  quoteCarousel=shuffleArray(QUOTES.map((_,index)=>index));
+
+  if(quoteCarousel.length>1&&quoteCarousel[0]===lastQuoteIndex){
+    const swapIndex=1+Math.floor(Math.random()*(quoteCarousel.length-1));
+    [quoteCarousel[0],quoteCarousel[swapIndex]]=[quoteCarousel[swapIndex],quoteCarousel[0]];
+  }
+}
+
+function getNextQuote(){
+  if(!QUOTES.length)return '';
+  if(!quoteCarousel.length)refillQuoteCarousel();
+
+  const quoteIndex=quoteCarousel.shift();
+  lastQuoteIndex=quoteIndex;
+  return QUOTES[quoteIndex];
+}
 
 const cv=document.getElementById('c');
 const ctx=cv.getContext('2d');
@@ -94,9 +148,9 @@ const gameBtn=document.getElementById('game-btn');
 const cadenceLabel=document.getElementById('cadence-label');
 
 const CADENCES=[
-  {name:'Contemplativa',factor:.82,shotDelay:275,enemyDelay:2550,crawler:1.00},
-  {name:'Estable',factor:1,shotDelay:225,enemyDelay:2150,crawler:1.18},
-  {name:'Intensa',factor:1.22,shotDelay:185,enemyDelay:1780,crawler:1.38}
+  {name:'Contemplativa',factor:.82,shotDelay:275,autoShotDelay:650,enemyDelay:2550,crawler:1.00},
+  {name:'Estable',factor:1,shotDelay:225,autoShotDelay:500,enemyDelay:2150,crawler:1.18},
+  {name:'Intensa',factor:1.22,shotDelay:185,autoShotDelay:380,enemyDelay:1780,crawler:1.38}
 ];
 const CADENCE_KEY='eidosPendulumCrawlerCadenceV1';
 let cadenceIndex=Number(localStorage.getItem(CADENCE_KEY));
@@ -109,13 +163,27 @@ function changeCadence(dir){
 cadenceLabel.textContent=CADENCES[cadenceIndex].name;
 
 const bgImgs=BG_IMAGES.map(src=>{const im=new Image();im.crossOrigin='anonymous';im.src=src;return im});
-let bgIndex=0,currentBg=bgImgs[0];
+let bgIndex=-1,currentBg=null;
+selectNextBackground();
 let score=0,level=1,lives=3,started=false,over=false,quoteVisible=false,running=false,transitioning=false;
 const PENDULUM_COLORS=['#c8a84b','#8fd4c2','#d9895b'];
 let best=Number(localStorage.getItem('eidosPendulumCrawlerBestV1'))||0;
 bestEl.textContent='Récord: '+best;
-let lastTime=0,elapsed=0,lastShot=-9999,lastEnemyShot=0;
-let player={x:W/2,y:H-36,w:44,h:18,shotFlash:0,hitFlash:0};
+let lastTime=0,elapsed=0,lastShot=-9999,lastAutoShot=-9999,lastEnemyShot=0;
+let invulnerableUntil=0;
+const INVULNERABILITY_MS=1100;
+
+let player={
+  x:W/2,
+  y:H-36,
+  w:44,
+  h:18,
+  shotFlash:0,
+  hitFlash:0,
+  state:'alive',
+  deathElapsed:0,
+  finalDeath:false
+};
 let mouseX=W/2;
 let bullets=[],enemyBullets=[],particles=[];
 let pendulums=[],fallingCores=[],crawlers=[],fields=[];
@@ -141,14 +209,33 @@ function updatePendulumPositions(t){
 }
 function resetLevel(){
   bullets=[];enemyBullets=[];particles=[];fallingCores=[];crawlers=[];fields=[];
-  started=false;over=false;transitioning=false;lastEnemyShot=elapsed;player.x=W/2;makePendulums();
+  started=false;
+  over=false;
+  transitioning=false;
+  lastEnemyShot=elapsed;
+  lastAutoShot=-9999;
+  invulnerableUntil=0;
+
+  player.x=W/2;
+  player.state='alive';
+  player.deathElapsed=0;
+  player.finalDeath=false;
+  player.hitFlash=0;
+  player.shotFlash=0;
+
+  makePendulums();
   levelEl.textContent='Nivel '+level;
-  msg.textContent='Rompe los péndulos · divide los gusanos · reduce los pozos';
+  msg.textContent='Mueve el emisor · el disparo es automático';
   gameBtn.style.display='none';
 }
 function restart(){
-  score=0;level=1;lives=3;bgIndex=0;currentBg=bgImgs[0];
+  score=0;level=1;lives=3;
+  bgCarousel=[];lastBgIndex=-1;selectNextBackground();
+  quoteCarousel=[];lastQuoteIndex=-1;
   scoreEl.textContent='Puntos: 0';livesEl.textContent='♥ ♥ ♥';
+  lastShot=-9999;
+  lastAutoShot=-9999;
+  invulnerableUntil=0;
   resetLevel();lastTime=0;loop();
 }
 function updateScore(points){
@@ -156,7 +243,13 @@ function updateScore(points){
   if(score>best){best=score;bestEl.textContent='Récord: '+best;localStorage.setItem('eidosPendulumCrawlerBestV1',String(best));}
 }
 function shoot(now){
-  if(!started||over||quoteVisible||transitioning)return;
+  if(
+    !started ||
+    over ||
+    quoteVisible ||
+    transitioning ||
+    player.state!=='alive'
+  )return;
   const delay=CADENCES[cadenceIndex].shotDelay;
   if(now-lastShot<delay)return;
   lastShot=now;
@@ -329,10 +422,73 @@ function updateFieldAutoCollapse(dt){
   }
 }
 
-function loseLife(){
-  lives--;livesEl.textContent=lives>0?'♥ '.repeat(lives).trim():'×';enemyBullets=[];player.hitFlash=18;burst(player.x,player.y,'#e8c49a',22);
-  if(lives<=0){over=true;msg.textContent='Fin de la secuencia · '+score+' puntos';gameBtn.textContent='Reiniciar';gameBtn.onclick=restart;gameBtn.style.display='inline-block';}
+function loseLife(now=performance.now()){
+  if(
+    over ||
+    player.state!=='alive' ||
+    now<invulnerableUntil
+  ){
+    return;
+  }
+
+  lives--;
+  livesEl.textContent=lives>0?'♥ '.repeat(lives).trim():'×';
+
+  enemyBullets=[];
+  bullets=[];
+
+  player.state='disintegrating';
+  player.deathElapsed=0;
+  player.finalDeath=lives<=0;
+  player.hitFlash=18;
+
+  burst(player.x,player.y,'#8fd4c2',42);
+  burst(player.x,player.y,'#c8a84b',22);
+
+  msg.textContent=lives>0
+    ? 'Reconstruyendo emisor…'
+    : 'Secuencia finalizando…';
 }
+function updatePlayerDeath(dt,now){
+  if(player.state==='alive')return;
+
+  player.deathElapsed+=dt;
+
+  if(player.state==='disintegrating'){
+    if(player.deathElapsed>=480){
+      player.state='rematerializing';
+      player.deathElapsed=0;
+      player.x=W/2;
+      mouseX=W/2;
+
+      burst(player.x,player.y,'#8fd4c2',20);
+    }
+    return;
+  }
+
+  if(player.state==='rematerializing'){
+    if(player.deathElapsed>=900){
+      if(player.finalDeath){
+        over=true;
+        started=false;
+        player.state='gone';
+
+        msg.textContent='Fin de la secuencia · '+score+' puntos';
+        gameBtn.textContent='Reiniciar';
+        gameBtn.onclick=restart;
+        gameBtn.style.display='inline-block';
+      }else{
+        player.state='alive';
+        player.deathElapsed=0;
+        player.hitFlash=0;
+        invulnerableUntil=now+INVULNERABILITY_MS;
+
+        msg.textContent='Mueve el emisor · el disparo es automático';
+      }
+    }
+  }
+}
+
 function applyFieldGravity(obj,dt,strength=1){
   for(const f of fields){
     if(f.dead)continue;
@@ -403,17 +559,38 @@ function updateCrawlers(dt){
 
     c.headX=c.x;c.headY=c.y;
     if(c.flash>0)c.flash--;
-    if(c.y>H-85){c.y=H-180;c.dir*=-1;loseLife();}
+    if(c.y>H-85){
+      c.alive=false;
+      burst(c.x,c.y,c.color,20);
+      loseLife(performance.now());
+    }
   }
 }
 function update(dt,now){
-  if(!started||over||quoteVisible||transitioning)return;
-  player.x+=(mouseX-player.x)*Math.min(1,dt*.018);
+  if(over||quoteVisible||transitioning)return;
+
+  updatePlayerDeath(dt,now);
+
+  if(!started)return;
+
+  if(player.state==='alive'){
+    player.x+=(mouseX-player.x)*Math.min(1,dt*.018);
+  }
   player.x=Math.max(player.w/2,Math.min(W-player.w/2,player.x));
   if(player.shotFlash>0)player.shotFlash--;
   if(player.hitFlash>0)player.hitFlash--;
   updatePendulumPositions(elapsed/1000);
-  enemyShoot(now);
+
+  if(player.state==='alive'){
+    const autoDelay=CADENCES[cadenceIndex].autoShotDelay;
+
+    if(now-lastAutoShot>=autoDelay){
+      lastAutoShot=now;
+      shoot(now);
+    }
+
+    enemyShoot(now);
+  }
 
   for(const f of fallingCores){
     if(!f.alive)continue;
@@ -470,7 +647,15 @@ function update(dt,now){
 
   for(let i=enemyBullets.length-1;i>=0;i--){
     const e=enemyBullets[i];
-    if(Math.abs(e.x-player.x)<player.w/2+e.r&&Math.abs(e.y-player.y)<player.h/2+e.r){enemyBullets.splice(i,1);loseLife();break;}
+    if(
+      player.state==='alive' &&
+      Math.abs(e.x-player.x)<player.w/2+e.r &&
+      Math.abs(e.y-player.y)<player.h/2+e.r
+    ){
+      enemyBullets.splice(i,1);
+      loseLife(now);
+      break;
+    }
   }
   for(const q of particles){q.x+=q.vx*dt/16.667;q.y+=q.vy*dt/16.667;q.vx*=.985;q.vy*=.985;q.life-=dt/16.667;}
   particles=particles.filter(q=>q.life>0);
@@ -586,12 +771,32 @@ function draw(){
   for(const q of particles){ctx.globalAlpha=Math.max(0,q.life/40);ctx.fillStyle=q.color;ctx.fillRect(q.x,q.y,2,2);}ctx.globalAlpha=1;
 
   /* Emisor EIDOS: núcleo, cápsula, estabilizadores y halo pulsante */
-  {
+  if(player.state!=='gone'){
     const pulse=1+.09*Math.sin(elapsed*.0042);
     const px=player.x,py=player.y;
     const haloColor=player.hitFlash>0?'232,112,82':'200,168,75';
 
+    let playerAlpha=1;
+    let playerScale=1;
+
+    if(player.state==='disintegrating'){
+      const p=Math.min(1,player.deathElapsed/480);
+      playerAlpha=1-p;
+      playerScale=1+p*.42;
+    }else if(player.state==='rematerializing'){
+      const p=Math.min(1,player.deathElapsed/900);
+      const pulseIn=.92+.08*Math.sin(p*Math.PI*6);
+      playerAlpha=p;
+      playerScale=(.28+p*.72)*pulseIn;
+    }else if(performance.now()<invulnerableUntil){
+      playerAlpha=.45+.35*Math.sin(elapsed*.028);
+    }
+
     ctx.save();
+    ctx.globalAlpha=Math.max(0,Math.min(1,playerAlpha));
+    ctx.translate(px,py);
+    ctx.scale(playerScale,playerScale);
+    ctx.translate(-px,-py);
 
     /* halo exterior pulsante */
     ctx.globalAlpha=.20+(player.hitFlash>0?.18:0);
@@ -686,12 +891,12 @@ function draw(){
     ctx.restore();
   }
 
-  if(!started&&!over&&!quoteVisible){
+  if(!started&&!over&&!quoteVisible&&player.state==='alive'){
     ctx.fillStyle='rgba(0,0,0,.50)';ctx.fillRect(0,0,W,H);
     ctx.fillStyle='#f5ecd0';ctx.font='bold 21px Georgia,serif';ctx.textAlign='center';
     ctx.fillText('PÉNDULOS Y CADENAS',W/2,H/2-20);
     ctx.font='13px Arial,sans-serif';ctx.fillStyle='#c8c8b0';
-    ctx.fillText('Cada segmento abre un pozo que desvía tus disparos',W/2,H/2+12);
+    ctx.fillText('Mueve el emisor · dispara automáticamente',W/2,H/2+12);
     ctx.textAlign='left';
   }
 }
@@ -706,14 +911,14 @@ function loop(){
 }
 function showQuote(){
   const qs=document.getElementById('quote-screen'),qt=document.getElementById('quote-text'),qh=document.getElementById('quote-hint');
-  qt.textContent=QUOTES[(level-2)%QUOTES.length];qt.classList.remove('show');qh.classList.remove('show');qs.classList.add('visible');qs.style.background='rgba(5,12,8,0)';quoteVisible=true;
+  qt.textContent=getNextQuote();qt.classList.remove('show');qh.classList.remove('show');qs.classList.add('visible');qs.style.background='rgba(5,12,8,0)';quoteVisible=true;
   let op=0;const id=setInterval(()=>{op=Math.min(.9,op+.05);qs.style.background='rgba(5,12,8,'+op+')';if(op>=.9){clearInterval(id);qt.classList.add('show');qh.classList.add('show')}},30);
 }
 function dismissQuote(){
   if(!quoteVisible)return;
   const qs=document.getElementById('quote-screen'),qt=document.getElementById('quote-text'),qh=document.getElementById('quote-hint');
   qt.classList.remove('show');qh.classList.remove('show');
-  let op=.9;const id=setInterval(()=>{op=Math.max(0,op-.06);qs.style.background='rgba(5,12,8,'+op+')';if(op<=0){clearInterval(id);qs.classList.remove('visible');quoteVisible=false;bgIndex=(bgIndex+1)%bgImgs.length;currentBg=bgImgs[bgIndex];resetLevel();lastTime=0;loop()}},30);
+  let op=.9;const id=setInterval(()=>{op=Math.max(0,op-.06);qs.style.background='rgba(5,12,8,'+op+')';if(op<=0){clearInterval(id);qs.classList.remove('visible');quoteVisible=false;selectNextBackground();resetLevel();lastTime=0;loop()}},30);
 }
 cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*W/r.width;if(!started&&!over&&!quoteVisible){started=true;msg.textContent='Divide los gusanos y destruye sus pozos gravitatorios'};});
 cv.addEventListener('mousedown',e=>{e.preventDefault();if(!started&&!over&&!quoteVisible)started=true;shoot(performance.now())});
