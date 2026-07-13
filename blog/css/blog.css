@@ -651,6 +651,57 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
 }
 
 
+/* Portadas animadas de las tarjetas del blog */
+
+.post-card .video-cover {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.post-card .card-preview-video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.45s ease,
+    visibility 0.45s ease;
+
+  pointer-events: none;
+  background: #000;
+}
+
+.post-card.video-playing .card-preview-video {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* En dispositivos táctiles se mantiene la imagen estática */
+@media (hover: none), (pointer: coarse) {
+  .post-card .card-preview-video {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
 
 /* ==========================================================
 

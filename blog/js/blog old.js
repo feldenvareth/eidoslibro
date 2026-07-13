@@ -6,14 +6,14 @@
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? '×' : '☰';
+      toggle.textContent = open ? '�' : '?';
     });
 
     nav.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded','false');
-        toggle.textContent = '☰';
+        toggle.textContent = '?';
       });
     });
 
@@ -21,7 +21,7 @@
       if(window.innerWidth > 900){
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded','false');
-        toggle.textContent = '☰';
+        toggle.textContent = '?';
       }
     });
   }
@@ -144,7 +144,7 @@
       if(isNaN(date)) return;
       var formatted = date.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
       if(meta.textContent.indexOf(formatted) === -1){
-        meta.textContent = meta.textContent.trimEnd() + ' · ' + formatted;
+        meta.textContent = meta.textContent.trimEnd() + ' � ' + formatted;
       }
     });
   })();
@@ -188,7 +188,7 @@
 
   function updateMetaReadingTime(metaElement, minutes){
     if(!metaElement || !minutes) return;
-    const parts = metaElement.textContent.split('·').map(part => part.trim()).filter(Boolean);
+    const parts = metaElement.textContent.split('�').map(part => part.trim()).filter(Boolean);
     const minText = `${minutes} min`;
     const idx = parts.findIndex(part => /\b\d+\s*min\b/i.test(part));
 
@@ -200,7 +200,7 @@
       parts.push(minText);
     }
 
-    metaElement.textContent = parts.join(' · ');
+    metaElement.textContent = parts.join(' � ');
   }
 
   if(articleContent){
@@ -229,11 +229,11 @@
 
       try{
         const response = await fetch(href, {cache: 'no-store'});
-        if(!response.ok) throw new Error('No se pudo leer el artículo');
+        if(!response.ok) throw new Error('No se pudo leer el art�culo');
         const html = await response.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const content = doc.querySelector('[data-article-content], .article-content');
-        if(!content) throw new Error('Artículo sin contenido detectable');
+        if(!content) throw new Error('Art�culo sin contenido detectable');
         const minutes = estimateReadingMinutesFromText(getReadableArticleText(content));
         updateMetaReadingTime(meta, minutes);
         try{ sessionStorage.setItem(cacheKey, String(minutes)); } catch(error) {}
@@ -357,38 +357,38 @@
 
     const STRINGS = {
         es: {
-            openLabel: "🎧 Escuchar con el navegador",
+            openLabel: "?? Escuchar con el navegador",
             unavailable: "Lectura no disponible",
-            prevLabel: "⏮ Sección anterior",
-            pauseLabel: "⏸ Pausar",
-            resumeLabel: "▶ Reanudar",
-            nextLabel: "⏭ Siguiente sección",
-            stopLabel: "■ Detener",
+            prevLabel: "? Secci�n anterior",
+            pauseLabel: "? Pausar",
+            resumeLabel: "? Reanudar",
+            nextLabel: "? Siguiente secci�n",
+            stopLabel: "� Detener",
             speedLabel: "Velocidad",
-            prevTitle: "Sección anterior",
+            prevTitle: "Secci�n anterior",
             pauseTitle: "Pausar",
             resumeTitle: "Reanudar",
-            nextTitle: "Siguiente sección",
+            nextTitle: "Siguiente secci�n",
             stopTitle: "Detener",
-            defaultStatus: "Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.",
+            defaultStatus: "Lectura autom�tica del navegador. La calidad de la voz puede variar seg�n el dispositivo.",
             reading: function (i, total, speed) {
-                return "Leyendo bloque " + i + " de " + total + " · Velocidad " + speed + "x.";
+                return "Leyendo bloque " + i + " de " + total + " � Velocidad " + speed + "x.";
             },
             resumed: function (speed) {
-                return "Lectura reanudada · Velocidad " + speed + "x.";
+                return "Lectura reanudada � Velocidad " + speed + "x.";
             },
             paused: "Lectura pausada.",
             interrupted: "La lectura se ha interrumpido.",
             noText: "No hay texto para leer."
         },
         en: {
-            openLabel: "🎧 Listen in your browser",
+            openLabel: "?? Listen in your browser",
             unavailable: "Reading unavailable",
-            prevLabel: "⏮ Previous section",
-            pauseLabel: "⏸ Pause",
-            resumeLabel: "▶ Resume",
-            nextLabel: "⏭ Next section",
-            stopLabel: "■ Stop",
+            prevLabel: "? Previous section",
+            pauseLabel: "? Pause",
+            resumeLabel: "? Resume",
+            nextLabel: "? Next section",
+            stopLabel: "� Stop",
             speedLabel: "Speed",
             prevTitle: "Previous section",
             pauseTitle: "Pause",
@@ -397,10 +397,10 @@
             stopTitle: "Stop",
             defaultStatus: "Automatic browser narration. Voice quality may vary by device.",
             reading: function (i, total, speed) {
-                return "Reading block " + i + " of " + total + " · Speed " + speed + "x.";
+                return "Reading block " + i + " of " + total + " � Speed " + speed + "x.";
             },
             resumed: function (speed) {
-                return "Reading resumed · Speed " + speed + "x.";
+                return "Reading resumed � Speed " + speed + "x.";
             },
             paused: "Reading paused.",
             interrupted: "Reading was interrupted.",
@@ -437,7 +437,7 @@
         if (floatingPrev) floatingPrev.title = T.prevTitle;
         if (floatingNext) floatingNext.title = T.nextTitle;
         if (floatingStop) floatingStop.title = T.stopTitle;
-        if (floatingPause) { floatingPause.textContent = "⏸"; floatingPause.title = T.pauseTitle; }
+        if (floatingPause) { floatingPause.textContent = "?"; floatingPause.title = T.pauseTitle; }
 
         speedSelects.forEach(function (select) {
             const label = select.closest(".read-speed-label");
@@ -504,9 +504,9 @@
             "Microsoft Alvaro Online (Natural) - Spanish (Spain)",
             "Microsoft Helena",
             "Microsoft Alvaro",
-            "Google español de España",
-            "Google español",
-            "Mónica",
+            "Google espa�ol de Espa�a",
+            "Google espa�ol",
+            "M�nica",
             "Jorge"
         ];
 
@@ -620,7 +620,7 @@
         pauseBtn.textContent = isPaused ? T.resumeLabel : T.pauseLabel;
 
         if (floatingPause) {
-            floatingPause.textContent = isPaused ? "▶" : "⏸";
+            floatingPause.textContent = isPaused ? "?" : "?";
             floatingPause.title = isPaused ? T.resumeTitle : T.pauseTitle;
         }
     }
@@ -695,7 +695,7 @@
         setStatus(T.defaultStatus);
         updateButtons();
 
-        // ▼▼▼ AÑADIDO: avisa al widget del juego que el lector ha parado ▼▼▼
+        // ??? A�ADIDO: avisa al widget del juego que el lector ha parado ???
         document.dispatchEvent(new CustomEvent('eidos-reader-stop'));
     }
 
@@ -787,7 +787,7 @@
         openPlayer();
         startReading(0, false);
 
-        // ▼▼▼ AÑADIDO: avisa al widget del juego que el lector ha arrancado ▼▼▼
+        // ??? A�ADIDO: avisa al widget del juego que el lector ha arrancado ???
         document.dispatchEvent(new CustomEvent('eidos-reader-start'));
     });
 
@@ -871,76 +871,3 @@
         speechSynthesis.cancel();
     });
 })();
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-
-  const canHover = window.matchMedia(
-    '(hover: hover) and (pointer: fine)'
-  ).matches;
-
-  if (!canHover) {
-    return;
-  }
-
-  const cards = document.querySelectorAll(
-    '.post-card .card-preview-video'
-  );
-
-  cards.forEach(function (video) {
-
-    const card = video.closest('.post-card');
-    const sourceUrl = video.dataset.videoSrc;
-
-    if (!card || !sourceUrl) {
-      return;
-    }
-
-    let videoLoaded = false;
-
-    function loadVideo() {
-      if (videoLoaded) {
-        return;
-      }
-
-      video.src = sourceUrl;
-      video.load();
-      videoLoaded = true;
-    }
-
-    function startVideo() {
-      loadVideo();
-
-      const playPromise = video.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(function () {
-            card.classList.add('video-playing');
-          })
-          .catch(function () {
-            card.classList.remove('video-playing');
-          });
-      }
-    }
-
-    function stopVideo() {
-      video.pause();
-      video.currentTime = 0;
-      card.classList.remove('video-playing');
-    }
-
-    card.addEventListener('mouseenter', startVideo);
-    card.addEventListener('mouseleave', stopVideo);
-
-    card.addEventListener('focusin', startVideo);
-    card.addEventListener('focusout', stopVideo);
-
-  });
-
-});
-
-
-
-
