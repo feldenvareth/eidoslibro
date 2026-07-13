@@ -114,7 +114,92 @@
     <main>
       <section class="section reveal" id="archivo" aria-labelledby="archivo-title">
         <div class="feature">
-          <div class="feature-img" aria-hidden="true"></div>
+          <div
+    class="feature-img feature-video"
+    aria-hidden="true"
+    style="background-image:url('articles/images/03/fondo.jpg')">
+
+    <video
+        class="feature-video-element"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        poster="articles/images/03/fondo.jpg">
+
+        <source
+            src="articles/images/03/video.mp4"
+            type="video/mp4">
+    </video>
+</div>
+
+<style>
+.feature-img.feature-video{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+
+    background-color:#000;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
+    isolation:isolate;
+}
+
+.feature-img.feature-video::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,6,8,.04),
+            rgba(5,6,8,.16)
+        );
+    pointer-events:none;
+}
+
+.feature-video-element{
+    position:absolute;
+    inset:0;
+    z-index:1;
+
+    width:100%;
+    height:100%;
+    display:block;
+
+    object-fit:contain;
+    object-position:center center;
+
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.01);
+
+    transition:
+        opacity 1.1s ease,
+        visibility 1.1s ease,
+        transform 1.6s ease;
+
+    background:transparent;
+}
+
+.feature-video-element.is-ready{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+@media (prefers-reduced-motion:reduce){
+    .feature-video-element{
+        transition:none;
+        transform:none;
+    }
+}
+</style>
           <div class="feature-copy">
             <p class="kicker">A Side Library of Eidos</p>
             <h2 id="archivo-title">Beyond the Novel.</h2>
@@ -134,7 +219,7 @@
         </div>
 
         <div class="archive-tools reveal" aria-label="Archive tools">
-          <div class="archive-count"><span id="article-count">2</span> articles in the archive</div>
+          <div class="archive-count"><span id="article-count">4</span> articles in the archive</div>
           <label class="search-box" for="article-search">
             <span class="sr-only">Search articles</span>
             <input id="article-search" type="search" placeholder="Search by title, topic or keyword…" autocomplete="off">
@@ -146,7 +231,11 @@
             <button class="tag-filter" type="button" data-filter="technology">Technology</button>
             <button class="tag-filter" type="button" data-filter="material">Material</button>
 <button class="tag-filter" type="button" data-filter="immortality">Immortality</button>
-<button class="tag-filter" type="button" data-filter="medicine">Medicine</button>            
+<button class="tag-filter" type="button" data-filter="medicine">Medicine</button>
+<button class="tag-filter" type="button" data-filter="evolution">Evolution</button>
+<button class="tag-filter" type="button" data-filter="ai">AI</button>
+<button class="tag-filter" type="button" data-filter="astrobiology">Astrobiology</button>
+<button class="tag-filter" type="button" data-filter="digital_life">Digital Life</button>            
             
           </div>
         </div>
@@ -159,8 +248,53 @@
 
 
 
+
+<article class="post-card reveal"
+         data-tags="evolution digital_life consciousness astrobiology ai"
+         data-title="Is Digital Life the Next Step in Evolution?"
+         data-excerpt="From primitive replicators to digital consciousness: a hypothesis about the evolution of life."
+         data-date="2026-07-15">
+
+  <a href="articles/04_digital_life_evolution.html">
+
+    <span class="cover video-cover"
+          style="background-image:url('articles/images/04/fondo.jpg')">
+
+      <video
+        class="card-preview-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        data-video-src="articles/images/04/video.mp4">
+      </video>
+    </span>
+
+    <span class="content">
+      <span class="meta">Evolution · 45 min</span>
+
+      <span class="tag-row">
+        <span>Evolution</span>
+        <span>Consciousness</span>
+        <span>Astrobiology</span>
+      </span>
+
+      <h3>
+        Is Digital Life the Next Step in Evolution?
+        From Replicator to Pattern
+      </h3>
+
+      <p>
+        A scientific journey from the origin of life to the possibility that consciousness may one day leave its biological substrate behind.
+      </p>
+    </span>
+  </a>
+</article>
+
 <article class="post-card reveal" data-tags="immortality medicine consciousness technology" data-title="Could We Achieve Human Immortality? The Real Science Behind Defeating Death" data-excerpt="The real science behind defeating death." data-date="2026-07-01">
 
+
+  <a href="articles/03_human_immortality.html">
 <span class="cover video-cover"
       style="background-image:url('articles/images/03/fondo.jpg')">
 
@@ -195,7 +329,18 @@
 <article class="post-card reveal" data-tags="consciousness neuroscience identity" data-title="Could We Copy a Human Mind What Science Knows and What It Still Cannot Answer" data-excerpt="The fly connectome and what still separates us from digitizing a consciousness." data-date="2026-06-01">
 
   <a href="articles/02_human_mind.html">
-    <span class="cover" style="background-image:url('articulos/images/02/fondo.jpg')"></span>
+    <span class="cover video-cover"
+      style="background-image:url('articles/images/02/fondo.jpg')">
+
+  <video
+    class="card-preview-video"
+    muted
+    loop
+    playsinline
+    preload="none"
+    data-video-src="articles/images/02/video.mp4">
+  </video>
+</span>
     <span class="content">
       <span class="meta">Consciousness · 12 min</span> <span class="tag-row"><span>Consciousness</span><span>Neuroscience</span></span>
       <h3>Could We Copy a Human Mind? What Science Knows and What It Still Cannot Answer</h3>
@@ -211,7 +356,18 @@
 
 <article class="post-card reveal" data-tags="technology material" data-title="The M1 A Material That Does Not Exist Yet But Could" data-excerpt="What is still missing for the material from the Eidos universe to become real." data-date="2025-03-15">
             <a href="articles/01_m1.html">
-              <span class="cover" style="background-image:url('articulos/images/01/fondo.jpg')"></span>
+              <span class="cover video-cover"
+      style="background-image:url('articles/images/01/fondo.jpg')">
+
+  <video
+    class="card-preview-video"
+    muted
+    loop
+    playsinline
+    preload="none"
+    data-video-src="articles/images/01/video.mp4">
+  </video>
+</span>
               <span class="content">
                 <span class="meta">Material · 1 min</span> <span class="tag-row"><span>Material</span><span>Technology</span></span>
                 <h3>The M1: A Material That Does Not Exist Yet (But Could)</h3>
@@ -342,6 +498,47 @@
     <a href="../termsandconditions.html">Terms and Conditions</a>
   </p>    </footer>
   </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const featureVideo = document.querySelector('.feature-video-element');
+
+    if (!featureVideo) return;
+
+    let revealed = false;
+
+    function revealFeatureVideo() {
+      if (revealed) return;
+      revealed = true;
+
+      requestAnimationFrame(function () {
+        featureVideo.classList.add('is-ready');
+      });
+    }
+
+    featureVideo.addEventListener('canplay', revealFeatureVideo, {
+      once: true
+    });
+
+    featureVideo.addEventListener('playing', revealFeatureVideo, {
+      once: true
+    });
+
+    if (featureVideo.readyState >= 3) {
+      revealFeatureVideo();
+    }
+
+    const playPromise = featureVideo.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {
+        /*
+         * If autoplay is blocked, the static image remains visible.
+         */
+      });
+    }
+  });
+  </script>
+
   <script src="js/blog.js"></script>
   
   

@@ -122,34 +122,91 @@
  <!--   Video       -->   
  
  
-         <div class="feature-img" aria-hidden="true">
-    <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
-        <source src="articulos/images/03/video.mp4" type="video/mp4">
+         <div
+    class="feature-img feature-video"
+    aria-hidden="true"
+    style="background-image:url('articulos/images/03/fondo.jpg')">
+
+    <video
+        class="feature-video-element"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        poster="articulos/images/03/fondo.jpg">
+
+        <source
+            src="articulos/images/03/video.mp4"
+            type="video/mp4">
     </video>
 </div>
- 
+
 <style>
+.feature-img.feature-video{
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
 
-.feature-img{
-    position: relative;
-    overflow: hidden;
-    border-radius: 28px;
-    background: #000 !important;
+    background-color:#000;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
+    isolation:isolate;
 }
 
-.feature-img video{
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-
-    object-fit: contain;
-    object-position: center center;
-
-    background: #000;
+.feature-img.feature-video::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5,6,8,.04),
+            rgba(5,6,8,.16)
+        );
+    pointer-events:none;
 }
 
+.feature-video-element{
+    position:absolute;
+    inset:0;
+    z-index:1;
+
+    width:100%;
+    height:100%;
+    display:block;
+
+    object-fit:contain;
+    object-position:center center;
+
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.01);
+
+    transition:
+        opacity 1.1s ease,
+        visibility 1.1s ease,
+        transform 1.6s ease;
+
+    background:transparent;
+}
+
+.feature-video-element.is-ready{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+@media (prefers-reduced-motion:reduce){
+    .feature-video-element{
+        transition:none;
+        transform:none;
+    }
+}
 </style>          
           
           
@@ -427,6 +484,48 @@ La ciencia real detrás de no morir</h3>
     <a href="../terminosycondiciones.html">Términos y condiciones</a>
   </p>    </footer>
   </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const featureVideo = document.querySelector('.feature-video-element');
+
+    if (!featureVideo) return;
+
+    let revealed = false;
+
+    function revealFeatureVideo() {
+      if (revealed) return;
+      revealed = true;
+
+      requestAnimationFrame(function () {
+        featureVideo.classList.add('is-ready');
+      });
+    }
+
+    featureVideo.addEventListener('canplay', revealFeatureVideo, {
+      once: true
+    });
+
+    featureVideo.addEventListener('playing', revealFeatureVideo, {
+      once: true
+    });
+
+    if (featureVideo.readyState >= 3) {
+      revealFeatureVideo();
+    }
+
+    const playPromise = featureVideo.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {
+        /*
+         * Si el navegador impide el autoplay,
+         * permanece visible la imagen fija.
+         */
+      });
+    }
+  });
+  </script>
+
   <script src="js/blog.js"></script>
   
   
