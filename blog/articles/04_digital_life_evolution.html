@@ -166,14 +166,9 @@ gtag('config', 'G-GRKE5N9XFB');
     overflow: hidden;
   }
 
-  .evolution-experience-btn {
-    border-color: rgba(200, 168, 75, .5);
-    letter-spacing: .06em;
-  }
-
-  .evolution-experience-btn:disabled {
+  .evolution-experience-btn[aria-disabled="true"] {
     opacity: .5;
-    cursor: default;
+    pointer-events: none;
   }
 
   body.evolution-experience-active {
@@ -263,9 +258,17 @@ gtag('config', 'G-GRKE5N9XFB');
     eidosPanel.classList.add('open');
     eidosPanel.setAttribute('aria-hidden', 'false');
     document.body.classList.add('evolution-experience-active');
-    evolutionExperienceButtons.forEach(function(button) {
-      button.disabled = true;
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
     });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
   }
 
   function closeEidos() {
@@ -276,8 +279,8 @@ gtag('config', 'G-GRKE5N9XFB');
     eidosPanel.classList.remove('open');
     eidosPanel.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('evolution-experience-active');
-    evolutionExperienceButtons.forEach(function(button) {
-      button.disabled = false;
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
     });
   }
 
@@ -393,14 +396,6 @@ gtag('config', 'G-GRKE5N9XFB');
     
   </div>
 </div>
-
-<button
-  class="btn evolution-experience-btn"
-  type="button"
-  title="Discover how far you can evolve your planet"
-  onclick="openEidosGame('/hiddenegg/games/evolution/evolution.html?sound=0')">
-  How far can you evolve your planet?
-</button>
 
 
 </div>
@@ -1064,6 +1059,17 @@ Chemistry tried paths until a strand could copy itself. That strand favored a sh
 
 
 <section aria-labelledby="related-title" class="related reveal">
+<h2 id="evolution-game-title">Game based on this article</h2>
+<p class="evolution-game-link">
+<a
+  class="evolution-experience-btn"
+  href="/hiddenegg/games/evolution/evolution.html?sound=0"
+  title="Discover how far you can evolve your planet"
+  onclick="openEidosGameLink(event, this)">
+  How far can you evolve your planet?
+</a>
+</p>
+
 <h2 id="related-title">Keep reading</h2>
 <div class="related-grid">
 <a class="related-card" href="01_m1.html">M1: A Material That Doesn't Exist Yet (But Might One Day)</a>
