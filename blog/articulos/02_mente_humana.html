@@ -519,47 +519,20 @@ gtag('config', 'G-GRKE5N9XFB');
       font-size: 16px;
     }
   }
+
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
 </style>
-
-
-<div id="eidos-launcher">
-
-  <div id="eidos-bubble">
-    Mientras escuchas · 🟡
-  </div>
-
-  <div class="eidos-game-buttons">
-
-    <button
-      class="eidos-game-btn"
-      type="button"
-      aria-label="Abrir Rompemuros"
-      title="Rompemuros"
-      onclick="openEidosGame('/hiddenegg/games/thewall/rompemuros.html')">
-      🟡
-    </button>
-
-    <button
-      class="eidos-game-btn"
-      type="button"
-      aria-label="Abrir juego de la nave"
-      title="Juego de la nave"
-      onclick="openEidosGame('/hiddenegg/games/pendulos/eidos_pendulos.html')">
-      <span class="eidos-ship-icon" aria-hidden="true">
-        <span class="eidos-ship-halo"></span>
-        <span class="eidos-ship-body"></span>
-        <span class="eidos-ship-arm eidos-ship-arm-left"></span>
-        <span class="eidos-ship-arm eidos-ship-arm-right"></span>
-        <span class="eidos-ship-light eidos-ship-light-left"></span>
-        <span class="eidos-ship-light eidos-ship-light-right"></span>
-        <span class="eidos-ship-core"></span>
-      </span>
-    </button>
-
-  </div>
-
-</div>
-
 
 <div
   id="eidos-panel"
@@ -568,13 +541,13 @@ gtag('config', 'G-GRKE5N9XFB');
   <div id="eidos-panel-header">
 
     <span>
-      E I D O S
+      T R A N S F E R E N C I A
     </span>
 
     <button
       id="eidos-close"
       type="button"
-      aria-label="Cerrar minijuego Eidos"
+      aria-label="Cerrar experiencia interactiva sobre la Gran Transferencia"
       onclick="closeEidos()">
       ✕
     </button>
@@ -583,9 +556,16 @@ gtag('config', 'G-GRKE5N9XFB');
 
   <iframe
     id="eidos-frame"
-    src="/hiddenegg/games/thewall/rompemuros.html"
-    title="Minijuego Eidos"
-    scrolling="no">
+    src="about:blank"
+    title="Experiencia interactiva sobre la Gran Transferencia"
+    scrolling="no"
+    
+     
+    
+    allow="autoplay; fullscreen">
+    
+    
+ 
   </iframe>
 
 </div>
@@ -596,17 +576,14 @@ gtag('config', 'G-GRKE5N9XFB');
      REFERENCIAS DEL WIDGET
      ───────────────────────────────────────── */
 
-  const eidosLauncher =
-    document.getElementById('eidos-launcher');
-
   const eidosPanel =
     document.getElementById('eidos-panel');
 
-  const eidosBubble =
-    document.getElementById('eidos-bubble');
-
   const eidosFrame =
     document.getElementById('eidos-frame');
+
+  const evolutionExperienceButtons =
+    document.querySelectorAll('.evolution-experience-btn');
 
 
   /* ─────────────────────────────────────────
@@ -614,38 +591,26 @@ gtag('config', 'G-GRKE5N9XFB');
      ───────────────────────────────────────── */
 
   function openEidosGame(gameUrl) {
-    if (!eidosPanel || !eidosBubble || !eidosFrame) {
+    if (!eidosPanel || !eidosFrame) {
       return;
     }
 
     eidosFrame.src = gameUrl;
     eidosPanel.classList.add('open');
     eidosPanel.setAttribute('aria-hidden', 'false');
-    eidosBubble.style.display = 'none';
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
+    });
   }
 
-
-  /* ─────────────────────────────────────────
-     ABRIR O CERRAR EL JUEGO
-     ───────────────────────────────────────── */
-
-  function toggleEidos() {
-    if (!eidosPanel || !eidosBubble) {
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
       return;
     }
-
-    const isOpen =
-      eidosPanel.classList.toggle('open');
-
-    eidosPanel.setAttribute(
-      'aria-hidden',
-      isOpen ? 'false' : 'true'
-    );
-
-    eidosBubble.style.display =
-      isOpen ? 'none' : 'block';
+    openEidosGame(link.href);
   }
-
 
   /* ─────────────────────────────────────────
      CERRAR EL JUEGO
@@ -653,7 +618,7 @@ gtag('config', 'G-GRKE5N9XFB');
      ───────────────────────────────────────── */
 
   function closeEidos() {
-    if (!eidosPanel || !eidosBubble) {
+    if (!eidosPanel) {
       return;
     }
 
@@ -664,42 +629,11 @@ gtag('config', 'G-GRKE5N9XFB');
       'true'
     );
 
-    eidosBubble.style.display = 'block';
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
+    });
   }
-
-
-  /* ─────────────────────────────────────────
-     EL LECTOR EMPIEZA
-     Mostrar el icono del minijuego
-     ───────────────────────────────────────── */
-
-  document.addEventListener(
-    'eidos-reader-start',
-    function() {
-      if (!eidosLauncher) {
-        return;
-      }
-
-      eidosLauncher.style.display = 'flex';
-    }
-  );
-
-
-  /* ─────────────────────────────────────────
-     EL LECTOR SE DETIENE
-     Ocultar el icono y cerrar el juego
-     ───────────────────────────────────────── */
-
-  document.addEventListener(
-    'eidos-reader-stop',
-    function() {
-      if (eidosLauncher) {
-        eidosLauncher.style.display = 'none';
-      }
-
-      closeEidos();
-    }
-  );
 
 
   /* ─────────────────────────────────────────
@@ -716,6 +650,12 @@ gtag('config', 'G-GRKE5N9XFB');
       closeEidos();
     }
   );
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
 </script>
 
 
@@ -1242,6 +1182,17 @@ viva. El mapa sirve de esqueleto, pero la vida que lo anima sigue siendo artific
 
 </section>
    <section class="related reveal" aria-labelledby="related-title">
+   <h2 id="transfer-game-title">Juego basado en este artículo</h2>
+   <p class="evolution-game-link">
+     <a
+       class="evolution-experience-btn"
+       href="/hiddenegg/games/transferencia/transferencia.html"
+       title="Pon a prueba la continuidad entre el original y la copia"
+       onclick="openEidosGameLink(event, this)">
+       ¿Podrás completar la Gran Transferencia?
+     </a>
+   </p>
+
    <h2 id="related-title">Seguir leyendo</h2><div class="related-grid">
    
    <a class="related-card" href="01_m1.html">El M1: material que aún no existe (pero podría)</a>
