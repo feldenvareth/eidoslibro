@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>¿Podremos copiar una mente humana? Lo que nos enseña el cerebro de una mosca | EIDOS Blog</title>
+<meta content="El connectoma de la mosca, el problema difícil de la consciencia y la pregunta que la ciencia todavía no sabe formular: qué es exactamente lo que hace que seas tú." name="description"/>
+<meta content="connectoma, mente, consciencia, neurociencia, Eidos, Gran Transferencia, identidad, Chalmers, Parfit" name="keywords"/>
+<meta content="Felden Vareth" name="author"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://www.eidoslibro.com/blog/articulos/copiar-mente-humana.html" rel="canonical"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="EIDOS" property="og:site_name"/>
+<meta content="¿Podremos copiar una mente humana?" property="og:title"/>
+<meta content="El connectoma de la mosca, el problema difícil de la consciencia y la pregunta que la ciencia todavía no sabe formular." name="description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/copiar-mente-humana.html" property="og:url"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/02/fondo.jpg" property="og:image"/>
+<meta content="2026-06-05" property="article:published_time"/>
+<meta content="Felden Vareth" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="¿Podremos copiar una mente humana?" name="twitter:title"/>
+<meta content="El connectoma de la mosca, el problema difícil de la consciencia y la pregunta que la ciencia todavía no sabe formular." name="twitter:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/02/fondo.jpg" name="twitter:image"/>
+<link href="../../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png"/>
+<link href="../../assets/images/favicon.png" rel="apple-touch-icon"/>
+<meta content="#050608" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="../css/blog.css" rel="stylesheet"/>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"¿Podremos copiar una mente humana? Lo que nos enseña el cerebro de una mosca",
+  "description":"El connectoma de la mosca, el problema difícil de la consciencia y la pregunta que la ciencia todavía no sabe formular: qué es exactamente lo que hace que seas tú.",
+  "image":"https://www.eidoslibro.com/blog/articulos/images/02/fondo.jpg",
+  "datePublished":"2026-06-05",
+  "dateModified":"2026-06-05",
+  "author":{"@type":"Person","name":"Felden Vareth"},
+  "publisher":{"@type":"Organization","name":"EIDOS"},
+  "mainEntityOfPage":"https://www.eidoslibro.com/blog/articulos/copiar-mente-humana.html",
+  "inLanguage":"es"
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied'
+});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GRKE5N9XFB');
+</script>
+</head>
+
+<body>
+
+
+<!-- ═══════════════════════════════════════════
+     EIDOS MINIJUEGO     Vinculado al reproductor
+     Pega este bloque completo antes de </body>
+     ═══════════════════════════════════════════ -->
+
+<style>
+  /* ─────────────────────────────────────────
+     AISLAMIENTO BÁSICO DEL WIDGET
+     ───────────────────────────────────────── */
+
+  #eidos-launcher,
+  #eidos-launcher *,
+  #eidos-panel,
+  #eidos-panel * {
+    box-sizing: border-box;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CONTENEDOR DEL BOTÓN
+     Oculto hasta que empiece el lector
+     ───────────────────────────────────────── */
+
+  #eidos-launcher {
+  position: fixed;
+
+  left: 18px;
+  right: auto;
+  bottom: 18px;
+
+  z-index: 999999;
+
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, serif;
+}
+
+
+  /* Fila de selección de minijuegos */
+  .eidos-game-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BURBUJA DE TEXTO
+     ───────────────────────────────────────── */
+
+#eidos-bubble {
+  display: block;
+
+  margin: 0;
+  padding: 6px 10px;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: #f5ecd0;
+
+  border: none;
+  border-radius: 14px 14px 14px 4px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35);
+
+  font-family: Georgia, serif;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  opacity: 0.88;
+
+  animation:
+    eidosPulse 2.5s infinite;
+}
+
+  @keyframes eidosPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN CIRCULAR
+     ───────────────────────────────────────── */
+
+ .eidos-game-btn {
+  width: 48px;
+  height: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: inherit;
+
+  border: 1px solid #c8a84b;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.4);
+
+  cursor: pointer;
+
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  opacity: 0.88;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.eidos-game-btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+
+/* Nave real del juego Péndulos: cápsula, estabilizadores, núcleo y halo */
+.eidos-ship-icon {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.eidos-ship-halo {
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  width: 30px;
+  height: 18px;
+  border: 1px solid rgba(200, 168, 75, .7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(200, 168, 75, .55);
+  animation: eidosShipPulse 2.2s ease-in-out infinite;
+}
+
+.eidos-ship-body {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #c8a84b;
+  border-radius: 7px;
+  background: #183328;
+  box-shadow: 0 0 5px rgba(200, 168, 75, .45);
+}
+
+.eidos-ship-arm {
+  position: absolute;
+  top: 11px;
+  width: 5px;
+  height: 1px;
+  background: rgba(200, 168, 75, .85);
+}
+
+.eidos-ship-arm-left { left: 4px; }
+.eidos-ship-arm-right { right: 4px; }
+
+.eidos-ship-light {
+  position: absolute;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7b5 0 20%, #c8a84b 45%, rgba(200,168,75,.15) 100%);
+  box-shadow: 0 0 6px #c8a84b;
+}
+
+.eidos-ship-light-left { left: 0; }
+.eidos-ship-light-right { right: 0; }
+
+.eidos-ship-core {
+  position: absolute;
+  left: 14px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 20%, #dffcf6 35%, #69b8aa 100%);
+  box-shadow: 0 0 7px #8fd4c2;
+}
+
+@keyframes eidosShipPulse {
+  0%, 100% { transform: scale(1); opacity: .55; }
+  50% { transform: scale(1.08); opacity: .95; }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANEL DEL JUEGO
+     Formato vertical adaptativo
+     ───────────────────────────────────────── */
+
+  #eidos-panel {
+    display: none;
+
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    z-index: 999998;
+
+    width: min(
+      620px,
+      calc(100vw - 36px),
+      calc((100dvh - 36px) * 620 / 900)
+    );
+
+    height: min(
+      900px,
+      calc(100dvh - 36px),
+      calc((100vw - 36px) * 900 / 620)
+    );
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: 2px solid #4a7c6f;
+    border-radius: 20px;
+
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.7);
+
+    overflow: hidden;
+  }
+
+  #eidos-panel.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CABECERA DEL PANEL
+     ───────────────────────────────────────── */
+
+  #eidos-panel-header {
+    flex: 0 0 58px;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 10px 18px;
+
+    background: #111a14;
+    color: #f5ecd0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 5px;
+  }
+
+  #eidos-panel-header span {
+    margin: 0;
+    padding: 0;
+
+    color: #f5ecd0;
+
+    font-family: Georgia, serif;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: inherit;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN DE CERRAR
+     ───────────────────────────────────────── */
+
+  #eidos-close {
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 4px 6px;
+
+    background: transparent;
+    color: #888;
+
+    border: none;
+    border-radius: 0;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+      color 0.2s ease;
+  }
+
+  #eidos-close:hover {
+    color: #fff;
+  }
+
+
+  /* ─────────────────────────────────────────
+     IFRAME DEL JUEGO
+     ───────────────────────────────────────── */
+
+  #eidos-frame {
+    display: block;
+
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: none;
+
+    overflow: hidden;
+  }
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS ESTRECHAS
+     ───────────────────────────────────────── */
+
+ @media (max-width: 700px) {
+  #eidos-launcher {
+    left: 10px;
+    right: auto;
+    bottom: 10px;
+  }
+
+  .eidos-game-btn {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  #eidos-bubble {
+    max-width: calc(100vw - 20px);
+
+    padding: 5px 8px;
+
+    font-size: 10px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+  #eidos-panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+
+    width: auto;
+    height: auto;
+
+    border-radius: 14px;
+  }
+
+  #eidos-panel-header {
+    flex-basis: 48px;
+
+    padding: 8px 12px;
+
+    font-size: 17px;
+    letter-spacing: 3px;
+  }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS BAJAS
+     ───────────────────────────────────────── */
+
+  @media (min-width: 701px) and (max-height: 760px) {
+    #eidos-panel {
+      top: 8px;
+      bottom: 8px;
+
+      width: min(
+        500px,
+        calc(100vw - 16px),
+        calc((100dvh - 16px) * 500 / 720)
+      );
+
+      height: min(
+        720px,
+        calc(100dvh - 16px),
+        calc((100vw - 16px) * 720 / 500)
+      );
+    }
+
+    #eidos-panel-header {
+      flex-basis: 46px;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      font-size: 16px;
+    }
+  }
+</style>
+
+
+<div id="eidos-launcher">
+
+  <div id="eidos-bubble">
+    Mientras escuchas · 🟡
+  </div>
+
+  <div class="eidos-game-buttons">
+
+    <button
+      class="eidos-game-btn"
+      type="button"
+      aria-label="Abrir Rompemuros"
+      title="Rompemuros"
+      onclick="openEidosGame('/hiddenegg/games/thewall/rompemuros.html')">
+      🟡
+    </button>
+
+    <button
+      class="eidos-game-btn"
+      type="button"
+      aria-label="Abrir juego de la nave"
+      title="Juego de la nave"
+      onclick="openEidosGame('/hiddenegg/games/pendulos/eidos_pendulos.html')">
+      <span class="eidos-ship-icon" aria-hidden="true">
+        <span class="eidos-ship-halo"></span>
+        <span class="eidos-ship-body"></span>
+        <span class="eidos-ship-arm eidos-ship-arm-left"></span>
+        <span class="eidos-ship-arm eidos-ship-arm-right"></span>
+        <span class="eidos-ship-light eidos-ship-light-left"></span>
+        <span class="eidos-ship-light eidos-ship-light-right"></span>
+        <span class="eidos-ship-core"></span>
+      </span>
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  id="eidos-panel"
+  aria-hidden="true">
+
+  <div id="eidos-panel-header">
+
+    <span>
+      E I D O S
+    </span>
+
+    <button
+      id="eidos-close"
+      type="button"
+      aria-label="Cerrar minijuego Eidos"
+      onclick="closeEidos()">
+      ✕
+    </button>
+
+  </div>
+
+  <iframe
+    id="eidos-frame"
+    src="/hiddenegg/games/thewall/rompemuros.html"
+    title="Minijuego Eidos"
+    scrolling="no">
+  </iframe>
+
+</div>
+
+
+<script>
+  /* ─────────────────────────────────────────
+     REFERENCIAS DEL WIDGET
+     ───────────────────────────────────────── */
+
+  const eidosLauncher =
+    document.getElementById('eidos-launcher');
+
+  const eidosPanel =
+    document.getElementById('eidos-panel');
+
+  const eidosBubble =
+    document.getElementById('eidos-bubble');
+
+  const eidosFrame =
+    document.getElementById('eidos-frame');
+
+
+  /* ─────────────────────────────────────────
+     ABRIR EL JUEGO ELEGIDO
+     ───────────────────────────────────────── */
+
+  function openEidosGame(gameUrl) {
+    if (!eidosPanel || !eidosBubble || !eidosFrame) {
+      return;
+    }
+
+    eidosFrame.src = gameUrl;
+    eidosPanel.classList.add('open');
+    eidosPanel.setAttribute('aria-hidden', 'false');
+    eidosBubble.style.display = 'none';
+  }
+
+
+  /* ─────────────────────────────────────────
+     ABRIR O CERRAR EL JUEGO
+     ───────────────────────────────────────── */
+
+  function toggleEidos() {
+    if (!eidosPanel || !eidosBubble) {
+      return;
+    }
+
+    const isOpen =
+      eidosPanel.classList.toggle('open');
+
+    eidosPanel.setAttribute(
+      'aria-hidden',
+      isOpen ? 'false' : 'true'
+    );
+
+    eidosBubble.style.display =
+      isOpen ? 'none' : 'block';
+  }
+
+
+  /* ─────────────────────────────────────────
+     CERRAR EL JUEGO
+     Nunca lo abre por accidente
+     ───────────────────────────────────────── */
+
+  function closeEidos() {
+    if (!eidosPanel || !eidosBubble) {
+      return;
+    }
+
+    eidosPanel.classList.remove('open');
+
+    eidosPanel.setAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+    eidosBubble.style.display = 'block';
+  }
+
+
+  /* ─────────────────────────────────────────
+     EL LECTOR EMPIEZA
+     Mostrar el icono del minijuego
+     ───────────────────────────────────────── */
+
+  document.addEventListener(
+    'eidos-reader-start',
+    function() {
+      if (!eidosLauncher) {
+        return;
+      }
+
+      eidosLauncher.style.display = 'flex';
+    }
+  );
+
+
+  /* ─────────────────────────────────────────
+     EL LECTOR SE DETIENE
+     Ocultar el icono y cerrar el juego
+     ───────────────────────────────────────── */
+
+  document.addEventListener(
+    'eidos-reader-stop',
+    function() {
+      if (eidosLauncher) {
+        eidosLauncher.style.display = 'none';
+      }
+
+      closeEidos();
+    }
+  );
+
+
+  /* ─────────────────────────────────────────
+     MENSAJE ENVIADO DESDE EL IFRAME
+     ───────────────────────────────────────── */
+
+  window.addEventListener(
+    'message',
+    function(event) {
+      if (event.data !== 'cerrar-eidos') {
+        return;
+      }
+
+      closeEidos();
+    }
+  );
+</script>
+
+
+
+<!-- ═══════════════════════════════════════════
+     FIN DEL LANZADOR EIDOS
+     ═══════════════════════════════════════════ -->
+
+
+
+
+
+
+
+<div class="reading-progress reading-progress-article">
+  <span></span>
+</div>
+
+<div class="reading-progress reading-progress-forum">
+  <span></span>
+</div>
+
+
+
+<div aria-hidden="true" class="ambient"></div>
+
+<div class="article-shell">
+
+<nav aria-label="Navegación del artículo" class="article-nav">
+<a href="../index.html">← Volver al blog</a>
+<a href="../../index.html">Eidos principal</a>
+<a href="../../relatos/index.html">Relatos</a>
+
+
+          <a href="../articles/02_human_mind.html"
+     class="lang-switch"
+     aria-label="English version"
+     title="English version">
+    <img src="../../assets/images/flaguk.webp"
+         alt="English">
+  </a>
+
+
+
+
+</nav>
+
+
+
+
+<header class="article-hero reveal">
+<p class="kicker">Eidos · Neurociencia · Filosofía</p>
+<h1>¿Podremos copiar una mente humana?<br>Lo que nos enseña el cerebro de una mosca</h1>
+<p class="article-meta">Ciencia · 11 min · Felden Vareth · 2026-06-05</p>
+<div class="article-actions">
+<a class="btn gold" href="#comentarios">Comentarios</a>
+<a class="btn" href="../index.html">Archivo</a>
+<button class="btn share-btn" data-share="" type="button">Copiar enlace</button>
+
+<a class="btn" href="images/02/copiar_la_mente_humana.pdf" download="">Descargar PDF</a>
+<a class="btn" href="images/02/reproductordoble.html" target="_blank" rel="noopener"  title="Conversación basada en este ensayo. No es una lectura del artículo.">Escuchar conversación</a>
+
+<div class="read-aloud-widget">
+  <button class="btn read-aloud-open" type="button">
+    🎧 Escuchar con el navegador
+  </button>
+
+  <div class="read-aloud-player" hidden>
+    <div class="read-aloud-controls">
+      <button class="btn read-prev" type="button">⏮ Sección anterior</button>
+      <button class="btn read-pause" type="button">⏸ Pausar</button>
+      <button class="btn read-next" type="button">⏭ Siguiente sección</button>
+      <button class="btn read-stop" type="button">■ Detener</button>
+      
+      <label class="read-speed-label">
+    Velocidad
+    <select class="read-speed">
+      
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+     
+    </select>
+  </label> 
+      
+      
+      
+      
+    </div>
+
+    <input class="read-progress" type="range" min="0" value="0" step="1">
+
+    <p class="read-status">
+      Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.
+    </p>
+  </div>
+
+  <div class="read-floating-player" hidden>
+    <div class="read-floating-controls">
+      <button class="btn read-floating-prev" type="button" title="Sección anterior">⏮</button>
+      <button class="btn read-floating-pause" type="button" title="Pausar">⏸</button>
+      <button class="btn read-floating-next" type="button" title="Siguiente sección">⏭</button>
+      <button class="btn read-floating-stop" type="button" title="Detener">■</button>
+
+          <label class="read-speed-label">
+
+      <select class="read-speed">
+
+        <option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+
+      </select>
+    </label>
+    </div>
+
+    <p class="read-floating-status"></p>
+  </div>
+</div>
+
+
+
+</div>
+</header>
+
+
+
+   <!--   para imagen estatica    
+   
+   
+<div aria-hidden="true" class="article-cover reveal"
+     style="background-image:url('images/03/fondo.jpg')"></div>
+
+-->
+
+<!--   Para video
+
+-->
+
+<div class="article-cover reveal">
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata">
+        <source src="images/02/video.mp4" type="video/mp4">
+    </video>
+</div>
+
+
+
+
+
+
+
+<aside class="article-toc reveal" data-toc="" hidden="">
+<p class="kicker">Mapa del post</p>
+<nav aria-label="Tabla de contenidos"></nav>
+</aside>
+
+<main class="article-content" data-article-content="">
+
+
+<p class="drop-intro">
+  <em>
+    <span class="dropcap">E</span>
+    <span class="after-drop">
+      n la novela 
+      <a href="https://www.eidoslibro.com/" target="_blank" rel="noopener"><strong>EIDOS</strong></a>, 
+      la Gran Transferencia se apoya sobre una pregunta aparentemente sencilla:
+    </span>
+  </em>
+</p>
+
+<blockquote>
+  «¿Qué es exactamente lo que debe preservarse para que una persona siga siendo ella misma?»
+</blockquote>
+
+<p>Durante siglos la respuesta pareció evidente. Si los recuerdos, la personalidad, los conocimientos y las emociones residen en el cerebro, bastaría con replicar su estructura física para copiar a la persona. La idea es tan intuitiva que gran parte de la ciencia ficción moderna la ha utilizado como axioma para explorar la inmortalidad, la transferencia mental o las consciencias digitales.</p>
+
+<p>Sin embargo, cuanto más avanza la neurociencia, más evidente resulta que el problema es de una escala y una profundidad biológica y conceptual colosal. El verdadero desafío es comprender qué parte de la materia genera la experiencia consciente que llamamos «yo». La dificultad no consiste únicamente en mapear neuronas ni en almacenar datos. </p>
+
+<p>Hasta hace muy poco, esta cuestión pertenecía casi por completo al territorio de la filosofía. Hoy empieza a entrar lentamente en los laboratorios de vanguardia. Sin haber resuelto el problema, algunas de las herramientas necesarias para formularlo con precisión empiezan a existir. </p>
+
+<p>En octubre de 2024, un consorcio internacional de investigadores publicó en <em>Nature</em> el mapa neuronal más completo jamás obtenido de un organismo complejo: el cerebro adulto de una mosca de la fruta, <em>Drosophila melanogaster</em>. A primera vista, un insecto puede parecer un avance modesto. En realidad representa uno de los hitos científicos más importantes de nuestra generación hacia la comprensión de cómo una mente emerge a partir de la materia física.</p>
+
+<p>Este artículo no pretende afirmar que estemos cerca de digitalizar una consciencia humana. Su objetivo es más sencillo y más honesto: analizar qué piezas del rompecabezas empiezan a estar al alcance de la ciencia y cuáles continúan sumidas en el misterio.</p>
+
+<blockquote>Porque, vistas por separado, las tecnologías necesarias ya están empezando a fracturar la frontera de lo imposible.</blockquote>
+
+<h2>El problema que lo hace necesario: la frontera biológica de la identidad</h2>
+
+<p>La medicina moderna ha aprendido a reparar órganos, sustituir articulaciones, trasplantar corazones e incluso editar genes. Sin embargo, el cerebro sigue siendo el territorio más desconocido del universo observable. Es excesivamente complejo. Cada recuerdo que conservamos, cada emoción y cada decisión dependen de una red de aproximadamente 86.000 millones de neuronas interconectadas mediante cientos de billones de sinapsis.</p>
+
+<p>Comprender su funcionamiento dinámico ya es un desafío monumental. Copiarlo con absoluta fidelidad parece todavía una tarea inalcanzable. Pero toda frontera científica empieza pareciendo una imposibilidad práctica antes de convertirse en una cuestión de método, escala y coste. En el caso del cerebro, además, no hablamos solo de reproducir un órgano. Hablamos de preservar aquello que una persona considera más íntimamente suyo: la continuidad de su experiencia.</p>
+
+<p>La pregunta, por tanto, además de técnica, es médica, psicológica y filosófica. Si una enfermedad destruye determinados circuitos y con ellos desaparecen recuerdos, rasgos de personalidad o vínculos emocionales, ¿qué parte exacta de la persona se ha perdido? Si una intervención futura pudiera registrar esos circuitos antes de su deterioro, ¿habría preservado información clínica o habría preservado algo más parecido a una identidad?</p>
+
+<p>La Gran Transferencia de <em>Eidos</em> nace precisamente de esa zona incierta. Pregunta qué significa que una mente continúe.</p>
+
+<h2>Primera pista: el primer connectoma completo de un cerebro adulto</h2>
+
+<p>Durante décadas, la neurociencia soñó con construir un <em>connectoma</em>: un plano detallado, neurona por neurona y conexión por conexión, de un sistema nervioso funcional. El mapa completo de las rutas por las que puede circular la información dentro de un cerebro.</p>
+
+<p>El logro publicado en octubre de 2024 por el FlyWire Consortium consiguió el trazado exhaustivo de 139.255 neuronas y más de 50 millones de conexiones sinápticas del cerebro adulto de una mosca de la fruta. El consorcio reunió a 287 investigadores de 76 instituciones de todo el mundo. Para lograrlo combinaron microscopía electrónica de alta resolución, inteligencia artificial para el procesamiento de imágenes y una red colaborativa de verificación humana, incluyendo neurocientíficos, rastreadores especializados y miles de voluntarios que participaron a través de la plataforma de ciencia ciudadana FlyWire. Las ramas de muchas neuronas de la mosca tienen diámetros inferiores a 50 nanómetros, aproximadamente una milésima parte del ancho de un cabello humano. Seguirlas con precisión dentro de un volumen tridimensional exige una combinación de potencia computacional y paciencia humana que ninguna máquina resuelve todavía por sí sola.</p>
+
+<p>Pero el resultado no se limitó a un inventario anatómico. Los investigadores identificaron 4.552 tipos celulares distintos, clasificados según su morfología, posición, conectividad y patrón de expresión génica. Eso permitió descubrir principios de organización que no eran visibles a menor escala: módulos de procesamiento paralelo, circuitos con arquitectura recurrente, y rutas especializadas para distintas modalidades sensoriales. Cuando el mapa es completo, emergen propiedades del sistema que no existen en ninguna neurona individual.</p>
+
+<p>Si el cerebro humano fuera una galaxia, el de la mosca sería apenas un pequeño sistema solar. Sin embargo, el principio es idéntico. Antes de comprender una máquina, primero hay que conocer su arquitectura. Antes de estudiar la circulación de una ciudad, hay que saber dónde están sus calles.</p>
+
+<p>El salto respecto a organismos anteriores es enorme. El gusano <em>C. elegans</em>, durante décadas el referente clásico de la conectómica, posee 302 neuronas. Su connectoma completo fue publicado en 1986 por Sydney Brenner, John White y colaboradores, un hito que tardó más de una década en completarse con la tecnología de la época. La larva de mosca, reconstruida antes que el adulto, tenía unas 3.000 neuronas. La mosca adulta supera los cien mil cuerpos neuronales y muestra comportamientos cualitativamente más complejos: navegación espacial, aprendizaje asociativo, memoria a largo plazo, selección de acciones en contextos variables y respuestas sensoriales integradas procedentes de la visión, el olfato y el sistema propioceptivo.</p>
+
+<p>Además, <em>Drosophila</em> no es un modelo arbitrario. Alrededor del 75% de los genes humanos asociados a enfermedades tienen un homólogo funcional en la mosca, y su estudio ha sido fundamental durante décadas para comprender mecanismos básicos de genética, desarrollo, circuitos de memoria y neurobiología de la conducta. Cartografiar su cerebro nos acerca a comprender, por primera vez con este nivel de detalle, cómo está construida una mente biológica mínima capaz de actuar en el mundo.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://www.nature.com/articles/s41586-024-07686-5" target="_blank" rel="noopener">Whole-brain annotation and multi-connectome cell typing of Drosophila — Nature (2024)</a></p>
+<p><a href="https://flywire.ai/" target="_blank" rel="noopener">FlyWire Consortium — proyecto de conectómica de Drosophila</a></p>
+<p><a href="https://www.brainfacts.org/neuroscience-in-society/supporting-research/2024/researchers-create-first-adult-fruit-fly-brain-connectome-110724" target="_blank" rel="noopener">Researchers create first adult fruit fly brain connectome — BrainFacts (2024)</a></p>
+
+</section>
+
+<h2>Segunda pista: la aceleración del mapa humano</h2>
+
+<p>La distancia entre una mosca y un ser humano es cuantitativamente inmensa. Nuestro cerebro contiene unas 86.000 millones de neuronas, frente a las 139.255 de la mosca. A pesar de ello, los proyectos destinados a cartografiar el cerebro humano ya no pertenecen al terreno de la especulación, ahora es un problema técnico y presupuestario, y en los últimos años han dado saltos de escala importantes.</p>
+
+<p>El punto de referencia más relevante llegó en mayo de 2024, cuando un equipo de Google Research y el Instituto Broad del MIT publicó en <em>Science</em> la reconstrucción más detallada jamás realizada de tejido cerebral humano a resolución sináptica: un milímetro cúbico de corteza temporal, obtenido de un paciente durante una cirugía de epilepsia. Ese fragmento —equivalente a la mitad de un grano de arena— contenía 57.000 células, 230 millones de sinapsis y cerca de 150 kilómetros de axones. El volumen de datos generado superó 1,4 petabytes. Es la mayor reconstrucción a resolución nanométrica de tejido humano que existe hasta hoy y el primer paso concreto hacia una conectómica del cerebro humano.</p>
+
+<p>A escala mayor, el <em>Human Connectome Project</em> impulsó una de las primeras iniciativas para describir las conexiones funcionales y estructurales del cerebro humano mediante resonancia magnética avanzada. Sus sucesores, el <em>Lifespan Human Connectome Project</em> y el <em>Connectomes Related to Human Disease</em>, extienden ese enfoque a diferentes etapas vitales y a condiciones neurológicas específicas. El programa MICrONS, centrado en redes corticales de ratón, combina reconstrucción anatómica a escala sináptica, fisiología in vivo e inteligencia artificial para descifrar cómo los circuitos visuales procesan información, con el objetivo de derivar principios de organización aplicables al cerebro de mamíferos. El Blue Brain Project, desde la EPFL, trabaja en modelos digitales de tejido cortical y simulaciones biológicamente detalladas a nivel de neurona y sinapsis individual.</p>
+
+<p>La diferencia fundamental respecto al connectoma de la mosca es la resolución y la escala. En humanos, los mapas de neuroimagen no llegan al nivel sináptico: ofrecen haces de conexión entre regiones, patrones de activación funcional y estructuras macroscópicas. El trabajo de Google y el Broad llegó al nivel sináptico, pero en un fragmento infinitesimal. Escalar ese nivel de detalle a todo el cerebro humano exigiría, con la tecnología actual, varios miles de millones de años de procesamiento computacional. El salto que queda es de muchos órdenes de magnitud.</p>
+
+<p>El objetivo final consiste en descifrar la coreografía: cómo fluye la información, cómo se actualizan los pesos sinápticos durante el aprendizaje, cómo se integran señales sensoriales, memoria, emoción y decisión en tiempo real. El mapa humano completo, si alguna vez llega, será una descripción dinámica de un proceso vivo, y requerirá herramientas que todavía no existen. No consiste solo en tener una imagen o en dibujar anatomía estática.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://www.humanconnectome.org/" target="_blank" rel="noopener">Human Connectome Project — National Institutes of Health</a></p>
+<p><a href="https://www.microns-explorer.org/" target="_blank" rel="noopener">MICrONS Explorer — Machine Intelligence from Cortical Networks</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.adk4858" target="_blank" rel="noopener">A petavoxel fragment of human cerebral cortex reconstructed at nanoscale resolution — Science (2024)</a></p>
+<p><a href="https://www.epfl.ch/research/domains/bluebrain/" target="_blank" rel="noopener">Blue Brain Project — EPFL</a></p>
+
+
+</section>
+
+
+<h2>Tercera pista: lo que el mapa revela, y lo que no puede revelar</h2>
+
+<p>El connectoma de la mosca responde a una pregunta fundamental: ¿cómo está cableado el cerebro? Qué neurona se conecta con cuál, con qué intensidad, en qué dirección y a través de qué rutas puede circular la información. Es el equivalente neurológico de disponer del plano completo de una ciudad: calles, cruces, semáforos, túneles y carreteras.</p>
+
+<p>Pero una ciudad no es su plano.</p>
+
+<p>Una ciudad vive en el movimiento de sus habitantes, en las conversaciones que ocurren en cada esquina, en los trayectos que se repiten cada mañana y en los acontecimientos que modifican continuamente su dinámica. El connectoma captura la arquitectura. No captura esa actividad.</p>
+
+<p>Quizá una analogía aún más directa sea la de una radio. Imaginemos que desmontamos una radio antigua y registramos cada transistor, cada resistencia, cada cable y cada punto de soldadura. Podríamos reconstruirla con una precisión absoluta. Sin embargo, el esquema eléctrico no contiene la música. La canción aparece únicamente cuando el sistema funciona, cuando recibe una señal, la transforma y la convierte en experiencia audible.</p>
+
+<p>Con el cerebro ocurre algo parecido, aunque la analogía electrónica se queda corta. Es un sistema vivo, químico y eléctrico a la vez, que se reconfigura de forma activa mientras procesa información. El connectoma nos dice por dónde puede circular la información. No nos dice qué información está circulando. Mucho menos nos dice cómo se siente esa información desde dentro.</p>
+
+<p>Quizá por eso la aproximación más fértil no sea únicamente reconstruir el mapa conexión por conexión. Google no cartografió sus primeras ciudades midiendo cada calle con precisión milimétrica. Lo hizo observando cómo se movían los coches: el flujo del tráfico reveló la estructura de la red, y esa estructura permitió comprender mejor el tráfico, y ese tráfico más comprendido refinó el mapa. Un bucle entre dinámica y arquitectura, cada uno iluminando al otro. Algo parecido podría ocurrir con el cerebro. Si pudiéramos registrar con suficiente resolución cómo fluye la información, qué patrones se activan, qué ritmos se sincronizan, qué rutas se repiten, ese tráfico podría revelar la arquitectura sin necesidad de haberla trazado neurona por neurona, y esa arquitectura a su vez explicaría por qué la información circula como circula. Un camino alternativo hacia la consciencia: una descripción de la ciudad en movimiento, no solo de sus calles vacías.</p>
+
+
+<p>Hay al menos cuatro capas de complejidad que el mapa estructural no captura. La primera es la actividad eléctrica: los potenciales de acción que recorren los axones en tiempo real, cuya frecuencia, sincronía y patrón espacio-temporal codifican información que no puede leerse del cableado en reposo. La segunda es la química sináptica: el tipo de neurotransmisor liberado, glutamato, GABA, dopamina, serotonina, acetilcolina, determina si una conexión es excitatoria o inhibitoria, rápida o lenta, modulable o fija. Dos circuitos con la misma arquitectura anatómica pueden comportarse de forma radicalmente distinta según su perfil neuroquímico. La tercera es el papel de las células gliales: durante décadas tratadas como mero soporte estructural, hoy se sabe que los astrocitos participan activamente en la regulación sináptica, modulan la transmisión y contribuyen a la plasticidad. El connectoma actual no las incluye. La cuarta es el estado metabólico y hormonal: el cerebro funciona de forma diferente según los niveles de cortisol, estrógenos, adenosina acumulada por falta de sueño o glucosa disponible. Nada de eso aparece en el mapa anatómico.</p>
+
+<p>Este es precisamente uno de los problemas señalados por el <em>State of Brain Emulation Report 2025</em>: nuestra capacidad para reconstruir connectomas crece mucho más rápido que nuestra capacidad para registrar la actividad neuronal que los atraviesa. Sabemos cada vez más sobre el mapa. Seguimos sabiendo muy poco sobre el tráfico.</p>
+
+<p>La memoria, por ejemplo, no reside en la posición de las neuronas. Reside en la fuerza variable de sus conexiones, en un proceso conocido como potenciación a largo plazo (LTP). Cuando determinados circuitos se activan repetidamente, las sinapsis modifican su eficacia: se insertan nuevos receptores AMPA en la membrana postsináptica, la espina dendrítica puede cambiar de tamaño, e incluso pueden formarse nuevas conexiones. El recuerdo es un patrón dinámico distribuido por una red que cambia no una pieza almacenada en una ubicación concreta. Eric Kandel recibió el Premio Nobel en 2000 por demostrar los mecanismos moleculares de este proceso, estudiando la plasticidad sináptica en el caracol marino <em>Aplysia</em> y estableciendo los fundamentos biológicos de la memoria a largo plazo.</p>
+
+<p>El cerebro, además, se reescribe a sí mismo de forma constante. La neuroplasticidad es la condición ordinaria de funcionamiento del sistema nervioso y no una excepción ni una curiosidad clínica. Aprender, olvidar, adaptarse o envejecer implica modificar físicamente la arquitectura cerebral: cambiar el número de sinapsis, su eficacia, el grosor de la mielina que recubre los axones, e incluso generar nuevas neuronas en regiones como el hipocampo, proceso conocido como neurogénesis adulta cuya importancia en humanos sigue siendo objeto de debate activo.</p>
+
+<p>Un estudio clásico realizado con taxistas londinenses mostró que años de navegación por una ciudad extraordinariamente compleja se asociaban a cambios estructurales medibles en el hipocampo posterior. Aprender una ciudad remodelaba literalmente el tejido cerebral. Copiar un cerebro en un instante concreto equivaldría a fotografiar un río. La imagen podría ser perfecta. El río, sin embargo, ya habría seguido fluyendo.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://mxschons.com/projects/state-of-brain-emulation-report-2025/" target="_blank" rel="noopener">State of Brain Emulation Report 2025 — Maximilian Schons / Brain Emulation Report</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/10716738/" target="_blank" rel="noopener">Navigation-related structural change in the hippocampi of taxi drivers — PNAS / PubMed (2000)</a></p>
+<p><a href="https://www.nobelprize.org/prizes/medicine/2000/kandel/lecture/" target="_blank" rel="noopener">The Molecular Biology of Memory Storage — Eric R. Kandel, Nobel Lecture (2000)</a></p>
+
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.0811168106" target="_blank" rel="noopener">Predicting human resting-state functional connectivity from structural connectivity — Honey et al., PNAS (2009)</a></p>
+<p><a href="https://www.humanconnectome.org/" target="_blank" rel="noopener">Human Connectome Project — National Institutes of Health</a></p>
+
+
+</section>
+
+<h2>Cuarta pista: ya simulamos cerebros, pero no todavía una mente</h2>
+
+<p>Conocer la estructura de un cerebro no equivale a comprender su funcionamiento, del mismo modo que una fotografía de alta resolución de un ordenador no explica el software que ejecuta. Por eso la siguiente etapa además de cartografiar es simular.</p>
+
+<p>Uno de los precedentes más influyentes es el proyecto OpenWorm: una iniciativa 
+internacional que tras mapear el connectoma de <em>C. elegans</em> intentó 
+simular el organismo completo en un modelo computacional. El resultado fue 
+parcial pero revelador. El modelo capturaba algunos comportamientos del gusano, 
+pero no todos. La misma arquitectura neuronal, trasladada a silicio, no se 
+comportaba exactamente igual que en tejido biológico. La diferencia radicaba en 
+aspectos que el connectoma no recoge: la dinámica temporal de los canales 
+iónicos, el perfil electroquímico de cada célula, la interacción con células 
+musculares y la mecánica corporal. Con 302 neuronas, los límites del mapa ya 
+eran insuficientes para la simulación. La lección es importante: el connectoma 
+es condición necesaria para simular un cerebro, pero no suficiente.</p>
+
+<p>El experimento más avanzado hasta la fecha llegó en marzo de 2026, cuando la 
+empresa Eon Systems tomó el connectoma completo del FlyWire Consortium —139.255 
+neuronas, 50 millones de conexiones— y lo conectó con un modelo físico del 
+cuerpo de la mosca y un motor de simulación de física. El resultado fue una 
+mosca digital que camina, navega hacia una fuente de alimento y se limpia las 
+antenas. Es la primera demostración de comportamiento emergente a partir de un 
+connectoma completo de cerebro adulto. Sin embargo, como señala <em>The 
+Register</em>, el sistema no funciona como un cerebro biológico real: usa 
+aprendizaje automático ajustado a la forma del connectoma, con un estado de 
+reposo de 0 Hz y entradas simplificadas sin datos sensoriales completos. Camina 
+y se limpia las antenas, sí, pero no procesa el entorno como lo haría una mosca 
+viva. El mapa sirve de esqueleto, pero la vida que lo anima sigue siendo artificial.</p>
+
+<p>Durante los últimos años se han desarrollado modelos computacionales capaces de reproducir circuitos neuronales parciales, estudiar dinámicas locales y analizar cómo determinadas arquitecturas producen comportamientos específicos. En organismos pequeños, los modelos empiezan a ser abordables. En cerebros de insectos adultos, la arquitectura ya se puede mapear, pero la simulación funcional completa sigue siendo un objetivo pendiente. Para mamíferos, los avances más prometedores son los de organoides cerebrales: estructuras de tejido humano cultivadas en laboratorio a partir de células madre, que desarrollan espontáneamente cierta actividad neuronal organizada. No son cerebros, ni siquiera aproximaciones funcionales completas, pero demuestran que determinados principios de autoorganización son intrínsecamente biológicos y difíciles de reproducir en silicio.</p>
+
+<p>La dificultad aumenta de forma explosiva al pasar a mamíferos. No basta con representar neuronas como puntos conectados por líneas. Una neurona real posee morfología tridimensional compleja, canales iónicos de docenas de tipos distintos, neurotransmisores con cinéticas específicas, estados metabólicos variables, plasticidad sináptica dependiente de la actividad, y una relación continua con células gliales, vasos sanguíneos, señales hormonales y el estado general del organismo. Cada nivel de detalle añade realismo, pero también multiplica el coste computacional de forma no lineal.</p>
+
+<p>El cerebro humano, con sus 86.000 millones de neuronas y sus cientos de billones de sinapsis, exigiría una infraestructura de datos y energía muy superior a cualquier simulación biológica actual. Una estimación citada en el <em>Whole Brain Emulation Roadmap</em> del Future of Humanity Institute calcula que simular un cerebro humano a resolución sináptica con los modelos más detallados requeriría entre 10²³ y 10²⁵ operaciones por segundo, una capacidad computacional que excede en muchos órdenes de magnitud los sistemas actuales más potentes. Incluso si los ordenadores siguieran avanzando al ritmo histórico de la ley de Moore, que ya ha empezado a mostrar sus límites físicos, quedaría por decidir qué nivel de detalle es indispensable para preservar una mente.</p>
+
+<p>Tal vez baste con copiar patrones funcionales macroscópicos. Tal vez haya que reproducir la biología molecular con fidelidad atómica. Tal vez la respuesta dependa de aspectos que todavía no sabemos identificar como relevantes. La emulación cerebral tropieza con decenas de barreras técnicas. A todas ellas se suma el no saber qué habría que calcular.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://www.theregister.com/2026/03/16/digital_fruit_fly_brain_model/" target="_blank" rel="noopener">Digital fruit fly brain model walks and cleans its feelers — The Register (2026)</a></p>
+<p><a href="https://news.berkeley.edu/2024/10/02/researchers-simulate-an-entire-fly-brain-on-a-laptop-is-a-human-brain-next/" target="_blank" rel="noopener">A Drosophila computational brain model reveals sensorimotor processing — Berkeley News (2024)</a></p>
+<p><a href="https://mxschons.com/projects/state-of-brain-emulation-report-2025/" target="_blank" rel="noopener">State of Brain Emulation Report 2025 — informe técnico sobre emulación cerebral</a></p>
+
+<p><a href="https://openworm.org/" target="_blank" rel="noopener">OpenWorm — proyecto de simulación completa de C. elegans</a></p>
+<p><a href="https://www.epfl.ch/research/domains/bluebrain/" target="_blank" rel="noopener">Blue Brain Project — simulación y modelado digital de tejido cerebral</a></p>
+
+</section>
+
+<h2>Quinta pista: el problema más difícil de la ciencia</h2>
+
+<p>Supongamos por un momento que todos los obstáculos técnicos desaparecen. Disponemos del connectoma completo de un cerebro humano. Conocemos el estado exacto de cada neurona, de cada sinapsis y de cada circuito. Podemos reproducir toda esa información en un soporte artificial y simularla con una fidelidad absoluta.</p>
+
+<p>Incluso entonces seguiría pendiente la pregunta más incómoda de toda la neurociencia.</p>
+
+<p>¿Por qué ese sistema sentiría algo?</p>
+
+<p>En 1994, el filósofo David Chalmers presentó una distinción que continúa dividiendo a científicos y filósofos tres décadas después. Existen, decía, los problemas fáciles de la consciencia y el problema difícil.</p>
+
+<p>Los problemas «fáciles» son aquellos que la ciencia sabe, al menos en principio, cómo abordar. Explicar la atención, la memoria, el aprendizaje, la percepción, el control motor o la toma de decisiones. Son problemas extraordinariamente complejos, pero pertenecen al ámbito de la función. Preguntan qué hace el cerebro y cómo lo hace.</p>
+
+<p>El problema difícil es diferente. No pregunta cómo procesa información el cerebro. Pregunta por qué ese procesamiento va acompañado de experiencia subjetiva. Cuando determinadas neuronas responden a una longitud de onda de aproximadamente 700 nanómetros, experimentamos el color rojo. La neurociencia puede describir los circuitos visuales implicados, seguir la señal desde la retina hasta la corteza visual, medir potenciales eléctricos y registrar patrones de activación.</p>
+
+<p>Lo que todavía no puede explicar es por qué existe una experiencia de «rojez». Por qué existe algo que se siente desde dentro. Por qué no somos simplemente sistemas que procesan información sin experimentar nada.</p>
+
+<blockquote>«Incluso si la ciencia mapeara cada proceso neuronal en detalle», escribió Chalmers, «la pregunta de por qué esos procesos deberían ir acompañados de experiencia subjetiva seguiría sin respuesta.»</blockquote>
+
+<p>Daniel Dennett, uno de los detractores más influyentes de esta formulación, sostiene que el problema difícil es una ilusión conceptual: el resultado de confundir la perspectiva de primera persona con un misterio metafísico irreductible. Para Dennett, el cerebro es un conjunto de subsistemas que interactúan para producir algo mayor que la suma de sus partes, y la consciencia es ese emergente, no un ingrediente añadido. Si describes perfectamente el funcionamiento, has descrito todo lo que hay.</p>
+
+<p>Otros autores, como Thomas Nagel, consideran que la experiencia subjetiva introduce un límite esencial a cualquier explicación puramente externa. En su célebre ensayo sobre los murciélagos, Nagel planteó que conocer todos los hechos físicos sobre un animal no equivale necesariamente a saber qué se siente al ser ese animal.</p>
+
+<p>El debate sigue abierto. La neurociencia puede medir correlatos neurales de la consciencia, patrones de activación asociados a estados conscientes, pero no puede medir la consciencia misma. No existe aún ningún instrumento capaz de distinguir con certeza un sistema que procesa información de un sistema que experimenta procesar información.</p>
+
+<p>El connectoma responde a la pregunta de cómo está organizado un cerebro. La pregunta de quién vive dentro de él sigue abierta.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://consc.net/papers/facing.pdf" target="_blank" rel="noopener">Facing Up to the Problem of Consciousness — David J. Chalmers, Journal of Consciousness Studies (1995)</a></p>
+<a href="articulos/02/facing.pdf">Facing Up to the Problem of Consciousness — David J. Chalmers (1995)</a>
+
+</section>
+
+
+<h2>Sexta pista: ¿quién sería la copia?</h2>
+
+<p>Incluso si el problema técnico se resolviera y la copia fuera funcionalmente perfecta, aparecería una tercera cuestión, esta vez de psicología y filosofía de la identidad: ¿seguiría siendo tú?</p>
+
+<p>En 1984, el filósofo Derek Parfit planteó en <em>Reasons and Persons</em> un experimento mental que hoy resulta notablemente pertinente. Imaginemos una máquina que registra el estado exacto de todas las células de tu cerebro y tu cuerpo, destruye el original y reconstruye una copia átomo a átomo en Marte. La copia despierta allí con tus recuerdos, tu personalidad y tu historia. Recuerda haber entrado en la máquina. Desde su punto de vista, la continuidad es perfecta.</p>
+
+<p>La trampa del experimento aparece con una variación: la máquina reconstruye la copia en Marte, pero el original no llega a destruirse. Ahora existen dos versiones de ti, psicológicamente continuas, ambas convencidas de ser la persona original. No pueden ser numéricamente la misma persona. ¿Cuál de las dos eres tú?</p>
+
+<p>Parfit concluyó que la pregunta está mal formulada. La identidad personal estricta, defendía, no es un hecho profundo del mundo, sino una convención que aplicamos retrospectivamente a la continuidad psicológica. Lo que importa en la supervivencia no es la identidad absoluta, sino la continuidad de memoria, carácter, intención y experiencia. Esa continuidad, en principio, puede ramificarse.</p>
+
+<p>La neurociencia aporta un caso real que complica todavía más el cuadro: el síndrome de cerebro dividido. En algunos pacientes a los que se secciona el cuerpo calloso para tratar epilepsias severas, los dos hemisferios cerebrales pueden mostrar preferencias, intenciones y respuestas independientes. Un mismo cuerpo, dos corrientes de procesamiento que a veces se contradicen. La pregunta de cuántas «personas» habitan ese cráneo no tiene una respuesta científica sencilla.</p>
+
+<p>La teoría de la identidad por ramificación psicológica intenta dar cuenta de estos escenarios. Sugiere que la continuidad puede mantenerse en múltiples instancias, sin que ninguna de ellas sea simplemente falsa. Pero esa solución, aunque coherente en términos filosóficos, no elimina la inquietud existencial: si la copia soy yo en algún sentido relevante, ¿por qué la destrucción del original no debería preocuparme?</p>
+
+<p>Una copia perfecta puede recordar haber sido tú. Puede hablar como tú, reconocer a tu familia y continuar tus proyectos. Eso no demuestra que tú hayas despertado al otro lado.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://archive.org/details/reasonspersons0000parf" target="_blank" rel="noopener">Reasons and Persons — Derek Parfit, Oxford University Press (1984)</a></p>
+<p><a href="https://plato.stanford.edu/entries/identity-personal/" target="_blank" rel="noopener">Personal Identity — Stanford Encyclopedia of Philosophy</a></p>
+<p><a href="https://plato.stanford.edu/entries/consciousness-unity/" target="_blank" rel="noopener">Unity of Consciousness — Stanford Encyclopedia of Philosophy</a></p>
+
+</section>
+
+<h2>Dónde está la ciencia hoy</h2>
+
+<p>El estado actual de la emulación cerebral puede resumirse en tres escalas. Para organismos de unos pocos cientos o miles de neuronas, el connectoma estructural completo ya es alcanzable y los modelos computacionales básicos empiezan a ser manejables. Para la mosca adulta, el mapa estructural existe, pero la simulación funcional completa no. Para el cerebro humano, cualquier horizonte serio debe formularse con extrema prudencia.</p>
+
+<p>El coste por neurona reconstruida ha caído drásticamente gracias a los avances en microscopía electrónica automatizada, segmentación por IA y verificación colaborativa. En 2024, la reconstrucción de un milímetro cúbico de corteza humana por Google y el Broad Institute generó 1,4 petabytes de datos para un fragmento de tejido microscópico. Escalar ese proceso a los 1.300 centímetros cúbicos de un cerebro humano completo implicaría almacenamiento del orden de los zetabytes (un millón de veces más que el total de datos digitales que se estima existen hoy en el mundo) además de una infraestructura de procesamiento y validación que no existe ni en perspectiva cercana.</p>
+
+<p>Y eso solo resolvería el primer nivel del problema: el mapa estructural. Después habría que capturar pesos sinápticos actualizados en tiempo real, estados funcionales dinámicos, el perfil neuroquímico de cada célula, la contribución de las células gliales, los componentes moleculares relevantes para la plasticidad, y quizá muchos aspectos que todavía no sabemos identificar como esenciales. Cada uno de esos niveles añade otra capa de complejidad, y cada capa multiplica el coste computacional.</p>
+
+<p>Lo más importante es no confundir dirección con llegada. La ciencia avanza hacia mapas más precisos, mejores simulaciones y modelos cada vez más integrados. Pero copiar una mente humana no es el siguiente paso inmediato después de cartografiar una mosca. Es una frontera conceptual situada mucho más lejos, que requiere no solo más tecnología sino preguntas que todavía no sabemos formular.</p>
+
+
+<section class="article-bibliography">
+
+<p><a href="https://mxschons.com/projects/state-of-brain-emulation-report-2025/" target="_blank" rel="noopener">State of Brain Emulation Report 2025 — evaluación del estado actual de la emulación cerebral</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.adk4858" target="_blank" rel="noopener">A petavoxel fragment of human cerebral cortex reconstructed at nanoscale resolution — Science (2024)</a></p>
+
+<h2>Tabla: ciencia actual frente al universo Eidos</h2>
+
+<table class="article-table">
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>En Eidos</th>
+<th>Estado científico actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mapa estructural</td>
+<td>Escaneo completo de la red neuronal humana</td>
+<td>Connectoma completo logrado en organismos pequeños y en mosca adulta; cerebro humano aún fuera de alcance a resolución sináptica</td>
+</tr>
+<tr>
+<td>Registro de actividad</td>
+<td>Captura de la dinámica mental completa</td>
+<td>Limitado a escalas reducidas o registros parciales; imposible hoy a escala humana completa</td>
+</tr>
+<tr>
+<td>Memoria</td>
+<td>Preservación de recuerdos y continuidad autobiográfica</td>
+<td>La memoria tiene base material y sináptica, pero no existe un método para copiarla íntegramente en humanos</td>
+</tr>
+<tr>
+<td>Simulación funcional</td>
+<td>Mentes activas en un entorno digital</td>
+<td>Modelos parciales de circuitos; sin simulación funcional completa de cerebro de insecto adulto ni de mamífero complejo</td>
+</tr>
+<tr>
+<td>Sustrato de destino</td>
+<td>M1 como soporte estable y casi eterno</td>
+<td>Cristales 5D, ADN como almacenamiento y materiales híbridos apuntan a soportes futuros, pero no a una mente funcional completa</td>
+</tr>
+<tr>
+<td>Consciencia digital</td>
+<td>La experiencia subjetiva continúa tras la transferencia</td>
+<td>Sin demostración científica; debate abierto entre teorías funcionalistas, emergentistas y posturas no reduccionistas</td>
+</tr>
+<tr>
+<td>Identidad personal</td>
+<td>La continuidad consciente es tratada como persistencia personal</td>
+<td>Sin consenso filosófico ni criterio empírico capaz de distinguir transferencia perfecta, copia o bifurcación consciente</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+
+
+<h2>Lo que hace diferente este obstáculo al del M1</h2>
+
+<p>El M1, el material de almacenamiento del universo de <em>Eidos</em>, no existe todavía. Sin embargo, muchas de sus propiedades tienen correlatos científicos parciales: cristales de memoria, almacenamiento molecular, soportes pasivos, materiales híbridos y captación energética de baja demanda. Su obstáculo principal es de ingeniería: tiempo, recursos y convergencia de tecnologías que ya existen por separado.</p>
+
+<p>El obstáculo de copiar una mente es de naturaleza distinta.</p>
+
+<p>No hay ninguna ley física conocida que impida reconstruir la estructura de un cerebro. El problema técnico es colosal, pero puede formularse en términos de escala, coste, resolución y capacidad computacional. Lo verdaderamente difícil aparece en el siguiente nivel: qué relación existe entre la organización física del cerebro y la experiencia subjetiva que genera.</p>
+
+<p>Es posible que esa pregunta tenga respuesta y que la neurociencia de las próximas décadas la encuentre. También es posible que parte del problema sea, como sostiene Nagel, inherentemente subjetiva: que los hechos sobre la consciencia solo puedan captarse desde dentro y que cualquier descripción científica en tercera persona deje escapar algo esencial.</p>
+
+<p>Si eso fuera cierto, una copia perfecta del cerebro podría funcionar exactamente como el original y aun así ser, en algún sentido profundo, oscura por dentro. Desde fuera, nadie notaría la diferencia. Desde dentro, quizá no habría nadie.</p>
+
+
+<section class="article-bibliography">
+
+<p><a href="https://www.eidoslibro.com/blog/articulos/01_m1.html" target="_blank" rel="noopener">El M1: material que aún no existe (pero podría) — EIDOS Blog</a></p>
+<p><a href="https://philpapers.org/rec/NAGWII" target="_blank" rel="noopener">What Is It Like to Be a Bat? — Thomas Nagel, The Philosophical Review (1974)</a></p>
+
+
+</section>
+
+
+<h2>Lo que importa en EIDOS</h2>
+
+<p>En la novela, la Gran Transferencia se plantea como una decisión civilizatoria tomada ante el deterioro irreversible del mundo físico, cuando el soporte biológico de la humanidad ya no puede garantizar continuidad. No se presenta como una simple copia digital de la mente humana ni como una promesa de inmortalidad tecnológica y aunque es una de las consecuencias, tampoco nace del deseo abstracto de vencer a la muerte. </p>
+
+<p>La pregunta central es más precisa y mucho más incómoda: si la continuidad de una persona depende de la materia concreta que compone su cerebro o de los procesos que ocurren dentro de ella. La diferencia parece pequeña. No lo es. De esa distinción nace buena parte del conflicto filosófico de <em><a href="https://www.amazon.es/dp/B0FCR5ZPBJ">Eidos</a></em> y <em><a href="https://www.amazon.es/dp/B0G8HLFJXT">Eidos Relatos</a></em>.</p>
+
+
+
+<p>Si la identidad personal reside exclusivamente en el soporte biológico, cualquier transferencia sería una copia. Si lo decisivo es la continuidad del patrón, de la memoria, de la personalidad y de la experiencia consciente, la respuesta podría ser distinta. El problema es que todavía desconocemos hasta qué punto esa experiencia depende de la organización de la información y hasta qué punto depende del propio sustrato biológico que la genera. Tal vez la consciencia pueda preservarse si se conserva su dinámica esencial. Tal vez necesite el cuerpo humano del mismo modo que una llama necesita el combustible que la alimenta.</p>
+
+
+<p>En ese segundo caso, el cuerpo no sería el centro de la identidad, sino el cauce temporal que la sostiene mientras la consciencia fluye a través de él. Sin entrar en cuestiones teológicas, existe una posibilidad aún más inquietante: puede que una transferencia perfecta conserve recuerdos, personalidad, emociones y sensación de continuidad, y que aun así algo fundamental quede atrás con el cuerpo que la originó. La ciencia actual no dispone de ninguna herramienta capaz de responder a esa pregunta.</p>
+
+<p>En el universo de Eidos, esta posibilidad aparece explorada desde una perspectiva diferente en el relato “La noche oscura de Eidos”, narrado desde el punto de vista de un sacerdote. No intenta responderla. Hace algo más incómodo: preguntarse qué ocurriría si nunca pudiéramos saber la respuesta.</p>
+
+<p>La pregunta sigue siendo inevitable: si al desaparecer el cuerpo desaparece también aquello que habitaba en él, ¿qué es exactamente lo que continúa al otro lado?
+</p>
+
+
+
+<p>La novela no afirma que ese dilema esté resuelto. Lo convierte en una pregunta. En el mundo de <em>Eidos</em>, el sistema no está concebido para producir una copia y eliminar después el cuerpo original, sino para preservar una única continuidad consciente cuando el soporte físico deja de cumplir su función. Muere el cuerpo biológico al transferir la consciencia. Lo que se intenta conservar es el relato vivido, la capacidad de reconocerse, decidir, recordar y seguir narrándose desde dentro.</p>
+
+<p>Desde fuera, sin embargo, aparece una dificultad casi irresoluble: si únicamente permanece una continuidad consciente, quizá no exista un experimento capaz de distinguir una transferencia perfecta de una copia seguida de la desaparición del original. Ambas posibilidades producirían el mismo resultado observable. Una persona despierta con sus recuerdos, sus vínculos, sus miedos y sus intenciones. Para los demás, continúa. Para ella, si no hay laguna ni fractura subjetiva, también continúa.</p>
+
+<p>El problema cambia cuando dos continuidades reclaman el mismo origen.</p>
+
+<p>La filosofía lleva décadas explorando esta posibilidad. Derek Parfit la utilizó para cuestionar el concepto mismo de identidad personal. La cultura popular también ha rozado ese abismo en obras como <em>The Prestige</em> o <em>The 6th Day</em>, donde una tecnología capaz de reproducir individuos convierte cada aparición en una pregunta moral: si dos seres poseen la misma historia hasta un instante determinado, ¿qué criterio permite decidir cuál de ellos es el auténtico?</p>
+
+<p><em>Eidos</em> explora ese territorio desde dentro, sin reducirlo a una paradoja abstracta. Casos como el de Thomas Arden, explorado en <em>Eidos Relatos</em>, muestran hasta qué punto una cuestión aparentemente filosófica podría convertirse en un problema práctico, legal y profundamente humano. Si dos continuidades conscientes nacen de una misma fuente, elegir una como «verdadera» no resuelve el dilema. Solo protege un relato y condena al otro.</p>
+
+<p>Esa tensión es la que convierte la ciencia en narrativa. Los laboratorios actuales y los connectomas venideros pueden enseñarnos dónde están los cables, cómo se distribuye la actividad y qué patrones parecen asociarse a memoria, percepción o decisión. Lo que no pueden decir todavía es si la persona que despierte al otro lado de una transferencia sentirá que ha sobrevivido o si, en el único lugar donde eso podría verificarse, el interior de esa experiencia, habrá simplemente silencio.</p>
+
+<blockquote>El cerebro de una mosca nos enseña dónde están los cables. Lo que no puede enseñarnos es si la luz que recorre esos cables es la misma luz, o simplemente otra luz que nadie distingue desde fuera.</blockquote>
+
+<p>La neurociencia actual todavía no puede decirnos si una consciencia puede transferirse. Ni siquiera puede decirnos con certeza qué es exactamente una consciencia. Lo que sí empieza a mostrar es que la identidad personal quizá dependa menos de la materia que nos compone y más de la continuidad de los procesos que la mantienen viva.</p>
+
+<p>Esa es, precisamente, la pregunta sobre la que se construye <em>Eidos</em>. No si una mente puede copiarse, sino si una historia puede continuar cuando cambia el soporte que la sostiene.</p>
+
+<section class="article-bibliography">
+
+<p><a href="https://www.eidoslibro.com/relatos/" target="_blank" rel="noopener">Eidos Relatos — capítulos y relatos del universo Eidos</a></p>
+<p><a href="https://archive.org/details/reasonspersons0000parf" target="_blank" rel="noopener">Reasons and Persons — Derek Parfit, Oxford University Press (1984)</a></p>
+<p><a href="https://www.imdb.com/title/tt0482571/" target="_blank" rel="noopener">The Prestige — Christopher Nolan (2006)</a></p>
+<p><a href="https://www.imdb.com/title/tt0216216/" target="_blank" rel="noopener">The 6th Day — Roger Spottiswoode (2000)</a></p>
+
+</section>
+   <section class="related reveal" aria-labelledby="related-title">
+   <h2 id="related-title">Seguir leyendo</h2><div class="related-grid">
+   
+   <a class="related-card" href="01_m1.html">El M1: material que aún no existe (pero podría)</a>
+   
+     <!-- 
+   <a class="related-card" href="ciencia-ficcion-filosofica.html">Por qué la ciencia ficción debe volver a pensar</a>
+    -->
+   </div>
+   </section>
+     
+
+
+      <section class="newsletter-mini reveal" aria-labelledby="newsletter-mini-title">
+        <h2 id="newsletter-mini-title">Recibe nuevos ensayos de Eidos.</h2>
+        <p>Una lista discreta para avisos de artículos, relatos y novedades editoriales.</p>
+        <a class="btn gold" href="../index.html#newsletter">Suscribirme al blog</a>
+      </section>
+
+      <section class="comments reveal" id="comentarios" aria-labelledby="comments-title">
+        <h2 id="comments-title">Comentarios</h2>
+        <div class="comment-note">
+Los comentarios forman parte del archivo público de Eidos.
+Cada usuario es responsable de los contenidos que publica bajo su cuenta de GitHub.
+La participación en el blog implica la aceptación de los
+<a href="../../terminosycondiciones.html">términos y condiciones</a> del sitio.
+Se ruega mantener un tono respetuoso y constructivo.
+Los mensajes ofensivos, difamatorios, insultos, spam o contenido inapropiado podrán ser eliminados y sus autores bloqueados.
+        </div>
+
+<script src="https://giscus.app/client.js"
+        data-repo="feldenvareth/eidoslibro"
+        data-repo-id="R_kgDOPw9c5w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOPw9c584C9o_t"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark_dimmed"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </section>
+
+</main>
+
+<footer class="footer">
+<p>© Felden Vareth · <a href="../index.html">Eidos Blog · </a> <a href="../../index.html">Eidos · </a> <a href="../../terminosycondiciones.html">Términos y condiciones</a></p>
+</footer>
+
+</div>
+
+<button aria-label="Volver arriba" class="scroll-top" type="button">↑</button>
+
+<script src="../js/blog.js"></script>
+
+<!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+<p style="margin:0">Este sitio utiliza cookies analíticas para mejorar la experiencia. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Política de Privacidad</a></p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Aceptar</button>
+<button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Rechazar</button>
+</div>
+</div>
+
+<script>
+function consentGranted() {
+  gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','true');
+}
+
+function consentDeclined() {
+  gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','false');
+}
+
+(function(){
+  const c = localStorage.getItem('consentGiven');
+  if(c === 'true') consentGranted();
+  else if(c === 'false') consentDeclined();
+  else document.getElementById('consent-banner').style.display='flex';
+})();
+</script>
+
+</body>
+</html>
