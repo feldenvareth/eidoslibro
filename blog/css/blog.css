@@ -1440,3 +1440,12 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
     }
 
 }
+
+
+/* Separación inferior del acceso al juego de Evolución */
+
+.article-content .evolution-game-link{
+
+    margin-bottom:clamp(52px,7vw,72px);
+
+}
