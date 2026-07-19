@@ -519,47 +519,25 @@ gtag('config', 'G-GRKE5N9XFB');
       font-size: 16px;
     }
   }
+
+  .evolution-experience-btn {
+    border-color: rgba(200, 168, 75, .5);
+    letter-spacing: .06em;
+  }
+
+  .evolution-experience-btn:disabled {
+    opacity: .5;
+    cursor: default;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
 </style>
-
-
-<div id="eidos-launcher">
-
-  <div id="eidos-bubble">
-    Mientras escuchas · 🟡
-  </div>
-
-  <div class="eidos-game-buttons">
-
-    <button
-      class="eidos-game-btn"
-      type="button"
-      aria-label="Abrir Rompemuros"
-      title="Rompemuros"
-      onclick="openEidosGame('/hiddenegg/games/thewall/rompemuros.html')">
-      🟡
-    </button>
-
-    <button
-      class="eidos-game-btn"
-      type="button"
-      aria-label="Abrir juego de la nave"
-      title="Juego de la nave"
-      onclick="openEidosGame('/hiddenegg/games/pendulos/eidos_pendulos.html')">
-      <span class="eidos-ship-icon" aria-hidden="true">
-        <span class="eidos-ship-halo"></span>
-        <span class="eidos-ship-body"></span>
-        <span class="eidos-ship-arm eidos-ship-arm-left"></span>
-        <span class="eidos-ship-arm eidos-ship-arm-right"></span>
-        <span class="eidos-ship-light eidos-ship-light-left"></span>
-        <span class="eidos-ship-light eidos-ship-light-right"></span>
-        <span class="eidos-ship-core"></span>
-      </span>
-    </button>
-
-  </div>
-
-</div>
-
 
 <div
   id="eidos-panel"
@@ -568,13 +546,13 @@ gtag('config', 'G-GRKE5N9XFB');
   <div id="eidos-panel-header">
 
     <span>
-      E I D O S
+      E V O L U C I Ó N
     </span>
 
     <button
       id="eidos-close"
       type="button"
-      aria-label="Cerrar minijuego Eidos"
+      aria-label="Cerrar experiencia interactiva"
       onclick="closeEidos()">
       ✕
     </button>
@@ -583,8 +561,8 @@ gtag('config', 'G-GRKE5N9XFB');
 
   <iframe
     id="eidos-frame"
-    src="/hiddenegg/games/thewall/rompemuros.html"
-    title="Minijuego Eidos"
+    src="about:blank"
+    title="Experiencia interactiva sobre la evolución"
     scrolling="no">
   </iframe>
 
@@ -596,17 +574,14 @@ gtag('config', 'G-GRKE5N9XFB');
      REFERENCIAS DEL WIDGET
      ───────────────────────────────────────── */
 
-  const eidosLauncher =
-    document.getElementById('eidos-launcher');
-
   const eidosPanel =
     document.getElementById('eidos-panel');
 
-  const eidosBubble =
-    document.getElementById('eidos-bubble');
-
   const eidosFrame =
     document.getElementById('eidos-frame');
+
+  const evolutionExperienceButtons =
+    document.querySelectorAll('.evolution-experience-btn');
 
 
   /* ─────────────────────────────────────────
@@ -614,38 +589,18 @@ gtag('config', 'G-GRKE5N9XFB');
      ───────────────────────────────────────── */
 
   function openEidosGame(gameUrl) {
-    if (!eidosPanel || !eidosBubble || !eidosFrame) {
+    if (!eidosPanel || !eidosFrame) {
       return;
     }
 
     eidosFrame.src = gameUrl;
     eidosPanel.classList.add('open');
     eidosPanel.setAttribute('aria-hidden', 'false');
-    eidosBubble.style.display = 'none';
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(button) {
+      button.disabled = true;
+    });
   }
-
-
-  /* ─────────────────────────────────────────
-     ABRIR O CERRAR EL JUEGO
-     ───────────────────────────────────────── */
-
-  function toggleEidos() {
-    if (!eidosPanel || !eidosBubble) {
-      return;
-    }
-
-    const isOpen =
-      eidosPanel.classList.toggle('open');
-
-    eidosPanel.setAttribute(
-      'aria-hidden',
-      isOpen ? 'false' : 'true'
-    );
-
-    eidosBubble.style.display =
-      isOpen ? 'none' : 'block';
-  }
-
 
   /* ─────────────────────────────────────────
      CERRAR EL JUEGO
@@ -653,7 +608,7 @@ gtag('config', 'G-GRKE5N9XFB');
      ───────────────────────────────────────── */
 
   function closeEidos() {
-    if (!eidosPanel || !eidosBubble) {
+    if (!eidosPanel) {
       return;
     }
 
@@ -664,42 +619,11 @@ gtag('config', 'G-GRKE5N9XFB');
       'true'
     );
 
-    eidosBubble.style.display = 'block';
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(button) {
+      button.disabled = false;
+    });
   }
-
-
-  /* ─────────────────────────────────────────
-     EL LECTOR EMPIEZA
-     Mostrar el icono del minijuego
-     ───────────────────────────────────────── */
-
-  document.addEventListener(
-    'eidos-reader-start',
-    function() {
-      if (!eidosLauncher) {
-        return;
-      }
-
-      eidosLauncher.style.display = 'flex';
-    }
-  );
-
-
-  /* ─────────────────────────────────────────
-     EL LECTOR SE DETIENE
-     Ocultar el icono y cerrar el juego
-     ───────────────────────────────────────── */
-
-  document.addEventListener(
-    'eidos-reader-stop',
-    function() {
-      if (eidosLauncher) {
-        eidosLauncher.style.display = 'none';
-      }
-
-      closeEidos();
-    }
-  );
 
 
   /* ─────────────────────────────────────────
@@ -716,6 +640,12 @@ gtag('config', 'G-GRKE5N9XFB');
       closeEidos();
     }
   );
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
 </script>
 
 
@@ -827,6 +757,13 @@ gtag('config', 'G-GRKE5N9XFB');
   </div>
 </div>
 
+<button
+  class="btn evolution-experience-btn"
+  type="button"
+  title="Descubre hasta dónde puedes hacer evolucionar tu planeta"
+  onclick="openEidosGame('/hiddenegg/games/evolution/evolucion.html?sound=0')">
+  ¿Hasta dónde podrás hacer evolucionar tu planeta?
+</button>
 
 </div>
 </header>
