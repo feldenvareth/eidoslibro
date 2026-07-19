@@ -520,14 +520,13 @@ gtag('config', 'G-GRKE5N9XFB');
     }
   }
 
-  .evolution-experience-btn {
-    border-color: rgba(200, 168, 75, .5);
-    letter-spacing: .06em;
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
   }
 
-  .evolution-experience-btn:disabled {
-    opacity: .5;
-    cursor: default;
+  .evolution-game-link {
+    margin-bottom: clamp(34px, 5vw, 58px);
   }
 
   body.evolution-experience-active {
@@ -597,9 +596,17 @@ gtag('config', 'G-GRKE5N9XFB');
     eidosPanel.classList.add('open');
     eidosPanel.setAttribute('aria-hidden', 'false');
     document.body.classList.add('evolution-experience-active');
-    evolutionExperienceButtons.forEach(function(button) {
-      button.disabled = true;
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
     });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
   }
 
   /* ─────────────────────────────────────────
@@ -620,8 +627,8 @@ gtag('config', 'G-GRKE5N9XFB');
     );
 
     document.body.classList.remove('evolution-experience-active');
-    evolutionExperienceButtons.forEach(function(button) {
-      button.disabled = false;
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
     });
   }
 
@@ -756,14 +763,6 @@ gtag('config', 'G-GRKE5N9XFB');
     <p class="read-floating-status"></p>
   </div>
 </div>
-
-<button
-  class="btn evolution-experience-btn"
-  type="button"
-  title="Descubre hasta dónde puedes hacer evolucionar tu planeta"
-  onclick="openEidosGame('/hiddenegg/games/evolution/evolucion.html?sound=0')">
-  ¿Hasta dónde podrás hacer evolucionar tu planeta?
-</button>
 
 </div>
 </header>
@@ -1451,6 +1450,17 @@ La química probó caminos hasta que una hebra pudo copiarse. Esa hebra favoreci
 
 
 <section aria-labelledby="related-title" class="related reveal">
+<h2 id="evolution-game-title">Juego basado en este artículo</h2>
+<p class="evolution-game-link">
+<a
+  class="evolution-experience-btn"
+  href="/hiddenegg/games/evolution/evolucion.html?sound=0"
+  title="Descubre hasta dónde puedes hacer evolucionar tu planeta"
+  onclick="openEidosGameLink(event, this)">
+  ¿Hasta dónde podrás hacer evolucionar tu planeta?
+</a>
+</p>
+
 <h2 id="related-title">Seguir leyendo</h2>
 <div class="related-grid">
 <a class="related-card" href="01_m1.html">El M1: material que aún no existe (pero podría)</a>
