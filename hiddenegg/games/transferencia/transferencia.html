@@ -295,6 +295,43 @@
       line-height: 1.35;
     }
 
+    #mind-sync-status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin: 0 0 7px;
+    }
+
+    .mind-status {
+      min-width: 0;
+      padding: 4px 7px;
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+      border-radius: 5px;
+      color: #72847a;
+      background: rgba(3, 14, 9, .42);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    #original-status.ready {
+      color: var(--cyan);
+      border-color: rgba(121,217,192,.55);
+      background: rgba(121,217,192,.08);
+      box-shadow: 0 0 10px rgba(121,217,192,.1);
+    }
+
+    #copy-status.ready {
+      color: var(--gold-light);
+      border-color: rgba(234,210,125,.52);
+      background: rgba(234,210,125,.07);
+      box-shadow: 0 0 10px rgba(234,210,125,.08);
+    }
+
     #sync-track {
       height: 5px;
       overflow: hidden;
@@ -314,7 +351,7 @@
     #controls {
       flex: 0 0 auto;
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto auto auto;
       align-items: center;
       gap: 6px;
       width: min(100%, 570px);
@@ -339,6 +376,16 @@
 
     .small-button:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-light); }
     .small-button:disabled { opacity: .32; cursor: default; }
+
+    #finish-button {
+      color: var(--gold-light);
+      border-color: rgba(200,168,75,.68);
+    }
+
+    #finish-button:hover:not(:disabled) {
+      color: #102018;
+      background: var(--gold);
+    }
 
     .screen {
       position: absolute;
@@ -497,6 +544,46 @@
 
     .result-link:hover { border-color: var(--gold); color: var(--gold-light); }
 
+    .finish-visual {
+      position: relative;
+      width: 100%;
+      height: clamp(135px, 24dvh, 205px);
+      display: grid;
+      place-items: center;
+      margin: 13px auto 12px;
+      overflow: hidden;
+      border: 1px solid rgba(200,168,75,.55);
+      border-radius: 11px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(121,217,192,.13), transparent 55%),
+        #06100c;
+    }
+
+    #finish-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      filter: saturate(.82) brightness(.72) contrast(1.05);
+      transition: opacity .45s ease;
+    }
+
+    #finish-image.loaded { opacity: .84; }
+
+    .finish-visual::after {
+      content: "E I D O S";
+      position: relative;
+      z-index: 1;
+      color: rgba(245,236,208,.27);
+      font: 500 27px/1 Georgia, serif;
+      letter-spacing: 10px;
+      pointer-events: none;
+    }
+
+    .finish-visual.has-image::after { opacity: .28; }
+
     .identity-visual {
       position: relative;
       width: min(100%, 330px);
@@ -566,6 +653,8 @@
       #info-card { padding: 7px 9px; }
       #stage-name { font-size: 20px; }
       #stage-description { min-height: 26px; margin-block: 4px 5px; font-size: 10px; }
+      #mind-sync-status { gap: 4px; margin-bottom: 5px; }
+      .mind-status { padding: 3px 5px; font-size: 7px; }
       #controls { min-height: 30px; }
       #control-hint { font-size: 9px; }
       .small-button { min-height: 28px; padding: 4px 9px; font-size: 10px; }
@@ -590,6 +679,7 @@
       #game-subtitle { display: none; }
       #info-card { padding-block: 5px; }
       #stage-description { min-height: 0; margin: 3px 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #mind-sync-status { margin-bottom: 4px; }
       .card { padding-block: 14px; }
       .card h2 { font-size: 34px; }
       .identity-visual { height: 78px; }
@@ -640,9 +730,13 @@
       <section id="info-card" aria-labelledby="stage-name">
         <div id="info-head">
           <h2 id="stage-name">Percepción</h2>
-          <span id="fragment-count">Recuerdo 1/2</span>
+          <span id="fragment-count">0/2 sincronizados</span>
         </div>
         <p id="stage-description">Dos sistemas reciben el mismo mundo. Todavía parecen idénticos.</p>
+        <div id="mind-sync-status" aria-live="polite">
+          <span class="mind-status" id="original-status">ORIGINAL · PENDIENTE</span>
+          <span class="mind-status" id="copy-status">COPIA · PENDIENTE</span>
+        </div>
         <div id="sync-track" aria-hidden="true"><div id="sync-fill"></div></div>
       </section>
 
@@ -650,6 +744,7 @@
         <span id="control-hint">Flechas · desliza el dedo</span>
         <button class="small-button" id="undo-button" type="button" disabled>Deshacer</button>
         <button class="small-button" id="restart-stage-button" type="button">Reiniciar fase</button>
+        <button class="small-button" id="finish-button" type="button">Terminar</button>
       </div>
     </section>
 
@@ -713,6 +808,29 @@
         </nav>
       </div>
     </section>
+
+    <section class="screen" id="finish-screen" aria-labelledby="finish-title" aria-hidden="true">
+      <div class="card result-card">
+        <p class="card-kicker">TU TRANSFERENCIA SE DETIENE AQUÍ</p>
+        <h2 id="finish-title">PATRÓN CONSERVADO</h2>
+        <div class="finish-visual" id="finish-visual" aria-hidden="true">
+          <img id="finish-image" alt="">
+        </div>
+        <div class="identity-visual" aria-hidden="true">
+          <span class="identity-line"></span>
+          <span class="identity-node original">◉</span>
+          <span class="identity-node copy">◇</span>
+        </div>
+        <p class="result-lead">Has conseguido conservar la mente hasta:</p>
+        <p class="result-value" id="finish-stage">Percepción</p>
+        <p class="result-copy" id="finish-progress">0 de 7 fases completadas.</p>
+        <button class="primary-button" id="finish-retry-button" type="button">NUEVA TRANSFERENCIA</button>
+        <nav class="result-links" aria-label="Enlaces sobre EIDOS">
+          <a class="result-link" href="https://www.eidoslibro.com/index.html" target="_blank" rel="noopener">CONOCER EIDOS</a>
+          <a class="result-link" href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">LEER EL ARTÍCULO QUE INSPIRÓ ESTE JUEGO</a>
+        </nav>
+      </div>
+    </section>
   </main>
 
   <script src="/hiddenegg/games/eidos-content.js"></script>
@@ -738,14 +856,20 @@
       const stageNameElement = document.getElementById("stage-name");
       const stageDescriptionElement = document.getElementById("stage-description");
       const fragmentCount = document.getElementById("fragment-count");
+      const originalStatus = document.getElementById("original-status");
+      const copyStatus = document.getElementById("copy-status");
       const boardMessage = document.getElementById("board-message");
       const undoButton = document.getElementById("undo-button");
       const restartStageButton = document.getElementById("restart-stage-button");
+      const finishButton = document.getElementById("finish-button");
       const soundButton = document.getElementById("sound-button");
       const soundNote = document.getElementById("sound-note");
       const startScreen = document.getElementById("start-screen");
       const gameOverScreen = document.getElementById("game-over-screen");
       const victoryScreen = document.getElementById("victory-screen");
+      const finishScreen = document.getElementById("finish-screen");
+      const finishVisual = document.getElementById("finish-visual");
+      const finishImage = document.getElementById("finish-image");
       const phaseFlash = document.getElementById("phase-flash");
       const phaseName = document.getElementById("phase-name");
       const phaseCopy = document.getElementById("phase-copy");
@@ -789,31 +913,31 @@
           name: "Lenguaje",
           short: "LENGUAJE",
           copy: "Los símbolos organizan el pensamiento y alteran lo que puede imaginarse.",
-          fragments: ["Nombre", "Voz", "Significado"]
+          fragments: ["Nombre", "Significado"]
         },
         {
           name: "Emoción",
           short: "EMOCIÓN",
           copy: "La información adquiere peso cuando algo importa, atrae o amenaza.",
-          fragments: ["Miedo", "Deseo", "Afecto"]
+          fragments: ["Miedo", "Afecto"]
         },
         {
           name: "Identidad",
           short: "IDENTIDAD",
           copy: "Una vida se reconoce en la historia que conserva sobre sí misma.",
-          fragments: ["Historia", "Cuerpo", "Elección"]
+          fragments: ["Historia", "Elección"]
         },
         {
           name: "Autoconsciencia",
           short: "AUTOCON.",
           copy: "La mente observa su propio pensamiento y se pregunta quién lo produce.",
-          fragments: ["Yo", "Duda", "Continuidad", "Fin"]
+          fragments: ["Yo", "Continuidad"]
         },
         {
           name: "Autonomía",
           short: "AUTONOMÍA",
           copy: "Una copia perfecta deja de serlo en cuanto comienza a vivir.",
-          fragments: ["Decisión", "Cambio", "Futuro", "Otro"]
+          fragments: ["Decisión", "Futuro"]
         }
       ];
 
@@ -1148,7 +1272,7 @@
       }
 
       function openScreen(screen) {
-        [startScreen, gameOverScreen, victoryScreen].forEach(item => {
+        [startScreen, gameOverScreen, victoryScreen, finishScreen].forEach(item => {
           const open = item === screen;
           item.classList.toggle("open", open);
           item.setAttribute("aria-hidden", String(!open));
@@ -1156,7 +1280,7 @@
       }
 
       function closeScreens() {
-        [startScreen, gameOverScreen, victoryScreen].forEach(item => {
+        [startScreen, gameOverScreen, victoryScreen, finishScreen].forEach(item => {
           item.classList.remove("open");
           item.setAttribute("aria-hidden", "true");
         });
@@ -1180,10 +1304,14 @@
         }
       }
 
+      function progressStageNumber() {
+        return Math.min(TOTAL_STAGES, Math.max(stageIndex + 1, completedStages + 1));
+      }
+
       function updateHud() {
         scoreHud.textContent = String(Math.max(0, Math.round(score)));
         bestHud.textContent = String(Math.max(best, Math.round(score)));
-        stageHud.textContent = `Fase ${stageIndex + 1}/${TOTAL_STAGES}`;
+        stageHud.textContent = `Fase ${progressStageNumber()}/${TOTAL_STAGES}`;
         syncHud.textContent = `Sincronía ${Math.max(0, Math.round(sync))}%`;
         syncFill.style.width = `${Math.max(0, sync)}%`;
         syncFill.style.background = sync < 30
@@ -1191,14 +1319,26 @@
           : "linear-gradient(90deg,#79d9c0,#89dda9 55%,#ead27d)";
         stageNameElement.textContent = STAGES[stageIndex].name;
         stageDescriptionElement.textContent = STAGES[stageIndex].copy;
-        fragmentCount.textContent = targetIndex < stage.targets.length
-          ? `Recuerdo ${targetIndex + 1}/${stage.targets.length}`
-          : "Salida desbloqueada";
+        const totalMemories = stage?.targets.length || 2;
+        fragmentCount.textContent = `${Math.min(targetIndex, totalMemories)}/${totalMemories} sincronizados`;
+        const currentTarget = targetIndex < totalMemories ? stage.targets[targetIndex] : null;
+        const phaseComplete = targetIndex >= totalMemories;
+        const originalReady = phaseComplete || Boolean(currentTarget && posL === currentTarget.left);
+        const copyReady = phaseComplete || Boolean(currentTarget && posR === currentTarget.right);
+        originalStatus.textContent = originalReady
+          ? "RECUERDO ORIGINAL · SINCRONIZADO"
+          : "RECUERDO ORIGINAL · PENDIENTE";
+        copyStatus.textContent = copyReady
+          ? "RECUERDO COPIA · SINCRONIZADO"
+          : "RECUERDO COPIA · PENDIENTE";
+        originalStatus.classList.toggle("ready", originalReady);
+        copyStatus.classList.toggle("ready", copyReady);
         boardWrap.setAttribute(
           "aria-label",
           `Circuitos del original y de la copia. Progreso: ${completedStages} de ${TOTAL_STAGES} fases completadas. Fase actual: ${STAGES[stageIndex].name}.`
         );
         undoButton.disabled = !history.length || animating || transitioning || !playing;
+        finishButton.disabled = !playing || animating || transitioning;
       }
 
       function snapshot() {
@@ -1352,6 +1492,10 @@
             playNode();
             updateHud();
             setMessage(`«${name}» se ha conservado en las dos mentes.`, "", 1100);
+            if (targetIndex >= stage.targets.length) {
+              completeStage();
+              return;
+            }
           } else if (leftReady || rightReady) {
             setMessage(leftReady ? "El original recuerda; la copia todavía no." : "La copia recuerda; el original todavía no.", "warning", 900);
           }
@@ -1424,6 +1568,39 @@
         document.getElementById("final-sync").textContent = `${Math.max(0, Math.round(sync))}%`;
         playWin();
         openScreen(victoryScreen);
+      }
+
+      function finishGame() {
+        if (!playing || animating || transitioning) return;
+        playing = false;
+        transitioning = false;
+        saveBest();
+        updateHud();
+        document.getElementById("finish-stage").textContent = STAGES[stageIndex].name;
+        document.getElementById("finish-progress").textContent = completedStages === 1
+          ? "1 de 7 fases completada. La copia conserva ya su primer patrón."
+          : `${completedStages} de 7 fases completadas. Puedes continuar la transferencia en una nueva partida.`;
+        const visibleBackground = backgroundLayers[activeBackgroundLayer];
+        const visibleSource = visibleBackground?.currentSrc || visibleBackground?.src || "";
+        finishImage.classList.remove("loaded");
+        finishVisual.classList.remove("has-image");
+        const revealFinishImage = () => {
+          finishImage.classList.add("loaded");
+          finishVisual.classList.add("has-image");
+        };
+        finishImage.onload = revealFinishImage;
+        finishImage.onerror = () => {
+          finishImage.classList.remove("loaded");
+          finishVisual.classList.remove("has-image");
+        };
+        if (visibleSource) {
+          finishImage.src = visibleSource;
+          if (finishImage.complete && finishImage.naturalWidth) revealFinishImage();
+        }
+        else finishImage.removeAttribute("src");
+        tone(262, 0, .12, .025, "triangle");
+        tone(392, .1, .18, .022, "triangle");
+        openScreen(finishScreen);
       }
 
       function gridPosition(index, gridX, gridY) {
@@ -1813,13 +1990,14 @@
         const endX = W - 42;
         const step = (endX - startX) / (TOTAL_STAGES - 1);
         const iconY = y + 27;
-        const reachedIndex = Math.max(stageIndex, completedStages - 1);
+        const activeStageIndex = completedStages >= TOTAL_STAGES ? -1 : progressStageNumber() - 1;
+        const reachedIndex = activeStageIndex >= 0 ? activeStageIndex : TOTAL_STAGES - 1;
 
         ctx.save();
         ctx.textAlign = "center";
         ctx.fillStyle = "rgba(245,236,208,.52)";
         ctx.font = "9px Arial";
-        ctx.fillText(`PROGRESO DE LA TRANSFERENCIA · ${completedStages}/${TOTAL_STAGES}`, W / 2, y);
+        ctx.fillText(`PROGRESO DE LA TRANSFERENCIA · ${progressStageNumber()}/${TOTAL_STAGES}`, W / 2, y);
 
         ctx.lineCap = "round";
         ctx.lineWidth = 2;
@@ -1832,7 +2010,7 @@
         if (reachedIndex > 0) {
           const progressGradient = ctx.createLinearGradient(startX, 0, startX + step * reachedIndex, 0);
           progressGradient.addColorStop(0, "rgba(121,217,192,.78)");
-          progressGradient.addColorStop(1, completedStages > stageIndex ? "rgba(121,217,192,.78)" : "rgba(234,210,125,.82)");
+          progressGradient.addColorStop(1, activeStageIndex < 0 ? "rgba(121,217,192,.78)" : "rgba(234,210,125,.82)");
           ctx.strokeStyle = progressGradient;
           ctx.beginPath();
           ctx.moveTo(startX, iconY);
@@ -1843,7 +2021,7 @@
         for (let i = 0; i < TOTAL_STAGES; i++) {
           const state = i < completedStages
             ? "completed"
-            : i === stageIndex
+            : i === activeStageIndex
               ? "active"
               : "pending";
           const x = startX + i * step;
@@ -1956,10 +2134,12 @@
       document.getElementById("start-button").addEventListener("click", startNewGame);
       document.getElementById("retry-button").addEventListener("click", startNewGame);
       document.getElementById("victory-retry-button").addEventListener("click", startNewGame);
+      document.getElementById("finish-retry-button").addEventListener("click", startNewGame);
       document.getElementById("close-btn").addEventListener("click", closeGame);
       soundButton.addEventListener("click", toggleSound);
       undoButton.addEventListener("click", undo);
       restartStageButton.addEventListener("click", restartStage);
+      finishButton.addEventListener("click", finishGame);
 
       bestHud.textContent = String(best);
       updateSoundUI();
