@@ -202,17 +202,17 @@
       gap: var(--gap);
       padding: var(--gap);
       overflow: hidden;
-      background: rgba(3, 10, 7, .58);
+      background: rgba(10, 27, 20, .78);
       border: 1px solid rgba(200, 168, 75, .45);
       border-radius: 10px;
-      box-shadow: inset 0 0 35px rgba(0,0,0,.45), 0 10px 28px rgba(0,0,0,.2);
+      box-shadow: inset 0 0 30px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.2);
       touch-action: none;
     }
 
     .cell {
       aspect-ratio: 1;
-      background: rgba(74, 124, 111, .1);
-      border: 1px solid rgba(121, 217, 192, .08);
+      background: rgba(74, 124, 111, .16);
+      border: 1px solid rgba(121, 217, 192, .13);
       border-radius: clamp(7px, 2vw, 11px);
     }
 
@@ -239,8 +239,8 @@
       overflow: hidden;
       color: var(--cream);
       background:
-        radial-gradient(circle at 30% 23%, color-mix(in srgb, var(--tile) 28%, transparent), transparent 45%),
-        linear-gradient(145deg, color-mix(in srgb, var(--tile) 13%, #183027), #0a1611 72%);
+        radial-gradient(circle at 30% 23%, color-mix(in srgb, var(--tile) 31%, transparent), transparent 45%),
+        linear-gradient(145deg, color-mix(in srgb, var(--tile) 15%, #1d3a2d), #0e2018 72%);
       border: 1px solid color-mix(in srgb, var(--tile) 47%, transparent);
       border-radius: clamp(7px, 2vw, 11px);
       box-shadow:
@@ -463,6 +463,14 @@
       border-color: color-mix(in srgb, var(--milestone-color) 28%, transparent);
     }
 
+    .milestone.transition-origin { opacity: 0; }
+
+    .milestone.receiving {
+      color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.025);
+      border-color: rgba(255,255,255,.055);
+    }
+
     #controls-bar {
       width: min(424px, 100%);
       display: flex;
@@ -493,28 +501,20 @@
     .game-button:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-light); }
     .game-button:disabled { opacity: .35; cursor: default; }
 
-    #toast {
-      position: absolute;
-      z-index: 35;
-      left: 50%;
-      bottom: 140px;
-      width: max-content;
-      max-width: calc(100% - 30px);
-      padding: 8px 13px;
-      color: var(--cream);
-      background: rgba(8, 24, 17, .96);
-      border: 1px solid rgba(200,168,75,.58);
-      border-radius: 6px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.4);
-      font: 12px Georgia, serif;
-      text-align: center;
-      opacity: 0;
-      transform: translate(-50%, 10px);
-      pointer-events: none;
-      transition: .25s ease;
+    #new-button {
+      padding-inline: 13px;
+      color: #10251c;
+      background: var(--gold);
+      border-color: var(--gold-light);
+      box-shadow: 0 0 16px rgba(200,168,75,.24);
+      font-weight: 700;
     }
 
-    #toast.visible { opacity: 1; transform: translate(-50%, 0); }
+    #new-button:hover:not(:disabled) {
+      color: #07100c;
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
 
     #level-up-overlay {
       position: absolute;
@@ -525,8 +525,8 @@
       visibility: hidden;
       opacity: 0;
       pointer-events: none;
-      background: radial-gradient(circle at center, rgba(12, 38, 27, .78), rgba(5, 17, 13, .54) 34%, transparent 58%);
-      transition: opacity .16s ease, visibility .16s;
+      background: radial-gradient(circle at center, rgba(12, 38, 27, .58), rgba(5, 17, 13, .3) 36%, transparent 64%);
+      transition: opacity .12s ease, visibility .12s;
     }
 
     #level-up-overlay.open {
@@ -535,35 +535,44 @@
     }
 
     #level-up-stage {
-      display: grid;
-      place-items: center;
+      position: relative;
       min-width: 230px;
-      padding: 20px 26px;
+      min-height: 160px;
       text-align: center;
       opacity: 0;
-      color: var(--level-color, var(--cyan));
       background: radial-gradient(circle, rgba(8, 30, 21, .94), rgba(5, 17, 12, .68) 58%, transparent 74%);
+    }
+
+    .level-up-state {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      place-items: center;
+      padding: 20px 26px;
+      color: var(--level-color, var(--cyan));
+      opacity: 0;
       filter: drop-shadow(0 0 34px color-mix(in srgb, var(--level-color) 38%, transparent));
     }
 
-    #level-up-kicker {
+    .level-up-kicker {
       margin-bottom: 6px;
       color: var(--gold);
       font: 700 9px/1 Arial, sans-serif;
       letter-spacing: 3px;
     }
 
-    #level-up-glyph {
+    .level-up-glyph {
       font: 80px/.82 Georgia, serif;
       text-shadow: 0 0 22px color-mix(in srgb, var(--level-color) 45%, transparent);
     }
 
-    #level-up-glyph .dna-icon {
+    .level-up-glyph .dna-icon {
       width: .68em;
       height: .68em;
     }
 
-    #level-up-name {
+    .level-up-name {
       margin-top: 9px;
       color: var(--cream);
       font: 400 25px/1.05 Georgia, serif;
@@ -604,7 +613,7 @@
     .result-image-wrap {
       position: relative;
       width: 100%;
-      height: clamp(94px, 19dvh, 128px);
+      height: clamp(145px, 28dvh, 190px);
       margin: 10px 0 13px;
       overflow: hidden;
       background: radial-gradient(circle, rgba(121,217,192,.13), transparent 62%), #07100c;
@@ -797,6 +806,28 @@
 
     .primary-button:hover { filter: brightness(1.08); }
 
+    .start-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    #resume-button {
+      min-width: 145px;
+      padding: 10px 17px;
+      color: var(--cream);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      cursor: pointer;
+      font: 700 10px/1 Arial, sans-serif;
+      letter-spacing: 1.2px;
+    }
+
+    #resume-button:hover { color: var(--gold-light); border-color: var(--gold); }
+    [hidden] { display: none !important; }
+
     .silent-note {
       margin: 10px 0 0;
       color: #818b84;
@@ -885,11 +916,11 @@
       #milestones { grid-template-columns: repeat(12, 1fr); gap: 2px; }
       .milestone { height: 18px; font-size: 10px; }
       .game-button { padding: 5px 7px; font-size: 9px; }
+      #new-button { padding-inline: 11px; }
       #move-hint { font-size: 8px; }
-      #toast { bottom: 100px; }
       #level-up-overlay { top: 44px; }
-      #level-up-glyph { font-size: 66px; }
-      #level-up-name { font-size: 21px; }
+      .level-up-glyph { font-size: 66px; }
+      .level-up-name { font-size: 21px; }
       .result-card { padding: 13px 14px; }
       .result-image-wrap { margin-block: 7px 9px; }
       .result-link { padding: 8px 9px; font-size: 9px; }
@@ -912,7 +943,7 @@
       .example-piece { min-height: 40px; font-size: 8px; }
       .control-grid { margin-bottom: 10px; }
       .silent-note { display: none; }
-      .result-image-wrap { height: 76px; }
+      .result-image-wrap { height: 110px; }
       .result-prompt { margin-top: 8px; }
       .result-links { gap: 5px; }
     }
@@ -986,13 +1017,18 @@
       </div>
     </div>
 
-    <div id="toast" role="status" aria-live="polite"></div>
-
     <div id="level-up-overlay" aria-hidden="true">
       <div id="level-up-stage">
-        <span id="level-up-kicker">EVOLUCIÓN</span>
-        <span id="level-up-glyph">∞</span>
-        <strong id="level-up-name">Replicador</strong>
+        <div class="level-up-state" id="level-up-from">
+          <span class="level-up-kicker">EVOLUCIÓN</span>
+          <span class="level-up-glyph" id="level-up-from-glyph">∞</span>
+          <strong class="level-up-name" id="level-up-from-name">Replicador</strong>
+        </div>
+        <div class="level-up-state" id="level-up-to">
+          <span class="level-up-kicker">EVOLUCIÓN</span>
+          <span class="level-up-glyph" id="level-up-to-glyph">≈</span>
+          <strong class="level-up-name" id="level-up-to-name">ARN</strong>
+        </div>
       </div>
     </div>
 
@@ -1018,7 +1054,10 @@
           <div class="control-item"><strong>FINAL</strong>Descubrir EIDOS</div>
         </div>
 
-        <button class="primary-button" id="start-button" type="button">INICIAR</button>
+        <div class="start-actions">
+          <button class="primary-button" id="start-button" type="button">INICIAR</button>
+          <button id="resume-button" type="button" hidden>CONTINUAR PARTIDA</button>
+        </div>
         <p class="silent-note">Juego sin sonido, pensado para acompañar la escucha.</p>
         <nav class="game-links" aria-label="Enlaces relacionados">
           <a href="https://www.eidoslibro.com" target="_blank" rel="noopener noreferrer">Conoce EIDOS</a>
@@ -1030,7 +1069,7 @@
 
     <section class="screen" id="game-over" aria-hidden="true">
       <div class="card result-card">
-        <p class="card-kicker">TU PLANETA HA COLAPSADO</p>
+        <p class="card-kicker" id="game-over-kicker">TU PLANETA HA COLAPSADO</p>
         <div class="result-image-wrap">
           <span class="result-image-fallback">E I D O S</span>
           <img class="result-image" id="game-over-image" alt="Imagen del universo EIDOS">
@@ -1131,7 +1170,9 @@
       const bestEvolution = document.getElementById("best-evolution");
       const startScreen = document.getElementById("start-screen");
       const startButton = document.getElementById("start-button");
+      const resumeButton = document.getElementById("resume-button");
       const gameOverScreen = document.getElementById("game-over");
+      const gameOverKicker = document.getElementById("game-over-kicker");
       const gameOverStage = document.getElementById("game-over-stage");
       const gameOverImage = document.getElementById("game-over-image");
       const evolutionScreen = document.getElementById("evolution-screen");
@@ -1139,9 +1180,12 @@
       const victoryImage = document.getElementById("victory-image");
       const levelUpOverlay = document.getElementById("level-up-overlay");
       const levelUpStage = document.getElementById("level-up-stage");
-      const levelUpGlyph = document.getElementById("level-up-glyph");
-      const levelUpName = document.getElementById("level-up-name");
-      const toast = document.getElementById("toast");
+      const levelUpFrom = document.getElementById("level-up-from");
+      const levelUpFromGlyph = document.getElementById("level-up-from-glyph");
+      const levelUpFromName = document.getElementById("level-up-from-name");
+      const levelUpTo = document.getElementById("level-up-to");
+      const levelUpToGlyph = document.getElementById("level-up-to-glyph");
+      const levelUpToName = document.getElementById("level-up-to-name");
 
       let grid = emptyGrid();
       let score = 0;
@@ -1152,7 +1196,6 @@
       let uid = 0;
       let newIds = new Set();
       let mergedIds = new Set();
-      let toastTimer = 0;
       let started = false;
       let animating = false;
       let activeBackgroundLayer = 0;
@@ -1241,7 +1284,11 @@
           const gridMaximum = Math.max(2, ...grid.flat().filter(Boolean).map(tile => tile.value));
           runMaxValue = Math.max(gridMaximum, Number(saved.runMaxValue) || 2);
           maxEverValue = Math.max(maxEverValue, runMaxValue);
-          return grid.flat().some(Boolean);
+          if (!grid.flat().some(Boolean) || !movesAvailable()) {
+            clearSavedGame();
+            return false;
+          }
+          return true;
         } catch (_) {
           return false;
         }
@@ -1256,14 +1303,36 @@
         } catch (_) {}
       }
 
+      function clearSavedGame() {
+        try { localStorage.removeItem(SAVE_KEY); }
+        catch (_) {}
+      }
+
       function addRandomTile() {
         const spaces = [];
         grid.forEach((row, r) => row.forEach((tile, c) => { if (!tile) spaces.push([r, c]); }));
         if (!spaces.length) return;
         const [row, col] = spaces[Math.floor(Math.random() * spaces.length)];
-        const tile = createTile(2, row, col);
+        const tile = createTile(randomSpawnValue(), row, col);
         grid[row][col] = tile;
         newIds.add(tile.id);
+      }
+
+      function randomSpawnValue() {
+        const currentStage = stageByValue.get(runMaxValue) || stages[0];
+        const currentIndex = Math.max(0, stages.indexOf(currentStage));
+        const maximumSpawnIndex = Math.max(0, currentIndex - 2);
+        const candidates = stages.slice(0, maximumSpawnIndex + 1);
+        const weights = candidates.map((_, index) => Math.pow(.34, index));
+        const totalWeight = weights.reduce((total, weight) => total + weight, 0);
+        let roll = Math.random() * totalWeight;
+
+        for (let index = 0; index < candidates.length; index++) {
+          roll -= weights[index];
+          if (roll <= 0) return candidates[index].value;
+        }
+
+        return candidates[candidates.length - 1].value;
       }
 
       function startNewGame() {
@@ -1501,51 +1570,115 @@
 
         if (reducedMotion) {
           changeBackground();
-          showToast(`Nuevo hito · ${discovery.to.name}`);
           pulseCurrentHito();
           pulseMilestone(discovery.to.value);
           onComplete();
           return;
         }
 
+        resetLevelUpAnimation();
         levelUpOverlay.classList.add("open");
         levelUpOverlay.setAttribute("aria-hidden", "false");
-        setLevelUpStage(discovery.from);
+        setLevelUpState(levelUpFrom, levelUpFromGlyph, levelUpFromName, discovery.from);
+        setLevelUpState(levelUpTo, levelUpToGlyph, levelUpToName, discovery.to);
 
-        await animateNode(levelUpStage, [
-          { opacity: 0, transform: "scale(.72)" },
-          { opacity: 1, transform: "scale(1.12)", offset: .62 },
-          { opacity: 0, transform: "scale(1.38)" }
-        ], { duration: 550, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" });
+        const centeredRect = levelUpStage.getBoundingClientRect();
+        const originMilestone = milestonesElement.querySelector(`[data-stage-value="${discovery.from.value}"]`);
+        const destinationMilestone = milestonesElement.querySelector(`[data-stage-value="${discovery.to.value}"]`);
+        prepareMilestoneArrival(destinationMilestone);
+        originMilestone?.classList.add("transition-origin");
+        const origin = transitionOffset(originMilestone || discoveryName, centeredRect);
+
+        await Promise.all([
+          animateNode(levelUpStage, [
+            { opacity: .12, transform: `translate(${origin.x}px, ${origin.y}px) scale(.14)` },
+            { opacity: .3, transform: `translate(${origin.x}px, ${origin.y}px) scale(.2)`, offset: .14 },
+            { opacity: 1, transform: "translate(0, 0) scale(1)", offset: .78 },
+            { opacity: 1, transform: "translate(0, 0) scale(1)" }
+          ], { duration: 1100, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" }),
+          animateNode(levelUpFrom, [
+            { opacity: 1 },
+            { opacity: 1 }
+          ], { duration: 1100, easing: "linear", fill: "forwards" })
+        ]);
 
         changeBackground();
-        setLevelUpStage(discovery.to);
 
-        const sourceRect = levelUpStage.getBoundingClientRect();
-        const targetRect = discoveryName.getBoundingClientRect();
-        const exitX = targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2);
-        const exitY = targetRect.top + targetRect.height / 2 - (sourceRect.top + sourceRect.height / 2);
+        await Promise.all([
+          animateNode(levelUpFrom, [
+            { opacity: 1, transform: "scale(1)" },
+            { opacity: 1, transform: "scale(1)", offset: .28 },
+            { opacity: 0, transform: "scale(1.06)" }
+          ], { duration: 700, easing: "ease-in-out", fill: "forwards" }),
+          animateNode(levelUpTo, [
+            { opacity: 0, transform: "scale(.92)" },
+            { opacity: .2, transform: "scale(.94)", offset: .16 },
+            { opacity: 1, transform: "scale(1)", offset: .66 },
+            { opacity: 1, transform: "scale(1)" }
+          ], { duration: 700, easing: "ease-in-out", fill: "forwards" })
+        ]);
 
-        await animateNode(levelUpStage, [
-          { opacity: 0, transform: "scale(1.42)" },
-          { opacity: 1, transform: "scale(1.08)", offset: .2 },
-          { opacity: 1, transform: "scale(1)", offset: .61 },
-          { opacity: 1, transform: "translate(0, 0) scale(1)", offset: .69 },
-          { opacity: 0, transform: `translate(${exitX}px, ${exitY}px) scale(.2)` }
-        ], { duration: 2000, easing: "cubic-bezier(.2,.78,.2,1)", fill: "forwards" });
+        originMilestone?.classList.remove("transition-origin");
+        const destination = transitionOffset(destinationMilestone || discoveryName, levelUpStage.getBoundingClientRect());
 
+        await Promise.all([
+          animateNode(levelUpStage, [
+            { opacity: 1, transform: "translate(0, 0) scale(1)" },
+            { opacity: 0, transform: `translate(${destination.x}px, ${destination.y}px) scale(.18)` }
+          ], { duration: 950, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" }),
+          animateNode(levelUpTo, [
+            { opacity: 1 },
+            { opacity: 1, offset: .82 },
+            { opacity: 0 }
+          ], { duration: 950, easing: "ease-in", fill: "forwards" })
+        ]);
+
+        revealMilestone(destinationMilestone, discovery.to);
         levelUpOverlay.classList.remove("open");
         levelUpOverlay.setAttribute("aria-hidden", "true");
-        showToast(`Nuevo hito · ${discovery.to.name}`);
+        resetLevelUpAnimation();
         pulseCurrentHito();
         pulseMilestone(discovery.to.value);
         onComplete();
       }
 
-      function setLevelUpStage(stage) {
-        levelUpStage.style.setProperty("--level-color", stage.color);
-        setStageGlyph(levelUpGlyph, stage);
-        levelUpName.textContent = stage.name;
+      function transitionOffset(target, sourceRect) {
+        if (!target) return { x: 0, y: 0 };
+        const targetRect = target.getBoundingClientRect();
+        return {
+          x: targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2),
+          y: targetRect.top + targetRect.height / 2 - (sourceRect.top + sourceRect.height / 2)
+        };
+      }
+
+      function resetLevelUpAnimation() {
+        [levelUpStage, levelUpFrom, levelUpTo].forEach(element => {
+          element.getAnimations?.().forEach(animation => animation.cancel());
+          element.style.opacity = "";
+          element.style.transform = "";
+        });
+      }
+
+      function setLevelUpState(element, glyph, name, stage) {
+        element.style.setProperty("--level-color", stage.color);
+        setStageGlyph(glyph, stage);
+        name.textContent = stage.name;
+      }
+
+      function prepareMilestoneArrival(milestone) {
+        if (!milestone) return;
+        milestone.classList.remove("found", "just-found");
+        milestone.classList.add("receiving");
+        milestone.textContent = "·";
+        milestone.title = "Hito en evolución";
+      }
+
+      function revealMilestone(milestone, stage) {
+        if (!milestone) return;
+        milestone.classList.remove("receiving");
+        milestone.classList.add("found");
+        milestone.innerHTML = stageGlyphMarkup(stage);
+        milestone.title = stage.name;
       }
 
       function stageGlyphMarkup(stage) {
@@ -1572,15 +1705,22 @@
         card.classList.add("just-updated");
       }
 
-      function showGameOver() {
+      function showGameOver(reason = "collapse") {
+        const voluntary = reason === "voluntary";
+        gameOverKicker.textContent = voluntary ? "TU EVOLUCIÓN SE DETIENE AQUÍ" : "TU PLANETA HA COLAPSADO";
         gameOverStage.textContent = stageByValue.get(runMaxValue)?.name || highestStage().name;
+        document.getElementById("game-over-copy").textContent = voluntary
+          ? "Has cerrado esta partida. Puedes comenzar otra o descubrir la idea que hay detrás de esta evolución."
+          : "El tablero se ha llenado y ya no quedan combinaciones posibles.";
         setResultImage(gameOverImage);
         gameOverPending = false;
+        clearSavedGame();
         openScreen(gameOverScreen);
       }
 
       function showVictory() {
         gameOverPending = false;
+        clearSavedGame();
         setResultImage(victoryImage);
         openScreen(victoryScreen);
       }
@@ -1614,13 +1754,6 @@
         else pendingDiscovery.to = stage;
         runMaxValue = value;
         maxEverValue = Math.max(maxEverValue, value);
-      }
-
-      function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add("visible");
-        window.clearTimeout(toastTimer);
-        toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2100);
       }
 
       function openScreen(element) {
@@ -1703,7 +1836,7 @@
 
         if (!started && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
-          begin();
+          startFreshGame();
           return;
         }
 
@@ -1731,6 +1864,12 @@
         board.focus?.();
       }
 
+      function startFreshGame() {
+        resumeButton.hidden = true;
+        startNewGame();
+        begin();
+      }
+
       let pointerStart = null;
 
       board.addEventListener("pointerdown", event => {
@@ -1751,15 +1890,16 @@
       board.addEventListener("pointercancel", () => { pointerStart = null; });
       document.addEventListener("keydown", handleKey);
 
-      startButton.addEventListener("click", begin);
+      startButton.addEventListener("click", startFreshGame);
+      resumeButton.addEventListener("click", begin);
       undoButton.addEventListener("click", () => { if (history) restoreState(history); });
-      newButton.addEventListener("click", startNewGame);
+      newButton.addEventListener("click", () => showGameOver("voluntary"));
       document.getElementById("retry-button").addEventListener("click", startNewGame);
       document.getElementById("continue-button").addEventListener("click", continueAfterOrganic);
       document.getElementById("victory-restart-button").addEventListener("click", startNewGame);
 
       if (loadGame()) {
-        startButton.textContent = "CONTINUAR";
+        resumeButton.hidden = false;
         render();
         changeBackground();
       } else {
