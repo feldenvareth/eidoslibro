@@ -630,6 +630,14 @@
 
     .screen.open { display: grid; animation: fade .25s ease; }
 
+    .screen.mobile-fit .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(var(--card-fit-scale, 1));
+      transform-origin: center;
+    }
+
     #game-over,
     #victory-screen {
       padding-block: 12px;
@@ -960,10 +968,28 @@
       #new-button { padding-inline: 11px; }
       #move-hint { font-size: 8px; }
       #level-up-overlay { top: 44px; }
-      .level-up-glyph { font-size: 66px; }
-      .level-up-name { font-size: 21px; }
+      #level-up-stage { min-width: 190px; min-height: 128px; }
+      .level-up-state { padding: 14px 18px; }
+      .level-up-glyph { font-size: 50px; }
+      .level-up-name { margin-top: 6px; font-size: 18px; }
+      .level-up-kicker { margin-bottom: 4px; font-size: 7px; }
+      .screen { padding: 9px; }
+      #start-screen .card { padding: 15px 16px 13px; }
+      #start-screen .card-subtitle { margin: 4px 0 9px; }
+      #start-screen .intro { margin-bottom: 9px; font-size: 11.5px; line-height: 1.35; }
+      #start-screen #merge-example { margin-bottom: 9px; }
+      #start-screen .example-piece { min-height: 43px; font-size: 8px; }
+      #start-screen .control-grid { gap: 5px; margin-bottom: 11px; font-size: 9.5px; }
+      #start-screen .control-item { padding: 6px 5px; }
+      #start-screen .start-actions { gap: 6px; }
+      #start-screen .silent-note { margin-top: 7px; }
+      #start-screen .game-links { margin-top: 7px; }
       .result-card { padding: 13px 14px; }
-      .result-image-wrap { margin-block: 7px 9px; }
+      .result-image-wrap { height: clamp(135px, 24dvh, 175px); margin-block: 6px 8px; }
+      #game-over-copy, #evolution-copy, #victory-copy { margin: 8px auto 12px; line-height: 1.4; }
+      .result-actions { margin-top: 8px; }
+      .result-prompt { margin: 8px 0 5px; }
+      .result-links { gap: 5px; margin-top: 5px; }
       .result-link { padding: 8px 9px; font-size: 9px; }
     }
 
@@ -1203,6 +1229,7 @@
 
       const stageByValue = new Map(stages.map(stage => [stage.value, stage]));
       const DNA_ICON = `<svg class="dna-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="helix-line" d="M7 2c0 7 18 7 18 14S7 23 7 30"/><path class="helix-line" d="M25 2c0 7-18 7-18 14s18 7 18 14"/><path class="helix-rung" d="M9 5h14M11 10h10M7 16h18M11 22h10M9 27h14"/></svg>`;
+      const gameShell = document.getElementById("game-shell");
       const tilesElement = document.getElementById("tiles");
       const scoreElement = document.getElementById("score");
       const bestElement = document.getElementById("best");
@@ -1240,6 +1267,7 @@
       let score = 0;
       let best = readNumber(BEST_KEY);
       let history = null;
+      let pendingReplay = null;
       let runMaxValue = 2;
       let maxEverValue = loadMaxStage();
       let uid = 0;
@@ -1431,14 +1459,19 @@
         catch (_) {}
       }
 
-      function addRandomTile() {
+      function addRandomTile(forcedSpawn = null) {
         const spaces = [];
         grid.forEach((row, r) => row.forEach((tile, c) => { if (!tile) spaces.push([r, c]); }));
-        if (!spaces.length) return;
-        const [row, col] = spaces[Math.floor(Math.random() * spaces.length)];
-        const tile = createTile(randomSpawnValue(), row, col);
+        if (!spaces.length) return null;
+        const forcedIsAvailable = forcedSpawn && spaces.some(([r, c]) => r === forcedSpawn.row && c === forcedSpawn.col);
+        const [row, col] = forcedIsAvailable
+          ? [forcedSpawn.row, forcedSpawn.col]
+          : spaces[Math.floor(Math.random() * spaces.length)];
+        const value = forcedIsAvailable ? forcedSpawn.value : randomSpawnValue();
+        const tile = createTile(value, row, col);
         grid[row][col] = tile;
         newIds.add(tile.id);
+        return { row, col, value };
       }
 
       function randomSpawnValue() {
@@ -1466,6 +1499,7 @@
         score = 0;
         runMaxValue = 2;
         history = null;
+        pendingReplay = null;
         newIds.clear();
         mergedIds.clear();
         addRandomTile();
@@ -1483,7 +1517,9 @@
       function cloneState() {
         return {
           values: grid.map(row => row.map(tile => tile ? tile.value : 0)),
-          score
+          score,
+          runMaxValue,
+          replay: null
         };
       }
 
@@ -1493,6 +1529,8 @@
         gameOverPending = false;
         grid = state.values.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
         score = state.score;
+        runMaxValue = Number(state.runMaxValue) || Math.max(2, ...state.values.flat());
+        pendingReplay = state.replay || null;
         history = null;
         closeScreen(gameOverScreen);
         render();
@@ -1592,11 +1630,14 @@
           return;
         }
 
+        const replaySpawn = pendingReplay?.direction === direction ? pendingReplay.spawn : null;
+        pendingReplay = null;
         history = previous;
         best = Math.max(best, score);
         playMoveSound(mergeCount);
         animateMovement(movementPaths, () => {
-          addRandomTile();
+          const spawn = addRandomTile(replaySpawn);
+          history.replay = { direction, spawn };
           render();
           saveGame();
           gameOverPending = !movesAvailable();
@@ -1688,6 +1729,24 @@
         return new Promise(resolve => window.setTimeout(resolve, options.duration || 0));
       }
 
+      function waitForPaint(frames = 1) {
+        return new Promise(resolve => {
+          const nextFrame = () => {
+            frames -= 1;
+            if (frames <= 0) resolve();
+            else window.requestAnimationFrame(nextFrame);
+          };
+          window.requestAnimationFrame(nextFrame);
+        });
+      }
+
+      function compactMode() {
+        const coarsePointer = window.matchMedia?.("(pointer: coarse)").matches;
+        const touchOnly = navigator.maxTouchPoints > 0 &&
+          window.matchMedia?.("(hover: none)").matches;
+        return coarsePointer || touchOnly || gameShell.getBoundingClientRect().height < 590;
+      }
+
       async function playLevelUp(discovery, onComplete) {
         const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
         animating = true;
@@ -1715,6 +1774,18 @@
         prepareMilestoneArrival(destinationMilestone);
         originMilestone?.classList.add("transition-origin");
         const origin = transitionOffset(originMilestone || discoveryName, centeredRect);
+
+        if (compactMode()) {
+          await playCompactLevelUp(discovery, origin, originMilestone, destinationMilestone);
+          revealMilestone(destinationMilestone, discovery.to);
+          levelUpOverlay.classList.remove("open");
+          levelUpOverlay.setAttribute("aria-hidden", "true");
+          resetLevelUpAnimation();
+          pulseCurrentHito();
+          pulseMilestone(discovery.to.value);
+          onComplete();
+          return;
+        }
 
         await Promise.all([
           animateNode(levelUpStage, [
@@ -1767,6 +1838,53 @@
         pulseCurrentHito();
         pulseMilestone(discovery.to.value);
         onComplete();
+      }
+
+      async function playCompactLevelUp(discovery, origin, originMilestone, destinationMilestone) {
+        await Promise.all([
+          animateNode(levelUpStage, [
+            { opacity: .16, transform: `translate(${origin.x}px, ${origin.y}px) scale(.16)` },
+            { opacity: 1, transform: "translate(0, 0) scale(1)" }
+          ], { duration: 760, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" }),
+          animateNode(levelUpFrom, [
+            { opacity: 1 },
+            { opacity: 1 }
+          ], { duration: 760, easing: "linear", fill: "forwards" })
+        ]);
+
+        await animateNode(levelUpFrom, [
+          { opacity: 1, transform: "scale(1)" },
+          { opacity: .06, transform: "scale(.96)" }
+        ], { duration: 180, easing: "ease-in", fill: "forwards" });
+
+        levelUpFrom.getAnimations?.().forEach(animation => animation.cancel());
+        setLevelUpState(levelUpFrom, levelUpFromGlyph, levelUpFromName, discovery.to);
+        changeBackground();
+
+        levelUpFrom.style.opacity = ".06";
+        levelUpFrom.style.transform = "scale(.96)";
+        void levelUpFrom.offsetWidth;
+        await waitForPaint(2);
+
+        await animateNode(levelUpFrom, [
+          { opacity: .06, transform: "scale(.96)" },
+          { opacity: 1, transform: "scale(1)" }
+        ], { duration: 220, easing: "ease-out", fill: "forwards" });
+
+        originMilestone?.classList.remove("transition-origin");
+        const destination = transitionOffset(destinationMilestone || discoveryName, levelUpStage.getBoundingClientRect());
+
+        await Promise.all([
+          animateNode(levelUpStage, [
+            { opacity: 1, transform: "translate(0, 0) scale(1)" },
+            { opacity: 0, transform: `translate(${destination.x}px, ${destination.y}px) scale(.18)` }
+          ], { duration: 720, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" }),
+          animateNode(levelUpFrom, [
+            { opacity: 1 },
+            { opacity: 1, offset: .78 },
+            { opacity: 0 }
+          ], { duration: 720, easing: "ease-in", fill: "forwards" })
+        ]);
       }
 
       function transitionOffset(target, sourceRect) {
@@ -1886,11 +2004,31 @@
       function openScreen(element) {
         element.classList.add("open");
         element.setAttribute("aria-hidden", "false");
+        window.setTimeout(() => fitScreenCard(element), 0);
       }
 
       function closeScreen(element) {
         element.classList.remove("open");
         element.setAttribute("aria-hidden", "true");
+      }
+
+      function fitScreenCard(screen) {
+        const card = screen.querySelector?.(".card");
+        if (!card) return;
+
+        screen.classList.remove("mobile-fit");
+        card.style.setProperty("--card-fit-scale", "1");
+        if (!compactMode()) return;
+
+        screen.classList.add("mobile-fit");
+        const screenRect = screen.getBoundingClientRect();
+        const cardRect = card.getBoundingClientRect();
+        const scale = Math.max(.72, Math.min(
+          1,
+          (screenRect.width - 18) / cardRect.width,
+          (screenRect.height - 34) / cardRect.height
+        ));
+        card.style.setProperty("--card-fit-scale", scale.toFixed(3));
       }
 
       function isScreenOpen(element) {
@@ -2017,6 +2155,11 @@
 
       board.addEventListener("pointercancel", () => { pointerStart = null; });
       document.addEventListener("keydown", handleKey);
+      window.addEventListener?.("resize", () => {
+        [startScreen, gameOverScreen, evolutionScreen, victoryScreen]
+          .filter(isScreenOpen)
+          .forEach(fitScreenCard);
+      });
 
       soundButton.addEventListener("click", toggleSound);
       startButton.addEventListener("click", startFreshGame);
@@ -2034,6 +2177,7 @@
       } else {
         startNewGame();
       }
+      window.setTimeout(() => fitScreenCard(startScreen), 0);
     })();
   </script>
 </body>

@@ -1729,9 +1729,22 @@
         return new Promise(resolve => window.setTimeout(resolve, options.duration || 0));
       }
 
+      function waitForPaint(frames = 1) {
+        return new Promise(resolve => {
+          const nextFrame = () => {
+            frames -= 1;
+            if (frames <= 0) resolve();
+            else window.requestAnimationFrame(nextFrame);
+          };
+          window.requestAnimationFrame(nextFrame);
+        });
+      }
+
       function compactMode() {
         const coarsePointer = window.matchMedia?.("(pointer: coarse)").matches;
-        return coarsePointer || gameShell.getBoundingClientRect().height < 590;
+        const touchOnly = navigator.maxTouchPoints > 0 &&
+          window.matchMedia?.("(hover: none)").matches;
+        return coarsePointer || touchOnly || gameShell.getBoundingClientRect().height < 590;
       }
 
       async function playLevelUp(discovery, onComplete) {
@@ -1847,6 +1860,11 @@
         levelUpFrom.getAnimations?.().forEach(animation => animation.cancel());
         setLevelUpState(levelUpFrom, levelUpFromGlyph, levelUpFromName, discovery.to);
         changeBackground();
+
+        levelUpFrom.style.opacity = ".06";
+        levelUpFrom.style.transform = "scale(.96)";
+        void levelUpFrom.offsetWidth;
+        await waitForPaint(2);
 
         await animateNode(levelUpFrom, [
           { opacity: .06, transform: "scale(.96)" },
