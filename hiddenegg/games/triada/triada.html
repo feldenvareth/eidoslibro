@@ -35,22 +35,99 @@
     body {
       display: grid;
       place-items: center;
+      padding: 0;
     }
 
     #game-shell {
       position: relative;
-      width: min(100vw, calc(100dvh * 5 / 7));
-      height: min(100dvh, calc(100vw * 7 / 5));
-      max-width: 500px;
-      max-height: 700px;
+      width: min(620px, 100vw);
+      height: min(900px, 100vh);
+      height: min(900px, 100dvh);
+      display: grid;
+      grid-template-rows: 46px minmax(0, 1fr);
       overflow: hidden;
-      background: #08110d;
-      border: 1px solid rgba(209, 173, 79, 0.42);
-      border-radius: 10px;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(47, 105, 84, 0.12), transparent 45%),
+        #06100c;
+      border: 2px solid rgba(79, 159, 126, 0.72);
+      border-radius: 8px;
       box-shadow: 0 18px 55px rgba(0, 0, 0, 0.55);
     }
 
+    #game-topbar {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      min-width: 0;
+      padding: 0 12px 0 16px;
+      background: rgba(5, 15, 11, 0.94);
+      border-bottom: 1px solid rgba(121, 217, 192, 0.2);
+    }
+
+    .game-topbar-title {
+      min-width: 0;
+      color: var(--gold);
+      font: 700 10px/1 Arial, sans-serif;
+      letter-spacing: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .game-topbar-actions {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    #close-game {
+      flex: 0 0 auto;
+      min-height: 31px;
+      padding: 0 12px;
+      color: #bac8c0;
+      background: rgba(10, 29, 22, 0.76);
+      border: 1px solid rgba(121, 217, 192, 0.5);
+      border-radius: 5px;
+      font: 12px/1 Georgia, serif;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    #close-game:hover,
+    #close-game:focus-visible {
+      color: var(--cream);
+      border-color: var(--cyan);
+      outline: none;
+    }
+
+    #game-content {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      padding: 7px;
+      overflow: hidden;
+    }
+
+    #playfield {
+      position: relative;
+      width: min(500px, 100%, calc(71.4286vh - 42.857px));
+      width: min(500px, 100%, calc(71.4286dvh - 42.857px));
+      aspect-ratio: 5 / 7;
+      overflow: hidden;
+      background: #08110d;
+      border: 1px solid rgba(209, 173, 79, 0.42);
+      border-radius: 8px;
+      box-shadow: 0 14px 42px rgba(0, 0, 0, 0.48);
+    }
+
     canvas {
+      position: absolute;
+      inset: 0;
       display: block;
       width: 100%;
       height: 100%;
@@ -59,20 +136,18 @@
     }
 
     #shield-button {
-      position: absolute;
-      right: max(14px, env(safe-area-inset-right));
-      bottom: max(14px, env(safe-area-inset-bottom));
-      width: 64px;
-      height: 64px;
+      position: relative;
+      width: auto;
+      height: 31px;
       display: none;
       place-items: center;
-      padding: 0;
+      padding: 0 11px;
       color: var(--cream);
       background: rgba(12, 31, 24, 0.84);
-      border: 2px solid var(--gold);
-      border-radius: 50%;
+      border: 1px solid var(--gold);
+      border-radius: 5px;
       box-shadow: 0 5px 18px rgba(0, 0, 0, 0.45);
-      font: 700 10px/1.1 Arial, sans-serif;
+      font: 700 9px/1 Arial, sans-serif;
       letter-spacing: 1px;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -81,9 +156,9 @@
     #shield-button::before {
       content: "";
       position: absolute;
-      inset: 7px;
-      border: 1px solid rgba(121, 217, 192, 0.75);
-      border-radius: 50%;
+      inset: 3px;
+      border: 1px solid rgba(121, 217, 192, 0.38);
+      border-radius: 3px;
     }
 
     #shield-button.ready {
@@ -294,12 +369,41 @@
     }
 
     @media (pointer: coarse) and (max-width: 700px) {
-      #game-shell { border-radius: 0; }
+      #game-shell {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        border-radius: 0;
+      }
+
+      #game-content { padding: 5px; }
+      #playfield { border-radius: 5px; }
+      #shield-button {
+        width: auto;
+        height: 29px;
+        padding-inline: 9px;
+        font-size: 9px;
+      }
+
+      #start-card,
+      #unlock-screen { padding: 12px; }
+
+      .card-inner,
+      .unlock-card {
+        max-height: calc(100% - 8px);
+        overflow: auto;
+        overscroll-behavior: contain;
+      }
     }
 
-    @media (max-height: 580px) {
+    @media (max-width: 430px), (max-height: 720px) {
+      #game-shell { grid-template-rows: 42px minmax(0, 1fr); }
+      #game-topbar { padding-inline: 10px 8px; }
+      .game-topbar-title { font-size: 9px; letter-spacing: 2px; }
+      #close-game { min-height: 29px; padding-inline: 10px; }
       .card-inner { padding: 16px; }
       h1 { font-size: 32px; }
+      .subtitle { margin-bottom: 12px; font-size: 10px; }
       .intro { margin-bottom: 10px; }
       .controls { margin-bottom: 12px; }
       .silent-note { display: none; }
@@ -308,49 +412,69 @@
       #unlock-quote { min-height: 42px; margin: 9px 4px; font-size: 14px; }
       .unlock-hint { display: none; }
     }
+
+    @media (max-width: 350px), (max-height: 590px) {
+      #start-card { padding: 7px; }
+      .card-inner { width: 96%; padding: 12px; }
+      .eyebrow { margin-bottom: 4px; }
+      h1 { font-size: 28px; }
+      .subtitle { margin-bottom: 7px; }
+      .intro { font-size: 11px; line-height: 1.35; }
+      .controls { gap: 5px; font-size: 10px; }
+      .control { padding: 6px; }
+      #start-button { padding: 11px 22px; }
+    }
   </style>
 </head>
 <body>
   <main id="game-shell" aria-label="Minijuego EIDOS Tríada">
-    <canvas id="game" width="500" height="700"></canvas>
-
-    <button id="shield-button" type="button" aria-label="Activar escudo">
-      ESCUDO
-    </button>
-
-    <section id="unlock-screen" aria-hidden="true">
-      <div class="unlock-card">
-        <p class="unlock-kicker">CONTENIDO DESBLOQUEADO</p>
-        <p id="unlock-phase">FASE SUPERADA</p>
-        <div class="unlock-image-wrap">
-          <span id="unlock-image-fallback">E I D O S</span>
-          <img id="unlock-image" alt="Imagen desbloqueada de EIDOS">
-        </div>
-        <blockquote id="unlock-quote"></blockquote>
-        <button id="unlock-continue" type="button">CONTINUAR</button>
-        <p class="unlock-hint">También puedes pulsar Intro o Espacio</p>
+    <header id="game-topbar">
+      <span class="game-topbar-title">EIDOS · TRÍADA</span>
+      <div class="game-topbar-actions">
+        <button id="shield-button" type="button" aria-label="Activar escudo">ESCUDO</button>
+        <button id="close-game" type="button" aria-label="Cerrar el juego">× Cerrar</button>
       </div>
-    </section>
+    </header>
 
-    <section id="start-card">
-      <div class="card-inner">
-        <p class="eyebrow">E I D O S</p>
-        <h1>TRÍADA</h1>
-        <p class="subtitle">ENSAMBLA · RESISTE · ATRAVIESA</p>
-        <p class="intro">
-          Rompe las formaciones, sobrevive a las criaturas y acopla los tres
-          módulos antes de enfrentarte a la nave nodriza.
-        </p>
-        <div class="controls">
-          <div class="control"><strong>MOVER</strong>← → · A D · ratón · arrastrar</div>
-          <div class="control"><strong>ESCUDO</strong>Clic · doble toque</div>
-          <div class="control"><strong>DISPARO</strong>Automático</div>
-          <div class="control"><strong>PAUSA</strong>P</div>
-        </div>
-        <button id="start-button" type="button">INICIAR</button>
-        <p class="silent-note">Juego sin sonido, pensado para acompañar la escucha.</p>
+    <div id="game-content">
+      <div id="playfield">
+        <canvas id="game" width="500" height="700"></canvas>
+
+        <section id="unlock-screen" aria-hidden="true">
+          <div class="unlock-card">
+            <p class="unlock-kicker">CONTENIDO DESBLOQUEADO</p>
+            <p id="unlock-phase">FASE SUPERADA</p>
+            <div class="unlock-image-wrap">
+              <span id="unlock-image-fallback">E I D O S</span>
+              <img id="unlock-image" alt="Imagen desbloqueada de EIDOS">
+            </div>
+            <blockquote id="unlock-quote"></blockquote>
+            <button id="unlock-continue" type="button">CONTINUAR</button>
+            <p class="unlock-hint">También puedes pulsar Intro o Espacio</p>
+          </div>
+        </section>
+
+        <section id="start-card">
+          <div class="card-inner">
+            <p class="eyebrow">E I D O S</p>
+            <h1>TRÍADA</h1>
+            <p class="subtitle">ENSAMBLA · RESISTE · ATRAVIESA</p>
+            <p class="intro">
+              Rompe las formaciones, sobrevive a las criaturas y acopla los tres
+              módulos antes de enfrentarte a la nave nodriza.
+            </p>
+            <div class="controls">
+              <div class="control"><strong>MOVER</strong>Flechas · arrastra el dedo</div>
+              <div class="control"><strong>ESCUDO</strong>Botón · doble toque</div>
+              <div class="control"><strong>DISPARO</strong>Automático</div>
+              <div class="control"><strong>PAUSA</strong>P</div>
+            </div>
+            <button id="start-button" type="button">INICIAR</button>
+            <p class="silent-note">Juego sin sonido, pensado para acompañar la escucha.</p>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <script src="/hiddenegg/games/eidos-content.js"></script>
@@ -360,6 +484,7 @@
 
       const canvas = document.getElementById("game");
       const ctx = canvas.getContext("2d");
+      const closeGameButton = document.getElementById("close-game");
       const startCard = document.getElementById("start-card");
       const startButton = document.getElementById("start-button");
       const shieldButton = document.getElementById("shield-button");
@@ -1934,38 +2059,101 @@
         ctx.translate(boss.x, boss.y);
         if (boss.hit > 0) ctx.globalAlpha = 0.65;
 
-        ctx.fillStyle = "#182b24";
-        ctx.strokeStyle = "#65917f";
-        ctx.lineWidth = 2;
+        const hullGlow = ctx.createRadialGradient(0, 4, 12, 0, 4, 145);
+        hullGlow.addColorStop(0, "rgba(121,217,192,0.16)");
+        hullGlow.addColorStop(0.58, "rgba(47,105,84,0.08)");
+        hullGlow.addColorStop(1, "rgba(47,105,84,0)");
+        ctx.fillStyle = hullGlow;
         ctx.beginPath();
-        ctx.moveTo(-126, 20);
-        ctx.lineTo(-93, -35);
-        ctx.lineTo(-41, -54);
-        ctx.lineTo(41, -54);
-        ctx.lineTo(93, -35);
-        ctx.lineTo(126, 20);
-        ctx.lineTo(94, 48);
-        ctx.lineTo(-94, 48);
+        ctx.ellipse(0, 5, 158, 98, 0, 0, TAU);
+        ctx.fill();
+
+        // Silueta de portanaves: alas barridas, espina central y proa corta.
+        // No utiliza círculos gemelos ni apéndices que puedan leerse como una cara.
+        const hull = ctx.createLinearGradient(0, -64, 0, 62);
+        hull.addColorStop(0, "#315b4d");
+        hull.addColorStop(0.48, "#203f35");
+        hull.addColorStop(1, "#10261f");
+        ctx.fillStyle = hull;
+        ctx.strokeStyle = boss.shell > 0 ? "#78ae98" : COLORS.red;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = boss.shell > 0 ? "rgba(121,217,192,0.34)" : "rgba(239,115,109,0.36)";
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.moveTo(0, -64);
+        ctx.lineTo(32, -48);
+        ctx.lineTo(72, -43);
+        ctx.lineTo(104, -24);
+        ctx.lineTo(143, 4);
+        ctx.lineTo(119, 35);
+        ctx.lineTo(72, 29);
+        ctx.lineTo(46, 48);
+        ctx.lineTo(17, 43);
+        ctx.lineTo(0, 62);
+        ctx.lineTo(-17, 43);
+        ctx.lineTo(-46, 48);
+        ctx.lineTo(-72, 29);
+        ctx.lineTo(-119, 35);
+        ctx.lineTo(-143, 4);
+        ctx.lineTo(-104, -24);
+        ctx.lineTo(-72, -43);
+        ctx.lineTo(-32, -48);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
+        ctx.shadowBlur = 0;
 
-        ctx.fillStyle = "#294b3e";
-        for (const x of [-82, -52, 52, 82]) {
+        // Paneles en abanico que refuerzan la escala de la nave.
+        ctx.strokeStyle = "rgba(245,236,208,0.23)";
+        ctx.lineWidth = 1;
+        for (const side of [-1, 1]) {
           ctx.beginPath();
-          ctx.arc(x, 13, 13, 0, TAU);
-          ctx.fill();
-          ctx.fillStyle = COLORS.gold;
+          ctx.moveTo(side * 12, -43);
+          ctx.lineTo(side * 56, -28);
+          ctx.lineTo(side * 106, 9);
+          ctx.lineTo(side * 69, 19);
+          ctx.lineTo(side * 37, 38);
+          ctx.stroke();
+
           ctx.beginPath();
-          ctx.arc(x, 13, 3, 0, TAU);
+          ctx.moveTo(side * 61, -34);
+          ctx.lineTo(side * 84, -12);
+          ctx.lineTo(side * 124, 8);
+          ctx.stroke();
+
+          // Nacelas longitudinales, deliberadamente rectangulares.
+          ctx.fillStyle = "rgba(5,20,15,0.9)";
+          ctx.strokeStyle = "rgba(209,173,79,0.65)";
+          ctx.beginPath();
+          ctx.roundRect(side * 88 - 19, 3, 38, 11, 4);
           ctx.fill();
-          ctx.fillStyle = "#294b3e";
+          ctx.stroke();
+          ctx.fillStyle = "rgba(121,217,192,0.68)";
+          for (let i = -12; i <= 12; i += 8) {
+            ctx.fillRect(side * 88 + i - 2, 6, 4, 5);
+          }
         }
 
+        // Espina y puente central.
+        ctx.fillStyle = "rgba(7,24,19,0.96)";
+        ctx.strokeStyle = "rgba(143,203,182,0.78)";
+        ctx.beginPath();
+        ctx.roundRect(-7, -48, 14, 66, 5);
+        ctx.fill();
+        ctx.stroke();
+
+        // Cámara blindada: su forma hexagonal concentra la lectura en el núcleo.
         ctx.fillStyle = boss.shell > 0 ? "#3b6554" : "#1b211f";
         ctx.strokeStyle = boss.shell > 0 ? COLORS.gold : COLORS.red;
+        ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.roundRect(-42, -30, 84, 64, 14);
+        ctx.moveTo(0, -31);
+        ctx.lineTo(31, -16);
+        ctx.lineTo(36, 16);
+        ctx.lineTo(0, 35);
+        ctx.lineTo(-36, 16);
+        ctx.lineTo(-31, -16);
+        ctx.closePath();
         ctx.fill();
         ctx.stroke();
 
@@ -1983,11 +2171,20 @@
           ctx.ellipse(0, 0, 9, 14, 0, 0, TAU);
           ctx.fill();
         } else {
-          ctx.fillStyle = "rgba(245,236,208,0.28)";
-          ctx.fillRect(-30, -8, 60, 16);
-          ctx.fillStyle = COLORS.cream;
+          ctx.strokeStyle = "rgba(245,236,208,0.35)";
+          ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.arc(0, 0, 4, 0, TAU);
+          ctx.moveTo(-24, -10);
+          ctx.lineTo(0, 15);
+          ctx.lineTo(24, -10);
+          ctx.stroke();
+          ctx.fillStyle = COLORS.gold;
+          ctx.beginPath();
+          ctx.moveTo(0, -8);
+          ctx.lineTo(8, 1);
+          ctx.lineTo(0, 10);
+          ctx.lineTo(-8, 1);
+          ctx.closePath();
           ctx.fill();
         }
 
@@ -2578,6 +2775,10 @@
 
       window.addEventListener("keydown", event => {
         if (["ArrowLeft", "ArrowRight", "Space"].includes(event.code)) event.preventDefault();
+        if (event.code === "Escape") {
+          window.parent.postMessage("cerrar-eidos", "*");
+          return;
+        }
         if ((event.code === "Enter" || event.code === "Space") && state === "unlock") {
           continuePhaseUnlock();
           return;
@@ -2606,6 +2807,9 @@
 
       startButton.addEventListener("click", startGame);
       unlockContinue.addEventListener("click", continuePhaseUnlock);
+      closeGameButton.addEventListener("click", () => {
+        window.parent.postMessage("cerrar-eidos", "*");
+      });
 
       setupBackground();
       draw(0);
