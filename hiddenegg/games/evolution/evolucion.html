@@ -2083,8 +2083,10 @@
         if (compactMode()) {
           await playCompactLevelUp(discovery, origin, originMilestone, destinationMilestone);
           revealMilestone(destinationMilestone, discovery.to);
+          concealLevelUpLayers();
           levelUpOverlay.classList.remove("open");
           levelUpOverlay.setAttribute("aria-hidden", "true");
+          await waitForPaint(2);
           resetLevelUpAnimation();
           pulseCurrentHito();
           pulseMilestone(discovery.to.value);
@@ -2136,8 +2138,10 @@
         ]);
 
         revealMilestone(destinationMilestone, discovery.to);
+        concealLevelUpLayers();
         levelUpOverlay.classList.remove("open");
         levelUpOverlay.setAttribute("aria-hidden", "true");
+        await waitForPaint(2);
         resetLevelUpAnimation();
         pulseCurrentHito();
         pulseMilestone(discovery.to.value);
@@ -2145,6 +2149,9 @@
       }
 
       async function playCompactLevelUp(discovery, origin, originMilestone, destinationMilestone) {
+        levelUpTo.style.opacity = "0";
+        levelUpTo.style.transform = "scale(.96)";
+
         await Promise.all([
           animateNode(levelUpStage, [
             { opacity: .16, transform: `translate(${origin.x}px, ${origin.y}px) scale(.16)` },
@@ -2161,16 +2168,11 @@
           { opacity: 0, transform: "scale(.96)" }
         ], { duration: 190, easing: "ease-in", fill: "forwards" });
 
-        levelUpFrom.getAnimations?.().forEach(animation => animation.cancel());
-        setLevelUpState(levelUpFrom, levelUpFromGlyph, levelUpFromName, discovery.to);
-        changeBackground();
-
         levelUpFrom.style.opacity = "0";
-        levelUpFrom.style.transform = "scale(.96)";
-        void levelUpFrom.offsetWidth;
+        changeBackground();
         await waitForPaint(2);
 
-        await animateNode(levelUpFrom, [
+        await animateNode(levelUpTo, [
           { opacity: 0, transform: "scale(.96)" },
           { opacity: 1, transform: "scale(1)" }
         ], { duration: 240, easing: "ease-out", fill: "forwards" });
@@ -2183,7 +2185,7 @@
             { opacity: 1, transform: "translate(0, 0) scale(1)" },
             { opacity: 0, transform: `translate(${destination.x}px, ${destination.y}px) scale(.18)` }
           ], { duration: 720, easing: "cubic-bezier(.2,.75,.2,1)", fill: "forwards" }),
-          animateNode(levelUpFrom, [
+          animateNode(levelUpTo, [
             { opacity: 1 },
             { opacity: 1, offset: .78 },
             { opacity: 0 }
@@ -2198,6 +2200,13 @@
           x: targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2),
           y: targetRect.top + targetRect.height / 2 - (sourceRect.top + sourceRect.height / 2)
         };
+      }
+
+      function concealLevelUpLayers() {
+        [levelUpStage, levelUpFrom, levelUpTo].forEach(element => {
+          element.getAnimations?.().forEach(animation => animation.cancel());
+          element.style.opacity = "0";
+        });
       }
 
       function resetLevelUpAnimation() {
