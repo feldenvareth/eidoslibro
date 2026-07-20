@@ -1677,7 +1677,7 @@
 
         const currentStage = stageByValue.get(runMaxValue) || stages[0];
         const currentIndex = Math.max(0, stages.indexOf(currentStage));
-        const maximumSpawnIndex = Math.max(0, currentIndex - 2);
+        const maximumSpawnIndex = Math.max(0, currentIndex - 3);
         const retiredValues = new Set(retiredStageValues());
         const candidates = stages
           .slice(0, maximumSpawnIndex + 1)
