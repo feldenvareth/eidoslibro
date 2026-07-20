@@ -279,6 +279,11 @@
       touch-action: none;
     }
 
+    #board:focus-visible {
+      outline: 2px solid rgba(245, 215, 110, .8);
+      outline-offset: 3px;
+    }
+
     .cell {
       aspect-ratio: 1;
       background: rgba(74, 124, 111, .16);
@@ -372,6 +377,26 @@
       width: 78px;
       height: 78px;
       color: rgba(245,236,208,.18);
+    }
+
+    #victory-image {
+      position: relative;
+      z-index: 1;
+    }
+
+    #victory-screen .result-image-wrap::after { z-index: 2; }
+
+    #victory-fallback {
+      z-index: 3;
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+
+    #victory-fallback svg {
+      width: 96px;
+      height: 96px;
+      color: var(--cream);
+      filter: drop-shadow(0 0 13px rgba(121,217,192,.62));
     }
 
     .eye-icon,
@@ -1248,7 +1273,7 @@
       </div>
 
       <div id="board-wrap">
-        <div id="board" role="application" aria-label="Evolution game board">
+        <div id="board" role="application" tabindex="0" aria-label="Evolution game board">
           <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
           <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
           <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
@@ -1405,7 +1430,8 @@
       const SIZE = 4;
       const SAVE_KEY = "eidos-evolution-v3";
       const BEST_KEY = "eidos-evolucion-best-v2";
-      const MAX_STAGE_KEY = "eidos-evolucion-max-stage-v1";
+      const MAX_STAGE_KEY = "eidos-evolucion-max-stage-v2";
+      const LEGACY_MAX_STAGE_KEY = "eidos-evolucion-max-stage-v1";
       const BEST_CUSTODIANS_KEY = "eidos-evolucion-best-custodians-v1";
       const LEGACY_DISCOVERY_KEY = "eidos-evolucion-discoveries-v2";
       const soundNote = document.getElementById("sound-note");
@@ -1495,7 +1521,7 @@
       let grid = emptyGrid();
       let score = 0;
       let best = readNumber(BEST_KEY);
-      let bestCustodianCount = readNumber(BEST_CUSTODIANS_KEY);
+      let bestCustodianCount = Math.min(SIZE * SIZE, readNumber(BEST_CUSTODIANS_KEY));
       let history = null;
       let pendingReplay = null;
       let runMaxValue = 2;
@@ -1671,32 +1697,65 @@
         return { id: ++uid, value, row, col };
       }
 
+      function normalizedRecordedStage(value, hasCustodianRecord = false) {
+        const numericValue = Number(value) || 2;
+        let validValue = 2;
+        stages.forEach(stage => {
+          if (stage.value <= numericValue) validValue = stage.value;
+        });
+        // In the previous version, 4096 represented EIDOS, not a Custodian.
+        if (validValue === TERMINAL_STAGE_VALUE && !hasCustodianRecord) return 2048;
+        return validValue;
+      }
+
       function loadMaxStage() {
-        let legacyMaximum = 2;
+        let legacyDiscoveryMaximum = 2;
         try {
           const legacy = JSON.parse(localStorage.getItem(LEGACY_DISCOVERY_KEY));
-          if (Array.isArray(legacy) && legacy.length) legacyMaximum = Math.max(...legacy);
+          if (Array.isArray(legacy) && legacy.length) legacyDiscoveryMaximum = Math.max(...legacy);
         } catch (_) {}
-        return Math.max(2, readNumber(MAX_STAGE_KEY), legacyMaximum);
+
+        const currentMaximum = readNumber(MAX_STAGE_KEY);
+        const legacyMaximum = Math.max(readNumber(LEGACY_MAX_STAGE_KEY), legacyDiscoveryMaximum);
+        const hasCustodianRecord = readNumber(BEST_CUSTODIANS_KEY) > 0;
+        const migratedLegacyMaximum = normalizedRecordedStage(legacyMaximum, hasCustodianRecord);
+        const custodianRecordMaximum = hasCustodianRecord ? TERMINAL_STAGE_VALUE : 2;
+        const maximum = Math.max(2, currentMaximum, migratedLegacyMaximum, custodianRecordMaximum);
+
+        try { localStorage.setItem(MAX_STAGE_KEY, String(maximum)); }
+        catch (_) {}
+        return maximum;
       }
 
       function loadGame() {
         try {
           const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
-          if (!saved || !Array.isArray(saved.grid) || saved.grid.length !== SIZE) return false;
-          grid = saved.grid.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
-          score = Number(saved.score) || 0;
-          custodianCount = Number(saved.custodianCount) || 0;
-          bestCustodianCount = Math.max(bestCustodianCount, custodianCount);
-          try { localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount)); }
-          catch (_) {}
+          const validValues = new Set([0, ...stages.map(stage => stage.value)]);
+          const validGrid = saved && Array.isArray(saved.grid) && saved.grid.length === SIZE &&
+            saved.grid.every(row => Array.isArray(row) && row.length === SIZE &&
+              row.every(value => validValues.has(Number(value))));
+          if (!validGrid) return false;
+
+          grid = saved.grid.map((row, r) => row.map((value, c) => {
+            const numericValue = Number(value);
+            return numericValue ? createTile(numericValue, r, c) : null;
+          }));
+          if (!grid.flat().some(Boolean)) return false;
+
+          score = Math.max(0, Number(saved.score) || 0);
+          best = Math.max(best, score);
+          custodianCount = grid.flat().filter(tile => tile?.value === TERMINAL_STAGE_VALUE).length;
+          bestCustodianCount = Math.min(SIZE * SIZE, Math.max(bestCustodianCount, custodianCount));
           const gridMaximum = Math.max(2, ...grid.flat().filter(Boolean).map(tile => tile.value));
-          runMaxValue = Math.max(gridMaximum, Number(saved.runMaxValue) || 2);
+          runMaxValue = Math.max(gridMaximum, normalizedRecordedStage(saved.runMaxValue, custodianCount > 0));
           maxEverValue = Math.max(maxEverValue, runMaxValue);
-          if (!grid.flat().some(Boolean) || !movesAvailable()) {
-            clearSavedGame();
-            return false;
-          }
+          gameOverPending = !movesAvailable();
+
+          try {
+            localStorage.setItem(BEST_KEY, String(best));
+            localStorage.setItem(MAX_STAGE_KEY, String(maxEverValue));
+            localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount));
+          } catch (_) {}
           return true;
         } catch (_) {
           return false;
@@ -1819,7 +1878,9 @@
         gameOverPending = false;
         grid = state.values.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
         score = state.score;
-        custodianCount = Number(state.custodianCount) || 0;
+        custodianCount = state.values.flat().filter(value => Number(value) === TERMINAL_STAGE_VALUE).length;
+        newIds.clear();
+        mergedIds.clear();
         runMaxValue = Number(state.runMaxValue) || Math.max(2, ...state.values.flat());
         pendingReplay = state.replay || null;
         history = null;
@@ -1963,8 +2024,11 @@
               return;
             }
 
+            if (gameOverPending) {
+              scheduleLockedScreen(showGameOver, 190);
+              return;
+            }
             unlockBoard();
-            if (gameOverPending) window.setTimeout(showGameOver, 190);
           };
 
           if (discovery) playLevelUp(discovery, finishMove);
@@ -2081,14 +2145,13 @@
 
         if (compactMode()) {
           await playCompactLevelUp(discovery, origin, originMilestone, destinationMilestone);
-          revealMilestone(destinationMilestone, discovery.to);
           concealLevelUpLayers();
           levelUpOverlay.classList.remove("open");
           levelUpOverlay.setAttribute("aria-hidden", "true");
           await waitForPaint(2);
           resetLevelUpAnimation();
+          revealMilestone(destinationMilestone, discovery.to);
           pulseCurrentHito();
-          pulseMilestone(discovery.to.value);
           onComplete();
           return;
         }
@@ -2267,8 +2330,21 @@
         card.classList.add("just-updated");
       }
 
-            function showGameOver(reason = "collapse") {
+      function scheduleLockedScreen(callback, delay = 120) {
+        animating = true;
+        undoButton.disabled = true;
+        newButton.disabled = true;
+        window.setTimeout(() => {
+          callback();
+          animating = false;
+          undoButton.disabled = !history;
+          newButton.disabled = false;
+        }, delay);
+      }
+
+      function showGameOver(reason = "collapse") {
         const voluntary = reason === "voluntary";
+        animating = false;
         gameOverKicker.textContent = voluntary ? "YOUR EVOLUTION STOPS HERE" : "YOUR PLANET HAS COLLAPSED";
         gameOverStage.textContent = stageByValue.get(runMaxValue)?.name || highestStage().name;
         if (voluntary) {
@@ -2287,7 +2363,6 @@
       }
 
       function showVictory() {
-        gameOverPending = false;
         const current = pendingCustodianAnnouncements.shift();
         if (!current) return;
         setResultImage(victoryImage);
@@ -2304,19 +2379,23 @@
       function continueAfterOrganic() {
         closeScreen(evolutionScreen);
         if (pendingCustodianAnnouncements.length) {
-          window.setTimeout(showVictory, 60);
+          scheduleLockedScreen(showVictory);
           return;
         }
-        if (gameOverPending) window.setTimeout(showGameOver, 120);
+        if (gameOverPending) {
+          scheduleLockedScreen(showGameOver);
+        }
       }
 
       function continueAfterCustodian() {
         closeScreen(victoryScreen);
         if (pendingCustodianAnnouncements.length) {
-          window.setTimeout(showVictory, 60);
+          scheduleLockedScreen(showVictory);
           return;
         }
-        if (gameOverPending) window.setTimeout(showGameOver, 120);
+        if (gameOverPending) {
+          scheduleLockedScreen(showGameOver);
+        }
       }
 
       function inside(row, col) {
@@ -2452,15 +2531,32 @@
           return;
         }
 
+        const activationKey = event.key === "Enter" || event.key === " ";
+        const focusedControl = event.target instanceof Element && event.target.closest("button, a");
+        if (activationKey && focusedControl) return;
+
         if (!started && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
-          startFreshGame();
+          if (resumeButton.hidden) startFreshGame();
+          else begin();
           return;
         }
 
         if (isScreenOpen(evolutionScreen) && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           continueAfterOrganic();
+          return;
+        }
+
+        if (isScreenOpen(victoryScreen) && activationKey) {
+          event.preventDefault();
+          continueAfterCustodian();
+          return;
+        }
+
+        if (isScreenOpen(gameOverScreen) && activationKey) {
+          event.preventDefault();
+          startNewGame();
           return;
         }
 
@@ -2481,6 +2577,10 @@
         closeScreen(startScreen);
         playStartSound();
         board.focus?.();
+        if (gameOverPending || !movesAvailable()) {
+          gameOverPending = true;
+          scheduleLockedScreen(showGameOver);
+        }
       }
 
       function startFreshGame() {
