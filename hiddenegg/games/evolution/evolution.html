@@ -541,10 +541,13 @@
     }
 
     #best-evolution {
+      max-width: 68%;
       margin: 0 0 4px;
+      overflow: hidden;
       color: #7f948a;
       font-size: 7px;
       line-height: 1;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
@@ -1403,6 +1406,7 @@
       const SAVE_KEY = "eidos-evolution-v3";
       const BEST_KEY = "eidos-evolucion-best-v2";
       const MAX_STAGE_KEY = "eidos-evolucion-max-stage-v1";
+      const BEST_CUSTODIANS_KEY = "eidos-evolucion-best-custodians-v1";
       const LEGACY_DISCOVERY_KEY = "eidos-evolucion-discoveries-v2";
       const soundNote = document.getElementById("sound-note");
       const soundButton = document.getElementById("sound-button");
@@ -1491,6 +1495,7 @@
       let grid = emptyGrid();
       let score = 0;
       let best = readNumber(BEST_KEY);
+      let bestCustodianCount = readNumber(BEST_CUSTODIANS_KEY);
       let history = null;
       let pendingReplay = null;
       let runMaxValue = 2;
@@ -1524,6 +1529,9 @@
 
       function announceCustodianBirth() {
         custodianCount += 1;
+        bestCustodianCount = Math.max(bestCustodianCount, custodianCount);
+        try { localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount)); }
+        catch (_) {}
         const name = custodianNameFor(custodianCount);
         pendingCustodianAnnouncements.push({ count: custodianCount, name, icon: custodianGlyphMarkup(name) });
       }
@@ -1679,6 +1687,9 @@
           grid = saved.grid.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
           score = Number(saved.score) || 0;
           custodianCount = Number(saved.custodianCount) || 0;
+          bestCustodianCount = Math.max(bestCustodianCount, custodianCount);
+          try { localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount)); }
+          catch (_) {}
           const gridMaximum = Math.max(2, ...grid.flat().filter(Boolean).map(tile => tile.value));
           runMaxValue = Math.max(gridMaximum, Number(saved.runMaxValue) || 2);
           maxEverValue = Math.max(maxEverValue, runMaxValue);
@@ -1698,6 +1709,7 @@
           localStorage.setItem(SAVE_KEY, JSON.stringify({ grid: values, score, runMaxValue, custodianCount }));
           localStorage.setItem(BEST_KEY, String(best));
           localStorage.setItem(MAX_STAGE_KEY, String(maxEverValue));
+          localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount));
         } catch (_) {}
       }
 
@@ -1803,6 +1815,7 @@
       function restoreState(state) {
         animating = false;
         pendingDiscovery = null;
+        pendingCustodianAnnouncements = [];
         gameOverPending = false;
         grid = state.values.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
         score = state.score;
@@ -1925,20 +1938,32 @@
           const discovery = pendingDiscovery;
           pendingDiscovery = null;
 
-          const finishMove = () => {
+          const unlockBoard = () => {
             animating = false;
             newButton.disabled = false;
+          };
 
+          const openAfterTransition = callback => {
+            animating = true;
+            newButton.disabled = true;
+            window.setTimeout(() => {
+              callback();
+              unlockBoard();
+            }, 170);
+          };
+
+          const finishMove = () => {
             if (discovery?.to.value === 2048) {
-              openScreen(evolutionScreen);
+              openAfterTransition(() => openScreen(evolutionScreen));
               return;
             }
 
             if (pendingCustodianAnnouncements.length) {
-              showVictory();
+              openAfterTransition(showVictory);
               return;
             }
 
+            unlockBoard();
             if (gameOverPending) window.setTimeout(showGameOver, 190);
           };
 
@@ -2079,21 +2104,20 @@
           ], { duration: 1100, easing: "linear", fill: "forwards" })
         ]);
 
-        changeBackground();
+        await animateNode(levelUpFrom, [
+          { opacity: 1, transform: "scale(1)" },
+          { opacity: 0, transform: "scale(1.035)" }
+        ], { duration: 260, easing: "ease-in", fill: "forwards" });
 
-        await Promise.all([
-          animateNode(levelUpFrom, [
-            { opacity: 1, transform: "scale(1)" },
-            { opacity: 1, transform: "scale(1)", offset: .28 },
-            { opacity: 0, transform: "scale(1.06)" }
-          ], { duration: 700, easing: "ease-in-out", fill: "forwards" }),
-          animateNode(levelUpTo, [
-            { opacity: 0, transform: "scale(.92)" },
-            { opacity: .2, transform: "scale(.94)", offset: .16 },
-            { opacity: 1, transform: "scale(1)", offset: .66 },
-            { opacity: 1, transform: "scale(1)" }
-          ], { duration: 700, easing: "ease-in-out", fill: "forwards" })
-        ]);
+        levelUpFrom.style.opacity = "0";
+        levelUpTo.style.opacity = "0";
+        changeBackground();
+        await waitForPaint(2);
+
+        await animateNode(levelUpTo, [
+          { opacity: 0, transform: "scale(.94)" },
+          { opacity: 1, transform: "scale(1)" }
+        ], { duration: 310, easing: "ease-out", fill: "forwards" });
 
         originMilestone?.classList.remove("transition-origin");
         const destination = transitionOffset(destinationMilestone || discoveryName, levelUpStage.getBoundingClientRect());
@@ -2133,22 +2157,22 @@
 
         await animateNode(levelUpFrom, [
           { opacity: 1, transform: "scale(1)" },
-          { opacity: .06, transform: "scale(.96)" }
-        ], { duration: 180, easing: "ease-in", fill: "forwards" });
+          { opacity: 0, transform: "scale(.96)" }
+        ], { duration: 190, easing: "ease-in", fill: "forwards" });
 
         levelUpFrom.getAnimations?.().forEach(animation => animation.cancel());
         setLevelUpState(levelUpFrom, levelUpFromGlyph, levelUpFromName, discovery.to);
         changeBackground();
 
-        levelUpFrom.style.opacity = ".06";
+        levelUpFrom.style.opacity = "0";
         levelUpFrom.style.transform = "scale(.96)";
         void levelUpFrom.offsetWidth;
         await waitForPaint(2);
 
         await animateNode(levelUpFrom, [
-          { opacity: .06, transform: "scale(.96)" },
+          { opacity: 0, transform: "scale(.96)" },
           { opacity: 1, transform: "scale(1)" }
-        ], { duration: 220, easing: "ease-out", fill: "forwards" });
+        ], { duration: 240, easing: "ease-out", fill: "forwards" });
 
         originMilestone?.classList.remove("transition-origin");
         const destination = transitionOffset(destinationMilestone || discoveryName, levelUpStage.getBoundingClientRect());
@@ -2391,7 +2415,14 @@
           : "All milestones reached";
 
         const maximumStage = stageByValue.get(maxEverValue) || stages[stages.length - 1];
-        bestEvolution.textContent = `Best evolution: ${maximumStage.name}`;
+        if (bestCustodianCount > 0) {
+          const recordName = custodianNameFor(bestCustodianCount);
+          bestEvolution.textContent = `Record: ${bestCustodianCount} · ${recordName}`;
+          bestEvolution.title = `Browser record: ${bestCustodianCount} intelligent custodian${bestCustodianCount === 1 ? "" : "s"}. Latest: ${recordName}.`;
+        } else {
+          bestEvolution.textContent = `Best evolution: ${maximumStage.name}`;
+          bestEvolution.title = `Best evolution reached in this browser: ${maximumStage.name}.`;
+        }
 
         milestonesElement.innerHTML = "";
         stages.forEach(stage => {
