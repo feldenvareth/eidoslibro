@@ -24,6 +24,41 @@
   <meta name="twitter:description" content="Une piezas iguales y haz evolucionar la vida de tu planeta.">
   <meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/evolution/eidos-evolucion-compartir.png">
   <title>EIDOS · Evolución</title>
+
+  <!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+  <script>
+    (function () {
+      const GA_MEASUREMENT_ID = 'G-GRKE5N9XFB';
+      let analyticsLoaded = false;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+      window.loadEidosAnalytics = function () {
+        if (analyticsLoaded) return;
+        analyticsLoaded = true;
+
+        const analyticsScript = document.createElement('script');
+        analyticsScript.async = true;
+        analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+        document.head.appendChild(analyticsScript);
+
+        window.gtag('js', new Date());
+        window.gtag('config', GA_MEASUREMENT_ID, {
+          page_title: 'EIDOS · Evolución'
+        });
+      };
+
+      try {
+        if (localStorage.getItem('consentGiven') === 'true') {
+          window.loadEidosAnalytics();
+        }
+      } catch (error) {
+        console.warn('No se pudo leer el consentimiento de Analytics.', error);
+      }
+    })();
+  </script>
+
   <style>
     :root {
       color-scheme: dark;
@@ -1015,12 +1050,139 @@
       .result-links { gap: 5px; }
     }
 
+
+
+    /* Consentimiento de cookies y Analytics */
+    #consent-banner {
+      position: fixed;
+      left: 50%;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      z-index: 10000;
+      width: min(620px, calc(100vw - 24px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 14px;
+      color: #ded7c1;
+      background: rgba(7, 16, 12, .97);
+      border: 1px solid rgba(200, 168, 75, .62);
+      border-radius: 9px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .5);
+      font: 12px/1.35 Arial, sans-serif;
+      touch-action: manipulation;
+    }
+
+    #consent-banner[hidden] { display: none; }
+
+    #consent-banner p {
+      flex: 1 1 320px;
+      margin: 0;
+    }
+
+    #consent-banner a {
+      color: var(--cyan);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .consent-actions {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 7px;
+    }
+
+    .consent-btn {
+      min-width: 76px;
+      padding: 7px 10px;
+      color: var(--ink);
+      background: var(--gold-light);
+      border: 1px solid var(--gold);
+      border-radius: 5px;
+      cursor: pointer;
+      font: 700 11px/1 Arial, sans-serif;
+      touch-action: manipulation;
+    }
+
+    .consent-btn.decline {
+      color: #cbd3ce;
+      background: transparent;
+      border-color: rgba(121, 217, 192, .4);
+    }
+
+    .consent-btn:hover,
+    .consent-btn:focus-visible {
+      filter: brightness(1.1);
+      outline: 2px solid rgba(121, 217, 192, .55);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 560px) {
+      #consent-banner {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 9px;
+        padding: 11px;
+        text-align: center;
+      }
+
+      .consent-actions {
+        justify-content: center;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
+
+  <aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
+    <p>
+      Este juego utiliza cookies de analítica para medir sus visitas.
+      <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a>
+    </p>
+    <div class="consent-actions">
+      <button class="consent-btn" id="consent-accept" type="button">Aceptar</button>
+      <button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button>
+    </div>
+  </aside>
+
+  <script>
+    (function () {
+      const banner = document.getElementById('consent-banner');
+      const acceptButton = document.getElementById('consent-accept');
+      const rejectButton = document.getElementById('consent-reject');
+
+      function saveConsent(value) {
+        try {
+          localStorage.setItem('consentGiven', value ? 'true' : 'false');
+        } catch (error) {
+          console.warn('No se pudo guardar el consentimiento de Analytics.', error);
+        }
+        banner.hidden = true;
+      }
+
+      acceptButton.addEventListener('click', function () {
+        saveConsent(true);
+        if (typeof window.loadEidosAnalytics === 'function') {
+          window.loadEidosAnalytics();
+        }
+      });
+
+      rejectButton.addEventListener('click', function () {
+        saveConsent(false);
+      });
+
+      try {
+        const consent = localStorage.getItem('consentGiven');
+        banner.hidden = consent === 'true' || consent === 'false';
+      } catch (error) {
+        banner.hidden = false;
+      }
+    })();
+  </script>
   <main id="game-shell" aria-label="Minijuego EIDOS Evolución">
     <div id="evolution-background" aria-hidden="true">
       <img id="background-a" alt="">
