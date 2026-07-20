@@ -944,7 +944,7 @@
       const searchParams = new URLSearchParams(window.location.search || "");
       const soundSetting = searchParams.get("sound");
       const embedded = window.parent !== window;
-      let soundEnabled = soundSetting === "1" || (soundSetting !== "0" && !embedded);
+      let soundEnabled = soundSetting !== "0";
       let audioContext = null;
 
       let runSeed = 1;
@@ -1210,44 +1210,105 @@
         return audioContext;
       }
 
-      function tone(frequency, delay = 0, duration = .08, volume = .035, type = "sine") {
+      function tone(frequency, delay = 0, duration = .08, volume = .035, type = "sine", endFrequency = frequency) {
         const context = getAudioContext();
         if (!context) return;
         const start = context.currentTime + delay;
         const oscillator = context.createOscillator();
         const gain = context.createGain();
         oscillator.type = type;
-        oscillator.frequency.setValueAtTime(frequency, start);
+        oscillator.frequency.setValueAtTime(Math.max(1, frequency), start);
+        if (endFrequency !== frequency) {
+          oscillator.frequency.exponentialRampToValueAtTime(Math.max(1, endFrequency), start + duration);
+        }
         gain.gain.setValueAtTime(.0001, start);
         gain.gain.exponentialRampToValueAtTime(volume, start + .012);
         gain.gain.exponentialRampToValueAtTime(.0001, start + duration);
         oscillator.connect(gain);
         gain.connect(context.destination);
         oscillator.start(start);
-        oscillator.stop(start + duration + .03);
+        oscillator.stop(start + duration + .035);
+      }
+
+      function noiseBurst(delay = 0, duration = .08, volume = .014, filterFrequency = 950) {
+        const context = getAudioContext();
+        if (!context) return;
+        const frameCount = Math.max(1, Math.floor(context.sampleRate * duration));
+        const buffer = context.createBuffer(1, frameCount, context.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < frameCount; i++) {
+          const fade = 1 - i / frameCount;
+          data[i] = (Math.random() * 2 - 1) * fade;
+        }
+        const source = context.createBufferSource();
+        const filter = context.createBiquadFilter();
+        const gain = context.createGain();
+        const start = context.currentTime + delay;
+        source.buffer = buffer;
+        filter.type = "bandpass";
+        filter.frequency.setValueAtTime(filterFrequency, start);
+        filter.Q.setValueAtTime(1.2, start);
+        gain.gain.setValueAtTime(volume, start);
+        gain.gain.exponentialRampToValueAtTime(.0001, start + duration);
+        source.connect(filter);
+        filter.connect(gain);
+        gain.connect(context.destination);
+        source.start(start);
+      }
+
+      function playStart() {
+        [196, 294, 392].forEach((frequency, i) => tone(frequency, i * .075, .16, .032, "triangle", frequency * 1.03));
+        noiseBurst(.02, .12, .006, 1350);
       }
 
       function playMove(changedBoth) {
-        tone(changedBoth ? 210 : 160, 0, .045, .018, "triangle");
+        const notes = [196, 220, 247, 220];
+        const frequency = notes[moves % notes.length];
+        tone(frequency, 0, .055, changedBoth ? .031 : .021, "triangle", frequency * 1.04);
+        if (changedBoth) tone(frequency * 2, .012, .04, .011, "sine");
+      }
+
+      function playBlocked() {
+        tone(125, 0, .07, .028, "square", 92);
       }
 
       function playNode() {
-        tone(330, 0, .1, .035, "sine");
-        tone(495, .08, .12, .035, "sine");
-        tone(660, .17, .14, .03, "sine");
+        tone(330, 0, .12, .045, "sine", 350);
+        tone(495, .075, .15, .043, "sine", 520);
+        tone(660, .155, .18, .038, "sine", 700);
+        noiseBurst(.12, .11, .009, 1750);
       }
 
       function playStage() {
-        [262, 330, 392, 523].forEach((frequency, i) => tone(frequency, i * .095, .16, .034, "triangle"));
+        [262, 330, 392, 523].forEach((frequency, i) => tone(frequency, i * .085, .2, .043, "triangle", frequency * 1.025));
+        tone(784, .31, .32, .025, "sine", 820);
       }
 
       function playHazard() {
-        tone(150, 0, .2, .05, "sawtooth");
-        tone(90, .06, .25, .04, "sawtooth");
+        tone(170, 0, .25, .06, "sawtooth", 72);
+        tone(110, .045, .3, .046, "square", 58);
+        noiseBurst(0, .22, .025, 420);
+      }
+
+      function playUndo() {
+        tone(260, 0, .09, .027, "triangle", 185);
+        tone(185, .055, .1, .022, "triangle", 150);
+      }
+
+      function playRestart() {
+        tone(145, 0, .1, .032, "triangle", 210);
+        tone(210, .08, .13, .029, "triangle", 290);
+      }
+
+      function playFinish() {
+        tone(262, 0, .16, .035, "triangle", 300);
+        tone(392, .09, .22, .032, "triangle", 440);
+        tone(523, .2, .26, .025, "sine", 590);
       }
 
       function playWin() {
-        [220, 277, 330, 440, 554, 659].forEach((frequency, i) => tone(frequency, i * .11, .22, .035, i > 3 ? "sine" : "triangle"));
+        [220, 277, 330, 440, 554, 659, 880].forEach((frequency, i) => tone(frequency, i * .095, .25, .042, i > 3 ? "sine" : "triangle", frequency * 1.025));
+        noiseBurst(.48, .22, .012, 1900);
       }
 
       function updateSoundUI() {
@@ -1256,7 +1317,7 @@
         soundButton.setAttribute("aria-label", soundEnabled ? "Desactivar sonido" : "Activar sonido");
         soundButton.title = soundEnabled ? "Desactivar sonido" : "Activar sonido";
         soundNote.textContent = soundEnabled
-          ? "El sonido comienza con el primer movimiento."
+          ? "Sonido activado. Puedes silenciarlo con ♪."
           : "Sonido desactivado. Puedes activarlo con ♪.";
       }
 
@@ -1385,8 +1446,7 @@
         prepareStage(0, false);
         closeScreens();
         getAudioContext();
-        tone(220, 0, .08, .025, "triangle");
-        tone(330, .08, .12, .025, "triangle");
+        playStart();
         boardWrap.focus({ preventScroll: true });
       }
 
@@ -1403,13 +1463,14 @@
         flashUntil = performance.now() + 350;
         flashType = "restart";
         updateHud();
+        playRestart();
         setMessage("Fase reiniciada. El patrón conserva una pequeña pérdida de sincronía.", "warning", 1500);
       }
 
       function undo() {
         if (!history.length || animating || transitioning || !playing) return;
         restoreSnapshot(history.pop());
-        tone(180, 0, .06, .018, "triangle");
+        playUndo();
       }
 
       function currentGoal() {
@@ -1426,7 +1487,7 @@
         if (!playing || animating || transitioning) return;
         const next = transition(posL, posR, direction, stage.wallsL, stage.wallsR);
         if (next.left === posL && next.right === posR) {
-          tone(105, 0, .04, .014, "square");
+          playBlocked();
           setMessage("Los dos circuitos están bloqueados en esa dirección.", "warning", 650);
           return;
         }
@@ -1598,8 +1659,7 @@
           if (finishImage.complete && finishImage.naturalWidth) revealFinishImage();
         }
         else finishImage.removeAttribute("src");
-        tone(262, 0, .12, .025, "triangle");
-        tone(392, .1, .18, .022, "triangle");
+        playFinish();
         openScreen(finishScreen);
       }
 
