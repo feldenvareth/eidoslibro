@@ -1390,6 +1390,20 @@
       ];
 
       const stageByValue = new Map(stages.map(stage => [stage.value, stage]));
+      const RETIRED_STAGE_RULES = [
+        { reachedValue: 64, retiredValue: 2 },
+        { reachedValue: 256, retiredValue: 4 },
+        { reachedValue: 1024, retiredValue: 8 },
+        { reachedValue: 4096, retiredValue: 16 }
+      ];
+      const SPAWN_DISTRIBUTIONS = {
+        1: [100],
+        2: [65, 35],
+        3: [55, 30, 15],
+        4: [49, 29, 17, 5],
+        5: [44, 26, 16, 9, 5],
+        6: [40, 24, 15, 9, 7, 5]
+      };
       const DNA_ICON = `<svg class="dna-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="helix-line" d="M7 2c0 7 18 7 18 14S7 23 7 30"/><path class="helix-line" d="M25 2c0 7-18 7-18 14s18 7 18 14"/><path class="helix-rung" d="M9 5h14M11 10h10M7 16h18M11 22h10M9 27h14"/></svg>`;
       const gameShell = document.getElementById("game-shell");
       const tilesElement = document.getElementById("tiles");
@@ -1636,21 +1650,48 @@
         return { row, col, value };
       }
 
+      function retiredStageValues() {
+        return RETIRED_STAGE_RULES
+          .filter(rule => runMaxValue >= rule.reachedValue)
+          .map(rule => rule.retiredValue);
+      }
+
+      function countTilesByValue(value) {
+        let count = 0;
+        grid.forEach(row => row.forEach(tile => {
+          if (tile?.value === value) count += 1;
+        }));
+        return count;
+      }
+
+      function compensationSpawnValue() {
+        for (const value of retiredStageValues()) {
+          if (countTilesByValue(value) % 2 === 1) return value;
+        }
+        return null;
+      }
+
       function randomSpawnValue() {
+        const compensationValue = compensationSpawnValue();
+        if (compensationValue !== null) return compensationValue;
+
         const currentStage = stageByValue.get(runMaxValue) || stages[0];
         const currentIndex = Math.max(0, stages.indexOf(currentStage));
         const maximumSpawnIndex = Math.max(0, currentIndex - 2);
-        const candidates = stages.slice(0, maximumSpawnIndex + 1);
-        const weights = candidates.map((_, index) => Math.pow(.34, index));
-        const totalWeight = weights.reduce((total, weight) => total + weight, 0);
-        let roll = Math.random() * totalWeight;
+        const retiredValues = new Set(retiredStageValues());
+        const candidates = stages
+          .slice(0, maximumSpawnIndex + 1)
+          .filter(stage => !retiredValues.has(stage.value));
+        const availableCandidates = candidates.length ? candidates : [stages[0]];
+        const weights = SPAWN_DISTRIBUTIONS[availableCandidates.length] || SPAWN_DISTRIBUTIONS[6];
+        let roll = Math.random() * 100;
 
-        for (let index = 0; index < candidates.length; index++) {
+        for (let index = 0; index < availableCandidates.length; index++) {
           roll -= weights[index];
-          if (roll <= 0) return candidates[index].value;
+          if (roll < 0) return availableCandidates[index].value;
         }
 
-        return candidates[candidates.length - 1].value;
+        return availableCandidates[availableCandidates.length - 1].value;
       }
 
       function startNewGame() {
