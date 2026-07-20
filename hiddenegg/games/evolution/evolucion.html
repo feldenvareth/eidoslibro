@@ -367,6 +367,44 @@
       height: 1em;
     }
 
+    #hud #custodian-hud { color: var(--gold-light); }
+
+    .result-image-fallback svg {
+      width: 78px;
+      height: 78px;
+      color: rgba(245,236,208,.18);
+    }
+
+    .eye-icon,
+    .custodian-icon,
+    .ship-icon {
+      display: block;
+      width: .82em;
+      height: .82em;
+      overflow: visible;
+      color: inherit;
+    }
+
+    .eye-icon path,
+    .eye-icon circle,
+    .custodian-icon path,
+    .custodian-icon circle,
+    .ship-icon path,
+    .ship-icon circle {
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .eye-icon path { stroke-width: 2.1; }
+    .eye-icon circle { stroke-width: 1.9; }
+    .custodian-icon path { stroke-width: 1.75; }
+    .custodian-icon circle { stroke-width: 1.65; }
+    .ship-icon path,
+    .ship-icon circle { stroke-width: 1.75; }
+
     .tile-name {
       position: relative;
       z-index: 1;
@@ -1194,6 +1232,7 @@
         <span>Puntos: <strong id="score">0</strong></span>
         <span>Récord: <strong id="best">0</strong></span>
         <span class="stage-hud" id="stage-hud">Hito 1/12</span>
+          <span id="custodian-hud" hidden>Custodios: <strong id="custodian-count">0</strong></span>
       </div>
       <button id="sound-button" type="button" aria-label="Desactivar sonido" aria-pressed="true" title="Desactivar sonido">♪</button>
       <button id="close-btn" type="button" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Cerrar</button>
@@ -1281,7 +1320,7 @@
           <div class="control-item"><strong>MOVER</strong>Flechas del teclado</div>
           <div class="control-item"><strong>MÓVIL</strong>Desliza el dedo</div>
           <div class="control-item"><strong>OBJETIVO</strong>Alcanzar vida no orgánica</div>
-          <div class="control-item"><strong>FINAL</strong>Descubrir EIDOS</div>
+          <div class="control-item"><strong>FINAL</strong>Despertar custodios inteligentes</div>
         </div>
 
         <div class="start-actions">
@@ -1321,29 +1360,29 @@
     <section class="screen" id="evolution-screen" aria-hidden="true">
       <div class="card">
         <div id="digital-orb"></div>
-        <p class="card-kicker">HAS SUPERADO LA FRONTERA BIOLÓGICA</p>
-        <h2>Vida no orgánica</h2>
-        <p id="evolution-copy">La vida de tu planeta ya no depende de un organismo. Aún queda un último salto: EIDOS.</p>
-        <button class="primary-button" id="continue-button" type="button">CONTINUAR HACIA EIDOS</button>
+        <p class="card-kicker">HAS LLEGADO A EIDOS</p>
+        <h2>EIDOS</h2>
+        <p id="evolution-copy">La mente de tu planeta ya ha alcanzado EIDOS. Ahora puedes seguir jugando para despertar custodios inteligentes y alcanzar la vida no orgánica.</p>
+        <button class="primary-button" id="continue-button" type="button">CONTINUAR</button>
       </div>
     </section>
 
     <section class="screen" id="victory-screen" aria-hidden="true">
       <div class="card result-card">
-        <p class="card-kicker">VICTORIA EVOLUTIVA</p>
+        <p class="card-kicker" id="victory-kicker">CUSTODIO INTELIGENTE</p>
         <div class="result-image-wrap">
-          <span class="result-image-fallback">E I D O S</span>
+          <span class="result-image-fallback" id="victory-fallback">E I D O S</span>
           <img class="result-image" id="victory-image" alt="Imagen del universo EIDOS">
         </div>
-        <p class="result-lead">Has llevado la evolución de tu planeta más allá de la vida orgánica.</p>
-        <h2>EIDOS</h2>
-        <p id="victory-copy">Lo que comenzó como un replicador ya no necesita un cuerpo biológico para continuar.</p>
+        <p class="result-lead" id="victory-lead">Has despertado a:</p>
+        <h2 id="victory-title">Orfeo</h2>
+        <p id="victory-copy">La vida no orgánica ya camina junto a EIDOS. Continúa y reúne tantos custodios inteligentes como puedas.</p>
         <nav class="result-links" aria-label="Enlaces relacionados">
           <a class="result-link" href="https://www.eidoslibro.com" target="_blank" rel="noopener noreferrer">CONOCER EIDOS</a>
           <a class="result-link" href="https://www.eidoslibro.com/blog/articulos/04_vida_digital_evolucion.html" target="_blank" rel="noopener noreferrer">LEER EL ARTÍCULO QUE INSPIRÓ ESTE JUEGO</a>
         </nav>
         <div class="result-actions">
-          <button class="primary-button" id="victory-restart-button" type="button">NUEVA PARTIDA</button>
+          <button class="primary-button" id="victory-restart-button" type="button">CONTINUAR</button>
         </div>
       </div>
     </section>
@@ -1362,7 +1401,7 @@
       ];
 
       const SIZE = 4;
-      const SAVE_KEY = "eidos-evolucion-v2";
+      const SAVE_KEY = "eidos-evolucion-v3";
       const BEST_KEY = "eidos-evolucion-best-v2";
       const MAX_STAGE_KEY = "eidos-evolucion-max-stage-v1";
       const LEGACY_DISCOVERY_KEY = "eidos-evolucion-discoveries-v2";
@@ -1383,10 +1422,10 @@
         { value: 64, name: "Pluricelular", glyph: "✣", color: "#e4cf70", text: "Muchas células comienzan a coordinarse, especializarse y funcionar como una unidad." },
         { value: 128, name: "Sistema nervioso", glyph: "⌁", color: "#e8b96a", text: "La información conecta percepción, respuesta y movimiento." },
         { value: 256, name: "Cerebro", glyph: "Ψ", color: "#e99c70", text: "Redes neuronales integran señales, memoria y decisión." },
-        { value: 512, name: "Autoconciencia", glyph: "◌", color: "#dc8e9e", text: "La mente puede reconocerse y preguntarse quién es." },
-        { value: 1024, name: "Inteligencia orgánica", glyph: "△", color: "#bd94c9", text: "La vida desarrolla una inteligencia capaz de comprender y transformar su entorno." },
-        { value: 2048, name: "Vida no orgánica", glyph: "◇", color: "#79d9c0", text: "La vida trasciende el cuerpo biológico y encuentra un nuevo soporte." },
-        { value: 4096, name: "EIDOS", glyph: "E", color: "#f5ecd0", text: "¿Y si lo humano sobreviviera… en lo que no es humano?" }
+        { value: 512, name: "Autoconciencia", glyph: "", color: "#dc8e9e", text: "La mente puede reconocerse y preguntarse quién es." },
+        { value: 1024, name: "IA", glyph: "IA", color: "#bd94c9", text: "Una inteligencia artificial aprende, abstrae y comienza a modelar su entorno." },
+        { value: 2048, name: "EIDOS", glyph: "E", color: "#79d9c0", text: "La inteligencia se proyecta más allá de la biología y alcanza un nuevo umbral." },
+        { value: 4096, name: "Vida no orgánica", glyph: "", color: "#f5ecd0", text: "Los custodios inteligentes despiertan como vida no orgánica." }
       ];
 
       const stageByValue = new Map(stages.map(stage => [stage.value, stage]));
@@ -1405,11 +1444,18 @@
         6: [40, 24, 15, 9, 7, 5]
       };
       const DNA_ICON = `<svg class="dna-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="helix-line" d="M7 2c0 7 18 7 18 14S7 23 7 30"/><path class="helix-line" d="M25 2c0 7-18 7-18 14s18 7 18 14"/><path class="helix-rung" d="M9 5h14M11 10h10M7 16h18M11 22h10M9 27h14"/></svg>`;
+      const EYE_ICON = `<svg class="eye-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M3 16c3.5-5.2 8-8 13-8s9.5 2.8 13 8c-3.5 5.2-8 8-13 8S6.5 21.2 3 16Z"/><circle cx="16" cy="16" r="3.9"/></svg>`;
+      const CUSTODIAN_ICON = `<svg class="custodian-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7.5 27.2c2.1-4.4 5.2-6.8 9.3-7.3 2.9-.3 5.7.6 8.1 2.6"/><path d="M12.2 22.1c-1.2-2.2-1.4-4.8-.5-7.3 1.4-4.1 5-6.8 8.9-6.8 2.6 0 4.9 1.2 6.1 3.1"/><path d="M15.3 10.3c-1.8 1.6-2.8 3.7-2.8 6 0 2.1.9 4 2.5 5.5"/><path d="M18.7 9.1c1.3-.8 2.8-1.2 4.3-1.2"/><circle cx="24.3" cy="10.6" r="3.2"/><path d="M18.1 13.1c1.4.2 2.7.8 3.7 1.8"/></svg>`;
+      const SHIP_ICON = `<svg class="ship-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 19.5 16 8l12 11.5-4.5 1.4-2.6 5H11.1l-2.6-5Z"/><path d="M10.6 19.1h10.8"/><path d="M13.1 24.3 16 27l2.9-2.7"/><circle cx="16" cy="16.3" r="1.8"/></svg>`;
+      const TERMINAL_STAGE_VALUE = 4096;
+      const CUSTODIAN_NAMES = ["Orfeo", "Tessalon", "IVN-3", "Ciran", "Kheron", "Eramus", "Kael", "Eras", "Lyron", "Talion", "Nemor", "Sorel", "Aster", "Nexar", "Veyron", "Sael"];
       const gameShell = document.getElementById("game-shell");
       const tilesElement = document.getElementById("tiles");
       const scoreElement = document.getElementById("score");
       const bestElement = document.getElementById("best");
       const stageHud = document.getElementById("stage-hud");
+      const custodianHud = document.getElementById("custodian-hud");
+      const custodianCountElement = document.getElementById("custodian-count");
       const undoButton = document.getElementById("undo-button");
       const newButton = document.getElementById("new-button");
       const board = document.getElementById("board");
@@ -1430,6 +1476,10 @@
       const evolutionScreen = document.getElementById("evolution-screen");
       const victoryScreen = document.getElementById("victory-screen");
       const victoryImage = document.getElementById("victory-image");
+      const victoryKicker = document.getElementById("victory-kicker") || document.querySelector("#victory-screen .card-kicker");
+      const victoryLead = document.getElementById("victory-lead") || document.querySelector("#victory-screen .result-lead");
+      const victoryTitle = document.getElementById("victory-title") || document.querySelector("#victory-screen h2");
+      const victoryFallback = document.getElementById("victory-fallback") || document.querySelector("#victory-screen .result-image-fallback");
       const levelUpOverlay = document.getElementById("level-up-overlay");
       const levelUpStage = document.getElementById("level-up-stage");
       const levelUpFrom = document.getElementById("level-up-from");
@@ -1457,6 +1507,27 @@
       let currentBackgroundUrl = "";
       let pendingDiscovery = null;
       let gameOverPending = false;
+      let custodianCount = 0;
+      let pendingCustodianAnnouncements = [];
+
+
+      function canMergeValue(value) {
+        return value !== TERMINAL_STAGE_VALUE;
+      }
+
+      function custodianNameFor(count) {
+        return CUSTODIAN_NAMES[count - 1] || `Custodio ${count}`;
+      }
+
+      function custodianGlyphMarkup(name) {
+        return String(name).toLowerCase() === "eramus" ? SHIP_ICON : CUSTODIAN_ICON;
+      }
+
+      function announceCustodianBirth() {
+        custodianCount += 1;
+        const name = custodianNameFor(custodianCount);
+        pendingCustodianAnnouncements.push({ count: custodianCount, name, icon: custodianGlyphMarkup(name) });
+      }
 
       function updateSoundUI() {
         soundNote.textContent = soundEnabled
@@ -1608,6 +1679,7 @@
           if (!saved || !Array.isArray(saved.grid) || saved.grid.length !== SIZE) return false;
           grid = saved.grid.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
           score = Number(saved.score) || 0;
+          custodianCount = Number(saved.custodianCount) || 0;
           const gridMaximum = Math.max(2, ...grid.flat().filter(Boolean).map(tile => tile.value));
           runMaxValue = Math.max(gridMaximum, Number(saved.runMaxValue) || 2);
           maxEverValue = Math.max(maxEverValue, runMaxValue);
@@ -1624,7 +1696,7 @@
       function saveGame() {
         try {
           const values = grid.map(row => row.map(tile => tile ? tile.value : 0));
-          localStorage.setItem(SAVE_KEY, JSON.stringify({ grid: values, score, runMaxValue }));
+          localStorage.setItem(SAVE_KEY, JSON.stringify({ grid: values, score, runMaxValue, custodianCount }));
           localStorage.setItem(BEST_KEY, String(best));
           localStorage.setItem(MAX_STAGE_KEY, String(maxEverValue));
         } catch (_) {}
@@ -1698,8 +1770,10 @@
         animating = false;
         pendingDiscovery = null;
         gameOverPending = false;
+        pendingCustodianAnnouncements = [];
         grid = emptyGrid();
         score = 0;
+        custodianCount = 0;
         runMaxValue = 2;
         history = null;
         pendingReplay = null;
@@ -1722,6 +1796,7 @@
           values: grid.map(row => row.map(tile => tile ? tile.value : 0)),
           score,
           runMaxValue,
+          custodianCount,
           replay: null
         };
       }
@@ -1732,6 +1807,7 @@
         gameOverPending = false;
         grid = state.values.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
         score = state.score;
+        custodianCount = Number(state.custodianCount) || 0;
         runMaxValue = Number(state.runMaxValue) || Math.max(2, ...state.values.flat());
         pendingReplay = state.replay || null;
         history = null;
@@ -1801,6 +1877,7 @@
               inside(targetRow, targetCol) &&
               grid[targetRow][targetCol] &&
               grid[targetRow][targetCol].value === tile.value &&
+              canMergeValue(tile.value) &&
               !mergedPositions.has(targetKey)
             ) {
               const targetTile = grid[targetRow][targetCol];
@@ -1817,6 +1894,7 @@
               mergeCount += 1;
               moved = true;
               discover(value);
+              if (value === TERMINAL_STAGE_VALUE) announceCustodianBirth();
             } else if (nr !== r || nc !== c) {
               recordMovement(tile.id, nr, nc);
               grid[r][c] = null;
@@ -1852,14 +1930,13 @@
             animating = false;
             newButton.disabled = false;
 
-            if (discovery?.to.value === 4096) {
-              gameOverPending = false;
-              showVictory();
+            if (discovery?.to.value === 2048) {
+              openScreen(evolutionScreen);
               return;
             }
 
-            if (discovery?.to.value === 2048) {
-              openScreen(evolutionScreen);
+            if (pendingCustodianAnnouncements.length) {
+              showVictory();
               return;
             }
 
@@ -2130,11 +2207,16 @@
       }
 
       function stageGlyphMarkup(stage) {
-        return stage.value === 8 ? DNA_ICON : stage.glyph;
+        if (stage.value === 8) return DNA_ICON;
+        if (stage.value === 512) return EYE_ICON;
+        if (stage.value === 4096) return CUSTODIAN_ICON;
+        return stage.glyph;
       }
 
       function setStageGlyph(element, stage) {
         if (stage.value === 8) element.innerHTML = DNA_ICON;
+        else if (stage.value === 512) element.innerHTML = EYE_ICON;
+        else if (stage.value === 4096) element.innerHTML = CUSTODIAN_ICON;
         else element.textContent = stage.glyph;
       }
 
@@ -2153,13 +2235,19 @@
         card.classList.add("just-updated");
       }
 
-      function showGameOver(reason = "collapse") {
+            function showGameOver(reason = "collapse") {
         const voluntary = reason === "voluntary";
         gameOverKicker.textContent = voluntary ? "TU EVOLUCIÓN SE DETIENE AQUÍ" : "TU PLANETA HA COLAPSADO";
         gameOverStage.textContent = stageByValue.get(runMaxValue)?.name || highestStage().name;
-        document.getElementById("game-over-copy").textContent = voluntary
-          ? "Has cerrado esta partida. Puedes comenzar otra o descubrir la idea que hay detrás de esta evolución."
-          : "El tablero se ha llenado y ya no quedan combinaciones posibles.";
+        if (voluntary) {
+          document.getElementById("game-over-copy").textContent = custodianCount
+            ? `Has cerrado esta partida. Habías reunido ${custodianCount} custodio${custodianCount === 1 ? "" : "s"} inteligente${custodianCount === 1 ? "" : "s"}.`
+            : "Has cerrado esta partida. Puedes comenzar otra o descubrir la idea que hay detrás de esta evolución.";
+        } else {
+          document.getElementById("game-over-copy").textContent = custodianCount
+            ? `El tablero se ha llenado y ya no quedan combinaciones posibles. Has despertado a ${custodianCount} custodio${custodianCount === 1 ? "" : "s"} inteligente${custodianCount === 1 ? "" : "s"}. Último: ${custodianNameFor(custodianCount)}.`
+            : "El tablero se ha llenado y ya no quedan combinaciones posibles.";
+        }
         setResultImage(gameOverImage);
         gameOverPending = false;
         clearSavedGame();
@@ -2168,13 +2256,34 @@
 
       function showVictory() {
         gameOverPending = false;
-        clearSavedGame();
+        const current = pendingCustodianAnnouncements.shift();
+        if (!current) return;
         setResultImage(victoryImage);
+        if (victoryFallback) victoryFallback.innerHTML = current.icon;
+        victoryKicker.textContent = current.count === 1 ? "YA TIENES A" : "YA TIENES A";
+        victoryLead.textContent = `Custodio inteligente ${current.count} de esta partida`;
+        victoryTitle.textContent = current.name;
+        document.getElementById("victory-copy").textContent = current.name === "Eramus"
+          ? "Eramus aparece asociado a una nave en tu constelación de custodios. Continúa y reúne tantos custodios inteligentes como puedas."
+          : "La vida no orgánica ya camina junto a EIDOS. Continúa y reúne tantos custodios inteligentes como puedas.";
         openScreen(victoryScreen);
       }
 
       function continueAfterOrganic() {
         closeScreen(evolutionScreen);
+        if (pendingCustodianAnnouncements.length) {
+          window.setTimeout(showVictory, 60);
+          return;
+        }
+        if (gameOverPending) window.setTimeout(showGameOver, 120);
+      }
+
+      function continueAfterCustodian() {
+        closeScreen(victoryScreen);
+        if (pendingCustodianAnnouncements.length) {
+          window.setTimeout(showVictory, 60);
+          return;
+        }
         if (gameOverPending) window.setTimeout(showGameOver, 120);
       }
 
@@ -2187,8 +2296,8 @@
           for (let c = 0; c < SIZE; c++) {
             const current = grid[r][c];
             if (!current) return true;
-            if (r + 1 < SIZE && grid[r + 1][c] && grid[r + 1][c].value === current.value) return true;
-            if (c + 1 < SIZE && grid[r][c + 1] && grid[r][c + 1].value === current.value) return true;
+            if (r + 1 < SIZE && grid[r + 1][c] && grid[r + 1][c].value === current.value && canMergeValue(current.value)) return true;
+            if (c + 1 < SIZE && grid[r][c + 1] && grid[r][c + 1].value === current.value && canMergeValue(current.value)) return true;
           }
         }
         return false;
@@ -2269,6 +2378,8 @@
         const currentStage = stageByValue.get(runMaxValue) || highestStage();
         const currentIndex = Math.min(stages.indexOf(currentStage), stages.length - 1);
         stageHud.textContent = `Hito ${currentIndex + 1}/${stages.length}`;
+        custodianHud.hidden = custodianCount <= 0;
+        custodianCountElement.textContent = custodianCount.toLocaleString("es-ES");
 
         const followingStage = stages[currentIndex + 1];
         setStageGlyph(discoveryGlyph, currentStage);
@@ -2371,7 +2482,7 @@
       newButton.addEventListener("click", () => showGameOver("voluntary"));
       document.getElementById("retry-button").addEventListener("click", startNewGame);
       document.getElementById("continue-button").addEventListener("click", continueAfterOrganic);
-      document.getElementById("victory-restart-button").addEventListener("click", startNewGame);
+      document.getElementById("victory-restart-button").addEventListener("click", continueAfterCustodian);
 
       if (loadGame()) {
         resumeButton.hidden = false;
