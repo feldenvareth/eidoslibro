@@ -580,6 +580,87 @@
     .result-value { margin: 0 0 12px; color: var(--gold-light); font: 500 28px/1 Georgia, serif; }
     .result-copy { max-width: 390px; margin: 12px auto 17px; color: #d0d4cf; font-size: 13px; line-height: 1.5; }
 
+    .transfer-result-card {
+      width: min(100%, 520px);
+      transition: border-color .5s ease, box-shadow .5s ease;
+    }
+
+    .transfer-result-card.success {
+      border-color: rgba(121,217,192,.78);
+      box-shadow: 0 22px 70px rgba(0,0,0,.5), 0 0 38px rgba(121,217,192,.12);
+    }
+
+    .transfer-result-card.copy-only {
+      border-color: rgba(200,168,75,.72);
+      box-shadow: 0 22px 70px rgba(0,0,0,.5), 0 0 38px rgba(200,168,75,.11);
+    }
+
+    .transfer-visual {
+      position: relative;
+      width: 100%;
+      height: clamp(205px, 31dvh, 275px);
+      margin: 15px auto 5px;
+      overflow: hidden;
+      border: 1px solid rgba(121,217,192,.35);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 18% 50%, rgba(121,217,192,.12), transparent 25%),
+        radial-gradient(circle at 82% 50%, rgba(234,210,125,.1), transparent 25%),
+        #030b07;
+      box-shadow: inset 0 0 55px rgba(0,0,0,.52);
+    }
+
+    #transfer-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .transfer-sequence-label {
+      position: absolute;
+      left: 50%;
+      bottom: 23px;
+      width: calc(100% - 30px);
+      margin: 0;
+      transform: translateX(-50%);
+      color: #d9e2dc;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-align: center;
+      text-shadow: 0 2px 8px #000;
+      transition: color .35s ease, opacity .35s ease;
+    }
+
+    .transfer-threshold {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+      color: rgba(245,236,208,.48);
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+    }
+
+    .victory-result-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(9px);
+      transition: max-height .7s ease, opacity .55s ease, transform .55s ease;
+    }
+
+    .victory-result-content.revealed {
+      max-height: 420px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .transfer-result-card.success #victory-title { color: #dffbef; }
+    .transfer-result-card.copy-only #victory-title { color: var(--gold-light); }
+    .transfer-result-card.copy-only .result-value { color: var(--cyan); }
+
     .result-link {
       flex: 1 1 180px;
       padding: 9px 10px;
@@ -717,6 +798,9 @@
       .example-symbol { font-size: 24px; }
       .control-grid { margin-bottom: 10px; }
       .silent-note, .game-links { margin-top: 7px; }
+      .transfer-visual { height: 190px; margin-top: 10px; }
+      .transfer-sequence-label { bottom: 18px; font-size: 8px; letter-spacing: 1.5px; }
+      .transfer-threshold { font-size: 6px; }
     }
 
     @media (max-height: 720px) {
@@ -883,7 +967,7 @@
         <span>Puntos: <strong id="score-hud">0</strong></span>
         <span>Récord: <strong id="best-hud">0</strong></span>
         <span id="stage-hud">Fase 1/7</span>
-        <span id="sync-hud">Sincronía 100%</span>
+        <span id="sync-hud">Ventana 10:00</span>
       </div>
       <button id="sound-button" type="button" aria-label="Desactivar sonido" aria-pressed="true" title="Desactivar sonido">♪</button>
       <button id="close-btn" type="button">✕ Cerrar</button>
@@ -943,8 +1027,8 @@
         <div class="control-grid">
           <div class="control-item"><strong>MOVER</strong>Flechas del teclado</div>
           <div class="control-item"><strong>MÓVIL</strong>Desliza el dedo</div>
-          <div class="control-item"><strong>OBJETIVO</strong>Conservar la sincronía</div>
-          <div class="control-item"><strong>FINAL</strong>Dejar nacer otra mente</div>
+          <div class="control-item"><strong>OBJETIVO</strong>Completar las 7 fases en 10 minutos</div>
+          <div class="control-item"><strong>RIESGO</strong>Las minas restan tiempo</div>
         </div>
         <button class="primary-button" id="start-button" type="button">INICIAR</button>
         <p class="silent-note" id="sound-note">El sonido comienza con el primer movimiento.</p>
@@ -957,11 +1041,11 @@
 
     <section class="screen" id="game-over-screen" aria-labelledby="game-over-title" aria-hidden="true">
       <div class="card result-card">
-        <p class="card-kicker">LA SEÑAL SE HA FRAGMENTADO</p>
-        <h2 id="game-over-title">COPIA INESTABLE</h2>
-        <p class="result-lead">Has conservado la mente hasta:</p>
+        <p class="card-kicker">LA VENTANA SE HA CERRADO</p>
+        <h2 id="game-over-title">TRANSFERENCIA INTERRUMPIDA</h2>
+        <p class="result-lead">La transferencia se detuvo en:</p>
         <p class="result-value" id="failure-stage">Memoria</p>
-        <p class="result-copy">Las diferencias han roto la continuidad del patrón. Puedes comenzar otra transferencia e intentarlo de nuevo.</p>
+        <p class="result-copy">Los diez minutos se han agotado antes de completar el patrón. Puedes iniciar una nueva transferencia e intentarlo de nuevo.</p>
         <button class="primary-button" id="retry-button" type="button">NUEVA TRANSFERENCIA</button>
         <nav class="result-links">
           <a class="result-link" href="https://www.eidoslibro.com/index.html" target="_blank" rel="noopener">CONOCER EIDOS</a>
@@ -971,22 +1055,24 @@
     </section>
 
     <section class="screen" id="victory-screen" aria-labelledby="victory-title" aria-hidden="true">
-      <div class="card result-card">
-        <p class="card-kicker">TRANSFERENCIA COMPLETADA</p>
-        <h2 id="victory-title">DOS MENTES</h2>
-        <div class="identity-visual" aria-hidden="true">
-          <span class="identity-line"></span>
-          <span class="identity-node original">◉</span>
-          <span class="identity-node copy">◇</span>
+      <div class="card result-card transfer-result-card" id="victory-card">
+        <p class="card-kicker" id="victory-kicker">EIDOS · TRANSFERENCIA DE CONSCIENCIA</p>
+        <h2 id="victory-title">TRANSFERENCIA EN CURSO</h2>
+        <div class="transfer-visual" id="transfer-visual" aria-hidden="true">
+          <canvas id="transfer-canvas" width="900" height="360"></canvas>
+          <p class="transfer-sequence-label" id="transfer-sequence-label">LEYENDO EL PATRÓN CONSCIENTE</p>
+          <span class="transfer-threshold">UMBRAL DE CONTINUIDAD · 30 %</span>
         </div>
-        <p class="result-lead">Sincronización final:</p>
-        <p class="result-value" id="final-sync">87%</p>
-        <p class="result-copy">Durante un instante fueron idénticas. Después, la copia comenzó a tomar sus propias decisiones.<br><strong>¿Sigue siendo tú?</strong></p>
-        <button class="primary-button" id="victory-retry-button" type="button">NUEVA TRANSFERENCIA</button>
-        <nav class="result-links">
-          <a class="result-link" href="https://www.eidoslibro.com/index.html" target="_blank" rel="noopener">CONOCER EIDOS</a>
-          <a class="result-link" href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">LEER EL ARTÍCULO QUE INSPIRÓ ESTE JUEGO</a>
-        </nav>
+        <div class="victory-result-content" id="victory-result-content">
+          <p class="result-lead">Ventana restante:</p>
+          <p class="result-value" id="final-sync">87 %</p>
+          <p class="result-copy" id="victory-copy"></p>
+          <button class="primary-button" id="victory-retry-button" type="button">NUEVA TRANSFERENCIA</button>
+          <nav class="result-links">
+            <a class="result-link" href="https://www.eidoslibro.com/index.html" target="_blank" rel="noopener">CONOCER EIDOS</a>
+            <a class="result-link" href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">LEER EL ARTÍCULO QUE INSPIRÓ ESTE JUEGO</a>
+          </nav>
+        </div>
       </div>
     </section>
 
@@ -1054,6 +1140,14 @@
       const phaseFlash = document.getElementById("phase-flash");
       const phaseName = document.getElementById("phase-name");
       const phaseCopy = document.getElementById("phase-copy");
+      const victoryCard = document.getElementById("victory-card");
+      const victoryKicker = document.getElementById("victory-kicker");
+      const victoryTitle = document.getElementById("victory-title");
+      const victoryCopy = document.getElementById("victory-copy");
+      const victoryResultContent = document.getElementById("victory-result-content");
+      const transferCanvas = document.getElementById("transfer-canvas");
+      const transferContext = transferCanvas.getContext("2d");
+      const transferSequenceLabel = document.getElementById("transfer-sequence-label");
 
       const N = 7;
       const CELL_COUNT = N * N;
@@ -1070,6 +1164,11 @@
       let narrowLayout = false;
       const MOVE_MS = 145;
       const TOTAL_STAGES = 7;
+      const GAME_DURATION_MS = 10 * 60 * 1000;
+      const MINE_PENALTY_PERCENT = 1;
+      const BLOCKED_MOVE_PENALTY_PERCENT = 1;
+      const RESTART_PENALTY_PERCENT = 2;
+      const TRANSFER_THRESHOLD = 30;
       const DIRS = [
         { key: "up", dx: 0, dy: -1, glyph: "↑" },
         { key: "right", dx: 1, dy: 0, glyph: "→" },
@@ -1138,6 +1237,9 @@
       let score = 0;
       let best = loadBest();
       let sync = 100;
+      let transferTimeRemaining = GAME_DURATION_MS;
+      let lastTimerTick = 0;
+      let lastDisplayedSecond = -1;
       let moves = 0;
       let history = [];
       let playing = false;
@@ -1152,6 +1254,7 @@
       let backgroundDeck = [];
       let lastBackgroundIndex = -1;
       let hasStartedBefore = false;
+      let transferAnimationFrame = 0;
 
       function configureCanvasLayout() {
         narrowLayout = Boolean(narrowLayoutMedia.matches);
@@ -1450,7 +1553,10 @@
       }
 
       function playBlocked() {
-        tone(125, 0, .07, .028, "square", 92);
+        // Golpe corto y seco: distinto de la descarga eléctrica de una mina.
+        tone(138, 0, .055, .036, "square", 96);
+        tone(82, .045, .065, .024, "square", 68);
+        noiseBurst(0, .045, .008, 1250);
       }
 
       function playNode() {
@@ -1466,9 +1572,11 @@
       }
 
       function playHazard() {
-        tone(170, 0, .25, .06, "sawtooth", 72);
-        tone(110, .045, .3, .046, "square", 58);
-        noiseBurst(0, .22, .025, 420);
+        // Descarga grave y eléctrica, más larga que el aviso de dirección bloqueada.
+        tone(190, 0, .24, .064, "sawtooth", 66);
+        tone(118, .035, .31, .05, "square", 52);
+        noiseBurst(0, .24, .03, 390);
+        noiseBurst(.07, .13, .017, 1650);
       }
 
       function playUndo() {
@@ -1537,6 +1645,47 @@
         }
       }
 
+      function formatTransferTime(milliseconds) {
+        const totalSeconds = Math.max(0, Math.ceil(milliseconds / 1000));
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = String(totalSeconds % 60).padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      }
+
+      function syncFromRemainingTime() {
+        sync = Math.max(0, Math.min(100, transferTimeRemaining / GAME_DURATION_MS * 100));
+      }
+
+      function applyTimePenalty(percent) {
+        transferTimeRemaining = Math.max(
+          0,
+          transferTimeRemaining - GAME_DURATION_MS * (percent / 100)
+        );
+        syncFromRemainingTime();
+        lastTimerTick = performance.now();
+        lastDisplayedSecond = -1;
+        updateHud();
+        if (transferTimeRemaining <= 0 && playing) endGame();
+      }
+
+      function tickTransferWindow(now) {
+        if (!lastTimerTick) lastTimerTick = now;
+        if (!playing || transitioning || document.hidden) {
+          lastTimerTick = now;
+          return;
+        }
+        const elapsed = Math.max(0, now - lastTimerTick);
+        lastTimerTick = now;
+        transferTimeRemaining = Math.max(0, transferTimeRemaining - elapsed);
+        syncFromRemainingTime();
+        const displayedSecond = Math.ceil(transferTimeRemaining / 1000);
+        if (displayedSecond !== lastDisplayedSecond) {
+          lastDisplayedSecond = displayedSecond;
+          updateHud();
+        }
+        if (transferTimeRemaining <= 0) endGame();
+      }
+
       function updateObjectiveMessage() {
         if (!stage) return;
         if (targetIndex < stage.targets.length) {
@@ -1554,9 +1703,9 @@
         scoreHud.textContent = String(Math.max(0, Math.round(score)));
         bestHud.textContent = String(Math.max(best, Math.round(score)));
         stageHud.textContent = `Fase ${progressStageNumber()}/${TOTAL_STAGES}`;
-        syncHud.textContent = `Sincronía ${Math.max(0, Math.round(sync))}%`;
+        syncHud.textContent = `Ventana ${formatTransferTime(transferTimeRemaining)}`;
         syncFill.style.width = `${Math.max(0, sync)}%`;
-        syncFill.style.background = sync < 30
+        syncFill.style.background = sync < TRANSFER_THRESHOLD
           ? "linear-gradient(90deg,#cf726a,#e9a36f)"
           : "linear-gradient(90deg,#79d9c0,#89dda9 55%,#ead27d)";
         stageNameElement.textContent = STAGES[stageIndex].name;
@@ -1584,14 +1733,13 @@
       }
 
       function snapshot() {
-        return { posL, posR, targetIndex, sync, score, moves };
+        return { posL, posR, targetIndex, score, moves };
       }
 
       function restoreSnapshot(state) {
         posL = state.posL;
         posR = state.posR;
         targetIndex = state.targetIndex;
-        sync = state.sync;
         score = state.score;
         moves = state.moves;
         animation = null;
@@ -1610,17 +1758,26 @@
         history = [];
         animation = null;
         animating = false;
-        if (!preserveSync) sync = 100;
+        if (!preserveSync) {
+          transferTimeRemaining = GAME_DURATION_MS;
+          syncFromRemainingTime();
+          lastTimerTick = performance.now();
+          lastDisplayedSecond = -1;
+        }
         updateHud();
         updateObjectiveMessage();
       }
 
       function startNewGame() {
+        cancelTransferAnimation();
         if (hasStartedBefore) changeBackground();
         hasStartedBefore = true;
         runSeed = (Date.now() ^ Math.floor(Math.random() * 0xffffffff)) >>> 0;
         score = 0;
-        sync = 100;
+        transferTimeRemaining = GAME_DURATION_MS;
+        syncFromRemainingTime();
+        lastTimerTick = performance.now();
+        lastDisplayedSecond = -1;
         completedStages = 0;
         playing = true;
         transitioning = false;
@@ -1633,7 +1790,8 @@
 
       function restartStage() {
         if (!playing || transitioning || animating) return;
-        sync = Math.max(20, sync - 4);
+        applyTimePenalty(RESTART_PENALTY_PERCENT);
+        if (!playing) return;
         score = Math.max(0, score - 75);
         posL = stage.startLeft;
         posR = stage.startRight;
@@ -1645,7 +1803,7 @@
         flashType = "restart";
         updateHud();
         playRestart();
-        setMessage("Fase reiniciada. El patrón conserva una pequeña pérdida de sincronía.", "warning", 1500);
+        setMessage(`Fase reiniciada · −${RESTART_PENALTY_PERCENT} % de la ventana.`, "warning", 1500);
       }
 
       function undo() {
@@ -1668,8 +1826,14 @@
         if (!playing || animating || transitioning) return;
         const next = transition(posL, posR, direction, stage.wallsL, stage.wallsR);
         if (next.left === posL && next.right === posR) {
+          applyTimePenalty(BLOCKED_MOVE_PENALTY_PERCENT);
+          if (!playing) return;
+          score = Math.max(0, score - 20);
+          flashUntil = performance.now() + 430;
+          flashType = "blocked";
           playBlocked();
-          setMessage("Los dos circuitos están bloqueados en esa dirección.", "warning", 650);
+          setMessage(`DIRECCIÓN BLOQUEADA · −${BLOCKED_MOVE_PENALTY_PERCENT} % de la ventana.`, "danger", 950);
+          updateHud();
           return;
         }
 
@@ -1692,7 +1856,6 @@
         const changedL = next.left !== fromL;
         const changedR = next.right !== fromR;
         score += 7 + stageIndex * 2;
-        if (changedL !== changedR) sync = Math.max(0, sync - .55);
         playMove(changedL && changedR);
         updateHud();
         window.setTimeout(resolveMove, MOVE_MS + 8);
@@ -1707,16 +1870,18 @@
         const hitLeft = stage.hazardsL.has(posL);
         const hitRight = stage.hazardsR.has(posR);
         if (hitLeft || hitRight) {
-          sync = Math.max(0, sync - (hitLeft && hitRight ? 18 : 11));
+          const mineHits = Number(hitLeft) + Number(hitRight);
+          const minePenalty = mineHits * MINE_PENALTY_PERCENT;
+          applyTimePenalty(minePenalty);
+          if (!playing) return;
           score = Math.max(0, score - 90);
           posL = origin.left;
           posR = origin.right;
           flashUntil = performance.now() + 500;
           flashType = "hazard";
           playHazard();
-          setMessage("El ruido ha corrompido el impulso. Movimiento rechazado.", "danger", 1300);
+          setMessage(`El ruido ha corrompido el impulso · −${minePenalty} % de la ventana.`, "danger", 1400);
           updateHud();
-          if (sync <= 0) endGame();
           return;
         }
 
@@ -1727,7 +1892,6 @@
           if (leftReady && rightReady) {
             const name = target.name;
             targetIndex++;
-            sync = Math.min(100, sync + 3.5);
             score += 220 + stageIndex * 45;
             flashUntil = performance.now() + 560;
             flashType = "memory";
@@ -1749,7 +1913,6 @@
         if (!routeExists()) {
           setMessage("El patrón ha quedado bloqueado. Deshaz el último movimiento o reinicia la fase.", "danger");
         }
-        if (sync <= 0) endGame();
         updateHud();
       }
 
@@ -1770,7 +1933,6 @@
         transitioning = true;
         animating = false;
         score += Math.round(350 + sync * 5 + stageIndex * 100);
-        sync = Math.min(100, sync + 7);
         completedStages = Math.max(completedStages, stageIndex + 1);
         saveBest();
         updateHud();
@@ -1801,15 +1963,314 @@
         openScreen(gameOverScreen);
       }
 
+      function cancelTransferAnimation() {
+        if (transferAnimationFrame) cancelAnimationFrame(transferAnimationFrame);
+        transferAnimationFrame = 0;
+      }
+
+      function transferParticleSet(count = 112) {
+        return Array.from({ length: count }, (_, index) => ({
+          delay: (index % 28) / 34 + Math.floor(index / 28) * .07,
+          wave: 8 + Math.random() * 25,
+          phase: Math.random() * Math.PI * 2,
+          size: .8 + Math.random() * 1.9,
+          speed: .82 + Math.random() * .4
+        }));
+      }
+
+      function smoothStep(start, end, value) {
+        const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
+        return t * t * (3 - 2 * t);
+      }
+
+      function drawTransferNode(context, x, y, radius, color, glow, label, opacity = 1, pulse = 1) {
+        if (opacity <= .01) return;
+        context.save();
+        context.globalAlpha = opacity;
+        const animatedRadius = radius * pulse;
+        const aura = context.createRadialGradient(x, y, 0, x, y, animatedRadius * 2.8);
+        aura.addColorStop(0, color.replace("1)", `${Math.min(.72, glow)})`));
+        aura.addColorStop(.38, color.replace("1)", `${Math.min(.25, glow * .36)})`));
+        aura.addColorStop(1, color.replace("1)", "0)"));
+        context.fillStyle = aura;
+        context.beginPath();
+        context.arc(x, y, animatedRadius * 2.8, 0, Math.PI * 2);
+        context.fill();
+
+        context.strokeStyle = color;
+        context.lineWidth = 1.5;
+        context.shadowBlur = 14 + glow * 20;
+        context.shadowColor = color;
+        context.beginPath();
+        context.arc(x, y, animatedRadius, 0, Math.PI * 2);
+        context.stroke();
+        context.shadowBlur = 0;
+
+        for (let i = 0; i < 7; i++) {
+          const angle = i / 7 * Math.PI * 2 + glow * 1.3;
+          const inner = animatedRadius * (.22 + (i % 3) * .1);
+          const outer = animatedRadius * (.55 + (i % 2) * .13);
+          context.strokeStyle = color.replace("1)", `${.25 + glow * .17})`);
+          context.beginPath();
+          context.moveTo(x + Math.cos(angle) * inner, y + Math.sin(angle) * inner);
+          context.lineTo(x + Math.cos(angle + .35) * outer, y + Math.sin(angle + .35) * outer);
+          context.stroke();
+        }
+
+        context.fillStyle = color;
+        context.shadowColor = color;
+        context.shadowBlur = 13;
+        context.beginPath();
+        context.arc(x, y, 3.5 + glow * 1.6, 0, Math.PI * 2);
+        context.fill();
+        context.shadowBlur = 0;
+
+        context.fillStyle = "rgba(245,236,208,.76)";
+        context.font = "700 8px Arial";
+        context.textAlign = "center";
+        context.fillText(label, x, y + animatedRadius + 24);
+        context.restore();
+      }
+
+      function drawTransferWorlds(context, width, height, sourceX, targetX) {
+        context.save();
+
+        context.strokeStyle = "rgba(121,217,192,.13)";
+        context.fillStyle = "rgba(121,217,192,.07)";
+        const horizonY = height * .79;
+        context.beginPath();
+        context.arc(sourceX - 4, height * .94, Math.min(92, width * .18), Math.PI, Math.PI * 2);
+        context.stroke();
+        const buildings = [13, 22, 17, 31, 20, 37, 16];
+        let buildingX = 12;
+        for (const buildingHeight of buildings) {
+          context.fillRect(buildingX, horizonY - buildingHeight, 10, buildingHeight);
+          buildingX += 13;
+        }
+        context.fillStyle = "rgba(196,214,203,.66)";
+        context.font = "700 7px Arial";
+        context.textAlign = "left";
+        context.fillText("TIERRA · MUNDO FÍSICO", 10, 16);
+
+        context.strokeStyle = "rgba(234,210,125,.17)";
+        context.fillStyle = "rgba(234,210,125,.055)";
+        const rackY = height * .79;
+        const rackStart = width - 94;
+        for (let i = 0; i < 3; i++) {
+          const x = rackStart + i * 25;
+          const rackHeight = 55 + (i % 2) * 9;
+          context.fillRect(x, rackY - rackHeight, 17, rackHeight);
+          context.strokeRect(x, rackY - rackHeight, 17, rackHeight);
+          for (let y = rackY - rackHeight + 8; y < rackY - 5; y += 10) {
+            context.fillRect(x + 4, y, 9, 1);
+          }
+        }
+        context.fillStyle = "rgba(230,215,167,.72)";
+        context.textAlign = "right";
+        context.fillText("EIDOS · MATRIZ DE SERVIDORES", width - 10, 16);
+        context.restore();
+      }
+
+      function drawSourceMemory(context, sourceX, centerY, progress, success, elapsed) {
+        const migration = success ? smoothStep(.18, .87, progress) : 0;
+        const remaining = success ? 1 - migration : 1;
+        const count = success ? Math.max(0, Math.round(24 * remaining)) : 24;
+        context.save();
+        for (let i = 0; i < count; i++) {
+          const angle = i / 24 * Math.PI * 2 + elapsed * .0011 * (i % 2 ? 1 : -1);
+          const orbit = 38 + (i % 4) * 4 + Math.sin(elapsed / 290 + i) * 2;
+          const alpha = success ? .18 + remaining * .62 : .44 + Math.sin(elapsed / 420 + i) * .13;
+          const color = i % 3 ? `rgba(121,217,192,${alpha})` : `rgba(234,210,125,${alpha * .78})`;
+          context.fillStyle = color;
+          context.shadowColor = color;
+          context.shadowBlur = 6;
+          context.beginPath();
+          context.arc(sourceX + Math.cos(angle) * orbit, centerY + Math.sin(angle) * orbit * .72, 1.1 + (i % 3) * .35, 0, Math.PI * 2);
+          context.fill();
+        }
+        context.restore();
+      }
+
+      function animateTransfer(success) {
+        cancelTransferAnimation();
+        const particles = transferParticleSet(success ? 126 : 112);
+        const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+        const duration = reducedMotion ? 1000 : 5600;
+        const start = performance.now();
+        let lastLabel = "";
+
+        function frame(now) {
+          const rect = transferCanvas.getBoundingClientRect();
+          const dpr = Math.min(2, window.devicePixelRatio || 1);
+          const width = Math.max(320, rect.width || 460);
+          const height = Math.max(185, rect.height || 245);
+          if (transferCanvas.width !== Math.round(width * dpr) || transferCanvas.height !== Math.round(height * dpr)) {
+            transferCanvas.width = Math.round(width * dpr);
+            transferCanvas.height = Math.round(height * dpr);
+          }
+          const context = transferContext;
+          context.setTransform(dpr, 0, 0, dpr, 0, 0);
+          context.clearRect(0, 0, width, height);
+
+          const elapsed = now - start;
+          const progress = Math.min(1, elapsed / duration);
+          const sourceX = width * .17;
+          const targetX = width * .83;
+          const centerY = height * .48;
+          const targetBuild = smoothStep(.36, .86, progress);
+          const sourceFade = success ? smoothStep(.55, .93, progress) : 0;
+          const connectionFade = 1 - smoothStep(.72, .94, progress);
+
+          const background = context.createLinearGradient(0, 0, width, height);
+          background.addColorStop(0, "rgba(4,18,12,.97)");
+          background.addColorStop(.5, "rgba(2,9,6,.99)");
+          background.addColorStop(1, "rgba(9,20,14,.97)");
+          context.fillStyle = background;
+          context.fillRect(0, 0, width, height);
+
+          context.save();
+          context.strokeStyle = "rgba(121,217,192,.035)";
+          context.lineWidth = 1;
+          for (let x = 0; x < width; x += 24) {
+            context.beginPath();
+            context.moveTo(x, 0);
+            context.lineTo(x, height);
+            context.stroke();
+          }
+          for (let y = 0; y < height; y += 24) {
+            context.beginPath();
+            context.moveTo(0, y);
+            context.lineTo(width, y);
+            context.stroke();
+          }
+          context.restore();
+
+          drawTransferWorlds(context, width, height, sourceX, targetX);
+          drawSourceMemory(context, sourceX, centerY, progress, success, elapsed);
+
+          const flowProgress = Math.max(0, Math.min(1, (progress - .10) / .68));
+          if (connectionFade > .01) {
+            context.save();
+            context.globalAlpha = connectionFade;
+            context.strokeStyle = "rgba(121,217,192,.14)";
+            context.lineWidth = 1;
+            for (let i = 0; i < 7; i++) {
+              const y = centerY + (i - 3) * 10;
+              context.beginPath();
+              context.moveTo(sourceX + 27, y);
+              context.bezierCurveTo(width * .38, y + Math.sin(i) * 15, width * .62, y - Math.cos(i) * 17, targetX - 27, y);
+              context.stroke();
+            }
+            context.restore();
+          }
+
+          for (const particle of particles) {
+            const local = (flowProgress * 1.6 - particle.delay) * particle.speed;
+            if (local <= 0 || local >= 1.08 || connectionFade <= .01) continue;
+            const t = Math.max(0, Math.min(1, local));
+            const eased = 1 - Math.pow(1 - t, 2.35);
+            const x = sourceX + (targetX - sourceX) * eased;
+            const y = centerY + Math.sin(t * Math.PI * 4 + particle.phase) * particle.wave * (1 - t * .58);
+            const alpha = (Math.sin(t * Math.PI) * .9 + .08) * connectionFade;
+            const particleColor = particle.phase > Math.PI
+              ? `rgba(234,210,125,${alpha})`
+              : `rgba(121,217,192,${alpha})`;
+            context.fillStyle = particleColor;
+            context.shadowBlur = 8;
+            context.shadowColor = particleColor;
+            context.beginPath();
+            context.arc(x, y, particle.size, 0, Math.PI * 2);
+            context.fill();
+            context.shadowBlur = 0;
+          }
+
+          const sourceOpacity = success ? 1 - sourceFade : 1;
+          const sourcePulse = 1 + Math.sin(elapsed / 210) * (success ? .035 : .07);
+          const targetPulse = 1 + Math.sin(elapsed / 190) * (progress > .82 ? .075 : .035);
+          drawTransferNode(
+            context,
+            sourceX,
+            centerY,
+            27,
+            "rgba(121,217,192,1)",
+            .35 + (1 - sourceFade) * .48,
+            "ORIGINAL · TIERRA",
+            sourceOpacity,
+            sourcePulse
+          );
+          drawTransferNode(
+            context,
+            targetX,
+            centerY,
+            27,
+            "rgba(234,210,125,1)",
+            .12 + targetBuild * .78,
+            success ? "CONTINUIDAD · EIDOS" : "COPIA · EIDOS",
+            Math.max(.08, targetBuild),
+            targetPulse
+          );
+
+          const label = progress < .25
+            ? "LEYENDO EL PATRÓN CONSCIENTE"
+            : progress < .62
+              ? success ? "MIGRANDO LA CONSCIENCIA" : "COPIANDO EL PATRÓN CONSCIENTE"
+              : progress < .88
+                ? "ESTABILIZANDO EN EIDOS"
+                : success
+                  ? "QUEDA UNA SOLA CONTINUIDAD"
+                  : "DOS CONTINUIDADES INDEPENDIENTES";
+          if (label !== lastLabel) {
+            transferSequenceLabel.textContent = label;
+            transferSequenceLabel.style.color = progress >= .88 ? "#ead27d" : "#d9e2dc";
+            lastLabel = label;
+          }
+
+          if (progress < 1) {
+            transferAnimationFrame = requestAnimationFrame(frame);
+          } else {
+            transferAnimationFrame = 0;
+            revealTransferOutcome(success);
+          }
+        }
+
+        transferAnimationFrame = requestAnimationFrame(frame);
+      }
+
+      function revealTransferOutcome(success) {
+        victoryCard.classList.toggle("success", success);
+        victoryCard.classList.toggle("copy-only", !success);
+        victoryKicker.textContent = success ? "CONSCIENCIA CONSERVADA" : "COPIA CREADA";
+        victoryTitle.textContent = success ? "TRANSFERIDO A EIDOS" : "DOS CONTINUIDADES";
+        victoryCopy.innerHTML = success
+          ? `Quedaba al menos un ${TRANSFER_THRESHOLD} % de la ventana de transferencia. El original ha cesado y el patrón consciente continúa en EIDOS.<br><strong>Solo queda una continuidad.</strong>`
+          : `Quedaba menos de un ${TRANSFER_THRESHOLD} % de la ventana de transferencia. Una copia llegó a EIDOS, pero el original permaneció activo en la Tierra.<br><strong>Ahora son dos continuidades independientes.</strong>`;
+        victoryResultContent.classList.add("revealed");
+      }
+
       function showVictory() {
         playing = false;
         transitioning = false;
-        score += 1500;
+        syncFromRemainingTime();
+        const finalWindow = Math.max(0, Math.round(sync));
+        const success = finalWindow >= TRANSFER_THRESHOLD;
+        score += success ? 1500 : 500;
         saveBest();
         updateHud();
-        document.getElementById("final-sync").textContent = `${Math.max(0, Math.round(sync))}%`;
-        playWin();
+        document.getElementById("final-sync").textContent = `${finalWindow} %`;
+        victoryCard.classList.remove("success", "copy-only");
+        victoryResultContent.classList.remove("revealed");
+        victoryKicker.textContent = "EIDOS · TRANSFERENCIA DE CONSCIENCIA";
+        victoryTitle.textContent = "TRANSFERENCIA EN CURSO";
+        transferSequenceLabel.textContent = "LEYENDO EL PATRÓN CONSCIENTE";
+        transferSequenceLabel.style.color = "#d9e2dc";
         openScreen(victoryScreen);
+        if (success) {
+          playWin();
+        } else {
+          playFinish();
+          window.setTimeout(playHazard, 620);
+        }
+        animateTransfer(success);
       }
 
       function finishGame() {
@@ -2279,6 +2740,7 @@
       }
 
       function draw(time) {
+        tickTransferWindow(time);
         drawBackground(time);
         drawHeaderLabels();
         if (stage) {
@@ -2301,17 +2763,32 @@
         }
 
         if (time < flashUntil) {
-          const alpha = Math.min(.28, (flashUntil - time) / 500 * .28);
-          ctx.fillStyle = flashType === "hazard"
-            ? `rgba(207,114,106,${alpha})`
+          const remaining = Math.max(0, flashUntil - time);
+          const baseDuration = flashType === "hazard" ? 500 : flashType === "blocked" ? 430 : 500;
+          const strength = flashType === "hazard" ? .38 : flashType === "blocked" ? .31 : .28;
+          const alpha = Math.min(strength, remaining / baseDuration * strength);
+          const isErrorFlash = flashType === "hazard" || flashType === "blocked";
+          ctx.fillStyle = isErrorFlash
+            ? `rgba(207,70,64,${alpha})`
             : flashType === "memory"
               ? `rgba(121,217,192,${alpha})`
               : `rgba(200,168,75,${alpha * .7})`;
           ctx.fillRect(0, 0, W, H);
+          if (isErrorFlash) {
+            ctx.save();
+            ctx.strokeStyle = `rgba(255,116,106,${Math.min(.9, alpha * 2.4)})`;
+            ctx.lineWidth = flashType === "hazard" ? 8 : 5;
+            ctx.strokeRect(ctx.lineWidth / 2, ctx.lineWidth / 2, W - ctx.lineWidth, H - ctx.lineWidth);
+            ctx.restore();
+          }
         }
 
         requestAnimationFrame(draw);
       }
+
+      document.addEventListener("visibilitychange", () => {
+        lastTimerTick = performance.now();
+      });
 
       function directionFromKey(key) {
         const map = { ArrowUp: "up", ArrowRight: "right", ArrowDown: "down", ArrowLeft: "left" };
