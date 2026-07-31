@@ -1,19 +1,10 @@
-EIDOS MUSIC V5
+EIDOS MUSIC V6
 
-Sustituye únicamente:
-music/index.html
+Sustituye music/index.html por el index incluido.
 
-por el index.html incluido.
-
-No cambies:
-music/Songs/
-music/assets/
-
-Incluye:
-- cubo central texturizado, más grande y volumétrico;
-- menú con la misma estructura que el index principal;
-- enlaces absolutos a las secciones reales de eidoslibro.com;
-- desaparición del menú tras 3,3 segundos sin interacción;
-- favicon del sitio;
-- Google Analytics G-GRKE5N9XFB, respetando el consentimiento guardado;
-- selector Aleatorio / En orden en el reproductor inferior.
+Cambios:
+- cubo central reducido aproximadamente a la mitad;
+- eliminados los bordes amarillos del cubo;
+- aparición lateral de las dos portadas con fade in/fade out activado por picos y transitorios de la música;
+- si llega otro pico antes de desaparecer, las portadas se reactivan;
+- no hace falta copiar imágenes extra: las portadas van integradas dentro del HTML.
