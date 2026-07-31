@@ -1,0 +1,34 @@
+VISOR MUSICAL EIDOS — CARGA AUTOMÁTICA CON PHP
+
+ESTRUCTURA OBLIGATORIA
+
+Music/
+├── index.html
+├── list-songs.php
+├── assets/
+│   ├── tapa.jpg
+│   └── taparelatos.jpg
+└── Songs/
+    ├── canción-1.mp3
+    ├── canción-2.mp3
+    └── cualquier-otro-audio.mp3
+
+FUNCIONAMIENTO
+
+1. Sube la carpeta Music completa al alojamiento de la web.
+2. El servidor debe admitir PHP.
+3. Para añadir una canción, cópiala dentro de Music/Songs.
+4. Para quitarla, bórrala de Music/Songs.
+5. No hay que actualizar ningún JSON ni modificar el HTML.
+6. Cada vez que se abre el visor, list-songs.php vuelve a leer la carpeta.
+7. La primera canción se elige al azar.
+8. Al terminar una canción, se elige otra al azar.
+9. Una canción elegida manualmente se reproduce una vez y después vuelve
+   automáticamente al modo aleatorio.
+
+IMPORTANTE
+
+- Esta versión no funciona abriendo index.html con doble clic, porque PHP
+  necesita ejecutarse desde el servidor.
+- Respeta las mayúsculas: Music y Songs.
+- Formatos admitidos: MP3, WAV, M4A, AAC, OGG, OGA, OPUS, FLAC y WEBM.
