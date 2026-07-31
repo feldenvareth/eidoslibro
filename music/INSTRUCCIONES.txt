@@ -1,17 +1,19 @@
-VISOR EIDOS CON CUBO LUMINOSO
+EIDOS MUSIC V5
 
 Sustituye únicamente:
 music/index.html
 
-por el index.html de este paquete.
-
-Cambios:
-- cubo central rehecho;
-- aspecto más parecido al cubo dorado de referencia;
-- caras translúcidas con iluminación;
-- halo y brillo exterior;
-- giro 3D más elegante.
+por el index.html incluido.
 
 No cambies:
-- music/Songs/
-- music/assets/
+music/Songs/
+music/assets/
+
+Incluye:
+- cubo central texturizado, más grande y volumétrico;
+- menú con la misma estructura que el index principal;
+- enlaces absolutos a las secciones reales de eidoslibro.com;
+- desaparición del menú tras 3,3 segundos sin interacción;
+- favicon del sitio;
+- Google Analytics G-GRKE5N9XFB, respetando el consentimiento guardado;
+- selector Aleatorio / En orden en el reproductor inferior.

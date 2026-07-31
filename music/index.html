@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Eidos · Visor musical</title>
+
+  <meta name="theme-color" content="#081511">
+  <link rel="canonical" href="https://www.eidoslibro.com/music/">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: dark;
@@ -238,10 +247,11 @@
       left: 50%;
       bottom: max(18px, env(safe-area-inset-bottom));
       z-index: 12;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto auto;
       align-items: center;
       gap: 9px;
-      width: min(720px, calc(100% - 28px));
+      width: min(870px, calc(100% - 28px));
       padding: 9px;
       border: 1px solid rgba(242,236,216,.17);
       border-radius: 999px;
@@ -288,6 +298,18 @@
     }
 
     .control-button:active { transform: scale(.98); }
+
+
+    .mode-button[data-mode="ordered"] {
+      border-color: rgba(216,178,57,.46);
+      color: #fff4c5;
+      background: rgba(216,178,57,.13);
+      box-shadow: inset 0 0 18px rgba(216,178,57,.05);
+    }
+
+    #modeLabelShort {
+      display: none;
+    }
 
     #nowPlaying {
       flex: 1 1 auto;
@@ -429,16 +451,20 @@
 
     @media (max-width: 650px) {
       #controls {
-        gap: 6px;
+        grid-template-columns: 82px minmax(0, 1fr) 82px 82px;
+        gap: 5px;
         padding: 7px;
       }
 
       .control-button {
         min-width: 0;
-        flex: 0 0 92px;
-        padding-inline: 10px;
-        font-size: .72rem;
+        width: 100%;
+        padding-inline: 7px;
+        font-size: .68rem;
       }
+
+      #modeLabelLong { display: none; }
+      #modeLabelShort { display: inline; }
 
       #nowPlaying { padding: 0 4px; }
       #nowPlaying small { display: none; }
@@ -451,8 +477,13 @@
     }
 
     @media (max-width: 430px) {
-      #controls { width: calc(100% - 16px); }
-      .control-button { flex-basis: 78px; font-size: .67rem; }
+      #controls {
+        width: calc(100% - 12px);
+        grid-template-columns: 70px minmax(0, 1fr) 70px 72px;
+        gap: 4px;
+        padding: 5px;
+      }
+      .control-button { font-size: .62rem; padding-inline: 4px; }
       #nowPlaying { min-width: 0; }
     }
 
@@ -462,103 +493,148 @@
       * { scroll-behavior: auto !important; }
     }
 
+
     /* =========================================================
-       MENÚ PRINCIPAL EIDOS
-       Los enlaces salen un nivel desde /music/ hacia la raíz.
+       NAVEGACIÓN EIDOS — misma estructura que la página principal
        ========================================================= */
-    #eidosNavbar {
+    #navbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 60;
-      height: 64px;
+      z-index: 70;
+      height: 56px;
       display: flex;
       align-items: center;
       gap: 28px;
-      padding: 0 30px;
-      border-bottom: 1px solid rgba(216, 178, 57, 0.16);
-      background:
-        linear-gradient(180deg, rgba(5, 16, 13, 0.94), rgba(7, 22, 18, 0.82));
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
-      backdrop-filter: blur(16px) saturate(1.12);
-      -webkit-backdrop-filter: blur(16px) saturate(1.12);
+      padding: 0 16px 0 12px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.20);
+      background: rgba(3, 17, 14, 0.94);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px) saturate(1.08);
+      -webkit-backdrop-filter: blur(14px) saturate(1.08);
+      opacity: 0;
+      transform: translateY(-110%);
+      pointer-events: none;
+      transition:
+        opacity 620ms ease,
+        transform 620ms cubic-bezier(.22,.61,.36,1),
+        visibility 620ms ease;
     }
 
-    .eidos-nav-logo {
+    body:not(.visualizer-started) #navbar,
+    body.nav-visible #navbar,
+    body.mobile-menu-open #navbar {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-logo {
       flex: 0 0 auto;
       color: var(--eidos-cream);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.34rem;
-      font-weight: 400;
-      letter-spacing: 0.22em;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.42rem;
+      font-weight: 600;
+      letter-spacing: .25em;
+      line-height: 1;
       text-decoration: none;
       white-space: nowrap;
       transition: color 180ms ease, text-shadow 180ms ease;
     }
 
-    .eidos-nav-logo:hover {
-      color: #fff9e9;
-      text-shadow: 0 0 18px rgba(216, 178, 57, 0.28);
+    .nav-logo:hover {
+      color: #fff9e8;
+      text-shadow: 0 0 20px rgba(216,178,57,.25);
     }
 
-    .eidos-nav-links {
+    .nav-links {
       min-width: 0;
       flex: 1 1 auto;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: clamp(10px, 1.15vw, 22px);
+      gap: clamp(12px, 1.18vw, 23px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .eidos-nav-links a,
-    .eidos-mobile-nav a {
-      color: rgba(242, 236, 216, 0.72);
-      font-size: clamp(0.60rem, 0.64vw, 0.72rem);
-      font-weight: 650;
-      letter-spacing: 0.08em;
+    .nav-links li {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a,
+    .mobile-menu a {
+      color: rgba(242,236,216,.72);
+      font-family: "Josefin Sans", ui-sans-serif, sans-serif;
+      font-size: clamp(.61rem, .66vw, .72rem);
+      font-weight: 600;
+      letter-spacing: .055em;
+      line-height: 1;
       text-decoration: none;
       text-transform: uppercase;
       white-space: nowrap;
-      transition: color 160ms ease, opacity 160ms ease;
+      transition: color 170ms ease, border-color 170ms ease, background 170ms ease;
     }
 
-    .eidos-nav-links a:hover,
-    .eidos-mobile-nav a:hover {
+    .nav-links a:hover,
+    .mobile-menu a:hover {
       color: var(--eidos-gold);
     }
 
-    .eidos-nav-links .eidos-buy-link {
+    .nav-links .buy-link {
       padding: 9px 13px;
-      border: 1px solid rgba(216, 178, 57, 0.34);
+      border: 1px solid rgba(216,178,57,.40);
       border-radius: 999px;
-      color: rgba(242, 236, 216, 0.9);
-      background: rgba(216, 178, 57, 0.07);
+      color: rgba(242,236,216,.92);
+      background: rgba(216,178,57,.06);
     }
 
-    .eidos-nav-links .eidos-buy-link:hover {
-      border-color: rgba(216, 178, 57, 0.66);
-      background: rgba(216, 178, 57, 0.13);
+    .nav-links .buy-link:hover {
+      border-color: rgba(216,178,57,.70);
+      background: rgba(216,178,57,.13);
     }
 
-    #eidosMenuButton {
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+    }
+
+    .lang-switch img {
+      display: block;
+      width: 24px;
+      height: auto;
+      border-radius: 1px;
+      opacity: .86;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .lang-switch:hover img {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
       display: none;
       width: 42px;
       height: 42px;
-      flex: 0 0 42px;
+      margin-left: auto;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       gap: 5px;
-      padding: 0;
-      border: 1px solid rgba(242, 236, 216, 0.14);
+      border: 1px solid rgba(242,236,216,.13);
       border-radius: 50%;
       color: var(--eidos-cream);
-      background: rgba(242, 236, 216, 0.05);
+      background: rgba(242,236,216,.04);
       cursor: pointer;
     }
 
-    #eidosMenuButton span {
+    .hamburger span {
       display: block;
       width: 18px;
       height: 1px;
@@ -566,158 +642,201 @@
       transition: transform 180ms ease, opacity 180ms ease;
     }
 
-    #eidosMenuButton[aria-expanded="true"] span:nth-child(1) {
+    .hamburger.active span:nth-child(1) {
       transform: translateY(6px) rotate(45deg);
     }
 
-    #eidosMenuButton[aria-expanded="true"] span:nth-child(2) {
+    .hamburger.active span:nth-child(2) {
       opacity: 0;
     }
 
-    #eidosMenuButton[aria-expanded="true"] span:nth-child(3) {
+    .hamburger.active span:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    .eidos-mobile-nav {
+    .mobile-menu {
       position: fixed;
-      top: 64px;
+      top: 56px;
       left: 0;
       right: 0;
-      z-index: 59;
+      z-index: 69;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
+      max-height: calc(100vh - 56px);
       padding: 10px;
-      border-bottom: 1px solid rgba(216, 178, 57, 0.18);
-      background: rgba(5, 17, 14, 0.97);
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      overflow-y: auto;
+      border-bottom: 1px solid rgba(201,168,76,.20);
+      background: rgba(3,17,14,.97);
+      box-shadow: 0 22px 45px rgba(0,0,0,.40);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
+      transform: translateY(-12px);
       pointer-events: none;
-      transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+      transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
     }
 
-    body.eidos-menu-open .eidos-mobile-nav {
+    .mobile-menu.open {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
       pointer-events: auto;
     }
 
-    .eidos-mobile-nav a {
+    .mobile-menu a {
       display: flex;
-      min-height: 42px;
+      min-height: 43px;
       align-items: center;
       justify-content: center;
       padding: 9px 8px;
-      border: 1px solid rgba(242, 236, 216, 0.08);
-      border-radius: 4px;
+      border: 1px solid rgba(242,236,216,.07);
+      border-radius: 3px;
       text-align: center;
-      background: rgba(242, 236, 216, 0.025);
+      background: rgba(242,236,216,.018);
     }
 
-    /* El distintivo del visor baja para no solaparse con el menú. */
+    /* El identificador del visor ocupa la esquina superior cuando el menú se oculta. */
     #brand {
-      top: 82px;
+      top: 18px;
+      transition: opacity 260ms ease, transform 260ms ease, top 500ms ease;
     }
 
     #touchHint {
-      top: 78px;
+      top: 16px;
+      transition: opacity 300ms ease, top 500ms ease;
     }
 
-    @media (max-width: 1280px) {
-      #eidosNavbar {
-        padding: 0 20px;
-      }
+    body:not(.visualizer-started) #brand,
+    body.nav-visible #brand,
+    body.mobile-menu-open #brand {
+      top: 72px;
+    }
 
-      .eidos-nav-links {
+    body:not(.visualizer-started) #touchHint,
+    body.nav-visible #touchHint,
+    body.mobile-menu-open #touchHint {
+      top: 70px;
+    }
+
+    @media (max-width: 1180px) {
+      .nav-links {
         display: none;
       }
 
-      #eidosMenuButton {
+      .hamburger {
         display: flex;
-        margin-left: auto;
       }
     }
 
     @media (max-width: 680px) {
-      #eidosNavbar {
-        height: 58px;
-        padding: 0 14px;
+      #navbar {
+        height: 56px;
+        padding-inline: 14px;
       }
 
-      .eidos-nav-logo {
-        font-size: 1.12rem;
+      .nav-logo {
+        font-size: 1.24rem;
       }
 
-      .eidos-mobile-nav {
-        top: 58px;
+      .mobile-menu {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-height: calc(100vh - 58px);
-        overflow-y: auto;
       }
 
-      #brand {
-        top: 72px;
-        left: 14px;
-      }
-
-      #touchHint {
+      body:not(.visualizer-started) #brand,
+      body.nav-visible #brand,
+      body.mobile-menu-open #brand {
         top: 70px;
       }
     }
-
   </style>
+
+  <!-- Google tag (gtag.js), igual que en la página principal -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GRKE5N9XFB');
+
+    (function () {
+      try {
+        const consent = localStorage.getItem('consentGiven');
+        if (consent === 'true') {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted',
+            'analytics_storage': 'granted'
+          });
+        }
+      } catch (_) {
+        // Si el almacenamiento no está disponible, se conserva el consentimiento denegado.
+      }
+    })();
+  </script>
+
 </head>
 <body>
 
-  <!-- Navegación principal de Eidos -->
-  <nav id="eidosNavbar" aria-label="Navegación principal">
-    <a class="eidos-nav-logo" href="../index.html#hero" aria-label="Volver al inicio de Eidos">EIDOS</a>
 
-    <div class="eidos-nav-links">
-      <a href="../index.html#synopsis">La novela</a>
-      <a href="../index.html#video">Vídeo</a>
-      <a href="../index.html#themes">Temas</a>
-      <a href="../index.html#editions">Volúmenes</a>
-      <a href="../index.html#stories">Relatos</a>
-      <a href="../index.html#blog">Blog</a>
-      <a href="../index.html#download">Comienza</a>
-      <a href="../index.html#scenes">Escenas</a>
-      <a href="../index.html#reviews">Reseñas</a>
-      <a href="../index.html#mentions">Menciones</a>
-      <a href="../index.html#author">Autor</a>
-      <a class="eidos-buy-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a>
-    </div>
+  <!-- Navigation: misma estructura que el index principal -->
+  <nav id="navbar">
+    <a class="nav-logo" href="https://www.eidoslibro.com/#hero">EIDOS</a>
 
-    <button
-      id="eidosMenuButton"
-      type="button"
-      aria-label="Abrir menú"
-      aria-controls="eidosMobileNav"
-      aria-expanded="false"
-    >
+    <ul class="nav-links">
+      <li><a href="https://www.eidoslibro.com/#synopsis">La novela</a></li>
+      <li><a href="https://www.eidoslibro.com/#video">Vídeo</a></li>
+      <li><a href="https://www.eidoslibro.com/#themes">Temas</a></li>
+      <li><a href="https://www.eidoslibro.com/#editions">Volúmenes</a></li>
+      <li><a href="https://www.eidoslibro.com/#stories">Relatos</a></li>
+      <li><a href="https://www.eidoslibro.com/#blog">Blog</a></li>
+      <li><a href="https://www.eidoslibro.com/#download">Comienza</a></li>
+      <li><a href="https://www.eidoslibro.com/#scenes">Escenas</a></li>
+      <li><a href="https://www.eidoslibro.com/#reviews">Reseñas</a></li>
+      <li><a href="https://www.eidoslibro.com/#mentions">Menciones</a></li>
+      <li><a href="https://www.eidoslibro.com/#author">Autor</a></li>
+      <li><a class="buy-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a></li>
+      <li>
+        <a href="https://www.eidoslibro.com/indexeng.html" class="lang-switch" aria-label="English version">
+          <img src="https://www.eidoslibro.com/assets/images/flaguk.webp" alt="English">
+        </a>
+      </li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" role="button">
       <span></span><span></span><span></span>
-    </button>
+    </div>
   </nav>
 
-  <div id="eidosMobileNav" class="eidos-mobile-nav" aria-label="Menú móvil">
-    <a href="../index.html#hero">Inicio</a>
-    <a href="../index.html#synopsis">La novela</a>
-    <a href="../index.html#video">Vídeo</a>
-    <a href="../index.html#themes">Temas</a>
-    <a href="../index.html#editions">Volúmenes</a>
-    <a href="../index.html#stories">Relatos</a>
-    <a href="../index.html#blog">Blog</a>
-    <a href="../index.html#download">Comienza</a>
-    <a href="../index.html#scenes">Escenas</a>
-    <a href="../index.html#reviews">Reseñas</a>
-    <a href="../index.html#mentions">Menciones</a>
-    <a href="../index.html#author">Autor</a>
-    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="https://www.eidoslibro.com/#hero" onclick="closeMenu()">Inicio</a>
+    <a href="https://www.eidoslibro.com/#synopsis" onclick="closeMenu()">La novela</a>
+    <a href="https://www.eidoslibro.com/#video" onclick="closeMenu()">Vídeo</a>
+    <a href="https://www.eidoslibro.com/#themes" onclick="closeMenu()">Temas</a>
+    <a href="https://www.eidoslibro.com/#editions" onclick="closeMenu()">Volúmenes</a>
+    <a href="https://www.eidoslibro.com/#stories" onclick="closeMenu()">Relatos</a>
+    <a href="https://www.eidoslibro.com/#blog" onclick="closeMenu()">Blog</a>
+    <a href="https://www.eidoslibro.com/#download" onclick="closeMenu()">Comienza</a>
+    <a href="https://www.eidoslibro.com/#scenes" onclick="closeMenu()">Escenas</a>
+    <a href="https://www.eidoslibro.com/#reviews" onclick="closeMenu()">Reseñas</a>
+    <a href="https://www.eidoslibro.com/#mentions" onclick="closeMenu()">Menciones</a>
+    <a href="https://www.eidoslibro.com/#author" onclick="closeMenu()">Autor</a>
+    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener" onclick="closeMenu()">Comprar</a>
+    <a href="https://www.eidoslibro.com/indexeng.html" class="lang-switch" aria-label="English version" onclick="closeMenu()">
+      <img src="https://www.eidoslibro.com/assets/images/flaguk.webp" alt="English">
+    </a>
   </div>
 
   <canvas id="visualizer" aria-label="Visualizador musical reactivo inspirado en Eidos"></canvas>
@@ -756,6 +875,10 @@
       <small>Ahora suena</small>
       <span id="currentTrackName">—</span>
     </div>
+    <button id="modeButton" class="control-button mode-button" type="button" data-mode="random" aria-label="Modo aleatorio">
+      <span id="modeLabelLong">Aleatorio</span>
+      <span id="modeLabelShort">Azar</span>
+    </button>
     <button id="selectButton" class="control-button" type="button">Canciones</button>
   </div>
 
@@ -786,6 +909,9 @@
       const startTrack = document.getElementById('startTrack');
       const startStatus = document.getElementById('startStatus');
       const currentTrackName = document.getElementById('currentTrackName');
+      const modeButton = document.getElementById('modeButton');
+      const modeLabelLong = document.getElementById('modeLabelLong');
+      const modeLabelShort = document.getElementById('modeLabelShort');
 
       let audioContext = null;
       let analyser = null;
@@ -803,7 +929,8 @@
       let lastFrame = performance.now();
       let controlsTimer = null;
       let selectorOpen = false;
-      let preloadedRandomIndex = -1;
+      let playbackMode = 'random';
+      let preloadedNextIndex = -1;
 
       const particles = [];
       const ripples = [];
@@ -1164,259 +1291,491 @@
       }
 
 
+      const cubeTextureSize = compactDevice ? 160 : 224;
+      const cubeSurfaceCanvas = document.createElement('canvas');
+      const cubeSurfaceCtx = cubeSurfaceCanvas.getContext('2d');
+      const cubeNoiseCanvas = document.createElement('canvas');
+      const cubeNoiseCtx = cubeNoiseCanvas.getContext('2d');
+      cubeSurfaceCanvas.width = cubeSurfaceCanvas.height = cubeTextureSize;
+      cubeNoiseCanvas.width = cubeNoiseCanvas.height = cubeTextureSize;
+
+      let cubeTextureTimestamp = -Infinity;
+
+      const cubeCloudSeeds = Array.from({ length: compactDevice ? 10 : 16 }, (_, i) => ({
+        x: Math.random(),
+        y: Math.random(),
+        radius: random(.09, .27),
+        phase: random(0, Math.PI * 2),
+        speed: random(.12, .35),
+        bright: i % 3 !== 0
+      }));
+
+      (function buildCubeNoise() {
+        const image = cubeNoiseCtx.createImageData(cubeTextureSize, cubeTextureSize);
+        for (let i = 0; i < image.data.length; i += 4) {
+          const value = Math.floor(Math.random() * 255);
+          image.data[i] = value;
+          image.data[i + 1] = value;
+          image.data[i + 2] = value;
+          image.data[i + 3] = Math.floor(random(14, 58));
+        }
+        cubeNoiseCtx.putImageData(image, 0, 0);
+      })();
+
+      function updateCubeTexture(time) {
+        if (time - cubeTextureTimestamp < (compactDevice ? 0.18 : 0.12)) return;
+        cubeTextureTimestamp = time;
+
+        const tctx = cubeSurfaceCtx;
+        const size = cubeTextureSize;
+
+        tctx.clearRect(0, 0, size, size);
+
+        const base = tctx.createLinearGradient(0, 0, size, size);
+        base.addColorStop(0, '#fff8a8');
+        base.addColorStop(.18, '#ffe04d');
+        base.addColorStop(.52, '#eaa918');
+        base.addColorStop(.78, '#ffd62f');
+        base.addColorStop(1, '#9b5807');
+        tctx.fillStyle = base;
+        tctx.fillRect(0, 0, size, size);
+
+        tctx.save();
+        tctx.filter = 'blur(17px)';
+        for (const seed of cubeCloudSeeds) {
+          const driftX = Math.sin(time * seed.speed + seed.phase) * size * .11;
+          const driftY = Math.cos(time * seed.speed * .73 + seed.phase) * size * .09;
+          const x = seed.x * size + driftX;
+          const y = seed.y * size + driftY;
+          const r = seed.radius * size * (1 + Math.sin(time * .4 + seed.phase) * .12);
+
+          const cloud = tctx.createRadialGradient(x, y, 0, x, y, r);
+          if (seed.bright) {
+            cloud.addColorStop(0, 'rgba(255,255,225,.66)');
+            cloud.addColorStop(.36, 'rgba(255,235,120,.30)');
+            cloud.addColorStop(1, 'rgba(255,190,30,0)');
+            tctx.globalCompositeOperation = 'screen';
+          } else {
+            cloud.addColorStop(0, 'rgba(118,61,2,.34)');
+            cloud.addColorStop(.46, 'rgba(161,83,3,.17)');
+            cloud.addColorStop(1, 'rgba(100,45,0,0)');
+            tctx.globalCompositeOperation = 'multiply';
+          }
+
+          tctx.fillStyle = cloud;
+          tctx.beginPath();
+          tctx.arc(x, y, r, 0, Math.PI * 2);
+          tctx.fill();
+        }
+        tctx.restore();
+
+        tctx.save();
+        tctx.globalCompositeOperation = 'screen';
+        const innerLight = tctx.createRadialGradient(
+          size * (.44 + Math.sin(time * .23) * .035),
+          size * (.39 + Math.cos(time * .19) * .03),
+          size * .02,
+          size * .48,
+          size * .46,
+          size * .55
+        );
+        innerLight.addColorStop(0, 'rgba(255,255,244,.75)');
+        innerLight.addColorStop(.25, 'rgba(255,246,167,.39)');
+        innerLight.addColorStop(.72, 'rgba(255,205,45,.12)');
+        innerLight.addColorStop(1, 'rgba(255,190,20,0)');
+        tctx.fillStyle = innerLight;
+        tctx.fillRect(0, 0, size, size);
+        tctx.restore();
+
+        tctx.save();
+        tctx.globalCompositeOperation = 'overlay';
+        tctx.globalAlpha = .16;
+        tctx.drawImage(cubeNoiseCanvas, 0, 0);
+        tctx.restore();
+
+        tctx.save();
+        tctx.globalCompositeOperation = 'screen';
+        tctx.globalAlpha = .20;
+        tctx.lineWidth = 1.2;
+        for (let i = 0; i < 11; i++) {
+          const y = size * (.10 + i * .079) + Math.sin(time * .38 + i) * 5;
+          tctx.strokeStyle = `rgba(255,249,196,${.08 + (i % 3) * .025})`;
+          tctx.beginPath();
+          tctx.moveTo(-20, y + 18);
+          tctx.bezierCurveTo(size * .28, y - 14, size * .68, y + 20, size + 24, y - 8);
+          tctx.stroke();
+        }
+        tctx.restore();
+
+        const glaze = tctx.createLinearGradient(0, 0, size, size);
+        glaze.addColorStop(0, 'rgba(255,255,255,.24)');
+        glaze.addColorStop(.22, 'rgba(255,255,255,.03)');
+        glaze.addColorStop(.65, 'rgba(104,49,0,.05)');
+        glaze.addColorStop(1, 'rgba(53,21,0,.18)');
+        tctx.fillStyle = glaze;
+        tctx.fillRect(0, 0, size, size);
+      }
+
+      function drawMappedTriangle(image, source, destination, alpha = 1) {
+        const [s0, s1, s2] = source;
+        const [d0, d1, d2] = destination;
+
+        const denom =
+          s0.x * (s1.y - s2.y) +
+          s1.x * (s2.y - s0.y) +
+          s2.x * (s0.y - s1.y);
+
+        if (Math.abs(denom) < 0.0001) return;
+
+        const a = (
+          d0.x * (s1.y - s2.y) +
+          d1.x * (s2.y - s0.y) +
+          d2.x * (s0.y - s1.y)
+        ) / denom;
+
+        const c = (
+          d0.x * (s2.x - s1.x) +
+          d1.x * (s0.x - s2.x) +
+          d2.x * (s1.x - s0.x)
+        ) / denom;
+
+        const e = (
+          d0.x * (s1.x * s2.y - s2.x * s1.y) +
+          d1.x * (s2.x * s0.y - s0.x * s2.y) +
+          d2.x * (s0.x * s1.y - s1.x * s0.y)
+        ) / denom;
+
+        const b = (
+          d0.y * (s1.y - s2.y) +
+          d1.y * (s2.y - s0.y) +
+          d2.y * (s0.y - s1.y)
+        ) / denom;
+
+        const d = (
+          d0.y * (s2.x - s1.x) +
+          d1.y * (s0.x - s2.x) +
+          d2.y * (s1.x - s0.x)
+        ) / denom;
+
+        const f = (
+          d0.y * (s1.x * s2.y - s2.x * s1.y) +
+          d1.y * (s2.x * s0.y - s0.x * s2.y) +
+          d2.y * (s0.x * s1.y - s1.x * s0.y)
+        ) / denom;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(d0.x, d0.y);
+        ctx.lineTo(d1.x, d1.y);
+        ctx.lineTo(d2.x, d2.y);
+        ctx.closePath();
+        ctx.clip();
+        ctx.globalAlpha = alpha;
+        ctx.setTransform(a * dpr, b * dpr, c * dpr, d * dpr, e * dpr, f * dpr);
+        ctx.drawImage(image, 0, 0);
+        ctx.restore();
+      }
+
+      function drawMappedQuad(image, points, alpha) {
+        const s = cubeTextureSize;
+        drawMappedTriangle(
+          image,
+          [{x:0,y:0}, {x:s,y:0}, {x:s,y:s}],
+          [points[0], points[1], points[2]],
+          alpha
+        );
+        drawMappedTriangle(
+          image,
+          [{x:0,y:0}, {x:s,y:s}, {x:0,y:s}],
+          [points[0], points[2], points[3]],
+          alpha
+        );
+      }
+
       function drawEidosCube(time) {
-        const cx = width * 0.5;
-        const cy = height * 0.5;
+        updateCubeTexture(time);
+
+        const cx = width * .5;
+        const cy = height * .5;
         const minSize = Math.min(width, height);
+        const pulse = 1 + energy.bass * .055 + energy.smoothedBeat * .035;
 
-        const pulse = 1 + energy.bass * 0.10 + energy.smoothedBeat * 0.08;
-        const cubeRadius = minSize * 0.090 * pulse;
-
-        const rotY = time * 0.34;
-        const rotX = -0.54 + Math.sin(time * 0.23) * 0.04 + energy.mid * 0.06;
-        const rotZ = Math.sin(time * 0.16) * 0.03;
+        const rotY = time * .23;
+        const rotX = -.57 + Math.sin(time * .18) * .035;
+        const rotZ = Math.sin(time * .12) * .018;
 
         const sy = Math.sin(rotY), cyRot = Math.cos(rotY);
         const sx = Math.sin(rotX), cxRot = Math.cos(rotX);
         const sz = Math.sin(rotZ), czRot = Math.cos(rotZ);
 
-        const basePoints = [
-          [-1, -1, -1], [ 1, -1, -1], [ 1,  1, -1], [-1,  1, -1],
-          [-1, -1,  1], [ 1, -1,  1], [ 1,  1,  1], [-1,  1,  1]
+        const camera = 4.7;
+        const focal = clamp(minSize * .49, 178, 440) * pulse;
+
+        const base = [
+          [-1,-1,-1], [ 1,-1,-1], [ 1, 1,-1], [-1, 1,-1],
+          [-1,-1, 1], [ 1,-1, 1], [ 1, 1, 1], [-1, 1, 1]
         ];
 
-        const points = basePoints.map(([x, y, z]) => {
+        const vertices = base.map(([x, y, z]) => {
           let px = x;
           let py = y;
           let pz = z;
 
-          const ryx = px * cyRot - pz * sy;
-          const ryz = px * sy + pz * cyRot;
-          px = ryx;
-          pz = ryz;
+          const yx = px * cyRot - pz * sy;
+          const yz = px * sy + pz * cyRot;
+          px = yx;
+          pz = yz;
 
-          const rxy = py * cxRot - pz * sx;
-          const rxz = py * sx + pz * cxRot;
-          py = rxy;
-          pz = rxz;
+          const xx = py * cxRot - pz * sx;
+          const xz = py * sx + pz * cxRot;
+          py = xx;
+          pz = xz;
 
-          const rzx = px * czRot - py * sz;
-          const rzy = px * sz + py * czRot;
-          px = rzx;
-          py = rzy;
+          const zx = px * czRot - py * sz;
+          const zy = px * sz + py * czRot;
+          px = zx;
+          py = zy;
 
-          const depth = 3.35;
-          const perspective = 1 / (depth - pz * 0.55);
+          const perspective = focal / (camera - pz);
 
           return {
             x3: px,
             y3: py,
             z3: pz,
-            x: cx + px * cubeRadius * 1.24 * perspective,
-            y: cy + py * cubeRadius * 1.24 * perspective,
-            p: perspective
+            x: cx + px * perspective,
+            y: cy + py * perspective
           };
         });
 
         const faces = [
-          { idx: [0, 1, 2, 3], tone: 'rear' },
-          { idx: [4, 5, 6, 7], tone: 'front' },
-          { idx: [0, 1, 5, 4], tone: 'bottom' },
-          { idx: [3, 2, 6, 7], tone: 'top' },
-          { idx: [1, 2, 6, 5], tone: 'right' },
-          { idx: [0, 3, 7, 4], tone: 'left' }
+          { idx:[4,5,6,7], tint:'front'  },
+          { idx:[1,0,3,2], tint:'back'   },
+          { idx:[5,1,2,6], tint:'right'  },
+          { idx:[0,4,7,3], tint:'left'   },
+          { idx:[0,1,5,4], tint:'top'    },
+          { idx:[7,6,2,3], tint:'bottom' }
         ];
 
-        function polygonPath(facePoints) {
-          ctx.beginPath();
-          ctx.moveTo(facePoints[0].x, facePoints[0].y);
-          for (let i = 1; i < facePoints.length; i++) {
-            ctx.lineTo(facePoints[i].x, facePoints[i].y);
-          }
-          ctx.closePath();
-        }
+        const light = { x:-.43, y:-.58, z:.69 };
+        const lightLen = Math.hypot(light.x, light.y, light.z);
+        light.x /= lightLen;
+        light.y /= lightLen;
+        light.z /= lightLen;
 
-        function faceCentroid(facePoints) {
-          let x = 0;
-          let y = 0;
-          let z = 0;
-          for (const p of facePoints) {
-            x += p.x;
-            y += p.y;
-            z += p.z3;
-          }
+        function faceData(face) {
+          const pts = face.idx.map(i => vertices[i]);
+          const a = pts[0], b = pts[1], c = pts[2];
+
+          const ux = b.x3 - a.x3;
+          const uy = b.y3 - a.y3;
+          const uz = b.z3 - a.z3;
+          const vx = c.x3 - a.x3;
+          const vy = c.y3 - a.y3;
+          const vz = c.z3 - a.z3;
+
+          let nx = uy * vz - uz * vy;
+          let ny = uz * vx - ux * vz;
+          let nz = ux * vy - uy * vx;
+          const nLen = Math.hypot(nx, ny, nz) || 1;
+          nx /= nLen;
+          ny /= nLen;
+          nz /= nLen;
+
+          const depth = pts.reduce((sum, p) => sum + p.z3, 0) / pts.length;
+          const centerX = pts.reduce((sum, p) => sum + p.x, 0) / pts.length;
+          const centerY = pts.reduce((sum, p) => sum + p.y, 0) / pts.length;
+          const lambert = Math.max(0, nx * light.x + ny * light.y + nz * light.z);
+
           return {
-            x: x / facePoints.length,
-            y: y / facePoints.length,
-            z: z / facePoints.length
+            ...face,
+            pts,
+            nx, ny, nz,
+            depth,
+            centerX,
+            centerY,
+            lambert,
+            visible: nz > .035
           };
         }
 
-        function drawFaceVeil(facePoints, centroid, alpha) {
+        const visibleFaces = faces
+          .map(faceData)
+          .filter(face => face.visible)
+          .sort((a, b) => a.depth - b.depth);
+
+        ctx.save();
+
+        // Halo amplio, más contenido que el visualizador para mantener volumen.
+        ctx.globalCompositeOperation = 'screen';
+        const haloRadius = clamp(minSize * .24, 120, 255) * pulse;
+        const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, haloRadius);
+        halo.addColorStop(0, `rgba(255,240,128,${.25 + energy.overall * .13})`);
+        halo.addColorStop(.20, `rgba(255,208,45,${.18 + energy.bass * .10})`);
+        halo.addColorStop(.48, `rgba(236,157,18,${.085 + energy.smoothedBeat * .055})`);
+        halo.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = halo;
+        ctx.beginPath();
+        ctx.arc(cx, cy, haloRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Núcleo luminoso que parece quedar encerrado dentro del cubo.
+        const core = ctx.createRadialGradient(cx - 18, cy - 22, 2, cx, cy, haloRadius * .49);
+        core.addColorStop(0, `rgba(255,255,244,${.37 + energy.bass * .12})`);
+        core.addColorStop(.28, `rgba(255,239,132,${.22 + energy.overall * .10})`);
+        core.addColorStop(.72, 'rgba(255,184,27,.06)');
+        core.addColorStop(1, 'rgba(255,164,0,0)');
+        ctx.fillStyle = core;
+        ctx.beginPath();
+        ctx.arc(cx, cy, haloRadius * .50, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Caras con textura volumétrica animada.
+        ctx.globalCompositeOperation = 'source-over';
+        for (const face of visibleFaces) {
+          const shade = .58 + face.lambert * .37;
+          const alpha = clamp(shade + energy.overall * .08, .52, .94);
+
           ctx.save();
-          polygonPath(facePoints);
+          ctx.beginPath();
+          ctx.moveTo(face.pts[0].x, face.pts[0].y);
+          for (let i = 1; i < face.pts.length; i++) {
+            ctx.lineTo(face.pts[i].x, face.pts[i].y);
+          }
+          ctx.closePath();
+
+          const underpaint = ctx.createLinearGradient(
+            face.centerX - focal * .18,
+            face.centerY - focal * .18,
+            face.centerX + focal * .22,
+            face.centerY + focal * .22
+          );
+          underpaint.addColorStop(0, `rgba(255,244,160,${.25 * shade})`);
+          underpaint.addColorStop(.45, `rgba(255,198,34,${.55 * shade})`);
+          underpaint.addColorStop(1, `rgba(112,54,1,${.42 * shade})`);
+          ctx.fillStyle = underpaint;
+          ctx.fill();
+          ctx.restore();
+
+          drawMappedQuad(cubeSurfaceCanvas, face.pts, alpha);
+
+          // Profundidad y reflexión direccional por cara.
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(face.pts[0].x, face.pts[0].y);
+          for (let i = 1; i < face.pts.length; i++) {
+            ctx.lineTo(face.pts[i].x, face.pts[i].y);
+          }
+          ctx.closePath();
           ctx.clip();
 
-          const veilA = ctx.createRadialGradient(
-            centroid.x - cubeRadius * 0.18,
-            centroid.y - cubeRadius * 0.20,
-            cubeRadius * 0.02,
-            centroid.x - cubeRadius * 0.10,
-            centroid.y - cubeRadius * 0.05,
-            cubeRadius * 0.88
+          const faceMinX = Math.min(...face.pts.map(p => p.x));
+          const faceMaxX = Math.max(...face.pts.map(p => p.x));
+          const faceMinY = Math.min(...face.pts.map(p => p.y));
+          const faceMaxY = Math.max(...face.pts.map(p => p.y));
+
+          const reflection = ctx.createLinearGradient(
+            faceMinX,
+            faceMinY,
+            faceMaxX,
+            faceMaxY
           );
-          veilA.addColorStop(0, `rgba(255, 248, 186, ${alpha * 0.34})`);
-          veilA.addColorStop(0.40, `rgba(255, 220, 70, ${alpha * 0.18})`);
-          veilA.addColorStop(1, 'rgba(255, 190, 35, 0)');
-          ctx.fillStyle = veilA;
+          reflection.addColorStop(0, `rgba(255,255,245,${.24 * face.lambert + .06})`);
+          reflection.addColorStop(.22, 'rgba(255,255,255,.025)');
+          reflection.addColorStop(.72, 'rgba(88,35,0,.045)');
+          reflection.addColorStop(1, `rgba(52,18,0,${.16 * (1 - face.lambert)})`);
+          ctx.fillStyle = reflection;
           ctx.fillRect(
-            centroid.x - cubeRadius * 1.15,
-            centroid.y - cubeRadius * 1.15,
-            cubeRadius * 2.3,
-            cubeRadius * 2.3
+            faceMinX - 4,
+            faceMinY - 4,
+            faceMaxX - faceMinX + 8,
+            faceMaxY - faceMinY + 8
           );
 
-          const veilB = ctx.createLinearGradient(
-            centroid.x - cubeRadius * 0.42,
-            centroid.y - cubeRadius * 0.32,
-            centroid.x + cubeRadius * 0.45,
-            centroid.y + cubeRadius * 0.38
+          const movingGlint = ctx.createRadialGradient(
+            face.centerX - focal * (.10 + Math.sin(time * .31) * .04),
+            face.centerY - focal * (.12 + Math.cos(time * .27) * .035),
+            0,
+            face.centerX,
+            face.centerY,
+            Math.max(18, focal * .22)
           );
-          veilB.addColorStop(0, `rgba(255,255,255, ${alpha * 0.10})`);
-          veilB.addColorStop(0.5, `rgba(255, 232, 120, ${alpha * 0.05})`);
-          veilB.addColorStop(1, `rgba(255, 187, 49, ${alpha * 0.16})`);
-          ctx.fillStyle = veilB;
+          movingGlint.addColorStop(0, `rgba(255,255,246,${.15 + face.lambert * .11})`);
+          movingGlint.addColorStop(.42, 'rgba(255,243,170,.05)');
+          movingGlint.addColorStop(1, 'rgba(255,210,70,0)');
+          ctx.globalCompositeOperation = 'screen';
+          ctx.fillStyle = movingGlint;
           ctx.fillRect(
-            centroid.x - cubeRadius * 0.95,
-            centroid.y - cubeRadius * 0.95,
-            cubeRadius * 1.9,
-            cubeRadius * 1.9
+            faceMinX - 6,
+            faceMinY - 6,
+            faceMaxX - faceMinX + 12,
+            faceMaxY - faceMinY + 12
           );
-
-          ctx.lineWidth = Math.max(1, cubeRadius * 0.013);
-          for (let i = 0; i < 4; i++) {
-            const drift = Math.sin(time * 0.45 + i * 1.37) * cubeRadius * 0.06;
-            ctx.strokeStyle = `rgba(255, 244, 180, ${alpha * 0.05})`;
-            ctx.beginPath();
-            ctx.moveTo(
-              centroid.x - cubeRadius * 0.44,
-              centroid.y - cubeRadius * (0.16 + i * 0.16) + drift
-            );
-            ctx.lineTo(
-              centroid.x + cubeRadius * 0.40,
-              centroid.y - cubeRadius * (0.28 - i * 0.14) - drift * 0.25
-            );
-            ctx.stroke();
-          }
-
           ctx.restore();
         }
 
-        function drawEdgeGlow(facePoints, alpha, shadow) {
-          polygonPath(facePoints);
-          ctx.strokeStyle = `rgba(255, 224, 86, ${alpha})`;
-          ctx.lineWidth = Math.max(1.6, cubeRadius * 0.033);
-          ctx.shadowColor = `rgba(255, 196, 36, ${shadow})`;
-          ctx.shadowBlur = cubeRadius * 0.34;
-          ctx.stroke();
-
-          polygonPath(facePoints);
-          ctx.strokeStyle = `rgba(255, 248, 188, ${alpha * 0.92})`;
-          ctx.lineWidth = Math.max(1, cubeRadius * 0.014);
-          ctx.shadowBlur = cubeRadius * 0.11;
-          ctx.stroke();
-        }
-
-        const sortedFaces = faces.map(face => {
-          const facePoints = face.idx.map(i => points[i]);
-          const centroid = faceCentroid(facePoints);
-          return { ...face, facePoints, centroid };
-        }).sort((a, b) => a.centroid.z - b.centroid.z);
-
-        ctx.save();
-        ctx.globalCompositeOperation = 'screen';
-
-        const aura = ctx.createRadialGradient(cx, cy, 0, cx, cy, cubeRadius * 1.95);
-        aura.addColorStop(0, `rgba(255, 225, 82, ${0.24 + energy.overall * 0.16})`);
-        aura.addColorStop(0.32, `rgba(255, 196, 35, ${0.15 + energy.bass * 0.15})`);
-        aura.addColorStop(0.70, `rgba(255, 155, 18, ${0.06 + energy.smoothedBeat * 0.08})`);
-        aura.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = aura;
-        ctx.beginPath();
-        ctx.arc(cx, cy, cubeRadius * 1.95, 0, Math.PI * 2);
-        ctx.fill();
-
-        const coreGlow = ctx.createRadialGradient(cx, cy, cubeRadius * 0.08, cx, cy, cubeRadius * 0.96);
-        coreGlow.addColorStop(0, `rgba(255,255,235, ${0.18 + energy.bass * 0.10})`);
-        coreGlow.addColorStop(0.34, `rgba(255, 234, 120, ${0.13 + energy.overall * 0.12})`);
-        coreGlow.addColorStop(1, 'rgba(255, 200, 40, 0)');
-        ctx.fillStyle = coreGlow;
-        ctx.beginPath();
-        ctx.arc(cx, cy, cubeRadius * 0.96, 0, Math.PI * 2);
-        ctx.fill();
-
-        for (const face of sortedFaces) {
-          const facePoints = face.facePoints;
-          const centroid = face.centroid;
-          const frontFactor = (centroid.z + 1.2) / 2.4;
-          const faceAlpha = Math.max(0.16, 0.18 + frontFactor * 0.22 + energy.overall * 0.06);
-
-          let gradient;
-          if (face.tone === 'top') {
-            gradient = ctx.createLinearGradient(
-              centroid.x,
-              centroid.y - cubeRadius * 0.62,
-              centroid.x,
-              centroid.y + cubeRadius * 0.58
-            );
-            gradient.addColorStop(0, `rgba(255, 249, 186, ${faceAlpha * 0.92})`);
-            gradient.addColorStop(0.48, `rgba(255, 221, 92, ${faceAlpha * 0.72})`);
-            gradient.addColorStop(1, `rgba(231, 162, 28, ${faceAlpha * 0.52})`);
-          } else if (face.tone === 'right' || face.tone === 'front') {
-            gradient = ctx.createLinearGradient(
-              centroid.x - cubeRadius * 0.48,
-              centroid.y - cubeRadius * 0.22,
-              centroid.x + cubeRadius * 0.55,
-              centroid.y + cubeRadius * 0.45
-            );
-            gradient.addColorStop(0, `rgba(255, 224, 84, ${faceAlpha * 0.58})`);
-            gradient.addColorStop(0.50, `rgba(255, 206, 49, ${faceAlpha * 0.76})`);
-            gradient.addColorStop(1, `rgba(224, 148, 20, ${faceAlpha * 0.50})`);
-          } else {
-            gradient = ctx.createLinearGradient(
-              centroid.x - cubeRadius * 0.52,
-              centroid.y - cubeRadius * 0.40,
-              centroid.x + cubeRadius * 0.38,
-              centroid.y + cubeRadius * 0.45
-            );
-            gradient.addColorStop(0, `rgba(255, 232, 98, ${faceAlpha * 0.48})`);
-            gradient.addColorStop(0.55, `rgba(244, 178, 34, ${faceAlpha * 0.64})`);
-            gradient.addColorStop(1, `rgba(193, 123, 16, ${faceAlpha * 0.40})`);
+        // Aristas visibles, con núcleo blanco y halo dorado.
+        const edgeMap = new Map();
+        for (const face of visibleFaces) {
+          for (let i = 0; i < 4; i++) {
+            const a = face.idx[i];
+            const b = face.idx[(i + 1) % 4];
+            const key = a < b ? `${a}-${b}` : `${b}-${a}`;
+            edgeMap.set(key, [a, b]);
           }
-
-          polygonPath(facePoints);
-          ctx.fillStyle = gradient;
-          ctx.fill();
-
-          drawFaceVeil(facePoints, centroid, faceAlpha);
-          drawEdgeGlow(facePoints, 0.52 + frontFactor * 0.22, 0.42 + frontFactor * 0.20);
         }
+
+        ctx.globalCompositeOperation = 'screen';
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
 
         ctx.beginPath();
-        const visibleEdges = [
-          [0, 1], [1, 2], [2, 3], [3, 0],
-          [4, 5], [5, 6], [6, 7], [7, 4],
-          [0, 4], [1, 5], [2, 6], [3, 7]
-        ];
-        for (const [a, b] of visibleEdges) {
-          ctx.moveTo(points[a].x, points[a].y);
-          ctx.lineTo(points[b].x, points[b].y);
+        for (const [a, b] of edgeMap.values()) {
+          ctx.moveTo(vertices[a].x, vertices[a].y);
+          ctx.lineTo(vertices[b].x, vertices[b].y);
         }
-        ctx.strokeStyle = `rgba(255, 251, 210, ${0.22 + energy.high * 0.18})`;
-        ctx.lineWidth = Math.max(1, cubeRadius * 0.010);
-        ctx.shadowColor = 'rgba(255, 215, 82, 0.55)';
-        ctx.shadowBlur = cubeRadius * 0.16;
+        ctx.strokeStyle = `rgba(255,183,20,${.56 + energy.bass * .10})`;
+        ctx.lineWidth = clamp(minSize * .010, 5.5, 10);
+        ctx.shadowColor = 'rgba(255,169,8,.90)';
+        ctx.shadowBlur = clamp(minSize * .035, 18, 34);
         ctx.stroke();
+
+        ctx.beginPath();
+        for (const [a, b] of edgeMap.values()) {
+          ctx.moveTo(vertices[a].x, vertices[a].y);
+          ctx.lineTo(vertices[b].x, vertices[b].y);
+        }
+        ctx.strokeStyle = `rgba(255,253,218,${.82 + energy.high * .10})`;
+        ctx.lineWidth = clamp(minSize * .0032, 1.8, 3.2);
+        ctx.shadowColor = 'rgba(255,242,154,.90)';
+        ctx.shadowBlur = clamp(minSize * .010, 7, 12);
+        ctx.stroke();
+
+        // Destello corto en el vértice superior frontal.
+        const highlightVertex = vertices
+          .slice()
+          .sort((a, b) => (a.y - b.y) || (b.z3 - a.z3))[0];
+
+        const spark = ctx.createRadialGradient(
+          highlightVertex.x,
+          highlightVertex.y,
+          0,
+          highlightVertex.x,
+          highlightVertex.y,
+          clamp(minSize * .035, 18, 34)
+        );
+        spark.addColorStop(0, 'rgba(255,255,255,.86)');
+        spark.addColorStop(.16, 'rgba(255,248,176,.50)');
+        spark.addColorStop(1, 'rgba(255,194,27,0)');
+        ctx.fillStyle = spark;
+        ctx.beginPath();
+        ctx.arc(
+          highlightVertex.x,
+          highlightVertex.y,
+          clamp(minSize * .035, 18, 34),
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
 
         ctx.restore();
       }
@@ -1614,6 +1973,23 @@
         return index;
       }
 
+      function chooseNextIndex() {
+        if (!localPlaylist.length) return -1;
+        if (playbackMode === 'ordered') {
+          return (currentTrackIndex + 1) % localPlaylist.length;
+        }
+        return chooseRandomIndex(true);
+      }
+
+      function updatePlaybackModeUI() {
+        const ordered = playbackMode === 'ordered';
+        modeButton.dataset.mode = playbackMode;
+        modeButton.setAttribute('aria-label', ordered ? 'Reproducción en orden' : 'Reproducción aleatoria');
+        modeButton.setAttribute('aria-pressed', ordered ? 'true' : 'false');
+        modeLabelLong.textContent = ordered ? 'En orden' : 'Aleatorio';
+        modeLabelShort.textContent = ordered ? 'Orden' : 'Azar';
+      }
+
       function updateTrackLabels() {
         const track = localPlaylist[currentTrackIndex];
         const name = track?.name || '—';
@@ -1722,7 +2098,7 @@
           renderTrackList();
           startStatus.textContent = `${localPlaylist.length} ${localPlaylist.length === 1 ? 'canción disponible' : 'canciones disponibles'}.`;
           startButton.disabled = false;
-          preloadNextRandomTrack();
+          preloadNextTrack();
         } catch (error) {
           console.error(error);
           startTrack.textContent = 'No se ha podido cargar la música.';
@@ -1748,15 +2124,18 @@
         audio.load();
       }
 
-      function preloadNextRandomTrack() {
-        if (localPlaylist.length < 2) {
-          preloadedRandomIndex = localPlaylist.length ? 0 : -1;
+      function preloadNextTrack() {
+        if (!localPlaylist.length) {
+          preloadedNextIndex = -1;
           preloadAudio.removeAttribute('src');
           preloadAudio.load();
           return;
         }
-        preloadedRandomIndex = chooseRandomIndex(true);
-        preloadAudio.src = new URL(localPlaylist[preloadedRandomIndex].source, document.baseURI).href;
+
+        preloadedNextIndex = chooseNextIndex();
+        if (preloadedNextIndex < 0) return;
+
+        preloadAudio.src = new URL(localPlaylist[preloadedNextIndex].source, document.baseURI).href;
         preloadAudio.load();
       }
 
@@ -1794,7 +2173,7 @@
           audio.muted = false;
           running = true;
           startStatus.textContent = '';
-          preloadNextRandomTrack();
+          preloadNextTrack();
           showControls();
         } catch (error) {
           audio.pause();
@@ -1833,12 +2212,12 @@
           running = true;
           pauseButton.textContent = 'Pausa';
           updateTrackLabels();
-          preloadNextRandomTrack();
+          preloadNextTrack();
           showControls();
         } catch (error) {
           console.error(`No se pudo reproducir ${track.name}.`, error);
           trackTransitioning = false;
-          await playPlaylistTrack(chooseRandomIndex(true), attempts + 1);
+          await playPlaylistTrack(chooseNextIndex(), attempts + 1);
           return;
         }
 
@@ -1885,6 +2264,13 @@
         showControls();
       });
 
+      modeButton.addEventListener('click', () => {
+        playbackMode = playbackMode === 'random' ? 'ordered' : 'random';
+        updatePlaybackModeUI();
+        preloadNextTrack();
+        showControls();
+      });
+
       selectButton.addEventListener('click', () => {
         if (selectorOpen) closeTrackSelector();
         else openTrackSelector();
@@ -1893,13 +2279,13 @@
       closeSelector.addEventListener('click', closeTrackSelector);
 
       audio.addEventListener('ended', () => {
-        const nextIndex = preloadedRandomIndex >= 0 ? preloadedRandomIndex : chooseRandomIndex(true);
-        playPlaylistTrack(nextIndex);
+        const nextIndex = preloadedNextIndex >= 0 ? preloadedNextIndex : chooseNextIndex();
+        if (nextIndex >= 0) playPlaylistTrack(nextIndex);
       });
 
       audio.addEventListener('error', () => {
         if (!panel.classList.contains('hidden')) return;
-        const nextIndex = chooseRandomIndex(true);
+        const nextIndex = chooseNextIndex();
         if (nextIndex >= 0) playPlaylistTrack(nextIndex);
       });
 
@@ -1921,51 +2307,91 @@
 
       window.addEventListener('resize', resize);
 
+      updatePlaybackModeUI();
       loadPlaylist();
       resize();
       requestAnimationFrame(render);
     })();
   </script>
 
-  <script>
+<script>
     (() => {
-      const menuButton = document.getElementById('eidosMenuButton');
-      const mobileNav = document.getElementById('eidosMobileNav');
+      const navbar = document.getElementById('navbar');
+      const menu = document.getElementById('mobile-menu');
+      const burger = document.getElementById('hamburger');
+      let navigationTimer = null;
 
-      if (!menuButton || !mobileNav) return;
+      function scheduleNavigationFade() {
+        clearTimeout(navigationTimer);
+        if (!document.body.classList.contains('visualizer-started')) return;
+        if (document.body.classList.contains('mobile-menu-open')) return;
 
-      function setMenu(open) {
-        document.body.classList.toggle('eidos-menu-open', open);
-        menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
-        menuButton.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        navigationTimer = setTimeout(() => {
+          if (!document.body.classList.contains('mobile-menu-open')) {
+            document.body.classList.remove('nav-visible');
+          }
+        }, 3300);
       }
 
-      menuButton.addEventListener('click', event => {
-        event.stopPropagation();
-        setMenu(!document.body.classList.contains('eidos-menu-open'));
+      function showNavigation() {
+        document.body.classList.add('nav-visible');
+        scheduleNavigationFade();
+      }
+
+      window.toggleMenu = function toggleMenu() {
+        const opening = !menu.classList.contains('open');
+        menu.classList.toggle('open', opening);
+        burger.classList.toggle('active', opening);
+        burger.setAttribute('aria-expanded', opening ? 'true' : 'false');
+        document.body.classList.toggle('mobile-menu-open', opening);
+
+        document.body.classList.add('nav-visible');
+        clearTimeout(navigationTimer);
+        if (!opening) scheduleNavigationFade();
+      };
+
+      window.closeMenu = function closeMenu() {
+        menu.classList.remove('open');
+        burger.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('mobile-menu-open');
+        scheduleNavigationFade();
+      };
+
+      document.addEventListener('pointermove', showNavigation, { passive: true });
+      document.addEventListener('pointerdown', showNavigation, { passive: true });
+      document.addEventListener('touchstart', showNavigation, { passive: true });
+      document.addEventListener('focusin', showNavigation);
+
+      navbar.addEventListener('mouseenter', () => {
+        document.body.classList.add('nav-visible');
+        clearTimeout(navigationTimer);
       });
 
-      mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => setMenu(false));
-      });
+      navbar.addEventListener('mouseleave', scheduleNavigationFade);
+      menu.addEventListener('mouseenter', () => clearTimeout(navigationTimer));
+      menu.addEventListener('mouseleave', scheduleNavigationFade);
 
       document.addEventListener('pointerdown', event => {
         if (
-          document.body.classList.contains('eidos-menu-open') &&
-          !mobileNav.contains(event.target) &&
-          !menuButton.contains(event.target)
+          menu.classList.contains('open') &&
+          !menu.contains(event.target) &&
+          !burger.contains(event.target)
         ) {
-          setMenu(false);
+          closeMenu();
         }
-      });
+      }, { passive: true });
 
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') setMenu(false);
+        if (event.key === 'Escape') closeMenu();
       });
 
       window.addEventListener('resize', () => {
-        if (window.innerWidth > 1280) setMenu(false);
+        if (window.innerWidth > 1180) closeMenu();
       });
+
+      document.body.classList.add('nav-visible');
+      scheduleNavigationFade();
     })();
   </script>
 
