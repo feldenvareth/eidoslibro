@@ -1,15 +1,14 @@
-EIDOS MUSIC V8
+EIDOS MUSIC V9
 
 Sustituye únicamente:
 music/index.html
 
-Cambios:
-- recuperados los halos pulsantes;
-- recuperadas las ondas circulares deformadas;
-- recuperado el efecto de altavoz central;
-- conservada la corona completa del ecualizador;
-- eliminado únicamente el pequeño disco blanco situado detrás del cubo;
-- conservado el fade lento de las portadas.
+Cambios añadidos:
+- onda de transferencia expansiva cuando hay golpes fuertes;
+- filamentos de datos que salen del cubo;
+- constelaciones fugaces alrededor de la escena;
+- respiración cromática lenta en el fondo;
+- se mantiene el cubo pequeño, las portadas laterales y el fade lento.
 
 No cambies:
 music/Songs/
