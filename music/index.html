@@ -508,7 +508,10 @@
   <script>
     (() => {
       'use strict';
-      const PLAYLIST_URL = './list-songs.php';
+      const GITHUB_CONTENTS_URL = 'https://api.github.com/repos/feldenvareth/eidoslibro/contents/music/Songs?ref=main';
+      const AUDIO_EXTENSION = /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|webm)$/i;
+      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV1';
+      const PLAYLIST_CACHE_MS = 5 * 60 * 1000;
       const SONGS_DIRECTORY = './Songs/';
       const START_DELAY_MS = 2000;
 
@@ -1103,7 +1106,13 @@
         if (/^(https?:)?\/\//i.test(file) || file.startsWith('/') || file.startsWith('./') || file.startsWith('../')) {
           return file;
         }
-        return `${SONGS_DIRECTORY}${file}`;
+
+        const safePath = String(file)
+          .split('/')
+          .map(segment => encodeURIComponent(segment))
+          .join('/');
+
+        return `${SONGS_DIRECTORY}${safePath}`;
       }
 
       function normalizeTrack(item, index) {
@@ -1166,30 +1175,75 @@
 
       async function loadPlaylist() {
         try {
-          const endpoint = `${PLAYLIST_URL}?v=${Date.now()}`;
-          const response = await fetch(endpoint, {
-            cache: 'no-store',
-            headers: { 'Accept': 'application/json' }
-          });
+          let rawTracks = null;
 
-          if (!response.ok) {
-            throw new Error(`El servidor devolvió HTTP ${response.status}.`);
+          try {
+            const cached = JSON.parse(localStorage.getItem(PLAYLIST_CACHE_KEY) || 'null');
+            if (
+              cached &&
+              Array.isArray(cached.tracks) &&
+              Date.now() - Number(cached.savedAt || 0) < PLAYLIST_CACHE_MS
+            ) {
+              rawTracks = cached.tracks;
+            }
+          } catch (_) {
+            // La caché local es opcional.
           }
 
-          const data = await response.json();
-          const rawTracks = Array.isArray(data) ? data : data.tracks;
+          if (!rawTracks) {
+            const response = await fetch(GITHUB_CONTENTS_URL, {
+              cache: 'no-store',
+              headers: {
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
+            });
 
-          if (!Array.isArray(rawTracks)) {
-            throw new Error('El servidor no ha devuelto una lista válida de canciones.');
+            if (!response.ok) {
+              throw new Error(`GitHub devolvió HTTP ${response.status}.`);
+            }
+
+            const contents = await response.json();
+            if (!Array.isArray(contents)) {
+              throw new Error('GitHub no ha devuelto el contenido de la carpeta.');
+            }
+
+            rawTracks = contents
+              .filter(item =>
+                item &&
+                item.type === 'file' &&
+                typeof item.name === 'string' &&
+                AUDIO_EXTENSION.test(item.name)
+              )
+              .map(item => ({
+                title: item.name
+                  .replace(/\.[^.]+$/, '')
+                  .replace(/[_-]+/g, ' ')
+                  .replace(/\s+/g, ' ')
+                  .trim(),
+                file: item.name
+              }));
+
+            try {
+              localStorage.setItem(
+                PLAYLIST_CACHE_KEY,
+                JSON.stringify({ tracks: rawTracks, savedAt: Date.now() })
+              );
+            } catch (_) {
+              // La caché es opcional.
+            }
           }
 
           localPlaylist = rawTracks
             .map(normalizeTrack)
             .filter(Boolean)
-            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+            .sort((a, b) => a.name.localeCompare(b.name, 'es', {
+              numeric: true,
+              sensitivity: 'base'
+            }));
 
           if (!localPlaylist.length) {
-            throw new Error('No hay archivos de audio compatibles dentro de Music/Songs.');
+            throw new Error('No hay audios compatibles dentro de music/Songs.');
           }
 
           currentTrackIndex = Math.floor(Math.random() * localPlaylist.length);
@@ -1200,7 +1254,7 @@
         } catch (error) {
           console.error(error);
           startTrack.textContent = 'No se ha podido cargar la música.';
-          startStatus.textContent = 'El visor debe estar publicado en un servidor con PHP y conservar la carpeta Music/Songs.';
+          startStatus.textContent = 'Comprueba que el repositorio sea público y que las canciones estén dentro de music/Songs.';
           startButton.disabled = true;
         }
       }
