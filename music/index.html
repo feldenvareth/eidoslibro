@@ -494,32 +494,30 @@
     }
 
 
-    /* =========================================================
-       NAVEGACIÓN EIDOS — misma estructura que la página principal
-       ========================================================= */
+    /* ─── NAVEGACIÓN: MISMO FORMATO QUE EL INDEX PRINCIPAL ─── */
     #navbar {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      z-index: 70;
-      height: 56px;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 60px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 28px;
-      padding: 0 16px 0 12px;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.20);
-      background: rgba(3, 17, 14, 0.94);
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(14px) saturate(1.08);
-      -webkit-backdrop-filter: blur(14px) saturate(1.08);
+      gap: 30px;
+      background: rgba(7, 7, 16, 0.96);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       opacity: 0;
       transform: translateY(-110%);
       pointer-events: none;
       transition:
         opacity 620ms ease,
         transform 620ms cubic-bezier(.22,.61,.36,1),
-        visibility 620ms ease;
+        background 0.5s,
+        padding 0.3s;
     }
 
     body:not(.visualizer-started) #navbar,
@@ -532,29 +530,21 @@
 
     .nav-logo {
       flex: 0 0 auto;
-      color: var(--eidos-cream);
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: 1.42rem;
-      font-weight: 600;
-      letter-spacing: .25em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
       line-height: 1;
+      letter-spacing: 8px;
+      color: #c9a84c;
       text-decoration: none;
       white-space: nowrap;
-      transition: color 180ms ease, text-shadow 180ms ease;
-    }
-
-    .nav-logo:hover {
-      color: #fff9e8;
-      text-shadow: 0 0 20px rgba(216,178,57,.25);
     }
 
     .nav-links {
-      min-width: 0;
-      flex: 1 1 auto;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: clamp(12px, 1.18vw, 23px);
+      gap: 20px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -565,81 +555,55 @@
       align-items: center;
     }
 
-    .nav-links a,
-    .mobile-menu a {
-      color: rgba(242,236,216,.72);
-      font-family: "Josefin Sans", ui-sans-serif, sans-serif;
-      font-size: clamp(.61rem, .66vw, .72rem);
-      font-weight: 600;
-      letter-spacing: .055em;
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
       line-height: 1;
-      text-decoration: none;
+      letter-spacing: 3px;
       text-transform: uppercase;
+      color: #d4cfc6;
+      text-decoration: none;
       white-space: nowrap;
-      transition: color 170ms ease, border-color 170ms ease, background 170ms ease;
+      transition: color 0.3s;
     }
 
-    .nav-links a:hover,
-    .mobile-menu a:hover {
-      color: var(--eidos-gold);
-    }
-
-    .nav-links .buy-link {
-      padding: 9px 13px;
-      border: 1px solid rgba(216,178,57,.40);
-      border-radius: 999px;
-      color: rgba(242,236,216,.92);
-      background: rgba(216,178,57,.06);
-    }
-
-    .nav-links .buy-link:hover {
-      border-color: rgba(216,178,57,.70);
-      background: rgba(216,178,57,.13);
+    .nav-links a:hover {
+      color: #c9a84c;
     }
 
     .lang-switch {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 26px;
+      min-width: 24px;
     }
 
     .lang-switch img {
       display: block;
       width: 24px;
       height: auto;
-      border-radius: 1px;
-      opacity: .86;
-      transition: opacity 160ms ease, transform 160ms ease;
-    }
-
-    .lang-switch:hover img {
-      opacity: 1;
-      transform: translateY(-1px);
     }
 
     .hamburger {
       display: none;
-      width: 42px;
-      height: 42px;
-      margin-left: auto;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
-      border: 1px solid rgba(242,236,216,.13);
-      border-radius: 50%;
-      color: var(--eidos-cream);
-      background: rgba(242,236,216,.04);
       cursor: pointer;
+      padding: 4px;
+      position: relative;
+      z-index: 101;
+      margin-left: auto;
     }
 
     .hamburger span {
-      display: block;
-      width: 18px;
+      width: 24px;
       height: 1px;
-      background: currentColor;
-      transition: transform 180ms ease, opacity 180ms ease;
+      background: #c9a84c;
+      display: block;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
     }
 
     .hamburger.active span:nth-child(1) {
@@ -655,52 +619,60 @@
     }
 
     .mobile-menu {
+      display: none;
       position: fixed;
-      top: 56px;
-      left: 0;
-      right: 0;
-      z-index: 69;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      max-height: calc(100vh - 56px);
-      padding: 10px;
+      inset: 0;
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 30px;
+      padding: 90px 24px 30px;
       overflow-y: auto;
-      border-bottom: 1px solid rgba(201,168,76,.20);
-      background: rgba(3,17,14,.97);
-      box-shadow: 0 22px 45px rgba(0,0,0,.40);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-12px);
-      pointer-events: none;
-      transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+      background: rgba(7, 7, 16, 0.98);
     }
 
     .mobile-menu.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
+      display: flex;
     }
 
     .mobile-menu a {
-      display: flex;
-      min-height: 43px;
-      align-items: center;
-      justify-content: center;
-      padding: 9px 8px;
-      border: 1px solid rgba(242,236,216,.07);
-      border-radius: 3px;
-      text-align: center;
-      background: rgba(242,236,216,.018);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #d4cfc6;
+      text-decoration: none;
+      transition: color 0.3s;
     }
 
-    /* El identificador del visor ocupa la esquina superior cuando el menú se oculta. */
+    .mobile-menu a:hover {
+      color: #c9a84c;
+    }
+
     #brand {
       top: 18px;
       transition: opacity 260ms ease, transform 260ms ease, top 500ms ease;
+    }
+
+    #brand strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: 8px;
+      color: #c9a84c;
+    }
+
+    #brand span {
+      margin-top: 7px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #c9a84c;
     }
 
     #touchHint {
@@ -711,16 +683,36 @@
     body:not(.visualizer-started) #brand,
     body.nav-visible #brand,
     body.mobile-menu-open #brand {
-      top: 72px;
+      top: 88px;
     }
 
     body:not(.visualizer-started) #touchHint,
     body.nav-visible #touchHint,
     body.mobile-menu-open #touchHint {
-      top: 70px;
+      top: 82px;
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1220px) {
+      #navbar {
+        padding-left: 36px;
+        padding-right: 36px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 9px;
+        letter-spacing: 2.2px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      #navbar {
+        padding: 18px 24px;
+      }
+
       .nav-links {
         display: none;
       }
@@ -728,26 +720,38 @@
       .hamburger {
         display: flex;
       }
-    }
-
-    @media (max-width: 680px) {
-      #navbar {
-        height: 56px;
-        padding-inline: 14px;
-      }
-
-      .nav-logo {
-        font-size: 1.24rem;
-      }
-
-      .mobile-menu {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
 
       body:not(.visualizer-started) #brand,
       body.nav-visible #brand,
       body.mobile-menu-open #brand {
-        top: 70px;
+        top: 82px;
+      }
+
+      body:not(.visualizer-started) #touchHint,
+      body.nav-visible #touchHint,
+      body.mobile-menu-open #touchHint {
+        top: 78px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #navbar {
+        padding: 17px 20px;
+      }
+
+      .nav-logo {
+        font-size: 25px;
+        letter-spacing: 7px;
+      }
+
+      #brand strong {
+        font-size: 23px;
+        letter-spacing: 6px;
+      }
+
+      #brand span {
+        font-size: 8px;
+        letter-spacing: 2.4px;
       }
     }
   </style>
@@ -791,7 +795,7 @@
 <body>
 
 
-  <!-- Navigation: misma estructura que el index principal -->
+  <!-- Navigation: misma estructura que la página principal -->
   <nav id="navbar">
     <a class="nav-logo" href="https://www.eidoslibro.com/#hero">EIDOS</a>
 
@@ -807,21 +811,33 @@
       <li><a href="https://www.eidoslibro.com/#reviews">Reseñas</a></li>
       <li><a href="https://www.eidoslibro.com/#mentions">Menciones</a></li>
       <li><a href="https://www.eidoslibro.com/#author">Autor</a></li>
-      <li><a class="buy-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a></li>
       <li>
-        <a href="https://www.eidoslibro.com/indexeng.html" class="lang-switch" aria-label="English version">
+        <a href="https://www.amazon.es/dp/B0FCR5ZPBJ"
+           target="_blank"
+           rel="noopener">Comprar</a>
+      </li>
+      <li>
+        <a href="https://www.eidoslibro.com/indexeng.html"
+           class="lang-switch"
+           aria-label="English version">
           <img src="https://www.eidoslibro.com/assets/images/flaguk.webp" alt="English">
         </a>
       </li>
     </ul>
 
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" role="button">
+    <div
+      class="hamburger"
+      id="hamburger"
+      onclick="toggleMenu()"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      role="button"
+    >
       <span></span><span></span><span></span>
     </div>
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
-    <a href="https://www.eidoslibro.com/#hero" onclick="closeMenu()">Inicio</a>
     <a href="https://www.eidoslibro.com/#synopsis" onclick="closeMenu()">La novela</a>
     <a href="https://www.eidoslibro.com/#video" onclick="closeMenu()">Vídeo</a>
     <a href="https://www.eidoslibro.com/#themes" onclick="closeMenu()">Temas</a>
@@ -833,8 +849,14 @@
     <a href="https://www.eidoslibro.com/#reviews" onclick="closeMenu()">Reseñas</a>
     <a href="https://www.eidoslibro.com/#mentions" onclick="closeMenu()">Menciones</a>
     <a href="https://www.eidoslibro.com/#author" onclick="closeMenu()">Autor</a>
-    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener" onclick="closeMenu()">Comprar</a>
-    <a href="https://www.eidoslibro.com/indexeng.html" class="lang-switch" aria-label="English version" onclick="closeMenu()">
+    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ"
+       target="_blank"
+       rel="noopener"
+       onclick="closeMenu()">Comprar</a>
+    <a href="https://www.eidoslibro.com/indexeng.html"
+       class="lang-switch"
+       aria-label="English version"
+       onclick="closeMenu()">
       <img src="https://www.eidoslibro.com/assets/images/flaguk.webp" alt="English">
     </a>
   </div>
@@ -2873,7 +2895,7 @@
       });
 
       window.addEventListener('resize', () => {
-        if (window.innerWidth > 1180) closeMenu();
+        if (window.innerWidth > 900) closeMenu();
       });
 
       document.body.classList.add('nav-visible');
