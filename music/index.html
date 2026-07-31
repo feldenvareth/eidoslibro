@@ -218,10 +218,30 @@
       top: 18px;
       left: 20px;
       z-index: 7;
-      pointer-events: none;
+      display: block;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      color: inherit;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      pointer-events: auto;
       opacity: 0;
       transform: translateY(-6px);
-      transition: opacity 260ms ease, transform 260ms ease;
+      transition:
+        opacity 260ms ease,
+        transform 260ms ease,
+        filter 180ms ease;
+    }
+
+    #brand:hover {
+      filter: brightness(1.18);
+    }
+
+    #brand:focus-visible {
+      outline: 1px solid rgba(201, 168, 76, 0.72);
+      outline-offset: 7px;
     }
 
     #brand strong {
@@ -876,10 +896,15 @@
     </div>
   </section>
 
-  <div id="brand" aria-hidden="true">
+  <button
+    id="brand"
+    type="button"
+    aria-label="Volver al lanzador del visor musical"
+    title="Volver al lanzador musical"
+  >
     <strong>EIDOS</strong>
     <span>Visor musical</span>
-  </div>
+  </button>
 
   <div id="touchHint" aria-hidden="true">Mueve el ratón o toca la pantalla</div>
 
@@ -931,6 +956,7 @@
       const startTrack = document.getElementById('startTrack');
       const startStatus = document.getElementById('startStatus');
       const currentTrackName = document.getElementById('currentTrackName');
+      const brandButton = document.getElementById('brand');
       const modeButton = document.getElementById('modeButton');
       const modeLabelLong = document.getElementById('modeLabelLong');
       const modeLabelShort = document.getElementById('modeLabelShort');
@@ -2732,6 +2758,42 @@
         trackTransitioning = false;
       }
 
+      async function returnToLauncher() {
+        if (starting) return;
+
+        audio.pause();
+        audio.muted = false;
+        audio.volume = 1;
+        audio.currentTime = 0;
+        running = false;
+        trackTransitioning = false;
+
+        clearTimeout(controlsTimer);
+        selectorOpen = false;
+
+        document.body.classList.remove(
+          'visualizer-started',
+          'show-controls',
+          'selector-open'
+        );
+
+        selectorPanel.classList.remove('open');
+        panel.classList.remove('hidden');
+        pauseButton.textContent = 'Pausa';
+        startStatus.textContent = '';
+        updateTrackLabels();
+
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen();
+          }
+        } catch (error) {
+          console.warn('No se ha podido salir de pantalla completa.', error);
+        }
+
+        startButton.focus({ preventScroll: true });
+      }
+
       function showControls() {
         if (!document.body.classList.contains('visualizer-started')) return;
         document.body.classList.add('show-controls');
@@ -2756,6 +2818,11 @@
       }
 
       startButton.addEventListener('click', startInitialPlayback);
+
+      brandButton.addEventListener('click', event => {
+        event.stopPropagation();
+        returnToLauncher();
+      });
 
       pauseButton.addEventListener('click', async () => {
         if (starting) return;
