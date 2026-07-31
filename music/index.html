@@ -461,9 +461,265 @@
       #coverAtmosphere::after { animation: none; }
       * { scroll-behavior: auto !important; }
     }
+
+    /* =========================================================
+       MENÚ PRINCIPAL EIDOS
+       Los enlaces salen un nivel desde /music/ hacia la raíz.
+       ========================================================= */
+    #eidosNavbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 0 30px;
+      border-bottom: 1px solid rgba(216, 178, 57, 0.16);
+      background:
+        linear-gradient(180deg, rgba(5, 16, 13, 0.94), rgba(7, 22, 18, 0.82));
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(16px) saturate(1.12);
+      -webkit-backdrop-filter: blur(16px) saturate(1.12);
+    }
+
+    .eidos-nav-logo {
+      flex: 0 0 auto;
+      color: var(--eidos-cream);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.34rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 180ms ease, text-shadow 180ms ease;
+    }
+
+    .eidos-nav-logo:hover {
+      color: #fff9e9;
+      text-shadow: 0 0 18px rgba(216, 178, 57, 0.28);
+    }
+
+    .eidos-nav-links {
+      min-width: 0;
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(10px, 1.15vw, 22px);
+    }
+
+    .eidos-nav-links a,
+    .eidos-mobile-nav a {
+      color: rgba(242, 236, 216, 0.72);
+      font-size: clamp(0.60rem, 0.64vw, 0.72rem);
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 160ms ease, opacity 160ms ease;
+    }
+
+    .eidos-nav-links a:hover,
+    .eidos-mobile-nav a:hover {
+      color: var(--eidos-gold);
+    }
+
+    .eidos-nav-links .eidos-buy-link {
+      padding: 9px 13px;
+      border: 1px solid rgba(216, 178, 57, 0.34);
+      border-radius: 999px;
+      color: rgba(242, 236, 216, 0.9);
+      background: rgba(216, 178, 57, 0.07);
+    }
+
+    .eidos-nav-links .eidos-buy-link:hover {
+      border-color: rgba(216, 178, 57, 0.66);
+      background: rgba(216, 178, 57, 0.13);
+    }
+
+    #eidosMenuButton {
+      display: none;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0;
+      border: 1px solid rgba(242, 236, 216, 0.14);
+      border-radius: 50%;
+      color: var(--eidos-cream);
+      background: rgba(242, 236, 216, 0.05);
+      cursor: pointer;
+    }
+
+    #eidosMenuButton span {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    #eidosMenuButton[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    #eidosMenuButton[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #eidosMenuButton[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .eidos-mobile-nav {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      z-index: 59;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      padding: 10px;
+      border-bottom: 1px solid rgba(216, 178, 57, 0.18);
+      background: rgba(5, 17, 14, 0.97);
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+    }
+
+    body.eidos-menu-open .eidos-mobile-nav {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .eidos-mobile-nav a {
+      display: flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 8px;
+      border: 1px solid rgba(242, 236, 216, 0.08);
+      border-radius: 4px;
+      text-align: center;
+      background: rgba(242, 236, 216, 0.025);
+    }
+
+    /* El distintivo del visor baja para no solaparse con el menú. */
+    #brand {
+      top: 82px;
+    }
+
+    #touchHint {
+      top: 78px;
+    }
+
+    @media (max-width: 1280px) {
+      #eidosNavbar {
+        padding: 0 20px;
+      }
+
+      .eidos-nav-links {
+        display: none;
+      }
+
+      #eidosMenuButton {
+        display: flex;
+        margin-left: auto;
+      }
+    }
+
+    @media (max-width: 680px) {
+      #eidosNavbar {
+        height: 58px;
+        padding: 0 14px;
+      }
+
+      .eidos-nav-logo {
+        font-size: 1.12rem;
+      }
+
+      .eidos-mobile-nav {
+        top: 58px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: calc(100vh - 58px);
+        overflow-y: auto;
+      }
+
+      #brand {
+        top: 72px;
+        left: 14px;
+      }
+
+      #touchHint {
+        top: 70px;
+      }
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- Navegación principal de Eidos -->
+  <nav id="eidosNavbar" aria-label="Navegación principal">
+    <a class="eidos-nav-logo" href="../index.html#hero" aria-label="Volver al inicio de Eidos">EIDOS</a>
+
+    <div class="eidos-nav-links">
+      <a href="../index.html#synopsis">La novela</a>
+      <a href="../index.html#video">Vídeo</a>
+      <a href="../index.html#themes">Temas</a>
+      <a href="../index.html#editions">Volúmenes</a>
+      <a href="../index.html#stories">Relatos</a>
+      <a href="../index.html#blog">Blog</a>
+      <a href="../index.html#download">Comienza</a>
+      <a href="../index.html#scenes">Escenas</a>
+      <a href="../index.html#reviews">Reseñas</a>
+      <a href="../index.html#mentions">Menciones</a>
+      <a href="../index.html#author">Autor</a>
+      <a class="eidos-buy-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a>
+    </div>
+
+    <button
+      id="eidosMenuButton"
+      type="button"
+      aria-label="Abrir menú"
+      aria-controls="eidosMobileNav"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div id="eidosMobileNav" class="eidos-mobile-nav" aria-label="Menú móvil">
+    <a href="../index.html#hero">Inicio</a>
+    <a href="../index.html#synopsis">La novela</a>
+    <a href="../index.html#video">Vídeo</a>
+    <a href="../index.html#themes">Temas</a>
+    <a href="../index.html#editions">Volúmenes</a>
+    <a href="../index.html#stories">Relatos</a>
+    <a href="../index.html#blog">Blog</a>
+    <a href="../index.html#download">Comienza</a>
+    <a href="../index.html#scenes">Escenas</a>
+    <a href="../index.html#reviews">Reseñas</a>
+    <a href="../index.html#mentions">Menciones</a>
+    <a href="../index.html#author">Autor</a>
+    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">Comprar</a>
+  </div>
+
   <canvas id="visualizer" aria-label="Visualizador musical reactivo inspirado en Eidos"></canvas>
   <div id="coverAtmosphere" aria-hidden="true"></div>
   <div id="grain" aria-hidden="true"></div>
@@ -912,48 +1168,256 @@
         const cx = width * 0.5;
         const cy = height * 0.5;
         const minSize = Math.min(width, height);
-        const pulse = 1 + energy.bass * 0.22 + energy.smoothedBeat * 0.16;
-        const s = minSize * 0.026 * pulse;
-        const rot = time * 0.14;
-        const cos = Math.cos(rot);
-        const sin = Math.sin(rot);
 
-        const base = [
-          [-1,-1,-1], [1,-1,-1], [1,1,-1], [-1,1,-1],
-          [-1,-1,1], [1,-1,1], [1,1,1], [-1,1,1]
+        const pulse = 1 + energy.bass * 0.10 + energy.smoothedBeat * 0.08;
+        const cubeRadius = minSize * 0.090 * pulse;
+
+        const rotY = time * 0.34;
+        const rotX = -0.54 + Math.sin(time * 0.23) * 0.04 + energy.mid * 0.06;
+        const rotZ = Math.sin(time * 0.16) * 0.03;
+
+        const sy = Math.sin(rotY), cyRot = Math.cos(rotY);
+        const sx = Math.sin(rotX), cxRot = Math.cos(rotX);
+        const sz = Math.sin(rotZ), czRot = Math.cos(rotZ);
+
+        const basePoints = [
+          [-1, -1, -1], [ 1, -1, -1], [ 1,  1, -1], [-1,  1, -1],
+          [-1, -1,  1], [ 1, -1,  1], [ 1,  1,  1], [-1,  1,  1]
         ];
-        const points = base.map(([x,y,z]) => {
-          const rx = x * cos - z * sin;
-          const rz = x * sin + z * cos;
-          const perspective = 1 / (2.8 - rz * 0.22);
+
+        const points = basePoints.map(([x, y, z]) => {
+          let px = x;
+          let py = y;
+          let pz = z;
+
+          const ryx = px * cyRot - pz * sy;
+          const ryz = px * sy + pz * cyRot;
+          px = ryx;
+          pz = ryz;
+
+          const rxy = py * cxRot - pz * sx;
+          const rxz = py * sx + pz * cxRot;
+          py = rxy;
+          pz = rxz;
+
+          const rzx = px * czRot - py * sz;
+          const rzy = px * sz + py * czRot;
+          px = rzx;
+          py = rzy;
+
+          const depth = 3.35;
+          const perspective = 1 / (depth - pz * 0.55);
+
           return {
-            x: cx + (rx - y * 0.42) * s * perspective * 2.05,
-            y: cy + (y * 0.72 + rz * 0.30) * s * perspective * 2.05
+            x3: px,
+            y3: py,
+            z3: pz,
+            x: cx + px * cubeRadius * 1.24 * perspective,
+            y: cy + py * cubeRadius * 1.24 * perspective,
+            p: perspective
           };
         });
-        const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+
+        const faces = [
+          { idx: [0, 1, 2, 3], tone: 'rear' },
+          { idx: [4, 5, 6, 7], tone: 'front' },
+          { idx: [0, 1, 5, 4], tone: 'bottom' },
+          { idx: [3, 2, 6, 7], tone: 'top' },
+          { idx: [1, 2, 6, 5], tone: 'right' },
+          { idx: [0, 3, 7, 4], tone: 'left' }
+        ];
+
+        function polygonPath(facePoints) {
+          ctx.beginPath();
+          ctx.moveTo(facePoints[0].x, facePoints[0].y);
+          for (let i = 1; i < facePoints.length; i++) {
+            ctx.lineTo(facePoints[i].x, facePoints[i].y);
+          }
+          ctx.closePath();
+        }
+
+        function faceCentroid(facePoints) {
+          let x = 0;
+          let y = 0;
+          let z = 0;
+          for (const p of facePoints) {
+            x += p.x;
+            y += p.y;
+            z += p.z3;
+          }
+          return {
+            x: x / facePoints.length,
+            y: y / facePoints.length,
+            z: z / facePoints.length
+          };
+        }
+
+        function drawFaceVeil(facePoints, centroid, alpha) {
+          ctx.save();
+          polygonPath(facePoints);
+          ctx.clip();
+
+          const veilA = ctx.createRadialGradient(
+            centroid.x - cubeRadius * 0.18,
+            centroid.y - cubeRadius * 0.20,
+            cubeRadius * 0.02,
+            centroid.x - cubeRadius * 0.10,
+            centroid.y - cubeRadius * 0.05,
+            cubeRadius * 0.88
+          );
+          veilA.addColorStop(0, `rgba(255, 248, 186, ${alpha * 0.34})`);
+          veilA.addColorStop(0.40, `rgba(255, 220, 70, ${alpha * 0.18})`);
+          veilA.addColorStop(1, 'rgba(255, 190, 35, 0)');
+          ctx.fillStyle = veilA;
+          ctx.fillRect(
+            centroid.x - cubeRadius * 1.15,
+            centroid.y - cubeRadius * 1.15,
+            cubeRadius * 2.3,
+            cubeRadius * 2.3
+          );
+
+          const veilB = ctx.createLinearGradient(
+            centroid.x - cubeRadius * 0.42,
+            centroid.y - cubeRadius * 0.32,
+            centroid.x + cubeRadius * 0.45,
+            centroid.y + cubeRadius * 0.38
+          );
+          veilB.addColorStop(0, `rgba(255,255,255, ${alpha * 0.10})`);
+          veilB.addColorStop(0.5, `rgba(255, 232, 120, ${alpha * 0.05})`);
+          veilB.addColorStop(1, `rgba(255, 187, 49, ${alpha * 0.16})`);
+          ctx.fillStyle = veilB;
+          ctx.fillRect(
+            centroid.x - cubeRadius * 0.95,
+            centroid.y - cubeRadius * 0.95,
+            cubeRadius * 1.9,
+            cubeRadius * 1.9
+          );
+
+          ctx.lineWidth = Math.max(1, cubeRadius * 0.013);
+          for (let i = 0; i < 4; i++) {
+            const drift = Math.sin(time * 0.45 + i * 1.37) * cubeRadius * 0.06;
+            ctx.strokeStyle = `rgba(255, 244, 180, ${alpha * 0.05})`;
+            ctx.beginPath();
+            ctx.moveTo(
+              centroid.x - cubeRadius * 0.44,
+              centroid.y - cubeRadius * (0.16 + i * 0.16) + drift
+            );
+            ctx.lineTo(
+              centroid.x + cubeRadius * 0.40,
+              centroid.y - cubeRadius * (0.28 - i * 0.14) - drift * 0.25
+            );
+            ctx.stroke();
+          }
+
+          ctx.restore();
+        }
+
+        function drawEdgeGlow(facePoints, alpha, shadow) {
+          polygonPath(facePoints);
+          ctx.strokeStyle = `rgba(255, 224, 86, ${alpha})`;
+          ctx.lineWidth = Math.max(1.6, cubeRadius * 0.033);
+          ctx.shadowColor = `rgba(255, 196, 36, ${shadow})`;
+          ctx.shadowBlur = cubeRadius * 0.34;
+          ctx.stroke();
+
+          polygonPath(facePoints);
+          ctx.strokeStyle = `rgba(255, 248, 188, ${alpha * 0.92})`;
+          ctx.lineWidth = Math.max(1, cubeRadius * 0.014);
+          ctx.shadowBlur = cubeRadius * 0.11;
+          ctx.stroke();
+        }
+
+        const sortedFaces = faces.map(face => {
+          const facePoints = face.idx.map(i => points[i]);
+          const centroid = faceCentroid(facePoints);
+          return { ...face, facePoints, centroid };
+        }).sort((a, b) => a.centroid.z - b.centroid.z);
 
         ctx.save();
         ctx.globalCompositeOperation = 'screen';
-        const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, s * 3.2);
-        glow.addColorStop(0, `rgba(245, 220, 104, ${0.16 + energy.overall * 0.24})`);
-        glow.addColorStop(0.38, `rgba(216, 178, 57, ${0.08 + energy.bass * 0.16})`);
-        glow.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = glow;
+
+        const aura = ctx.createRadialGradient(cx, cy, 0, cx, cy, cubeRadius * 1.95);
+        aura.addColorStop(0, `rgba(255, 225, 82, ${0.24 + energy.overall * 0.16})`);
+        aura.addColorStop(0.32, `rgba(255, 196, 35, ${0.15 + energy.bass * 0.15})`);
+        aura.addColorStop(0.70, `rgba(255, 155, 18, ${0.06 + energy.smoothedBeat * 0.08})`);
+        aura.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = aura;
         ctx.beginPath();
-        ctx.arc(cx, cy, s * 3.2, 0, Math.PI * 2);
+        ctx.arc(cx, cy, cubeRadius * 1.95, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.strokeStyle = `rgba(249, 231, 154, ${0.42 + energy.overall * 0.40})`;
-        ctx.lineWidth = Math.max(1, minSize * 0.00145);
-        ctx.shadowColor = 'rgba(216,178,57,.72)';
-        ctx.shadowBlur = 5 + energy.smoothedBeat * 8;
+        const coreGlow = ctx.createRadialGradient(cx, cy, cubeRadius * 0.08, cx, cy, cubeRadius * 0.96);
+        coreGlow.addColorStop(0, `rgba(255,255,235, ${0.18 + energy.bass * 0.10})`);
+        coreGlow.addColorStop(0.34, `rgba(255, 234, 120, ${0.13 + energy.overall * 0.12})`);
+        coreGlow.addColorStop(1, 'rgba(255, 200, 40, 0)');
+        ctx.fillStyle = coreGlow;
         ctx.beginPath();
-        for (const [a,b] of edges) {
+        ctx.arc(cx, cy, cubeRadius * 0.96, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (const face of sortedFaces) {
+          const facePoints = face.facePoints;
+          const centroid = face.centroid;
+          const frontFactor = (centroid.z + 1.2) / 2.4;
+          const faceAlpha = Math.max(0.16, 0.18 + frontFactor * 0.22 + energy.overall * 0.06);
+
+          let gradient;
+          if (face.tone === 'top') {
+            gradient = ctx.createLinearGradient(
+              centroid.x,
+              centroid.y - cubeRadius * 0.62,
+              centroid.x,
+              centroid.y + cubeRadius * 0.58
+            );
+            gradient.addColorStop(0, `rgba(255, 249, 186, ${faceAlpha * 0.92})`);
+            gradient.addColorStop(0.48, `rgba(255, 221, 92, ${faceAlpha * 0.72})`);
+            gradient.addColorStop(1, `rgba(231, 162, 28, ${faceAlpha * 0.52})`);
+          } else if (face.tone === 'right' || face.tone === 'front') {
+            gradient = ctx.createLinearGradient(
+              centroid.x - cubeRadius * 0.48,
+              centroid.y - cubeRadius * 0.22,
+              centroid.x + cubeRadius * 0.55,
+              centroid.y + cubeRadius * 0.45
+            );
+            gradient.addColorStop(0, `rgba(255, 224, 84, ${faceAlpha * 0.58})`);
+            gradient.addColorStop(0.50, `rgba(255, 206, 49, ${faceAlpha * 0.76})`);
+            gradient.addColorStop(1, `rgba(224, 148, 20, ${faceAlpha * 0.50})`);
+          } else {
+            gradient = ctx.createLinearGradient(
+              centroid.x - cubeRadius * 0.52,
+              centroid.y - cubeRadius * 0.40,
+              centroid.x + cubeRadius * 0.38,
+              centroid.y + cubeRadius * 0.45
+            );
+            gradient.addColorStop(0, `rgba(255, 232, 98, ${faceAlpha * 0.48})`);
+            gradient.addColorStop(0.55, `rgba(244, 178, 34, ${faceAlpha * 0.64})`);
+            gradient.addColorStop(1, `rgba(193, 123, 16, ${faceAlpha * 0.40})`);
+          }
+
+          polygonPath(facePoints);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+
+          drawFaceVeil(facePoints, centroid, faceAlpha);
+          drawEdgeGlow(facePoints, 0.52 + frontFactor * 0.22, 0.42 + frontFactor * 0.20);
+        }
+
+        ctx.beginPath();
+        const visibleEdges = [
+          [0, 1], [1, 2], [2, 3], [3, 0],
+          [4, 5], [5, 6], [6, 7], [7, 4],
+          [0, 4], [1, 5], [2, 6], [3, 7]
+        ];
+        for (const [a, b] of visibleEdges) {
           ctx.moveTo(points[a].x, points[a].y);
           ctx.lineTo(points[b].x, points[b].y);
         }
+        ctx.strokeStyle = `rgba(255, 251, 210, ${0.22 + energy.high * 0.18})`;
+        ctx.lineWidth = Math.max(1, cubeRadius * 0.010);
+        ctx.shadowColor = 'rgba(255, 215, 82, 0.55)';
+        ctx.shadowBlur = cubeRadius * 0.16;
         ctx.stroke();
+
         ctx.restore();
       }
 
@@ -1462,5 +1926,48 @@
       requestAnimationFrame(render);
     })();
   </script>
+
+  <script>
+    (() => {
+      const menuButton = document.getElementById('eidosMenuButton');
+      const mobileNav = document.getElementById('eidosMobileNav');
+
+      if (!menuButton || !mobileNav) return;
+
+      function setMenu(open) {
+        document.body.classList.toggle('eidos-menu-open', open);
+        menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuButton.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      }
+
+      menuButton.addEventListener('click', event => {
+        event.stopPropagation();
+        setMenu(!document.body.classList.contains('eidos-menu-open'));
+      });
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      document.addEventListener('pointerdown', event => {
+        if (
+          document.body.classList.contains('eidos-menu-open') &&
+          !mobileNav.contains(event.target) &&
+          !menuButton.contains(event.target)
+        ) {
+          setMenu(false);
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') setMenu(false);
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 1280) setMenu(false);
+      });
+    })();
+  </script>
+
 </body>
 </html>

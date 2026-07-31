@@ -1,12 +1,17 @@
-VERSIÓN SIN PHP, SIN JSON Y SIN GITHUB ACTIONS
+VISOR EIDOS CON CUBO LUMINOSO
 
-1. En el repositorio, entra en la carpeta music.
-2. Borra list-songs.php.
-3. Sustituye music/index.html por este index.html.
-4. Conserva las canciones dentro de music/Songs.
-5. Espera a que GitHub Pages publique el cambio.
+Sustituye únicamente:
+music/index.html
 
-A partir de ese momento:
-- El visor consulta directamente el contenido de music/Songs en el repositorio.
-- Al añadir o borrar canciones no tienes que modificar ningún otro archivo.
-- La lista se guarda durante cinco minutos en el navegador para evitar consultas repetidas.
+por el index.html de este paquete.
+
+Cambios:
+- cubo central rehecho;
+- aspecto más parecido al cubo dorado de referencia;
+- caras translúcidas con iluminación;
+- halo y brillo exterior;
+- giro 3D más elegante.
+
+No cambies:
+- music/Songs/
+- music/assets/
