@@ -1097,7 +1097,7 @@
       function triggerSideCovers(intensity = 0.7, time = performance.now() / 1000) {
         const level = clamp(0.18 + intensity * 0.56, 0.18, 0.78);
         sideCoverState.maxAlpha = Math.max(sideCoverState.maxAlpha * 0.90, level);
-        sideCoverState.holdUntil = time + 0.42;
+        sideCoverState.holdUntil = time + 0.85;
         sideCoverState.lastTrigger = time;
         sideCoverState.pulse = 1;
       }
@@ -1222,47 +1222,126 @@
         const cx = width * 0.5;
         const cy = height * 0.5;
         const minSize = Math.min(width, height);
-        const baseRadius = minSize * (0.075 + energy.bass * 0.10 + energy.smoothedBeat * 0.065);
+        const baseRadius = minSize * (
+          0.075 +
+          energy.bass * 0.10 +
+          energy.smoothedBeat * 0.065
+        );
 
         ctx.save();
         ctx.globalCompositeOperation = 'screen';
 
-        // Halo exterior de color.
+        // Halos exteriores pulsantes.
         for (let layer = 0; layer < quality.haloLayers; layer++) {
-          const layerRadius = baseRadius * (1 + layer * 0.42) + Math.sin(time * (0.25 + layer * 0.04) + layer) * minSize * 0.012;
-          const alpha = (0.090 - layer * 0.014) * (0.55 + energy.overall * 1.28);
-          const ring = ctx.createRadialGradient(cx, cy, layerRadius * 0.65, cx, cy, layerRadius * 1.22);
+          const layerRadius =
+            baseRadius * (1 + layer * 0.42) +
+            Math.sin(time * (0.25 + layer * 0.04) + layer) *
+              minSize * 0.012;
+
+          const alpha =
+            (0.090 - layer * 0.014) *
+            (0.55 + energy.overall * 1.28);
+
+          const ring = ctx.createRadialGradient(
+            cx,
+            cy,
+            layerRadius * 0.65,
+            cx,
+            cy,
+            layerRadius * 1.22
+          );
+
           ring.addColorStop(0, 'rgba(0,0,0,0)');
-          ring.addColorStop(0.60, `rgba(184, 221, 196, ${alpha * 0.24})`);
-          ring.addColorStop(0.77, `rgba(92, 142, 127, ${alpha * 0.42})`);
-          ring.addColorStop(0.90, `rgba(158, 169, 99, ${alpha * 0.56})`);
-          ring.addColorStop(0.98, `rgba(226, 188, 61, ${alpha * 0.32})`);
+          ring.addColorStop(
+            0.60,
+            `rgba(184, 221, 196, ${alpha * 0.24})`
+          );
+          ring.addColorStop(
+            0.77,
+            `rgba(92, 142, 127, ${alpha * 0.42})`
+          );
+          ring.addColorStop(
+            0.90,
+            `rgba(158, 169, 99, ${alpha * 0.56})`
+          );
+          ring.addColorStop(
+            0.98,
+            `rgba(226, 188, 61, ${alpha * 0.32})`
+          );
           ring.addColorStop(1, 'rgba(0,0,0,0)');
+
           ctx.fillStyle = ring;
           ctx.beginPath();
           ctx.arc(cx, cy, layerRadius * 1.22, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // Ondas ecualizadoras radiales.
-        const bars = Math.round(clamp((width / 21) * quality.bars, 48, 108));
+        // Ecualizador radial completo.
+        const bars = Math.round(
+          clamp((width / 21) * quality.bars, 48, 108)
+        );
         const innerR = baseRadius * 1.55;
         const outerBase = minSize * 0.06;
         const spectrumLength = frequencyData ? frequencyData.length : 0;
+        const usefulSpectrum =
+          spectrumLength > 0
+            ? Math.max(4, Math.floor(spectrumLength * 0.43))
+            : 0;
+
         ctx.save();
+
         for (let i = 0; i < bars; i++) {
           const p = i / bars;
           const angle = p * Math.PI * 2 - Math.PI / 2;
-          const idx = spectrumLength > 0 ? Math.min(spectrumLength - 1, Math.floor(p * spectrumLength)) : 0;
-          const idleWave = 0.08 + Math.sin(time * 0.75 + p * Math.PI * 8) * 0.035;
-          const amp = spectrumLength > 0 ? (frequencyData[idx] / 255) : idleWave;
-          const len = outerBase * (0.35 + amp * 1.8 + energy.smoothedBeat * 0.22);
+
+          // El espectro se refleja para que responda toda la circunferencia.
+          const folded = p <= 0.5 ? p * 2 : (1 - p) * 2;
+
+          let amp = 0.08 +
+            Math.sin(time * 0.75 + p * Math.PI * 8) * 0.035;
+
+          if (usefulSpectrum > 0) {
+            const idx = Math.min(
+              usefulSpectrum - 1,
+              Math.floor(folded * (usefulSpectrum - 1))
+            );
+
+            const i0 = Math.max(0, idx - 2);
+            const i1 = Math.max(0, idx - 1);
+            const i2 = idx;
+            const i3 = Math.min(usefulSpectrum - 1, idx + 1);
+            const i4 = Math.min(usefulSpectrum - 1, idx + 2);
+
+            amp = (
+              frequencyData[i0] +
+              frequencyData[i1] +
+              frequencyData[i2] * 1.35 +
+              frequencyData[i3] +
+              frequencyData[i4]
+            ) / (5.35 * 255);
+
+            amp = clamp(
+              amp * 0.82 +
+              energy.overall * 0.10 +
+              energy.smoothedBeat * 0.07,
+              0,
+              1
+            );
+          }
+
+          const len = outerBase * (
+            0.35 +
+            amp * 1.8 +
+            energy.smoothedBeat * 0.22
+          );
+
           const x1 = cx + Math.cos(angle) * innerR;
           const y1 = cy + Math.sin(angle) * innerR;
           const x2 = cx + Math.cos(angle) * (innerR + len);
           const y2 = cy + Math.sin(angle) * (innerR + len);
 
           const barAlpha = 0.25 + amp * 0.58;
+
           if (p < 0.25) {
             ctx.strokeStyle = `rgba(104, 181, 164, ${barAlpha})`;
           } else if (p < 0.5) {
@@ -1272,6 +1351,7 @@
           } else {
             ctx.strokeStyle = `rgba(173, 211, 169, ${barAlpha})`;
           }
+
           ctx.lineWidth = Math.max(1.2, minSize * 0.0020);
           ctx.lineCap = 'round';
           ctx.beginPath();
@@ -1279,53 +1359,112 @@
           ctx.lineTo(x2, y2);
           ctx.stroke();
         }
+
         ctx.restore();
 
-        // Onda circular deformada.
+        // Ondas circulares deformadas por la música.
         for (let layer = 0; layer < quality.waveLayers; layer++) {
           const radius = baseRadius * (2.0 + layer * 0.42);
+
           ctx.strokeStyle = layer === 0
             ? `rgba(232, 236, 207, ${0.18 + energy.mid * 0.18})`
             : layer === 1
               ? `rgba(112, 156, 131, ${0.14 + energy.high * 0.14})`
               : `rgba(221, 190, 82, ${0.10 + energy.overall * 0.12})`;
-          ctx.lineWidth = Math.max(1.4, minSize * (0.0023 - layer * 0.00035));
+
+          ctx.lineWidth = Math.max(
+            1.4,
+            minSize * (0.0023 - layer * 0.00035)
+          );
+
           ctx.beginPath();
+
           const points = quality.wavePoints;
+
           for (let i = 0; i <= points; i++) {
             const angle = (i / points) * Math.PI * 2;
-            const idx = Math.floor((i / points) * (frequencyData ? frequencyData.length : 1));
-            const amp = frequencyData ? (frequencyData[idx] / 255) : 0;
-            const waveform = Math.sin(angle * 4 + time * 0.45 + layer) * energy.mid * minSize * 0.010
-              + Math.sin(angle * 10 - time * 0.62 + layer * 0.7) * energy.high * minSize * 0.006
-              + amp * minSize * (0.010 + layer * 0.0025);
+            const idx = Math.floor(
+              (i / points) *
+              (frequencyData ? frequencyData.length : 1)
+            );
+
+            const amp = frequencyData
+              ? frequencyData[
+                  Math.min(frequencyData.length - 1, idx)
+                ] / 255
+              : 0;
+
+            const waveform =
+              Math.sin(angle * 4 + time * 0.45 + layer) *
+                energy.mid *
+                minSize *
+                0.010 +
+              Math.sin(
+                angle * 10 -
+                time * 0.62 +
+                layer * 0.7
+              ) *
+                energy.high *
+                minSize *
+                0.006 +
+              amp *
+                minSize *
+                (0.010 + layer * 0.0025);
+
             const r = radius + waveform;
             const x = cx + Math.cos(angle) * r;
             const y = cy + Math.sin(angle) * r;
-            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
           }
+
           ctx.closePath();
           ctx.stroke();
         }
 
-        // Núcleo tipo altavoz / fuente central.
+        // Cono/altavoz central pulsante.
+        // Se conserva el efecto, pero se elimina el pequeño disco blanco
+        // que antes quedaba visible detrás del cubo.
         const outerSpeaker = baseRadius * 0.95;
         const innerSpeaker = outerSpeaker * 0.62;
-        const cone = ctx.createRadialGradient(cx, cy, innerSpeaker * 0.1, cx, cy, outerSpeaker * 1.35);
-        cone.addColorStop(0, `rgba(255,255,255, ${0.30 + energy.overall * 0.25})`);
-        cone.addColorStop(0.10, `rgba(236, 224, 154, ${0.30 + energy.bass * 0.28})`);
-        cone.addColorStop(0.35, `rgba(86, 139, 122, ${0.22 + energy.mid * 0.18})`);
-        cone.addColorStop(0.70, `rgba(104, 132, 79, ${0.18 + energy.high * 0.15})`);
+
+        const cone = ctx.createRadialGradient(
+          cx,
+          cy,
+          innerSpeaker * 0.1,
+          cx,
+          cy,
+          outerSpeaker * 1.35
+        );
+
+        cone.addColorStop(
+          0,
+          `rgba(255,255,255, ${0.20 + energy.overall * 0.16})`
+        );
+        cone.addColorStop(
+          0.10,
+          `rgba(236, 224, 154, ${0.25 + energy.bass * 0.22})`
+        );
+        cone.addColorStop(
+          0.35,
+          `rgba(86, 139, 122, ${0.22 + energy.mid * 0.18})`
+        );
+        cone.addColorStop(
+          0.70,
+          `rgba(104, 132, 79, ${0.18 + energy.high * 0.15})`
+        );
         cone.addColorStop(1, 'rgba(0,0,0,0)');
+
         ctx.fillStyle = cone;
         ctx.beginPath();
         ctx.arc(cx, cy, outerSpeaker * 1.35, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = `rgba(250, 252, 255, ${0.18 + energy.smoothedBeat * 0.22})`;
-        ctx.beginPath();
-        ctx.arc(cx, cy, innerSpeaker * (0.55 + energy.bass * 0.28), 0, Math.PI * 2);
-        ctx.fill();
+        /*
+          Eliminado intencionadamente:
+          el círculo blanco sólido que se dibujaba aquí.
+        */
 
         ctx.restore();
       }
@@ -1808,8 +1947,8 @@
           const target = Math.max(sideCoverState.alpha, sideCoverState.maxAlpha);
           sideCoverState.alpha = lerp(sideCoverState.alpha, target, 0.15);
         } else {
-          sideCoverState.alpha = Math.max(0, sideCoverState.alpha - dt / 4.0);
-          sideCoverState.maxAlpha = Math.max(0, sideCoverState.maxAlpha - dt * 0.18);
+          sideCoverState.alpha = Math.max(0, sideCoverState.alpha - dt / 7.2);
+          sideCoverState.maxAlpha = Math.max(0, sideCoverState.maxAlpha - dt * 0.095);
         }
         sideCoverState.pulse = Math.max(0, sideCoverState.pulse - dt * 0.7);
 

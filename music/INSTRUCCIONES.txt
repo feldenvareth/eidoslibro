@@ -1,10 +1,16 @@
-EIDOS MUSIC V6
+EIDOS MUSIC V8
 
-Sustituye music/index.html por el index incluido.
+Sustituye únicamente:
+music/index.html
 
 Cambios:
-- cubo central reducido aproximadamente a la mitad;
-- eliminados los bordes amarillos del cubo;
-- aparición lateral de las dos portadas con fade in/fade out activado por picos y transitorios de la música;
-- si llega otro pico antes de desaparecer, las portadas se reactivan;
-- no hace falta copiar imágenes extra: las portadas van integradas dentro del HTML.
+- recuperados los halos pulsantes;
+- recuperadas las ondas circulares deformadas;
+- recuperado el efecto de altavoz central;
+- conservada la corona completa del ecualizador;
+- eliminado únicamente el pequeño disco blanco situado detrás del cubo;
+- conservado el fade lento de las portadas.
+
+No cambies:
+music/Songs/
+music/assets/
