@@ -558,6 +558,24 @@
       const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
       const lerp = (a, b, t) => a + (b - a) * t;
 
+      // Ajuste automático de rendimiento. Mantiene el aspecto general,
+      // pero reduce carga en pantallas grandes, móviles y equipos modestos.
+      const compactDevice =
+        window.matchMedia('(max-width: 820px)').matches ||
+        (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+
+      const quality = {
+        dpr: compactDevice ? 1 : 1.25,
+        particles: compactDevice ? 0.58 : 0.72,
+        nodes: compactDevice ? 0.58 : 0.72,
+        bars: compactDevice ? 0.62 : 0.76,
+        wavePoints: compactDevice ? 64 : 88,
+        haloLayers: compactDevice ? 2 : 3,
+        waveLayers: 2,
+        maxStars: compactDevice ? 48 : 78,
+        maxRipples: compactDevice ? 3 : 5
+      };
+
       const energy = {
         bass: 0,
         mid: 0,
@@ -569,7 +587,7 @@
       };
 
       function resize() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        dpr = Math.min(window.devicePixelRatio || 1, quality.dpr);
         width = Math.max(1, window.innerWidth);
         height = Math.max(1, window.innerHeight);
         canvas.width = Math.round(width * dpr);
@@ -586,8 +604,8 @@
         peakStars.length = 0;
 
         const area = width * height;
-        const particleCount = Math.round(clamp(area / 7200, 90, 360));
-        const nodeCount = Math.round(clamp(width / 130, 7, 18));
+        const particleCount = Math.round(clamp((area / 11500) * quality.particles, 52, 185));
+        const nodeCount = Math.round(clamp((width / 205) * quality.nodes, 4, 10));
 
         for (let i = 0; i < particleCount; i++) {
           particles.push({
@@ -623,7 +641,7 @@
 
         audioContext = new AudioContextClass();
         analyser = audioContext.createAnalyser();
-        analyser.fftSize = 2048;
+        analyser.fftSize = 1024;
         analyser.smoothingTimeConstant = 0.82;
         analyser.minDecibels = -92;
         analyser.maxDecibels = -12;
@@ -648,7 +666,7 @@
       function spawnPeakBurst(intensity = 0.7) {
         const cx = width * 0.5;
         const cy = height * 0.5;
-        const count = Math.round(10 + intensity * 20);
+        const count = Math.round(5 + intensity * 10);
         const baseRadius = Math.min(width, height) * (0.07 + energy.bass * 0.09 + energy.smoothedBeat * 0.05);
 
         for (let i = 0; i < count; i++) {
@@ -696,7 +714,7 @@
         energy.beat = clamp(bassDelta * 6.5 + bassNow * 0.35, 0, 1);
         energy.smoothedBeat = lerp(energy.smoothedBeat, energy.beat, energy.beat > energy.smoothedBeat ? 0.38 : 0.08);
 
-        if (energy.beat > 0.52 && ripples.length < 10) {
+        if (energy.beat > 0.55 && ripples.length < quality.maxRipples) {
           ripples.push({
             x: width * 0.5 + random(-width * 0.13, width * 0.13),
             y: height * 0.5 + random(-height * 0.10, height * 0.10),
@@ -706,7 +724,7 @@
           });
         }
 
-        if (energy.beat > 0.58 && peakStars.length < 260) {
+        if (energy.beat > 0.62 && peakStars.length < quality.maxStars) {
           spawnPeakBurst(energy.beat);
         }
       }
@@ -787,7 +805,7 @@
         ctx.globalCompositeOperation = 'screen';
 
         // Halo exterior de color.
-        for (let layer = 0; layer < 5; layer++) {
+        for (let layer = 0; layer < quality.haloLayers; layer++) {
           const layerRadius = baseRadius * (1 + layer * 0.42) + Math.sin(time * (0.25 + layer * 0.04) + layer) * minSize * 0.012;
           const alpha = (0.090 - layer * 0.014) * (0.55 + energy.overall * 1.28);
           const ring = ctx.createRadialGradient(cx, cy, layerRadius * 0.65, cx, cy, layerRadius * 1.22);
@@ -804,7 +822,7 @@
         }
 
         // Ondas ecualizadoras radiales.
-        const bars = Math.round(clamp(width / 18, 80, 180));
+        const bars = Math.round(clamp((width / 21) * quality.bars, 48, 108));
         const innerR = baseRadius * 1.55;
         const outerBase = minSize * 0.06;
         const spectrumLength = frequencyData ? frequencyData.length : 0;
@@ -821,22 +839,16 @@
           const x2 = cx + Math.cos(angle) * (innerR + len);
           const y2 = cy + Math.sin(angle) * (innerR + len);
 
-          const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+          const barAlpha = 0.25 + amp * 0.58;
           if (p < 0.25) {
-            grad.addColorStop(0, `rgba(223, 237, 204, ${0.10 + amp * 0.28})`);
-            grad.addColorStop(1, `rgba(82, 148, 135, ${0.38 + amp * 0.34})`);
+            ctx.strokeStyle = `rgba(104, 181, 164, ${barAlpha})`;
           } else if (p < 0.5) {
-            grad.addColorStop(0, `rgba(129, 164, 133, ${0.11 + amp * 0.26})`);
-            grad.addColorStop(1, `rgba(89, 125, 89, ${0.36 + amp * 0.34})`);
+            ctx.strokeStyle = `rgba(132, 167, 128, ${barAlpha})`;
           } else if (p < 0.75) {
-            grad.addColorStop(0, `rgba(235, 203, 91, ${0.10 + amp * 0.26})`);
-            grad.addColorStop(1, `rgba(190, 137, 48, ${0.34 + amp * 0.34})`);
+            ctx.strokeStyle = `rgba(229, 190, 72, ${barAlpha})`;
           } else {
-            grad.addColorStop(0, `rgba(226, 188, 61, ${0.10 + amp * 0.24})`);
-            grad.addColorStop(1, `rgba(150, 195, 157, ${0.34 + amp * 0.34})`);
+            ctx.strokeStyle = `rgba(173, 211, 169, ${barAlpha})`;
           }
-
-          ctx.strokeStyle = grad;
           ctx.lineWidth = Math.max(1.2, minSize * 0.0020);
           ctx.lineCap = 'round';
           ctx.beginPath();
@@ -847,7 +859,7 @@
         ctx.restore();
 
         // Onda circular deformada.
-        for (let layer = 0; layer < 3; layer++) {
+        for (let layer = 0; layer < quality.waveLayers; layer++) {
           const radius = baseRadius * (2.0 + layer * 0.42);
           ctx.strokeStyle = layer === 0
             ? `rgba(232, 236, 207, ${0.18 + energy.mid * 0.18})`
@@ -856,7 +868,7 @@
               : `rgba(221, 190, 82, ${0.10 + energy.overall * 0.12})`;
           ctx.lineWidth = Math.max(1.4, minSize * (0.0023 - layer * 0.00035));
           ctx.beginPath();
-          const points = 180;
+          const points = quality.wavePoints;
           for (let i = 0; i <= points; i++) {
             const angle = (i / points) * Math.PI * 2;
             const idx = Math.floor((i / points) * (frequencyData ? frequencyData.length : 1));
@@ -935,7 +947,7 @@
         ctx.strokeStyle = `rgba(249, 231, 154, ${0.42 + energy.overall * 0.40})`;
         ctx.lineWidth = Math.max(1, minSize * 0.00145);
         ctx.shadowColor = 'rgba(216,178,57,.72)';
-        ctx.shadowBlur = 10 + energy.smoothedBeat * 18;
+        ctx.shadowBlur = 5 + energy.smoothedBeat * 8;
         ctx.beginPath();
         for (const [a,b] of edges) {
           ctx.moveTo(points[a].x, points[a].y);
@@ -975,16 +987,12 @@
             default: colorA = [167, 205, 161]; colorB = [239, 215, 128]; break;
           }
 
-          const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, size * 5.5);
-          glow.addColorStop(0, `rgba(${colorA[0]}, ${colorA[1]}, ${colorA[2]}, ${alpha * 0.80})`);
-          glow.addColorStop(0.35, `rgba(${colorB[0]}, ${colorB[1]}, ${colorB[2]}, ${alpha * 0.26})`);
-          glow.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = glow;
+          ctx.fillStyle = `rgba(${colorA[0]}, ${colorA[1]}, ${colorA[2]}, ${alpha * 0.62})`;
           ctx.beginPath();
-          ctx.arc(s.x, s.y, size * 5.5, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, Math.max(0.8, size * 0.72), 0, Math.PI * 2);
           ctx.fill();
 
-          ctx.strokeStyle = `rgba(255,255,255, ${alpha * 0.72})`;
+          ctx.strokeStyle = `rgba(${colorB[0]}, ${colorB[1]}, ${colorB[2]}, ${alpha * 0.70})`;
           ctx.lineWidth = Math.max(0.8, size * 0.45);
           ctx.beginPath();
           ctx.moveTo(s.x - size * 1.8, s.y);
@@ -1047,13 +1055,7 @@
           ripple.radius += ripple.speed * dt;
           ripple.alpha *= Math.pow(0.26, dt);
 
-          const grad = ctx.createRadialGradient(ripple.x, ripple.y, ripple.radius * 0.78, ripple.x, ripple.y, ripple.radius * 1.08);
-          grad.addColorStop(0, 'rgba(0,0,0,0)');
-          grad.addColorStop(0.68, `rgba(218, 232, 201, ${ripple.alpha * 0.55})`);
-          grad.addColorStop(0.82, `rgba(105, 148, 125, ${ripple.alpha * 0.85})`);
-          grad.addColorStop(0.94, `rgba(222, 179, 66, ${ripple.alpha * 0.45})`);
-          grad.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.strokeStyle = grad;
+          ctx.strokeStyle = `rgba(181, 202, 139, ${ripple.alpha * 0.82})`;
           ctx.lineWidth = Math.max(1.0, Math.min(width, height) * 0.0018);
           ctx.beginPath();
           ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
@@ -1066,6 +1068,12 @@
       }
 
       function render(now) {
+        if (document.hidden) {
+          lastFrame = now;
+          requestAnimationFrame(render);
+          return;
+        }
+
         const dt = Math.min((now - lastFrame) / 1000, 0.1);
         lastFrame = now;
         const time = now / 1000;
