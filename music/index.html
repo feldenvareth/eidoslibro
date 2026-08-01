@@ -268,7 +268,7 @@
       bottom: max(18px, env(safe-area-inset-bottom));
       z-index: 12;
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto auto;
+      grid-template-columns: auto minmax(0, 1fr) auto auto auto;
       align-items: center;
       gap: 9px;
       width: min(870px, calc(100% - 28px));
@@ -348,15 +348,205 @@
       text-transform: uppercase;
     }
 
-    #currentTrackName {
-      display: block;
+    #currentTrackViewport {
+      width: 100%;
+      min-width: 0;
       overflow: hidden;
+      white-space: nowrap;
+      -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 10px,
+        #000 calc(100% - 10px),
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 10px,
+        #000 calc(100% - 10px),
+        transparent 100%
+      );
+    }
+
+    #currentTrackMarquee {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    #currentTrackMarquee.is-marquee {
+      width: max-content;
+      justify-content: flex-start;
+      animation:
+        trackNameMarquee var(--marquee-duration, 12s)
+        linear
+        1.1s
+        infinite;
+    }
+
+    #currentTrackName,
+    #currentTrackClone {
+      display: inline-block;
+      flex: 0 0 auto;
       color: rgba(242,236,216,.90);
       font-family: Georgia, "Times New Roman", serif;
       font-size: .91rem;
-      text-overflow: ellipsis;
       white-space: nowrap;
     }
+
+    #currentTrackClone,
+    .track-marquee-gap {
+      display: none;
+    }
+
+    #currentTrackMarquee.is-marquee #currentTrackClone,
+    #currentTrackMarquee.is-marquee .track-marquee-gap {
+      display: inline-block;
+      flex: 0 0 auto;
+    }
+
+    .track-marquee-gap {
+      min-width: 104px;
+      color: rgba(216,178,57,.56);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: .63rem;
+      text-align: center;
+    }
+
+    @keyframes trackNameMarquee {
+      from { transform: translateX(0); }
+      to {
+        transform: translateX(
+          calc(-1 * var(--marquee-distance, 240px))
+        );
+      }
+    }
+
+
+    #sharePanel {
+      position: absolute;
+      right: max(14px, env(safe-area-inset-right));
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 68px);
+      z-index: 14;
+      width: min(390px, calc(100% - 28px));
+      overflow: hidden;
+      border: 1px solid rgba(242,236,216,.17);
+      border-radius: 12px;
+      background: rgba(7, 23, 19, .94);
+      box-shadow: 0 24px 70px rgba(0,0,0,.48);
+      backdrop-filter: blur(18px) saturate(1.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px) scale(.985);
+      pointer-events: none;
+      transition:
+        opacity 220ms ease,
+        transform 220ms ease,
+        visibility 220ms ease;
+    }
+
+    body.share-open #sharePanel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    body.share-open #controls {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    body.share-open #brand {
+      opacity: .82;
+      transform: translateY(0);
+    }
+
+    .share-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 15px 16px 11px;
+      border-bottom: 1px solid rgba(242,236,216,.11);
+    }
+
+    .share-head strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.02rem;
+      font-weight: 400;
+      letter-spacing: .05em;
+    }
+
+    #closeShare {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--eidos-cream);
+      background: rgba(242,236,216,.08);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .share-options {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+    }
+
+    .share-option {
+      display: block;
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid rgba(242,236,216,.10);
+      border-radius: 8px;
+      color: rgba(242,236,216,.90);
+      background: rgba(242,236,216,.035);
+      text-align: left;
+      cursor: pointer;
+      transition:
+        background 150ms ease,
+        border-color 150ms ease,
+        transform 150ms ease;
+    }
+
+    .share-option:hover {
+      border-color: rgba(216,178,57,.30);
+      background: rgba(216,178,57,.09);
+    }
+
+    .share-option:active { transform: scale(.99); }
+
+    .share-option-title {
+      display: block;
+      margin-bottom: 4px;
+      color: rgba(242,236,216,.94);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: .97rem;
+    }
+
+    .share-option-help {
+      display: block;
+      color: rgba(242,236,216,.56);
+      font-size: .72rem;
+      line-height: 1.35;
+    }
+
+    #shareStatus {
+      min-height: 2.1em;
+      padding: 0 15px 13px;
+      color: rgba(216,178,57,.88);
+      font-size: .72rem;
+      text-align: center;
+    }
+
+    #shareLabelShort { display: none; }
 
     #selectorPanel {
       position: absolute;
@@ -471,7 +661,7 @@
 
     @media (max-width: 650px) {
       #controls {
-        grid-template-columns: 82px minmax(0, 1fr) 82px 82px;
+        grid-template-columns: 76px minmax(0, 1fr) 72px 76px 72px;
         gap: 5px;
         padding: 7px;
       }
@@ -485,6 +675,8 @@
 
       #modeLabelLong { display: none; }
       #modeLabelShort { display: inline; }
+      #shareLabelLong { display: none; }
+      #shareLabelShort { display: inline; }
 
       #nowPlaying { padding: 0 4px; }
       #nowPlaying small { display: none; }
@@ -499,18 +691,37 @@
     @media (max-width: 430px) {
       #controls {
         width: calc(100% - 12px);
-        grid-template-columns: 70px minmax(0, 1fr) 70px 72px;
+        grid-template-columns: 60px minmax(0, 1fr) 58px 64px 56px;
         gap: 4px;
         padding: 5px;
       }
       .control-button { font-size: .62rem; padding-inline: 4px; }
       #nowPlaying { min-width: 0; }
+
+      #sharePanel {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, 15px) scale(.985);
+      }
+
+      body.share-open #sharePanel {
+        transform: translate(-50%, 0) scale(1);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       #coverAtmosphere::before,
       #coverAtmosphere::after { animation: none; }
       * { scroll-behavior: auto !important; }
+      #currentTrackMarquee.is-marquee {
+        animation: none;
+        width: 100%;
+        justify-content: center;
+      }
+      #currentTrackMarquee.is-marquee #currentTrackClone,
+      #currentTrackMarquee.is-marquee .track-marquee-gap {
+        display: none;
+      }
     }
 
 
@@ -916,17 +1127,53 @@
     <div id="trackList" role="listbox" aria-label="Canciones disponibles"></div>
   </section>
 
+  <section id="sharePanel" role="dialog" aria-modal="false" aria-label="Compartir música">
+    <div class="share-head">
+      <strong>Compartir</strong>
+      <button id="closeShare" type="button" aria-label="Cerrar compartir">×</button>
+    </div>
+
+    <div class="share-options">
+      <button id="sharePlayerButton" class="share-option" type="button">
+        <span class="share-option-title">Compartir el reproductor</span>
+        <span class="share-option-help">Abre el visor musical con una canción aleatoria.</span>
+      </button>
+
+      <button id="shareTrackButton" class="share-option" type="button">
+        <span class="share-option-title">Compartir esta canción</span>
+        <span class="share-option-help">Abre el visor con la canción actual preparada desde el inicio.</span>
+      </button>
+    </div>
+
+    <div id="shareStatus" role="status" aria-live="polite"></div>
+  </section>
+
   <div id="controls" aria-label="Controles de reproducción">
     <button id="pauseButton" class="control-button" type="button">Pausa</button>
+
     <div id="nowPlaying" aria-live="polite">
       <small>Ahora suena</small>
-      <span id="currentTrackName">—</span>
+      <div id="currentTrackViewport">
+        <div id="currentTrackMarquee">
+          <span id="currentTrackName">—</span>
+          <span class="track-marquee-gap" aria-hidden="true">     ◆     </span>
+          <span id="currentTrackClone" aria-hidden="true">—</span>
+          <span class="track-marquee-gap" aria-hidden="true">     ◆     </span>
+        </div>
+      </div>
     </div>
+
     <button id="modeButton" class="control-button mode-button" type="button" data-mode="random" aria-label="Modo aleatorio">
       <span id="modeLabelLong">Aleatorio</span>
       <span id="modeLabelShort">Azar</span>
     </button>
+
     <button id="selectButton" class="control-button" type="button">Canciones</button>
+
+    <button id="shareButton" class="control-button" type="button" aria-haspopup="dialog" aria-expanded="false">
+      <span id="shareLabelLong">Compartir</span>
+      <span id="shareLabelShort">Link</span>
+    </button>
   </div>
 
   <audio id="audio" preload="auto"></audio>
@@ -956,10 +1203,21 @@
       const startTrack = document.getElementById('startTrack');
       const startStatus = document.getElementById('startStatus');
       const currentTrackName = document.getElementById('currentTrackName');
+      const currentTrackClone = document.getElementById('currentTrackClone');
+      const currentTrackMarquee = document.getElementById('currentTrackMarquee');
+      const currentTrackViewport = document.getElementById('currentTrackViewport');
       const brandButton = document.getElementById('brand');
       const modeButton = document.getElementById('modeButton');
       const modeLabelLong = document.getElementById('modeLabelLong');
       const modeLabelShort = document.getElementById('modeLabelShort');
+      const shareButton = document.getElementById('shareButton');
+      const shareLabelLong = document.getElementById('shareLabelLong');
+      const shareLabelShort = document.getElementById('shareLabelShort');
+      const sharePanel = document.getElementById('sharePanel');
+      const closeShare = document.getElementById('closeShare');
+      const sharePlayerButton = document.getElementById('sharePlayerButton');
+      const shareTrackButton = document.getElementById('shareTrackButton');
+      const shareStatus = document.getElementById('shareStatus');
 
       let audioContext = null;
       let analyser = null;
@@ -979,6 +1237,17 @@
       let selectorOpen = false;
       let playbackMode = 'random';
       let preloadedNextIndex = -1;
+      let shareOpen = false;
+      let marqueeFrame = 0;
+      let requestedTrackMatched = false;
+
+      const requestedTrackToken = (() => {
+        try {
+          return new URL(window.location.href).searchParams.get('track');
+        } catch (_) {
+          return null;
+        }
+      })();
 
       const particles = [];
       const ripples = [];
@@ -1054,6 +1323,7 @@
         canvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         buildScene();
+        scheduleTrackMarqueeUpdate();
       }
 
       function buildScene() {
@@ -2484,7 +2754,8 @@
         if (typeof item === 'string') {
           return {
             name: item.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' '),
-            source: trackSource(item)
+            source: trackSource(item),
+            file: item
           };
         }
 
@@ -2493,6 +2764,7 @@
         return {
           name: String(item.title || item.name || file.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ')).trim(),
           source: trackSource(file),
+          file,
           order: Number.isFinite(item.order) ? item.order : index
         };
       }
@@ -2524,17 +2796,74 @@
         modeLabelShort.textContent = ordered ? 'Orden' : 'Azar';
       }
 
+      function scheduleTrackMarqueeUpdate() {
+        cancelAnimationFrame(marqueeFrame);
+
+        marqueeFrame = requestAnimationFrame(() => {
+          currentTrackMarquee.classList.remove('is-marquee');
+          currentTrackMarquee.style.removeProperty('--marquee-distance');
+          currentTrackMarquee.style.removeProperty('--marquee-duration');
+
+          const viewportWidth = currentTrackViewport.clientWidth;
+          const textWidth = currentTrackName.scrollWidth;
+
+          if (
+            viewportWidth > 0 &&
+            textWidth > viewportWidth + 6 &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ) {
+            const gapWidth = 104;
+            const distance = textWidth + gapWidth;
+            const duration = Math.max(10, distance / 27);
+
+            currentTrackMarquee.style.setProperty(
+              '--marquee-distance',
+              `${distance}px`
+            );
+            currentTrackMarquee.style.setProperty(
+              '--marquee-duration',
+              `${duration.toFixed(2)}s`
+            );
+            currentTrackMarquee.classList.add('is-marquee');
+          }
+        });
+      }
+
       function updateTrackLabels() {
         const track = localPlaylist[currentTrackIndex];
         const name = track?.name || '—';
+
         currentTrackName.textContent = name;
-        startTrack.textContent = track ? `Comenzará al azar: ${name}` : 'No hay canciones disponibles.';
+        currentTrackClone.textContent = name;
+
+        if (track) {
+          const currentTrackIsRequested =
+            requestedTrackMatched &&
+            requestedTrackToken &&
+            [track.file, track.name].some(candidate =>
+              String(candidate || '')
+                .trim()
+                .toLocaleLowerCase('es') ===
+              String(requestedTrackToken)
+                .trim()
+                .toLocaleLowerCase('es')
+            );
+
+          startTrack.textContent = currentTrackIsRequested
+            ? `Canción compartida: ${name}`
+            : `Comenzará al azar: ${name}`;
+        } else {
+          startTrack.textContent = 'No hay canciones disponibles.';
+        }
+
         document.title = track ? `${name} · Eidos` : 'Eidos · Visor musical';
 
         trackList.querySelectorAll('.track-option').forEach((button, index) => {
           button.classList.toggle('active', index === currentTrackIndex);
           button.setAttribute('aria-selected', index === currentTrackIndex ? 'true' : 'false');
         });
+
+        scheduleTrackMarqueeUpdate();
       }
 
       function renderTrackList() {
@@ -2628,7 +2957,44 @@
             throw new Error('No hay audios compatibles dentro de music/Songs.');
           }
 
-          currentTrackIndex = Math.floor(Math.random() * localPlaylist.length);
+          const normalizedRequestedTrack = requestedTrackToken
+            ? String(requestedTrackToken)
+                .trim()
+                .toLocaleLowerCase('es')
+            : '';
+
+          const requestedIndex = normalizedRequestedTrack
+            ? localPlaylist.findIndex(track => {
+                const candidates = [
+                  track.file,
+                  track.name,
+                  (() => {
+                    try {
+                      return decodeURIComponent(
+                        new URL(track.source, document.baseURI)
+                          .pathname
+                          .split('/')
+                          .pop() || ''
+                      );
+                    } catch (_) {
+                      return '';
+                    }
+                  })()
+                ];
+
+                return candidates.some(candidate =>
+                  String(candidate || '')
+                    .trim()
+                    .toLocaleLowerCase('es') === normalizedRequestedTrack
+                );
+              })
+            : -1;
+
+          requestedTrackMatched = requestedIndex >= 0;
+          currentTrackIndex = requestedTrackMatched
+            ? requestedIndex
+            : Math.floor(Math.random() * localPlaylist.length);
+
           renderTrackList();
           startStatus.textContent = `${localPlaylist.length} ${localPlaylist.length === 1 ? 'canción disponible' : 'canciones disponibles'}.`;
           startButton.disabled = false;
@@ -2758,6 +3124,86 @@
         trackTransitioning = false;
       }
 
+      function buildPlayerShareUrl() {
+        const url = new URL(window.location.href);
+        url.search = '';
+        url.hash = '';
+        return url.toString();
+      }
+
+      function buildTrackShareUrl() {
+        const track = getCurrentTrack();
+        const url = new URL(buildPlayerShareUrl());
+
+        if (track) {
+          url.searchParams.set('track', track.file || track.name);
+        }
+
+        return url.toString();
+      }
+
+      async function copyTextToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+
+      async function shareLink({ url, title, text }) {
+        shareStatus.textContent = '';
+
+        try {
+          if (navigator.share) {
+            await navigator.share({ title, text, url });
+            shareStatus.textContent = 'Enlace compartido.';
+          } else {
+            await copyTextToClipboard(url);
+            shareStatus.textContent = 'Enlace copiado.';
+          }
+        } catch (error) {
+          if (error?.name === 'AbortError') return;
+
+          try {
+            await copyTextToClipboard(url);
+            shareStatus.textContent = 'Enlace copiado.';
+          } catch (copyError) {
+            console.error(copyError);
+            shareStatus.textContent = 'No se ha podido copiar el enlace.';
+          }
+        }
+      }
+
+      function openSharePanel() {
+        if (selectorOpen) {
+          selectorOpen = false;
+          document.body.classList.remove('selector-open');
+        }
+
+        shareOpen = true;
+        shareStatus.textContent = '';
+        shareButton.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('share-open', 'show-controls');
+        clearTimeout(controlsTimer);
+      }
+
+      function closeSharePanel({ keepControls = true } = {}) {
+        shareOpen = false;
+        shareButton.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('share-open');
+
+        if (keepControls) showControls();
+      }
+
       async function returnToLauncher() {
         if (starting) return;
 
@@ -2770,11 +3216,14 @@
 
         clearTimeout(controlsTimer);
         selectorOpen = false;
+        shareOpen = false;
+        shareButton.setAttribute('aria-expanded', 'false');
 
         document.body.classList.remove(
           'visualizer-started',
           'show-controls',
-          'selector-open'
+          'selector-open',
+          'share-open'
         );
 
         selectorPanel.classList.remove('open');
@@ -2798,12 +3247,13 @@
         if (!document.body.classList.contains('visualizer-started')) return;
         document.body.classList.add('show-controls');
         clearTimeout(controlsTimer);
-        if (!selectorOpen) {
+        if (!selectorOpen && !shareOpen) {
           controlsTimer = setTimeout(() => document.body.classList.remove('show-controls'), 2600);
         }
       }
 
       function openTrackSelector() {
+        if (shareOpen) closeSharePanel({ keepControls: false });
         selectorOpen = true;
         document.body.classList.add('selector-open', 'show-controls');
         clearTimeout(controlsTimer);
@@ -2851,7 +3301,33 @@
         else openTrackSelector();
       });
 
+      shareButton.addEventListener('click', () => {
+        if (shareOpen) closeSharePanel();
+        else openSharePanel();
+      });
+
       closeSelector.addEventListener('click', closeTrackSelector);
+      closeShare.addEventListener('click', () => closeSharePanel());
+
+      sharePlayerButton.addEventListener('click', () => {
+        shareLink({
+          url: buildPlayerShareUrl(),
+          title: 'Eidos · Visor musical',
+          text: 'Escucha el visor musical de Eidos.'
+        });
+      });
+
+      shareTrackButton.addEventListener('click', () => {
+        const track = getCurrentTrack();
+
+        shareLink({
+          url: buildTrackShareUrl(),
+          title: track ? `${track.name} · Eidos` : 'Eidos · Visor musical',
+          text: track
+            ? `Escucha “${track.name}” en el visor musical de Eidos.`
+            : 'Escucha el visor musical de Eidos.'
+        });
+      });
 
       audio.addEventListener('ended', () => {
         const nextIndex = preloadedNextIndex >= 0 ? preloadedNextIndex : chooseNextIndex();
@@ -2866,15 +3342,37 @@
 
       document.addEventListener('pointermove', showControls, { passive: true });
       document.addEventListener('pointerdown', event => {
-        if (!selectorPanel.contains(event.target) && selectorOpen && !selectButton.contains(event.target)) {
+        if (
+          !selectorPanel.contains(event.target) &&
+          selectorOpen &&
+          !selectButton.contains(event.target)
+        ) {
           closeTrackSelector();
         }
+
+        if (
+          !sharePanel.contains(event.target) &&
+          shareOpen &&
+          !shareButton.contains(event.target)
+        ) {
+          closeSharePanel();
+        }
+
         showControls();
       }, { passive: true });
 
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && selectorOpen) closeTrackSelector();
-        if (event.code === 'Space' && document.body.classList.contains('visualizer-started') && !selectorOpen) {
+        if (event.key === 'Escape') {
+          if (shareOpen) closeSharePanel();
+          else if (selectorOpen) closeTrackSelector();
+        }
+
+        if (
+          event.code === 'Space' &&
+          document.body.classList.contains('visualizer-started') &&
+          !selectorOpen &&
+          !shareOpen
+        ) {
           event.preventDefault();
           pauseButton.click();
         }
@@ -2894,10 +3392,14 @@
       const navbar = document.getElementById('navbar');
       const menu = document.getElementById('mobile-menu');
       const burger = document.getElementById('hamburger');
+
       let navigationTimer = null;
+      let viewportTimer = null;
+      let compactNavigation = window.innerWidth <= 900;
 
       function scheduleNavigationFade() {
         clearTimeout(navigationTimer);
+
         if (!document.body.classList.contains('visualizer-started')) return;
         if (document.body.classList.contains('mobile-menu-open')) return;
 
@@ -2915,6 +3417,7 @@
 
       window.toggleMenu = function toggleMenu() {
         const opening = !menu.classList.contains('open');
+
         menu.classList.toggle('open', opening);
         burger.classList.toggle('active', opening);
         burger.setAttribute('aria-expanded', opening ? 'true' : 'false');
@@ -2922,6 +3425,7 @@
 
         document.body.classList.add('nav-visible');
         clearTimeout(navigationTimer);
+
         if (!opening) scheduleNavigationFade();
       };
 
@@ -2932,6 +3436,36 @@
         document.body.classList.remove('mobile-menu-open');
         scheduleNavigationFade();
       };
+
+      function stabilizeNavigationAfterViewportChange(forceClose = false) {
+        clearTimeout(viewportTimer);
+
+        document.body.classList.add('nav-visible');
+        clearTimeout(navigationTimer);
+
+        viewportTimer = setTimeout(() => {
+          const nextCompactNavigation = window.innerWidth <= 900;
+          const breakpointChanged =
+            nextCompactNavigation !== compactNavigation;
+
+          if (forceClose || breakpointChanged) {
+            closeMenu();
+          }
+
+          compactNavigation = nextCompactNavigation;
+          document.body.classList.add('nav-visible');
+          scheduleNavigationFade();
+        }, 180);
+      }
+
+      function handleOrientationChange() {
+        stabilizeNavigationAfterViewportChange(true);
+
+        setTimeout(
+          () => stabilizeNavigationAfterViewportChange(true),
+          420
+        );
+      }
 
       document.addEventListener('pointermove', showNavigation, { passive: true });
       document.addEventListener('pointerdown', showNavigation, { passive: true });
@@ -2961,9 +3495,40 @@
         if (event.key === 'Escape') closeMenu();
       });
 
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeMenu();
-      });
+      window.addEventListener(
+        'resize',
+        () => stabilizeNavigationAfterViewportChange(false),
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'orientationchange',
+        handleOrientationChange,
+        { passive: true }
+      );
+
+      document.addEventListener(
+        'fullscreenchange',
+        () => stabilizeNavigationAfterViewportChange(true)
+      );
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener(
+          'resize',
+          () => stabilizeNavigationAfterViewportChange(false),
+          { passive: true }
+        );
+      }
+
+      if (
+        screen.orientation &&
+        typeof screen.orientation.addEventListener === 'function'
+      ) {
+        screen.orientation.addEventListener(
+          'change',
+          handleOrientationChange
+        );
+      }
 
       document.body.classList.add('nav-visible');
       scheduleNavigationFade();
