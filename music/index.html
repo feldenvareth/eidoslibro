@@ -1439,12 +1439,12 @@
     <div class="share-options">
       <button id="sharePlayerButton" class="share-option" type="button">
         <span class="share-option-title">Compartir el reproductor</span>
-        <span class="share-option-help">Abre el visor musical con una canción aleatoria.</span>
+        <span class="share-option-help">Comparte en el móvil o copia el enlace del reproductor.</span>
       </button>
 
       <button id="shareTrackButton" class="share-option" type="button">
         <span class="share-option-title">Compartir esta canción</span>
-        <span class="share-option-help">Abre el visor con la canción actual preparada desde el inicio.</span>
+        <span class="share-option-help">Comparte en el móvil o copia esta canción desde el inicio.</span>
       </button>
     </div>
 
@@ -1665,6 +1665,7 @@
       let transportInteracting = false;
       let isSeeking = false;
       let lastNonZeroVolume = 0.85;
+      let shareStatusTimer = null;
 
       const storedVolume = (() => {
         try {
@@ -2000,12 +2001,12 @@
 
         const sideCoverTrigger = Math.max(energy.beat, highDelta * 6.2 + highNow * 0.22);
         const nowSec = performance.now() / 1000;
-        if (sideCoverTrigger > 0.62 && nowSec - sideCoverState.lastTrigger > 0.18) {
+        if (sideCoverTrigger > 0.59 && nowSec - sideCoverState.lastTrigger > 0.17) {
           triggerSideCovers(sideCoverTrigger, nowSec);
           triggerAccentEffects(sideCoverTrigger, nowSec);
         }
 
-        if (energy.beat > 0.55 && ripples.length < quality.maxRipples) {
+        if (energy.beat > 0.53 && ripples.length < quality.maxRipples) {
           ripples.push({
             x: width * 0.5 + random(-width * 0.13, width * 0.13),
             y: height * 0.5 + random(-height * 0.10, height * 0.10),
@@ -2015,7 +2016,7 @@
           });
         }
 
-        if (energy.beat > 0.62 && peakStars.length < quality.maxStars) {
+        if (energy.beat > 0.59 && peakStars.length < quality.maxStars) {
           spawnPeakBurst(energy.beat);
         }
       }
@@ -3953,27 +3954,66 @@
         textarea.remove();
       }
 
+      function canUseNativeMobileShare() {
+        const userAgent = navigator.userAgent || '';
+        const mobileUserAgent =
+          /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
+
+        /*
+          iPadOS puede identificarse como un Mac. Esta comprobación
+          permite usar el menú nativo en iPad sin activarlo en Windows.
+        */
+        const iPadDesktopMode =
+          navigator.platform === 'MacIntel' &&
+          navigator.maxTouchPoints > 1;
+
+        return (
+          typeof navigator.share === 'function' &&
+          (mobileUserAgent || iPadDesktopMode)
+        );
+      }
+
+      function showTemporaryShareStatus(message, duration = 1500) {
+        clearTimeout(shareStatusTimer);
+        shareStatus.textContent = message;
+
+        shareStatusTimer = setTimeout(() => {
+          shareStatus.textContent = '';
+        }, duration);
+      }
+
       async function shareLink({ url, title, text }) {
+        clearTimeout(shareStatusTimer);
         shareStatus.textContent = '';
 
-        try {
-          if (navigator.share) {
-            await navigator.share({ title, text, url });
-            shareStatus.textContent = 'Enlace compartido.';
-          } else {
-            await copyTextToClipboard(url);
-            shareStatus.textContent = 'Enlace copiado.';
-          }
-        } catch (error) {
-          if (error?.name === 'AbortError') return;
-
+        if (canUseNativeMobileShare()) {
           try {
-            await copyTextToClipboard(url);
-            shareStatus.textContent = 'Enlace copiado.';
-          } catch (copyError) {
-            console.error(copyError);
-            shareStatus.textContent = 'No se ha podido copiar el enlace.';
+            await navigator.share({ title, text, url });
+            showTemporaryShareStatus('Enlace compartido.', 1500);
+            return;
+          } catch (error) {
+            /*
+              Si el usuario cierra voluntariamente el menú de compartir,
+              no se copia nada ni se muestra un error.
+            */
+            if (error?.name === 'AbortError') return;
+
+            console.warn(
+              'No se ha podido usar el menú nativo. Se copiará el enlace.',
+              error
+            );
           }
+        }
+
+        try {
+          await copyTextToClipboard(url);
+          showTemporaryShareStatus('Enlace copiado.', 1500);
+        } catch (error) {
+          console.error(error);
+          showTemporaryShareStatus(
+            'No se ha podido copiar el enlace.',
+            2500
+          );
         }
       }
 
@@ -3994,6 +4034,9 @@
         shareOpen = false;
         shareButton.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('share-open');
+
+        clearTimeout(shareStatusTimer);
+        shareStatus.textContent = '';
 
         if (keepControls) showControls();
       }
