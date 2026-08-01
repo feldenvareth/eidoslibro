@@ -1627,8 +1627,17 @@
 
       const storedVolume = (() => {
         try {
-          const value = Number(localStorage.getItem('eidosMusicVolume'));
-          return Number.isFinite(value) ? clamp(value, 0, 1) : 0.85;
+          const stored = localStorage.getItem('eidosMusicVolume');
+
+          if (stored === null || stored === '') {
+            return 0.85;
+          }
+
+          const value = Number(stored);
+
+          return Number.isFinite(value)
+            ? Math.max(0, Math.min(1, value))
+            : 0.85;
         } catch (_) {
           return 0.85;
         }
