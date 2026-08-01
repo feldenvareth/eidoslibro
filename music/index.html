@@ -10,27 +10,6 @@
   <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.ico">
 
-  <meta name="description" content="Visor musical de Eidos. Escucha, explora y trasciende." />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Eidos" />
-  <meta property="og:locale" content="es_ES" />
-  <meta property="og:title" content="Eidos · Visor musical" />
-  <meta property="og:description" content="Visor musical de Eidos. Escucha, explora y trasciende." />
-  <meta property="og:url" content="https://www.eidoslibro.com/music/" />
-  <meta property="og:image" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
-  <meta property="og:image:alt" content="Eidos Visor Musical con un cubo dorado luminoso y las portadas de Eidos y Eidos Relatos" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Eidos · Visor musical" />
-  <meta name="twitter:description" content="Visor musical de Eidos. Escucha, explora y trasciende." />
-  <meta name="twitter:image" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta name="twitter:image:alt" content="Eidos Visor Musical con un cubo dorado luminoso y las portadas de Eidos y Eidos Relatos" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -43,7 +22,6 @@
       --eidos-moss: #617345;
       --eidos-gold: #d8b239;
       --eidos-cream: #f2ecd8;
-      --launcher-cover: url('./assets/tapa.jpg');
       --eidos-muted: rgba(242, 236, 216, 0.68);
       --eidos-line: rgba(242, 236, 216, 0.18);
       --eidos-glass: rgba(11, 27, 23, 0.76);
@@ -104,13 +82,14 @@
     }
 
     #coverAtmosphere::before {
-      background-image:
-        linear-gradient(rgba(13,35,29,.32), rgba(13,35,29,.76)),
-        var(--launcher-cover);
+      background-image: linear-gradient(rgba(13,35,29,.35), rgba(13,35,29,.74)), url('./assets/tapa.jpg');
+      clip-path: polygon(0 0, 56% 0, 44% 100%, 0 100%);
     }
 
     #coverAtmosphere::after {
-      display: none;
+      background-image: linear-gradient(rgba(16,34,29,.38), rgba(16,34,29,.78)), url('./assets/taparelatos.jpg');
+      clip-path: polygon(56% 0, 100% 0, 100% 100%, 44% 100%);
+      animation-delay: -14s;
     }
 
     #grain {
@@ -155,8 +134,8 @@
       border: 1px solid var(--eidos-line);
       border-radius: 6px;
       background:
-        linear-gradient(145deg, rgba(24, 55, 46, 0.84), rgba(8, 24, 20, 0.91)),
-        var(--launcher-cover) center/cover;
+        linear-gradient(145deg, rgba(24, 55, 46, 0.83), rgba(8, 24, 20, 0.90)),
+        url('./assets/taparelatos.jpg') center/cover;
       box-shadow: 0 28px 110px rgba(0,0,0,.55), inset 0 0 0 1px rgba(216,178,57,.06);
       position: relative;
       overflow: hidden;
@@ -181,15 +160,13 @@
 
     h1 {
       margin: 0;
-      color: #c9a84c;
-      font-family: 'Cormorant Garamond', serif;
+      color: var(--eidos-cream);
+      font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(3.2rem, 12vw, 7.4rem);
-      font-weight: 300;
-      letter-spacing: .18em;
+      font-weight: 400;
+      letter-spacing: .12em;
       line-height: .88;
-      text-shadow:
-        0 2px 26px rgba(0,0,0,.46),
-        0 0 24px rgba(201,168,76,.08);
+      text-shadow: 0 2px 26px rgba(0,0,0,.46);
     }
 
     .subtitle {
@@ -217,11 +194,11 @@
     #startButton {
       position: relative;
       margin-top: 26px;
-      min-width: min(330px, 100%);
+      min-width: min(310px, 100%);
       min-height: 52px;
       padding: 13px 24px;
       border: 1px solid rgba(216,178,57,.56);
-      border-radius: 999px;
+      border-radius: 2px;
       color: #fff9e6;
       background: linear-gradient(135deg, rgba(119,100,34,.88), rgba(50,84,70,.92));
       font: 700 .82rem/1 Inter, sans-serif;
@@ -291,14 +268,13 @@
       bottom: max(18px, env(safe-area-inset-bottom));
       z-index: 12;
       display: grid;
-      grid-template-columns: 46px minmax(210px, 300px) 46px 46px 46px 46px;
+      grid-template-columns: auto minmax(0, 1fr) auto auto auto;
       align-items: center;
-      justify-content: center;
       gap: 9px;
-      width: min(720px, calc(100% - 28px));
+      width: min(870px, calc(100% - 28px));
       padding: 9px;
       border: 1px solid rgba(242,236,216,.17);
-      border-radius: 28px;
+      border-radius: 999px;
       background: rgba(7, 23, 19, .74);
       box-shadow: 0 16px 48px rgba(0,0,0,.34);
       backdrop-filter: blur(15px) saturate(1.15);
@@ -323,239 +299,26 @@
 
     .control-button {
       flex: 0 0 auto;
-      min-width: 0;
+      min-width: 112px;
       min-height: 42px;
-      padding: 0;
+      padding: 9px 16px;
       border: 1px solid rgba(242,236,216,.14);
-      border-radius: 50%;
-      color: rgba(242,236,216,.86);
-      background: rgba(242,236,216,.045);
+      border-radius: 999px;
+      color: var(--eidos-cream);
+      background: rgba(242,236,216,.055);
+      font: 650 .78rem/1 Inter, sans-serif;
+      letter-spacing: .06em;
       cursor: pointer;
-      transition:
-        color 150ms ease,
-        background 150ms ease,
-        transform 150ms ease,
-        border-color 150ms ease,
-        box-shadow 150ms ease;
+      transition: background 150ms ease, transform 150ms ease, border-color 150ms ease;
     }
 
     .control-button:hover {
-      color: #fff7dc;
       background: rgba(216,178,57,.12);
       border-color: rgba(216,178,57,.36);
     }
 
-    .control-button:focus-visible {
-      outline: 1px solid rgba(216,178,57,.78);
-      outline-offset: 3px;
-    }
+    .control-button:active { transform: scale(.98); }
 
-    .control-button:active {
-      transform: scale(.94);
-    }
-
-    .icon-button {
-      width: 44px;
-      height: 44px;
-      display: inline-grid;
-      place-items: center;
-    }
-
-    .primary-control {
-      color: #071713;
-      border-color: rgba(232,206,116,.82);
-      background: rgba(216,178,57,.92);
-      box-shadow: 0 0 22px rgba(216,178,57,.13);
-    }
-
-    .primary-control:hover {
-      color: #071713;
-      background: #e5c45b;
-      border-color: #f2dc8b;
-    }
-
-    .button-icon {
-      width: 21px;
-      height: 21px;
-      display: inline-grid;
-      place-items: center;
-      pointer-events: none;
-    }
-
-    .button-icon svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .primary-control .button-icon svg path:first-child {
-      fill: currentColor;
-      stroke: none;
-    }
-
-    .mode-button[data-mode="random"] {
-      color: #e4c35c;
-      border-color: rgba(216,178,57,.34);
-      background: rgba(216,178,57,.08);
-    }
-
-    .mode-button[data-mode="ordered"] {
-      color: rgba(196,222,207,.94);
-      border-color: rgba(129,176,157,.30);
-      background: rgba(102,151,132,.08);
-    }
-
-
-    #transportControls {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 42px minmax(100px, 1fr) 42px 32px 116px;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-      padding: 8px 10px 1px;
-      border-top: 1px solid rgba(242,236,216,.10);
-    }
-
-    .time-label {
-      color: rgba(242,236,216,.62);
-      font-size: .68rem;
-      font-variant-numeric: tabular-nums;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .eidos-range {
-      --range-progress: 0%;
-      width: 100%;
-      min-width: 0;
-      height: 22px;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      touch-action: none;
-    }
-
-    .eidos-range:disabled {
-      opacity: .38;
-      cursor: default;
-    }
-
-    .eidos-range::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 4px;
-      border-radius: 999px;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(216,178,57,.92) 0,
-          rgba(216,178,57,.92) var(--range-progress),
-          rgba(242,236,216,.16) var(--range-progress),
-          rgba(242,236,216,.16) 100%
-        );
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.025);
-    }
-
-    .eidos-range::-moz-range-track {
-      width: 100%;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(242,236,216,.16);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.025);
-    }
-
-    .eidos-range::-moz-range-progress {
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(216,178,57,.92);
-    }
-
-    .eidos-range::-webkit-slider-thumb {
-      width: 14px;
-      height: 14px;
-      margin-top: -5px;
-      border: 1px solid rgba(255,249,222,.84);
-      border-radius: 50%;
-      background: #d8b239;
-      box-shadow:
-        0 0 0 3px rgba(216,178,57,.11),
-        0 2px 8px rgba(0,0,0,.38);
-      appearance: none;
-      -webkit-appearance: none;
-      transition: transform 120ms ease, box-shadow 120ms ease;
-    }
-
-    .eidos-range::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border: 1px solid rgba(255,249,222,.84);
-      border-radius: 50%;
-      background: #d8b239;
-      box-shadow:
-        0 0 0 3px rgba(216,178,57,.11),
-        0 2px 8px rgba(0,0,0,.38);
-      transition: transform 120ms ease, box-shadow 120ms ease;
-    }
-
-    .eidos-range:not(:disabled):hover::-webkit-slider-thumb,
-    .eidos-range:not(:disabled):focus-visible::-webkit-slider-thumb {
-      transform: scale(1.16);
-      box-shadow:
-        0 0 0 5px rgba(216,178,57,.14),
-        0 2px 10px rgba(0,0,0,.42);
-    }
-
-    .eidos-range:not(:disabled):hover::-moz-range-thumb,
-    .eidos-range:not(:disabled):focus-visible::-moz-range-thumb {
-      transform: scale(1.16);
-      box-shadow:
-        0 0 0 5px rgba(216,178,57,.14),
-        0 2px 10px rgba(0,0,0,.42);
-    }
-
-    .volume-button {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      border: 1px solid rgba(242,236,216,.11);
-      border-radius: 50%;
-      color: var(--eidos-cream);
-      background: rgba(242,236,216,.045);
-      font-size: .82rem;
-      line-height: 1;
-      cursor: pointer;
-      transition: background 150ms ease, border-color 150ms ease;
-    }
-
-    .volume-button:hover {
-      border-color: rgba(216,178,57,.32);
-      background: rgba(216,178,57,.10);
-    }
-
-    .volume-button svg {
-      width: 17px;
-      height: 17px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      pointer-events: none;
-    }
-
-    .volume-range {
-      min-width: 70px;
-    }
 
     .mode-button[data-mode="ordered"] {
       border-color: rgba(216,178,57,.46);
@@ -569,25 +332,25 @@
     }
 
     #nowPlaying {
+      flex: 1 1 auto;
       min-width: 0;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 16px;
-      overflow: hidden;
-      border: 1px solid rgba(242,236,216,.14);
-      border-radius: 999px;
-      color: rgba(242,236,216,.90);
-      background: rgba(242,236,216,.045);
-      box-shadow: inset 0 0 18px rgba(255,255,255,.018);
+      padding: 0 12px;
       text-align: center;
+    }
+
+    #nowPlaying small {
+      display: block;
+      margin-bottom: 3px;
+      color: rgba(216,178,57,.78);
+      font-size: .56rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
     }
 
     #currentTrackViewport {
       width: 100%;
       min-width: 0;
-      line-height: 1;
       overflow: hidden;
       white-space: nowrap;
       -webkit-mask-image: linear-gradient(
@@ -631,7 +394,7 @@
       flex: 0 0 auto;
       color: rgba(242,236,216,.90);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: .88rem;
+      font-size: .91rem;
       white-space: nowrap;
     }
 
@@ -667,7 +430,7 @@
     #sharePanel {
       position: absolute;
       right: max(14px, env(safe-area-inset-right));
-      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 112px);
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 68px);
       z-index: 14;
       width: min(390px, calc(100% - 28px));
       overflow: hidden;
@@ -788,7 +551,7 @@
     #selectorPanel {
       position: absolute;
       left: 50%;
-      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 112px);
+      bottom: calc(max(18px, env(safe-area-inset-bottom)) + 68px);
       z-index: 11;
       width: min(620px, calc(100% - 28px));
       max-height: min(58vh, 520px);
@@ -896,22 +659,9 @@
 
     body.visualizer-started:not(.show-controls):not(.selector-open) #touchHint { opacity: .64; }
 
-    @media (min-width: 651px) and (max-width: 820px) {
-      #controls {
-        width: min(680px, calc(100% - 20px));
-        grid-template-columns: 44px minmax(180px, 260px) 44px 44px 44px 44px;
-        gap: 7px;
-      }
-
-      .icon-button {
-        width: 42px;
-        height: 42px;
-      }
-    }
-
     @media (max-width: 650px) {
       #controls {
-        grid-template-columns: 38px minmax(118px, 1fr) 38px 38px 38px 38px;
+        grid-template-columns: 76px minmax(0, 1fr) 72px 76px 72px;
         gap: 5px;
         padding: 7px;
       }
@@ -919,39 +669,17 @@
       .control-button {
         min-width: 0;
         width: 100%;
-        padding: 0;
+        padding-inline: 7px;
+        font-size: .68rem;
       }
 
-      .icon-button {
-        width: 38px;
-        height: 38px;
-      }
+      #modeLabelLong { display: none; }
+      #modeLabelShort { display: inline; }
+      #shareLabelLong { display: none; }
+      #shareLabelShort { display: inline; }
 
-      .button-icon {
-        width: 18px;
-        height: 18px;
-      }
-
-      #nowPlaying {
-        min-height: 38px;
-        padding: 0 10px;
-      }
-
-      #transportControls {
-        grid-template-columns: 36px minmax(72px, 1fr) 36px 30px 78px;
-        gap: 5px;
-        padding: 7px 5px 0;
-      }
-
-      .time-label {
-        font-size: .60rem;
-      }
-
-      .volume-button {
-        width: 30px;
-        height: 30px;
-        font-size: .72rem;
-      }
+      #nowPlaying { padding: 0 4px; }
+      #nowPlaying small { display: none; }
       #currentTrackName { font-size: .80rem; }
       #brand { top: 12px; left: 14px; }
       #brand strong { font-size: 1.05rem; }
@@ -963,43 +691,12 @@
     @media (max-width: 430px) {
       #controls {
         width: calc(100% - 12px);
-        grid-template-columns: 34px minmax(92px, 1fr) 34px 34px 34px 34px;
+        grid-template-columns: 60px minmax(0, 1fr) 58px 64px 56px;
         gap: 4px;
         padding: 5px;
       }
-      .control-button { padding: 0; }
-
-      .icon-button {
-        width: 34px;
-        height: 34px;
-      }
-
-      .button-icon {
-        width: 16px;
-        height: 16px;
-      }
-
-      #nowPlaying {
-        min-width: 0;
-        min-height: 34px;
-        padding: 0 8px;
-      }
-
-      #transportControls {
-        grid-template-columns: 32px minmax(60px, 1fr) 32px 28px 62px;
-        gap: 4px;
-        padding-inline: 2px;
-      }
-
-      .time-label {
-        font-size: .55rem;
-      }
-
-      .volume-button {
-        width: 28px;
-        height: 28px;
-        font-size: .66rem;
-      }
+      .control-button { font-size: .62rem; padding-inline: 4px; }
+      #nowPlaying { min-width: 0; }
 
       #sharePanel {
         left: 50%;
@@ -1406,7 +1103,7 @@
       <p class="subtitle">Visor musical</p>
       <div id="startTrack">Buscando una canción aleatoria…</div>
       <div id="startStatus" role="status" aria-live="polite"></div>
-      <button id="startButton" type="button" disabled>Entrar en el reproductor</button>
+      <button id="startButton" type="button" disabled>Entrar en el visor</button>
     </div>
   </section>
 
@@ -1452,17 +1149,10 @@
   </section>
 
   <div id="controls" aria-label="Controles de reproducción">
-    <button
-      id="pauseButton"
-      class="control-button icon-button primary-control"
-      type="button"
-      aria-label="Pausar"
-      title="Pausar"
-    >
-      <span id="pauseIcon" class="button-icon" aria-hidden="true"></span>
-    </button>
+    <button id="pauseButton" class="control-button" type="button">Pausa</button>
 
     <div id="nowPlaying" aria-live="polite">
+      <small>Ahora suena</small>
       <div id="currentTrackViewport">
         <div id="currentTrackMarquee">
           <span id="currentTrackName">—</span>
@@ -1473,105 +1163,17 @@
       </div>
     </div>
 
-    <button
-      id="modeButton"
-      class="control-button icon-button mode-button"
-      type="button"
-      data-mode="random"
-      aria-label="Reproducción aleatoria"
-      title="Reproducción aleatoria"
-      aria-pressed="false"
-    >
-      <span id="modeIcon" class="button-icon" aria-hidden="true"></span>
+    <button id="modeButton" class="control-button mode-button" type="button" data-mode="random" aria-label="Modo aleatorio">
+      <span id="modeLabelLong">Aleatorio</span>
+      <span id="modeLabelShort">Azar</span>
     </button>
 
-    <button
-      id="nextButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Siguiente canción"
-      title="Siguiente canción"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <path d="M5 4.8v14.4L15.8 12 5 4.8Z"></path>
-          <path d="M17.2 5v14"></path>
-        </svg>
-      </span>
+    <button id="selectButton" class="control-button" type="button">Canciones</button>
+
+    <button id="shareButton" class="control-button" type="button" aria-haspopup="dialog" aria-expanded="false">
+      <span id="shareLabelLong">Compartir</span>
+      <span id="shareLabelShort">Link</span>
     </button>
-
-    <button
-      id="selectButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Lista de canciones"
-      title="Lista de canciones"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <circle cx="4.5" cy="6.5" r="1"></circle>
-          <circle cx="4.5" cy="12" r="1"></circle>
-          <circle cx="4.5" cy="17.5" r="1"></circle>
-          <path d="M8 6.5h11M8 12h11M8 17.5h11"></path>
-        </svg>
-      </span>
-    </button>
-
-    <button
-      id="shareButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Compartir"
-      title="Compartir"
-      aria-haspopup="dialog"
-      aria-expanded="false"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <circle cx="18" cy="5" r="2.4"></circle>
-          <circle cx="6" cy="12" r="2.4"></circle>
-          <circle cx="18" cy="19" r="2.4"></circle>
-          <path d="m8.1 10.8 7.7-4.5M8.1 13.2l7.7 4.5"></path>
-        </svg>
-      </span>
-    </button>
-
-    <div id="transportControls" aria-label="Posición y volumen">
-      <span id="currentTimeLabel" class="time-label">0:00</span>
-
-      <input
-        id="seekBar"
-        class="eidos-range"
-        type="range"
-        min="0"
-        max="1000"
-        value="0"
-        step="1"
-        aria-label="Posición de la canción"
-        disabled
-      >
-
-      <span id="durationLabel" class="time-label">0:00</span>
-
-      <button
-        id="muteButton"
-        class="volume-button"
-        type="button"
-        aria-label="Silenciar"
-        title="Silenciar"
-      ></button>
-
-      <input
-        id="volumeBar"
-        class="eidos-range volume-range"
-        type="range"
-        min="0"
-        max="1"
-        value="0.85"
-        step="0.01"
-        aria-label="Volumen"
-      >
-    </div>
   </div>
 
   <audio id="audio" preload="auto"></audio>
@@ -1581,30 +1183,10 @@
       'use strict';
       const GITHUB_CONTENTS_URL = 'https://api.github.com/repos/feldenvareth/eidoslibro/contents/music/Songs?ref=main';
       const AUDIO_EXTENSION = /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|webm)$/i;
-      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV2';
-      const PLAYLIST_CACHE_MS = 24 * 60 * 60 * 1000;
+      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV1';
+      const PLAYLIST_CACHE_MS = 5 * 60 * 1000;
       const SONGS_DIRECTORY = './Songs/';
       const START_DELAY_MS = 2000;
-
-      /*
-        Lista de seguridad. Permite que el reproductor funcione incluso
-        cuando api.github.com esté temporalmente bloqueada, limitada o
-        no responda desde el navegador.
-
-        La API sigue consultándose en segundo plano para incorporar
-        canciones nuevas automáticamente cuando esté disponible.
-      */
-      const FALLBACK_TRACK_FILES = [
-        'Eidos -  Country.mp3',
-        'Eidos -  mention.mp3',
-        'Eidos - Gran Transferencia Fem.mp3',
-        'Eidos - La vida desaparecia female.mp3',
-        'Eidos - La vida desaparecia male.mp3',
-        'Eidos - Rap Remix.mp3',
-        'Eidos - The Final Transfer.mp3',
-        'Eidos - Última Transferencia para Eidos.mp3',
-        'Eidos- El Último Billete.mp3'
-      ];
 
       const canvas = document.getElementById('visualizer');
       const ctx = canvas.getContext('2d', { alpha: false });
@@ -1614,8 +1196,6 @@
       const panel = document.getElementById('startPanel');
       const startButton = document.getElementById('startButton');
       const pauseButton = document.getElementById('pauseButton');
-      const pauseIcon = document.getElementById('pauseIcon');
-      const nextButton = document.getElementById('nextButton');
       const selectButton = document.getElementById('selectButton');
       const selectorPanel = document.getElementById('selectorPanel');
       const closeSelector = document.getElementById('closeSelector');
@@ -1628,18 +1208,16 @@
       const currentTrackViewport = document.getElementById('currentTrackViewport');
       const brandButton = document.getElementById('brand');
       const modeButton = document.getElementById('modeButton');
-      const modeIcon = document.getElementById('modeIcon');
+      const modeLabelLong = document.getElementById('modeLabelLong');
+      const modeLabelShort = document.getElementById('modeLabelShort');
       const shareButton = document.getElementById('shareButton');
+      const shareLabelLong = document.getElementById('shareLabelLong');
+      const shareLabelShort = document.getElementById('shareLabelShort');
       const sharePanel = document.getElementById('sharePanel');
       const closeShare = document.getElementById('closeShare');
       const sharePlayerButton = document.getElementById('sharePlayerButton');
       const shareTrackButton = document.getElementById('shareTrackButton');
       const shareStatus = document.getElementById('shareStatus');
-      const currentTimeLabel = document.getElementById('currentTimeLabel');
-      const durationLabel = document.getElementById('durationLabel');
-      const seekBar = document.getElementById('seekBar');
-      const muteButton = document.getElementById('muteButton');
-      const volumeBar = document.getElementById('volumeBar');
 
       let audioContext = null;
       let analyser = null;
@@ -1662,55 +1240,6 @@
       let shareOpen = false;
       let marqueeFrame = 0;
       let requestedTrackMatched = false;
-      let transportInteracting = false;
-      let isSeeking = false;
-      let lastNonZeroVolume = 0.85;
-
-      const storedVolume = (() => {
-        try {
-          const stored = localStorage.getItem('eidosMusicVolume');
-
-          if (stored === null || stored === '') {
-            return 0.85;
-          }
-
-          const value = Number(stored);
-
-          return Number.isFinite(value)
-            ? Math.max(0, Math.min(1, value))
-            : 0.85;
-        } catch (_) {
-          return 0.85;
-        }
-      })();
-
-      let desiredVolume = storedVolume;
-      if (desiredVolume > 0) lastNonZeroVolume = desiredVolume;
-
-      const launcherCovers = [
-        './assets/tapa.jpg',
-        './assets/taparelatos.jpg'
-      ];
-
-      let previousLauncherCover = -1;
-
-      function chooseLauncherCover() {
-        let nextIndex = Math.floor(Math.random() * launcherCovers.length);
-
-        if (
-          launcherCovers.length > 1 &&
-          nextIndex === previousLauncherCover
-        ) {
-          nextIndex = (nextIndex + 1) % launcherCovers.length;
-        }
-
-        previousLauncherCover = nextIndex;
-
-        document.documentElement.style.setProperty(
-          '--launcher-cover',
-          `url("${launcherCovers[nextIndex]}")`
-        );
-      }
 
       const requestedTrackToken = (() => {
         try {
@@ -3240,103 +2769,6 @@
         };
       }
 
-      function formatPlaybackTime(seconds) {
-        if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
-
-        const total = Math.floor(seconds);
-        const hours = Math.floor(total / 3600);
-        const minutes = Math.floor((total % 3600) / 60);
-        const secs = total % 60;
-
-        if (hours > 0) {
-          return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        }
-
-        return `${minutes}:${String(secs).padStart(2, '0')}`;
-      }
-
-      function setRangeProgress(input, ratio) {
-        input.style.setProperty(
-          '--range-progress',
-          `${clamp(ratio, 0, 1) * 100}%`
-        );
-      }
-
-      function updateTransportUI() {
-        const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-        const previewTime = duration > 0
-          ? (Number(seekBar.value) / 1000) * duration
-          : 0;
-
-        if (!isSeeking) {
-          const ratio = duration > 0 ? audio.currentTime / duration : 0;
-          seekBar.value = String(Math.round(clamp(ratio, 0, 1) * 1000));
-          currentTimeLabel.textContent = formatPlaybackTime(audio.currentTime);
-        } else {
-          currentTimeLabel.textContent = formatPlaybackTime(previewTime);
-        }
-
-        durationLabel.textContent = formatPlaybackTime(duration);
-        seekBar.disabled = !(duration > 0);
-        setRangeProgress(seekBar, Number(seekBar.value) / 1000);
-      }
-
-      function updateVolumeUI() {
-        volumeBar.value = String(desiredVolume);
-        setRangeProgress(volumeBar, desiredVolume);
-
-        const muted = desiredVolume <= 0 || audio.muted;
-
-        muteButton.innerHTML = muted
-          ? ICONS.muted
-          : desiredVolume < 0.45
-            ? ICONS.volumeLow
-            : ICONS.volumeHigh;
-
-        muteButton.setAttribute(
-          'aria-label',
-          muted ? 'Recuperar volumen' : 'Silenciar'
-        );
-        muteButton.title = muted ? 'Recuperar volumen' : 'Silenciar';
-      }
-
-      function applyVolume(value, { persist = true } = {}) {
-        desiredVolume = clamp(Number(value) || 0, 0, 1);
-
-        if (desiredVolume > 0) {
-          lastNonZeroVolume = desiredVolume;
-        }
-
-        audio.volume = desiredVolume;
-        audio.muted = desiredVolume <= 0;
-
-        if (persist) {
-          try {
-            localStorage.setItem(
-              'eidosMusicVolume',
-              desiredVolume.toFixed(2)
-            );
-          } catch (_) {
-            // El almacenamiento local es opcional.
-          }
-        }
-
-        updateVolumeUI();
-      }
-
-      function commitSeek() {
-        const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
-
-        if (duration > 0) {
-          audio.currentTime =
-            clamp(Number(seekBar.value) / 1000, 0, 1) * duration;
-        }
-
-        isSeeking = false;
-        updateTransportUI();
-        showControls();
-      }
-
       function chooseRandomIndex(excludeCurrent = true) {
         if (!localPlaylist.length) return -1;
         if (localPlaylist.length === 1) return 0;
@@ -3355,83 +2787,46 @@
         return chooseRandomIndex(true);
       }
 
-      const ICONS = {
-        play: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M7 4.8v14.4L18 12 7 4.8Z"></path>
-          </svg>
-        `,
-        pause: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M7.5 5v14M16.5 5v14"></path>
-          </svg>
-        `,
-        shuffle: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 7h2.2c2.1 0 3.2 1.1 4.5 3.1l2.4 3.8c1.2 1.9 2.3 3.1 4.7 3.1H20"></path>
-            <path d="m17 14 3 3-3 3"></path>
-            <path d="M4 17h2.2c1.9 0 3-.9 4.1-2.5l2.9-4.4C14.4 8.2 15.6 7 17.8 7H20"></path>
-            <path d="m17 4 3 3-3 3"></path>
-          </svg>
-        `,
-        ordered: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 7h13"></path>
-            <path d="m15 4 3 3-3 3"></path>
-            <path d="M20 17H7"></path>
-            <path d="m9 14-3 3 3 3"></path>
-          </svg>
-        `,
-        volumeHigh: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 9h4l5-4v14l-5-4H4V9Z"></path>
-            <path d="M16 8.3a5 5 0 0 1 0 7.4"></path>
-            <path d="M18.5 5.8a8.5 8.5 0 0 1 0 12.4"></path>
-          </svg>
-        `,
-        volumeLow: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 9h4l5-4v14l-5-4H4V9Z"></path>
-            <path d="M16 8.3a5 5 0 0 1 0 7.4"></path>
-          </svg>
-        `,
-        muted: `
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 9h4l5-4v14l-5-4H4V9Z"></path>
-            <path d="m17 9 4 4M21 9l-4 4"></path>
-          </svg>
-        `
-      };
-
-      function updatePauseButtonUI() {
-        const paused = audio.paused || !running;
-        pauseIcon.innerHTML = paused ? ICONS.play : ICONS.pause;
-        pauseButton.setAttribute(
-          'aria-label',
-          paused ? 'Reproducir' : 'Pausar'
-        );
-        pauseButton.title = paused ? 'Reproducir' : 'Pausar';
-      }
-
       function updatePlaybackModeUI() {
         const ordered = playbackMode === 'ordered';
-
         modeButton.dataset.mode = playbackMode;
-        modeButton.setAttribute(
-          'aria-label',
-          ordered ? 'Reproducción en orden' : 'Reproducción aleatoria'
-        );
-        modeButton.setAttribute(
-          'aria-pressed',
-          ordered ? 'true' : 'false'
-        );
-        modeButton.title = ordered
-          ? 'Reproducción en orden'
-          : 'Reproducción aleatoria';
+        modeButton.setAttribute('aria-label', ordered ? 'Reproducción en orden' : 'Reproducción aleatoria');
+        modeButton.setAttribute('aria-pressed', ordered ? 'true' : 'false');
+        modeLabelLong.textContent = ordered ? 'En orden' : 'Aleatorio';
+        modeLabelShort.textContent = ordered ? 'Orden' : 'Azar';
+      }
 
-        modeIcon.innerHTML = ordered
-          ? ICONS.ordered
-          : ICONS.shuffle;
+      function scheduleTrackMarqueeUpdate() {
+        cancelAnimationFrame(marqueeFrame);
+
+        marqueeFrame = requestAnimationFrame(() => {
+          currentTrackMarquee.classList.remove('is-marquee');
+          currentTrackMarquee.style.removeProperty('--marquee-distance');
+          currentTrackMarquee.style.removeProperty('--marquee-duration');
+
+          const viewportWidth = currentTrackViewport.clientWidth;
+          const textWidth = currentTrackName.scrollWidth;
+
+          if (
+            viewportWidth > 0 &&
+            textWidth > viewportWidth + 6 &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ) {
+            const gapWidth = 104;
+            const distance = textWidth + gapWidth;
+            const duration = Math.max(10, distance / 27);
+
+            currentTrackMarquee.style.setProperty(
+              '--marquee-distance',
+              `${distance}px`
+            );
+            currentTrackMarquee.style.setProperty(
+              '--marquee-duration',
+              `${duration.toFixed(2)}s`
+            );
+            currentTrackMarquee.classList.add('is-marquee');
+          }
+        });
       }
 
       function updateTrackLabels() {
@@ -3489,274 +2884,125 @@
         updateTrackLabels();
       }
 
-      function rawTracksFromFiles(files) {
-        return files.map(file => ({
-          title: file
-            .replace(/\.[^.]+$/, '')
-            .replace(/[_-]+/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim(),
-          file
-        }));
-      }
-
-      function readPlaylistCache() {
+      async function loadPlaylist() {
         try {
-          const cached = JSON.parse(
-            localStorage.getItem(PLAYLIST_CACHE_KEY) || 'null'
-          );
+          let rawTracks = null;
 
-          if (
-            cached &&
-            Array.isArray(cached.tracks) &&
-            cached.tracks.length &&
-            Date.now() - Number(cached.savedAt || 0) < PLAYLIST_CACHE_MS
-          ) {
-            return cached.tracks;
-          }
-        } catch (_) {
-          // La caché local es opcional.
-        }
-
-        return null;
-      }
-
-      function writePlaylistCache(tracks) {
-        try {
-          localStorage.setItem(
-            PLAYLIST_CACHE_KEY,
-            JSON.stringify({
-              tracks,
-              savedAt: Date.now()
-            })
-          );
-        } catch (_) {
-          // La caché local es opcional.
-        }
-      }
-
-      async function fetchGithubPlaylist() {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 7000);
-
-        try {
-          const response = await fetch(GITHUB_CONTENTS_URL, {
-            cache: 'no-store',
-            signal: controller.signal,
-            headers: {
-              'Accept': 'application/vnd.github+json'
+          try {
+            const cached = JSON.parse(localStorage.getItem(PLAYLIST_CACHE_KEY) || 'null');
+            if (
+              cached &&
+              Array.isArray(cached.tracks) &&
+              Date.now() - Number(cached.savedAt || 0) < PLAYLIST_CACHE_MS
+            ) {
+              rawTracks = cached.tracks;
             }
-          });
-
-          if (!response.ok) {
-            const remaining =
-              response.headers.get('x-ratelimit-remaining');
-
-            throw new Error(
-              remaining === '0'
-                ? 'GitHub ha alcanzado temporalmente el límite de consultas.'
-                : `GitHub devolvió HTTP ${response.status}.`
-            );
+          } catch (_) {
+            // La caché local es opcional.
           }
 
-          const contents = await response.json();
+          if (!rawTracks) {
+            const response = await fetch(GITHUB_CONTENTS_URL, {
+              cache: 'no-store',
+              headers: {
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
+            });
 
-          if (!Array.isArray(contents)) {
-            throw new Error(
-              'GitHub no ha devuelto el contenido de la carpeta.'
-            );
+            if (!response.ok) {
+              throw new Error(`GitHub devolvió HTTP ${response.status}.`);
+            }
+
+            const contents = await response.json();
+            if (!Array.isArray(contents)) {
+              throw new Error('GitHub no ha devuelto el contenido de la carpeta.');
+            }
+
+            rawTracks = contents
+              .filter(item =>
+                item &&
+                item.type === 'file' &&
+                typeof item.name === 'string' &&
+                AUDIO_EXTENSION.test(item.name)
+              )
+              .map(item => ({
+                title: item.name
+                  .replace(/\.[^.]+$/, '')
+                  .replace(/[_-]+/g, ' ')
+                  .replace(/\s+/g, ' ')
+                  .trim(),
+                file: item.name
+              }));
+
+            try {
+              localStorage.setItem(
+                PLAYLIST_CACHE_KEY,
+                JSON.stringify({ tracks: rawTracks, savedAt: Date.now() })
+              );
+            } catch (_) {
+              // La caché es opcional.
+            }
           }
 
-          const tracks = contents
-            .filter(item =>
-              item &&
-              item.type === 'file' &&
-              typeof item.name === 'string' &&
-              AUDIO_EXTENSION.test(item.name)
-            )
-            .map(item => ({
-              title: item.name
-                .replace(/\.[^.]+$/, '')
-                .replace(/[_-]+/g, ' ')
-                .replace(/\s+/g, ' ')
-                .trim(),
-              file: item.name
-            }));
-
-          if (!tracks.length) {
-            throw new Error(
-              'GitHub no ha encontrado audios compatibles.'
-            );
-          }
-
-          return tracks;
-        } finally {
-          clearTimeout(timeout);
-        }
-      }
-
-      function applyPlaylist(rawTracks, {
-        preserveCurrentTrack = false
-      } = {}) {
-        const previousTrackFile = preserveCurrentTrack
-          ? getCurrentTrack()?.file
-          : null;
-
-        const nextPlaylist = rawTracks
-          .map(normalizeTrack)
-          .filter(Boolean)
-          .sort((a, b) => a.name.localeCompare(
-            b.name,
-            'es',
-            {
+          localPlaylist = rawTracks
+            .map(normalizeTrack)
+            .filter(Boolean)
+            .sort((a, b) => a.name.localeCompare(b.name, 'es', {
               numeric: true,
               sensitivity: 'base'
-            }
-          ));
+            }));
 
-        if (!nextPlaylist.length) {
-          return false;
-        }
-
-        localPlaylist = nextPlaylist;
-
-        const normalizedRequestedTrack = requestedTrackToken
-          ? String(requestedTrackToken)
-              .trim()
-              .toLocaleLowerCase('es')
-          : '';
-
-        const requestedIndex = normalizedRequestedTrack
-          ? localPlaylist.findIndex(track => {
-              const candidates = [
-                track.file,
-                track.name,
-                (() => {
-                  try {
-                    return decodeURIComponent(
-                      new URL(track.source, document.baseURI)
-                        .pathname
-                        .split('/')
-                        .pop() || ''
-                    );
-                  } catch (_) {
-                    return '';
-                  }
-                })()
-              ];
-
-              return candidates.some(candidate =>
-                String(candidate || '')
-                  .trim()
-                  .toLocaleLowerCase('es') ===
-                normalizedRequestedTrack
-              );
-            })
-          : -1;
-
-        requestedTrackMatched = requestedIndex >= 0;
-
-        if (requestedTrackMatched) {
-          currentTrackIndex = requestedIndex;
-        } else if (previousTrackFile) {
-          const preservedIndex = localPlaylist.findIndex(
-            track => track.file === previousTrackFile
-          );
-
-          currentTrackIndex = preservedIndex >= 0
-            ? preservedIndex
-            : Math.min(
-                currentTrackIndex,
-                localPlaylist.length - 1
-              );
-        } else {
-          currentTrackIndex = Math.floor(
-            Math.random() * localPlaylist.length
-          );
-        }
-
-        renderTrackList();
-
-        startStatus.textContent =
-          `${localPlaylist.length} ${
-            localPlaylist.length === 1
-              ? 'canción disponible'
-              : 'canciones disponibles'
-          }.`;
-
-        startButton.disabled = false;
-        preloadNextTrack();
-
-        return true;
-      }
-
-      async function refreshPlaylistFromGithub() {
-        try {
-          const githubTracks = await fetchGithubPlaylist();
-
-          writePlaylistCache(githubTracks);
-
-          const currentFiles = localPlaylist
-            .map(track => track.file)
-            .filter(Boolean)
-            .sort()
-            .join('\n');
-
-          const githubFiles = githubTracks
-            .map(track => track.file)
-            .filter(Boolean)
-            .sort()
-            .join('\n');
-
-          if (githubFiles !== currentFiles) {
-            applyPlaylist(
-              githubTracks,
-              { preserveCurrentTrack: true }
-            );
-          }
-        } catch (error) {
-          /*
-            No se muestra un error al visitante porque ya existe una
-            lista funcional de respaldo. El detalle queda en consola.
-          */
-          console.warn(
-            'No se ha podido actualizar la lista desde GitHub. ' +
-            'Se mantiene la lista local de seguridad.',
-            error
-          );
-        }
-      }
-
-      function loadPlaylist() {
-        try {
-          /*
-            Primero se usa la caché; si no existe, se aplica
-            inmediatamente la lista de seguridad. El botón queda
-            disponible sin esperar a GitHub.
-          */
-          const cachedTracks = readPlaylistCache();
-          const initialTracks = cachedTracks ||
-            rawTracksFromFiles(FALLBACK_TRACK_FILES);
-
-          const loaded = applyPlaylist(initialTracks);
-
-          if (!loaded) {
-            throw new Error(
-              'No ha sido posible construir la lista de canciones.'
-            );
+          if (!localPlaylist.length) {
+            throw new Error('No hay audios compatibles dentro de music/Songs.');
           }
 
-          /*
-            La consulta remota no bloquea el reproductor. Solo actualiza
-            la lista si GitHub responde y detecta cambios.
-          */
-          refreshPlaylistFromGithub();
+          const normalizedRequestedTrack = requestedTrackToken
+            ? String(requestedTrackToken)
+                .trim()
+                .toLocaleLowerCase('es')
+            : '';
+
+          const requestedIndex = normalizedRequestedTrack
+            ? localPlaylist.findIndex(track => {
+                const candidates = [
+                  track.file,
+                  track.name,
+                  (() => {
+                    try {
+                      return decodeURIComponent(
+                        new URL(track.source, document.baseURI)
+                          .pathname
+                          .split('/')
+                          .pop() || ''
+                      );
+                    } catch (_) {
+                      return '';
+                    }
+                  })()
+                ];
+
+                return candidates.some(candidate =>
+                  String(candidate || '')
+                    .trim()
+                    .toLocaleLowerCase('es') === normalizedRequestedTrack
+                );
+              })
+            : -1;
+
+          requestedTrackMatched = requestedIndex >= 0;
+          currentTrackIndex = requestedTrackMatched
+            ? requestedIndex
+            : Math.floor(Math.random() * localPlaylist.length);
+
+          renderTrackList();
+          startStatus.textContent = `${localPlaylist.length} ${localPlaylist.length === 1 ? 'canción disponible' : 'canciones disponibles'}.`;
+          startButton.disabled = false;
+          preloadNextTrack();
         } catch (error) {
           console.error(error);
-          startTrack.textContent =
-            'No se ha podido preparar la música.';
-          startStatus.textContent =
-            'Comprueba que los archivos de audio sigan dentro de music/Songs.';
+          startTrack.textContent = 'No se ha podido cargar la música.';
+          startStatus.textContent = 'Comprueba que el repositorio sea público y que las canciones estén dentro de music/Songs.';
           startButton.disabled = true;
         }
       }
@@ -3767,11 +3013,6 @@
 
       function configureAudioSource(track) {
         audio.pause();
-        isSeeking = false;
-        seekBar.value = '0';
-        currentTimeLabel.textContent = '0:00';
-        durationLabel.textContent = '0:00';
-        setRangeProgress(seekBar, 0);
         audio.removeAttribute('src');
         audio.load();
 
@@ -3819,7 +3060,7 @@
 
           panel.classList.add('hidden');
           document.body.classList.add('visualizer-started');
-          updatePauseButtonUI();
+          pauseButton.textContent = 'Pausa';
           updateTrackLabels();
 
           const playPromise = audio.play();
@@ -3828,19 +3069,17 @@
           running = false;
           await delay(START_DELAY_MS);
           audio.currentTime = 0;
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          audio.volume = 1;
+          audio.muted = false;
           running = true;
-          updateVolumeUI();
           startStatus.textContent = '';
           preloadNextTrack();
           showControls();
         } catch (error) {
           audio.pause();
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          audio.muted = false;
+          audio.volume = 1;
           running = false;
-          updateVolumeUI();
           panel.classList.remove('hidden');
           document.body.classList.remove('visualizer-started');
           startStatus.textContent = `No se pudo iniciar la canción. ${error.message}`;
@@ -3855,7 +3094,7 @@
         if (!localPlaylist.length || trackTransitioning) return;
         if (attempts >= localPlaylist.length) {
           running = false;
-          updatePauseButtonUI();
+          pauseButton.textContent = 'Continuar';
           return;
         }
 
@@ -3866,12 +3105,12 @@
         try {
           currentTrackIndex = normalizedIndex;
           configureAudioSource(track);
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          audio.muted = false;
+          audio.volume = 1;
           if (audioContext && audioContext.state === 'suspended') await audioContext.resume();
           await audio.play();
           running = true;
-          updatePauseButtonUI();
+          pauseButton.textContent = 'Pausa';
           updateTrackLabels();
           preloadNextTrack();
           showControls();
@@ -3969,11 +3208,9 @@
         if (starting) return;
 
         audio.pause();
-        audio.volume = desiredVolume;
-        audio.muted = desiredVolume <= 0;
+        audio.muted = false;
+        audio.volume = 1;
         audio.currentTime = 0;
-        updateTransportUI();
-        updateVolumeUI();
         running = false;
         trackTransitioning = false;
 
@@ -3990,9 +3227,8 @@
         );
 
         selectorPanel.classList.remove('open');
-        chooseLauncherCover();
         panel.classList.remove('hidden');
-        updatePauseButtonUI();
+        pauseButton.textContent = 'Pausa';
         startStatus.textContent = '';
         updateTrackLabels();
 
@@ -4011,7 +3247,7 @@
         if (!document.body.classList.contains('visualizer-started')) return;
         document.body.classList.add('show-controls');
         clearTimeout(controlsTimer);
-        if (!selectorOpen && !shareOpen && !transportInteracting) {
+        if (!selectorOpen && !shareOpen) {
           controlsTimer = setTimeout(() => document.body.classList.remove('show-controls'), 2600);
         }
       }
@@ -4040,23 +3276,16 @@
 
       pauseButton.addEventListener('click', async () => {
         if (starting) return;
-
         if (audio.paused) {
-          if (
-            audioContext &&
-            audioContext.state === 'suspended'
-          ) {
-            await audioContext.resume();
-          }
-
+          if (audioContext && audioContext.state === 'suspended') await audioContext.resume();
           await audio.play();
           running = true;
+          pauseButton.textContent = 'Pausa';
         } else {
           audio.pause();
           running = false;
+          pauseButton.textContent = 'Continuar';
         }
-
-        updatePauseButtonUI();
         showControls();
       });
 
@@ -4064,27 +3293,6 @@
         playbackMode = playbackMode === 'random' ? 'ordered' : 'random';
         updatePlaybackModeUI();
         preloadNextTrack();
-        showControls();
-      });
-
-      nextButton.addEventListener('click', async () => {
-        if (
-          starting ||
-          trackTransitioning ||
-          !localPlaylist.length
-        ) {
-          return;
-        }
-
-        const nextIndex =
-          preloadedNextIndex >= 0
-            ? preloadedNextIndex
-            : chooseNextIndex();
-
-        if (nextIndex >= 0) {
-          await playPlaylistTrack(nextIndex);
-        }
-
         showControls();
       });
 
@@ -4100,57 +3308,6 @@
 
       closeSelector.addEventListener('click', closeTrackSelector);
       closeShare.addEventListener('click', () => closeSharePanel());
-
-      seekBar.addEventListener('pointerdown', () => {
-        transportInteracting = true;
-        isSeeking = true;
-        clearTimeout(controlsTimer);
-        showControls();
-      });
-
-      seekBar.addEventListener('input', () => {
-        isSeeking = true;
-        updateTransportUI();
-        showControls();
-      });
-
-      seekBar.addEventListener('change', commitSeek);
-
-      volumeBar.addEventListener('pointerdown', () => {
-        transportInteracting = true;
-        clearTimeout(controlsTimer);
-        showControls();
-      });
-
-      volumeBar.addEventListener('input', () => {
-        applyVolume(volumeBar.value);
-        showControls();
-      });
-
-      muteButton.addEventListener('click', () => {
-        if (desiredVolume > 0 && !audio.muted) {
-          lastNonZeroVolume = desiredVolume;
-          applyVolume(0);
-        } else {
-          applyVolume(lastNonZeroVolume || 0.85);
-        }
-        showControls();
-      });
-
-      document.addEventListener('pointerup', () => {
-        if (!transportInteracting) return;
-        transportInteracting = false;
-
-        if (isSeeking) commitSeek();
-        else showControls();
-      }, { passive: true });
-
-      document.addEventListener('pointercancel', () => {
-        transportInteracting = false;
-        isSeeking = false;
-        updateTransportUI();
-        showControls();
-      }, { passive: true });
 
       sharePlayerButton.addEventListener('click', () => {
         shareLink({
@@ -4172,18 +3329,7 @@
         });
       });
 
-      audio.addEventListener('play', updatePauseButtonUI);
-      audio.addEventListener('pause', updatePauseButtonUI);
-      audio.addEventListener('loadedmetadata', updateTransportUI);
-      audio.addEventListener('durationchange', updateTransportUI);
-      audio.addEventListener('timeupdate', updateTransportUI);
-      audio.addEventListener('seeking', updateTransportUI);
-      audio.addEventListener('seeked', updateTransportUI);
-      audio.addEventListener('emptied', updateTransportUI);
-      audio.addEventListener('volumechange', updateVolumeUI);
-
       audio.addEventListener('ended', () => {
-        updateTransportUI();
         const nextIndex = preloadedNextIndex >= 0 ? preloadedNextIndex : chooseNextIndex();
         if (nextIndex >= 0) playPlaylistTrack(nextIndex);
       });
@@ -4234,11 +3380,7 @@
 
       window.addEventListener('resize', resize);
 
-      chooseLauncherCover();
-      applyVolume(desiredVolume, { persist: false });
-      updateTransportUI();
       updatePlaybackModeUI();
-      updatePauseButtonUI();
       loadPlaylist();
       resize();
       requestAnimationFrame(render);
