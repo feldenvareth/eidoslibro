@@ -22,6 +22,7 @@
       --eidos-moss: #617345;
       --eidos-gold: #d8b239;
       --eidos-cream: #f2ecd8;
+      --launcher-cover: url('./assets/tapa.jpg');
       --eidos-muted: rgba(242, 236, 216, 0.68);
       --eidos-line: rgba(242, 236, 216, 0.18);
       --eidos-glass: rgba(11, 27, 23, 0.76);
@@ -82,14 +83,13 @@
     }
 
     #coverAtmosphere::before {
-      background-image: linear-gradient(rgba(13,35,29,.35), rgba(13,35,29,.74)), url('./assets/tapa.jpg');
-      clip-path: polygon(0 0, 56% 0, 44% 100%, 0 100%);
+      background-image:
+        linear-gradient(rgba(13,35,29,.32), rgba(13,35,29,.76)),
+        var(--launcher-cover);
     }
 
     #coverAtmosphere::after {
-      background-image: linear-gradient(rgba(16,34,29,.38), rgba(16,34,29,.78)), url('./assets/taparelatos.jpg');
-      clip-path: polygon(56% 0, 100% 0, 100% 100%, 44% 100%);
-      animation-delay: -14s;
+      display: none;
     }
 
     #grain {
@@ -134,8 +134,8 @@
       border: 1px solid var(--eidos-line);
       border-radius: 6px;
       background:
-        linear-gradient(145deg, rgba(24, 55, 46, 0.83), rgba(8, 24, 20, 0.90)),
-        url('./assets/taparelatos.jpg') center/cover;
+        linear-gradient(145deg, rgba(24, 55, 46, 0.84), rgba(8, 24, 20, 0.91)),
+        var(--launcher-cover) center/cover;
       box-shadow: 0 28px 110px rgba(0,0,0,.55), inset 0 0 0 1px rgba(216,178,57,.06);
       position: relative;
       overflow: hidden;
@@ -160,13 +160,15 @@
 
     h1 {
       margin: 0;
-      color: var(--eidos-cream);
-      font-family: Georgia, "Times New Roman", serif;
+      color: #c9a84c;
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3.2rem, 12vw, 7.4rem);
-      font-weight: 400;
-      letter-spacing: .12em;
+      font-weight: 300;
+      letter-spacing: .18em;
       line-height: .88;
-      text-shadow: 0 2px 26px rgba(0,0,0,.46);
+      text-shadow:
+        0 2px 26px rgba(0,0,0,.46),
+        0 0 24px rgba(201,168,76,.08);
     }
 
     .subtitle {
@@ -194,11 +196,11 @@
     #startButton {
       position: relative;
       margin-top: 26px;
-      min-width: min(310px, 100%);
+      min-width: min(330px, 100%);
       min-height: 52px;
       padding: 13px 24px;
       border: 1px solid rgba(216,178,57,.56);
-      border-radius: 2px;
+      border-radius: 999px;
       color: #fff9e6;
       background: linear-gradient(135deg, rgba(119,100,34,.88), rgba(50,84,70,.92));
       font: 700 .82rem/1 Inter, sans-serif;
@@ -1383,7 +1385,7 @@
       <p class="subtitle">Visor musical</p>
       <div id="startTrack">Buscando una canción aleatoria…</div>
       <div id="startStatus" role="status" aria-live="polite"></div>
-      <button id="startButton" type="button" disabled>Entrar en el visor</button>
+      <button id="startButton" type="button" disabled>Entrar en el reproductor</button>
     </div>
   </section>
 
@@ -1634,6 +1636,31 @@
 
       let desiredVolume = storedVolume;
       if (desiredVolume > 0) lastNonZeroVolume = desiredVolume;
+
+      const launcherCovers = [
+        './assets/tapa.jpg',
+        './assets/taparelatos.jpg'
+      ];
+
+      let previousLauncherCover = -1;
+
+      function chooseLauncherCover() {
+        let nextIndex = Math.floor(Math.random() * launcherCovers.length);
+
+        if (
+          launcherCovers.length > 1 &&
+          nextIndex === previousLauncherCover
+        ) {
+          nextIndex = (nextIndex + 1) % launcherCovers.length;
+        }
+
+        previousLauncherCover = nextIndex;
+
+        document.documentElement.style.setProperty(
+          '--launcher-cover',
+          `url("${launcherCovers[nextIndex]}")`
+        );
+      }
 
       const requestedTrackToken = (() => {
         try {
@@ -3764,6 +3791,7 @@
         );
 
         selectorPanel.classList.remove('open');
+        chooseLauncherCover();
         panel.classList.remove('hidden');
         updatePauseButtonUI();
         startStatus.textContent = '';
@@ -4007,6 +4035,7 @@
 
       window.addEventListener('resize', resize);
 
+      chooseLauncherCover();
       applyVolume(desiredVolume, { persist: false });
       updateTransportUI();
       updatePlaybackModeUI();
