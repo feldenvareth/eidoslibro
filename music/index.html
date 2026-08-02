@@ -1733,6 +1733,7 @@
       let audioContext = null;
       let analyser = null;
       let sourceNode = null;
+      let outputGainNode = null;
       let frequencyData = null;
       let timeData = null;
       let width = 0;
@@ -1971,8 +1972,19 @@
         analyser.maxDecibels = -12;
 
         sourceNode = audioContext.createMediaElementSource(audio);
+        outputGainNode = audioContext.createGain();
+
+        /*
+          El analizador recibe siempre la señal original. El volumen
+          del usuario se aplica después, solo a la salida audible.
+        */
         sourceNode.connect(analyser);
-        analyser.connect(audioContext.destination);
+        analyser.connect(outputGainNode);
+        outputGainNode.connect(audioContext.destination);
+
+        audio.volume = 1;
+        audio.muted = false;
+        outputGainNode.gain.value = desiredVolume;
 
         frequencyData = new Uint8Array(analyser.frequencyBinCount);
         timeData = new Uint8Array(analyser.fftSize);
@@ -3345,7 +3357,11 @@
           const target = Math.max(sideCoverState.alpha, sideCoverState.maxAlpha);
           sideCoverState.alpha = lerp(sideCoverState.alpha, target, 0.15);
         } else {
-          sideCoverState.alpha = Math.max(0, sideCoverState.alpha - dt / 7.2);
+          /*
+            Fade más breve: recupera el impacto de aparición. Si llega otro
+            golpe durante el fade, triggerSideCovers lo reinicia.
+          */
+          sideCoverState.alpha = Math.max(0, sideCoverState.alpha - dt / 3.0);
           sideCoverState.maxAlpha = Math.max(0, sideCoverState.maxAlpha - dt * 0.095);
         }
         sideCoverState.pulse = Math.max(0, sideCoverState.pulse - dt * 0.7);
@@ -3835,11 +3851,21 @@
         setRangeProgress(seekBar, Number(seekBar.value) / 1000);
       }
 
+      function setOutputGain(value) {
+        if (!outputGainNode || !audioContext) return;
+
+        const gainValue = clamp(Number(value) || 0, 0, 1);
+        const now = audioContext.currentTime;
+
+        outputGainNode.gain.cancelScheduledValues(now);
+        outputGainNode.gain.setValueAtTime(gainValue, now);
+      }
+
       function updateVolumeUI() {
         volumeBar.value = String(desiredVolume);
         setRangeProgress(volumeBar, desiredVolume);
 
-        const muted = desiredVolume <= 0 || audio.muted;
+        const muted = desiredVolume <= 0;
 
         muteButton.innerHTML = muted
           ? ICONS.muted
@@ -3861,8 +3887,13 @@
           lastNonZeroVolume = desiredVolume;
         }
 
-        audio.volume = desiredVolume;
-        audio.muted = desiredVolume <= 0;
+        /*
+          El elemento permanece a volumen completo para que el analizador
+          reciba la canción sin atenuación. Solo cambia la ganancia de salida.
+        */
+        audio.volume = 1;
+        audio.muted = false;
+        setOutputGain(desiredVolume);
 
         if (persist) {
           try {
@@ -4677,8 +4708,9 @@
           const resumePromise = audioContext.state === 'suspended' ? audioContext.resume() : Promise.resolve();
 
           configureAudioSource(track);
-          audio.muted = true;
-          audio.volume = 0;
+          audio.volume = 1;
+          audio.muted = false;
+          setOutputGain(0);
           audio.currentTime = 0;
 
           panel.classList.add('hidden');
@@ -4692,8 +4724,7 @@
           running = false;
           await delay(START_DELAY_MS);
           audio.currentTime = 0;
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          setOutputGain(desiredVolume);
           running = true;
           updatePauseButtonUI();
           updateVolumeUI();
@@ -4702,8 +4733,7 @@
           showControls();
         } catch (error) {
           audio.pause();
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          setOutputGain(desiredVolume);
           running = false;
           updateVolumeUI();
           panel.classList.remove('hidden');
@@ -4747,8 +4777,9 @@
 
           currentTrackIndex = normalizedIndex;
           configureAudioSource(track);
-          audio.volume = desiredVolume;
-          audio.muted = desiredVolume <= 0;
+          audio.volume = 1;
+          audio.muted = false;
+          setOutputGain(desiredVolume);
           if (audioContext && audioContext.state === 'suspended') await audioContext.resume();
           await audio.play();
           running = true;
@@ -4896,8 +4927,9 @@
         if (starting) return;
 
         audio.pause();
-        audio.volume = desiredVolume;
-        audio.muted = desiredVolume <= 0;
+        audio.volume = 1;
+        audio.muted = false;
+        setOutputGain(desiredVolume);
         audio.currentTime = 0;
         updateTransportUI();
         updateVolumeUI();
@@ -5132,7 +5164,7 @@
       });
 
       muteButton.addEventListener('click', () => {
-        if (desiredVolume > 0 && !audio.muted) {
+        if (desiredVolume > 0) {
           lastNonZeroVolume = desiredVolume;
           applyVolume(0);
         } else {
