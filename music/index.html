@@ -844,8 +844,46 @@
       cursor: pointer;
     }
 
+    #languageFilter {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+      padding: 10px 10px 4px;
+      border-bottom: 1px solid rgba(242,236,216,.07);
+    }
+
+    .language-filter-button {
+      min-height: 35px;
+      padding: 7px 10px;
+      border: 1px solid rgba(242,236,216,.11);
+      border-radius: 999px;
+      color: rgba(242,236,216,.67);
+      background: rgba(242,236,216,.035);
+      font: 600 .68rem/1 'Josefin Sans', sans-serif;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 150ms ease, border-color 150ms ease,
+                  background 150ms ease, transform 150ms ease;
+    }
+
+    .language-filter-button:hover {
+      color: rgba(255,247,220,.94);
+      border-color: rgba(216,178,57,.28);
+      background: rgba(216,178,57,.07);
+    }
+
+    .language-filter-button:active { transform: scale(.98); }
+
+    .language-filter-button.active {
+      color: #fff3bd;
+      border-color: rgba(216,178,57,.52);
+      background: rgba(216,178,57,.14);
+      box-shadow: inset 0 0 17px rgba(216,178,57,.05);
+    }
+
     #trackList {
-      max-height: calc(min(58vh, 520px) - 64px);
+      max-height: calc(min(58vh, 520px) - 116px);
       overflow-y: auto;
       padding: 8px;
       scrollbar-width: thin;
@@ -1436,6 +1474,16 @@
       <strong>Seleccionar canción</strong>
       <button id="closeSelector" type="button" aria-label="Cerrar selector">×</button>
     </div>
+
+    <div id="languageFilter" role="group" aria-label="Filtrar canciones por idioma">
+      <button class="language-filter-button active" type="button"
+              data-language="all" aria-pressed="true">Todas</button>
+      <button class="language-filter-button" type="button"
+              data-language="esp" aria-pressed="false">Español</button>
+      <button class="language-filter-button" type="button"
+              data-language="eng" aria-pressed="false">English</button>
+    </div>
+
     <div id="trackList" role="listbox" aria-label="Canciones disponibles"></div>
   </section>
 
@@ -1589,8 +1637,9 @@
     (() => {
       'use strict';
       const GITHUB_CONTENTS_URL = 'https://api.github.com/repos/feldenvareth/eidoslibro/contents/music/Songs?ref=main';
+      const SUPPORTED_LANGUAGE_FOLDERS = new Set(['esp', 'eng']);
       const AUDIO_EXTENSION = /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|webm)$/i;
-      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV2';
+      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV3';
       const PLAYLIST_CACHE_MS = 24 * 60 * 60 * 1000;
       const SONGS_DIRECTORY = './Songs/';
       const START_DELAY_MS = 2000;
@@ -1604,15 +1653,16 @@
         canciones nuevas automáticamente cuando esté disponible.
       */
       const FALLBACK_TRACK_FILES = [
-        'Eidos -  Country.mp3',
-        'Eidos -  mention.mp3',
-        'Eidos - Gran Transferencia Fem.mp3',
-        'Eidos - La vida desaparecia female.mp3',
-        'Eidos - La vida desaparecia male.mp3',
-        'Eidos - Rap Remix.mp3',
-        'Eidos - The Final Transfer.mp3',
-        'Eidos - Última Transferencia para Eidos.mp3',
-        'Eidos- El Último Billete.mp3'
+        { file: 'eng/Eidos -  Country.mp3', language: 'eng' },
+        { file: 'eng/Eidos -  mention.mp3', language: 'eng' },
+        { file: 'eng/Eidos - The Final Transfer.mp3', language: 'eng' },
+
+        { file: 'esp/Eidos - Gran Transferencia Fem.mp3', language: 'esp' },
+        { file: 'esp/Eidos - La vida desaparecia female.mp3', language: 'esp' },
+        { file: 'esp/Eidos - La vida desaparecia male.mp3', language: 'esp' },
+        { file: 'esp/Eidos - Rap Remix.mp3', language: 'esp' },
+        { file: 'esp/Eidos - Última Transferencia para Eidos.mp3', language: 'esp' },
+        { file: 'esp/Eidos- El Último Billete.mp3', language: 'esp' }
       ];
 
       const canvas = document.getElementById('visualizer');
@@ -1629,6 +1679,10 @@
       const selectorPanel = document.getElementById('selectorPanel');
       const closeSelector = document.getElementById('closeSelector');
       const trackList = document.getElementById('trackList');
+      const languageFilter = document.getElementById('languageFilter');
+      const languageFilterButtons = Array.from(
+        document.querySelectorAll('.language-filter-button')
+      );
       const startTrack = document.getElementById('startTrack');
       const startStatus = document.getElementById('startStatus');
       const currentTrackName = document.getElementById('currentTrackName');
@@ -1675,6 +1729,17 @@
         Solo se vuelve a llenar cuando todas han sonado.
       */
       let randomQueue = [];
+
+      const storedLanguageFilter = (() => {
+        try {
+          const value = localStorage.getItem('eidosMusicLanguageFilter');
+          return ['all', 'esp', 'eng'].includes(value) ? value : 'all';
+        } catch (_) {
+          return 'all';
+        }
+      })();
+
+      let trackLanguageFilter = storedLanguageFilter;
       let shareOpen = false;
       let marqueeFrame = 0;
       let requestedTrackMatched = false;
@@ -3628,21 +3693,56 @@
         return `${SONGS_DIRECTORY}${safePath}`;
       }
 
+      function detectTrackLanguage(file, explicitLanguage = '') {
+        const normalizedExplicit = String(explicitLanguage || '')
+          .trim()
+          .toLowerCase();
+
+        if (SUPPORTED_LANGUAGE_FOLDERS.has(normalizedExplicit)) {
+          return normalizedExplicit;
+        }
+
+        const firstDirectory = String(file || '')
+          .replace(/\\/g, '/')
+          .split('/')
+          .filter(Boolean)[0]
+          ?.toLowerCase();
+
+        return SUPPORTED_LANGUAGE_FOLDERS.has(firstDirectory)
+          ? firstDirectory
+          : 'unknown';
+      }
+
       function normalizeTrack(item, index) {
         if (typeof item === 'string') {
+          const defaultName = item
+            .split('/')
+            .pop()
+            .replace(/\.[^.]+$/, '')
+            .replace(/[_-]+/g, ' ');
+
           return {
-            name: item.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' '),
+            name: defaultName,
             source: trackSource(item),
-            file: item
+            file: item,
+            language: detectTrackLanguage(item)
           };
         }
 
         const file = String(item?.file || item?.src || '').trim();
         if (!file) return null;
+
+        const defaultName = file
+          .split('/')
+          .pop()
+          .replace(/\.[^.]+$/, '')
+          .replace(/[_-]+/g, ' ');
+
         return {
-          name: String(item.title || item.name || file.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ')).trim(),
+          name: String(item.title || item.name || defaultName).trim(),
           source: trackSource(file),
           file,
+          language: detectTrackLanguage(file, item.language),
           order: Number.isFinite(item.order) ? item.order : index
         };
       }
@@ -3744,6 +3844,28 @@
         showControls();
       }
 
+      function trackMatchesLanguageFilter(track) {
+        return Boolean(
+          track &&
+          (
+            trackLanguageFilter === 'all' ||
+            track.language === trackLanguageFilter
+          )
+        );
+      }
+
+      function getAvailableTrackIndices() {
+        return localPlaylist
+          .map((track, index) =>
+            trackMatchesLanguageFilter(track) ? index : -1
+          )
+          .filter(index => index >= 0);
+      }
+
+      function getAvailableTrackCount() {
+        return getAvailableTrackIndices().length;
+      }
+
       function shuffleIndices(indices) {
         const shuffled = indices.slice();
 
@@ -3756,27 +3878,25 @@
       }
 
       function resetRandomQueue(excludeIndex = currentTrackIndex) {
-        if (!localPlaylist.length) {
+        const availableIndices = getAvailableTrackIndices();
+
+        if (!availableIndices.length) {
           randomQueue = [];
           return;
         }
 
-        if (localPlaylist.length === 1) {
-          randomQueue = [0];
+        if (availableIndices.length === 1) {
+          randomQueue = availableIndices.slice();
           return;
         }
 
-        const candidates = localPlaylist
-          .map((_, index) => index)
-          .filter(index => index !== excludeIndex);
-
-        randomQueue = shuffleIndices(candidates);
+        randomQueue = shuffleIndices(
+          availableIndices.filter(index => index !== excludeIndex)
+        );
       }
 
       function cleanRandomQueue() {
-        const validIndices = new Set(
-          localPlaylist.map((_, index) => index)
-        );
+        const validIndices = new Set(getAvailableTrackIndices());
 
         randomQueue = randomQueue.filter(
           (index, position, queue) =>
@@ -3787,16 +3907,14 @@
       }
 
       function peekRandomIndex() {
-        if (!localPlaylist.length) return -1;
-        if (localPlaylist.length === 1) return 0;
+        const availableIndices = getAvailableTrackIndices();
+
+        if (!availableIndices.length) return -1;
+        if (availableIndices.length === 1) return availableIndices[0];
 
         cleanRandomQueue();
 
         if (!randomQueue.length) {
-          /*
-            Comienza un ciclo nuevo. La canción que acaba de sonar se
-            excluye para evitar una repetición inmediata entre ciclos.
-          */
           resetRandomQueue(currentTrackIndex);
         }
 
@@ -3810,10 +3928,15 @@
       }
 
       function chooseNextIndex() {
-        if (!localPlaylist.length) return -1;
+        const availableIndices = getAvailableTrackIndices();
+        if (!availableIndices.length) return -1;
 
         if (playbackMode === 'ordered') {
-          return (currentTrackIndex + 1) % localPlaylist.length;
+          const position = availableIndices.indexOf(currentTrackIndex);
+
+          return position >= 0
+            ? availableIndices[(position + 1) % availableIndices.length]
+            : availableIndices[0];
         }
 
         return peekRandomIndex();
@@ -3936,6 +4059,30 @@
         });
       }
 
+      function updateLanguageFilterUI() {
+        languageFilterButtons.forEach(button => {
+          const active = button.dataset.language === trackLanguageFilter;
+
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      }
+
+      function updatePlaylistStatus() {
+        const count = getAvailableTrackCount();
+        const filterLabel =
+          trackLanguageFilter === 'esp'
+            ? ' en español'
+            : trackLanguageFilter === 'eng'
+              ? ' en inglés'
+              : '';
+
+        startStatus.textContent =
+          `${count} ${
+            count === 1 ? 'canción disponible' : 'canciones disponibles'
+          }${filterLabel}.`;
+      }
+
       function updateTrackLabels() {
         const track = localPlaylist[currentTrackIndex];
         const name = track?.name || '—';
@@ -3965,9 +4112,12 @@
 
         document.title = track ? `${name} · Eidos` : 'Eidos · Visor musical';
 
-        trackList.querySelectorAll('.track-option').forEach((button, index) => {
-          button.classList.toggle('active', index === currentTrackIndex);
-          button.setAttribute('aria-selected', index === currentTrackIndex ? 'true' : 'false');
+        trackList.querySelectorAll('.track-option').forEach(button => {
+          const index = Number(button.dataset.trackIndex);
+          const active = index === currentTrackIndex;
+
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-selected', active ? 'true' : 'false');
         });
 
         scheduleTrackMarqueeUpdate();
@@ -3975,35 +4125,56 @@
 
       function renderTrackList() {
         trackList.replaceChildren();
-        localPlaylist.forEach((track, index) => {
+
+        const filteredTracks = localPlaylist
+          .map((track, index) => ({ track, index }))
+          .filter(({ track }) => trackMatchesLanguageFilter(track));
+
+        filteredTracks.forEach(({ track, index }, visibleIndex) => {
           const button = document.createElement('button');
           button.type = 'button';
           button.className = 'track-option';
           button.setAttribute('role', 'option');
-          button.innerHTML = `<span class="track-number">${String(index + 1).padStart(2, '0')}</span><span class="track-title"></span>`;
+          button.dataset.trackIndex = String(index);
+          button.innerHTML =
+            `<span class="track-number">${String(visibleIndex + 1).padStart(2, '0')}</span>` +
+            `<span class="track-title"></span>`;
+
           button.querySelector('.track-title').textContent = track.name;
+
           button.addEventListener('click', async () => {
             closeTrackSelector();
-            await playPlaylistTrack(
-              index,
-              0,
-              'manual'
-            );
+            await playPlaylistTrack(index, 0, 'manual');
           });
+
           trackList.appendChild(button);
         });
+
+        updateLanguageFilterUI();
+        updatePlaylistStatus();
         updateTrackLabels();
       }
 
       function rawTracksFromFiles(files) {
-        return files.map(file => ({
-          title: file
-            .replace(/\.[^.]+$/, '')
-            .replace(/[_-]+/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim(),
-          file
-        }));
+        return files.map(item => {
+          const file = typeof item === 'string'
+            ? item
+            : String(item.file || '');
+
+          return {
+            title: file
+              .split('/')
+              .pop()
+              .replace(/\.[^.]+$/, '')
+              .replace(/[_-]+/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim(),
+            file,
+            language: typeof item === 'string'
+              ? detectTrackLanguage(file)
+              : detectTrackLanguage(file, item.language)
+          };
+        });
       }
 
       function readPlaylistCache() {
@@ -4041,39 +4212,84 @@
         }
       }
 
+      async function fetchGithubJson(url, signal) {
+        const response = await fetch(url, {
+          cache: 'no-store',
+          signal,
+          headers: { 'Accept': 'application/vnd.github+json' }
+        });
+
+        if (!response.ok) {
+          const remaining = response.headers.get('x-ratelimit-remaining');
+
+          throw new Error(
+            remaining === '0'
+              ? 'GitHub ha alcanzado temporalmente el límite de consultas.'
+              : `GitHub devolvió HTTP ${response.status}.`
+          );
+        }
+
+        return response.json();
+      }
+
       async function fetchGithubPlaylist() {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 7000);
+        const timeout = setTimeout(() => controller.abort(), 9000);
 
         try {
-          const response = await fetch(GITHUB_CONTENTS_URL, {
-            cache: 'no-store',
-            signal: controller.signal,
-            headers: {
-              'Accept': 'application/vnd.github+json'
-            }
-          });
+          const rootContents = await fetchGithubJson(
+            GITHUB_CONTENTS_URL,
+            controller.signal
+          );
 
-          if (!response.ok) {
-            const remaining =
-              response.headers.get('x-ratelimit-remaining');
-
-            throw new Error(
-              remaining === '0'
-                ? 'GitHub ha alcanzado temporalmente el límite de consultas.'
-                : `GitHub devolvió HTTP ${response.status}.`
-            );
-          }
-
-          const contents = await response.json();
-
-          if (!Array.isArray(contents)) {
+          if (!Array.isArray(rootContents)) {
             throw new Error(
               'GitHub no ha devuelto el contenido de la carpeta.'
             );
           }
 
-          const tracks = contents
+          const languageDirectories = rootContents.filter(item =>
+            item &&
+            item.type === 'dir' &&
+            typeof item.name === 'string' &&
+            SUPPORTED_LANGUAGE_FOLDERS.has(item.name.toLowerCase())
+          );
+
+          if (languageDirectories.length) {
+            const groups = await Promise.all(
+              languageDirectories.map(async directory => {
+                const language = directory.name.toLowerCase();
+                const contents = await fetchGithubJson(
+                  directory.url,
+                  controller.signal
+                );
+
+                if (!Array.isArray(contents)) return [];
+
+                return contents
+                  .filter(item =>
+                    item &&
+                    item.type === 'file' &&
+                    typeof item.name === 'string' &&
+                    AUDIO_EXTENSION.test(item.name)
+                  )
+                  .map(item => ({
+                    title: item.name
+                      .replace(/\.[^.]+$/, '')
+                      .replace(/[_-]+/g, ' ')
+                      .replace(/\s+/g, ' ')
+                      .trim(),
+                    file: `${language}/${item.name}`,
+                    language
+                  }));
+              })
+            );
+
+            const tracks = groups.flat();
+            if (tracks.length) return tracks;
+          }
+
+          const rootTracks = rootContents
             .filter(item =>
               item &&
               item.type === 'file' &&
@@ -4086,16 +4302,17 @@
                 .replace(/[_-]+/g, ' ')
                 .replace(/\s+/g, ' ')
                 .trim(),
-              file: item.name
+              file: item.name,
+              language: 'unknown'
             }));
 
-          if (!tracks.length) {
+          if (!rootTracks.length) {
             throw new Error(
               'GitHub no ha encontrado audios compatibles.'
             );
           }
 
-          return tracks;
+          return rootTracks;
         } finally {
           clearTimeout(timeout);
         }
@@ -4166,32 +4383,31 @@
           currentTrackIndex = requestedIndex;
         } else if (previousTrackFile) {
           const preservedIndex = localPlaylist.findIndex(
-            track => track.file === previousTrackFile
+            track =>
+              track.file === previousTrackFile &&
+              trackMatchesLanguageFilter(track)
           );
+
+          const availableIndices = getAvailableTrackIndices();
 
           currentTrackIndex = preservedIndex >= 0
             ? preservedIndex
-            : Math.min(
-                currentTrackIndex,
-                localPlaylist.length - 1
-              );
+            : availableIndices[
+                Math.floor(Math.random() * availableIndices.length)
+              ] ?? 0;
         } else {
-          currentTrackIndex = Math.floor(
-            Math.random() * localPlaylist.length
-          );
+          const availableIndices = getAvailableTrackIndices();
+
+          currentTrackIndex = availableIndices[
+            Math.floor(Math.random() * availableIndices.length)
+          ] ?? 0;
         }
 
         resetRandomQueue(currentTrackIndex);
         renderTrackList();
+        updatePlaylistStatus();
 
-        startStatus.textContent =
-          `${localPlaylist.length} ${
-            localPlaylist.length === 1
-              ? 'canción disponible'
-              : 'canciones disponibles'
-          }.`;
-
-        startButton.disabled = false;
+        startButton.disabled = getAvailableTrackCount() === 0;
         preloadNextTrack();
 
         return true;
@@ -4204,13 +4420,13 @@
           writePlaylistCache(githubTracks);
 
           const currentFiles = localPlaylist
-            .map(track => track.file)
+            .map(track => `${track.language}:${track.file}`)
             .filter(Boolean)
             .sort()
             .join('\n');
 
           const githubFiles = githubTracks
-            .map(track => track.file)
+            .map(track => `${track.language}:${track.file}`)
             .filter(Boolean)
             .sort()
             .join('\n');
@@ -4630,6 +4846,66 @@
         showControls();
       });
 
+      languageFilter.addEventListener('click', async event => {
+        const button = event.target.closest('.language-filter-button');
+        if (!button) return;
+
+        const nextFilter = button.dataset.language;
+
+        if (
+          !['all', 'esp', 'eng'].includes(nextFilter) ||
+          nextFilter === trackLanguageFilter
+        ) {
+          return;
+        }
+
+        trackLanguageFilter = nextFilter;
+
+        try {
+          localStorage.setItem(
+            'eidosMusicLanguageFilter',
+            trackLanguageFilter
+          );
+        } catch (_) {
+          // El almacenamiento local es opcional.
+        }
+
+        resetRandomQueue(currentTrackIndex);
+        renderTrackList();
+
+        const currentAllowed =
+          trackMatchesLanguageFilter(getCurrentTrack());
+
+        const nextIndex = currentAllowed
+          ? currentTrackIndex
+          : peekRandomIndex();
+
+        if (
+          nextIndex >= 0 &&
+          nextIndex !== currentTrackIndex
+        ) {
+          if (document.body.classList.contains('visualizer-started')) {
+            await playPlaylistTrack(
+              nextIndex,
+              0,
+              'language-filter'
+            );
+          } else {
+            currentTrackIndex = nextIndex;
+            markRandomTrackAsPlayed(nextIndex);
+            updateTrackLabels();
+            preloadNextTrack();
+          }
+        } else {
+          updateTrackLabels();
+          preloadNextTrack();
+        }
+
+        const active = trackList.querySelector('.track-option.active');
+        active?.scrollIntoView({ block: 'nearest' });
+        showControls();
+      });
+
       modeButton.addEventListener('click', () => {
         playbackMode =
           playbackMode === 'random'
@@ -4821,6 +5097,7 @@
       updateTransportUI();
       updatePlaybackModeUI();
       updatePauseButtonUI();
+      updateLanguageFilterUI();
       loadPlaylist();
       resize();
       requestAnimationFrame(render);
