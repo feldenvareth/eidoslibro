@@ -1798,6 +1798,7 @@
         beat: 0,
         smoothedBeat: 0,
         previousBass: 0,
+        previousMid: 0,
         previousHigh: 0
       };
 
@@ -1810,7 +1811,8 @@
         lastAccent: -99,
         lastCover: -99,
         lastRipple: -99,
-        lastStarBurst: -99
+        lastStarBurst: -99,
+        lastStructureHit: -99
       };
 
       function resize() {
@@ -1916,16 +1918,33 @@
       }
 
       function triggerSideCovers(intensity = 0.7, time = performance.now() / 1000) {
-        const level = clamp(0.18 + intensity * 0.56, 0.18, 0.78);
-        sideCoverState.maxAlpha = Math.max(sideCoverState.maxAlpha * 0.90, level);
-        sideCoverState.holdUntil = time + 0.85;
+        const level = clamp(0.24 + intensity * 0.54, 0.24, 0.84);
+        const alreadyVisible = sideCoverState.alpha > 0.03;
+
+        sideCoverState.maxAlpha = Math.max(
+          sideCoverState.maxAlpha * 0.88,
+          level
+        );
+
+        if (alreadyVisible) {
+          /*
+            Si llega otro impacto mientras las portadas están visibles
+            o entrando en fade-out, se recuperan suavemente.
+          */
+          sideCoverState.alpha = Math.max(
+            sideCoverState.alpha,
+            Math.min(0.88, level * 0.88)
+          );
+        }
+
+        sideCoverState.holdUntil = time + (alreadyVisible ? 1.35 : 1.05);
         sideCoverState.lastTrigger = time;
-        sideCoverState.pulse = 1;
+        sideCoverState.pulse = Math.max(sideCoverState.pulse, 1);
       }
 
       function triggerAccentEffects(intensity = 0.7, time = performance.now() / 1000) {
         const minSize = Math.min(width || window.innerWidth, height || window.innerHeight);
-        const waveCount = compactDevice ? 1 : 2;
+        const waveCount = 1;
 
         for (let i = 0; i < waveCount && transferWaves.length < 6; i++) {
           transferWaves.push({
@@ -1938,7 +1957,7 @@
           });
         }
 
-        const filamentCount = compactDevice ? 2 : 4;
+        const filamentCount = compactDevice ? 2 : 3;
         for (let i = 0; i < filamentCount && dataFilaments.length < 18; i++) {
           const toCover = sideCoverState.alpha > 0.06 && Math.random() < 0.55;
           const side = Math.random() < 0.5 ? -1 : 1;
@@ -1964,7 +1983,7 @@
           });
         }
 
-        if (constellations.length < (compactDevice ? 2 : 3)) {
+        if (constellations.length < (compactDevice ? 1 : 2)) {
           const nodeCount = compactDevice ? 4 : 6;
           const nodes = [];
           const links = [];
@@ -2021,11 +2040,38 @@
         energy.overall = lerp(energy.overall, clamp(rms * 2.4, 0, 1), 0.14);
 
         const bassDelta = Math.max(0, bassNow - energy.previousBass);
+        const midDelta = Math.max(0, midNow - energy.previousMid);
         const highDelta = Math.max(0, highNow - energy.previousHigh);
+
+        /*
+          Cambios de distribución de frecuencias: no importa solo subir
+          el volumen, sino que entren graves, voz o agudos de otra forma.
+        */
+        const structureShift = clamp(
+          Math.abs(bassNow - energy.bass) * 1.9 +
+          Math.abs(midNow - energy.mid) * 1.45 +
+          Math.abs(highNow - energy.high) * 1.9,
+          0,
+          1
+        );
+
         energy.previousBass = lerp(energy.previousBass, bassNow, 0.30);
+        energy.previousMid = lerp(energy.previousMid, midNow, 0.28);
         energy.previousHigh = lerp(energy.previousHigh, highNow, 0.26);
-        energy.beat = clamp(bassDelta * 6.5 + bassNow * 0.35, 0, 1);
-        energy.smoothedBeat = lerp(energy.smoothedBeat, energy.beat, energy.beat > energy.smoothedBeat ? 0.38 : 0.08);
+
+        energy.beat = clamp(
+          bassDelta * 6.2 +
+          midDelta * 1.8 +
+          bassNow * 0.31,
+          0,
+          1
+        );
+
+        energy.smoothedBeat = lerp(
+          energy.smoothedBeat,
+          energy.beat,
+          energy.beat > energy.smoothedBeat ? 0.38 : 0.08
+        );
 
         const nowSec = performance.now() / 1000;
         const sampleDt = clamp(
@@ -2074,7 +2120,7 @@
           aboveBaseline > 0.025
         ) {
           musicalEvents.sustainedFor = Math.min(
-            2.4,
+            2.8,
             musicalEvents.sustainedFor + sampleDt
           );
         } else {
@@ -2085,88 +2131,143 @@
         }
 
         const transientScore = clamp(
-          energy.beat * 0.76 +
-          bassDelta * 2.8 +
-          highDelta * 4.6,
+          energy.beat * 0.70 +
+          bassDelta * 2.6 +
+          highDelta * 4.1 +
+          midDelta * 1.25,
           0,
           1
         );
 
         const swellScore = clamp(
-          levelRise * 8.5 +
-          Math.max(0, aboveBaseline) * 4.2,
+          levelRise * 7.4 +
+          Math.max(0, aboveBaseline) * 4.0,
           0,
           1
         );
 
         const sustainedScore =
-          musicalEvents.sustainedFor > 0.58
+          musicalEvents.sustainedFor > 0.52
             ? clamp(
-                (musicalEvents.smoothedLevel - 0.17) * 2.7 +
-                Math.min(1.5, musicalEvents.sustainedFor) * 0.22,
+                (musicalEvents.smoothedLevel - 0.17) * 2.75 +
+                Math.min(1.8, musicalEvents.sustainedFor) * 0.24,
                 0,
                 1
               )
             : 0;
 
+        /*
+          Momento estructural claro: golpe, cambio de espectro o subida.
+          Se recuerda brevemente para reconocer un clímax que culmina
+          y se mantiene.
+        */
+        const structureHitScore = Math.max(
+          transientScore,
+          swellScore * 0.92,
+          structureShift * 0.95
+        );
+
+        if (structureHitScore > 0.46) {
+          musicalEvents.lastStructureHit = nowSec;
+        }
+
+        const climaxHoldScore =
+          nowSec - musicalEvents.lastStructureHit < 2.05
+            ? clamp(
+                sustainedScore * 0.95 +
+                Math.max(0, aboveBaseline) * 2.0,
+                0,
+                1
+              )
+            : sustainedScore * 0.72;
+
         const accentScore = Math.max(
           transientScore,
-          swellScore,
-          sustainedScore * 0.92
+          structureShift * 0.90,
+          swellScore * 0.88,
+          climaxHoldScore * 0.78
         );
 
         const coverScore = Math.max(
-          transientScore * 0.96,
-          swellScore * 0.90,
-          sustainedScore
+          transientScore * 0.84,
+          structureShift * 0.92,
+          swellScore * 0.86,
+          climaxHoldScore
         );
 
+        /*
+          Rayas, círculos y demás: algo menos frecuentes que antes.
+        */
         if (
-          accentScore > 0.46 &&
-          nowSec - musicalEvents.lastAccent > 0.95
+          accentScore > 0.50 &&
+          nowSec - musicalEvents.lastAccent > 1.30
         ) {
           triggerAccentEffects(accentScore, nowSec);
           musicalEvents.lastAccent = nowSec;
         }
 
-        const coverCooldown =
-          coverScore > 0.82 ? 5.2 : 6.4;
+        /*
+          Portadas:
+          - pueden iniciarse tras un momento fuerte;
+          - si ya están visibles o en fade, un nuevo impacto relevante
+            puede reactivarlas tras ~1 s;
+          - si han desaparecido, sí se espera más para que conserven
+            su valor promocional.
+        */
+        const coverVisible = sideCoverState.alpha > 0.035;
+        const coverRefreshReady =
+          coverVisible &&
+          nowSec - sideCoverState.lastTrigger > 0.95 &&
+          coverScore > 0.46;
 
-        if (
-          coverScore > 0.54 &&
-          nowSec - musicalEvents.lastCover > coverCooldown
-        ) {
+        const newCoverCooldown =
+          coverScore > 0.80 ? 3.8 : 4.8;
+
+        const canStartNewCover =
+          !coverVisible &&
+          coverScore > 0.56 &&
+          nowSec - musicalEvents.lastCover > newCoverCooldown;
+
+        if (coverRefreshReady || canStartNewCover) {
           triggerSideCovers(coverScore, nowSec);
           musicalEvents.lastCover = nowSec;
 
-          if (nowSec - musicalEvents.lastAccent > 0.35) {
-            triggerAccentEffects(coverScore, nowSec);
+          /*
+            Los efectos secundarios no deben dispararse siempre que se
+            refuerzan las portadas. Solo acompañan los impactos más
+            claros o cuando hacía bastante que no aparecían.
+          */
+          if (
+            coverScore > 0.61 &&
+            nowSec - musicalEvents.lastAccent > 0.78
+          ) {
+            triggerAccentEffects(coverScore * 0.92, nowSec);
             musicalEvents.lastAccent = nowSec;
           }
         }
 
         if (
-          accentScore > 0.43 &&
-          nowSec - musicalEvents.lastRipple > 0.42 &&
+          accentScore > 0.54 &&
+          nowSec - musicalEvents.lastRipple > 0.76 &&
           ripples.length < quality.maxRipples
         ) {
           ripples.push({
             x: width * 0.5 + random(-width * 0.13, width * 0.13),
             y: height * 0.5 + random(-height * 0.10, height * 0.10),
             radius: Math.min(width, height) * 0.05,
-            alpha: 0.24 + accentScore * 0.22,
-            speed: 27 + accentScore * 54
+            alpha: 0.22 + accentScore * 0.18,
+            speed: 24 + accentScore * 46
           });
           musicalEvents.lastRipple = nowSec;
         }
 
         if (
-          Math.max(transientScore, swellScore) > 0.48 &&
-          nowSec - musicalEvents.lastStarBurst > 0.72 &&
+          Math.max(transientScore, structureShift, swellScore) > 0.57 &&
+          nowSec - musicalEvents.lastStarBurst > 1.05 &&
           peakStars.length < quality.maxStars
         ) {
           spawnPeakBurst(
-            Math.max(transientScore, swellScore)
+            Math.max(transientScore, structureShift, swellScore)
           );
           musicalEvents.lastStarBurst = nowSec;
         }
