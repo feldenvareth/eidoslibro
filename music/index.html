@@ -846,10 +846,14 @@
 
     #languageFilter {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
       gap: 7px;
-      padding: 10px 10px 4px;
+      max-height: 104px;
+      overflow-y: auto;
+      padding: 10px 10px 6px;
       border-bottom: 1px solid rgba(242,236,216,.07);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(216,178,57,.30) transparent;
     }
 
     .language-filter-button {
@@ -883,7 +887,7 @@
     }
 
     #trackList {
-      max-height: calc(min(58vh, 520px) - 116px);
+      max-height: calc(min(58vh, 520px) - 138px);
       overflow-y: auto;
       padding: 8px;
       scrollbar-width: thin;
@@ -1478,10 +1482,6 @@
     <div id="languageFilter" role="group" aria-label="Filtrar canciones por idioma">
       <button class="language-filter-button active" type="button"
               data-language="all" aria-pressed="true">Todas</button>
-      <button class="language-filter-button" type="button"
-              data-language="esp" aria-pressed="false">Español</button>
-      <button class="language-filter-button" type="button"
-              data-language="eng" aria-pressed="false">English</button>
     </div>
 
     <div id="trackList" role="listbox" aria-label="Canciones disponibles"></div>
@@ -1637,9 +1637,34 @@
     (() => {
       'use strict';
       const GITHUB_CONTENTS_URL = 'https://api.github.com/repos/feldenvareth/eidoslibro/contents/music/Songs?ref=main';
-      const SUPPORTED_LANGUAGE_FOLDERS = new Set(['esp', 'eng']);
+      const ROOT_LANGUAGE_KEY = 'root';
+
+      const LANGUAGE_LABELS = {
+        esp: 'Español',
+        es: 'Español',
+        eng: 'English',
+        en: 'English',
+        fra: 'Français',
+        fre: 'Français',
+        fr: 'Français',
+        ita: 'Italiano',
+        it: 'Italiano',
+        deu: 'Deutsch',
+        ger: 'Deutsch',
+        de: 'Deutsch',
+        por: 'Português',
+        pt: 'Português',
+        cat: 'Català',
+        ca: 'Català',
+        eus: 'Euskara',
+        eu: 'Euskara',
+        glg: 'Galego',
+        gl: 'Galego',
+        root: 'Otros'
+      };
+
       const AUDIO_EXTENSION = /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|webm)$/i;
-      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV3';
+      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV4';
       const PLAYLIST_CACHE_MS = 24 * 60 * 60 * 1000;
       const SONGS_DIRECTORY = './Songs/';
       const START_DELAY_MS = 2000;
@@ -1653,16 +1678,19 @@
         canciones nuevas automáticamente cuando esté disponible.
       */
       const FALLBACK_TRACK_FILES = [
-        { file: 'eng/Eidos -  Country.mp3', language: 'eng' },
-        { file: 'eng/Eidos -  mention.mp3', language: 'eng' },
+        { file: 'eng/Eidos - Mention.mp3', language: 'eng' },
+        { file: 'eng/Eidos - Rap Remix.mp3', language: 'eng' },
         { file: 'eng/Eidos - The Final Transfer.mp3', language: 'eng' },
+        { file: 'eng/Eidos - The First Time Never Returns.mp3', language: 'eng' },
+        { file: 'eng/Eidos - The Iron Tracks - Country.mp3', language: 'eng' },
+        { file: 'eng/Eidos - The Iron Tracks - Duet- Country .mp3', language: 'eng' },
 
+        { file: 'esp/Eidos - El Último Billete.mp3', language: 'esp' },
         { file: 'esp/Eidos - Gran Transferencia Fem.mp3', language: 'esp' },
         { file: 'esp/Eidos - La vida desaparecia female.mp3', language: 'esp' },
         { file: 'esp/Eidos - La vida desaparecia male.mp3', language: 'esp' },
-        { file: 'esp/Eidos - Rap Remix.mp3', language: 'esp' },
-        { file: 'esp/Eidos - Última Transferencia para Eidos.mp3', language: 'esp' },
-        { file: 'esp/Eidos- El Último Billete.mp3', language: 'esp' }
+        { file: 'esp/Eidos - No vuelve la primera vez.mp3', language: 'esp' },
+        { file: 'esp/Eidos - Última Transferencia para Eidos.mp3', language: 'esp' }
       ];
 
       const canvas = document.getElementById('visualizer');
@@ -1680,9 +1708,7 @@
       const closeSelector = document.getElementById('closeSelector');
       const trackList = document.getElementById('trackList');
       const languageFilter = document.getElementById('languageFilter');
-      const languageFilterButtons = Array.from(
-        document.querySelectorAll('.language-filter-button')
-      );
+      let languageFilterButtons = [];
       const startTrack = document.getElementById('startTrack');
       const startStatus = document.getElementById('startStatus');
       const currentTrackName = document.getElementById('currentTrackName');
@@ -1732,8 +1758,11 @@
 
       const storedLanguageFilter = (() => {
         try {
-          const value = localStorage.getItem('eidosMusicLanguageFilter');
-          return ['all', 'esp', 'eng'].includes(value) ? value : 'all';
+          const value = String(
+            localStorage.getItem('eidosMusicLanguageFilter') || ''
+          ).trim().toLowerCase();
+
+          return value || 'all';
         } catch (_) {
           return 'all';
         }
@@ -3693,24 +3722,42 @@
         return `${SONGS_DIRECTORY}${safePath}`;
       }
 
-      function detectTrackLanguage(file, explicitLanguage = '') {
-        const normalizedExplicit = String(explicitLanguage || '')
+      function normalizeLanguageKey(value) {
+        return String(value || '')
           .trim()
-          .toLowerCase();
+          .toLowerCase()
+          .replace(/[^a-z0-9_-]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
 
-        if (SUPPORTED_LANGUAGE_FOLDERS.has(normalizedExplicit)) {
+      function formatLanguageLabel(language) {
+        const key = normalizeLanguageKey(language);
+
+        if (LANGUAGE_LABELS[key]) {
+          return LANGUAGE_LABELS[key];
+        }
+
+        return key
+          .replace(/[-_]+/g, ' ')
+          .replace(/\b\w/g, letter => letter.toUpperCase()) ||
+          'Otros';
+      }
+
+      function detectTrackLanguage(file, explicitLanguage = '') {
+        const normalizedExplicit = normalizeLanguageKey(explicitLanguage);
+
+        if (normalizedExplicit) {
           return normalizedExplicit;
         }
 
-        const firstDirectory = String(file || '')
+        const parts = String(file || '')
           .replace(/\\/g, '/')
           .split('/')
-          .filter(Boolean)[0]
-          ?.toLowerCase();
+          .filter(Boolean);
 
-        return SUPPORTED_LANGUAGE_FOLDERS.has(firstDirectory)
-          ? firstDirectory
-          : 'unknown';
+        return parts.length > 1
+          ? normalizeLanguageKey(parts[0])
+          : ROOT_LANGUAGE_KEY;
       }
 
       function normalizeTrack(item, index) {
@@ -4059,6 +4106,89 @@
         });
       }
 
+      function getAvailableLanguageKeys() {
+        const keys = Array.from(
+          new Set(
+            localPlaylist
+              .map(track => normalizeLanguageKey(track.language))
+              .filter(Boolean)
+          )
+        );
+
+        const priority = [
+          'esp', 'es', 'eng', 'en',
+          'fra', 'fre', 'fr',
+          'ita', 'it',
+          'deu', 'ger', 'de',
+          'por', 'pt',
+          'cat', 'ca',
+          'eus', 'eu',
+          'glg', 'gl'
+        ];
+
+        return keys.sort((a, b) => {
+          if (a === ROOT_LANGUAGE_KEY) return 1;
+          if (b === ROOT_LANGUAGE_KEY) return -1;
+
+          const aPriority = priority.indexOf(a);
+          const bPriority = priority.indexOf(b);
+
+          if (aPriority >= 0 || bPriority >= 0) {
+            if (aPriority < 0) return 1;
+            if (bPriority < 0) return -1;
+            return aPriority - bPriority;
+          }
+
+          return formatLanguageLabel(a).localeCompare(
+            formatLanguageLabel(b),
+            'es',
+            { sensitivity: 'base' }
+          );
+        });
+      }
+
+      function renderLanguageFilterButtons() {
+        const availableKeys = getAvailableLanguageKeys();
+        const validFilters = new Set(['all', ...availableKeys]);
+
+        if (!validFilters.has(trackLanguageFilter)) {
+          trackLanguageFilter = 'all';
+
+          try {
+            localStorage.setItem(
+              'eidosMusicLanguageFilter',
+              trackLanguageFilter
+            );
+          } catch (_) {
+            // El almacenamiento local es opcional.
+          }
+        }
+
+        languageFilter.replaceChildren();
+
+        const filterOptions = [
+          { key: 'all', label: 'Todas' },
+          ...availableKeys.map(key => ({
+            key,
+            label: formatLanguageLabel(key)
+          }))
+        ];
+
+        for (const option of filterOptions) {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'language-filter-button';
+          button.dataset.language = option.key;
+          button.textContent = option.label;
+          button.setAttribute('aria-pressed', 'false');
+          languageFilter.appendChild(button);
+        }
+
+        languageFilterButtons = Array.from(
+          languageFilter.querySelectorAll('.language-filter-button')
+        );
+      }
+
       function updateLanguageFilterUI() {
         languageFilterButtons.forEach(button => {
           const active = button.dataset.language === trackLanguageFilter;
@@ -4070,12 +4200,9 @@
 
       function updatePlaylistStatus() {
         const count = getAvailableTrackCount();
-        const filterLabel =
-          trackLanguageFilter === 'esp'
-            ? ' en español'
-            : trackLanguageFilter === 'eng'
-              ? ' en inglés'
-              : '';
+        const filterLabel = trackLanguageFilter === 'all'
+          ? ''
+          : ` · ${formatLanguageLabel(trackLanguageFilter)}`;
 
         startStatus.textContent =
           `${count} ${
@@ -4124,6 +4251,7 @@
       }
 
       function renderTrackList() {
+        renderLanguageFilterButtons();
         trackList.replaceChildren();
 
         const filteredTracks = localPlaylist
@@ -4234,7 +4362,7 @@
 
       async function fetchGithubPlaylist() {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 9000);
+        const timeout = setTimeout(() => controller.abort(), 11000);
 
         try {
           const rootContents = await fetchGithubJson(
@@ -4246,47 +4374,6 @@
             throw new Error(
               'GitHub no ha devuelto el contenido de la carpeta.'
             );
-          }
-
-          const languageDirectories = rootContents.filter(item =>
-            item &&
-            item.type === 'dir' &&
-            typeof item.name === 'string' &&
-            SUPPORTED_LANGUAGE_FOLDERS.has(item.name.toLowerCase())
-          );
-
-          if (languageDirectories.length) {
-            const groups = await Promise.all(
-              languageDirectories.map(async directory => {
-                const language = directory.name.toLowerCase();
-                const contents = await fetchGithubJson(
-                  directory.url,
-                  controller.signal
-                );
-
-                if (!Array.isArray(contents)) return [];
-
-                return contents
-                  .filter(item =>
-                    item &&
-                    item.type === 'file' &&
-                    typeof item.name === 'string' &&
-                    AUDIO_EXTENSION.test(item.name)
-                  )
-                  .map(item => ({
-                    title: item.name
-                      .replace(/\.[^.]+$/, '')
-                      .replace(/[_-]+/g, ' ')
-                      .replace(/\s+/g, ' ')
-                      .trim(),
-                    file: `${language}/${item.name}`,
-                    language
-                  }));
-              })
-            );
-
-            const tracks = groups.flat();
-            if (tracks.length) return tracks;
           }
 
           const rootTracks = rootContents
@@ -4303,16 +4390,59 @@
                 .replace(/\s+/g, ' ')
                 .trim(),
               file: item.name,
-              language: 'unknown'
+              language: ROOT_LANGUAGE_KEY
             }));
 
-          if (!rootTracks.length) {
+          const directories = rootContents.filter(item =>
+            item &&
+            item.type === 'dir' &&
+            typeof item.name === 'string' &&
+            typeof item.url === 'string'
+          );
+
+          const directoryGroups = await Promise.all(
+            directories.map(async directory => {
+              const language = normalizeLanguageKey(directory.name);
+              if (!language) return [];
+
+              const contents = await fetchGithubJson(
+                directory.url,
+                controller.signal
+              );
+
+              if (!Array.isArray(contents)) return [];
+
+              return contents
+                .filter(item =>
+                  item &&
+                  item.type === 'file' &&
+                  typeof item.name === 'string' &&
+                  AUDIO_EXTENSION.test(item.name)
+                )
+                .map(item => ({
+                  title: item.name
+                    .replace(/\.[^.]+$/, '')
+                    .replace(/[_-]+/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim(),
+                  file: `${directory.name}/${item.name}`,
+                  language
+                }));
+            })
+          );
+
+          const tracks = [
+            ...rootTracks,
+            ...directoryGroups.flat()
+          ];
+
+          if (!tracks.length) {
             throw new Error(
               'GitHub no ha encontrado audios compatibles.'
             );
           }
 
-          return rootTracks;
+          return tracks;
         } finally {
           clearTimeout(timeout);
         }
@@ -4342,6 +4472,17 @@
         }
 
         localPlaylist = nextPlaylist;
+
+        const availableLanguageKeys = new Set(
+          getAvailableLanguageKeys()
+        );
+
+        if (
+          trackLanguageFilter !== 'all' &&
+          !availableLanguageKeys.has(trackLanguageFilter)
+        ) {
+          trackLanguageFilter = 'all';
+        }
 
         const normalizedRequestedTrack = requestedTrackToken
           ? String(requestedTrackToken)
@@ -4852,8 +4993,13 @@
 
         const nextFilter = button.dataset.language;
 
+        const validFilters = new Set([
+          'all',
+          ...getAvailableLanguageKeys()
+        ]);
+
         if (
-          !['all', 'esp', 'eng'].includes(nextFilter) ||
+          !validFilters.has(nextFilter) ||
           nextFilter === trackLanguageFilter
         ) {
           return;
