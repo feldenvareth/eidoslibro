@@ -2533,17 +2533,20 @@
           const points = quality.wavePoints;
 
           for (let i = 0; i <= points; i++) {
-            const angle = (i / points) * Math.PI * 2;
-            const idx = Math.floor(
-              (i / points) *
-              (frequencyData ? frequencyData.length : 1)
-            );
+            const t = i === points ? 0 : (i / points);
+            const angle = t * Math.PI * 2;
 
-            const amp = frequencyData
-              ? frequencyData[
-                  Math.min(frequencyData.length - 1, idx)
-                ] / 255
-              : 0;
+            let amp = 0;
+            if (frequencyData && frequencyData.length) {
+              const samplePos = t * frequencyData.length;
+              const idx0 = Math.floor(samplePos) % frequencyData.length;
+              const idx1 = (idx0 + 1) % frequencyData.length;
+              const frac = samplePos - Math.floor(samplePos);
+
+              const a0 = frequencyData[idx0] / 255;
+              const a1 = frequencyData[idx1] / 255;
+              amp = lerp(a0, a1, frac);
+            }
 
             const waveform =
               Math.sin(angle * 4 + time * 0.45 + layer) *
@@ -2625,6 +2628,7 @@
 
 
 
+
       function drawBackdropWaveform(time) {
         const cx = width * 0.5;
         const cy = height * 0.5;
@@ -2636,8 +2640,8 @@
         const barSpacing = sideSpan / Math.max(1, barsPerSide - 0.15);
         const barWidth = Math.max(1.6, Math.min(3.7, barSpacing * 0.14));
 
-        const baseHeight = Math.max(6, minSize * 0.018);
-        const maxExtraHeight = clamp(minSize * 0.115, 34, 80);
+        const baseHeight = Math.max(4.5, minSize * 0.014);
+        const maxExtraHeight = clamp(minSize * 0.145, 42, 96);
 
         const spectrumLength = frequencyData ? frequencyData.length : 0;
         const usefulSpectrum =
@@ -2659,22 +2663,18 @@
             const i2 = Math.min(usefulSpectrum - 1, idx + 1);
 
             amp = (
-              frequencyData[i0] * 0.85 +
-              frequencyData[i1] * 1.65 +
-              frequencyData[i2] * 0.85
-            ) / (3.35 * 255);
+              frequencyData[i0] * 0.80 +
+              frequencyData[i1] * 1.85 +
+              frequencyData[i2] * 0.80
+            ) / (3.45 * 255);
           }
 
-          /*
-            Queremos que se note el beat, así que además de la muestra real
-            le damos un pequeño impulso musical vivo.
-          */
           const rhythmicLift =
-            energy.smoothedBeat * 0.22 +
+            energy.smoothedBeat * 0.24 +
             energy.overall * 0.10 +
-            Math.max(0, Math.sin(time * 3.8 + p * 7.5)) * 0.045;
+            Math.max(0, Math.sin(time * 4.1 + p * 8.0)) * 0.05;
 
-          return clamp(amp * 0.96 + rhythmicLift, 0, 1);
+          return clamp(amp * 0.98 + rhythmicLift, 0, 1);
         }
 
         function drawHalf(side) {
@@ -2687,11 +2687,11 @@
             startX + direction * sideSpan,
             cy
           );
-          strokeGradient.addColorStop(0, 'rgba(255, 233, 154, 0.20)');
-          strokeGradient.addColorStop(0.18, 'rgba(244, 203, 76, 0.48)');
-          strokeGradient.addColorStop(0.50, 'rgba(232, 189, 62, 0.72)');
-          strokeGradient.addColorStop(0.84, 'rgba(190, 214, 184, 0.24)');
-          strokeGradient.addColorStop(1, 'rgba(165, 205, 195, 0.06)');
+          strokeGradient.addColorStop(0, 'rgba(255, 233, 154, 0.14)');
+          strokeGradient.addColorStop(0.18, 'rgba(244, 203, 76, 0.34)');
+          strokeGradient.addColorStop(0.50, 'rgba(232, 189, 62, 0.50)');
+          strokeGradient.addColorStop(0.84, 'rgba(190, 214, 184, 0.18)');
+          strokeGradient.addColorStop(1, 'rgba(165, 205, 195, 0.05)');
 
           const glowGradient = ctx.createLinearGradient(
             startX,
@@ -2700,32 +2700,29 @@
             cy
           );
           glowGradient.addColorStop(0, 'rgba(255, 219, 96, 0.00)');
-          glowGradient.addColorStop(0.24, 'rgba(240, 200, 80, 0.12)');
-          glowGradient.addColorStop(0.50, 'rgba(226, 182, 56, 0.20)');
-          glowGradient.addColorStop(0.86, 'rgba(171, 206, 188, 0.08)');
+          glowGradient.addColorStop(0.24, 'rgba(240, 200, 80, 0.08)');
+          glowGradient.addColorStop(0.50, 'rgba(226, 182, 56, 0.13)');
+          glowGradient.addColorStop(0.86, 'rgba(171, 206, 188, 0.05)');
           glowGradient.addColorStop(1, 'rgba(160, 201, 190, 0.00)');
 
           for (let i = 0; i < barsPerSide; i++) {
             const p = i / Math.max(1, barsPerSide - 1);
 
-            /*
-              Más alto cerca del cubo y menor hacia fuera, como en la referencia.
-            */
-            const centerEnvelope = Math.pow(1 - p, 1.22);
+            const centerEnvelope = Math.pow(1 - p, 1.20);
             const amp = sampleAmplitude(p);
 
             const beatSwing =
               0.10 +
-              energy.smoothedBeat * 0.32 +
-              Math.sin(time * 4.3 + i * 0.85 + side * 0.6) * 0.05;
+              energy.smoothedBeat * 0.34 +
+              Math.sin(time * 4.6 + i * 0.92 + side * 0.55) * 0.06;
 
             const h = clamp(
               baseHeight +
                 maxExtraHeight *
                   (
-                    centerEnvelope * 0.68 +
-                    amp * 0.95 +
-                    beatSwing * 0.28
+                    centerEnvelope * 0.58 +
+                    amp * 1.20 +
+                    beatSwing * 0.24
                   ),
               baseHeight,
               baseHeight + maxExtraHeight
@@ -2738,29 +2735,29 @@
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
 
-            // halo sutil
+            // halo sutil, más transparente
             ctx.strokeStyle = glowGradient;
-            ctx.lineWidth = Math.max(3.2, barWidth * 2.05);
+            ctx.lineWidth = Math.max(3.0, barWidth * 1.95);
             ctx.lineCap = 'round';
-            ctx.globalAlpha = 0.14 + amp * 0.18;
+            ctx.globalAlpha = 0.10 + amp * 0.12;
             ctx.beginPath();
             ctx.moveTo(x, cy - h * 0.52);
             ctx.lineTo(x, cy + h * 0.52);
             ctx.stroke();
 
-            // barra principal
+            // barra principal, algo más limpia y transparente
             ctx.strokeStyle = strokeGradient;
             ctx.lineWidth = barWidth;
-            ctx.globalAlpha = 0.42 + amp * 0.36;
+            ctx.globalAlpha = 0.28 + amp * 0.28;
             ctx.beginPath();
             ctx.moveTo(x, cy - h * 0.50);
             ctx.lineTo(x, cy + h * 0.50);
             ctx.stroke();
 
-            // núcleo luminoso
-            ctx.strokeStyle = 'rgba(255, 246, 198, 0.30)';
-            ctx.lineWidth = Math.max(0.9, barWidth * 0.32);
-            ctx.globalAlpha = 0.12 + amp * 0.14;
+            // núcleo luminoso pequeño
+            ctx.strokeStyle = 'rgba(255, 246, 198, 0.24)';
+            ctx.lineWidth = Math.max(0.9, barWidth * 0.30);
+            ctx.globalAlpha = 0.08 + amp * 0.10;
             ctx.beginPath();
             ctx.moveTo(x, cy - h * 0.16);
             ctx.lineTo(x, cy + h * 0.16);
