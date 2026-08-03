@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Eidos · Salvapantallas</title>
+  <meta name="description" content="Salvapantallas visual de Eidos.">
+  <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+  <main id="screensaver" class="screensaver" aria-live="polite">
+    <div class="screen-bg screen-bg--current"></div>
+    <div class="screen-bg screen-bg--next"></div>
+    <div class="screen-shade"></div>
+
+    <div class="screen-stage">
+      <img class="screen-image screen-image--current" alt="">
+      <img class="screen-image screen-image--next" alt="">
+    </div>
+
+    <div id="screen-status" class="screen-status">Leyendo la carpeta de imágenes…</div>
+
+    <div id="screen-controls" class="screen-controls">
+      <a class="screen-brand" href="index.html" aria-label="Volver a la galería">
+        <span class="screen-brand__mark">E</span><span>EIDOS</span>
+      </a>
+      <div class="screen-actions">
+        <button id="screen-pause" type="button">Pausar</button>
+        <button id="screen-next" type="button">Siguiente</button>
+        <button id="screen-fullscreen" type="button">Pantalla completa</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/image-source.js"></script>
+  <script src="js/screen.js"></script>
+</body>
+</html>

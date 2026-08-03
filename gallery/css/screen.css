@@ -1,0 +1,136 @@
+:root { color-scheme: dark; --duration: 2200ms; }
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #000; }
+body { color: white; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+button, a { color: inherit; font: inherit; }
+a { text-decoration: none; }
+
+.screensaver { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; cursor: default; }
+.screensaver.is-idle { cursor: none; }
+.screen-bg {
+  position: absolute;
+  inset: -7%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  filter: blur(42px) brightness(.42) saturate(.72);
+  transform: scale(1.15);
+  transition: opacity var(--duration) ease;
+}
+.screen-bg--current { opacity: 1; }
+.screen-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, transparent 24%, rgba(0,0,0,.28) 72%, rgba(0,0,0,.62)),
+    linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.28));
+}
+.screen-stage { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; perspective: 1500px; }
+.screen-image {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: clamp(0px, 2vw, 28px);
+  object-fit: contain;
+  opacity: 0;
+  filter: drop-shadow(0 26px 70px rgba(0,0,0,.48));
+  backface-visibility: hidden;
+  transform-origin: center;
+}
+.screen-image--current { opacity: 1; }
+.screen-image--next { z-index: 2; }
+
+.screensaver.is-changing .screen-image,
+.screensaver.is-changing .screen-bg { animation-duration: var(--duration); animation-fill-mode: both; animation-timing-function: cubic-bezier(.2,.7,.18,1); }
+.screensaver.is-changing .screen-image--next { opacity: 1; }
+.screensaver.is-changing .screen-bg--current { opacity: 0; }
+.screensaver.is-changing .screen-bg--next { opacity: 1; }
+
+.screen-fade .screen-image--current { animation-name: screen-out-fade; }
+.screen-fade .screen-image--next { animation-name: screen-in-fade; }
+.screen-zoom .screen-image--current { animation-name: screen-out-zoom; }
+.screen-zoom .screen-image--next { animation-name: screen-in-zoom; }
+.screen-drift-left .screen-image--current { animation-name: screen-out-left; }
+.screen-drift-left .screen-image--next { animation-name: screen-in-right; }
+.screen-drift-right .screen-image--current { animation-name: screen-out-right; }
+.screen-drift-right .screen-image--next { animation-name: screen-in-left; }
+.screen-rise .screen-image--current { animation-name: screen-out-rise; }
+.screen-rise .screen-image--next { animation-name: screen-in-rise; }
+.screen-fall .screen-image--current { animation-name: screen-out-fall; }
+.screen-fall .screen-image--next { animation-name: screen-in-fall; }
+.screen-flip-x .screen-image--current { animation-name: screen-out-flip-x; }
+.screen-flip-x .screen-image--next { animation-name: screen-in-flip-x; }
+.screen-flip-y .screen-image--current { animation-name: screen-out-flip-y; }
+.screen-flip-y .screen-image--next { animation-name: screen-in-flip-y; }
+.screen-orbit .screen-image--current { animation-name: screen-out-orbit; }
+.screen-orbit .screen-image--next { animation-name: screen-in-orbit; }
+.screen-blur .screen-image--current { animation-name: screen-out-blur; }
+.screen-blur .screen-image--next { animation-name: screen-in-blur; }
+.screen-depth .screen-image--current { animation-name: screen-out-depth; }
+.screen-depth .screen-image--next { animation-name: screen-in-depth; }
+.screen-diagonal .screen-image--current { animation-name: screen-out-diagonal; }
+.screen-diagonal .screen-image--next { animation-name: screen-in-diagonal; }
+
+@keyframes screen-out-fade { to { opacity: 0; transform: scale(1.04); } }
+@keyframes screen-in-fade { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes screen-out-zoom { to { opacity: 0; transform: scale(1.32); filter: blur(10px); } }
+@keyframes screen-in-zoom { from { opacity: 0; transform: scale(.58); filter: blur(14px); } to { opacity: 1; transform: scale(1); filter: blur(0); } }
+@keyframes screen-out-left { to { opacity: 0; transform: translateX(-45%) scale(.86) rotateY(18deg); } }
+@keyframes screen-in-right { from { opacity: 0; transform: translateX(55%) scale(1.12) rotateY(-18deg); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-right { to { opacity: 0; transform: translateX(45%) scale(.86) rotateY(-18deg); } }
+@keyframes screen-in-left { from { opacity: 0; transform: translateX(-55%) scale(1.12) rotateY(18deg); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-rise { to { opacity: 0; transform: translateY(-45%) scale(.82); filter: blur(5px); } }
+@keyframes screen-in-rise { from { opacity: 0; transform: translateY(52%) scale(1.12); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-fall { to { opacity: 0; transform: translateY(45%) scale(.82); filter: blur(5px); } }
+@keyframes screen-in-fall { from { opacity: 0; transform: translateY(-52%) scale(1.12); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-flip-x { to { opacity: 0; transform: rotateX(-88deg) scale(.75); } }
+@keyframes screen-in-flip-x { from { opacity: 0; transform: rotateX(88deg) scale(.75); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-flip-y { to { opacity: 0; transform: rotateY(88deg) scale(.75); } }
+@keyframes screen-in-flip-y { from { opacity: 0; transform: rotateY(-88deg) scale(.75); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-orbit { to { opacity: 0; transform: rotate(-16deg) translate(-18%, 10%) scale(.58); filter: blur(8px); } }
+@keyframes screen-in-orbit { from { opacity: 0; transform: rotate(17deg) translate(18%, -10%) scale(1.34); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes screen-out-blur { to { opacity: 0; filter: blur(28px) saturate(.1); transform: scale(1.09); } }
+@keyframes screen-in-blur { from { opacity: 0; filter: blur(34px) saturate(.1); transform: scale(.85); } to { opacity: 1; filter: blur(0) saturate(1); transform: scale(1); } }
+@keyframes screen-out-depth { to { opacity: 0; transform: translateZ(-650px) rotateX(14deg); filter: blur(12px); } }
+@keyframes screen-in-depth { from { opacity: 0; transform: translateZ(500px) rotateX(-14deg) scale(1.3); filter: blur(12px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes screen-out-diagonal { to { opacity: 0; transform: translate(-55%, -55%) rotate(-8deg) scale(.72); } }
+@keyframes screen-in-diagonal { from { opacity: 0; transform: translate(60%, 60%) rotate(8deg) scale(1.22); } to { opacity: 1; transform: none; } }
+
+.screen-status { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 24px; color: rgba(255,255,255,.72); text-align: center; }
+.screen-status[hidden] { display: none; }
+.screen-status.is-error { color: #ffcccc; }
+.screen-controls {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 18px;
+  background: rgba(4,5,8,.58);
+  backdrop-filter: blur(16px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.screensaver.is-idle .screen-controls { opacity: 0; pointer-events: none; transform: translateY(16px); }
+.screen-brand { display: flex; align-items: center; gap: 10px; letter-spacing: .2em; font-size: 13px; }
+.screen-brand__mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; font-family: Georgia, serif; font-size: 18px; }
+.screen-actions { display: flex; gap: 8px; }
+.screen-actions button { border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 9px 14px; background: rgba(255,255,255,.06); cursor: pointer; }
+.screen-actions button:hover { background: rgba(255,255,255,.13); }
+
+@media (max-width: 650px) {
+  .screen-controls { align-items: flex-end; }
+  .screen-brand span:last-child { display: none; }
+  .screen-actions { flex-wrap: wrap; justify-content: flex-end; }
+  .screen-actions button { padding: 8px 11px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}

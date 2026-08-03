@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05060a">
+  <title>Eidos · Galería</title>
+  <meta name="description" content="Galería visual de Eidos.">
+  <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__image ambient__image--a is-visible"></div>
+    <div class="ambient__image ambient__image--b"></div>
+    <div class="ambient__veil"></div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Volver a Eidos">
+      <span class="brand__mark">E</span>
+      <span class="brand__text">EIDOS</span>
+    </a>
+    <nav class="topbar__nav" aria-label="Navegación de la galería">
+      <span class="topbar__current">Galería</span>
+      <a href="screen.html">Salvapantallas</a>
+      <button id="motion-toggle" class="icon-button" type="button" aria-pressed="false">Pausar</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="gallery-title">
+      <p class="eyebrow">Archivo visual</p>
+      <h1 id="gallery-title">El universo de Eidos</h1>
+      <p class="hero__copy">Las imágenes aparecen, desaparecen y se transforman. La carpeta decide cuáles forman parte del ciclo.</p>
+    </section>
+
+    <section class="gallery-shell" aria-live="polite">
+      <div id="gallery-status" class="gallery-status">Leyendo la carpeta de imágenes…</div>
+      <div id="eidos-grid" class="eidos-grid" hidden></div>
+    </section>
+  </main>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" hidden>
+    <button id="lightbox-close" class="lightbox__close" type="button" aria-label="Cerrar">×</button>
+    <button id="lightbox-prev" class="lightbox__arrow lightbox__arrow--prev" type="button" aria-label="Imagen anterior">‹</button>
+    <figure class="lightbox__figure">
+      <img id="lightbox-image" alt="">
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+    <button id="lightbox-next" class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Imagen siguiente">›</button>
+  </div>
+
+  <script src="js/image-source.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>
