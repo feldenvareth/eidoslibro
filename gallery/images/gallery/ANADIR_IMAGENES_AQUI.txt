@@ -1,0 +1,7 @@
+Sube aquí las imágenes de Eidos.
+
+Formatos admitidos: JPG, JPEG, PNG, WEBP, GIF, AVIF, BMP y SVG.
+También puedes crear subcarpetas.
+
+No escribas los nombres de las imágenes en el código.
+La galería y el salvapantallas las leerán automáticamente desde GitHub.
