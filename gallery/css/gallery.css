@@ -122,6 +122,7 @@ main { width: min(1500px, 100%); margin: 0 auto; padding: 0 clamp(14px, 3vw, 48p
   backdrop-filter: blur(10px);
 }
 .gallery-status { display: grid; min-height: 220px; place-items: center; padding: 28px; color: var(--muted); text-align: center; }
+.gallery-status[hidden] { display: none; }
 .gallery-status.is-error { color: #ffcbcb; }
 
 .eidos-grid {

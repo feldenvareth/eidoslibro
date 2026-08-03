@@ -185,6 +185,7 @@
     try {
       images = await EidosImageSource.loadImages();
       if (!images.length) {
+        status.hidden = false;
         status.innerHTML = 'La carpeta <strong>gallery/images/gallery</strong> todavía no contiene imágenes.<br>Súbelas a GitHub y recarga la página.';
         return;
       }
@@ -198,6 +199,7 @@
       gridTimer = window.setInterval(rotateGrid, GRID_INTERVAL);
       backgroundTimer = window.setInterval(rotateBackground, BACKGROUND_INTERVAL);
     } catch (error) {
+      status.hidden = false;
       status.classList.add('is-error');
       status.textContent = error.message;
     }
