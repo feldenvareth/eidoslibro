@@ -1,6 +1,0 @@
-COLOCA AQUÍ LAS IMÁGENES DE EIDOS
-
-No es necesario editar HTML, JavaScript ni PHP.
-La galería y el salvapantallas leen automáticamente esta carpeta y sus subcarpetas.
-
-Formatos admitidos: JPG, JPEG, PNG, WEBP, GIF y AVIF.
