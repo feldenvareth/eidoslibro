@@ -4,8 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <title>Eidos · Salvapantallas</title>
-  <meta name="description" content="Salvapantallas visual de Eidos.">
+  <title>EIDOS · Salvapantallas</title>
+  <meta name="description" content="Salvapantallas visual del universo de EIDOS.">
+  <link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/screen.css">
 </head>
 <body>
@@ -21,16 +25,16 @@
 
     <div id="screen-status" class="screen-status">Leyendo la carpeta de imágenes…</div>
 
-    <div id="screen-controls" class="screen-controls">
-      <a class="screen-brand" href="index.html" aria-label="Volver a la galería">
-        <span class="screen-brand__mark">E</span><span>EIDOS</span>
-      </a>
-      <div class="screen-actions">
-        <button id="screen-pause" type="button">Pausar</button>
-        <button id="screen-next" type="button">Siguiente</button>
-        <button id="screen-fullscreen" type="button">Pantalla completa</button>
-      </div>
-    </div>
+    <header id="screen-controls" class="screen-controls">
+      <a class="screen-brand" href="../index.html" aria-label="Volver a la página principal de EIDOS">EIDOS</a>
+      <nav class="screen-nav" aria-label="Navegación del salvapantallas">
+        <a href="index.html">Galería</a>
+        <span class="screen-current">Salvapantallas</span>
+        <button id="screen-pause" class="screen-button" type="button" aria-pressed="false">Pausar</button>
+        <button id="screen-next" class="screen-button" type="button">Siguiente</button>
+        <button id="screen-fullscreen" class="screen-button" type="button">Pantalla completa</button>
+      </nav>
+    </header>
   </main>
 
   <script src="js/image-source.js"></script>

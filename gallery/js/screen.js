@@ -105,7 +105,7 @@
   function revealControls() {
     root.classList.remove('is-idle');
     window.clearTimeout(idleTimer);
-    idleTimer = window.setTimeout(() => root.classList.add('is-idle'), 2600);
+    idleTimer = window.setTimeout(() => root.classList.add('is-idle'), 3200);
   }
 
   async function init() {
@@ -122,7 +122,7 @@
       revealControls();
     } catch (error) {
       status.classList.add('is-error');
-      status.textContent = `${error.message} Comprueba que GitHub Actions haya actualizado images.json.`;
+      status.textContent = `${error.message} Comprueba que la carpeta gallery/images/gallery exista en el repositorio público.`;
     }
   }
 
@@ -135,7 +135,7 @@
   });
   document.getElementById('screen-fullscreen').addEventListener('click', toggleFullscreen);
 
-  ['mousemove', 'mousedown', 'touchstart', 'keydown'].forEach(eventName => {
+  ['pointermove', 'mousemove', 'mousedown', 'touchstart', 'keydown', 'focusin'].forEach(eventName => {
     document.addEventListener(eventName, revealControls, { passive: true });
   });
 
