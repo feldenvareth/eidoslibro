@@ -6,7 +6,7 @@
   --text: #f5f0e8;
   --muted: rgba(212, 207, 198, 0.68);
   --accent: #c9a84c;
-  --transition: 900ms;
+  --transition: 1500ms;
 }
 
 * { box-sizing: border-box; }
@@ -193,6 +193,41 @@ main { width: min(1500px, 100%); margin: 0 auto; padding: 0 clamp(14px, 3vw, 48p
 .fx-wipe .tile__next { animation-name: in-wipe; }
 .fx-depth .tile__current { animation-name: out-depth; }
 .fx-depth .tile__next { animation-name: in-depth; }
+.fx-curtain .tile__current { animation-name: out-curtain; }
+.fx-curtain .tile__next { animation-name: in-curtain; }
+.fx-iris .tile__current { animation-name: out-iris; }
+.fx-iris .tile__next { animation-name: in-iris; }
+.fx-swing .tile__current { animation-name: out-swing; transform-origin: left center; }
+.fx-swing .tile__next { animation-name: in-swing; transform-origin: right center; }
+.fx-twist .tile__current { animation-name: out-twist; }
+.fx-twist .tile__next { animation-name: in-twist; }
+.fx-pan .tile__current { animation-name: out-pan; }
+.fx-pan .tile__next { animation-name: in-pan; }
+.fx-prism .tile__current { animation-name: out-prism; }
+.fx-prism .tile__next { animation-name: in-prism; }
+.fx-collapse .tile__current { animation-name: out-collapse; }
+.fx-collapse .tile__next { animation-name: in-collapse; }
+.fx-corner .tile__current { animation-name: out-corner; transform-origin: top left; }
+.fx-corner .tile__next { animation-name: in-corner; transform-origin: bottom right; }
+.fx-glide .tile__current { animation-name: out-glide; }
+.fx-glide .tile__next { animation-name: in-glide; }
+
+.fx-dissolve .tile__current { animation-name: out-dissolve; }
+.fx-dissolve .tile__next { animation-name: in-dissolve; }
+.fx-focus .tile__current { animation-name: out-focus; }
+.fx-focus .tile__next { animation-name: in-focus; }
+.fx-exposure .tile__current { animation-name: out-exposure; }
+.fx-exposure .tile__next { animation-name: in-exposure; }
+.fx-soft-wipe .tile__current { animation-name: out-soft-wipe; }
+.fx-soft-wipe .tile__next { animation-name: in-soft-wipe; }
+.fx-parallax .tile__current { animation-name: out-parallax; }
+.fx-parallax .tile__next { animation-name: in-parallax; }
+.fx-vignette .tile__current { animation-name: out-vignette; }
+.fx-vignette .tile__next { animation-name: in-vignette; }
+.fx-reveal-up .tile__current { animation-name: out-reveal-up; }
+.fx-reveal-up .tile__next { animation-name: in-reveal-up; }
+.fx-diamond .tile__current { animation-name: out-diamond; }
+.fx-diamond .tile__next { animation-name: in-diamond; }
 
 @keyframes out-fade { to { opacity: 0; } }
 @keyframes in-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -224,6 +259,41 @@ main { width: min(1500px, 100%); margin: 0 auto; padding: 0 clamp(14px, 3vw, 48p
 @keyframes in-wipe { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
 @keyframes out-depth { to { opacity: 0; transform: translateZ(-260px) rotateX(18deg); filter: blur(7px); } }
 @keyframes in-depth { from { opacity: 0; transform: translateZ(240px) rotateX(-18deg) scale(1.3); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes out-curtain { to { opacity: .2; clip-path: inset(0 50% 0 50%); filter: brightness(.55); } }
+@keyframes in-curtain { from { clip-path: inset(0 50% 0 50%); transform: scale(1.08); } to { clip-path: inset(0); transform: scale(1); } }
+@keyframes out-iris { to { opacity: 0; clip-path: circle(0 at 50% 50%); transform: scale(1.12); } }
+@keyframes in-iris { from { opacity: 0; clip-path: circle(0 at 50% 50%); transform: scale(.86); } to { opacity: 1; clip-path: circle(75% at 50% 50%); transform: scale(1); } }
+@keyframes out-swing { to { opacity: 0; transform: perspective(850px) rotateY(96deg) scale(.88); filter: brightness(.55); } }
+@keyframes in-swing { from { opacity: 0; transform: perspective(850px) rotateY(-96deg) scale(.88); } to { opacity: 1; transform: perspective(850px) rotateY(0) scale(1); } }
+@keyframes out-twist { to { opacity: 0; transform: rotate(-28deg) skewX(12deg) scale(.58); filter: blur(5px); } }
+@keyframes in-twist { from { opacity: 0; transform: rotate(28deg) skewX(-12deg) scale(1.36); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes out-pan { to { opacity: 0; transform: translateX(-18%) scale(1.22); filter: blur(3px); } }
+@keyframes in-pan { from { opacity: 0; transform: translateX(22%) scale(1.18); filter: blur(4px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes out-prism { to { opacity: 0; transform: scale(1.14); filter: blur(10px) saturate(2.2) hue-rotate(55deg) contrast(1.35); } }
+@keyframes in-prism { from { opacity: 0; transform: scale(.84); filter: blur(14px) saturate(2.4) hue-rotate(-65deg) contrast(1.45); } to { opacity: 1; transform: scale(1); filter: none; } }
+@keyframes out-collapse { to { opacity: 0; transform: scaleX(.02) scaleY(.72); filter: brightness(.45); } }
+@keyframes in-collapse { from { opacity: 0; transform: scaleX(.02) scaleY(1.28); } to { opacity: 1; transform: scale(1); } }
+@keyframes out-corner { to { opacity: 0; transform: perspective(700px) rotateX(75deg) rotateY(-55deg) scale(.42); filter: blur(4px); } }
+@keyframes in-corner { from { opacity: 0; transform: perspective(700px) rotateX(-75deg) rotateY(55deg) scale(.48); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes out-glide { to { opacity: 0; transform: translate(32%, -12%) rotate(5deg) scale(.78); filter: blur(5px); } }
+@keyframes in-glide { from { opacity: 0; transform: translate(-36%, 14%) rotate(-5deg) scale(1.18); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+
+@keyframes out-dissolve { to { opacity: 0; transform: scale(1.04); filter: blur(9px) contrast(.72) brightness(.62); } }
+@keyframes in-dissolve { from { opacity: 0; transform: scale(.98); filter: blur(10px) contrast(.78) brightness(1.18); } to { opacity: 1; transform: scale(1); filter: blur(0) contrast(1) brightness(1); } }
+@keyframes out-focus { to { opacity: 0; transform: scale(1.1); filter: blur(20px) saturate(.72); } }
+@keyframes in-focus { from { opacity: 0; transform: scale(1.12); filter: blur(24px) saturate(.72); } to { opacity: 1; transform: scale(1); filter: blur(0) saturate(1); } }
+@keyframes out-exposure { to { opacity: 0; transform: scale(1.06); filter: brightness(2.1) contrast(.62) saturate(.35); } }
+@keyframes in-exposure { from { opacity: 0; transform: scale(.96); filter: brightness(2.25) contrast(.58) saturate(.3); } to { opacity: 1; transform: scale(1); filter: brightness(1) contrast(1) saturate(1); } }
+@keyframes out-soft-wipe { to { opacity: .08; clip-path: polygon(100% 0, 100% 0, 0 100%, 0 100%); transform: scale(1.05); filter: blur(3px); } }
+@keyframes in-soft-wipe { from { opacity: .18; clip-path: polygon(100% 0, 100% 0, 0 100%, 0 100%); transform: scale(1.08); filter: blur(4px); } to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(1); filter: blur(0); } }
+@keyframes out-parallax { to { opacity: 0; transform: translateX(-14%) scale(1.16); filter: blur(4px) brightness(.72); } }
+@keyframes in-parallax { from { opacity: 0; transform: translateX(14%) scale(1.1); filter: blur(5px) brightness(.78); } to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0) brightness(1); } }
+@keyframes out-vignette { to { opacity: 0; clip-path: ellipse(12% 12% at 50% 50%); transform: scale(1.12); filter: brightness(.42) blur(6px); } }
+@keyframes in-vignette { from { opacity: 0; clip-path: ellipse(10% 10% at 50% 50%); transform: scale(.92); filter: brightness(.6) blur(7px); } to { opacity: 1; clip-path: ellipse(75% 75% at 50% 50%); transform: scale(1); filter: brightness(1) blur(0); } }
+@keyframes out-reveal-up { to { opacity: .08; clip-path: inset(100% 0 0 0); transform: translateY(-8%) scale(1.04); filter: blur(3px); } }
+@keyframes in-reveal-up { from { opacity: .12; clip-path: inset(100% 0 0 0); transform: translateY(10%) scale(1.08); filter: blur(4px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes out-diamond { to { opacity: 0; clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); transform: scale(1.14) rotate(2deg); filter: blur(5px); } }
+@keyframes in-diamond { from { opacity: 0; clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); transform: scale(.9) rotate(-2deg); filter: blur(6px); } to { opacity: 1; clip-path: polygon(50% -22%, 122% 50%, 50% 122%, -22% 50%); transform: scale(1) rotate(0); filter: blur(0); } }
 
 .lightbox {
   position: fixed;

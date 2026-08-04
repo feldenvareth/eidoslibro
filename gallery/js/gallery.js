@@ -1,12 +1,17 @@
 (() => {
   'use strict';
 
-  const GRID_INTERVAL = 3000;
+  const GRID_PAUSE = 2000;
+  const TRANSITION_FALLBACK = 1750;
   const BACKGROUND_INTERVAL = 16000;
   const effects = [
     'fx-fade', 'fx-zoom-in', 'fx-zoom-out', 'fx-slide-left', 'fx-slide-right',
     'fx-slide-up', 'fx-slide-down', 'fx-flip-x', 'fx-flip-y', 'fx-rotate',
-    'fx-blur', 'fx-diagonal', 'fx-tilt', 'fx-wipe', 'fx-depth'
+    'fx-blur', 'fx-diagonal', 'fx-tilt', 'fx-wipe', 'fx-depth',
+    'fx-curtain', 'fx-iris', 'fx-swing', 'fx-twist', 'fx-pan',
+    'fx-prism', 'fx-collapse', 'fx-corner', 'fx-glide',
+    'fx-dissolve', 'fx-focus', 'fx-exposure', 'fx-soft-wipe',
+    'fx-parallax', 'fx-vignette', 'fx-reveal-up', 'fx-diamond'
   ];
 
   const grid = document.getElementById('eidos-grid');
@@ -25,6 +30,8 @@
   let backgroundTimer = null;
   let visibleBackground = 0;
   let lightboxIndex = 0;
+  let effectQueue = [];
+  let lastChangedIndexes = [];
 
   function desiredTileCount() {
     if (window.matchMedia('(max-width: 430px)').matches) return 8;
@@ -35,6 +42,11 @@
 
   function cleanUrl(url) {
     return url.replace(/(["'\\()\s])/g, '\\$1');
+  }
+
+  function nextEffect() {
+    if (!effectQueue.length) effectQueue = EidosImageSource.shuffle(effects);
+    return effectQueue.shift();
   }
 
   function createTile(item) {
@@ -64,6 +76,7 @@
 
     grid.replaceChildren();
     tiles = [];
+    lastChangedIndexes = [];
     const used = new Set();
 
     for (let i = 0; i < target; i += 1) {
@@ -84,52 +97,124 @@
     });
   }
 
-  async function replaceTile(tile, item) {
-    if (!tile || tile.classList.contains('is-changing')) return;
+  function gridColumnCount() {
+    if (window.matchMedia('(max-width: 430px)').matches) return 2;
+    if (window.matchMedia('(max-width: 760px)').matches) return 3;
+    if (window.matchMedia('(max-width: 1050px)').matches) return 5;
+    return 6;
+  }
 
-    try {
-      await preload(item.url);
-    } catch {
+  function areAdjacent(firstIndex, secondIndex, columns) {
+    const firstRow = Math.floor(firstIndex / columns);
+    const firstColumn = firstIndex % columns;
+    const secondRow = Math.floor(secondIndex / columns);
+    const secondColumn = secondIndex % columns;
+
+    return Math.abs(firstRow - secondRow) + Math.abs(firstColumn - secondColumn) === 1;
+  }
+
+  function selectSeparatedIndexes(requestedCount) {
+    const columns = gridColumnCount();
+    const allIndexes = tiles
+      .map((tile, index) => ({ tile, index }))
+      .filter(({ tile }) => !tile.classList.contains('is-changing'))
+      .map(({ index }) => index);
+
+    const previous = new Set(lastChangedIndexes);
+    const preferred = EidosImageSource.shuffle(allIndexes.filter(index => !previous.has(index)));
+    const fallback = EidosImageSource.shuffle(allIndexes.filter(index => previous.has(index)));
+    const selected = [];
+
+    const tryAdd = index => {
+      if (selected.includes(index)) return;
+      if (selected.some(chosen => areAdjacent(index, chosen, columns))) return;
+      selected.push(index);
+    };
+
+    preferred.forEach(index => {
+      if (selected.length < requestedCount) tryAdd(index);
+    });
+    fallback.forEach(index => {
+      if (selected.length < requestedCount) tryAdd(index);
+    });
+
+    return selected;
+  }
+
+  function runTileTransition(tile, item, effect) {
+    return new Promise(resolve => {
+      const current = tile.querySelector('.tile__current');
+      const next = tile.querySelector('.tile__next');
+
+      next.style.backgroundImage = `url("${cleanUrl(item.url)}")`;
+      tile.classList.add('is-changing', effect);
+
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        current.style.backgroundImage = next.style.backgroundImage;
+        next.style.backgroundImage = '';
+        tile.dataset.url = item.url;
+        tile.dataset.name = item.name;
+        tile.setAttribute('aria-label', `Ampliar ${item.name}`);
+        tile.classList.remove('is-changing', effect);
+        next.removeEventListener('animationend', finish);
+        resolve();
+      };
+
+      next.addEventListener('animationend', finish, { once: true });
+      window.setTimeout(finish, TRANSITION_FALLBACK);
+    });
+  }
+
+  function scheduleGrid(delay = GRID_PAUSE) {
+    window.clearTimeout(gridTimer);
+    gridTimer = null;
+    if (!paused && !document.hidden) {
+      gridTimer = window.setTimeout(rotateGrid, delay);
+    }
+  }
+
+  async function rotateGrid() {
+    gridTimer = null;
+    if (paused || document.hidden || !tiles.length || !deck) return;
+
+    const requestedCount = 1 + Math.floor(Math.random() * 3);
+    const selectedIndexes = selectSeparatedIndexes(requestedCount);
+
+    if (!selectedIndexes.length) {
+      scheduleGrid();
       return;
     }
 
-    const current = tile.querySelector('.tile__current');
-    const next = tile.querySelector('.tile__next');
-    const effect = effects[Math.floor(Math.random() * effects.length)];
-
-    next.style.backgroundImage = `url("${cleanUrl(item.url)}")`;
-    tile.classList.add('is-changing', effect);
-
-    let finished = false;
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      current.style.backgroundImage = next.style.backgroundImage;
-      next.style.backgroundImage = '';
-      tile.dataset.url = item.url;
-      tile.dataset.name = item.name;
-      tile.setAttribute('aria-label', `Ampliar ${item.name}`);
-      tile.classList.remove('is-changing', effect);
-      next.removeEventListener('animationend', finish);
-    };
-
-    next.addEventListener('animationend', finish, { once: true });
-    window.setTimeout(finish, 1300);
-  }
-
-  function rotateGrid() {
-    if (paused || document.hidden || !tiles.length) return;
-
-    const maximum = Math.min(4, tiles.length);
-    const count = 1 + Math.floor(Math.random() * maximum);
-    const selected = EidosImageSource.shuffle(tiles).slice(0, count);
     const usedUrls = new Set(tiles.map(tile => tile.dataset.url));
-
-    selected.forEach((tile, index) => {
+    const changes = selectedIndexes.map(index => {
+      const tile = tiles[index];
       const item = deck.next(usedUrls);
       usedUrls.add(item.url);
-      window.setTimeout(() => replaceTile(tile, item), index * 110);
+      return { index, tile, item, effect: nextEffect() };
     });
+
+    const ready = (await Promise.all(changes.map(async change => {
+      try {
+        await preload(change.item.url);
+        return change;
+      } catch {
+        return null;
+      }
+    }))).filter(Boolean);
+
+    if (paused || document.hidden) return;
+
+    if (!ready.length) {
+      scheduleGrid();
+      return;
+    }
+
+    lastChangedIndexes = ready.map(change => change.index);
+    await Promise.all(ready.map(change => runTileTransition(change.tile, change.item, change.effect)));
+    scheduleGrid();
   }
 
   function setBackground(item) {
@@ -179,6 +264,9 @@
     paused = !paused;
     motionToggle.textContent = paused ? 'Continuar' : 'Pausar';
     motionToggle.setAttribute('aria-pressed', String(paused));
+
+    if (paused) window.clearTimeout(gridTimer);
+    else scheduleGrid();
   }
 
   async function init() {
@@ -196,7 +284,7 @@
       grid.hidden = false;
       setBackground(deck.next());
 
-      gridTimer = window.setInterval(rotateGrid, GRID_INTERVAL);
+      scheduleGrid();
       backgroundTimer = window.setInterval(rotateBackground, BACKGROUND_INTERVAL);
     } catch (error) {
       status.hidden = false;
@@ -218,6 +306,11 @@
     if (event.key === 'ArrowRight') moveLightbox(1);
   });
 
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) window.clearTimeout(gridTimer);
+    else scheduleGrid();
+  });
+
   let resizeTimer;
   window.addEventListener('resize', () => {
     window.clearTimeout(resizeTimer);
@@ -225,7 +318,7 @@
   });
 
   window.addEventListener('beforeunload', () => {
-    window.clearInterval(gridTimer);
+    window.clearTimeout(gridTimer);
     window.clearInterval(backgroundTimer);
   });
 

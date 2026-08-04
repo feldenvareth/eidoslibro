@@ -6,7 +6,12 @@
   const effects = [
     'screen-fade', 'screen-zoom', 'screen-drift-left', 'screen-drift-right',
     'screen-rise', 'screen-fall', 'screen-flip-x', 'screen-flip-y',
-    'screen-orbit', 'screen-blur', 'screen-depth', 'screen-diagonal'
+    'screen-orbit', 'screen-blur', 'screen-depth', 'screen-diagonal',
+    'screen-curtain', 'screen-iris', 'screen-swing', 'screen-twist',
+    'screen-pan', 'screen-prism', 'screen-collapse', 'screen-corner',
+    'screen-glide', 'screen-dissolve', 'screen-focus', 'screen-exposure',
+    'screen-soft-wipe', 'screen-parallax', 'screen-vignette',
+    'screen-reveal-up', 'screen-diamond'
   ];
 
   const root = document.getElementById('screensaver');
@@ -23,6 +28,7 @@
   let paused = false;
   let changing = false;
   let idleTimer = null;
+  let effectQueue = [];
 
   function preload(url) {
     return new Promise((resolve, reject) => {
@@ -35,6 +41,11 @@
 
   function cssUrl(url) {
     return `url("${url.replace(/(["'\\()\s])/g, '\\$1')}")`;
+  }
+
+  function nextEffect() {
+    if (!effectQueue.length) effectQueue = EidosImageSource.shuffle(effects);
+    return effectQueue.shift();
   }
 
   function setInitial(item) {
@@ -58,7 +69,7 @@
     }
 
     changing = true;
-    const effect = effects[Math.floor(Math.random() * effects.length)];
+    const effect = nextEffect();
     nextImage.src = item.url;
     nextImage.alt = item.name;
     nextBg.style.backgroundImage = cssUrl(item.url);

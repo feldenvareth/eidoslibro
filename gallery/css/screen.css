@@ -80,6 +80,41 @@ a { text-decoration: none; }
 .screen-depth .screen-image--next { animation-name: screen-in-depth; }
 .screen-diagonal .screen-image--current { animation-name: screen-out-diagonal; }
 .screen-diagonal .screen-image--next { animation-name: screen-in-diagonal; }
+.screen-curtain .screen-image--current { animation-name: screen-out-curtain; }
+.screen-curtain .screen-image--next { animation-name: screen-in-curtain; }
+.screen-iris .screen-image--current { animation-name: screen-out-iris; }
+.screen-iris .screen-image--next { animation-name: screen-in-iris; }
+.screen-swing .screen-image--current { animation-name: screen-out-swing; transform-origin: left center; }
+.screen-swing .screen-image--next { animation-name: screen-in-swing; transform-origin: right center; }
+.screen-twist .screen-image--current { animation-name: screen-out-twist; }
+.screen-twist .screen-image--next { animation-name: screen-in-twist; }
+.screen-pan .screen-image--current { animation-name: screen-out-pan; }
+.screen-pan .screen-image--next { animation-name: screen-in-pan; }
+.screen-prism .screen-image--current { animation-name: screen-out-prism; }
+.screen-prism .screen-image--next { animation-name: screen-in-prism; }
+.screen-collapse .screen-image--current { animation-name: screen-out-collapse; }
+.screen-collapse .screen-image--next { animation-name: screen-in-collapse; }
+.screen-corner .screen-image--current { animation-name: screen-out-corner; transform-origin: top left; }
+.screen-corner .screen-image--next { animation-name: screen-in-corner; transform-origin: bottom right; }
+.screen-glide .screen-image--current { animation-name: screen-out-glide; }
+.screen-glide .screen-image--next { animation-name: screen-in-glide; }
+
+.screen-dissolve .screen-image--current { animation-name: screen-out-dissolve; }
+.screen-dissolve .screen-image--next { animation-name: screen-in-dissolve; }
+.screen-focus .screen-image--current { animation-name: screen-out-focus; }
+.screen-focus .screen-image--next { animation-name: screen-in-focus; }
+.screen-exposure .screen-image--current { animation-name: screen-out-exposure; }
+.screen-exposure .screen-image--next { animation-name: screen-in-exposure; }
+.screen-soft-wipe .screen-image--current { animation-name: screen-out-soft-wipe; }
+.screen-soft-wipe .screen-image--next { animation-name: screen-in-soft-wipe; }
+.screen-parallax .screen-image--current { animation-name: screen-out-parallax; }
+.screen-parallax .screen-image--next { animation-name: screen-in-parallax; }
+.screen-vignette .screen-image--current { animation-name: screen-out-vignette; }
+.screen-vignette .screen-image--next { animation-name: screen-in-vignette; }
+.screen-reveal-up .screen-image--current { animation-name: screen-out-reveal-up; }
+.screen-reveal-up .screen-image--next { animation-name: screen-in-reveal-up; }
+.screen-diamond .screen-image--current { animation-name: screen-out-diamond; }
+.screen-diamond .screen-image--next { animation-name: screen-in-diamond; }
 
 @keyframes screen-out-fade { to { opacity: 0; transform: scale(1.04); } }
 @keyframes screen-in-fade { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: scale(1); } }
@@ -105,6 +140,41 @@ a { text-decoration: none; }
 @keyframes screen-in-depth { from { opacity: 0; transform: translateZ(500px) rotateX(-14deg) scale(1.3); filter: blur(12px); } to { opacity: 1; transform: none; filter: blur(0); } }
 @keyframes screen-out-diagonal { to { opacity: 0; transform: translate(-55%, -55%) rotate(-8deg) scale(.72); } }
 @keyframes screen-in-diagonal { from { opacity: 0; transform: translate(60%, 60%) rotate(8deg) scale(1.22); } to { opacity: 1; transform: none; } }
+@keyframes screen-out-curtain { to { opacity: .12; clip-path: inset(0 50% 0 50%); transform: scale(1.08); filter: brightness(.45); } }
+@keyframes screen-in-curtain { from { opacity: 0; clip-path: inset(0 50% 0 50%); transform: scale(1.12); } to { opacity: 1; clip-path: inset(0); transform: scale(1); } }
+@keyframes screen-out-iris { to { opacity: 0; clip-path: circle(0 at 50% 50%); transform: scale(1.14); filter: blur(4px); } }
+@keyframes screen-in-iris { from { opacity: 0; clip-path: circle(0 at 50% 50%); transform: scale(.82); } to { opacity: 1; clip-path: circle(75% at 50% 50%); transform: scale(1); } }
+@keyframes screen-out-swing { to { opacity: 0; transform: perspective(1500px) rotateY(92deg) scale(.78); filter: brightness(.48) blur(4px); } }
+@keyframes screen-in-swing { from { opacity: 0; transform: perspective(1500px) rotateY(-92deg) scale(.78); filter: blur(4px); } to { opacity: 1; transform: perspective(1500px) rotateY(0) scale(1); filter: blur(0); } }
+@keyframes screen-out-twist { to { opacity: 0; transform: rotate(-24deg) skewX(10deg) scale(.58); filter: blur(11px); } }
+@keyframes screen-in-twist { from { opacity: 0; transform: rotate(24deg) skewX(-10deg) scale(1.34); filter: blur(12px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes screen-out-pan { to { opacity: 0; transform: translateX(-22%) scale(1.25); filter: blur(7px); } }
+@keyframes screen-in-pan { from { opacity: 0; transform: translateX(26%) scale(1.2); filter: blur(8px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes screen-out-prism { to { opacity: 0; transform: scale(1.16); filter: blur(20px) saturate(2.2) hue-rotate(55deg) contrast(1.35); } }
+@keyframes screen-in-prism { from { opacity: 0; transform: scale(.82); filter: blur(24px) saturate(2.5) hue-rotate(-65deg) contrast(1.45); } to { opacity: 1; transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-collapse { to { opacity: 0; transform: scaleX(.015) scaleY(.72); filter: brightness(.4) blur(4px); } }
+@keyframes screen-in-collapse { from { opacity: 0; transform: scaleX(.015) scaleY(1.28); filter: blur(4px); } to { opacity: 1; transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-corner { to { opacity: 0; transform: perspective(1400px) rotateX(72deg) rotateY(-52deg) scale(.38); filter: blur(10px); } }
+@keyframes screen-in-corner { from { opacity: 0; transform: perspective(1400px) rotateX(-72deg) rotateY(52deg) scale(.42); filter: blur(11px); } to { opacity: 1; transform: none; filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-glide { to { opacity: 0; transform: translate(38%, -15%) rotate(5deg) scale(.72); filter: blur(10px); } }
+@keyframes screen-in-glide { from { opacity: 0; transform: translate(-42%, 17%) rotate(-5deg) scale(1.2); filter: blur(11px); } to { opacity: 1; transform: none; filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+
+@keyframes screen-out-dissolve { to { opacity: 0; transform: scale(1.05); filter: blur(18px) contrast(.7) brightness(.58); } }
+@keyframes screen-in-dissolve { from { opacity: 0; transform: scale(.97); filter: blur(20px) contrast(.76) brightness(1.16); } to { opacity: 1; transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-focus { to { opacity: 0; transform: scale(1.11); filter: blur(34px) saturate(.68); } }
+@keyframes screen-in-focus { from { opacity: 0; transform: scale(1.14); filter: blur(38px) saturate(.68); } to { opacity: 1; transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-exposure { to { opacity: 0; transform: scale(1.07); filter: brightness(2.15) contrast(.58) saturate(.3) blur(4px); } }
+@keyframes screen-in-exposure { from { opacity: 0; transform: scale(.95); filter: brightness(2.3) contrast(.54) saturate(.26) blur(5px); } to { opacity: 1; transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-soft-wipe { to { opacity: .06; clip-path: polygon(100% 0, 100% 0, 0 100%, 0 100%); transform: scale(1.06); filter: blur(7px); } }
+@keyframes screen-in-soft-wipe { from { opacity: .12; clip-path: polygon(100% 0, 100% 0, 0 100%, 0 100%); transform: scale(1.1); filter: blur(9px); } to { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-parallax { to { opacity: 0; transform: translateX(-18%) scale(1.2); filter: blur(8px) brightness(.68); } }
+@keyframes screen-in-parallax { from { opacity: 0; transform: translateX(18%) scale(1.13); filter: blur(10px) brightness(.74); } to { opacity: 1; transform: translateX(0) scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-vignette { to { opacity: 0; clip-path: ellipse(10% 10% at 50% 50%); transform: scale(1.14); filter: brightness(.38) blur(12px); } }
+@keyframes screen-in-vignette { from { opacity: 0; clip-path: ellipse(8% 8% at 50% 50%); transform: scale(.9); filter: brightness(.55) blur(14px); } to { opacity: 1; clip-path: ellipse(76% 76% at 50% 50%); transform: scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-reveal-up { to { opacity: .06; clip-path: inset(100% 0 0 0); transform: translateY(-10%) scale(1.05); filter: blur(8px); } }
+@keyframes screen-in-reveal-up { from { opacity: .1; clip-path: inset(100% 0 0 0); transform: translateY(12%) scale(1.1); filter: blur(10px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0) scale(1); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
+@keyframes screen-out-diamond { to { opacity: 0; clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); transform: scale(1.16) rotate(2deg); filter: blur(10px); } }
+@keyframes screen-in-diamond { from { opacity: 0; clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%); transform: scale(.88) rotate(-2deg); filter: blur(12px); } to { opacity: 1; clip-path: polygon(50% -22%, 122% 50%, 50% 122%, -22% 50%); transform: scale(1) rotate(0); filter: drop-shadow(0 26px 70px rgba(0,0,0,.48)); } }
 
 
 .screen-status { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 24px; color: rgba(255,255,255,.72); text-align: center; }
