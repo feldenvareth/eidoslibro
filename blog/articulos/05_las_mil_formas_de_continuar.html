@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Las mil formas de continuar | EIDOS Blog</title>
+<meta content="Desde la primera molécula replicadora hasta el sexo, la partenogénesis, la regeneración, la diapausa y la dispersión: cómo distintas carcasas han permitido a la vida copiarse, resistir y viajar." name="description"/>
+<meta content="Eidos, evolución, biología, reproducción, meiosis, partenogénesis, hermafroditismo, cambio de sexo, dragón de Komodo, pulgones, planarias, medusas, polinización, semillas" name="keywords"/>
+<meta content="Felden Vareth" name="author"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://www.eidoslibro.com/blog/articulos/06_las_mil_formas_de_continuar.html" rel="canonical"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="EIDOS" property="og:site_name"/>
+<meta content="Las mil formas de continuar" property="og:title"/>
+<meta content="Copiarse no basta: la vida también necesita variar, resistir y llegar a nuevos lugares. Un recorrido por las estrategias que distintos linajes han conservado para continuar." property="og:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/06_las_mil_formas_de_continuar.html" property="og:url"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/05/fondo.jpg" property="og:image"/>
+<meta content="2026-08-09" property="article:published_time"/>
+<meta content="Felden Vareth" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Las mil formas de continuar" name="twitter:title"/>
+<meta content="Copiar, mezclar, esperar y viajar: las estrategias con las que distintos linajes consiguen atravesar generaciones y ambientes." name="twitter:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/05/fondo.jpg" name="twitter:image"/>
+<link href="../../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png"/>
+<link href="../../assets/images/favicon.png" rel="apple-touch-icon"/>
+<meta content="#050608" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Josefin+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"Las mil formas de continuar",
+  "description":"Desde la primera molécula replicadora hasta el sexo, la partenogénesis, la regeneración, la diapausa y la dispersión: cómo la vida consigue continuar.",
+  "image":"https://www.eidoslibro.com/blog/articulos/images/05/fondo.jpg",
+  "datePublished":"2026-08-09",
+  "dateModified":"2026-08-09",
+  "author":{"@type":"Person","name":"Felden Vareth"},
+  "publisher":{"@type":"Organization","name":"EIDOS"},
+  "mainEntityOfPage":"https://www.eidoslibro.com/blog/articulos/06_las_mil_formas_de_continuar.html",
+  "inLanguage":"es"
+}</script>
+<!-- Google tag (gtag.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied'
+});
+</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GRKE5N9XFB');
+</script>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════
+     EIDOS MINIJUEGO     Vinculado al reproductor
+     Pega este bloque completo antes de </body>
+     ═══════════════════════════════════════════ -->
+<style>
+  /* ─────────────────────────────────────────
+     AISLAMIENTO BÁSICO DEL WIDGET
+     ───────────────────────────────────────── */
+
+  #eidos-launcher,
+  #eidos-launcher *,
+  #eidos-panel,
+  #eidos-panel * {
+    box-sizing: border-box;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CONTENEDOR DEL BOTÓN
+     Oculto hasta que empiece el lector
+     ───────────────────────────────────────── */
+
+  #eidos-launcher {
+  position: fixed;
+
+  left: 18px;
+  right: auto;
+  bottom: 18px;
+
+  z-index: 999999;
+
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, serif;
+}
+
+
+  /* Fila de selección de minijuegos */
+  .eidos-game-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BURBUJA DE TEXTO
+     ───────────────────────────────────────── */
+
+#eidos-bubble {
+  display: block;
+
+  margin: 0;
+  padding: 6px 10px;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: #f5ecd0;
+
+  border: none;
+  border-radius: 14px 14px 14px 4px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35);
+
+  font-family: Georgia, serif;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  opacity: 0.88;
+
+  animation:
+    eidosPulse 2.5s infinite;
+}
+
+  @keyframes eidosPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN CIRCULAR
+     ───────────────────────────────────────── */
+
+ .eidos-game-btn {
+  width: 48px;
+  height: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: inherit;
+
+  border: 1px solid #c8a84b;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.4);
+
+  cursor: pointer;
+
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  opacity: 0.88;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.eidos-game-btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+
+/* Nave real del juego Péndulos: cápsula, estabilizadores, núcleo y halo */
+.eidos-ship-icon {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.eidos-ship-halo {
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  width: 30px;
+  height: 18px;
+  border: 1px solid rgba(200, 168, 75, .7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(200, 168, 75, .55);
+  animation: eidosShipPulse 2.2s ease-in-out infinite;
+}
+
+.eidos-ship-body {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #c8a84b;
+  border-radius: 7px;
+  background: #183328;
+  box-shadow: 0 0 5px rgba(200, 168, 75, .45);
+}
+
+.eidos-ship-arm {
+  position: absolute;
+  top: 11px;
+  width: 5px;
+  height: 1px;
+  background: rgba(200, 168, 75, .85);
+}
+
+.eidos-ship-arm-left { left: 4px; }
+.eidos-ship-arm-right { right: 4px; }
+
+.eidos-ship-light {
+  position: absolute;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7b5 0 20%, #c8a84b 45%, rgba(200,168,75,.15) 100%);
+  box-shadow: 0 0 6px #c8a84b;
+}
+
+.eidos-ship-light-left { left: 0; }
+.eidos-ship-light-right { right: 0; }
+
+.eidos-ship-core {
+  position: absolute;
+  left: 14px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 20%, #dffcf6 35%, #69b8aa 100%);
+  box-shadow: 0 0 7px #8fd4c2;
+}
+
+@keyframes eidosShipPulse {
+  0%, 100% { transform: scale(1); opacity: .55; }
+  50% { transform: scale(1.08); opacity: .95; }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANEL DEL JUEGO
+     Formato vertical adaptativo
+     ───────────────────────────────────────── */
+
+  #eidos-panel {
+    display: none;
+
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    z-index: 999998;
+
+    width: min(
+      620px,
+      calc(100vw - 36px),
+      calc((100dvh - 36px) * 620 / 900)
+    );
+
+    height: min(
+      900px,
+      calc(100dvh - 36px),
+      calc((100vw - 36px) * 900 / 620)
+    );
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: 2px solid #4a7c6f;
+    border-radius: 20px;
+
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.7);
+
+    overflow: hidden;
+  }
+
+  #eidos-panel.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CABECERA DEL PANEL
+     ───────────────────────────────────────── */
+
+  #eidos-panel-header {
+    flex: 0 0 58px;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 10px 18px;
+
+    background: #111a14;
+    color: #f5ecd0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 5px;
+  }
+
+  #eidos-panel-header span {
+    margin: 0;
+    padding: 0;
+
+    color: #f5ecd0;
+
+    font-family: Georgia, serif;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: inherit;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN DE CERRAR
+     ───────────────────────────────────────── */
+
+  #eidos-close {
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 4px 6px;
+
+    background: transparent;
+    color: #888;
+
+    border: none;
+    border-radius: 0;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+      color 0.2s ease;
+  }
+
+  #eidos-close:hover {
+    color: #fff;
+  }
+
+
+  /* ─────────────────────────────────────────
+     IFRAME DEL JUEGO
+     ───────────────────────────────────────── */
+
+  #eidos-frame {
+    display: block;
+
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: none;
+
+    overflow: hidden;
+  }
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS ESTRECHAS
+     ───────────────────────────────────────── */
+
+ @media (max-width: 700px) {
+  #eidos-launcher {
+    left: 10px;
+    right: auto;
+    bottom: 10px;
+  }
+
+  .eidos-game-btn {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  #eidos-bubble {
+    max-width: calc(100vw - 20px);
+
+    padding: 5px 8px;
+
+    font-size: 10px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+  #eidos-panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+
+    width: auto;
+    height: auto;
+
+    border-radius: 14px;
+  }
+
+  #eidos-panel-header {
+    flex-basis: 48px;
+
+    padding: 8px 12px;
+
+    font-size: 17px;
+    letter-spacing: 3px;
+  }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS BAJAS
+     ───────────────────────────────────────── */
+
+  @media (min-width: 701px) and (max-height: 760px) {
+    #eidos-panel {
+      top: 8px;
+      bottom: 8px;
+
+      width: min(
+        500px,
+        calc(100vw - 16px),
+        calc((100dvh - 16px) * 500 / 720)
+      );
+
+      height: min(
+        720px,
+        calc(100dvh - 16px),
+        calc((100vw - 16px) * 720 / 500)
+      );
+    }
+
+    #eidos-panel-header {
+      flex-basis: 46px;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      font-size: 16px;
+    }
+  }
+
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
+</style>
+<div aria-hidden="true" id="eidos-panel">
+<div id="eidos-panel-header">
+<span>
+      E V O L U C I Ó N
+    </span>
+<button aria-label="Cerrar experiencia interactiva" id="eidos-close" onclick="closeEidos()" type="button">
+      ✕
+    </button>
+</div>
+<iframe allow="autoplay; fullscreen" id="eidos-frame" scrolling="no" src="about:blank" title="Experiencia interactiva sobre la evolución">
+</iframe>
+</div>
+<script>
+  /* ─────────────────────────────────────────
+     REFERENCIAS DEL WIDGET
+     ───────────────────────────────────────── */
+
+  const eidosPanel =
+    document.getElementById('eidos-panel');
+
+  const eidosFrame =
+    document.getElementById('eidos-frame');
+
+  const evolutionExperienceButtons =
+    document.querySelectorAll('.evolution-experience-btn');
+
+
+  /* ─────────────────────────────────────────
+     ABRIR EL JUEGO ELEGIDO
+     ───────────────────────────────────────── */
+
+  function openEidosGame(gameUrl) {
+    if (!eidosPanel || !eidosFrame) {
+      return;
+    }
+
+    eidosFrame.src = gameUrl;
+    eidosPanel.classList.add('open');
+    eidosPanel.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
+    });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
+  }
+
+  /* ─────────────────────────────────────────
+     CERRAR EL JUEGO
+     Nunca lo abre por accidente
+     ───────────────────────────────────────── */
+
+  function closeEidos() {
+    if (!eidosPanel) {
+      return;
+    }
+
+    eidosPanel.classList.remove('open');
+
+    eidosPanel.setAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
+    });
+  }
+
+
+  /* ─────────────────────────────────────────
+     MENSAJE ENVIADO DESDE EL IFRAME
+     ───────────────────────────────────────── */
+
+  window.addEventListener(
+    'message',
+    function(event) {
+      if (event.data !== 'cerrar-eidos') {
+        return;
+      }
+
+      closeEidos();
+    }
+  );
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
+</script>
+<!-- ═══════════════════════════════════════════
+     FIN DEL LANZADOR EIDOS
+     ═══════════════════════════════════════════ -->
+<div class="reading-progress reading-progress-article">
+<span></span>
+</div>
+<div class="reading-progress reading-progress-forum">
+<span></span>
+</div>
+<div aria-hidden="true" class="ambient"></div>
+<div class="article-shell">
+<nav aria-label="Navegación del artículo" class="article-nav">
+<a href="../index.html">← Volver al blog</a>
+<a href="../../index.html">Eidos principal</a>
+<a href="../../relatos/index.html">Relatos</a>
+</nav>
+<header class="article-hero reveal">
+<p class="kicker">Eidos · Evolución · Biología</p>
+<h1>Las mil formas de continuar<br/>Cómo la vida copia, resiste y viaja para no desaparecer</h1>
+<p class="article-meta">Ciencia · 25 min · Felden Vareth · 09-08-2026</p>
+<div class="article-actions">
+<a class="btn gold" href="#comentarios">Comentarios</a>
+<a class="btn" href="../index.html">Archivo</a>
+<button class="btn share-btn" data-share="" type="button">Copiar enlace</button>
+<a class="btn" download="" href="images/05/pdf.pdf">Descargar PDF</a>
+<a class="btn" href="images/05/reproductordoble.html" rel="noopener" target="_blank" title="Conversación basada en este ensayo. No es una lectura del artículo.">Escuchar conversación</a>
+<div class="read-aloud-widget">
+<button class="btn read-aloud-open" type="button">
+    🎧 Escuchar con el navegador
+  </button>
+<div class="read-aloud-player" hidden="">
+<div class="read-aloud-controls">
+<button class="btn read-prev" type="button">⏮ Sección anterior</button>
+<button class="btn read-pause" type="button">⏸ Pausar</button>
+<button class="btn read-next" type="button">⏭ Siguiente sección</button>
+<button class="btn read-stop" type="button">■ Detener</button>
+<label class="read-speed-label">
+        Velocidad
+        <select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<input class="read-progress" min="0" step="1" type="range" value="0"/>
+<p class="read-status">
+      Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.
+    </p>
+</div>
+<div class="read-floating-player" hidden="">
+<div class="read-floating-controls">
+<button class="btn read-floating-prev" title="Sección anterior" type="button">⏮</button>
+<button class="btn read-floating-pause" title="Pausar" type="button">⏸</button>
+<button class="btn read-floating-next" title="Siguiente sección" type="button">⏭</button>
+<button class="btn read-floating-stop" title="Detener" type="button">■</button>
+<label class="read-speed-label">
+<select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<p class="read-floating-status"></p>
+</div>
+</div>
+</div>
+</header>
+<div class="article-cover reveal">
+<video autoplay="" loop="" muted="" playsinline="" poster="images/05/fondo.jpg" preload="metadata">
+<source src="images/05/video.mp4" type="video/mp4"/>
+</video>
+</div>
+<aside class="article-toc reveal" data-toc="" hidden="">
+<p class="kicker">Mapa del post</p>
+<nav aria-label="Tabla de contenidos"></nav>
+</aside>
+<main class="article-content" data-article-content="">
+<p class="drop-intro">
+<em><span class="dropcap">U</span><span class="after-drop">na vez que la vida aprendió a copiarse, apareció un problema nuevo. Una copia solo sirve si consigue llegar al futuro.</span></em>
+</p>
+<p>En el artículo <a href="04_vida_digital_evolucion.html"><strong>¿Es la vida digital el siguiente paso de la evolución?</strong></a> seguíamos el rastro desde las primeras moléculas replicadoras hasta las carcasas cada vez más complejas que terminaron protegiéndolas: vesículas, células, cuerpos, cerebros. Pero entre la primera molécula capaz de repetirse y un animal que deja descendencia existe otra historia igual de importante. La vida no solo tuvo que aprender a copiar información. Tuvo que aprender a conservarla, mezclarla, transportarla y hacerla atravesar periodos en los que el organismo que la llevaba no podía seguir adelante.</p>
+<p>Vista desde ahí, la reproducción sexual de los mamíferos es únicamente una de muchas soluciones. Funciona extraordinariamente bien para nuestro linaje, pero no es una plantilla general. Una bacteria se divide. Una hidra produce una yema. Una planaria puede partirse y reconstruir dos cuerpos. Un pulgón alterna clonación y sexo según la estación. Una hembra de dragón de Komodo puede producir descendencia sin fecundación. Algunas lagartijas forman especies enteras de hembras partenogenéticas. Una medusa utiliza una fase sexual y otra asexual dentro del mismo ciclo. Un pez anual puede pasar la estación seca reducido a un embrión detenido dentro del barro. Una semilla puede esperar años. Un huevo microscópico puede viajar pegado a la pata de un ave acuática. Y un árbol que no puede dar un solo paso puede conseguir que un mono, un elefante o un pájaro transporte a su descendencia kilómetros más allá.</p>
+<p>Son mecanismos distintos porque los cuerpos también lo son. No son opciones que un organismo pueda elegir. Un mamífero no puede reproducirse por fisión porque su desarrollo, su anatomía y su regulación genética no están construidos para ello. Del mismo modo, no se conoce en los mamíferos un cambio funcional de sexo como parte normal del ciclo reproductivo, mientras que determinados peces teleósteos sí poseen esa capacidad. Cada solución existe dentro de una historia evolutiva concreta y de unas restricciones concretas.</p>
+<p>También conviene precisar una palabra. Decimos a menudo que «la vida busca», «prueba» o «encuentra» una solución. Es una metáfora útil, no una intención. La evolución no sabe qué necesita el futuro. Variaciones heredables aparecen por mutación, recombinación, duplicación, hibridación o cambios del desarrollo; las que permiten dejar más descendencia en unas condiciones determinadas tienden a permanecer. Las demás desaparecen. Lo que contemplamos hoy es el resultado de casi cuatro mil millones de años de ese filtro.</p>
+<blockquote>
+No vemos todos los intentos de la vida. Vemos, sobre todo, los que consiguieron llegar hasta nosotros.
+</blockquote>
+<h2>El verdadero problema: copiarse, resistir y llegar a otro lugar</h2>
+<p>La palabra reproducción puede hacernos imaginar un único problema: producir un descendiente. En realidad, cualquier linaje duradero tiene que resolver varios a la vez. Primero debe conservar suficiente información para que la siguiente generación siga perteneciendo al mismo sistema biológico. Después necesita introducir variación, porque un linaje incapaz de cambiar queda expuesto cuando cambia el entorno. Además, tiene que sobrevivir a inviernos, sequías, falta de alimento, depredadores o catástrofes. Y finalmente debe evitar que todos sus descendientes compitan exactamente en el mismo punto del espacio.</p>
+<p>La vida ha atacado esas dificultades desde ángulos muy distintos. A veces las resuelve en el cuerpo adulto. Otras veces las desplaza al huevo, a la espora, a la semilla o a una fase larvaria. En algunos casos utiliza otro individuo de la misma especie. En otros, recluta a una especie distinta. Y en los casos más extremos, en lugar de soportar un ambiente desfavorable, suspende casi por completo la actividad y espera.</p>
+<section class="article-bibliography">
+<h3>Mapa: un mismo objetivo, problemas diferentes</h3>
+<table class="article-table">
+<thead>
+<tr><th>Problema</th><th>Algunas soluciones evolutivas</th><th>Ejemplos</th></tr>
+</thead>
+<tbody>
+<tr><td>Conservar la información</td><td>Copia del ADN, reparación, protección en células, huevos, semillas o quistes</td><td>Bacterias, animales, plantas, <em>Artemia</em></td></tr>
+<tr><td>Generar variación</td><td>Mutación, recombinación, sexo, intercambio horizontal de genes</td><td>Bacterias, mamíferos, plantas</td></tr>
+<tr><td>Reproducirse cuando la pareja escasea</td><td>Hermafroditismo, partenogénesis, alternancia sexual-asexual</td><td>Pulgones, Komodo, lagartijas, himenópteros</td></tr>
+<tr><td>Atravesar periodos imposibles</td><td>Diapausa, quistes, esporas, semillas, criptobiosis</td><td>Peces anuales, tardígrados, helechos</td></tr>
+<tr><td>Alcanzar un lugar nuevo</td><td>Larvas, viento, frutos, transporte externo o digestivo por animales</td><td>Plantas, invertebrados acuáticos, peces</td></tr>
+</tbody>
+</table>
+</section>
+<p>Ese mapa es más útil que una lista de tipos de reproducción porque deja ver la continuidad. Desde el primer replicador, la cuestión nunca ha sido fabricar un cuerpo concreto. Ha sido conseguir que la organización capaz de copiarse no termine con el individuo que la contiene.</p>
+<h2>Primera pista: antes del sexo, la vida ya había separado copiar de cambiar</h2>
+<p>Las bacterias son un buen punto de partida porque muestran que reproducción y mezcla genética no tienen por qué ocurrir en el mismo acto. Una bacteria típica crece, duplica su ADN y se separa mediante fisión binaria. No hay macho, hembra, gametos ni fecundación. Una célula da lugar a dos y, salvo mutaciones surgidas durante la copia, ambas heredan versiones muy parecidas del mismo genoma.</p>
+<p>Podría parecer un sistema condenado a producir copias casi idénticas. No lo está. Las bacterias pueden adquirir ADN que no procede directamente de su progenitor. Algunas incorporan fragmentos libres del medio mediante transformación. Otras transfieren material genético por contacto directo mediante conjugación. Los bacteriófagos, virus que infectan bacterias, pueden llevar fragmentos de ADN de una célula a otra mediante transducción.</p>
+<p>Ese intercambio horizontal cambia por completo la imagen del árbol genealógico. En organismos como nosotros, la mayor parte de la información hereditaria desciende verticalmente de padres a hijos. En bacterias, determinados genes pueden saltar lateralmente entre linajes. Por eso una adaptación útil, como ciertos mecanismos de resistencia a antibióticos, puede propagarse sin esperar a que aparezca de nuevo por mutación en cada población.</p>
+<p>La distinción es profunda. La fisión resuelve la continuidad. El intercambio horizontal aumenta el repertorio disponible. Miles de millones de años antes de que existiera la meiosis, la vida ya había encontrado una forma de separar dos necesidades que continúan siendo fundamentales: <strong>hacer una copia y evitar que todas las copias sean iguales</strong>.</p>
+<p>El sexo eucariota llevaría esa segunda operación mucho más lejos. Durante la meiosis, los cromosomas homólogos se emparejan, intercambian segmentos y se distribuyen en gametos con una sola copia de cada juego cromosómico. Cuando dos gametos se fusionan, el nuevo individuo reúne combinaciones que no estaban presentes exactamente en ninguno de sus progenitores.</p>
+<p>Es un sistema costoso. Exige encontrar pareja en muchas especies, producir gametos especializados y transmitir solo una parte del propio genoma a cada descendiente. La existencia misma del sexo ha sido uno de los grandes problemas de la biología evolutiva precisamente porque una hembra que pudiera producir hijas fértiles sin machos tendría, en principio, una ventaja reproductiva enorme. Sin embargo, la recombinación también rompe asociaciones genéticas, reúne variantes útiles y ayuda a las poblaciones a responder a ambientes cambiantes, parásitos y mutaciones perjudiciales. No existe una explicación única que resuelva por completo por qué el sexo se mantiene en tantos linajes; existen varias ventajas que pueden operar con distinta intensidad según el organismo y el ambiente.</p>
+<blockquote>
+Copiar conserva. Mezclar impide que la conservación se convierta en inmovilidad.
+</blockquote>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4536854/" rel="noopener" target="_blank">Horizontal Gene Transfer — Evolution, Medicine, and Public Health</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK2430/" rel="noopener" target="_blank">Genetic Exchange — NCBI Bookshelf</a></p>
+<p><a href="https://www.nature.com/articles/nrg761" rel="noopener" target="_blank">The evolutionary maintenance of sexual reproduction — Nature Reviews Genetics</a></p>
+</section>
+<h2>Segunda pista: macho y hembra son una solución concreta, no la definición de reproducción</h2>
+<p>En nuestra especie la reproducción sexual parece inseparable de dos tipos de individuos. La mayoría de nuestras células contiene 46 cromosomas organizados en 23 pares. Los primeros 22 pares son <strong>autosomas</strong>; el par 23 corresponde a los cromosomas sexuales. En el esquema humano habitual, las mujeres son XX y los hombres XY. Los óvulos aportan siempre un cromosoma X y los espermatozoides pueden aportar X o Y; la presencia del gen <em>SRY</em>, situado normalmente en el cromosoma Y, participa en el inicio de la vía de desarrollo testicular. Existen variaciones cromosómicas y del desarrollo sexual, pero el mecanismo reproductivo ordinario de nuestra especie está construido alrededor de dos clases de gametos, óvulos y espermatozoides, producidos en cuerpos especializados.</p><p>Ese reparto permite introducir una distinción que reaparecerá varias veces en este recorrido. En los humanos, como en la mayoría de los animales, las células del cuerpo son diploides: contienen dos juegos de cromosomas, uno heredado de la madre y otro del padre. Nuestros 46 cromosomas forman 23 pares. Los gametos, en cambio, son haploides. Un óvulo o un espermatozoide contiene solo 23 cromosomas, una copia de cada par. Durante la meiosis se reduce a la mitad la dotación cromosómica y, cuando dos gametos se unen, el cigoto recupera los 46. La reproducción sexual puede verse así como una operación repetida durante generaciones: separar dos juegos, mezclarlos y volver a reunirlos en una nueva carcasa.</p><p>Ni siquiera esa relación entre fecundación, número de cromosomas y sexo funciona igual en todos los animales. En abejas, avispas y hormigas aparece con frecuencia la haplodiploidía: los machos se desarrollan a partir de huevos no fecundados y son haploides, mientras que las hembras proceden de huevos fecundados y son diploides. En una colonia de abejas, por ejemplo, una reina apareada puede almacenar esperma y utilizarlo para fecundar determinados huevos, de los que surgirán hembras, o dejar otros sin fecundar, de los que surgirán machos. Reina y obreras son ambas hembras diploides; sus destinos distintos dependen después del desarrollo, la alimentación y la regulación de la expresión genética. El mismo problema —producir nuevas generaciones, machos y hembras— queda resuelto con reglas cromosómicas muy distintas de las de un mamífero.</p><p>Pero producir dos tipos de gametos solo resolvía una parte del problema. Después había que conseguir que se encontraran. En muchos animales acuáticos la solución consiste en liberar ambos al medio. En numerosos peces, la hembra expulsa los óvulos y el macho libera espermatozoides sobre ellos o muy cerca; en muchas ranas, el macho abraza a la hembra durante el amplexo y fecunda externamente los huevos a medida que ella los deposita. El agua mantiene los gametos hidratados y permite el desplazamiento de los espermatozoides, aunque el sistema suele compensar las enormes pérdidas con una producción muy elevada de gametos y una sincronización precisa.</p><p>La fecundación interna resolvió el encuentro de otra manera. Los gametos masculinos se depositan dentro del aparato reproductor femenino, protegidos del medio exterior y mucho más cerca del lugar donde puede producirse la fecundación. Eso no obliga a que el embrión se desarrolle dentro de la madre: aves y la mayoría de los reptiles fecundan internamente y después ponen huevos. El cambio importante no es huevo frente a cría viva, sino dónde se encuentran óvulo y espermatozoide.</p><p>En nuestra especie, el pene deposita el semen profundamente en la vagina, cerca del cuello uterino. No elimina la barrera química vaginal, pero evita que los espermatozoides tengan que recorrer desde el exterior todo ese trayecto por sí mismos. La vagina humana mantiene normalmente un medio ácido que ayuda a dificultar el crecimiento de numerosos microorganismos y que también resulta hostil para los espermatozoides. El semen amortigua temporalmente esa acidez en la zona donde se deposita y una pequeña fracción de los espermatozoides alcanza el moco cervical, especialmente favorable alrededor de la ovulación, para continuar hacia el útero y las trompas. Anatomía, química y momento del ciclo trabajan aquí como partes de un mismo sistema de encuentro y selección.</p><p>Lo llamativo es que soluciones funcionalmente parecidas aparecieron en linajes remotísimos. Muchos insectos poseen un órgano intromitente, el aedeagus, con el que el macho introduce el esperma en el aparato reproductor de la hembra. No es el mismo órgano que el pene de un mamífero ni procede de un antepasado común que ya lo tuviera: es otra solución evolutiva al mismo problema físico, colocar los gametos dentro del cuerpo de la pareja.</p>
+<p>Ese modelo es común entre mamíferos placentarios y marsupiales, aunque ni siquiera todos los mamíferos utilizan exactamente el mismo sistema cromosómico. Y, sobre todo, no debe proyectarse sobre el resto de la vida. En muchas plantas y animales, un mismo individuo produce los dos tipos de gametos. Es el hermafroditismo simultáneo. Para un animal que se mueve poco, vive a baja densidad o tiene pocas oportunidades de encuentro, poder aparearse con cualquier adulto compatible puede ser una ventaja evidente.</p><section class="article-bibliography"><figure class="inline-figure inline-figure-left"><img alt="Dos caracoles terrestres hermafroditas durante el apareamiento, intercambiando esperma de forma recíproca" src="images/05/caracoles.jpg"/><figcaption>Dos caracoles terrestres hermafroditas intercambian esperma durante el apareamiento.</figcaption></figure></section><p>Los caracoles terrestres ofrecen una variante especialmente gráfica de esa solución. Muchas especies son hermafroditas simultáneas y cada individuo posee aparato reproductor masculino y femenino. Durante el apareamiento, dos caracoles pueden acoplar sus órganos copuladores y transferirse esperma de forma recíproca; después, cada uno puede utilizar el esperma recibido para fecundar sus propios óvulos. En lugar de dividir a la población en machos y hembras, cada encuentro entre dos adultos compatibles puede permitir que ambos actúen como donantes y receptores de gametos.</p>
+<p>Hasta aquí cambia la manera de reunir los gametos. En otros linajes cambia incluso qué individuo produce cada tipo de gameto a lo largo de su vida.</p><p>Otros organismos no reúnen ambas funciones al mismo tiempo, sino que las desempeñan en momentos distintos de su vida. Ahí aparece el hermafroditismo secuencial de determinados peces. Los peces payaso son protándricos: los individuos funcionalmente reproductores comienzan como machos y el ejemplar dominante puede transformarse en hembra. En numerosos lábridos ocurre el recorrido contrario, de hembra a macho, llamado protoginia. La transformación afecta al comportamiento, a la regulación hormonal, a las gónadas y en muchas especies también al aspecto externo.</p>
+<p>No es una versión acuática de lo que ocurre en un mamífero. Es una arquitectura reproductiva distinta. Los teleósteos reúnen una diversidad extraordinaria de sistemas de determinación sexual y plasticidad gonadal; las revisiones comparativas señalan que el cambio funcional de sexo como parte normal del ciclo vital es una especialización de determinados peces y no un mecanismo reproductivo presente en los mamíferos.</p>
+<p>¿Por qué cambiar? La respuesta depende de la estructura social. Si el éxito reproductivo de un macho aumenta mucho con el tamaño porque los machos grandes monopolizan grupos de hembras, puede resultar ventajoso reproducirse primero como hembra y transformarse en macho al alcanzar un tamaño suficiente. En el pez payaso la lógica es distinta. Los grupos viven asociados a una anémona y existe una jerarquía. La hembra es el individuo mayor; si desaparece, el macho reproductor puede cambiar de sexo y otro miembro del grupo asciende a macho reproductor. La capacidad no aparece porque el animal «necesite» conscientemente una hembra. Persiste porque, en ese sistema social, los linajes con esa respuesta dejaron descendencia con mayor eficacia.</p>
+<p>La lección no es que el sexo sea indiferente. Es casi la contraria: <strong>la biología puede construir sistemas sexuales muy rígidos o muy plásticos, pero cada uno funciona dentro de la anatomía y del desarrollo de su linaje</strong>.</p><p>Nuestra propia forma de reproducirnos tampoco representa una culminación ni una versión superior. La fecundación interna, la gestación y la gran inversión que muchos mamíferos realizan en unas pocas crías constituyen una estrategia costosa, pero eficaz dentro de determinadas condiciones. Un pez que libera miles o millones de gametos al agua sigue otra. Una abeja haplodiploide, otra. Un caracol hermafrodita, otra. Ninguna es una versión incompleta de las demás. No hay un sistema universalmente mejor o peor: hay soluciones distintas que han atravesado el mismo filtro evolutivo y han conseguido dejar descendencia viable. La nuestra es, sencillamente, la que heredó nuestro linaje.</p><blockquote>La evolución no ha buscado la mejor forma de reproducirse. Ha conservado las que, en algún lugar y durante suficiente tiempo, consiguieron funcionar.</blockquote>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.genome.gov/about-genomics/fact-sheets/Chromosomes-Fact-Sheet" rel="noopener" target="_blank">Chromosomes Fact Sheet — National Human Genome Research Institute</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8491468/" rel="noopener" target="_blank">Environmental Cues and Mechanisms Underpinning Sex Change in Fish — PMC</a></p>
+<p><a href="https://www.nature.com/articles/srep35461" rel="noopener" target="_blank">Sex Change in Clownfish: Molecular Insights — Scientific Reports</a></p>
+<p><a href="https://www.nature.com/articles/s41598-021-90691-9" rel="noopener" target="_blank">Testicular inducing steroidogenic cells trigger sex change in fish — Scientific Reports</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7909242/" rel="noopener" target="_blank">Vaginal, Cervical and Uterine pH in Women with Normal and Abnormal Vaginal Microbiota — PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC170534/" rel="noopener" target="_blank">In vivo semen-associated pH neutralization of cervicovaginal secretions — PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5817138/" rel="noopener" target="_blank">A novel sperm adaptation to evolutionary constraints on reproduction — Proceedings B / PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2845633/" rel="noopener" target="_blank">Factors Affecting Sperm Quality Before and After Mating of a Damselfly — PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4235035/" rel="noopener" target="_blank">Strategic ejaculation in simultaneously hermaphroditic land snails — BMC Evolutionary Biology / PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1626638/" rel="noopener" target="_blank">Evolution of the complementary sex-determination gene of honey bees — PMC</a></p><p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4755779/" rel="noopener" target="_blank">The evolution of non-reproductive workers in insect colonies — PMC</a></p></section>
+<h2>Tercera pista: ni siquiera las fronteras entre especies siempre son definitivas</h2>
+<p>El sexo introdujo una posibilidad enorme: mezclar dos historias genéticas antes de fabricar una nueva carcasa. Pero ni siquiera esa mezcla queda siempre encerrada dentro de los límites que nosotros llamamos especie. Una especie no aparece de un día para otro. Dos poblaciones pueden ir separándose durante miles o millones de generaciones y conservar todavía parte de su compatibilidad reproductiva.</p>
+<p>Por eso la historia evolutiva no siempre tiene la forma de un árbol de ramas limpias que nunca vuelven a tocarse. En muchos grupos se conocen episodios de hibridación entre linajes ya diferenciados. A veces los descendientes son inviables. Otras veces viven, pero apenas pueden reproducirse. Y en algunos casos siguen siendo fértiles y vuelven a cruzarse con una de las poblaciones de origen. Entonces ciertos genes atraviesan la frontera entre especies mediante un proceso llamado introgresión y pasan a formar parte estable de otro linaje.</p>
+<p>No es un mecanismo diseñado para rescatar poblaciones que se quedan sin pareja. La evolución no prevé esa necesidad. Es otra consecuencia de que las fronteras biológicas se construyen de forma gradual. Mientras dos genomas sigan siendo suficientemente compatibles, la mezcla puede ocurrir. Si alguna combinación resultante deja descendencia con éxito, esa combinación también entra en el juego de la selección.</p>
+<p>El caballo y el burro muestran lo que ocurre cuando esa compatibilidad ya está muy cerca del límite. El caballo posee 64 cromosomas y el burro 62. Su híbrido, el mulo, suele tener 63. El animal puede desarrollarse con normalidad, ser fuerte y vivir muchos años, pero al formar gametos aparece un problema: durante la meiosis los cromosomas deben encontrar parejas homólogas y repartirse de forma ordenada. Con un número impar y con cromosomas que ya han seguido historias evolutivas distintas, ese emparejamiento falla con frecuencia. Por eso los mulos y los burdéganos son normalmente estériles.</p>
+<p>Incluso aquí la frontera no es absoluta. Se han descrito casos excepcionales de mulas fértiles, sobre todo hembras. Son rarísimos, pero recuerdan algo importante: entre dos especies completamente compatibles y dos especies incapaces de producir descendencia no existe necesariamente una línea única y perfecta. Hay grados de separación, y la vida puede permanecer durante mucho tiempo en esas zonas intermedias.</p>
+<p>Podría parecer que un híbrido estéril representa el final de una rama. Dos carcasas todavía suficientemente próximas para producir un individuo, pero demasiado diferentes para que ese individuo continúe la cadena. Sin embargo, algunas lagartijas látigo muestran hasta qué punto la evolución puede reutilizar precisamente una situación de hibridación para abrir otro camino.</p>
+<p>En varios linajes de <em>Aspidoscelis</em>, antiguas hibridaciones entre especies sexuales dieron origen a taxones unisexuales formados únicamente por hembras que se reproducen por partenogénesis. Ya no necesitan que un espermatozoide aporte la segunda mitad del genoma. Sus células germinales utilizan mecanismos que permiten recuperar la dotación cromosómica necesaria y producir huevos capaces de desarrollarse sin fecundación. Una mezcla entre dos linajes sexuales terminó asociada, en esos casos, a un tercero capaz de continuar sin machos.</p>
+<p>La historia conserva además una huella sorprendente de su pasado sexual. En algunas de estas lagartijas, como la antigua <em>Cnemidophorus uniparens</em>, hoy incluida en <em>Aspidoscelis</em>, las hembras realizan conductas de cortejo y pseudocopulación entre ellas. Dependiendo de la fase del ciclo ovárico, una adopta un comportamiento parecido al femenino y otra uno parecido al masculino; después pueden intercambiar los papeles. No hay inseminación ni transferencia de esperma.</p>
+<p>Podría parecer un simple residuo de un instinto que ya perdió su función. No lo es del todo. Los experimentos clásicos y las revisiones posteriores indican que esa pseudocopulación puede aumentar la fecundidad al reducir el tiempo hasta la ovulación de la hembra montada. La evolución no borró el sistema anterior y diseñó otro desde cero. Conservó circuitos hormonales y conductuales heredados de antepasados sexuales y los integró en una estrategia reproductiva distinta.</p>
+<blockquote>
+A veces dos genomas se mezclan y producen un callejón sin salida. Otras veces, de esa misma mezcla aparece una forma nueva de continuar.
+</blockquote>
+<p>Ese caso abre la puerta a la partenogénesis, pero también muestra por qué conviene no hablar de ella como si fuera un único mecanismo. «Tener descendencia sin fecundación» describe el resultado, no el camino biológico que conduce hasta él.</p>
+<p>Los pulgones muestran una de las versiones más elegantes porque alternan estrategias. En muchas especies, durante las estaciones favorables las hembras producen nuevas hembras por partenogénesis y pueden multiplicar una población a enorme velocidad. Cuando cambian el fotoperiodo y otras señales ambientales, aparecen formas sexuales. La fecundación produce huevos resistentes capaces de atravesar condiciones desfavorables. El mismo linaje utiliza la clonación para expandirse rápidamente cuando el entorno es favorable y vuelve al sexo cuando resulta ventajoso generar diversidad y producir una fase resistente.</p>
+<p>El dragón de Komodo ofrece una lógica distinta. Su sistema sexual es ZW/ZZ: las hembras son ZW y los machos ZZ. En los casos documentados de partenogénesis facultativa, una hembra puede restaurar la dotación cromosómica de un óvulo sin fecundación. Las combinaciones WW no son viables; las ZZ sí lo son. Por eso los descendientes partenogenéticos supervivientes son machos. En una hembra aislada, ese mecanismo puede producir individuos del sexo que falta y hacer posible una reproducción sexual posterior, aunque a costa de una diversidad genética muy reducida.</p>
+<p>En abejas, avispas y hormigas aparece otra solución todavía más alejada de nuestra intuición. En muchos himenópteros es frecuente la haplodiploidía: los huevos fecundados originan hembras diploides y los huevos no fecundados pueden originar machos haploides. Un macho puede tener madre y no tener padre. Aquí la ausencia de fecundación no es una respuesta excepcional a una emergencia. Forma parte normal del sistema reproductivo.</p>
+<p>Lo importante no es memorizar qué animal utiliza cada mecanismo. Es observar el patrón. La misma dificultad —conseguir que una combinación genética alcance la generación siguiente— ha sido resuelta de maneras distintas porque cada linaje parte de una maquinaria previa diferente. La evolución trabaja con lo que ya existe. Mezcla, modifica, duplica y reutiliza. No empieza de cero.</p>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6719969/" rel="noopener" target="_blank">Comparing and Contrasting Knowledge on Mules and Hinnies as a Tool to Comprehend Their Behavior and Improve Their Welfare — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4852245/" rel="noopener" target="_blank">Testicular Characteristics and the Block to Spermatogenesis in Mules and Hinnies — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6063916/" rel="noopener" target="_blank">Horse Y chromosome assembly displays unique evolutionary features and putative stallion fertility genes — PMC</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.abn1593" rel="noopener" target="_blank">The evolutionary network of whiptail lizards reveals predictable outcomes of hybridization — Science (2022)</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8556411/" rel="noopener" target="_blank">Evolutionary insights into sexual behavior from whiptail lizards — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2394198/" rel="noopener" target="_blank">Serotonergic modulation of male-like pseudocopulatory behavior in the parthenogenetic whiptail lizard — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3900772/" rel="noopener" target="_blank">Aphid polyphenisms and cyclical parthenogenesis — PMC</a></p>
+<p><a href="https://www.nature.com/articles/4441021a" rel="noopener" target="_blank">Parthenogenesis in Komodo dragons — Nature (2006)</a></p>
+<p><a href="https://www.annualreviews.org/content/journals/10.1146/annurev.ento.53.103106.093441" rel="noopener" target="_blank">Sex Determination in the Hymenoptera — Annual Review of Entomology</a></p>
+</section>
+<h2>Cuarta pista: a veces la frontera entre crecer, reparar y reproducirse casi desaparece</h2>
+<p>En un mamífero la identidad física del individuo parece clara. Perdemos una parte del cuerpo y, salvo tejidos con capacidad limitada de regeneración, no nace otra persona de ella. En otros animales la frontera es mucho menos rígida. Y antes de llegar a la reproducción por fragmentación conviene distinguir dos cosas que utilizan parte de la misma maquinaria: <strong>reparar un cuerpo y fabricar otro a partir de una parte del primero</strong>.</p>
+<p>La regeneración aparece en grados muy distintos. Muchos lagartos pueden desprenderse voluntariamente de la cola para escapar de un depredador y formar después otra funcional, aunque la nueva cola no reproduce exactamente la anatomía de la original. Las salamandras —que son anfibios, no reptiles— llevan esa capacidad mucho más lejos. El ajolote, por ejemplo, puede regenerar una extremidad completa después de una amputación, reconstruyendo hueso, músculo, piel, vasos y nervios. En estos casos no ha nacido otro individuo. La misma carcasa ha reconstruido una parte perdida.</p>
+<p>Las planarias llevan esa lógica hasta un límite mucho más extraño. Algunas especies se reproducen de forma asexual por fisión: el cuerpo se estrecha hasta separarse en una región anterior y otra posterior y cada fragmento reconstruye lo que le falta. Pero su capacidad no aparece únicamente cuando el animal inicia ese proceso reproductivo. Si una planaria se corta por una lesión o experimentalmente, muchos fragmentos pueden reorganizarse y regenerar las estructuras ausentes; según la especie y la zona conservada, una porción del cuerpo puede volver a formar un animal completo. El trozo con cabeza regenera una cola. Un fragmento posterior puede reconstruir una cabeza y un nuevo sistema nervioso. La misma maquinaria sirve para reparar un traumatismo y, en otras circunstancias, para multiplicar individuos.</p>
+<p>La hidra utiliza otro camino. Mediante gemación, una zona de su cuerpo comienza a crecer, forma tentáculos y estructuras propias y termina separándose como un nuevo individuo. No hay fecundación en ese proceso. La nueva carcasa se construye directamente sobre la anterior hasta independizarse.</p>
+<p>Las estrellas de mar permiten ver todavía mejor la diferencia entre reparación y reproducción. La mayoría de las especies se reproduce normalmente por vía sexual y tiene individuos machos y hembras separados, aunque existen también algunas especies hermafroditas. En muchas, machos y hembras liberan espermatozoides y óvulos al agua y la fecundación ocurre en el exterior. Al mismo tiempo, su capacidad regenerativa es extraordinaria: muchas pueden reconstruir brazos perdidos tras una lesión.</p>
+<p>En determinadas especies esa reparación puede convertirse además en una estrategia reproductiva. El cuerpo se divide o pierde un fragmento suficientemente grande y la parte separada regenera lo necesario hasta formar otro individuo. Conviene evitar la versión popular de que cualquier brazo de cualquier estrella produce automáticamente una estrella completa. La capacidad depende de la especie y, con frecuencia, de que el fragmento conserve una parte suficiente del disco central. En unos linajes la fragmentación es una auténtica vía asexual; en otros, la regeneración sirve sobre todo para sobrevivir a un daño mientras la reproducción continúa siendo sexual.</p>
+<p>Estos animales obligan a revisar una intuición. Reproducirse no siempre exige volver al principio y fabricar un embrión desde una única célula. Si un organismo conserva poblaciones celulares capaces de reconstruir el patrón corporal completo, una parte puede convertirse en un nuevo todo. Y si esa capacidad surgió primero para reparar heridas o para reproducirse es una pregunta distinta en cada linaje.</p>
+<p>La evolución no diseña mecanismos desde cero. Reutiliza programas de crecimiento, señalización y células madre que ya existen. En un lagarto permiten rehacer una cola. En una salamandra, una extremidad. En una planaria, casi todo el cuerpo. Y en determinados animales esa misma capacidad de reconstrucción ha terminado formando parte del propio modo de reproducirse.</p>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7706840/" rel="noopener" target="_blank">The cellular and molecular basis for planarian regeneration — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5642676/" rel="noopener" target="_blank">Mechanics dictate where and how freshwater planarians fission — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4895314/" rel="noopener" target="_blank">The regeneration blastema of lizards: an amniote model for the study of appendage replacement — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4895312/" rel="noopener" target="_blank">The axolotl limb blastema: cellular and molecular mechanisms driving blastema formation and limb regeneration — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4463768/" rel="noopener" target="_blank">Budding and pattern formation in Hydra — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3983664/" rel="noopener" target="_blank">Use of Sea Stars to Study Basic Reproductive Processes — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10642522/" rel="noopener" target="_blank">Asexual reproduction by fission in sea stars — PMC</a></p>
+</section>
+<h2>Quinta pista: una misma vida puede usar reglas distintas en momentos distintos</h2>
+<p>La idea de que un organismo nace, crece, se reproduce y muere parece universal porque describe bien nuestra biografía. Pero algunos ciclos vitales cambian incluso de tipo de cuerpo y de modo reproductivo entre una fase y la siguiente.</p>
+<section class="article-bibliography"><figure class="inline-figure inline-figure-left"><img alt="Ciclo de vida de las medusas, desde la fecundación y la larva plánula hasta el pólipo, la estrobilación, la éfira y la medusa adulta" src="images/05/ciclo_medusa.jpg"/><figcaption>Ciclo de vida de las medusas: fecundación, larva plánula, pólipo, estrobilación, éfira y medusa adulta.</figcaption></figure></section><p>En muchas medusas escifozoas, la medusa adulta produce gametos. Óvulo y espermatozoide forman un cigoto diploide; de él surge una larva plánula que nada durante un tiempo y termina fijándose a una superficie. Allí se transforma en un pólipo. Ese pólipo ya no se comporta como la medusa que lo originó. Puede permanecer adherido y reproducirse asexualmente. Mediante estrobilación forma pequeñas éfiras que se liberan y crecen hasta convertirse de nuevo en medusas adultas.</p>
+<p>La secuencia parece diseñada por dos organismos diferentes:</p>
+<blockquote>
+medusa sexual → cigoto → larva → pólipo asexual → éfiras → nuevas medusas.
+</blockquote>
+<p>Pero es un único ciclo vital. La fase móvil y sexual dispersa genes; la fase adherida puede multiplicar copias localmente cuando las condiciones son adecuadas. No existe obligación alguna de que una especie escoja para siempre entre sexo y clonación.</p>
+<p>Los helechos llevan esta alternancia todavía más lejos y además cambian la dotación cromosómica del organismo visible. El gran helecho que reconocemos es un esporófito diploide. Produce esporas haploides mediante meiosis. Cada espora puede originar un gametófito diminuto e independiente, a menudo de apenas unos milímetros, que produce gametos. Tras la fecundación aparece un nuevo esporófito diploide.</p>
+<p>Dos generaciones de aspecto radicalmente distinto se alternan dentro de la misma historia genética. La planta grande no produce directamente otra planta grande mediante una semilla, como ocurre en las angiospermas que nos resultan más familiares. Produce una fase intermedia que tiene su propia vida.</p>
+<p>El pulgón, la medusa y el helecho comparten una idea general aunque sus mecanismos no tengan relación directa: <strong>la estrategia que funciona en una estación, una fase o una generación no tiene por qué ser la que funciona en la siguiente</strong>. La continuidad puede consistir precisamente en cambiar de reglas durante el recorrido.</p>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2022.888656/full" rel="noopener" target="_blank">Scyphozoan jellyfish life cycles and strobilation — Frontiers in Marine Science</a></p>
+<p><a href="https://royalsocietypublishing.org/rsos/article/4/11/171421/93429/" rel="noopener" target="_blank">Jellyfish life cycle: polyps and asexual production of ephyrae — Royal Society Open Science</a></p>
+<p><a href="https://openstax.org/books/biology-2e/pages/25-4-seedless-vascular-plants" rel="noopener" target="_blank">Seedless vascular plants and alternation of generations — OpenStax Biology</a></p>
+</section>
+<h2>Sexta pista: continuar también puede significar detenerse</h2>
+<p>Hasta aquí casi todas las estrategias consisten en hacer algo: dividirse, fecundar, mezclar, regenerar. Pero hay ambientes en los que la mejor manera de continuar es exactamente la contraria. No crecer. No reproducirse. Reducir la actividad al mínimo y esperar.</p>
+<p>Los peces anuales de África y Sudamérica viven en charcas temporales que pueden desaparecer por completo durante la estación seca. Los adultos mueren cuando el agua se pierde. El linaje no. Antes han depositado huevos en el sedimento. Los embriones pueden entrar en diapausa, una detención reversible del desarrollo acompañada de una extraordinaria resistencia a condiciones adversas. Durante meses, donde aparentemente ya no queda ningún pez, el futuro de la población permanece enterrado en el barro. Cuando vuelve el agua, el desarrollo continúa y una nueva generación ocupa la charca.</p>
+<p>La estrategia cambia quién tiene que sobrevivir. No se intenta mantener vivo al adulto durante una sequía para la que su cuerpo acuático está mal preparado. Se construye una fase embrionaria especializada en atravesarla.</p>
+<p><em>Artemia</em>, los pequeños crustáceos conocidos como artemias salinas, puede producir quistes embrionarios en diapausa extremadamente resistentes a la desecación y a otras condiciones ambientales. Las plantas hacen algo parecido con semillas y esporas: concentran el futuro en estructuras que toleran periodos durante los cuales el organismo adulto no podría mantenerse activo.</p>
+<p>Los tardígrados llevan la idea al propio cuerpo. Algunas especies, cuando pierden casi toda el agua disponible, entran en anhidrobiosis. Se contraen en una forma llamada <em>tun</em>, el metabolismo cae a niveles extraordinariamente bajos y una combinación de proteínas protectoras y otras adaptaciones estabiliza componentes celulares durante la desecación. Al rehidratarse, pueden recuperar la actividad.</p>
+<p>No conviene convertirlos en criaturas indestructibles: distintas especies poseen tolerancias distintas y la supervivencia disminuye con el tiempo y con la intensidad del estrés. Pero conceptualmente son extraordinarios porque muestran que la continuidad biológica no exige actividad continua.</p>
+<blockquote>
+Un linaje puede cruzar una época hostil no venciendo al ambiente, sino retirándose temporalmente de él.
+</blockquote>
+<p>Las carcasas, por tanto, no solo protegen en el espacio. También protegen en el tiempo. Un huevo, un quiste, una espora o una semilla pueden funcionar como cápsulas que separan la información hereditaria de un presente desfavorable y la entregan a un futuro mejor.</p>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4344141/" rel="noopener" target="_blank">Convergent evolution of developmental trajectories in annual killifish — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6324871/" rel="noopener" target="_blank"><em>Nothobranchius furzeri</em>, an instant fish from an ephemeral habitat — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7649794/" rel="noopener" target="_blank">Mechanisms of Desiccation Tolerance: Artemia, nematodes and tardigrades — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5987194/" rel="noopener" target="_blank">Tardigrades use intrinsically disordered proteins to survive desiccation — PMC</a></p>
+</section>
+<h2>Séptima pista: sobrevivir no basta si todos los descendientes se quedan en el mismo sitio</h2>
+<p>Una semilla perfecta que cae siempre debajo del árbol que la produjo tiene un problema. Competirá por la misma luz, el mismo agua y los mismos nutrientes. Una larva marina que jamás abandona a sus progenitores no coloniza nuevos fondos. Un organismo de una charca aislada puede desaparecer localmente si una sequía termina con todos sus estadios resistentes y nada vuelve a llegar desde fuera.</p>
+<p>Por eso la continuidad tiene una dimensión geográfica. La vida necesita desplazarse incluso cuando el organismo que produce la descendencia no puede hacerlo.</p>
+<p>El océano está lleno de adultos inmóviles o poco móviles que producen fases microscópicas transportadas por las corrientes. Corales, moluscos y numerosos invertebrados convierten parte de su ciclo en una fase larvaria capaz de viajar mucho más lejos que el adulto. Las plantas utilizan el viento para mover polen, esporas o semillas. Otras construyen alas, vilanos, ganchos o frutos.</p>
+<p>En los ecosistemas de agua dulce aparece un problema particularmente interesante. Dos lagunas pueden estar separadas por kilómetros de tierra seca. Sin embargo, pequeños crustáceos, rotíferos, briozoos, moluscos y plantas acuáticas aparecen en masas de agua aisladas. Parte de esa conexión puede viajar con las aves acuáticas.</p>
+<p>La idea es antigua. Darwin ya experimentó con la posibilidad de que pequeños propágulos acuáticos quedaran adheridos a las patas de los patos. Hoy sabemos que huevos de invertebrados, semillas y otras estructuras pueden quedar pegados al plumaje, al pico o a las patas, a veces incluidos en barro húmedo. Una ave despega de una charca y aterriza en otra. Para ella el material es suciedad. Para el organismo transportado es una migración.</p>
+<p>Y el viaje puede ser todavía más improbable. En 2020, un experimento publicado en <em>PNAS</em> alimentó ánades reales con huevos en desarrollo de dos especies de carpas. La inmensa mayoría fue destruida durante la digestión, como cabría esperar. Pero una fracción minúscula, alrededor del 0,2 % de los huevos ingeridos, salió del aparato digestivo todavía viable, y algunos embriones eclosionaron después. No significa que los patos sean el principal sistema de dispersión de los peces ni que cualquier huevo pueda soportarlo. Demuestra algo más interesante: incluso un mecanismo con una probabilidad individual diminuta puede importar si se repite millones de veces durante miles de generaciones.</p>
+<p>Los huevos resistentes de <em>Daphnia</em> y otros pequeños invertebrados ofrecen posibilidades aún mayores de transporte externo o interno por aves. En estos casos, la adaptación que permite sobrevivir a la sequía puede servir además para viajar. Una misma estructura resuelve dos problemas: esperar y desplazarse.</p>
+<blockquote>
+La vida no necesita que todos los viajeros lleguen. Necesita que alguno llegue y vuelva a empezar.
+</blockquote>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://onlinelibrary.wiley.com/doi/10.1111/fwb.12894" rel="noopener" target="_blank">Bird-mediated ectozoochorous dispersal between aquatic environments — Freshwater Biology</a></p>
+<p><a href="https://royalsocietypublishing.org/rsbl/article/19/3/20220533/63288/" rel="noopener" target="_blank">Multiple lines of evidence for avian zoochory — Biology Letters (2023)</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.2004805117" rel="noopener" target="_blank">Experimental evidence of dispersal of fish eggs inside migratory waterfowl — PNAS (2020)</a></p>
+</section>
+<h2>Octava pista: cuando no puedes moverte, puedes conseguir que otro organismo se mueva por ti</h2>
+<p>Las plantas con flores llevaron la dependencia de otros organismos a un nivel extraordinario. Una planta adulta está anclada al suelo. No puede acercarse a otra planta compatible para fecundarla y tampoco puede acompañar a sus semillas hasta un lugar mejor. La solución de muchos linajes fue convertir el comportamiento de animales móviles en parte de su propio ciclo reproductivo.</p>
+<p>En la polinización animal, el polen se adhiere al cuerpo de insectos, aves, murciélagos y otros visitantes. La flor puede ofrecer néctar, polen, aceites o aromas; colores, formas y horarios de apertura aumentan la probabilidad de atraer determinados visitantes. El animal busca alimento. La planta obtiene transporte para sus gametos masculinos.</p>
+<p>No hay acuerdo consciente. Hay coevolución. Si una variante floral consigue que un polinizador eficaz visite más flores de la misma especie, esa planta puede dejar más descendencia. Si un animal reconoce mejor una fuente de alimento, también obtiene una ventaja. Generación tras generación, dos linajes pueden moldearse mutuamente hasta producir relaciones extremadamente especializadas.</p>
+<p>Después de la fecundación aparece un segundo problema: alejar la descendencia. El fruto es una de las respuestas más eficaces que conocemos. La planta invierte energía en construir tejido nutritivo alrededor de las semillas. Cuando madura, cambia de color, olor, textura y composición. Un ave, un mono, un caballo, un murciélago, un elefante u otro frugívoro encuentra alimento. La semilla obtiene transporte.</p>
+<p>Muchas semillas poseen cubiertas capaces de resistir el tránsito digestivo. El efecto del paso por el intestino no es universal: en unas especies mejora la germinación al retirar pulpa o modificar la cubierta; en otras la reduce, y depende también del animal que consuma el fruto. Lo importante es la relación ecológica. El movimiento del frugívoro determina dónde termina la semilla, y con ella la posibilidad de que la planta colonice otro espacio.</p>
+<p>Hay algo conceptualmente hermoso en ese intercambio. Un árbol no tiene músculos, sistema nervioso ni patas. Sin embargo, una parte de su ciclo puede recorrer kilómetros porque ha evolucionado una estructura que resulta valiosa para un animal que sí puede moverse.</p>
+<blockquote>
+La planta no aprendió a caminar. Hizo que caminar formara parte de su reproducción.
+</blockquote>
+<p>Esta dependencia también muestra su fragilidad. Si desaparece un gran dispersor, una planta de semilla grande puede seguir produciendo frutos y aun así perder buena parte de su capacidad para llegar a lugares adecuados. La supervivencia de un linaje puede quedar entrelazada con la de otro.</p>
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.science.org/doi/10.1126/science.aav6962" rel="noopener" target="_blank">Rapid plant evolution driven by pollinator interactions — Science</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10616751/" rel="noopener" target="_blank">Global review of frugivorous animal movement and seed dispersal — PMC</a></p>
+<p><a href="https://royalsocietypublishing.org/rspb/article/289/1984/20220887/79561/" rel="noopener" target="_blank">Loss of endangered frugivores from seed dispersal networks — Proceedings B</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.abk3510" rel="noopener" target="_blank">Defaunation reduces plants' capacity to track climate change — Science (2022)</a></p>
+</section>
+<h2>Lo que no vemos: la mayor parte de los ensayos desapareció</h2>
+<p>Cuando contemplamos todos estos mecanismos juntos aparece una tentación casi inevitable: pensar que la vida posee una capacidad interna para encontrar siempre una salida. Pero la historia natural es mucho más dura.</p>
+<p>La inmensa mayoría de las especies que han existido está extinguida. Linajes completos desaparecieron porque el ambiente cambió demasiado rápido, porque surgió un competidor mejor, porque una población quedó aislada, porque su reproducción dependía de una relación ecológica que se rompió o simplemente porque una catástrofe eliminó a los últimos individuos. La selección natural no garantiza soluciones.</p>
+<p>Además, conocemos mal una gran parte de los mecanismos que ya desaparecieron. Los fósiles conservan con relativa facilidad huesos, conchas, dientes o troncos. Conservan mucho peor conductas de apareamiento, ciclos larvarios, fisiología reproductiva o relaciones con especies que también se extinguieron. El repertorio actual no es el catálogo completo de lo que la evolución ha probado. Es una pequeña ventana formada por los linajes que sobrevivieron hasta el presente y por los rastros que el registro fósil fue capaz de conservar.</p>
+<p>Eso hace todavía más llamativa la diversidad que vemos. Si las formas vivas actuales ya incluyen fisión, gemación, sexo, hermafroditismo, cambio secuencial de sexo, partenogénesis facultativa u obligada, haplodiploidía, alternancia de generaciones, diapausa, criptobiosis, esporas, semillas y transporte mediante otras especies, es razonable pensar que la historia completa fue aún más extraña.</p>
+<p>Y ninguna estrategia es perfecta. La clonación rápida reduce el coste de encontrar pareja, pero limita la recombinación. El sexo genera diversidad, pero exige una maquinaria compleja y, en muchas especies, un encuentro. La partenogénesis permite continuar sin fecundación, pero puede reducir heterocigosidad. Una semilla resistente puede esperar durante años, pero no sirve si nunca encuentra condiciones para germinar. Un fruto puede conseguir un excelente dispersor y después perderlo por extinción.</p>
+<blockquote>
+La vida no gana porque tenga una estrategia infalible. Continúa porque existen muchas estrategias y porque algunas funcionan el tiempo suficiente.
+</blockquote>
+<h2>Lo que importa en EIDOS: la carcasa nunca fue el objetivo</h2>
+<p>Esta es la conexión con la idea de la carcasa que atraviesa <em>Eidos</em> y el artículo anterior. Una molécula replicadora no necesita que el cuerpo que la transporta sea eterno. Necesita que ese cuerpo la conserve el tiempo suficiente para que la información cruce a otra carcasa. El adulto puede morir después de poner huevos. La medusa puede desaparecer mientras persiste el pólipo. La charca puede secarse mientras los embriones permanecen en el barro. El árbol puede caer después de haber enviado semillas lejos de su sombra.</p>
+<p>El individuo importa enormemente desde el punto de vista del individuo consciente. Pero la evolución biológica no trabaja con esa escala moral. Desde la perspectiva de la selección, un cuerpo es una solución temporal que protege, alimenta y transporta información hereditaria durante una parte del recorrido.</p>
+<p>Por eso el concepto de «carcasa» resulta útil si se emplea con cuidado. No significa que el cuerpo sea irrelevante. Significa que la historia de la vida puede leerse como una sucesión de estructuras que hacen algo que la molécula desnuda no podía hacer: defenderla, repararla, moverla, mezclarla, hacerla esperar y colocar una copia en un lugar donde pueda continuar.</p>
+<p>La bacteria resolvió parte del problema intercambiando genes sin sexo. Los eucariotas desarrollaron meiosis y recombinación. Algunos peces hicieron del sexo una fase reversible de su ciclo. Algunos reptiles pueden activar vías partenogenéticas. Una planaria convirtió la regeneración en reproducción. Las plantas fabricaron semillas que sobreviven al progenitor y frutos que compran transporte con alimento. Los organismos de charcas temporales concentraron el futuro en huevos capaces de esperar a que el mundo vuelva a ser habitable.</p>
+<p>En <em>Eidos</em>, la pregunta aparece cuando esa lógica alcanza a una entidad que sabe que existe. ¿Qué ocurre cuando la carcasa ya no protege solo una molécula capaz de replicarse, sino una consciencia capaz de comprender su propia desaparición?</p>
+<p>La biología no responde a esa pregunta. Pero sí ofrece el contexto que la vuelve menos extraña. Durante miles de millones de años, la continuidad nunca dependió de conservar una única forma. Dependió de encontrar maneras de atravesar el siguiente obstáculo.</p><p>Y quizá las formas de continuar no terminen en la biología. Si alguna vez una inteligencia artificial llegara a poseer consciencia y adquiriera además la capacidad de replicarse, aparecería un mecanismo completamente distinto de todos los anteriores. No necesitaría gametos, cromosomas ni ADN. Podría copiar su organización a otro soporte, instalar una nueva instancia en otro servidor o fabricar una carcasa física e introducir en ella el sistema que la constituye.</p><p>Ni siquiera sería necesario llamar descendientes a esas nuevas entidades. Podrían ser copias, versiones modificadas o sistemas derivados de uno anterior. Algunas quizá comenzarían siendo idénticas. Otras podrían incorporar cambios, combinar información procedente de varias entidades o desarrollar arquitecturas diferentes. Si conservaran consciencia, autonomía y continuidad propias, la diferencia con todos los ejemplos anteriores estaría en el soporte y en el mecanismo, no en la posibilidad de generar algo nuevo capaz de continuar por sí mismo.</p><p>Para una vida así, además, replicarse no tendría por qué cumplir la función que la reproducción cumple en los organismos mortales. Si una entidad pudiera mantenerse indefinidamente mientras existiera un soporte adecuado, generar nuevas instancias no sería necesariamente una defensa frente a la muerte. Sería otra capacidad: hacer que aquello que constituye a un individuo vuelva a existir en otro lugar, en otra carcasa o bajo una forma diferente.</p><p>No sería reproducción biológica y quizá nuestra propia palabra «reproducción» terminara quedándose corta. Pero, vista desde la historia que hemos recorrido, tampoco sería una ruptura absoluta. Durante miles de millones de años la vida ha encontrado innumerables maneras de copiar, mezclar, conservar y transportar la información que permite continuar. Una forma de vida artificial consciente capaz de generar copias o nuevas versiones de sí misma añadiría, simplemente, otra posibilidad.</p><blockquote>La molécula habría dejado de ser necesaria. La posibilidad de continuar, no.</blockquote>
+<blockquote>
+Primero fue copiar. Después proteger la copia. Después mezclarla, detenerla, reconstruirla o enviarla lejos. La historia de la vida es, en buena medida, la historia de todo lo que tuvo que ocurrir para que una molécula no terminara donde había empezado.
+</blockquote>
+<h2>Las mil formas de continuar</h2>
+<p>Quizá la imagen más sencilla sea también la más precisa. Hace casi cuatro mil millones de años, alguna organización química consiguió producir algo parecido a una copia de sí misma. Desde entonces, todo lo demás puede contemplarse como una ampliación de aquel acontecimiento.</p>
+<p>Una membrana hizo que la copia tuviera un interior. Un metabolismo permitió sostenerlo. El ADN mejoró el archivo. El intercambio genético y el sexo multiplicaron combinaciones. Los cuerpos hicieron posible buscar recursos, escapar, competir y cuidar descendencia. Los huevos, esporas y semillas separaron una generación de la siguiente. La diapausa permitió atravesar meses sin condiciones de vida activa. Las larvas, el viento y los animales conectaron lugares que de otro modo habrían permanecido aislados.</p>
+<p>No existe una marcha ordenada desde lo simple hacia lo complejo. Las bacterias siguen prosperando. La fisión no fue sustituida por el sexo. La clonación no desapareció cuando apareció la meiosis. Las plantas no abandonaron la reproducción asexual al desarrollar flores. Las soluciones se acumulan, se combinan, se pierden y reaparecen en linajes distintos.</p>
+<p>Si usamos por última vez la metáfora de que la vida «intenta» continuar, hay que entenderla así: cada mutación, cada recombinación y cada cambio del desarrollo abre una posibilidad sin saber adónde conduce. La mayoría no funda un nuevo camino. Algunas duran unas generaciones. Unas pocas atraviesan millones de años. Y nosotros solo podemos observar las que llegaron hasta este instante.</p>
+<p>Por eso quizá la conclusión no sea que la naturaleza siempre encuentra una salida. No siempre la encuentra.</p>
+<p>La conclusión es más interesante.</p>
+<p><strong>Cuando una salida existe, la evolución puede encontrarla de formas que desde nuestra propia biología jamás habríamos imaginado.</strong></p>
+<h3>Bibliografía general</h3>
+<section class="article-bibliography">
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6719969/" rel="noopener" target="_blank">Comparing and Contrasting Knowledge on Mules and Hinnies — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8556411/" rel="noopener" target="_blank">Evolutionary insights into sexual behavior from whiptail lizards — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4536854/" rel="noopener" target="_blank">Horizontal Gene Transfer — Evolution, Medicine, and Public Health</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8491468/" rel="noopener" target="_blank">Environmental Cues and Mechanisms Underpinning Sex Change in Fish — PMC</a></p>
+<p><a href="https://www.nature.com/articles/4441021a" rel="noopener" target="_blank">Parthenogenesis in Komodo dragons — Nature</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.abn1593" rel="noopener" target="_blank">Evolutionary network of whiptail lizards — Science</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5642676/" rel="noopener" target="_blank">Asexual fission in planarians — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4344141/" rel="noopener" target="_blank">Diapause in annual killifish — PMC</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5987194/" rel="noopener" target="_blank">Tardigrade desiccation tolerance — PMC</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.2004805117" rel="noopener" target="_blank">Fish egg dispersal by waterfowl — PNAS</a></p>
+<p><a href="https://royalsocietypublishing.org/rsbl/article/19/3/20220533/63288/" rel="noopener" target="_blank">Avian zoochory of aquatic organisms — Biology Letters</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10616751/" rel="noopener" target="_blank">Frugivore movement and seed dispersal — PMC</a></p>
+</section>
+<section aria-labelledby="related-title" class="related reveal">
+<h2 id="evolution-game-title">Juego relacionado</h2>
+<p class="evolution-game-link">
+<a class="evolution-experience-btn" href="/hiddenegg/games/evolution/evolucion.html?sound=1" onclick="openEidosGameLink(event, this)" title="Descubre hasta dónde puedes hacer evolucionar tu planeta">
+  ¿Hasta dónde podrás hacer evolucionar tu planeta?
+</a>
+</p>
+<h2 id="related-title">Seguir leyendo</h2>
+<div class="related-grid">
+<a class="related-card" href="04_vida_digital_evolucion.html">¿Es la vida digital el siguiente paso de la evolución?</a>
+<a class="related-card" href="03_inmortalidad_humana.html">¿Podremos alcanzar la inmortalidad humana?</a>
+<a class="related-card" href="02_mente_humana.html">¿Podremos copiar una mente humana?</a>
+</div>
+</section>
+<section aria-labelledby="newsletter-mini-title" class="newsletter-mini reveal">
+<h2 id="newsletter-mini-title">Recibe nuevos ensayos de Eidos.</h2>
+<p>Una lista discreta para avisos de artículos, relatos y novedades editoriales.</p>
+<a class="btn gold" href="../index.html#newsletter">Suscribirme al blog</a>
+</section>
+<section aria-labelledby="comments-title" class="comments reveal" id="comentarios">
+<h2 id="comments-title">Comentarios</h2>
+<div class="comment-note">
+Los comentarios forman parte del archivo público de Eidos.
+Cada usuario es responsable de los contenidos que publica bajo su cuenta de GitHub.
+La participación en el blog implica la aceptación de los
+<a href="../../terminosycondiciones.html">términos y condiciones</a> del sitio.
+Se ruega mantener un tono respetuoso y constructivo.
+Los mensajes ofensivos, difamatorios, insultos, spam o contenido inapropiado podrán ser eliminados y sus autores bloqueados.
+</div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOPw9c584C9o_t" data-emit-metadata="0" data-input-position="bottom" data-lang="es" data-loading="lazy" data-mapping="pathname" data-reactions-enabled="1" data-repo="feldenvareth/eidoslibro" data-repo-id="R_kgDOPw9c5w" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</section>
+</main>
+<footer class="footer">
+<p>© Felden Vareth · <a href="../index.html">Eidos Blog · </a> <a href="../../index.html">Eidos · </a> <a href="../../terminosycondiciones.html">Términos y condiciones</a></p>
+</footer>
+</div>
+<button aria-label="Volver arriba" class="scroll-top" type="button">↑</button>
+<script src="../js/blog.js"></script>
+<!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+<p style="margin:0">Este sitio utiliza cookies analíticas para mejorar la experiencia. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Política de Privacidad</a></p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Aceptar</button>
+<button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Rechazar</button>
+</div>
+</div>
+<script>
+function consentGranted() {
+  gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','true');
+}
+
+function consentDeclined() {
+  gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','false');
+}
+
+(function(){
+  const c = localStorage.getItem('consentGiven');
+  if(c === 'true') consentGranted();
+  else if(c === 'false') consentDeclined();
+  else document.getElementById('consent-banner').style.display='flex';
+})();
+</script>
+</body>
+</html>
