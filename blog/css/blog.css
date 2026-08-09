@@ -530,7 +530,9 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
 
   margin-left: 1.75rem;
 
-  margin-right: 0;
+  /* Alinea el borde derecho de la imagen con la columna de lectura (74ch),
+     no con el ancho completo de 860px del contenedor del artículo. */
+  margin-right: max(0px, calc(100% - 74ch));
 
 }
 
