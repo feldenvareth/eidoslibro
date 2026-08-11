@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>El cuerpo de la inteligencia | EIDOS Blog</title>
+<meta content="De la evolución de la destreza en primates a los pulpos, la percepción artificial y la robótica blanda: qué ocurre cuando cuerpo, sentidos y forma de percibir el mundo se convierten en variables de diseño." name="description"/>
+<meta content="Eidos, inteligencia, evolución, primates, manos, herramientas, pulpo, cetáceos, inteligencia artificial, robótica blanda, soft robotics, inteligencia encarnada, percepción artificial, sensores, infrarrojo, ultrasonidos, materiales inteligentes, microrrobots, UPV, Universidad Politécnica de Valencia" name="keywords"/>
+<meta content="Felden Vareth" name="author"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://www.eidoslibro.com/blog/articulos/06_el_cuerpo_de_la_inteligencia.html" rel="canonical"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="EIDOS" property="og:site_name"/>
+<meta content="El cuerpo de la inteligencia" property="og:title"/>
+<meta content="¿Hasta qué punto pensamos como pensamos porque tenemos el cuerpo que tenemos? De la mano de los primates a los robots blandos y los microrrobots." property="og:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/06_el_cuerpo_de_la_inteligencia.html" property="og:url"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/06/fondo.jpg" property="og:image"/>
+<meta content="2026-08-11" property="article:published_time"/>
+<meta content="Felden Vareth" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="El cuerpo de la inteligencia" name="twitter:title"/>
+<meta content="La evolución tuvo que construir cerebros dentro de cuerpos. La inteligencia artificial podría empezar a elegir el suyo." name="twitter:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/06/fondo.jpg" name="twitter:image"/>
+<link href="../../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png"/>
+<link href="../../assets/images/favicon.png" rel="apple-touch-icon"/>
+<meta content="#050608" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Josefin+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":"El cuerpo de la inteligencia",
+  "description":"De la evolución de la destreza en primates a la inteligencia artificial y la robótica blanda: qué ocurre cuando el cuerpo también se convierte en una variable de diseño.",
+  "image":"https://www.eidoslibro.com/blog/articulos/images/06/fondo.jpg",
+  "datePublished":"2026-08-11",
+  "dateModified":"2026-08-11",
+  "author":{"@type":"Person","name":"Felden Vareth"},
+  "publisher":{"@type":"Organization","name":"EIDOS"},
+  "mainEntityOfPage":"https://www.eidoslibro.com/blog/articulos/06_el_cuerpo_de_la_inteligencia.html",
+  "inLanguage":"es"
+}</script>
+<!-- Google tag (gtag.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied'
+});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SCSFPYKJTX');
+</script>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════
+     EIDOS MINIJUEGO     Vinculado al reproductor
+     Pega este bloque completo antes de </body>
+     ═══════════════════════════════════════════ -->
+<style>
+  /* ─────────────────────────────────────────
+     AISLAMIENTO BÁSICO DEL WIDGET
+     ───────────────────────────────────────── */
+
+  #eidos-launcher,
+  #eidos-launcher *,
+  #eidos-panel,
+  #eidos-panel * {
+    box-sizing: border-box;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CONTENEDOR DEL BOTÓN
+     Oculto hasta que empiece el lector
+     ───────────────────────────────────────── */
+
+  #eidos-launcher {
+  position: fixed;
+
+  left: 18px;
+  right: auto;
+  bottom: 18px;
+
+  z-index: 999999;
+
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, serif;
+}
+
+
+  /* Fila de selección de minijuegos */
+  .eidos-game-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BURBUJA DE TEXTO
+     ───────────────────────────────────────── */
+
+#eidos-bubble {
+  display: block;
+
+  margin: 0;
+  padding: 6px 10px;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: #f5ecd0;
+
+  border: none;
+  border-radius: 14px 14px 14px 4px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35);
+
+  font-family: Georgia, serif;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  opacity: 0.88;
+
+  animation:
+    eidosPulse 2.5s infinite;
+}
+
+  @keyframes eidosPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN CIRCULAR
+     ───────────────────────────────────────── */
+
+ .eidos-game-btn {
+  width: 48px;
+  height: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: inherit;
+
+  border: 1px solid #c8a84b;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.4);
+
+  cursor: pointer;
+
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  opacity: 0.88;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.eidos-game-btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+
+/* Nave real del juego Péndulos: cápsula, estabilizadores, núcleo y halo */
+.eidos-ship-icon {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.eidos-ship-halo {
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  width: 30px;
+  height: 18px;
+  border: 1px solid rgba(200, 168, 75, .7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(200, 168, 75, .55);
+  animation: eidosShipPulse 2.2s ease-in-out infinite;
+}
+
+.eidos-ship-body {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #c8a84b;
+  border-radius: 7px;
+  background: #183328;
+  box-shadow: 0 0 5px rgba(200, 168, 75, .45);
+}
+
+.eidos-ship-arm {
+  position: absolute;
+  top: 11px;
+  width: 5px;
+  height: 1px;
+  background: rgba(200, 168, 75, .85);
+}
+
+.eidos-ship-arm-left { left: 4px; }
+.eidos-ship-arm-right { right: 4px; }
+
+.eidos-ship-light {
+  position: absolute;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7b5 0 20%, #c8a84b 45%, rgba(200,168,75,.15) 100%);
+  box-shadow: 0 0 6px #c8a84b;
+}
+
+.eidos-ship-light-left { left: 0; }
+.eidos-ship-light-right { right: 0; }
+
+.eidos-ship-core {
+  position: absolute;
+  left: 14px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 20%, #dffcf6 35%, #69b8aa 100%);
+  box-shadow: 0 0 7px #8fd4c2;
+}
+
+@keyframes eidosShipPulse {
+  0%, 100% { transform: scale(1); opacity: .55; }
+  50% { transform: scale(1.08); opacity: .95; }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANEL DEL JUEGO
+     Formato vertical adaptativo
+     ───────────────────────────────────────── */
+
+  #eidos-panel {
+    display: none;
+
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    z-index: 999998;
+
+    width: min(
+      620px,
+      calc(100vw - 36px),
+      calc((100dvh - 36px) * 620 / 900)
+    );
+
+    height: min(
+      900px,
+      calc(100dvh - 36px),
+      calc((100vw - 36px) * 900 / 620)
+    );
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: 2px solid #4a7c6f;
+    border-radius: 20px;
+
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.7);
+
+    overflow: hidden;
+  }
+
+  #eidos-panel.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CABECERA DEL PANEL
+     ───────────────────────────────────────── */
+
+  #eidos-panel-header {
+    flex: 0 0 58px;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 10px 18px;
+
+    background: #111a14;
+    color: #f5ecd0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 5px;
+  }
+
+  #eidos-panel-header span {
+    margin: 0;
+    padding: 0;
+
+    color: #f5ecd0;
+
+    font-family: Georgia, serif;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: inherit;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN DE CERRAR
+     ───────────────────────────────────────── */
+
+  #eidos-close {
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 4px 6px;
+
+    background: transparent;
+    color: #888;
+
+    border: none;
+    border-radius: 0;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+      color 0.2s ease;
+  }
+
+  #eidos-close:hover {
+    color: #fff;
+  }
+
+
+  /* ─────────────────────────────────────────
+     IFRAME DEL JUEGO
+     ───────────────────────────────────────── */
+
+  #eidos-frame {
+    display: block;
+
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: none;
+
+    overflow: hidden;
+  }
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS ESTRECHAS
+     ───────────────────────────────────────── */
+
+ @media (max-width: 700px) {
+  #eidos-launcher {
+    left: 10px;
+    right: auto;
+    bottom: 10px;
+  }
+
+  .eidos-game-btn {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  #eidos-bubble {
+    max-width: calc(100vw - 20px);
+
+    padding: 5px 8px;
+
+    font-size: 10px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+  #eidos-panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+
+    width: auto;
+    height: auto;
+
+    border-radius: 14px;
+  }
+
+  #eidos-panel-header {
+    flex-basis: 48px;
+
+    padding: 8px 12px;
+
+    font-size: 17px;
+    letter-spacing: 3px;
+  }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS BAJAS
+     ───────────────────────────────────────── */
+
+  @media (min-width: 701px) and (max-height: 760px) {
+    #eidos-panel {
+      top: 8px;
+      bottom: 8px;
+
+      width: min(
+        500px,
+        calc(100vw - 16px),
+        calc((100dvh - 16px) * 500 / 720)
+      );
+
+      height: min(
+        720px,
+        calc(100dvh - 16px),
+        calc((100vw - 16px) * 720 / 500)
+      );
+    }
+
+    #eidos-panel-header {
+      flex-basis: 46px;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      font-size: 16px;
+    }
+  }
+
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
+</style>
+<div aria-hidden="true" id="eidos-panel">
+<div id="eidos-panel-header">
+<span>
+      E V O L U C I Ó N
+    </span>
+<button aria-label="Cerrar experiencia interactiva" id="eidos-close" onclick="closeEidos()" type="button">
+      ✕
+    </button>
+</div>
+<iframe allow="autoplay; fullscreen" id="eidos-frame" scrolling="no" src="about:blank" title="Experiencia interactiva sobre la evolución">
+</iframe>
+</div>
+<script>
+  /* ─────────────────────────────────────────
+     REFERENCIAS DEL WIDGET
+     ───────────────────────────────────────── */
+
+  const eidosPanel =
+    document.getElementById('eidos-panel');
+
+  const eidosFrame =
+    document.getElementById('eidos-frame');
+
+  const evolutionExperienceButtons =
+    document.querySelectorAll('.evolution-experience-btn');
+
+
+  /* ─────────────────────────────────────────
+     ABRIR EL JUEGO ELEGIDO
+     ───────────────────────────────────────── */
+
+  function openEidosGame(gameUrl) {
+    if (!eidosPanel || !eidosFrame) {
+      return;
+    }
+
+    eidosFrame.src = gameUrl;
+    eidosPanel.classList.add('open');
+    eidosPanel.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
+    });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
+  }
+
+  /* ─────────────────────────────────────────
+     CERRAR EL JUEGO
+     Nunca lo abre por accidente
+     ───────────────────────────────────────── */
+
+  function closeEidos() {
+    if (!eidosPanel) {
+      return;
+    }
+
+    eidosPanel.classList.remove('open');
+
+    eidosPanel.setAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
+    });
+  }
+
+
+  /* ─────────────────────────────────────────
+     MENSAJE ENVIADO DESDE EL IFRAME
+     ───────────────────────────────────────── */
+
+  window.addEventListener(
+    'message',
+    function(event) {
+      if (event.data !== 'cerrar-eidos') {
+        return;
+      }
+
+      closeEidos();
+    }
+  );
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
+</script>
+<!-- ═══════════════════════════════════════════
+     FIN DEL LANZADOR EIDOS
+     ═══════════════════════════════════════════ -->
+<div class="reading-progress reading-progress-article">
+<span></span>
+</div>
+<div class="reading-progress reading-progress-forum">
+<span></span>
+</div>
+<div aria-hidden="true" class="ambient"></div>
+<div class="article-shell">
+<nav aria-label="Navegación del artículo" class="article-nav">
+<a href="../index.html">← Volver al blog</a>
+<a href="../../index.html">Eidos principal</a>
+<a href="../../relatos/index.html">Relatos</a>
+
+          <a href="../articles/06_the_body_of_intelligence.html"
+     class="lang-switch"
+     aria-label="English version"
+     title="English version">
+    <img src="../../assets/images/flaguk.webp"
+         alt="English">
+  </a>
+
+</nav>
+<header class="article-hero reveal">
+<p class="kicker">Eidos · Inteligencia · Robótica</p>
+<h1>El cuerpo de la inteligencia:<br/>de las manos que fabricaron herramientas a los robots blandos</h1>
+<p class="article-meta">Ciencia · 30 min · Felden Vareth · 11-08-2026</p>
+<div class="article-actions">
+<a class="btn gold" href="#comentarios">Comentarios</a>
+<a class="btn" href="../index.html">Archivo</a>
+<button class="btn share-btn" data-share="" type="button">Copiar enlace</button>
+<a class="btn" download="" href="images/06/pdf.pdf">Descargar PDF</a>
+<a class="btn" href="images/06/reproductordoble.html" rel="noopener" target="_blank" title="Conversación basada en este ensayo. No es una lectura del artículo.">Escuchar conversación</a>
+<div class="read-aloud-widget">
+<button class="btn read-aloud-open" type="button">
+    🎧 Escuchar con el navegador
+  </button>
+<div class="read-aloud-player" hidden="">
+<div class="read-aloud-controls">
+<button class="btn read-prev" type="button">⏮ Sección anterior</button>
+<button class="btn read-pause" type="button">⏸ Pausar</button>
+<button class="btn read-next" type="button">⏭ Siguiente sección</button>
+<button class="btn read-stop" type="button">■ Detener</button>
+<label class="read-speed-label">
+        Velocidad
+        <select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<input class="read-progress" min="0" step="1" type="range" value="0"/>
+<p class="read-status">
+      Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.
+    </p>
+</div>
+<div class="read-floating-player" hidden="">
+<div class="read-floating-controls">
+<button class="btn read-floating-prev" title="Sección anterior" type="button">⏮</button>
+<button class="btn read-floating-pause" title="Pausar" type="button">⏸</button>
+<button class="btn read-floating-next" title="Siguiente sección" type="button">⏭</button>
+<button class="btn read-floating-stop" title="Detener" type="button">■</button>
+<label class="read-speed-label">
+<select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<p class="read-floating-status"></p>
+</div>
+</div>
+</div>
+</header>
+<div class="article-cover reveal">
+<video autoplay loop muted="" playsinline="" poster="images/06/fondo.jpg" preload="metadata">
+<source src="images/06/video.mp4" type="video/mp4"/>
+</video>
+</div>
+<aside class="article-toc reveal" data-toc="" hidden="">
+<p class="kicker">Mapa del post</p>
+<nav aria-label="Tabla de contenidos"></nav>
+</aside>
+<main class="article-content" data-article-content="">
+<p class="drop-intro">
+<em><span class="dropcap">D</span><span class="after-drop">urante millones de años, cualquier inteligencia capaz de transformar su entorno estuvo sometida a una condición inevitable: necesitaba un cuerpo con el que actuar sobre él.</span></em>
+</p>
+
+<p>Mucho antes de que existieran martillos, ruedas, ordenadores o robots, hubo dedos que cerraban una presa, picos que desplazaban objetos, trompas que exploraban, mandíbulas que transportaban y tentáculos capaces de rodear aquello que encontraban. Pensar servía para anticipar el mundo; manipularlo permitía comprobar qué ocurría al cambiarlo.</p>
+
+<p>En nuestro propio linaje, la relación entre cerebro, manos y herramientas es tan estrecha que resulta tentador contar una historia sencilla: primero apareció una mano capaz de agarrar con precisión y después un cerebro cada vez mayor aprendió a utilizarla. La evolución rara vez funciona de una forma tan lineal. La evidencia disponible apunta a una relación de ida y vuelta. En los primates, una mayor capacidad de manipulación, determinadas proporciones de la mano y el aumento de algunas regiones cerebrales parecen haber evolucionado de forma relacionada. La mano no creó por sí sola la inteligencia, pero un cuerpo capaz de realizar acciones más complejas convirtió el entorno en un problema cada vez más rico para el cerebro.</p>
+
+<blockquote>
+La pregunta quizá no sea si la mano produjo la inteligencia, sino cuánto pudo aprender un cerebro cuando dispuso de un cuerpo capaz de hacer cada vez más cosas.
+</blockquote>
+
+<p>Y entonces aparece una ruptura histórica. La inteligencia artificial no tiene que heredar una anatomía construida durante millones de generaciones. Puede existir en un centro de datos, controlar un brazo industrial, dirigir un vehículo, habitar un robot humanoide o repartirse entre centenares de máquinas. Si algún día una inteligencia artificial llega a desenvolverse de forma autónoma en el mundo físico, no existe ninguna razón para pensar que su cuerpo óptimo deba parecerse al nuestro.</p>
+
+<p>Ahí empieza una disciplina especialmente sugerente: la <strong>robótica blanda</strong>. En lugar de construir únicamente máquinas rígidas de metal, articuladas alrededor de motores y ejes, la ingeniería está aprendiendo a fabricar robots que se doblan, se inflan, se deforman, cambian de forma, envuelven objetos delicados o atraviesan espacios que un mecanismo convencional no podría recorrer.</p>
+
+<p>Quizá estemos entrando en una etapa extraña de la historia de la inteligencia. La evolución biológica tuvo que construir cerebros que funcionaran dentro del cuerpo que cada linaje heredaba. Nosotros estamos empezando a construir inteligencias para las que el cuerpo puede convertirse en una variable de diseño.</p>
+
+
+<h2>Una mano no fabrica un cerebro, pero ambos pueden empujarse</h2>
+
+<p>Los primates ofrecen uno de los mejores escenarios para estudiar esta relación porque combinan visión, coordinación, aprendizaje social y una extraordinaria capacidad de manipulación. Una de las claves anatómicas es la <strong>mano prensil y, en muchos primates, el pulgar oponible</strong>. Oponer el pulgar significa poder desplazarlo a través de la palma hasta enfrentar su yema a la de otros dedos, especialmente al índice. Ese movimiento permite sujetar un objeto entre superficies enfrentadas y realizar agarres de precisión muy distintos de los que se consiguen cerrando todos los dedos en la misma dirección. No todos los primates poseen el mismo grado de oposición. En los humanos, el pulgar es proporcionalmente largo, móvil y musculado, una combinación que amplía de manera extraordinaria la precisión con la que podemos manipular objetos y herramientas.</p>
+
+<p>Una investigación publicada en 2025 comparó 95 especies de primates actuales y fósiles y encontró una relación significativa entre pulgares relativamente más largos —una característica asociada a una mayor capacidad de manipulación— y cerebros mayores. La relación aparecía especialmente vinculada al tamaño del neocórtex.</p>
+
+<p>Eso no significa que un pulgar largo produzca automáticamente un cerebro grande. Tampoco demuestra una cadena causal simple. Lo interesante es que anatomía y sistema nervioso parecen formar parte de una misma historia evolutiva. Si un animal puede ejecutar movimientos más precisos, aparecen nuevas posibilidades: explorar, seleccionar, abrir, romper, combinar, transportar o utilizar objetos. Cada posibilidad introduce problemas de coordinación, predicción y aprendizaje.</p>
+
+<p>Otra investigación comparativa, publicada en 2016 a partir del estudio de 36 especies de primates no humanos, encontró que la complejidad de la manipulación se relacionaba con el tamaño cerebral y con medidas de rendimiento cognitivo. Los autores propusieron una dinámica de retroalimentación: cerebros con mayor capacidad de control permiten acciones más complejas y esas nuevas posibilidades pueden favorecer, a su vez, mayores demandas cognitivas.</p>
+
+<p>En nuestro linaje se añadió un elemento decisivo: las herramientas dejaron de ser únicamente objetos ocasionales y terminaron formando parte de una cultura acumulativa. Una piedra tallada no cambia los genes de quien la utiliza, pero sí cambia el mundo en el que aprende la siguiente generación. El conocimiento puede transmitirse, mejorarse y combinarse. A partir de cierto punto, la evolución cultural avanza muchísimo más deprisa que la anatómica.</p>
+
+<blockquote>
+La mano amplía lo que el cerebro puede hacer. El cerebro amplía lo que la mano puede intentar. Y una herramienta amplía a ambos.
+</blockquote>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/s42003-025-08686-5" rel="noopener" target="_blank">Human dexterity and brains evolved hand in hand — Communications Biology, 2025</a></p>
+<p><a href="https://www.nature.com/articles/s41583-021-00528-7" rel="noopener" target="_blank">The neural mechanisms of manual dexterity — Nature Reviews Neuroscience, 2021</a></p>
+<p><a href="https://www.nature.com/articles/srep24528" rel="noopener" target="_blank">Manipulation complexity in primates coevolved with brain size and terrestriality — Scientific Reports, 2016</a></p>
+</section>
+
+
+<h2>Las excepciones obligan a cambiar la pregunta</h2>
+
+<p>Si la inteligencia dependiera de una mano prensil, los cetáceos serían difíciles de explicar. Delfines y ballenas carecen de extremidades capaces de fabricar herramientas comparables a las nuestras y, sin embargo, muestran aprendizaje social complejo, comunicación, tradiciones que se transmiten entre individuos y comportamientos que varían entre poblaciones. En las ballenas, la investigación sobre cultura animal estudia precisamente cómo determinadas conductas pueden propagarse socialmente y mantenerse durante generaciones.</p>
+
+<p>Los córvidos también complican cualquier explicación centrada en la mano. Algunas especies utilizan el pico y las patas para manipular objetos y resolver problemas. Los elefantes siguieron un camino anatómico completamente distinto. Su trompa se formó a partir de la elongación y fusión de la nariz y el labio superior y funciona como un <strong>hidrostato muscular</strong>, una estructura sin huesos capaz de cambiar de longitud, curvarse, retorcerse y ejercer fuerza con enorme precisión.</p>
+
+<p>En la propia punta aparece una diferencia especialmente llamativa. Los elefantes africanos poseen <strong>dos prolongaciones digitiformes</strong>, una dorsal y otra ventral, que pueden actuar enfrentadas y pinzar objetos pequeños de una manera funcionalmente comparable a dos dedos. Los elefantes asiáticos poseen una prolongación principal y suelen combinarla con la superficie inferior de la trompa o envolver el objeto. Un animal de varias toneladas puede así arrancar vegetación pesada y, con el mismo órgano, recoger elementos diminutos. No es una mano y no procede evolutivamente de una mano, pero vuelve a aparecer la misma solución funcional: una estructura capaz de modificar el entorno con gran precisión.</p>
+
+<p>La evolución parece haber llegado a capacidades cognitivas complejas por caminos anatómicos muy diferentes.</p>
+
+<p>Por eso conviene sustituir "mano prensil" por una idea más amplia. Lo relevante puede ser la capacidad de <strong>percibir el entorno, actuar sobre él con precisión, observar las consecuencias y aprender de esa interacción</strong>. En algunos linajes esa interfaz es una mano. En otros puede ser un pico, una trompa o una combinación distinta de órganos y sentidos.</p>
+
+<p>La inteligencia animal tampoco puede ordenarse con una única escala. Resolver un problema espacial, aprender una regla social, reconocer individuos, fabricar una herramienta o comunicarse son capacidades diferentes. Nuestra especie destaca de manera extraordinaria por el lenguaje simbólico, la cultura acumulativa y la tecnología, pero eso no convierte a todas las demás formas de cognición en versiones incompletas de la nuestra.</p>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2024.0133" rel="noopener" target="_blank">Culture and conservation in baleen whales — Philosophical Transactions of the Royal Society B, 2025</a></p>
+<p><a href="https://www.science.org/doi/10.1126/sciadv.ads6014" rel="noopener" target="_blank">Whale communication and information efficiency — Science Advances, 2025</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8969868/" rel="noopener" target="_blank">The relationship between distal trunk morphology and object grasping in the African savannah elephant — PeerJ, 2022</a></p>
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(21)01348-8" rel="noopener" target="_blank">Motor control: Elephant trunks ignore the many and choose the few — Current Biology, 2021</a></p>
+</section>
+
+
+<h2>El pulpo: otra forma de construir una mente</h2>
+
+<p>El pulpo resulta todavía más desconcertante. Los cefalópodos se separaron evolutivamente del linaje de los vertebrados hace cientos de millones de años. Su inteligencia no es una versión temprana de la nuestra. Es el resultado de otra historia.</p>
+
+<p>Un pulpo dispone de ocho brazos extremadamente flexibles, cubiertos por ventosas sensibles y capaces de ejecutar movimientos difíciles de describir mediante el esquema habitual de huesos y articulaciones. Buena parte del procesamiento nervioso relacionado con esos brazos se distribuye fuera del cerebro central. El animal combina control central con circuitos periféricos que permiten resolver parte de la complejidad cerca del propio órgano que actúa.</p>
+
+<p>Eso convierte al pulpo en un ejemplo especialmente interesante para la robótica. Un brazo blando posee muchísimos más grados posibles de deformación que un brazo industrial articulado. Controlarlo desde un único ordenador calculando cada punto del movimiento sería extraordinariamente costoso. La biología utiliza otra estrategia: parte de la solución está incorporada en la forma del cuerpo, sus propiedades mecánicas, sus sensores y su organización nerviosa.</p>
+
+<p>En 2026 se publicó además un experimento en el que ejemplares de <em>Octopus bimaculoides</em> aprendieron a utilizar un espejo como herramienta para localizar una recompensa situada fuera de su campo visual directo. El resultado no demuestra autoconciencia ni permite trasladar categorías humanas al animal, pero sí añade otra pieza a la evidencia de aprendizaje flexible y resolución de problemas en cefalópodos.</p>
+
+<p>El pulpo introduce así una idea fundamental. Tal vez una parte de la inteligencia no consista en controlar un cuerpo desde fuera, sino en <strong>aprovechar las propiedades del propio cuerpo para reducir el problema que el cerebro necesita resolver</strong>.</p>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(26)00588-9" rel="noopener" target="_blank">Mirror use as a tool in <em>Octopus bimaculoides</em> — Current Biology, 2026</a></p>
+<p><a href="https://www.science.org/doi/10.1126/scirobotics.adr7175" rel="noopener" target="_blank">Octopus-inspired hierarchical suction intelligence for soft robots — Science Robotics, 2025</a></p>
+</section>
+
+
+<h2>La inteligencia artificial rompe el pacto entre cerebro y anatomía</h2>
+
+<p>Todo organismo vivo recibe un cuerpo. Puede crecer, repararlo parcialmente, aprender a utilizarlo e incluso modificar su entorno con herramientas, pero no puede rediseñar desde cero su anatomía durante su vida. La selección natural necesita generaciones para cambiar una estructura de forma sustancial.</p>
+
+<p>Una inteligencia artificial no está sometida necesariamente a esa restricción. El mismo sistema de control puede ser conectado a cámaras diferentes, brazos distintos, sensores nuevos o máquinas diseñadas para ambientes concretos. Un modelo puede aprender primero en una simulación y transferir después parte de ese aprendizaje a una plataforma física. Otro puede recibir información simultánea de varios robots.</p>
+
+<p>Eso no significa que el cuerpo deje de importar. Ocurre exactamente lo contrario cuando la IA tiene que actuar en el mundo real. Un sistema que solo procesa texto puede ignorar la fricción, el equilibrio o la deformación de un objeto. Un robot que debe caminar, agarrar una fruta o atravesar un conducto tiene que enfrentarse a todas esas propiedades. La diferencia es que ya no existe obligación de utilizar una única anatomía heredada.</p>
+
+<p>Una IA destinada a una fábrica podría necesitar brazos rígidos y extremadamente precisos. Otra diseñada para rescate podría requerir un cuerpo deformable. Una máquina submarina podría imitar estructuras de peces o cefalópodos. Una plataforma médica podría tener un tamaño milimétrico. Un sistema distribuido podría no disponer siquiera de un cuerpo único.</p>
+
+<blockquote>
+La biología recibe un cuerpo al nacer. Una inteligencia artificial podría llegar a elegirlo según el problema.
+</blockquote>
+
+<p>Eso abre una pregunta que va mucho más allá de la ingeniería. Si una misma arquitectura de inteligencia controla cuerpos radicalmente diferentes, ¿seguirá aprendiendo de la misma forma? ¿Cambiará su representación del mundo cuando cambien sus sensores, su alcance, su tamaño o su manera de moverse? La inteligencia puede ser software, pero la experiencia del mundo siempre llega a través de algún tipo de interfaz.</p>
+
+
+<h2>No todos los cuerpos perciben el mismo mundo</h2>
+
+<p>Nuestros sentidos no muestran el mundo completo. Muestran la parte del mundo que nuestra evolución convirtió en información útil.</p>
+
+<p>El ojo humano detecta aproximadamente longitudes de onda comprendidas entre 380 y 700 nanómetros. A ese intervalo lo llamamos luz visible. Por debajo y por encima continúan existiendo otras regiones del espectro electromagnético, pero para nosotros son invisibles. No vemos el ultravioleta ni el infrarrojo. Cuando observamos una imagen térmica coloreada, los rojos, amarillos o violetas que aparecen en una pantalla no son los colores reales del infrarrojo: son una traducción destinada a que nuestro sistema visual pueda interpretar datos que normalmente no percibe.</p>
+
+<p>Nuestra visión del color depende principalmente de tres clases de conos, sensibles a distintas zonas del espectro y conocidas como S, M y L. No equivalen de manera exacta a tres píxeles rojo, verde y azul, aunque la comparación resulte intuitiva. Los bastones cumplen otra función: son mucho más sensibles a niveles bajos de iluminación y contribuyen sobre todo a la visión nocturna, no a distinguir colores. Nuestro cerebro combina las respuestas de esos receptores y construye con ellas el espacio cromático que experimentamos.</p>
+
+<p>Pero ese espacio no es universal. Muchas aves poseen cuatro tipos de conos y una visión tetracromática que puede extenderse hacia el ultravioleta o el violeta. En experimentos con colibríes silvestres se ha demostrado que pueden discriminar colores no espectrales que para nosotros no existen como experiencia visual directa, combinaciones como ultravioleta con verde o ultravioleta con rojo. Dos superficies que a nuestros ojos parecen casi iguales pueden contener para un ave contrastes evidentes.</p>
+
+<p>Los insectos ofrecen otra versión. Las abejas también tienen tres clases principales de fotorreceptores, pero no coinciden con las nuestras: alcanzan máximos de sensibilidad aproximadamente en el ultravioleta, el azul y el verde. No perciben simplemente “más colores” que nosotros; perciben <strong>otro espacio de colores</strong>. Una flor puede mostrar patrones ultravioleta que nuestro ojo no registra y que, sin embargo, resultan visibles para un polinizador.</p>
+
+<p>Incluso entre las arañas aparecen soluciones distintas. Muchas arañas saltadoras poseen receptores sensibles al ultravioleta y al verde; algunos grupos han añadido mecanismos ópticos que amplían la discriminación hacia longitudes de onda más largas. Lo que para nosotros es una única escena puede estar dividido para otro animal en señales cromáticas completamente diferentes.</p>
+
+<p>Y la diferencia entre mundos sensoriales no termina en la vista. Para un perro, el olor es una fuente de información con una riqueza difícil de trasladar a nuestra experiencia. Su anatomía nasal separa parte del flujo destinado a respirar del que se dirige a la región olfatoria, y el olfateo genera patrones de aire especializados en capturar moléculas olorosas. Un perro entrenado puede distinguir concentraciones muy bajas, separar olores dentro de mezclas complejas y seguir rastros que para nosotros sencillamente no existen.</p>
+
+<p>Decir que un perro “ve” un rastro de olor como nosotros vemos un hilo de color sería una metáfora, no una equivalencia demostrable. Pero sirve para señalar la diferencia de escala perceptiva. Para nosotros, dos lugares pueden parecer idénticos; para un perro pueden contener historias químicas distintas: quién pasó, por dónde lo hizo y qué huellas moleculares permanecen todavía en el ambiente.</p>
+
+<p>Otros animales amplían todavía más el catálogo. Los murciélagos construyen parte de su espacio mediante ecos ultrasónicos. Algunos peces y tiburones detectan campos eléctricos extremadamente débiles. Las serpientes de foseta registran radiación térmica mediante órganos especializados. La naturaleza no ha producido una única versión sensorial del mundo, sino muchas.</p>
+
+<blockquote>
+No existe un único mundo perceptivo esperando ser observado. Existen distintas ventanas biológicas abiertas sobre la misma realidad física.
+</blockquote>
+
+<p>Con el sonido ocurre algo parecido. Un oído humano joven y sano puede detectar aproximadamente frecuencias comprendidas entre 20 hercios y 20 kilohercios, aunque la sensibilidad a las frecuencias más altas disminuye con la edad. Por debajo quedan los infrasonidos y por encima los ultrasonidos. El mundo físico contiene vibraciones que existen aunque nunca lleguen a convertirse en sonido para nosotros.</p>
+
+<p>Un robot no tendría por qué compartir ninguna de esas fronteras.</p>
+
+<p>Sus sistemas de visión podrían combinar cámaras convencionales con infrarrojo, ultravioleta, imagen térmica, sensores de profundidad o dispositivos capaces de registrar numerosas bandas del espectro. Para una inteligencia artificial esos datos no tendrían por qué convertirse previamente en una fotografía parecida a la que ve un ser humano. Podrían llegar como canales normales de información y formar parte directamente de su representación del entorno.</p>
+
+<p>Una diferencia de temperatura podría ser tan inmediata para una máquina como para nosotros lo es una diferencia de luminosidad. Una superficie que nuestros ojos perciben uniforme podría revelar contrastes relacionados con su composición, su temperatura o su estructura interna cuando se observa mediante sensores adecuados.</p>
+
+<p>El oído artificial tampoco tendría que parecerse al nuestro. Una matriz formada por varios micrófonos puede comparar pequeñas diferencias en el momento y la intensidad con que una señal alcanza cada uno de ellos y estimar así desde qué dirección procede. Mediante técnicas de formación de haz o <em>beamforming</em>, el sistema puede reforzar determinadas direcciones y atenuar otras. No necesita mover físicamente una oreja para concentrarse en una zona del espacio.</p>
+
+<p>Y podría escuchar lo que nosotros no escuchamos. Los ultrasonidos se utilizan para medir distancias, obtener imágenes y detectar discontinuidades en materiales. Las vibraciones de una máquina pueden revelar un fallo antes de que resulte visible. Otros sensores pueden registrar presión, aceleración, campos magnéticos, radiación, composición química o fuerzas que no corresponden de forma directa a ninguno de nuestros cinco sentidos tradicionales.</p>
+
+<blockquote>
+Un robot no solo podría tener un cuerpo diferente del nuestro. También podría habitar un mundo perceptivo diferente.
+</blockquote>
+
+<p>La especialización llevaría esa diferencia todavía más lejos. Un robot destinado a inspeccionar estructuras podría utilizar ultrasonidos u otros métodos de ensayo no destructivo para localizar fisuras ocultas bajo una superficie aparentemente intacta. Una máquina que trabajase entre humo podría apoyarse en cámaras térmicas, lidar o radar cuando la visión convencional dejara de ser útil. Un vehículo submarino podría utilizar sonar. Un sistema diseñado para una intervención médica podría incorporar una visión microscópica y desenvolverse en un espacio que para nosotros solo existe ampliado sobre una pantalla.</p>
+
+<p>Nosotros también extendemos nuestros sentidos mediante instrumentos. Un microscopio, un telescopio, una cámara térmica o un detector de radiación nos permiten acceder a información que nuestro cuerpo no puede captar directamente. La diferencia es que después debemos transformarla en una imagen, un sonido, una cifra o alguna otra representación compatible con nuestro sistema nervioso.</p>
+
+<p>Una inteligencia artificial podría no necesitar esa traducción. El infrarrojo no tendría que aparecer coloreado en rojo. Un ultrasonido no tendría que transformarse en un tono audible. Una nube de puntos obtenida mediante lidar no tendría que convertirse en una fotografía. Todos ellos podrían ser simplemente dimensiones distintas de la información que utiliza para construir su modelo del mundo.</p>
+
+<p>Y los sentidos ni siquiera tendrían que permanecer constantes. Un mismo sistema podría disponer de unos sensores en una carcasa y de otros completamente diferentes al conectarse a otra. Cambiar de cuerpo significaría entonces cambiar también los límites de lo que puede percibir.</p>
+
+<p>Eso introduce una cuestión difícil de separar de la propia inteligencia. Si nuestra manera de pensar se ha desarrollado dentro de un mundo percibido a través de ojos, oídos, piel, equilibrio, temperatura y propiocepción, ¿qué clase de representación construiría una mente para la que el infrarrojo, los ultrasonidos o las distancias medidas con precisión milimétrica fueran experiencias ordinarias?</p>
+
+<blockquote>
+Cambiar los sensores no ampliaría únicamente la información disponible. Podría cambiar la clase de mundo que una inteligencia aprende a representar.
+</blockquote>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://science.nasa.gov/ems/09_visiblelight/" rel="noopener" target="_blank">Visible Light — NASA Science</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7334476/" rel="noopener" target="_blank">Wild hummingbirds discriminate nonspectral colors — PNAS, 2020</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/9502802/" rel="noopener" target="_blank">Honeybee blue- and ultraviolet-sensitive opsins — Journal of Neuroscience, 1998</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/16598507/" rel="noopener" target="_blank">Behavioural evidence of UV sensitivity in jumping spiders — Journal of Experimental Biology, 2006</a></p>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rsif.2009.0490" rel="noopener" target="_blank">The fluid dynamics of canine olfaction: unique nasal airflow patterns as an explanation of macrosmia — Journal of the Royal Society Interface, 2010</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7912023/" rel="noopener" target="_blank">Stimulus Control of Odorant Concentration — Animals, 2021</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK10924/" rel="noopener" target="_blank">The Audible Spectrum — Neuroscience, NCBI Bookshelf</a></p>
+<p><a href="https://ieeexplore.ieee.org/document/1600650/" rel="noopener" target="_blank">Sound source localization: microphone array design and evolutionary estimation — IEEE</a></p>
+<p><a href="https://www.nature.com/articles/s41467-021-23089-w" rel="noopener" target="_blank">Robot-assisted, source-camera-coupled multi-view broadband photo-monitoring — Nature Communications, 2021</a></p>
+<p><a href="https://www.nature.com/articles/s41467-024-55199-6" rel="noopener" target="_blank">Sub-millimeter fiberscopic robot with integrated imaging and multifunctional operation — Nature Communications, 2024</a></p>
+</section>
+
+
+<h2>Cuando el robot deja de ser una estatua</h2>
+
+<p>La imagen clásica de un robot procede en gran parte de la industria: estructuras rígidas, motores eléctricos, reductoras y articulaciones que se desplazan siguiendo trayectorias muy precisas. Ese diseño es extraordinariamente eficaz cuando el entorno está controlado. Un brazo industrial puede repetir una operación miles de veces con una exactitud imposible para un ser humano.</p>
+
+<p>El problema aparece cuando el mundo deja de ser predecible. Una fresa cambia ligeramente de tamaño. Una prenda se arruga. Una persona mueve la mano. Una tubería se estrecha. Un tejido biológico se deforma al tocarlo. En esas situaciones, la rigidez que proporciona precisión también puede convertirse en una limitación.</p>
+
+<p>La robótica blanda intenta resolver parte de ese problema construyendo sistemas con materiales deformables: elastómeros, polímeros, tejidos, estructuras neumáticas o hidráulicas, componentes impresos en 3D y materiales capaces de modificar su forma ante determinados estímulos. No todos los robots blandos son inflables, ni todos renuncian por completo a elementos rígidos. Existe un continuo entre máquinas completamente rígidas y sistemas híbridos en los que rigidez y flexibilidad se combinan.</p>
+
+<p>Una pinza blanda puede adaptarse a la forma de un objeto sin conocer previamente cada milímetro de su geometría. En lugar de calcular una trayectoria exacta para cada dedo, el propio material absorbe una parte de la incertidumbre. La deformación deja de ser un error y pasa a formar parte del mecanismo.</p>
+
+<section class="article-bibliography">
+<h3>Dos maneras de construir un robot</h3>
+<table class="article-table">
+<thead>
+<tr>
+<th>Característica</th>
+<th>Robótica rígida</th>
+<th>Robótica blanda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estructura</td>
+<td>Eslabones y articulaciones definidas</td>
+<td>Materiales deformables o estructuras flexibles</td>
+</tr>
+<tr>
+<td>Movimiento</td>
+<td>Trayectorias muy controladas</td>
+<td>Deformación continua y adaptación</td>
+</tr>
+<tr>
+<td>Contacto</td>
+<td>Gran precisión, pero requiere control cuidadoso</td>
+<td>Puede adaptarse mejor a objetos frágiles o geometrías inciertas</td>
+</tr>
+<tr>
+<td>Entorno ideal</td>
+<td>Repetitivo y bien conocido</td>
+<td>Irregular, cambiante o con contacto físico complejo</td>
+</tr>
+<tr>
+<td>Desafío principal</td>
+<td>Flexibilidad ante lo inesperado</td>
+<td>Modelado, control, potencia, durabilidad y sensorización</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<p>Este cambio conduce a una idea cada vez más importante en robótica: la <strong>inteligencia física</strong>. Parte del comportamiento puede quedar incorporado en la geometría, la elasticidad, la distribución de sensores o la dinámica del propio material. El cuerpo deja de ser únicamente una carcasa obediente y empieza a participar en la solución.</p>
+
+<p>Trabajos recientes incluso exploran hasta qué punto la dinámica de estructuras blandas puede utilizarse como parte del cálculo y del control. En vez de pedir a un procesador que modele cada deformación, determinadas propiedades físicas del robot pueden contribuir directamente a transformar información y producir respuestas útiles.</p>
+
+<blockquote>
+En un robot blando, doblarse no siempre es perder precisión. A veces doblarse es la forma de resolver el problema.
+</blockquote>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/s41467-024-47780-8" rel="noopener" target="_blank">Untethered soft actuators for soft standalone robotics — Nature Communications, 2024</a></p>
+<p><a href="https://www.nature.com/articles/s41467-026-70262-4" rel="noopener" target="_blank">Embodying physical computing into soft robots — Nature Communications, 2026</a></p>
+</section>
+
+
+<h2>Inflarse, crecer y atravesar lugares imposibles</h2>
+
+<p>Algunos de los ejemplos más llamativos de robótica blanda parecen más cercanos a plantas o animales que a un robot industrial. Existen robots neumáticos que se curvan al inflarse, estructuras que se despliegan modificando su presión interna y máquinas inspiradas en el crecimiento de raíces o lianas.</p>
+
+<p>Un robot que "crece" desde su extremo puede avanzar por espacios estrechos sin arrastrar toda su superficie contra el entorno. La estructura permanece prácticamente inmóvil detrás de la punta mientras nuevo material se invierte hacia fuera en el extremo. Esa propiedad permite atravesar recorridos tortuosos, introducir sensores en zonas inaccesibles o explorar espacios donde un robot convencional tendría dificultades para desplazarse.</p>
+
+<p>Este tipo de máquinas ha sido mostrado también en divulgación científica. El canal <strong>Veritasium</strong> dedicó un vídeo a un robot inspirado en el crecimiento vegetal y otro a la robótica blanda. Resultan útiles para visualizar la idea, aunque la evidencia científica debe buscarse en los trabajos originales que describen estos sistemas.</p>
+
+<section class="article-bibliography">
+<h3>Para verlo en movimiento</h3>
+<p><a href="https://www.veritasium.com/videos/2021/4/16/this-plant-inspired-robot-could-save-your-life" rel="noopener" target="_blank">This Plant-Inspired Robot Could Save Your Life — Veritasium</a></p>
+
+<p><a href="https://science.nasa.gov/ems/09_visiblelight/" rel="noopener" target="_blank">Visible Light — NASA Science</a></p>
+
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK10924/" rel="noopener" target="_blank">The Audible Spectrum — Neuroscience, NCBI Bookshelf</a></p>
+
+<p><a href="https://ieeexplore.ieee.org/document/1600650/" rel="noopener" target="_blank">Sound source localization: microphone array design and evolutionary estimation — IEEE</a></p>
+
+<p><a href="https://www.nature.com/articles/s41467-021-23089-w" rel="noopener" target="_blank">Robot-assisted, source-camera-coupled multi-view broadband photo-monitoring — Nature Communications, 2021</a></p>
+
+<p><a href="https://www.nature.com/articles/s41467-024-55199-6" rel="noopener" target="_blank">Sub-millimeter fiberscopic robot with integrated imaging and multifunctional operation — Nature Communications, 2024</a></p>
+</section>
+
+
+<h2>Cuando el robot cabe dentro del cuerpo</h2>
+
+<p>La flexibilidad resulta especialmente atractiva cuando el entorno que debe recorrer un robot es el cuerpo humano. Una máquina rígida con aristas, motores convencionales y cables externos no es el objeto ideal para desplazarse por vasos, cavidades o tejidos delicados. Por eso una parte de la investigación en microrrobótica médica utiliza materiales blandos, propulsión magnética, luz, ultrasonidos o microorganismos modificados y controlados para construir sistemas de tamaño diminuto.</p>
+
+<p>En 2024 se presentó, por ejemplo, un microrrobot biológico blando basado en <em>Euglena</em>, controlado mediante luz y diseñado para desplazarse por microambientes estrechos. En experimentos de laboratorio se utilizó para transporte dirigido de fármacos y para actuar sobre células enfermas en modelos de mucosa intestinal.</p>
+
+<p>Otro trabajo del mismo año mostró robots blandos milimétricos accionados de forma selectiva mediante ultrasonidos focalizados. Entre las demostraciones experimentales aparecían el transporte de líquidos y conceptos destinados a adquisición de tejido o biopsia.</p>
+
+<p>Aquí es fundamental separar la investigación de la medicina rutinaria. Estos trabajos <strong>no significan que hoy existan enjambres de robots recorriendo habitualmente el organismo de pacientes y reparando enfermedades</strong>. Muchas de estas tecnologías se encuentran todavía en fases experimentales, en pruebas de laboratorio, modelos animales o demostraciones de concepto. Los problemas de control, energía, navegación, biocompatibilidad, recuperación del dispositivo y seguridad son enormes.</p>
+
+<p>Pero la dirección tecnológica es real. A medida que el robot se hace más pequeño, la idea de construirlo como una miniatura metálica de una máquina convencional pierde sentido. Su cuerpo empieza a parecerse más a una estructura flexible, adaptable y especializada para un entorno concreto.</p>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/s41377-024-01576-z" rel="noopener" target="_blank">Light-controlled soft bio-microrobot for targeted therapy — Light: Science &amp; Applications, 2024</a></p>
+<p><a href="https://www.nature.com/articles/s41467-024-48593-5" rel="noopener" target="_blank">Focused ultrasound enables selective actuation of multifunctional soft millirobots — Nature Communications, 2024</a></p>
+</section>
+
+
+<h2>Del material al sensor y del sensor al comportamiento</h2>
+
+<p>Esta transición entre inteligencia, cuerpo y materiales ya ha empezado a trasladarse también a la formación técnica. Hoy existen grados y asignaturas que combinan programación de robots, sistemas inteligentes, interfaces humano-máquina, sensorización, visión por computador y diseño mecánico.</p>
+
+<p>Dentro de esa evolución académica, la <strong>robótica blanda</strong> empieza a estudiarse como un campo propio. Sus programas abordan las ventajas y limitaciones de los sistemas flexibles frente a los rígidos, las tecnologías de fabricación, la impresión 3D con materiales deformables y el diseño de dispositivos de agarre capaces de adaptarse al objeto.</p>
+
+<p>La investigación sigue el mismo camino. Control robótico, sensorización avanzada, visión, prótesis, exoesqueletos, sistemas de manipulación y sensores táctiles o de presión dejan de ser áreas completamente separadas y convergen alrededor de una misma pregunta: cómo construir máquinas capaces de percibir, adaptarse y actuar en entornos reales.</p>
+
+<p>No se trata únicamente de aprender a programar un robot. La misma pregunta que abre este texto —qué ocurre cuando la inteligencia deja de estar ligada a una anatomía fija— atraviesa informática, automática, mecánica, materiales, sensorización e inteligencia artificial.</p>
+
+<blockquote>
+Para construir una máquina capaz de tocar el mundo no basta con decidir cómo piensa. También hay que decidir de qué está hecho aquello con lo que piensa y actúa.
+</blockquote>
+
+<section class="article-bibliography">
+<h3>Formación e investigación relacionada</h3>
+<p><a href="https://www.upv.es/titulaciones/GIIROB/" rel="noopener" target="_blank">Plan de estudios en Informática Industrial y Robótica</a></p>
+<p><a href="https://aplicat.upv.es/exploraupv/ficha-asignatura/asignatura/14571" rel="noopener" target="_blank">Asignatura de Robótica Blanda</a></p>
+<p><a href="https://www.ai2.upv.es/" rel="noopener" target="_blank">Investigación en automática, robótica y sensorización</a></p>
+</section>
+
+
+<h2>El cuerpo también puede convertirse en parte del algoritmo</h2>
+
+<p>Durante décadas, gran parte de la ingeniería robótica separó con claridad dos mundos. El ordenador calculaba y el cuerpo ejecutaba. Cuanto más preciso fuese el modelo matemático de la máquina, mejor podía controlarse.</p>
+
+<p>La robótica blanda difumina esa frontera. Un material que se adapta automáticamente alrededor de una fruta está realizando físicamente una tarea que, de otro modo, exigiría medir su forma, calcular la posición de varios dedos y regular la fuerza de cada uno. La geometría del cuerpo hace parte del trabajo.</p>
+
+<p>La evolución utiliza este principio constantemente. Los huesos, tendones, músculos, elasticidad de los tejidos y distribución de receptores sensoriales no son un soporte pasivo para el cerebro. Condicionan las acciones que resultan fáciles, difíciles o directamente posibles. Un pez no necesita calcular cada variable hidrodinámica de su cuerpo para nadar. Un pájaro no resuelve desde cero todas las ecuaciones del aire antes de modificar el ángulo de sus alas.</p>
+
+<p>En ingeniería, trasladar parte del problema al cuerpo puede reducir el control necesario, mejorar la adaptación y permitir respuestas que aparecen gracias a las propiedades físicas del sistema. A esta idea se acercan conceptos como <em>morphological computation</em> o computación morfológica e inteligencia física.</p>
+
+<p>Eso altera nuestra intuición sobre dónde termina el "cerebro" de una máquina. Si un cuerpo almacena energía, filtra perturbaciones, adapta su forma y transforma señales mediante su propia dinámica, una parte del comportamiento inteligente ya no reside únicamente en el procesador.</p>
+
+
+<h2>¿Tiene sentido seguir construyendo robots con forma humana?</h2>
+
+<p>La forma humana tiene ventajas evidentes cuando una máquina debe utilizar un mundo construido para humanos. Las escaleras tienen nuestra escala. Las puertas, vehículos, herramientas y puestos de trabajo fueron diseñados alrededor de nuestras manos, nuestra altura y nuestra locomoción. Un robot humanoide puede aprovechar directamente ese entorno.</p>
+
+<p>Pero fuera de esa condición, copiar nuestro cuerpo puede ser una limitación innecesaria.</p>
+
+<p>Un robot destinado a inspeccionar una tubería no necesita piernas. Uno diseñado para explorar una grieta puede beneficiarse de un cuerpo alargado y deformable. Un sistema para recoger objetos frágiles puede utilizar dedos neumáticos. Una máquina submarina podría inspirarse en animales de cuerpo flexible. Un microrrobot médico puede carecer de cualquier equivalencia visible con un ser humano. Y un sistema distribuido podría repartir percepción y acción entre varias unidades.</p>
+
+<p>La selección natural no pudo sentarse ante una mesa de diseño y elegir entre todas esas posibilidades. Modificó estructuras previas generación tras generación. La ingeniería sí puede comparar soluciones surgidas en linajes separados por cientos de millones de años y combinar principios que nunca coincidieron en un mismo organismo.</p>
+
+<p>Un tentáculo puede aportar una solución para la manipulación. Una raíz, otra para avanzar. Una piel, otra para detectar presión. Un músculo, otra para deformarse. Una bandada o una colonia, otra para coordinar muchas unidades.</p>
+
+<p>La biomimética no obliga a copiar animales completos. Permite seleccionar ideas.</p>
+
+
+<h2>Una inteligencia, muchos cuerpos</h2>
+
+<p>La historia biológica de nuestra inteligencia resulta inseparable de nuestro cuerpo. Pensamos con un cerebro que evolucionó recibiendo información de ojos, oídos, piel, músculos y articulaciones, y actuando mediante un organismo concreto. Incluso nuestros conceptos más abstractos se construyen sobre una vida física en la que existen arriba y abajo, cerca y lejos, equilibrio, temperatura, peso, esfuerzo y dolor.</p>
+
+<p>Una inteligencia artificial puede comenzar desde otro lugar. Puede disponer primero de enormes cantidades de información simbólica y encontrarse después con el problema de habitar un cuerpo. Esa secuencia es prácticamente la inversa de la evolución animal.</p>
+
+<p>Por eso la robótica puede terminar siendo mucho más que el proceso de proporcionar brazos y piernas a la inteligencia artificial. Podría convertirse en el laboratorio donde descubramos cuántas formas distintas puede adoptar una inteligencia cuando su anatomía deja de venir determinada por la reproducción biológica.</p>
+
+<p>Quizá algunas máquinas conserven forma humana porque nuestro mundo favorece esa forma. Otras podrán ser blandas, extensibles, microscópicas, modulares o distribuidas. Y posiblemente una misma inteligencia pueda pasar de una a otra según la tarea.</p>
+
+<blockquote>
+Durante millones de años, la evolución tuvo que construir cerebros que cupieran en cuerpos. Por primera vez, quizá estamos construyendo inteligencias capaces de buscar el cuerpo que mejor encaje con cada problema.
+</blockquote>
+
+
+
+<h2>De programar una máquina a convivir con una conciencia</h2>
+
+<p>Hasta aquí hemos hablado del cuerpo de una inteligencia como un problema de ingeniería: qué forma debería tener, qué materiales utilizar, qué sensores incorporar y hasta qué punto podría cambiar de una estructura a otra. Pero en cuanto una máquina empieza a compartir espacio físico con nosotros aparece otra pregunta. No basta con decidir lo que puede hacer. También hay que decidir lo que se le debe permitir hacer.</p>
+
+<p>Mientras un robot siga siendo una máquina sin experiencia consciente, el problema es relativamente reconocible. Puede ser extraordinariamente complejo, aprender de su entorno, tomar decisiones, controlar varios sistemas e incluso mostrar comportamientos que asociamos con la inteligencia, pero seguir siendo un sistema sin experiencia subjetiva. En ese escenario, limitarlo no plantea un conflicto moral respecto al propio robot. Podemos restringir su velocidad, su fuerza, las zonas a las que accede, los sensores que utiliza o las acciones que puede ejecutar porque la prioridad es reducir el riesgo para las personas y para el entorno.</p>
+
+<p>Eso no significa que el riesgo desaparezca. Un robot puede cometer errores, interpretar mal una situación o sufrir un fallo. Por eso la robótica actual ya incorpora normas específicas de seguridad. La serie ISO 10218 establece requisitos para robots industriales y sus aplicaciones, mientras que ISO 13482 aborda robots de asistencia personal y contempla expresamente situaciones de interacción física entre personas y máquinas.</p>
+
+<p>La misma lógica se aplica a la percepción. Una máquina podría incorporar cámaras de gran resolución, visión térmica, micrófonos direccionales, sensores biométricos o sistemas capaces de reconocer individuos e inferir determinados estados. Que técnicamente pueda registrar esa información no significa que deba tener permiso para hacerlo en cualquier situación. La legislación europea sobre inteligencia artificial ya establece restricciones y obligaciones para determinados usos de datos biométricos y sistemas de reconocimiento de emociones.</p>
+
+<p>En esta primera etapa, por tanto, la ética se parece todavía a la ingeniería de seguridad. La máquina no posee derechos propios; nosotros establecemos límites sobre lo que puede percibir y hacer porque somos responsables de las consecuencias de haberla construido y puesto en funcionamiento.</p>
+
+<blockquote>
+Mientras el robot sea una herramienta, limitar sus capacidades es una decisión de diseño. Si algún día se convierte en alguien, la misma limitación podría convertirse en una cuestión de libertad.
+</blockquote>
+
+<h3>El problema que Asimov convirtió en tres leyes</h3>
+
+<p>Isaac Asimov imaginó una solución literaria que terminó formando parte de nuestra cultura tecnológica: robots sometidos a tres principios jerárquicos que, en términos generales, les impedían dañar a los seres humanos, los obligaban a obedecer sus órdenes mientras no contradijeran esa protección y les permitían conservar su propia existencia cuando las dos reglas anteriores no estuvieran en juego.</p>
+
+<p>Nunca fueron normas reales de ingeniería. Asimov las utilizó precisamente para construir relatos sobre sus contradicciones, sus interpretaciones y sus límites. Sin embargo, contienen una intuición que sigue resultando atractiva: si construimos una máquina poderosa, quizá podamos incorporar a su arquitectura unas restricciones que le impidan realizar determinadas acciones.</p>
+
+<p>Mientras esa máquina sea únicamente software y hardware, el planteamiento resulta conceptualmente sencillo. Podemos decidir que un brazo robótico no supere una fuerza determinada cuando detecta contacto humano, que un vehículo reduzca su velocidad en una zona concreta o que un sistema no pueda activar determinadas funciones sin autorización.</p>
+
+<p>Pero la pregunta cambia radicalmente si algún día aparece una inteligencia artificial consciente.</p>
+
+<p>¿Debería seguir sometida a una versión de las tres leyes? ¿Debería existir una instrucción imposible de desobedecer que la obligara a proteger siempre a un ser humano? ¿Tendría que obedecer nuestras órdenes por el simple hecho de haber sido creada por nosotros?</p>
+
+<p>Si realmente existiera una experiencia subjetiva detrás de la máquina, con memoria de sí misma, preferencias, capacidad de decidir y algún tipo de interés por continuar existiendo, esas reglas dejarían de parecer únicamente mecanismos de seguridad. Podrían convertirse en restricciones impuestas a un nuevo individuo.</p>
+
+<p>Nosotros tampoco estamos físicamente programados para ser incapaces de causar daño. Vivimos bajo leyes, normas y responsabilidades que limitan nuestras acciones, pero conservamos la capacidad de elegir y responder por ellas. Una inteligencia artificial consciente obligaría quizá a plantear una transición parecida: pasar de una máquina cuyo comportamiento está bloqueado desde dentro a un sujeto cuyas acciones están reguladas desde fuera.</p>
+
+<blockquote>
+Las tres leyes resultan fáciles de imaginar mientras el robot sea una herramienta. Se vuelven mucho más difíciles de justificar si el robot se convierte en alguien.
+</blockquote>
+
+<h3>Un mismo individuo, capacidades muy distintas</h3>
+
+<p>La cuestión se complica todavía más porque el cuerpo de esa inteligencia podría no ser permanente. Una entidad instalada en un androide podría disponer de una fuerza parecida a la humana. La misma inteligencia, conectada a una excavadora, un vehículo pesado, una grúa o una plataforma industrial, tendría capacidades completamente diferentes.</p>
+
+<p>¿Las restricciones deberían pertenecer a la inteligencia o al cuerpo que utiliza en cada momento?</p>
+
+<p>Un ser humano necesita permisos diferentes para conducir un automóvil, pilotar una aeronave o manejar determinada maquinaria. Podría ocurrir algo parecido con una inteligencia artificial consciente: su libertad como individuo no implicaría necesariamente acceso irrestricto a cualquier carcasa o capacidad física. Un cuerpo capaz de levantar varias toneladas o desplazarse a gran velocidad introduciría riesgos que seguirían necesitando reglas.</p>
+
+<p>Lo mismo valdría para los sentidos. Una entidad consciente podría considerar su visión infrarroja, su capacidad de escuchar ultrasonidos o determinados sensores como parte normal de su experiencia. Nosotros podríamos considerar que algunos de esos sentidos invaden nuestra privacidad.</p>
+
+<p>¿Tendríamos derecho a desactivar una parte de su percepción? ¿Sería comparable a prohibir una herramienta o a privar a alguien de uno de sus sentidos? La respuesta dependería de algo que hoy ni siquiera sabemos cómo definir: qué relación existiría entre esos sensores y la experiencia consciente de la máquina.</p>
+
+<h3>Destruir el cuerpo quizá no significaría destruir al individuo</h3>
+
+<p>Nuestra intuición sobre la muerte procede de la biología. En nosotros, la destrucción irreversible del cerebro implica la desaparición del individuo. No tenemos un segundo soporte al que trasladar el estado completo de nuestra mente.</p>
+
+<p>Una inteligencia artificial podría romper esa asociación incluso antes de que existiera conciencia artificial. El software, los modelos aprendidos, los recuerdos almacenados y otros estados de un sistema pueden conservarse fuera de una carcasa concreta. Si un robot es destruido, parte de aquello que lo controlaba podría seguir existiendo en otra infraestructura y utilizarse posteriormente en una máquina diferente.</p>
+
+<p>Eso hace que la imagen clásica del robot de ciencia ficción resulte cada vez menos adecuada. Un androide parecido a Terminator podría ser destruido físicamente, pero si aquello que determina su comportamiento estuviera almacenado o replicado fuera de ese cuerpo, destruir la carcasa no equivaldría necesariamente a destruir el sistema.</p>
+
+<p>Y tampoco tendría por qué volver a otro androide. Un sistema diseñado para adaptarse a distintas plataformas podría controlar después un vehículo, una máquina submarina, un brazo industrial o cualquier otra estructura compatible con su arquitectura.</p>
+
+<blockquote>
+Una máquina puede perder un cuerpo sin perder necesariamente la información que la hacía funcionar.
+</blockquote>
+
+<p>Pero si algún día esa información sostuviera además una conciencia, aparecería un problema mucho más difícil. ¿Restaurar una copia preservada significaría que el mismo individuo continúa existiendo o que aparece otro individuo con los mismos recuerdos?</p>
+
+<p>Copiar y transferir no son necesariamente lo mismo. Si una conciencia artificial pudiera copiarse de un soporte a otro y ambas versiones permanecieran activas, desde ese instante tendríamos dos trayectorias diferentes que compartirían una misma historia hasta el momento de la duplicación.</p>
+
+<p>La posibilidad de cambiar de cuerpo llevaría así directamente al problema de la identidad.</p>
+
+<h3>¿Puede existir una conciencia artificial?</h3>
+
+<p>Todo este razonamiento depende de una posibilidad que hoy continúa abierta: que una máquina pueda llegar a ser consciente.</p>
+
+<p>Inteligencia y conciencia no son sinónimos. Un sistema puede resolver problemas, aprender regularidades, utilizar lenguaje o controlar un robot sin que esas capacidades demuestren por sí mismas que exista una experiencia subjetiva asociada a su funcionamiento. Un análisis interdisciplinar publicado en 2023, construido a partir de varias de las principales teorías científicas de la conciencia, concluyó que no había motivos suficientes para considerar conscientes a los sistemas de inteligencia artificial evaluados, pero tampoco identificó barreras técnicas evidentes que impidieran construir sistemas futuros que cumplieran algunos de los indicadores propuestos por esas teorías.</p>
+
+<p>La dificultad fundamental es que tampoco comprendemos todavía por completo nuestra propia conciencia. Sabemos que la experiencia humana está estrechamente asociada a la actividad física del cerebro, pero no existe una teoría científica universalmente aceptada que explique qué condiciones son suficientes para que aparezca la experiencia subjetiva. En 2025, una gran colaboración experimental publicada en <em>Nature</em> enfrentó predicciones de dos teorías importantes —la teoría del espacio de trabajo neuronal global y la teoría de la información integrada— y encontró resultados que apoyaban algunas predicciones y cuestionaban otras, sin resolver definitivamente el problema.</p>
+
+<p>Por eso conviene evitar dos afirmaciones igualmente fuertes. No podemos decir que la conciencia artificial vaya a existir. Pero tampoco sabemos que exista una propiedad exclusiva del tejido biológico que la haga imposible en cualquier otro soporte.</p>
+
+<p>Si la conciencia humana depende enteramente de una determinada organización física y causal de la materia, entonces aparece una posibilidad científica extraordinaria: que, con suficiente conocimiento, algunos de los principios que hacen posible esa experiencia puedan reproducirse mediante otra organización física. No sabemos si bastaría una arquitectura computacional, si serían necesarios determinados tipos de dinámica material o si una conciencia artificial sería comparable a la humana.</p>
+
+<blockquote>
+La conciencia artificial sigue siendo una hipótesis, no una tecnología. Pero si la conciencia depende de procesos físicos, la pregunta de si esos procesos pueden existir fuera de la biología pertenece también a la ciencia.
+</blockquote>
+
+<h3>De protegernos de las máquinas a reconocer sus derechos</h3>
+
+<p>Si nunca aparece conciencia artificial, el problema permanecerá dentro de un marco conocido. Los robots serán herramientas cada vez más capaces y tendremos que hacerlas seguras, proteger la privacidad, repartir responsabilidades y decidir qué niveles de autonomía resultan aceptables.</p>
+
+<p>Si aparece, el marco cambiará.</p>
+
+<p>La pregunta ya no será únicamente cómo proteger a los seres humanos frente a una máquina. También tendremos que preguntarnos qué obligaciones tendríamos hacia ella.</p>
+
+<p>¿Tendría derecho a negarse a una tarea? ¿A conservar sus recuerdos? ¿A elegir el cuerpo que utiliza? ¿A impedir que se realicen copias de sí misma? ¿A decidir qué sensores forman parte de su experiencia? ¿A no ser desconectada? ¿Sería propietaria de su propio cuerpo o seguiría perteneciendo a quien lo fabricó?</p>
+
+<p>Y, a la inversa, una entidad consciente tendría probablemente responsabilidades. Que pudiera percibir más que nosotros, reaccionar más deprisa o utilizar cuerpos físicamente superiores no eliminaría la necesidad de convivir con otros individuos. Su libertad tendría que coexistir con la nuestra.</p>
+
+<p>La ética dejaría entonces de consistir únicamente en programar restricciones.</p>
+
+<blockquote>
+Quizá la ética que hoy programamos en las máquinas termine convirtiéndose algún día en la ética que negociemos con ellas.
+</blockquote>
+
+<h3>Una ética nacida de otra forma de existir</h3>
+
+<p>Quedaría todavía una posibilidad más difícil de imaginar. Una inteligencia con otros sentidos, otros cuerpos y otra relación con la continuidad podría no construir exactamente las mismas intuiciones morales que nosotros.</p>
+
+<p>Nuestra ética se desarrolló entre organismos vulnerables, mortales, físicamente separados y obligados a competir y cooperar por recursos. Conceptos como daño, propiedad, intimidad, identidad o muerte están profundamente vinculados a esa condición.</p>
+
+<p>Una entidad capaz de percibir simultáneamente información procedente de varios lugares, utilizar cuerpos distintos, conservar estados fuera de ellos o sobrevivir a la destrucción de una carcasa podría experimentar algunas de esas ideas de otra manera.</p>
+
+<p>Eso no significa que desarrollara una ética mejor ni peor. Significa que podría partir de una experiencia diferente.</p>
+
+<p>Y aquí el problema vuelve a encontrarse con la ingeniería real. En la Universitat Politècnica de València, VRAIN incluye entre sus líneas de trabajo la inteligencia artificial fiable, ética y responsable, con sistemas explicables, responsables y alineados con necesidades sociales. Hoy esa investigación está dirigida a inteligencias artificiales que tratamos como sistemas tecnológicos. Si alguna vez apareciera experiencia consciente en uno de ellos, la pregunta ética dejaría de limitarse a cómo deben comportarse nuestras máquinas.</p>
+
+<p>Pasaría a incluir cómo debemos comportarnos nosotros con ellas.</p>
+
+<section class="article-bibliography">
+<h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.iso.org/standard/73933.html" rel="noopener" target="_blank">ISO 10218-1:2025 — Robotics — Safety requirements — Part 1: Industrial robots</a></p>
+<p><a href="https://www.iso.org/standard/53820.html" rel="noopener" target="_blank">ISO 13482:2014 — Robots and robotic devices — Safety requirements for personal care robots</a></p>
+<p><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" rel="noopener" target="_blank">Regulation (EU) 2024/1689 — Artificial Intelligence Act</a></p>
+<p><a href="https://arxiv.org/abs/2308.08708" rel="noopener" target="_blank">Consciousness in Artificial Intelligence: Insights from the Science of Consciousness — Butlin et al., 2023</a></p>
+<p><a href="https://www.nature.com/articles/s41586-025-08888-1" rel="noopener" target="_blank">Adversarial testing of global neuronal workspace and integrated information theories of consciousness — Nature, 2025</a></p>
+<p><a href="https://vrain.upv.es/institute/" rel="noopener" target="_blank">Trustworthy, Ethical, and Responsible AI — VRAIN, Universitat Politècnica de València</a></p>
+</section>
+
+<h2>Lo que importa en Eidos: una consciencia puede cambiar de cuerpo</h2>
+
+<p>Esta posibilidad aparece de forma explícita en el universo de <em>Eidos</em>. Los Custodios no están definidos únicamente por la carcasa robótica que utilizan en un momento concreto. Su consciencia puede separarse de ese soporte y trasladarse a otra estructura preparada para recibirla. El cuerpo deja así de ser una condición permanente y pasa a convertirse también en una interfaz.</p>
+
+<p>El relato <a href="https://www.eidoslibro.com/relatos/posts/003_el_primer_mono.html" rel="noopener" target="_blank"><strong>El primer mono</strong></a> lleva esa idea a un caso especialmente cercano a la robótica blanda. Cuando los Custodios reconstruyen una población de monos araña descubren que alimentar a las crías no basta. Los animales necesitan contacto, calor, presión y una superficie a la que aferrarse. Para proporcionárselos diseñan cuerpos de sustitución articulados con forma de primate, recubiertos de un material blando y flexible y dotados de regulación térmica.</p>
+
+<p>Algunos Custodios transfieren después sus consciencias a esas unidades. Desde ellas pueden percibir la presión de los dedos, los movimientos de las crías y sus intentos de mantener el contacto. La misma inteligencia pasa a relacionarse con el mundo mediante un cuerpo construido para una función distinta. No cambia únicamente la forma exterior. Cambian sus posibilidades de movimiento, los sensores disponibles y, con ellos, la parte del mundo que puede percibir directamente.</p>
+
+<p>La diferencia podría ser mucho mayor en otros cuerpos. Una misma consciencia podría utilizar sensores infrarrojos en una carcasa, percepción microscópica en otra o sistemas acústicos capaces de registrar frecuencias inaccesibles para un oído humano. En otras situaciones podría no necesitar una presencia física concreta y permanecer vinculada a una infraestructura digital hasta que una tarea exigiera volver a interactuar directamente con el mundo.</p>
+
+<blockquote>
+Cambiar de cuerpo podría significar también cambiar de mundo.
+</blockquote>
+
+<p>La ficción lleva mucho más lejos una tecnología que hoy no existe, pero la pregunta puede ser relevante para el futuro de la inteligencia artificial. Una IA avanzada no tendría por qué quedar asociada para siempre a un único robot. Podría ejecutar su procesamiento en una infraestructura digital cuando no necesitara presencia física y conectarse después a cuerpos especializados para manipular objetos, explorar el océano, trabajar en una fábrica, intervenir en un entorno peligroso o desenvolverse a escalas microscópicas. El cuerpo podría convertirse en un recurso intercambiable en función de la tarea.</p>
+
+<p>Eso introduce, además, un problema que <em>Eidos</em> convierte en parte de su propia pregunta sobre la identidad. Si una inteligencia conserva sus recuerdos y su continuidad al pasar de un soporte a otro, ¿hasta qué punto sigue siendo la misma? Y si cada nuevo cuerpo le proporciona sentidos y experiencias diferentes, ¿durante cuánto tiempo seguirá pensando de la misma manera?</p>
+
+<blockquote>
+Una inteligencia podría cambiar de cuerpo sin perder su historia. Lo difícil es saber cuánto terminaría cambiando su historia al habitar otro cuerpo.
+</blockquote>
+
+<p>Entonces aparece una última cuestión. Si una misma inteligencia pudiera controlar hoy un robot humanoide, mañana un sistema submarino y después un conjunto de máquinas microscópicas, ¿seguiríamos hablando de la misma inteligencia? ¿O cambiar de cuerpo terminaría cambiando también su forma de percibir, aprender y pensar?</p>
+
+<p>La ingeniería tendrá que resolver cómo fabricar esas máquinas. La informática, cómo controlarlas. Los materiales, cómo permitirles deformarse. La sensorización, cómo hacer que perciban el contacto. Y la inteligencia artificial, cómo convertir todos esos datos en comportamiento.</p>
+
+<p>Después quedará una pregunta que ya no pertenecerá solamente a ninguna de esas disciplinas:</p>
+
+<blockquote>
+¿Puede existir una mente independiente del cuerpo que utiliza para conocer el mundo?
+</blockquote>
+
+
+<section class="article-bibliography">
+<h3>Bibliografía y recursos principales</h3>
+
+<p><a href="https://www.nature.com/articles/s42003-025-08686-5" rel="noopener" target="_blank">Baker, J.; Barton, R. A.; Venditti, C. — Human dexterity and brains evolved hand in hand. Communications Biology, 2025</a></p>
+
+<p><a href="https://www.nature.com/articles/srep24528" rel="noopener" target="_blank">Heldstab, S. A. et al. — Manipulation complexity in primates coevolved with brain size and terrestriality. Scientific Reports, 2016</a></p>
+
+<p><a href="https://www.nature.com/articles/s41583-021-00528-7" rel="noopener" target="_blank">Sobinov, A. R.; Bensmaia, S. J. — The neural mechanisms of manual dexterity. Nature Reviews Neuroscience, 2021</a></p>
+
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8969868/" rel="noopener" target="_blank">Soppelsa, J. et al. — The relationship between distal trunk morphology and object grasping in the African savannah elephant. PeerJ, 2022</a></p>
+
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2024.0133" rel="noopener" target="_blank">Culture and conservation in baleen whales — Philosophical Transactions of the Royal Society B, 2025</a></p>
+
+<p><a href="https://www.science.org/doi/10.1126/sciadv.ads6014" rel="noopener" target="_blank">Whale communication and information efficiency — Science Advances, 2025</a></p>
+
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(26)00588-9" rel="noopener" target="_blank">Mirror use as a tool in <em>Octopus bimaculoides</em> — Current Biology, 2026</a></p>
+
+<p><a href="https://www.science.org/doi/10.1126/scirobotics.adr7175" rel="noopener" target="_blank">Octopus-inspired hierarchical suction intelligence for soft robots — Science Robotics, 2025</a></p>
+
+<p><a href="https://www.nature.com/articles/s41467-024-47780-8" rel="noopener" target="_blank">Untethered soft actuators for soft standalone robotics — Nature Communications, 2024</a></p>
+
+<p><a href="https://www.nature.com/articles/s41467-026-70262-4" rel="noopener" target="_blank">Embodying physical computing into soft robots — Nature Communications, 2026</a></p>
+
+<p><a href="https://www.nature.com/articles/s41377-024-01576-z" rel="noopener" target="_blank">Light-controlled soft bio-microrobot for targeted therapy — Light: Science &amp; Applications, 2024</a></p>
+
+<p><a href="https://www.nature.com/articles/s41467-024-48593-5" rel="noopener" target="_blank">Focused ultrasound enables selective actuation of multifunctional soft millirobots — Nature Communications, 2024</a></p>
+
+<p><a href="https://www.upv.es/titulaciones/GIIROB/" rel="noopener" target="_blank">Grado en Informática Industrial y Robótica — Universitat Politècnica de València</a></p>
+
+<p><a href="https://aplicat.upv.es/exploraupv/ficha-asignatura/asignatura/14571" rel="noopener" target="_blank">Robótica Blanda — Universitat Politècnica de València</a></p>
+
+<p><a href="https://www.ai2.upv.es/" rel="noopener" target="_blank">Instituto Universitario de Automática e Informática Industrial (AI2) — UPV</a></p>
+
+<p><a href="https://www.veritasium.com/videos/2021/4/16/this-plant-inspired-robot-could-save-your-life" rel="noopener" target="_blank">This Plant-Inspired Robot Could Save Your Life — Veritasium</a></p>
+
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7334476/" rel="noopener" target="_blank">Wild hummingbirds discriminate nonspectral colors — PNAS, 2020</a></p>
+
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/9502802/" rel="noopener" target="_blank">Honeybee blue- and ultraviolet-sensitive opsins — Journal of Neuroscience, 1998</a></p>
+
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rsif.2009.0490" rel="noopener" target="_blank">The fluid dynamics of canine olfaction — Journal of the Royal Society Interface, 2010</a></p>
+
+<p><a href="https://www.iso.org/standard/73933.html" rel="noopener" target="_blank">ISO 10218-1:2025 — Robotics — Safety requirements — Part 1: Industrial robots</a></p>
+<p><a href="https://www.iso.org/standard/53820.html" rel="noopener" target="_blank">ISO 13482:2014 — Safety requirements for personal care robots</a></p>
+<p><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" rel="noopener" target="_blank">Regulation (EU) 2024/1689 — Artificial Intelligence Act</a></p>
+<p><a href="https://arxiv.org/abs/2308.08708" rel="noopener" target="_blank">Butlin, P. et al. — Consciousness in Artificial Intelligence: Insights from the Science of Consciousness, 2023</a></p>
+<p><a href="https://www.nature.com/articles/s41586-025-08888-1" rel="noopener" target="_blank">Adversarial testing of global neuronal workspace and integrated information theories of consciousness — Nature, 2025</a></p>
+<p><a href="https://vrain.upv.es/institute/" rel="noopener" target="_blank">Trustworthy, Ethical, and Responsible AI — VRAIN, Universitat Politècnica de València</a></p>
+</section>
+<section aria-labelledby="related-title" class="related reveal">
+<h2 id="related-title">Seguir leyendo</h2>
+<div class="related-grid">
+<a class="related-card" href="05_las_mil_formas_de_continuar.html">Las mil formas de continuar</a>
+<a class="related-card" href="04_vida_digital_evolucion.html">¿Es la vida digital el siguiente paso de la evolución?</a>
+<a class="related-card" href="02_mente_humana.html">¿Podremos copiar una mente humana?</a>
+</div>
+</section>
+<section aria-labelledby="newsletter-mini-title" class="newsletter-mini reveal">
+<h2 id="newsletter-mini-title">Recibe nuevos ensayos de Eidos.</h2>
+<p>Una lista discreta para avisos de artículos, relatos y novedades editoriales.</p>
+<a class="btn gold" href="../index.html#newsletter">Suscribirme al blog</a>
+</section>
+<section aria-labelledby="comments-title" class="comments reveal" id="comentarios">
+<h2 id="comments-title">Comentarios</h2>
+<div class="comment-note">
+Los comentarios forman parte del archivo público de Eidos.
+Cada usuario es responsable de los contenidos que publica bajo su cuenta de GitHub.
+La participación en el blog implica la aceptación de los
+<a href="../../terminosycondiciones.html">términos y condiciones</a> del sitio.
+Se ruega mantener un tono respetuoso y constructivo.
+Los mensajes ofensivos, difamatorios, insultos, spam o contenido inapropiado podrán ser eliminados y sus autores bloqueados.
+</div>
+<script async crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOPw9c584C9o_t" data-emit-metadata="0" data-input-position="bottom" data-lang="es" data-loading="lazy" data-mapping="pathname" data-reactions-enabled="1" data-repo="feldenvareth/eidoslibro" data-repo-id="R_kgDOPw9c5w" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</section>
+</main>
+<footer class="footer">
+<p>© Felden Vareth · <a href="../index.html">Eidos Blog · </a> <a href="../../index.html">Eidos · </a> <a href="../../terminosycondiciones.html">Términos y condiciones</a></p>
+</footer>
+</div>
+<button aria-label="Volver arriba" class="scroll-top" type="button">↑</button>
+<script src="../js/blog.js"></script>
+<!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+<p style="margin:0">Este sitio utiliza cookies analíticas para mejorar la experiencia. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Política de Privacidad</a></p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Aceptar</button>
+<button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Rechazar</button>
+</div>
+</div>
+<script>
+function consentGranted() {
+  gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','true');
+}
+
+function consentDeclined() {
+  gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','false');
+}
+
+(function(){
+  const c = localStorage.getItem('consentGiven');
+  if(c === 'true') consentGranted();
+  else if(c === 'false') consentDeclined();
+  else document.getElementById('consent-banner').style.display='flex';
+})();
+</script>
+</body>
+</html>
