@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111a14">
-<meta name="description" content="Reconstruye las conexiones del conectoma. Un minijuego de lógica de EIDOS.">
-<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/conectoma/conectoma.html">
+<meta name="description" content="Rebuild the connections of the connectome. An EIDOS logic minigame.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/conectoma/conectomaEN.html">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
-<meta property="og:title" content="EIDOS · Conectoma">
-<meta property="og:description" content="Reconstruye las conexiones. Recupera el patrón. ¿Hasta dónde conseguirás llegar?">
-<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/conectoma.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-conectoma-compartir.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-conectoma-compartir.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="EIDOS Book">
+<meta property="og:title" content="EIDOS · Connectome">
+<meta property="og:description" content="Rebuild the connections. Recover the pattern. How far will you get?">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/conectomaEN.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-connectome-share.png">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-connectome-share.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS Conectoma: reconstruye las conexiones y recupera el patrón">
+<meta property="og:image:alt" content="EIDOS Connectome: rebuild the connections and recover the pattern">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIDOS · Conectoma">
-<meta name="twitter:description" content="Reconstruye las conexiones. Recupera el patrón.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-conectoma-compartir.png">
-<title>EIDOS · Conectoma</title>
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<meta name="twitter:title" content="EIDOS · Connectome">
+<meta name="twitter:description" content="Rebuild the connections. Recover the pattern.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/conectoma/eidos-connectome-share.png">
+<title>EIDOS · Connectome</title>
+<!-- Google Analytics: loaded only after cookie consent -->
 <script>
   (function () {
     const GA_MEASUREMENT_ID = 'G-SCSFPYKJTX';
@@ -47,7 +47,7 @@
 
       window.gtag('js', new Date());
       window.gtag('config', GA_MEASUREMENT_ID, {
-        page_title: 'EIDOS · Conectoma'
+        page_title: 'EIDOS · Connectome'
       });
     };
 
@@ -57,7 +57,7 @@
       }
     } catch (error) {
       console.warn(
-        'No se pudo leer el consentimiento de Analytics.',
+        'Analytics consent could not be read.',
         error
       );
     }
@@ -118,7 +118,7 @@
 @media(max-height:570px){#top-bar{height:40px}#game-area{height:calc(100% - 40px)}#subtitle,#status-text,#info-heading{display:none}#status-card,#progress-card{padding-block:3px}.card{padding:14px}.card h2{font-size:29px}.intro{font-size:11px;margin-bottom:9px}.control-grid{margin-bottom:10px}.silent-note{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-/* Conectoma v2: campaña, memoria y niveles degradados */
+/* Connectome v2: campaña, memoria y niveles degradados */
 #hud .lives-hud{color:#df8b83}#lives-el{letter-spacing:1px;color:#ef9a91}
 #mode-badge{position:absolute;z-index:10;left:8px;top:8px;display:none;padding:4px 7px;border:1px solid rgba(245,215,110,.55);border-radius:999px;background:rgba(7,16,12,.82);color:var(--gold2);font:700 7px/1 Arial,sans-serif;letter-spacing:1px;pointer-events:none}#mode-badge.visible{display:block}
 #memory-curtain{position:absolute;z-index:9;inset:0;display:none;place-items:center;background:rgba(4,12,9,.32);pointer-events:none}#memory-curtain.visible{display:grid}.memory-count{width:86px;height:86px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;background:rgba(7,16,12,.85);color:var(--gold2);font:38px Georgia,serif;box-shadow:0 0 35px rgba(200,168,75,.28)}
@@ -155,14 +155,14 @@
 </style>
 </head>
 <body>
-<aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden><p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener">Política de privacidad</a></p><div class="consent-actions"><button class="consent-btn" id="consent-accept">Aceptar</button><button class="consent-btn decline" id="consent-reject">Rechazar</button></div></aside>
-<main id="game-shell" aria-label="Minijuego EIDOS Conectoma">
+<aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden><p>This game uses analytics cookies to measure visits. <a href="https://www.eidoslibro.com/termsandconditions.html" target="_blank" rel="noopener">Privacy Policy</a></p><div class="consent-actions"><button class="consent-btn" id="consent-accept">Accept</button><button class="consent-btn decline" id="consent-reject">Reject</button></div></aside>
+<main id="game-shell" aria-label="EIDOS Connectome minigame">
 <div id="neural-bg" aria-hidden="true"><img id="bg-a" alt=""><img id="bg-b" alt=""></div>
-<div id="top-bar"><div id="hud"><span>Nivel: <strong id="level-el">1</strong></span><span>Tiempo: <strong id="time-el">00:00</strong></span><span class="stage" id="difficulty-el">Impulso</span><span class="lives-hud">Vida: <strong id="lives-el">♥ ♥ ♥</strong></span><span>Récord: <strong id="best-el">—</strong></span></div><button id="sound-button" class="top-btn" aria-label="Desactivar sonido">♪</button><button id="close-btn" class="top-btn" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Cerrar</button></div>
+<div id="top-bar"><div id="hud"><span>Level: <strong id="level-el">1</strong></span><span>Time: <strong id="time-el">00:00</strong></span><span class="stage" id="difficulty-el">Impulse</span><span class="lives-hud">Lives: <strong id="lives-el">♥ ♥ ♥</strong></span><span>Best: <strong id="best-el">—</strong></span></div><button id="sound-button" class="top-btn" aria-label="Mute sound">♪</button><button id="close-btn" class="top-btn" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Close</button></div>
 <div id="game-area">
-<div id="title-block"><p id="eyebrow">E I D O S</p><h1>CONECTOMA</h1><p id="subtitle">RECONSTRUYE LAS CONEXIONES · RECUPERA EL PATRÓN</p></div>
-<div id="board-wrap"><div id="mode-badge"></div><div id="memory-curtain"><span class="memory-count">2</span></div><div id="board" role="application" tabindex="0" aria-label="Tablero del conectoma"></div><svg id="paths" aria-hidden="true"></svg><div id="cursor"></div><div id="flash"></div></div>
-<section id="info-panel" aria-live="polite"><div id="status-card"><p id="info-heading">ESTADO DE LA RED</p><div id="status-main"><div><h2 id="status-title">Patrón incompleto</h2><p id="status-text">Une cada pareja sin cruzar ni compartir casillas.</p></div><div id="status-symbol">⌁</div></div></div><div id="progress-card"><p id="progress-heading">RECONSTRUCCIÓN DEL CONECTOMA</p><div id="progress-row">
+<div id="title-block"><p id="eyebrow">E I D O S</p><h1>CONNECTOME</h1><p id="subtitle">REBUILD THE CONNECTIONS · RECOVER THE PATTERN</p></div>
+<div id="board-wrap"><div id="mode-badge"></div><div id="memory-curtain"><span class="memory-count">2</span></div><div id="board" role="application" tabindex="0" aria-label="Connectome board"></div><svg id="paths" aria-hidden="true"></svg><div id="cursor"></div><div id="flash"></div></div>
+<section id="info-panel" aria-live="polite"><div id="status-card"><p id="info-heading">NETWORK STATUS</p><div id="status-main"><div><h2 id="status-title">Incomplete pattern</h2><p id="status-text">Connect each pair without crossing or sharing cells.</p></div><div id="status-symbol">⌁</div></div></div><div id="progress-card"><p id="progress-heading">CONNECTOME RECONSTRUCTION</p><div id="progress-row">
 <svg id="mini-connectome" viewBox="0 0 76 30" aria-hidden="true">
   <path class="mini-link" d="M8 15 L22 7 L38 15 L53 6 L68 15"/>
   <path class="mini-link" d="M22 7 L23 23 L38 15 L52 24 L68 15"/>
@@ -177,38 +177,38 @@
 </svg>
 <div id="progress-fiber"><div id="progress-fill"></div></div>
 <span id="seed-label">0%</span>
-<span id="progress-caption">La red se ilumina a medida que recuperas sus conexiones.</span>
-</div><div id="campaign-wrap"><p id="campaign-label"><span>CAMPAÑA</span><strong id="campaign-current-label">NIVEL 1 DE 10</strong></p><div id="campaign-map" aria-label="Niveles de campaña"></div></div></div></section>
-<div id="controls-bar"><span id="move-hint">Arrastra desde un núcleo · flechas + espacio</span><button id="undo-button" class="game-button" disabled>Deshacer</button><button id="hint-button" class="game-button">Pista · <span id="hint-count">3</span></button><button id="remember-button" class="game-button">Recordar</button><button id="new-button" class="game-button primary-small">Nuevo patrón</button></div>
+<span id="progress-caption">The network lights up as you restore its connections.</span>
+</div><div id="campaign-wrap"><p id="campaign-label"><span>CAMPAIGN</span><strong id="campaign-current-label">LEVEL 1 OF 10</strong></p><div id="campaign-map" aria-label="Campaign levels"></div></div></div></section>
+<div id="controls-bar"><span id="move-hint">Drag from a node · arrows + space</span><button id="undo-button" class="game-button" disabled>Undo</button><button id="hint-button" class="game-button">Hint · <span id="hint-count">3</span></button><button id="remember-button" class="game-button">Recall</button><button id="new-button" class="game-button primary-small">New pattern</button></div>
 </div>
-<section class="screen open" id="start-screen"><div class="card"><p class="card-kicker">E I D O S</p><h2>CONECTOMA</h2><p class="card-subtitle">RECONSTRUYE LAS CONEXIONES. RECUPERA EL PATRÓN.</p><p class="intro"><strong>Une cada pareja de núcleos</strong> mediante una fibra continua. Las conexiones no pueden cruzarse ni compartir una casilla.</p><div class="control-grid"><div class="control-item"><strong>RATÓN</strong>Arrastra desde un núcleo</div><div class="control-item"><strong>MÓVIL</strong>Desliza el dedo</div><div class="control-item"><strong>TECLADO</strong>Flechas y espacio</div><div class="control-item"><strong>OBJETIVO</strong>Recuperar el patrón</div></div><div class="mode-explanation"><strong>NIVELES DE MEMORIA</strong><br>En algunos patrones los colores desaparecerán. Conserva los símbolos, recuerda las parejas y recupera la red.</div><div class="start-actions"><button id="start-button" class="primary-button">INICIAR</button><button id="resume-button" class="secondary-button" hidden>CONTINUAR PARTIDA</button></div><p class="silent-note">El sonido comienza con tu primera conexión.</p><nav class="game-links"><a href="https://www.eidoslibro.com" target="_blank" rel="noopener">Conoce EIDOS</a><span>·</span><a href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">Artículo que inspiró el juego</a></nav></div></section>
-<section class="screen" id="difficulty-screen"><div class="card"><p class="card-kicker">PROFUNDIDAD DE LA RED</p><h2>DIFICULTAD</h2><div id="difficulty-list" class="difficulty-list"></div><button id="difficulty-back" class="secondary-button">VOLVER</button></div></section>
-<section class="screen" id="victory-screen"><div class="card result-card"><p class="card-kicker">PATRÓN RECUPERADO</p><h2>CONECTOMA ACTIVO</h2><p id="victory-stats" class="intro"></p><blockquote id="victory-quote"></blockquote><div id="narrative-copy" class="narrative-card" hidden></div><p id="global-stats"></p><div class="result-actions"><button id="next-button" class="primary-button">SIGUIENTE PATRÓN</button><button id="level-up-button" class="primary-button" hidden>SUBIR DIFICULTAD</button><button id="infinite-button" class="secondary-button" hidden>MODO INFINITO</button><button id="replay-button" class="secondary-button">REPETIR</button><button id="menu-button" class="secondary-button">DIFICULTAD</button></div><a class="article-link" href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">¿Puede este mapa contener una mente?<b>LEER EL ARTÍCULO SOBRE EL CONECTOMA</b></a></div></section>
-<section class="screen" id="memory-briefing" aria-hidden="true"><div class="card"><div class="memory-orb">◎</div><p class="card-kicker">MEMORIA INESTABLE</p><h2>MEMORIZA EL PATRÓN</h2><p class="intro">En este conectoma cambia la metodología. Los colores solo permanecerán visibles durante <strong>dos segundos</strong>.</p><div class="memory-rules"><div class="memory-rule"><strong>1.</strong> Pulsa comenzar y observa dónde está cada pareja.</div><div class="memory-rule"><strong>2.</strong> Cuando los colores desaparezcan, reconstruye las conexiones en gris.</div><div class="memory-rule"><strong>3.</strong> Una conexión correcta recuperará su color. Una incorrecta reducirá tu vida.</div><div class="memory-rule"><strong>RECORDAR</strong> muestra los colores durante medio segundo, pero consume una vida.</div></div><button id="memory-begin-button" class="primary-button">MOSTRAR COLORES</button></div></section>
-<section class="screen" id="game-over-screen"><div class="card result-card"><div class="life-orb"></div><p class="card-kicker">EL PATRÓN SE HA PERDIDO</p><h2>COLAPSO</h2><p class="intro">La reconstrucción ha consumido toda la integridad disponible. El conectoma deberá iniciarse de nuevo.</p><div class="result-actions"><button id="retry-level-button" class="primary-button">REPETIR PATRÓN</button><button id="game-over-menu-button" class="secondary-button">DIFICULTAD</button></div></div></section>
+<section class="screen open" id="start-screen"><div class="card"><p class="card-kicker">E I D O S</p><h2>CONNECTOME</h2><p class="card-subtitle">REBUILD THE CONNECTIONS. RECOVER THE PATTERN.</p><p class="intro"><strong>Connect each pair of nodes</strong> with a continuous fiber. Connections cannot cross or share a cell.</p><div class="control-grid"><div class="control-item"><strong>MOUSE</strong>Drag from a node</div><div class="control-item"><strong>TOUCH</strong>Swipe your finger</div><div class="control-item"><strong>KEYBOARD</strong>Arrows and space</div><div class="control-item"><strong>OBJECTIVE</strong>Recover the pattern</div></div><div class="mode-explanation"><strong>MEMORY LEVELS</strong><br>In some patterns the colors will disappear. Keep the symbols in mind, remember the pairs and rebuild the network.</div><div class="start-actions"><button id="start-button" class="primary-button">START</button><button id="resume-button" class="secondary-button" hidden>CONTINUE GAME</button></div><p class="silent-note">Sound starts with your first connection.</p><nav class="game-links"><a href="https://www.eidoslibro.com" target="_blank" rel="noopener">Discover EIDOS</a><span>·</span><a href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">Article that inspired the game</a></nav></div></section>
+<section class="screen" id="difficulty-screen"><div class="card"><p class="card-kicker">NETWORK DEPTH</p><h2>DIFFICULTY</h2><div id="difficulty-list" class="difficulty-list"></div><button id="difficulty-back" class="secondary-button">BACK</button></div></section>
+<section class="screen" id="victory-screen"><div class="card result-card"><p class="card-kicker">PATTERN RECOVERED</p><h2>CONNECTOME ACTIVE</h2><p id="victory-stats" class="intro"></p><blockquote id="victory-quote"></blockquote><div id="narrative-copy" class="narrative-card" hidden></div><p id="global-stats"></p><div class="result-actions"><button id="next-button" class="primary-button">NEXT PATTERN</button><button id="level-up-button" class="primary-button" hidden>INCREASE DIFFICULTY</button><button id="infinite-button" class="secondary-button" hidden>ENDLESS MODE</button><button id="replay-button" class="secondary-button">RETRY</button><button id="menu-button" class="secondary-button">DIFFICULTY</button></div><a class="article-link" href="https://www.eidoslibro.com/blog/articulos/02_mente_humana.html" target="_blank" rel="noopener">Could this map contain a mind?<b>READ THE ARTICLE ABOUT THE CONNECTOME</b></a></div></section>
+<section class="screen" id="memory-briefing" aria-hidden="true"><div class="card"><div class="memory-orb">◎</div><p class="card-kicker">UNSTABLE MEMORY</p><h2>MEMORIZE THE PATTERN</h2><p class="intro">This connectome changes the rules. Colors will remain visible for only <strong>two seconds</strong>.</p><div class="memory-rules"><div class="memory-rule"><strong>1.</strong> Press start and observe where each pair is.</div><div class="memory-rule"><strong>2.</strong> When the colors disappear, rebuild the connections in gray.</div><div class="memory-rule"><strong>3.</strong> A correct connection restores its color. An incorrect one costs a life.</div><div class="memory-rule"><strong>RECALL</strong> shows the colors for half a second, but costs one life.</div></div><button id="memory-begin-button" class="primary-button">SHOW COLORS</button></div></section>
+<section class="screen" id="game-over-screen"><div class="card result-card"><div class="life-orb"></div><p class="card-kicker">THE PATTERN IS LOST</p><h2>COLLAPSE</h2><p class="intro">Reconstruction has consumed all available integrity. The connectome must be restarted.</p><div class="result-actions"><button id="retry-level-button" class="primary-button">RETRY PATTERN</button><button id="game-over-menu-button" class="secondary-button">DIFFICULTY</button></div></div></section>
 </main>
-<script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="/hiddenegg/games/eidos-content-en.js"></script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const SAVE='eidos-conectoma-save-v5',PROGRESS='eidos-conectoma-progress-v5',SOUND='eidos-conectoma-sound-v1',STATS='eidos-conectoma-stats-v1';
+const SAVE='eidos-connectome-save-v5',PROGRESS='eidos-connectome-progress-v5',SOUND='eidos-connectome-sound-v1',STATS='eidos-connectome-stats-v1';
 const COLORS=['#65d9ff','#f3c85b','#e86f83','#78df9a','#b98cff','#ff9f55','#e7ec72','#59b6a7','#f1a9d2','#8ba7ff'];
 const SYMBOLS=['●','◆','▲','■','✦','⬟','✚','◉','✿','⬢'];
 const DIFFS=[
-{id:'impulso',name:'Impulso',size:[5,5],pairs:[3,4],fill:false,desc:'Primeras conexiones'},
-{id:'sinapsis',name:'Sinapsis',size:[5,6],pairs:[4,5],fill:true,desc:'La red comienza a cerrarse'},
-{id:'memoria',name:'Memoria',size:[6,7],pairs:[5,7],fill:true,desc:'Anticipa varios recorridos'},
-{id:'identidad',name:'Identidad',size:[7,8],pairs:[7,8],fill:true,desc:'El orden empieza a importar'},
-{id:'consciencia',name:'Consciencia',size:[8,10],pairs:[8,10],fill:true,desc:'Patrones profundos y extensos'}];
+{id:'impulso',name:'Impulse',size:[5,5],pairs:[3,4],fill:false,desc:'First connections'},
+{id:'sinapsis',name:'Synapse',size:[5,6],pairs:[4,5],fill:true,desc:'The network begins to close'},
+{id:'memoria',name:'Memory',size:[6,7],pairs:[5,7],fill:true,desc:'Anticipate several routes'},
+{id:'identidad',name:'Identity',size:[7,8],pairs:[7,8],fill:true,desc:'Order begins to matter'},
+{id:'consciencia',name:'Consciousness',size:[8,10],pairs:[8,10],fill:true,desc:'Deep and extensive patterns'}];
 const CAMPAIGN_PER_DIFF=10;
 const NARRATIVES=[
-'El impulso existe, pero todavía no hay memoria.',
-'Las sinapsis forman una red. La red comienza a conservar una historia.',
-'Un recuerdo no reside en una neurona, sino en la persistencia de un patrón.',
-'La identidad aparece cuando todas las partes dependen de una organización común.',
-'Has reconstruido el conectoma. Sigue sin estar demostrado que hayas recuperado a quien lo habitaba.'
+'The impulse exists, but there is no memory yet.',
+'Synapses form a network. The network begins to preserve a history.',
+'A memory does not reside in one neuron, but in the persistence of a pattern.',
+'Identity appears when every part depends on a shared organization.',
+'You rebuilt the connectome. It still does not prove that you recovered the one who inhabited it.'
 ];
-const FALLBACK_QUOTES=['La forma cae. El patrón continúa.','Ninguna conciencia existe aislada.','La identidad no reside en una conexión, sino en la totalidad del patrón.','La red recuerda incluso cuando ninguna neurona recuerda por sí sola.','Reconstruir la estructura no demuestra haber recuperado a quien la habitaba.'];
+const FALLBACK_QUOTES=['The form falls away. The pattern continues.','No consciousness exists in isolation.','Identity does not reside in one connection, but in the pattern as a whole.','The network remembers even when no neuron remembers on its own.','Rebuilding the structure does not prove that you recovered the one who inhabited it.'];
 const SHARED=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
 const IMAGES=Array.isArray(SHARED.images)?SHARED.images.filter(Boolean):[];
 const QUOTES=Array.isArray(SHARED.quotes)&&SHARED.quotes.length?SHARED.quotes:FALLBACK_QUOTES;
@@ -262,28 +262,28 @@ function normalizeCampaignProgress(){
   progress.count=progress.count||{};
   write(PROGRESS,progress);
 }
-function renderDifficulties(){const box=$('difficulty-list');box.innerHTML='';DIFFS.forEach((d,di)=>{const done=completedInDiff(d.id),next=Math.min(CAMPAIGN_PER_DIFF+1,Math.max(1,(progress.count[d.id]||0)+1)),b=document.createElement('button');b.className='difficulty-card';b.innerHTML=`<strong>${d.name}</strong><span>${done}/${CAMPAIGN_PER_DIFF}</span><small>${d.desc}<br>${done===CAMPAIGN_PER_DIFF?'Campaña completa · modo infinito':`Siguiente patrón ${next}`}</small>`;b.onclick=()=>startNew(d.id);box.appendChild(b)})}
-function startNew(diff,index=null){const i=index||nextIndex(diff),level=makeLevel(diff,i);if(!validateLevel(level)){console.error('Nivel inválido',level);return}progress.count[diff]=Math.max(progress.count[diff]||0,i);write(PROGRESS,progress);beginLevel(level,null);closeScreen($('difficulty-screen'));closeScreen($('start-screen'))}
+function renderDifficulties(){const box=$('difficulty-list');box.innerHTML='';DIFFS.forEach((d,di)=>{const done=completedInDiff(d.id),next=Math.min(CAMPAIGN_PER_DIFF+1,Math.max(1,(progress.count[d.id]||0)+1)),b=document.createElement('button');b.className='difficulty-card';b.innerHTML=`<strong>${d.name}</strong><span>${done}/${CAMPAIGN_PER_DIFF}</span><small>${d.desc}<br>${done===CAMPAIGN_PER_DIFF?'Campaign complete · endless mode':`Next pattern ${next}`}</small>`;b.onclick=()=>startNew(d.id);box.appendChild(b)})}
+function startNew(diff,index=null){const i=index||nextIndex(diff),level=makeLevel(diff,i);if(!validateLevel(level)){console.error('Invalid level',level);return}progress.count[diff]=Math.max(progress.count[diff]||0,i);write(PROGRESS,progress);beginLevel(level,null);closeScreen($('difficulty-screen'));closeScreen($('start-screen'))}
 function beginLevel(level,saved){clearInterval(timer);clearTimeout(revealTimer);if(level.mode==='degraded'){level={...level,mode:'normal',locked:level.solution.map(()=>[])};saved=null}const restored=saved?.paths||level.solution.map(()=>[]);const needsBriefing=level.mode==='memory'&&!saved;state={level,paths:restored,active:null,drawing:false,lastPointer:null,lastClient:null,lockedRun:null,history:[],moves:saved?.moves||0,hints:saved?.hints??3,lives:saved?.lives??3,base:saved?.elapsed||0,started:needsBriefing?0:Date.now(),cursor:[0,0],memoryHidden:level.mode==='memory'&&Boolean(saved),inputLocked:needsBriefing};buildBoard();if(state.memoryHidden)$('board').classList.add('memory-hidden');draw();updateHud();if(!needsBriefing)timer=setInterval(updateHud,500);saveGame();changeBackground();tone(196,.1);setTimeout(()=>tone(294,.13),65);$('board').focus();if(needsBriefing)openScreen($('memory-briefing'));}
 function isExactFragment(fragment,path){return fragment.length&&path?.length===fragment.length&&path.every((x,j)=>same(x,fragment[j]))}
-function buildBoard(){const l=state.level,b=$('board'),ends=new Map();b.innerHTML='';b.classList.remove('memory-hidden','memory-reveal','keyboard');b.style.gridTemplateColumns=`repeat(${l.cols},1fr)`;b.style.gridTemplateRows=`repeat(${l.rows},1fr)`;l.solution.forEach((p,i)=>{ends.set(key(p[0]),i);ends.set(key(p[p.length-1]),i)});for(let r=0;r<l.rows;r++)for(let c=0;c<l.cols;c++){const e=document.createElement('div');e.className='cell';e.dataset.r=r;e.dataset.c=c;const i=ends.get(r+','+c);if(i!==undefined){const n=document.createElement('span');n.className='node';n.style.setProperty('--c',COLORS[i]);n.style.setProperty('--real-color',COLORS[i]);n.textContent=SYMBOLS[i];n.setAttribute('aria-label','Núcleo '+(i+1));e.appendChild(n)}if(l.locked?.some(f=>f.some(p=>p[0]===r&&p[1]===c)))e.classList.add('locked-cell');b.appendChild(e)}const labels={normal:['Patrón incompleto',l.fillAll?'Conecta todas las parejas y ocupa toda la red.':'Conecta todas las parejas sin cruzar fibras.'],memory:['Memoria inestable','Memoriza los colores. Después solo se iluminarán las conexiones correctas.']};$('status-title').textContent=labels[l.mode][0];$('status-text').textContent=labels[l.mode][1];$('mode-badge').textContent=l.mode==='memory'?'MEMORIA':'';$('mode-badge').classList.toggle('visible',l.mode==='memory');$('remember-button').classList.toggle('visible',l.mode==='memory');setModeSubtitle(l.mode);positionCursor();renderCampaignMap()}
-function startMemoryReveal(){if(!state||state.level.mode!=='memory')return;closeScreen($('memory-briefing'));state.inputLocked=true;state.memoryHidden=false;state.started=Date.now();clearInterval(timer);timer=setInterval(updateHud,500);$('board').classList.remove('memory-hidden');$('board').classList.add('memory-reveal');const curtain=$('memory-curtain'),count=curtain.querySelector('.memory-count');curtain.classList.add('visible');count.textContent='2';tone(330,.12);setTimeout(()=>{if(!state||state.level.mode!=='memory')return;count.textContent='1';tone(390,.1)},1000);revealTimer=setTimeout(()=>{if(!state||state.level.mode!=='memory')return;$('board').classList.remove('memory-reveal');$('board').classList.add('memory-hidden');curtain.classList.remove('visible');state.memoryHidden=true;state.inputLocked=false;$('status-title').textContent='Memoria inestable';$('status-text').textContent='Los colores han desaparecido. Reconstruye el patrón antes de perder su rastro.';draw();saveGame();tone(210,.16)},2000)}
+function buildBoard(){const l=state.level,b=$('board'),ends=new Map();b.innerHTML='';b.classList.remove('memory-hidden','memory-reveal','keyboard');b.style.gridTemplateColumns=`repeat(${l.cols},1fr)`;b.style.gridTemplateRows=`repeat(${l.rows},1fr)`;l.solution.forEach((p,i)=>{ends.set(key(p[0]),i);ends.set(key(p[p.length-1]),i)});for(let r=0;r<l.rows;r++)for(let c=0;c<l.cols;c++){const e=document.createElement('div');e.className='cell';e.dataset.r=r;e.dataset.c=c;const i=ends.get(r+','+c);if(i!==undefined){const n=document.createElement('span');n.className='node';n.style.setProperty('--c',COLORS[i]);n.style.setProperty('--real-color',COLORS[i]);n.textContent=SYMBOLS[i];n.setAttribute('aria-label','Node '+(i+1));e.appendChild(n)}if(l.locked?.some(f=>f.some(p=>p[0]===r&&p[1]===c)))e.classList.add('locked-cell');b.appendChild(e)}const labels={normal:['Incomplete pattern',l.fillAll?'Connect every pair and fill the entire network.':'Connect every pair without crossing fibers.'],memory:['Unstable memory','Memorize the colors. Afterwards only correct connections will light up.']};$('status-title').textContent=labels[l.mode][0];$('status-text').textContent=labels[l.mode][1];$('mode-badge').textContent=l.mode==='memory'?'MEMORY':'';$('mode-badge').classList.toggle('visible',l.mode==='memory');$('remember-button').classList.toggle('visible',l.mode==='memory');setModeSubtitle(l.mode);positionCursor();renderCampaignMap()}
+function startMemoryReveal(){if(!state||state.level.mode!=='memory')return;closeScreen($('memory-briefing'));state.inputLocked=true;state.memoryHidden=false;state.started=Date.now();clearInterval(timer);timer=setInterval(updateHud,500);$('board').classList.remove('memory-hidden');$('board').classList.add('memory-reveal');const curtain=$('memory-curtain'),count=curtain.querySelector('.memory-count');curtain.classList.add('visible');count.textContent='2';tone(330,.12);setTimeout(()=>{if(!state||state.level.mode!=='memory')return;count.textContent='1';tone(390,.1)},1000);revealTimer=setTimeout(()=>{if(!state||state.level.mode!=='memory')return;$('board').classList.remove('memory-reveal');$('board').classList.add('memory-hidden');curtain.classList.remove('visible');state.memoryHidden=true;state.inputLocked=false;$('status-title').textContent='Unstable memory';$('status-text').textContent='The colors are gone. Rebuild the pattern before its trace is lost.';draw();saveGame();tone(210,.16)},2000)}
 function revealMemory(cost=true){
   if(!state||state.level.mode!=='memory'||state.inputLocked)return;
-  if(cost&&!loseLife('Recordar el patrón ha consumido una vida.',false))return;
+  if(cost&&!loseLife('Recalling the pattern cost one life.',false))return;
   stats.reveals++;
   write(STATS,stats);
   state.inputLocked=true;
   $('board').classList.add('memory-reveal');
-  $('status-title').textContent='Recuerdo recuperado';
-  $('status-text').textContent='Observa todas las parejas: volverán a ocultarse en un instante.';
+  $('status-title').textContent='Memory recovered';
+  $('status-text').textContent='Observe every pair: they will be hidden again in a moment.';
   tone(410,.12,.025);
   setTimeout(()=>{
     if(!state)return;
     $('board').classList.remove('memory-reveal');
     state.inputLocked=false;
-    $('status-title').textContent='Memoria inestable';
-    $('status-text').textContent='Los colores vuelven a quedar ocultos.';
+    $('status-title').textContent='Unstable memory';
+    $('status-text').textContent='The colors are hidden again.';
     draw();
     saveGame();
   },850);
@@ -400,8 +400,8 @@ function stepTo(r,c){
   if(state.lockedRun){
     if(state.lockedRun.color!==i||!advanceLockedRun(target)){
       invalid();
-      $('status-title').textContent='Sigue la fibra conservada';
-      $('status-text').textContent='Recorre el tramo luminoso hasta su otro extremo.';
+      $('status-title').textContent='Follow the preserved fiber';
+      $('status-text').textContent='Follow the glowing segment to its other end.';
       return false;
     }
     p.push(target);
@@ -415,14 +415,14 @@ function stepTo(r,c){
   if(lock!==null){
     if(lock!==i){
       invalid();
-      $('status-title').textContent='Fibra conservada';
-      $('status-text').textContent='Ese tramo pertenece a otra conexión.';
+      $('status-title').textContent='Preserved fiber';
+      $('status-text').textContent='That segment belongs to another connection.';
       return false;
     }
     if(!startLockedRun(i,target)){
       invalid();
-      $('status-title').textContent='Entrada incorrecta';
-      $('status-text').textContent='Entra en la fibra fija por uno de sus extremos.';
+      $('status-title').textContent='Wrong entry';
+      $('status-text').textContent='Enter the fixed fiber through one of its ends.';
       return false;
     }
     p.push(target);
@@ -462,8 +462,8 @@ function stepTo(r,c){
   if(ep===i&&!complete(i)&&lockedFragment(i).length){
     p.pop();
     invalid();
-    $('status-title').textContent='Tramo obligatorio omitido';
-    $('status-text').textContent='Esta conexión debe recorrer la fibra conservada de su color.';
+    $('status-title').textContent='Required segment skipped';
+    $('status-text').textContent='This connection must follow the preserved fiber of its color.';
     draw();
     saveGame();
     return false;
@@ -483,8 +483,8 @@ function stepTo(r,c){
   }
   return true;
 }
-function wrongMemoryConnection(i){tone(95,.18,.035,'square');state.active=null;state.drawing=false;setTimeout(()=>{if(!state)return;state.paths[i]=[];draw();loseLife('La conexión no pertenecía al mismo patrón.',true);saveGame()},250)}
-function loseLife(message,flash=true){if(!state)return false;state.lives=Math.max(0,state.lives-1);$('status-title').textContent='Integridad reducida';$('status-text').textContent=message;if(flash)invalid();updateHud();if(state.lives<=0){clearInterval(timer);state.started=0;stats.deaths++;write(STATS,stats);try{localStorage.removeItem(SAVE)}catch(e){}setTimeout(()=>openScreen($('game-over-screen')),450);return false}return true}
+function wrongMemoryConnection(i){tone(95,.18,.035,'square');state.active=null;state.drawing=false;setTimeout(()=>{if(!state)return;state.paths[i]=[];draw();loseLife('The connection did not belong to the same pattern.',true);saveGame()},250)}
+function loseLife(message,flash=true){if(!state)return false;state.lives=Math.max(0,state.lives-1);$('status-title').textContent='Integrity reduced';$('status-text').textContent=message;if(flash)invalid();updateHud();if(state.lives<=0){clearInterval(timer);state.started=0;stats.deaths++;write(STATS,stats);try{localStorage.removeItem(SAVE)}catch(e){}setTimeout(()=>openScreen($('game-over-screen')),450);return false}return true}
 function eventCell(e){
   return clientPointToCell(e.clientX,e.clientY);
 }
@@ -589,8 +589,8 @@ function renderCampaignMap(){
   const infinite=!state.level.campaign;
   box.innerHTML='';
   label.textContent=infinite
-    ?'MODO INFINITO · '+state.level.index
-    :'NIVEL '+state.level.index+' DE '+CAMPAIGN_PER_DIFF;
+    ?'ENDLESS MODE · '+state.level.index
+    :'LEVEL '+state.level.index+' OF '+CAMPAIGN_PER_DIFF;
 
   for(let i=1;i<=CAMPAIGN_PER_DIFF;i++){
     const n=document.createElement('span');
@@ -598,16 +598,16 @@ function renderCampaignMap(){
     const current=!infinite&&state.level.index===i;
     n.className='campaign-node '+(current?'current':done?'done':'future');
     n.textContent=i;
-    n.title=current?'Nivel actual':done?'Nivel completado':'Nivel pendiente';
+    n.title=current?'Current level':done?'Completed level':'Pending level';
     n.setAttribute('aria-label',n.title+' '+i);
     box.appendChild(n);
   }
 }
 function setModeSubtitle(mode){
   const subtitles={
-    normal:'RECONSTRUYE LAS CONEXIONES · RECUPERA EL PATRÓN',
-    memory:'MEMORIZA LOS COLORES · RECUPERA EL PATRÓN',
-    degraded:'RECONSTRUYE LAS CONEXIONES · RECUPERA EL PATRÓN'
+    normal:'REBUILD THE CONNECTIONS · RECOVER THE PATTERN',
+    memory:'MEMORIZE THE COLORS · RECOVER THE PATTERN',
+    degraded:'REBUILD THE CONNECTIONS · RECOVER THE PATTERN'
   };
   $('subtitle').textContent=subtitles[mode]||subtitles.normal;
 }
@@ -624,35 +624,35 @@ function updateNeuralProgress(pct){
 function updateProgressStatus(pct){
   if(!state)return;
   const genericTitles=new Set([
-    'Patrón incompleto',
-    'Primeras conexiones establecidas',
-    'Sinapsis reconstruidas',
-    'La red comienza a estabilizarse',
-    'El patrón casi está completo',
-    'Actividad neuronal restaurada',
-    'Conectoma degradado',
-    'Memoria inestable'
+    'Incomplete pattern',
+    'First connections established',
+    'Synapses rebuilt',
+    'The network begins to stabilize',
+    'The pattern is almost complete',
+    'Neural activity restored',
+    'Degraded connectome',
+    'Unstable memory'
   ]);
   if(!genericTitles.has($('status-title').textContent))return;
   let title,text;
   if(pct<12){
-    title='Patrón incompleto';
-    text=state.level.fillAll?'Conecta todas las parejas y ocupa toda la red.':'Une cada pareja sin cruzar ni compartir casillas.';
+    title='Incomplete pattern';
+    text=state.level.fillAll?'Connect every pair and fill the entire network.':'Connect each pair without crossing or sharing cells.';
   }else if(pct<32){
-    title='Primeras conexiones establecidas';
-    text='Los primeros impulsos comienzan a recorrer la estructura.';
+    title='First connections established';
+    text='The first impulses begin to travel through the structure.';
   }else if(pct<55){
-    title='Sinapsis reconstruidas';
-    text='La red empieza a conservar una organización reconocible.';
+    title='Synapses rebuilt';
+    text='The network begins to preserve a recognizable organization.';
   }else if(pct<78){
-    title='La red comienza a estabilizarse';
-    text='Cada nueva fibra reduce las discontinuidades del patrón.';
+    title='The network begins to stabilize';
+    text='Each new fiber reduces discontinuities in the pattern.';
   }else if(pct<100){
-    title='El patrón casi está completo';
-    text='Solo quedan algunas regiones por integrar.';
+    title='The pattern is almost complete';
+    text='Only a few regions remain to be integrated.';
   }else{
-    title='Actividad neuronal restaurada';
-    text='La estructura vuelve a transmitir información como una unidad.';
+    title='Neural activity restored';
+    text='The structure transmits information as a unit again.';
   }
   $('status-title').textContent=title;
   $('status-text').textContent=text;
@@ -674,10 +674,10 @@ function updateHud(){
   const best=progress.best[l.id];
   $('best-el').textContent=best?fmt(best):'—';
 }
-function checkWin(){if(!state.paths.every((_,i)=>complete(i)))return;if(state.level.fillAll&&used()!==state.level.rows*state.level.cols)return;clearInterval(timer);state.base=elapsed();state.started=0;const id=state.level.id;progress.completed[id]=true;if(!progress.best[id]||state.base<progress.best[id])progress.best[id]=state.base;stats.wins++;stats.totalTime+=state.base;if(state.level.mode==='memory')stats.memoryWins++;write(PROGRESS,progress);write(STATS,stats);try{localStorage.removeItem(SAVE)}catch(e){}$('status-title').textContent='Patrón recuperado';$('status-text').textContent='La red vuelve a transmitir información.';tone(262,.25);setTimeout(()=>tone(392,.3),130);setTimeout(()=>tone(587,.4),280);setTimeout(showVictory,650)}
+function checkWin(){if(!state.paths.every((_,i)=>complete(i)))return;if(state.level.fillAll&&used()!==state.level.rows*state.level.cols)return;clearInterval(timer);state.base=elapsed();state.started=0;const id=state.level.id;progress.completed[id]=true;if(!progress.best[id]||state.base<progress.best[id])progress.best[id]=state.base;stats.wins++;stats.totalTime+=state.base;if(state.level.mode==='memory')stats.memoryWins++;write(PROGRESS,progress);write(STATS,stats);try{localStorage.removeItem(SAVE)}catch(e){}$('status-title').textContent='Pattern recovered';$('status-text').textContent='The network transmits information again.';tone(262,.25);setTimeout(()=>tone(392,.3),130);setTimeout(()=>tone(587,.4),280);setTimeout(showVictory,650)}
 function showVictory(){
   changeBackground();
-  $('victory-stats').textContent=`Tiempo ${fmt(state.base)} · ${state.moves} conexiones redibujadas · tablero ${state.level.rows}×${state.level.cols} · dificultad ${state.level.rating}`;
+  $('victory-stats').textContent=`Time ${fmt(state.base)} · ${state.moves} connections redrawn · board ${state.level.rows}×${state.level.cols} · difficulty ${state.level.rating}`;
   $('victory-quote').textContent=nextQuote();
   const narrative=$('narrative-copy');
   const di=DIFFS.findIndex(d=>d.id===state.level.difficulty);
@@ -685,15 +685,15 @@ function showVictory(){
   const milestone=state.level.index%5===0;
   narrative.hidden=!(milestone||campaignEnd);
   narrative.textContent=campaignEnd
-    ?'Has completado esta profundidad. Puedes ascender a una red más compleja o continuar indefinidamente en este nivel.'
+    ?'You completed this depth. You can rise to a more complex network or continue indefinitely at this level.'
     :milestone?NARRATIVES[di]:'';
-  $('global-stats').textContent=`Patrones recuperados: ${stats.wins} · Colapsos: ${stats.deaths} · Memorias superadas: ${stats.memoryWins}`;
+  $('global-stats').textContent=`Patterns recovered: ${stats.wins} · Collapses: ${stats.deaths} · Memory levels cleared: ${stats.memoryWins}`;
   $('next-button').hidden=campaignEnd;
   $('level-up-button').hidden=!campaignEnd||di>=DIFFS.length-1;
   $('infinite-button').hidden=!campaignEnd;
   if(campaignEnd){
-    $('level-up-button').textContent=di<DIFFS.length-1?'SUBIR A '+DIFFS[di+1].name.toUpperCase():'CAMPAÑA COMPLETADA';
-    $('infinite-button').textContent='MODO INFINITO · '+DIFFS[di].name.toUpperCase();
+    $('level-up-button').textContent=di<DIFFS.length-1?'MOVE UP TO '+DIFFS[di+1].name.toUpperCase():'CAMPAIGN COMPLETADA';
+    $('infinite-button').textContent='ENDLESS MODE · '+DIFFS[di].name.toUpperCase();
   }
   renderCampaignMap();
   openScreen($('victory-screen'));
@@ -729,12 +729,12 @@ function hint(){
       {transform:'translate(-50%,-50%) scale(1)',filter:'brightness(1)'}
     ],{duration:1500,easing:'ease-in-out'});
   });
-  $('status-title').textContent='Pareja señalada';
-  $('status-text').textContent='Los dos núcleos iluminados pertenecen a la misma conexión.';
+  $('status-title').textContent='Pair highlighted';
+  $('status-text').textContent='The two highlighted nodes belong to the same connection.';
   tone(520,.1,.025);
   setTimeout(()=>tone(680,.12,.022),90);
   if(state.hints===0){
-    const alive=loseLife('Tres pistas han consumido una vida.',false);
+    const alive=loseLife('Three hints cost one life.',false);
     if(alive)state.hints=3;
   }
   updateHud();

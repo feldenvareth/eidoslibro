@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#071019">
-<meta name="description" content="FORMA · Un puzle de inteligencia espacial de EIDOS. Arrastra, gira y encaja piezas sobre una retícula triangular.">
-<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/forma/forma.html">
+<meta name="description" content="FORM · An EIDOS spatial-intelligence puzzle. Drag, rotate and fit pieces on a triangular grid.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/forma/formaEN.html">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
-<meta property="og:title" content="EIDOS · FORMA">
-<meta property="og:description" content="Arrastra, gira y encaja. Reconstruye la figura sobre una retícula triangular.">
-<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/forma/forma.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-forma-compartir.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-forma-compartir.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="EIDOS Book">
+<meta property="og:title" content="EIDOS · FORM">
+<meta property="og:description" content="Drag, rotate and fit. Rebuild the shape on a triangular grid.">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/forma/formaEN.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS FORMA: puzle de inteligencia espacial">
+<meta property="og:image:alt" content="EIDOS FORM: a spatial-intelligence puzzle">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIDOS · FORMA">
-<meta name="twitter:description" content="Arrastra, gira y encaja. Reconstruye la figura sobre una retícula triangular.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-forma-compartir.png">
-<title>EIDOS · FORMA</title>
+<meta name="twitter:title" content="EIDOS · FORM">
+<meta name="twitter:description" content="Drag, rotate and fit. Rebuild the shape on a triangular grid.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
+<title>EIDOS · FORM</title>
 <style>
 :root{
   color-scheme:dark;
@@ -101,7 +101,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 @media(max-width:390px){.brand small{display:none}.brand{font-size:15px}.hudbox{min-width:44px}.hudbox:nth-of-type(2){display:none}#trayHelp{display:none}.rulegrid{gap:4px}.rule{padding-inline:3px}}
 </style>
 
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<!-- Google Analytics: loaded only after cookie consent -->
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -114,10 +114,10 @@ button{font:inherit;color:inherit;touch-action:manipulation}
     s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
     document.head.appendChild(s);
     window.gtag('js',new Date());
-    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · FORMA"});
+    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · FORM"});
   };
   try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}
-  catch(error){console.warn("No se pudo leer el consentimiento de Analytics.",error);}
+  catch(error){console.warn("Analytics consent could not be read.",error);}
 })();
 </script>
 
@@ -126,14 +126,14 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 </style>
 </head>
 <body>
-<aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
-  <p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
-  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Aceptar</button><button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button></div>
+<aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden>
+  <p>This game uses analytics cookies to measure visits. <a href="https://www.eidoslibro.com/termsandconditions.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Accept</button><button class="consent-btn decline" id="consent-reject" type="button">Reject</button></div>
 </aside>
 <script id="eidos-consent-handler">
 (function(){
  const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
- function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("No se pudo guardar el consentimiento de Analytics.",error);} banner.hidden=true;}
+ function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("Analytics consent could not be saved.",error);} banner.hidden=true;}
  yes.addEventListener('click',()=>{save(true); if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
  no.addEventListener('click',()=>save(false));
  try{const c=localStorage.getItem('consentGiven'); banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
@@ -142,35 +142,35 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 
 <div id="game-shell">
   <header id="topbar">
-    <div class="brand">FORMA<small>EL CUERPO DE LA INTELIGENCIA</small></div>
-    <div class="hudbox">NIVEL<b id="levelN">1</b><em id="difficulty">FÁCIL</em></div>
-    <div class="hudbox">MOV.<b id="movesN">0</b></div>
-    <button id="menuButton" class="iconbtn" aria-label="Menú">☰</button>
+    <div class="brand">FORM<small>THE BODY OF INTELLIGENCE</small></div>
+    <div class="hudbox">LEVEL<b id="levelN">1</b><em id="difficulty">EASY</em></div>
+    <div class="hudbox">MOVES<b id="movesN">0</b></div>
+    <button id="menuButton" class="iconbtn" aria-label="Menu">☰</button>
   </header>
 
   <main id="game-area">
-    <div id="instruction"><span class="info">i</span><span id="instructionText">Cubre completamente la figura usando todas las piezas.</span></div>
+    <div id="instruction"><span class="info">i</span><span id="instructionText">Cover the shape completely using every piece.</span></div>
     <div id="board-wrap">
-      <canvas id="board" aria-label="Tablero del puzle"></canvas>
-      <div class="corner-note" id="blockNote">BLOQUE 1 · FUNDAMENTOS</div>
+      <canvas id="board" aria-label="Puzzle board"></canvas>
+      <div class="corner-note" id="blockNote">BLOCK 1 · FOUNDATIONS</div>
       <div id="toast"></div>
     </div>
-    <div id="progress-row"><span id="shapeName">TRIÁNGULO</span><div id="progress-track"><div id="progress-fill"></div></div><span id="progressText">0 / 0 piezas</span></div>
+    <div id="progress-row"><span id="shapeName">TRIANGLE</span><div id="progress-track"><div id="progress-fill"></div></div><span id="progressText">0 / 0 pieces</span></div>
     <div id="tray-wrap">
-      <div id="trayTitle"><b>PIEZAS</b> · ARRASTRA, GIRA Y ENCAJA</div>
-      <div id="trayHelp">SELECCIONA Y USA ↺ / ↻ PARA GIRAR 60°</div>
-      <canvas id="tray" aria-label="Piezas disponibles"></canvas>
+      <div id="trayTitle"><b>PIECES</b> · DRAG, ROTATE AND FIT</div>
+      <div id="trayHelp">SELECT AND USE ↺ / ↻ TO ROTATE 60°</div>
+      <canvas id="tray" aria-label="Available pieces"></canvas>
     </div>
     <div id="controls">
-      <button id="rotateLeft" class="control">↺&nbsp; 60°<span>girar izquierda</span></button>
-      <button id="rotateRight" class="control">↻&nbsp; 60°<span>girar derecha</span></button>
-      <button id="reset" class="control">⟳&nbsp; REINICIAR<span>nivel actual</span></button>
-      <button id="hint" class="control primary">✧&nbsp; PISTA (3)<span>muestra una zona</span></button>
+      <button id="rotateLeft" class="control">↺&nbsp; 60°<span>rotate left</span></button>
+      <button id="rotateRight" class="control">↻&nbsp; 60°<span>rotate right</span></button>
+      <button id="reset" class="control">⟳&nbsp; RESET<span>current level</span></button>
+      <button id="hint" class="control primary">✧&nbsp; HINT (3)<span>shows one area</span></button>
     </div>
     <div id="navrow">
-      <button id="prev" class="navbtn">‹ NIVEL ANTERIOR</button>
+      <button id="prev" class="navbtn">‹ PREVIOUS LEVEL</button>
       <div class="leveldots" id="levelDots"></div>
-      <button id="nextNav" class="navbtn">NIVEL SIGUIENTE ›</button>
+      <button id="nextNav" class="navbtn">NEXT LEVEL ›</button>
     </div>
   </main>
 
@@ -178,72 +178,72 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 
   <section id="startScreen" class="screen open">
     <div class="card">
-      <p class="kicker">EIDOS · INTELIGENCIA ESPACIAL</p>
-      <h1>FORMA</h1>
-      <p class="sub">EL CUERPO DE LA INTELIGENCIA</p>
-      <p class="intro">Todas las piezas y el objetivo comparten exactamente la misma retícula de triángulos equiláteros. <strong>No basta con reconocer una figura: hay que anticipar cómo puede transformarse.</strong></p>
+      <p class="kicker">EIDOS · SPATIAL INTELLIGENCE</p>
+      <h1>FORM</h1>
+      <p class="sub">THE BODY OF INTELLIGENCE</p>
+      <p class="intro">Every piece and the target share exactly the same grid of equilateral triangles. <strong>Recognizing a shape is not enough: you must anticipate how it can transform.</strong></p>
       <div class="rulegrid">
-        <div class="rule"><span class="glyph">☝</span><b>ARRASTRA</b>Lleva cada pieza a la figura.</div>
-        <div class="rule"><span class="glyph">↺ ↻</span><b>GIRA 60°</b>En ambos sentidos, también sobre el tablero.</div>
-        <div class="rule"><span class="glyph">△</span><b>COMPLETA</b>Puedes probar solapes; la solución final no los admite.</div>
+        <div class="rule"><span class="glyph">☝</span><b>DRAG</b>Move each piece onto the shape.</div>
+        <div class="rule"><span class="glyph">↺ ↻</span><b>ROTATE 60°</b>In both directions, including on the board.</div>
+        <div class="rule"><span class="glyph">△</span><b>COMPLETE</b>You can test overlaps; the final solution allows none.</div>
       </div>
       <div class="actions">
-        <button id="continueBtn" class="bigbtn primary">COMENZAR</button>
-        <button id="newBtn" class="bigbtn">NUEVA PARTIDA</button>
+        <button id="continueBtn" class="bigbtn primary">START</button>
+        <button id="newBtn" class="bigbtn">NEW GAME</button>
       </div>
-      <p class="smallnote">6 bloques de 10 niveles · dificultad progresiva · después, modo infinito</p>
+      <p class="smallnote">6 blocks of 10 levels · progressive difficulty · then, endless mode</p>
     </div>
   </section>
 
   <section id="menuScreen" class="screen">
     <div class="card">
-      <p class="kicker">CAMPAÑA</p>
-      <h2>SELECCIONA NIVEL</h2>
-      <p class="sub" id="menuProgress">PROGRESO 1 / 60</p>
+      <p class="kicker">CAMPAIGN</p>
+      <h2>SELECT LEVEL</h2>
+      <p class="sub" id="menuProgress">PROGRESS 1 / 60</p>
       <div id="levelGrid"></div>
       <div class="menurow">
-        <button id="resumeBtn" class="bigbtn primary">VOLVER AL JUEGO</button>
-        <button id="soundBtn" class="bigbtn">SONIDO: SÍ</button>
+        <button id="resumeBtn" class="bigbtn primary">BACK TO GAME</button>
+        <button id="soundBtn" class="bigbtn">SOUND: ON</button>
       </div>
       <div class="menurow">
-        <button id="restartMenuBtn" class="bigbtn">REINICIAR NIVEL</button>
-        <button id="startOverBtn" class="bigbtn">NUEVA PARTIDA</button>
+        <button id="restartMenuBtn" class="bigbtn">RESET LEVEL</button>
+        <button id="startOverBtn" class="bigbtn">NEW GAME</button>
       </div>
     </div>
   </section>
 
   <section id="winScreen" class="screen">
     <div class="card">
-      <p class="kicker">PERCEPCIÓN · ROTACIÓN · ENCAJE</p>
+      <p class="kicker">PERCEPTION · ROTATION · FIT</p>
       <div class="shape-glyph">◇</div>
-      <h2>FORMA COMPLETA</h2>
-      <p class="sub" id="winLevel">NIVEL 1 SUPERADO</p>
-      <div id="winStats"><div class="statcard">MOVIMIENTOS<b id="winMoves">0</b></div><div class="statcard">MEJOR MARCA<b id="winBest">0</b></div></div>
-      <p class="intro" id="winCopy">Has reconstruido una totalidad a partir de fragmentos que podían desplazarse y cambiar de orientación.</p>
-      <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">SIGUIENTE NIVEL</button><button id="winMenuBtn" class="bigbtn">VER NIVELES</button></div>
-      <div class="quote" id="winQuote">La inteligencia espacial no ve únicamente piezas. Ve relaciones posibles entre ellas.</div>
+      <h2>FORM COMPLETE</h2>
+      <p class="sub" id="winLevel">LEVEL 1 CLEARED</p>
+      <div id="winStats"><div class="statcard">MOVES<b id="winMoves">0</b></div><div class="statcard">BEST SCORE<b id="winBest">0</b></div></div>
+      <p class="intro" id="winCopy">You rebuilt a whole from fragments that could move and change orientation.</p>
+      <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">NEXT LEVEL</button><button id="winMenuBtn" class="bigbtn">VIEW LEVELS</button></div>
+      <div class="quote" id="winQuote">Spatial intelligence does not see only pieces. It sees possible relationships between them.</div>
     </div>
   </section>
 
   <section id="surrenderScreen" class="screen">
     <div class="card">
-      <p class="kicker">SIN PISTAS</p>
+      <p class="kicker">NO HINTS</p>
       <div class="shape-glyph">⌁</div>
-      <h2>RENDIRSE Y VER SOLUCIÓN</h2>
-      <p class="sub">CONFIRMACIÓN</p>
-      <p class="intro" id="surrenderCopy">Si confirmas, este puzle se cerrará como rendición y se mostrará la solución completa.</p>
-      <div class="actions"><button id="confirmSurrenderBtn" class="bigbtn gold">CONFIRMAR Y VER SOLUCIÓN</button><button id="cancelSurrenderBtn" class="bigbtn">SEGUIR INTENTÁNDOLO</button></div>
-      <p class="smallnote">La solución mostrada no contará como mejor marca.</p>
+      <h2>GIVE UP AND SHOW SOLUTION</h2>
+      <p class="sub">CONFIRMATION</p>
+      <p class="intro" id="surrenderCopy">If you confirm, this puzzle will be closed as a surrender and the complete solution will be shown.</p>
+      <div class="actions"><button id="confirmSurrenderBtn" class="bigbtn gold">CONFIRM AND SHOW SOLUTION</button><button id="cancelSurrenderBtn" class="bigbtn">KEEP TRYING</button></div>
+      <p class="smallnote">The shown solution will not count as a best score.</p>
     </div>
   </section>
 
   <section id="solutionScreen" class="screen solution-screen">
     <div class="card">
-      <p class="kicker">SOLUCIÓN REAL</p>
-      <h2>PUZLE CERRADO</h2>
-      <p class="sub" id="solutionLevel">NIVEL RESUELTO POR RENDICIÓN</p>
-      <p class="intro">Las piezas se han colocado exactamente en la partición con la que se generó este puzle. Puedes reiniciarlo ahora o continuar.</p>
-      <div class="actions"><button id="retrySolutionBtn" class="bigbtn">REINICIAR ESTE PUZLE</button><button id="continueSolutionBtn" class="bigbtn primary">CONTINUAR</button></div>
+      <p class="kicker">ACTUAL SOLUTION</p>
+      <h2>PUZZLE CLOSED</h2>
+      <p class="sub" id="solutionLevel">LEVEL RESOLVED BY SURRENDER</p>
+      <p class="intro">The pieces have been placed exactly in the partition used to generate this puzzle. You can reset it now or continue.</p>
+      <div class="actions"><button id="retrySolutionBtn" class="bigbtn">RESET THIS PUZZLE</button><button id="continueSolutionBtn" class="bigbtn primary">CONTINUE</button></div>
     </div>
   </section>
 
@@ -251,11 +251,11 @@ button{font:inherit;color:inherit;touch-action:manipulation}
     <div class="card">
       <p class="kicker">60 / 60</p>
       <div class="shape-glyph">⬡</div>
-      <h2>CAMPAÑA COMPLETA</h2>
-      <p class="sub">LA FORMA YA NO ES EL PROBLEMA</p>
-      <p class="intro">Has pasado de figuras simples a configuraciones cada vez más densas. La dificultad no estaba en cada triángulo, sino en imaginar cómo una parte podía convertirse en otra posición dentro del conjunto.</p>
-      <div class="quote">Un cuerpo capaz de actuar sobre el mundo multiplica los problemas que una inteligencia puede aprender a resolver.</div>
-      <div class="actions" style="margin-top:16px"><button id="infiniteBtn" class="bigbtn primary">CAMPAÑA INFINITA</button><button id="finishMenuBtn" class="bigbtn">VOLVER A NIVELES</button></div>
+      <h2>CAMPAIGN COMPLETE</h2>
+      <p class="sub">FORM IS NO LONGER THE PROBLEM</p>
+      <p class="intro">You moved from simple shapes to increasingly dense configurations. The difficulty was not in each triangle, but in imagining how one part could become another position within the whole.</p>
+      <div class="quote">A body capable of acting on the world multiplies the problems an intelligence can learn to solve.</div>
+      <div class="actions" style="margin-top:16px"><button id="infiniteBtn" class="bigbtn primary">ENDLESS CAMPAIGN</button><button id="finishMenuBtn" class="bigbtn">BACK TO LEVELS</button></div>
     </div>
   </section>
 </div>
@@ -267,19 +267,19 @@ const SQ3=Math.sqrt(3), HUNIT=SQ3/2;
 const SAVE_KEY='eidos-forma-save-v4', SOUND_KEY='eidos-forma-sound-v1';
 const COLORS=['#2da7e8','#f0b83d','#78c751','#ef624f','#a779e7','#41c2ae','#e887c2','#e89b4a','#7b99f2'];
 const QUOTES=[
-  'La inteligencia espacial no ve únicamente piezas. Ve relaciones posibles entre ellas.',
-  'Rotar una forma exige conservar mentalmente aquello que cambia mientras cambia su orientación.',
-  'Una solución aparece cuando el conjunto deja de parecer una suma de fragmentos.',
-  'Manipular el mundo también es una manera de pensar sobre él.',
-  'La misma estructura puede adquirir significados distintos cuando cambia de posición.',
-  'Ver una forma es inmediato. Imaginar todas las formas que puede llegar a ocupar requiere otra clase de trabajo mental.'
+  'Spatial intelligence does not see only pieces. It sees possible relationships between them.',
+  'Rotating a form requires mentally preserving what changes while its orientation changes.',
+  'A solution appears when the whole stops looking like a sum of fragments.',
+  'Manipulating the world is also a way of thinking about it.',
+  'The same structure can acquire different meanings when its position changes.',
+  'Seeing a form is immediate. Imagining every form it can occupy requires a different kind of mental work.'
 ];
 const WIN_COPY=[
-  'Has reconstruido una totalidad a partir de fragmentos que podían desplazarse y cambiar de orientación.',
-  'La pieza correcta no era suficiente: también necesitaba la orientación y la posición correctas.',
-  'Cada giro modificaba la apariencia sin modificar la estructura interna de la pieza.',
-  'La solución dependía de anticipar relaciones espaciales antes de poder comprobarlas.',
-  'El tablero ya no era una figura, sino un espacio de transformaciones posibles.'
+  'You rebuilt a whole from fragments that could move and change orientation.',
+  'The correct piece was not enough: it also needed the correct orientation and position.',
+  'Each rotation changed the appearance without changing the internal structure of the piece.',
+  'The solution depended on anticipating spatial relationships before they could be tested.',
+  'The board was no longer a figure, but a space of possible transformations.'
 ];
 const board=$('board'), tray=$('tray'), dragCanvas=$('drag-canvas');
 const bc=board.getContext('2d'), tc=tray.getContext('2d'), dc=dragCanvas.getContext('2d');
@@ -354,12 +354,12 @@ function shapeFor(n){
   const tier=Math.min(5,Math.floor((n-1)/10));
   const pos=(n-1)%10,phase=pos>=7?1:0;
   let name,polys;
-  if(n<=3){const s=4+(n===3?1:0);name='TRIÁNGULO';polys=[triangle(s,1)];}
+  if(n<=3){const s=4+(n===3?1:0);name='TRIANGLE';polys=[triangle(s,1)];}
   else{
     const kind=(pos+2*tier)%6;
-    if(kind===0){const s=5+Math.floor(tier/2)+phase;name='TRIÁNGULO';polys=[triangle(s,1)];}
+    if(kind===0){const s=5+Math.floor(tier/2)+phase;name='TRIANGLE';polys=[triangle(s,1)];}
     if(kind===1){const w=4+Math.floor(tier/2)+phase,h=3+(tier%2);name='ROMBO';polys=[rhombus(w,h)];}
-    if(kind===2){const s=2+(tier>=3?1:0)+phase;name='HEXÁGONO';polys=[hexagon(s)];}
+    if(kind===2){const s=2+(tier>=3?1:0)+phase;name='HEXAGON';polys=[hexagon(s)];}
     if(kind===3){const t=3+Math.floor(tier/2)+phase,h=3+(tier>=4?1:0);name='TRAPECIO';polys=[trapezoid(t,h)];}
     if(kind===4){const s=3+(tier>=3?1:0)+phase;name='FLECHA';polys=arrowShape(s);}
     if(kind===5){const s=3+(tier>=4?1:0)+phase;name='CORONA';polys=crownShape(s);}
@@ -390,7 +390,7 @@ function partition(cells,k,seed){
   k=Math.max(2,Math.min(k,Math.floor(cells.length/3)));
   const rnd=seeded(seed),map=new Map(cells.map(c=>[c.key,c])),adj=buildNeighborMap(cells);
   const unassigned=new Set(cells.map(c=>c.key)),groups=Array.from({length:k},()=>[]);
-  // Semillas alejadas entre sí para producir piezas compactas y reconocibles.
+  // Semillas alejadas entre sí para producir pieces compactas y reconocibles.
   let first=cells[Math.floor(rnd()*cells.length)];const seeds=[first];
   while(seeds.length<k){let best=null,score=-1;for(const c of cells){if(seeds.includes(c))continue;let d=Infinity;for(const s of seeds)d=Math.min(d,Math.hypot(c.cen.x-s.cen.x,c.cen.y-s.cen.y));const jitter=rnd()*.18;if(d+jitter>score){score=d+jitter;best=c}}seeds.push(best)}
   seeds.forEach((c,i)=>{groups[i].push(c.key);unassigned.delete(c.key)});
@@ -404,7 +404,7 @@ function partition(cells,k,seed){
       const cand=new Map();for(const id of groups[gi])for(const nb of adj.get(id)||[])if(unassigned.has(nb))cand.set(nb,(cand.get(nb)||0)+1);
       if(!cand.size)continue;
       let choices=[...cand.entries()].sort((a,b)=>b[1]-a[1]||rnd()-.5);
-      // Evita convertir todas las piezas en manchas: un poco de azar entre los mejores bordes.
+      // Evita convertir todas las pieces en manchas: un poco de azar entre los mejores bordes.
       const max=choices[0][1];choices=choices.filter(x=>x[1]>=max-1);const pick=choices[Math.floor(rnd()*choices.length)][0];
       groups[gi].push(pick);unassigned.delete(pick);did=true;
       if(groups[gi].length>=goals[gi]&&rnd()>.14)continue;
@@ -457,12 +457,12 @@ function isSolved(){
   return target.every(c=>occupied.has(c.key));
 }
 const BLOCKS=[
-  {name:'FUNDAMENTOS',diff:'FÁCIL'},
-  {name:'COMBINACIÓN',diff:'ATENCIÓN'},
-  {name:'ROTACIÓN',diff:'ESPACIAL'},
-  {name:'ANTICIPACIÓN',diff:'ROTACIÓN'},
-  {name:'ABSTRACCIÓN',diff:'ABSTRACCIÓN'},
-  {name:'SÍNTESIS',diff:'EIDOS'}
+  {name:'FOUNDATIONS',diff:'EASY'},
+  {name:'COMBINATION',diff:'ATTENTION'},
+  {name:'ROTATION',diff:'SPATIAL'},
+  {name:'ANTICIPATION',diff:'ROTATION'},
+  {name:'ABSTRACTION',diff:'ABSTRACTION'},
+  {name:'SYNTHESIS',diff:'EIDOS'}
 ];
 function blockFor(n){const i=Math.min(5,Math.floor((Math.max(1,n)-1)/10));return{index:i+1,...BLOCKS[i]}}
 function difficultyFor(n){if(infinite)return'INFINITO';return blockFor(n).diff}
@@ -479,8 +479,8 @@ function startLevel(n,inf=false){
   const seed=infinite?hash(infiniteRunSeed^(infiniteIndex*9173+41)):hash(level*9173+41),k=pieceCountFor(level,cells.length),groups=partition(cells,k,seed);pieces=makePieces(groups,seed^0x9e3779b9);
   rebuildOccupancy();
   const block=infinite?null:blockFor(level);$('shapeName').textContent=spec.name;$('levelN').textContent=infinite?'∞'+infiniteIndex:level;$('difficulty').textContent=difficultyFor(level);$('movesN').textContent='0';
-  $('blockNote').textContent=infinite?'CAMPAÑA INFINITA · SEMILLA '+String(infiniteRunSeed).slice(-4):'BLOQUE '+block.index+' · '+block.name;
-  $('instructionText').textContent='Cubre completamente la figura. Puedes mover y girar también las piezas ya colocadas.';
+  $('blockNote').textContent=infinite?'ENDLESS CAMPAIGN · SEED '+String(infiniteRunSeed).slice(-4):'BLOCK '+block.index+' · '+block.name;
+  $('instructionText').textContent='Cover the shape completely. You can also move and rotate pieces already placed.';
   updateHUD();save();resizeAll();drawAll();
 }
 
@@ -519,10 +519,10 @@ function drawBoard(){
   bc.save();bc.shadowColor='rgba(81,185,237,.16)';bc.shadowBlur=16;
   for(const c of target)drawTri(bc,targetPoly(c),'rgba(7,21,30,.82)','rgba(83,127,151,.55)',.75);bc.restore();
 
-  // Las piezas colocadas se dibujan por su geometría real, incluso durante pruebas con solape.
+  // Las pieces colocadas se dibujan por su geometría real, incluso durante pruebas con solape.
   for(const p of pieces){if(!p.placed||!p.t)continue;const tris=transformedTris(p,p.rot,p.t);for(const verts of tris){const key=ckey(verts),poly=verts.map(toBoard),outside=!targetMap.has(key);drawTri(bc,poly,p.color,outside?'rgba(236,113,104,.95)':'rgba(3,11,16,.72)',outside?1.7:1.05,.88)}}
 
-  // Si dos piezas ocupan el mismo triángulo, mezcla visualmente sus colores.
+  // Si dos pieces ocupan el mismo triángulo, mezcla visualmente sus colores.
   for(const [key,entry] of occupied){if(entry.owners.length<2)continue;const poly=entry.verts.map(toBoard);bc.save();bc.globalCompositeOperation='screen';for(const id of entry.owners)drawTri(bc,poly,pieces[id].color,'rgba(255,255,255,.28)',.7,.48);bc.restore();drawTri(bc,poly,'rgba(255,255,255,.06)','rgba(255,210,238,.95)',1.35,1)}
 
   if(selected&&selected.placed&&selected.t){bc.save();bc.strokeStyle='#c8ebfb';bc.lineWidth=1.35;bc.shadowColor='#67c8f3';bc.shadowBlur=8;for(const verts of transformedTris(selected,selected.rot,selected.t)){const poly=verts.map(toBoard);bc.beginPath();bc.moveTo(poly[0].x,poly[0].y);bc.lineTo(poly[1].x,poly[1].y);bc.lineTo(poly[2].x,poly[2].y);bc.closePath();bc.stroke()}bc.restore()}
@@ -547,11 +547,11 @@ function drawDrag(){
 function drawAll(){drawBoard();drawTray();drawDrag();updateHUD()}
 function updateHUD(){
   $('movesN').textContent=moves;const hintBtn=$('hint');
-  if(hints>0){hintBtn.childNodes[0].nodeValue='✧  PISTA ('+hints+')';hintBtn.querySelector('span').textContent='muestra una zona';hintBtn.classList.add('primary')}
-  else{hintBtn.childNodes[0].nodeValue='⚑  RENDIRSE';hintBtn.querySelector('span').textContent='ver solución';hintBtn.classList.add('primary')}
+  if(hints>0){hintBtn.childNodes[0].nodeValue='✧  HINT (+hints+')';hintBtn.querySelector('span').textContent='shows one area';hintBtn.classList.add('primary')}
+  else{hintBtn.childNodes[0].nodeValue='⚑  RENDIRSE';hintBtn.querySelector('span').textContent='show solution';hintBtn.classList.add('primary')}
   hintBtn.disabled=won||surrendered;
   const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';
-  $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?('SOLAPE · '+placed+'/'+pieces.length):issues.outside?('FUERA · '+placed+'/'+pieces.length):(placed+' / '+pieces.length+' piezas');
+  $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?('OVERLAP · '+placed+'/'+pieces.length):issues.outside?('OUTSIDE · '+placed+'/'+pieces.length):(placed+' / '+pieces.length+' pieces');
   $('rotateLeft').disabled=!selected;$('rotateRight').disabled=!selected;$('prev').disabled=infinite||level<=1;$('nextNav').disabled=infinite||level>=progress.unlocked||level>=60;
   renderDots();
 }
@@ -586,7 +586,7 @@ function nearestAxialToCartPoint(pt){
 function rotationTranslationAroundCentroid(piece,newRot){
   // Conserva el centro de gravedad visual de la pieza al girarla. Como el centro puede caer entre nodos,
   // después ajustamos la traslación al nodo de retícula más próximo. Si ese ajuste deja parte fuera,
-  // buscamos el pequeño desplazamiento interior más cercano SIN tener en cuenta solapes con otras piezas:
+  // buscamos el pequeño desplazamiento interior más cercano SIN tener en cuenta solapes con otras pieces:
   // los solapes siguen permitidos y se muestran mezclando colores, tal como exige la mecánica.
   const oldLocal=localCentroidCartAt(piece,piece.rot),base=axialToCart(piece.t);
   const fixedCenter={x:base.x+oldLocal.x,y:base.y+oldLocal.y};
@@ -648,12 +648,12 @@ function pointerUp(e){
   // Un toque corto sobre una pieza ya colocada solo la selecciona: no cuenta movimiento ni la desplaza.
   if(!dragMoved&&wasPlaced){
     restorePrevious(p);active=null;releasePointer(pointerId);pointerId=null;
-    play('select');showToast('Pieza seleccionada · arrástrala para moverla');drawAll();return;
+    play('select');showToast('Piece selected · drag it to move');drawAll();return;
   }
   // En la bandeja, primer toque selecciona y segundo toque gira.
   if(!dragMoved&&overTray&&p.prev&&!p.prev.placed){
     active=null;releasePointer(pointerId);pointerId=null;p.prev=null;
-    if(selectedBeforeDrag){rotateSelected(1,true)}else{showToast('Pieza seleccionada · usa ↺ o ↻ para girarla');play('select');drawAll()}
+    if(selectedBeforeDrag){rotateSelected(1,true)}else{showToast('Piece selected · use ↺ or ↻ to rotate it');play('select');drawAll()}
     return;
   }
 
@@ -661,7 +661,7 @@ function pointerUp(e){
   // Esto permite liberar una zona cuando se descubre que otra pieza debe ocuparla.
   if(dragMoved&&wasPlaced&&overTray){
     p.placed=false;p.t=null;p.matched=[];p.prev=null;active=null;moves++;rebuildOccupancy();
-    releasePointer(pointerId);pointerId=null;play('place');showToast('Pieza retirada · hueco liberado');updateHUD();drawAll();return;
+    releasePointer(pointerId);pointerId=null;play('place');showToast('Piece removed · space freed');updateHUD();drawAll();return;
   }
 
   let placed=false;
@@ -669,11 +669,11 @@ function pointerUp(e){
     const cand=candidateFor(p,p.pivotBoard);
     if(cand){
       p.t=cand.t;p.matched=cand.keys;p.placed=true;p.prev=null;rebuildOccupancy();
-      placed=true;moves++;play('place');showToast(wasPlaced?'Pieza recolocada':'Pieza encajada');
+      placed=true;moves++;play('place');showToast(wasPlaced?'Piece repositioned':'Piece fitted');
     }
   }
   active=null;releasePointer(pointerId);pointerId=null;
-  if(!placed){restorePrevious(p);play('bad');showToast(wasPlaced?'No cabe ahí · vuelve a su posición anterior':'Ese espacio no encaja con la pieza')}
+  if(!placed){restorePrevious(p);play('bad');showToast(wasPlaced?'It does not fit there · returning to its previous position':'That space does not fit the piece')}
   updateHUD();drawAll();if(placed)checkWin();
 }
 function pointerCancel(){if(!active)return;const p=active;active=null;releasePointer(pointerId);pointerId=null;restorePrevious(p);drawAll()}
@@ -684,41 +684,41 @@ function rotateSelected(dir=1,fromTap=false){
   if(p.placed&&p.t){
     // Una pieza colocada gira alrededor de SU CENTRO DE GRAVEDAD, no alrededor del vértice-pivote.
     // Después se encaja al grid más próximo que mantenga toda la pieza dentro de la figura objetivo.
-    // Las demás piezas NO bloquean el giro: si hay solape, se mantiene y se visualiza por mezcla de color.
+    // Las demás pieces NO bloquean el giro: si hay solape, se mantiene y se visualiza por mezcla de color.
     const newT=rotationTranslationAroundCentroid(p,newRot);
-    if(!newT){play('bad');showToast('No hay espacio dentro de la figura para completar ese giro');drawAll();return}
+    if(!newT){play('bad');showToast('There is no room inside the shape to complete that rotation');drawAll();return}
     p.rot=newRot;p.t=newT;p.matched=transformedKeys(p,p.rot,p.t);moves++;play('rotate');rebuildOccupancy();
     const issues=placementIssues();
-    if(issues.overlap)showToast('Giro sobre el centro · colores mezclados donde se solapan');
-    else showToast('Giro sobre el centro · ajustado a la retícula');
+    if(issues.overlap)showToast('Rotation around center · colors mixed where pieces overlap');
+    else showToast('Rotation around center · snapped to the grid');
   }else{
     p.rot=newRot;moves++;play('rotate');
-    if(!fromTap)showToast(dir>0?'Giro 60° a la derecha':'Giro 60° a la izquierda');
+    if(!fromTap)showToast(dir>0?'60° rotation to the right':'60° rotation to the left');
   }
   updateHUD();drawAll();checkWin();
 }
-function resetCurrent(){startLevel(infinite?infiniteIndex:level,infinite);showToast('Nivel reiniciado');play('reset')}
+function resetCurrent(){startLevel(infinite?infiniteIndex:level,infinite);showToast('Level reset');play('reset')}
 function pieceAtSolution(p){if(!p.placed||!p.t)return false;const a=transformedKeys(p,p.rot,p.t).slice().sort(),b=p.solutionKeys.slice().sort();return a.length===b.length&&a.every((k,i)=>k===b[i])}
 function useHint(){
   if(won||surrendered)return;if(hints<=0){openSurrender();return}
-  let p=(selected&&!pieceAtSolution(selected))?selected:pieces.find(x=>!pieceAtSolution(x));if(!p){showToast('La disposición actual ya coincide con la solución');return}
-  hints--;hintPiece=p.id;clearTimeout(hintTimer);hintTimer=setTimeout(()=>{hintPiece=null;drawAll()},2100);play('hint');showToast('La zona iluminada es la posición exacta de esta pieza');updateHUD();drawAll();
+  let p=(selected&&!pieceAtSolution(selected))?selected:pieces.find(x=>!pieceAtSolution(x));if(!p){showToast('The current arrangement already matches the solution');return}
+  hints--;hintPiece=p.id;clearTimeout(hintTimer);hintTimer=setTimeout(()=>{hintPiece=null;drawAll()},2100);play('hint');showToast('The highlighted area is the exact position of this piece');updateHUD();drawAll();
 }
 function checkWin(){if(isSolved()){won=true;updateHUD();setTimeout(winLevel,260)}}
 function openSurrender(){
-  $('surrenderCopy').textContent=infinite?'Si confirmas, este puzle infinito se cerrará como rendición y verás su solución. Si después lo abandonas, esta combinación puede no volver a aparecer en otra campaña infinita.':'Si confirmas, este nivel se cerrará como rendición y verás su solución. Al ser parte de la campaña, podrás volver a jugar exactamente este mismo nivel desde el menú.';
+  $('surrenderCopy').textContent=infinite?'If you confirm, this endless puzzle will be closed as a surrender and you will see its solution. If you then leave it, this combination may not appear again in another endless campaign.':'If you confirm, this level will be closed as a surrender and you will see its solution. Because it is part of the campaign, you can replay this exact level from the menu.';
   openScreen('surrenderScreen');
 }
 function revealSolution(){
   closeAllScreens();surrendered=true;won=true;selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
   for(const p of pieces){p.rot=0;p.t={...p.solutionT};p.placed=true;p.matched=p.solutionKeys.slice();p.prev=null}rebuildOccupancy();
   if(!infinite){progress.unlocked=Math.max(progress.unlocked,Math.min(60,level+1));save()}
-  $('solutionLevel').textContent=infinite?'PUZLE INFINITO '+infiniteIndex+' · SOLUCIÓN MOSTRADA':'NIVEL '+level+' · SOLUCIÓN MOSTRADA';
+  $('solutionLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' · SOLUTION SHOWN':'LEVEL '+level+' · SOLUTION SHOWN';
   updateHUD();drawAll();play('hint');setTimeout(()=>openScreen('solutionScreen'),520);
 }
 function winLevel(){
   play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level+1));save()}
-  $('winLevel').textContent=infinite?'PUZLE INFINITO '+infiniteIndex+' SUPERADO':'NIVEL '+level+' SUPERADO';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=QUOTES[(level-1)%QUOTES.length];$('nextLevelBtn').textContent=!infinite&&level===60?'FINALIZAR CAMPAÑA':'SIGUIENTE NIVEL';openScreen('winScreen')
+  $('winLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' CLEARED':'LEVEL '+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=QUOTES[(level-1)%QUOTES.length];$('nextLevelBtn').textContent=!infinite&&level===60?'FINISH CAMPAIGN':'NEXT LEVEL';openScreen('winScreen')
 }
 function nextLevel(){closeAllScreens();if(!infinite&&level===60){openScreen('finishScreen');return}if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(level+1)}
 
@@ -727,10 +727,10 @@ function openScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classL
 function closeAllScreens(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'))}
 function renderMenu(){
   $('menuProgress').textContent='PROGRESO '+Math.min(60,progress.unlocked)+' / 60';const grid=$('levelGrid');grid.innerHTML='';
-  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOQUE '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+(i<progress.unlocked?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.addEventListener('click',()=>{closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
-  $('soundBtn').textContent='SONIDO: '+(sound?'SÍ':'NO')
+  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+(i<progress.unlocked?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.addEventListener('click',()=>{closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
+  $('soundBtn').textContent='SOUND: '+(sound?'YES':'NO')
 }
-function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent='SONIDO: '+(sound?'SÍ':'NO');if(sound)play('select')}
+function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent='SOUND: '+(sound?'YES':'NO');if(sound)play('select')}
 function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}
 function tone(freq,dur=.08,type='sine',vol=.035,delay=0){if(!sound)return;ensureAudio();const o=audio.createOscillator(),g=audio.createGain(),now=audio.currentTime+delay;o.type=type;o.frequency.setValueAtTime(freq,now);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(vol,now+.012);g.gain.exponentialRampToValueAtTime(.0001,now+dur);o.connect(g);g.connect(audio.destination);o.start(now);o.stop(now+dur+.02)}
 function play(kind){if(!sound)return;try{if(kind==='pick')tone(330,.06,'sine',.025);if(kind==='select')tone(420,.05,'sine',.022);if(kind==='rotate'){tone(390,.055,'triangle',.026);tone(520,.06,'triangle',.018,.035)}if(kind==='place'){tone(440,.07,'sine',.03);tone(660,.08,'sine',.022,.04)}if(kind==='bad'){tone(150,.09,'sawtooth',.018);tone(115,.12,'sawtooth',.012,.05)}if(kind==='hint'){tone(620,.08,'sine',.022);tone(830,.12,'sine',.016,.07)}if(kind==='reset')tone(250,.09,'triangle',.022);if(kind==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.18,'sine',.028,i*.085))}}catch(e){}}
@@ -745,7 +745,7 @@ $('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurre
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))closeAllScreens();else openScreen('menuScreen')}});
 window.addEventListener('resize',()=>{dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));resizeAll()});
 
-$('continueBtn').textContent=progress.unlocked>1?'CONTINUAR NIVEL '+(progress.last||1):'COMENZAR';$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
+$('continueBtn').textContent=progress.unlocked>1?'CONTINUE LEVEL '+(progress.last||1):'START';$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
 startLevel(progress.last||1);
 openScreen('startScreen');
 })();

@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#08110d">
-  <meta name="description" content="Rompe las formaciones, sobrevive y acopla los tres módulos antes de la nave nodriza.">
-<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/triada/triada.html">
+  <meta name="description" content="Break the formations, survive and dock all three modules before the mothership.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/triada/triadaEN.html">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
-<meta property="og:title" content="EIDOS · Tríada">
-<meta property="og:description" content="Ensambla. Resiste. Atraviesa. Completa la Tríada.">
-<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/triada/triada.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triada-compartir.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triada-compartir.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="EIDOS Book">
+<meta property="og:title" content="EIDOS · Triad">
+<meta property="og:description" content="Assemble. Endure. Break through. Complete the Triad.">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/triada/triadaEN.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triad-share.png">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triad-share.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS Tríada">
+<meta property="og:image:alt" content="EIDOS Triad">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIDOS · Tríada">
-<meta name="twitter:description" content="Ensambla. Resiste. Atraviesa. Completa la Tríada.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triada-compartir.png">
-<title>EIDOS · Tríada</title>
+<meta name="twitter:title" content="EIDOS · Triad">
+<meta name="twitter:description" content="Assemble. Endure. Break through. Complete the Triad.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/triada/eidos-triad-share.png">
+<title>EIDOS · Triad</title>
   <style>
     :root {
       color-scheme: dark;
@@ -444,7 +444,7 @@
     }
   </style>
 
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<!-- Google Analytics: loaded only after cookie consent -->
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -457,10 +457,10 @@
     s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
     document.head.appendChild(s);
     window.gtag('js',new Date());
-    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Tríada"});
+    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Triad"});
   };
   try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}
-  catch(error){console.warn("No se pudo leer el consentimiento de Analytics.",error);}
+  catch(error){console.warn("Analytics consent could not be read.",error);}
 })();
 </script>
 
@@ -469,26 +469,26 @@
 </style>
 </head>
 <body>
-<aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
-  <p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
-  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Aceptar</button><button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button></div>
+<aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden>
+  <p>This game uses analytics cookies to measure visits. <a href="https://www.eidoslibro.com/termsandconditions.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Accept</button><button class="consent-btn decline" id="consent-reject" type="button">Reject</button></div>
 </aside>
 <script id="eidos-consent-handler">
 (function(){
  const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
- function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("No se pudo guardar el consentimiento de Analytics.",error);} banner.hidden=true;}
+ function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("Analytics consent could not be saved.",error);} banner.hidden=true;}
  yes.addEventListener('click',()=>{save(true); if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
  no.addEventListener('click',()=>save(false));
  try{const c=localStorage.getItem('consentGiven'); banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
 })();
 </script>
 
-  <main id="game-shell" aria-label="Minijuego EIDOS Tríada">
+  <main id="game-shell" aria-label="EIDOS Triad minigame">
     <header id="game-topbar">
-      <span class="game-topbar-title">EIDOS · TRÍADA</span>
+      <span class="game-topbar-title">EIDOS · TRIAD</span>
       <div class="game-topbar-actions">
-        <button id="shield-button" type="button" aria-label="Activar escudo">ESCUDO</button>
-        <button id="close-game" type="button" aria-label="Cerrar el juego">× Cerrar</button>
+        <button id="shield-button" type="button" aria-label="Activate shield">SHIELD</button>
+        <button id="close-game" type="button" aria-label="Close game">× Close</button>
       </div>
     </header>
 
@@ -498,42 +498,42 @@
 
         <section id="unlock-screen" aria-hidden="true">
           <div class="unlock-card">
-            <p class="unlock-kicker">CONTENIDO DESBLOQUEADO</p>
-            <p id="unlock-phase">FASE SUPERADA</p>
+            <p class="unlock-kicker">CONTENT UNLOCKED</p>
+            <p id="unlock-phase">PHASE CLEARED</p>
             <div class="unlock-image-wrap">
               <span id="unlock-image-fallback">E I D O S</span>
-              <img id="unlock-image" alt="Imagen desbloqueada de EIDOS">
+              <img id="unlock-image" alt="Unlocked EIDOS image">
             </div>
             <blockquote id="unlock-quote"></blockquote>
-            <button id="unlock-continue" type="button">CONTINUAR</button>
-            <p class="unlock-hint">También puedes pulsar Intro o Espacio</p>
+            <button id="unlock-continue" type="button">CONTINUE</button>
+            <p class="unlock-hint">You can also press Enter or Space</p>
           </div>
         </section>
 
         <section id="start-card">
           <div class="card-inner">
             <p class="eyebrow">E I D O S</p>
-            <h1>TRÍADA</h1>
-            <p class="subtitle">ENSAMBLA · RESISTE · ATRAVIESA</p>
+            <h1>TRIAD</h1>
+            <p class="subtitle">ASSEMBLE · ENDURE · BREAK THROUGH</p>
             <p class="intro">
-              Rompe las formaciones, sobrevive a las criaturas y acopla los tres
-              módulos antes de enfrentarte a la nave nodriza.
+              Break the formations, survive the creatures and dock all three
+              modules before facing the mothership.
             </p>
             <div class="controls">
-              <div class="control"><strong>MOVER</strong>Flechas · arrastra el dedo</div>
-              <div class="control"><strong>ESCUDO</strong>Botón · doble toque</div>
-              <div class="control"><strong>DISPARO</strong>Automático</div>
-              <div class="control"><strong>PAUSA</strong>P</div>
+              <div class="control"><strong>MOVE</strong>Arrows · drag your finger</div>
+              <div class="control"><strong>SHIELD</strong>Button · double tap</div>
+              <div class="control"><strong>FIRE</strong>Automatic</div>
+              <div class="control"><strong>PAUSE</strong>P</div>
             </div>
-            <button id="start-button" type="button">INICIAR</button>
-            <p class="silent-note">Juego sin sonido, pensado para acompañar la escucha.</p>
+            <button id="start-button" type="button">START</button>
+            <p class="silent-note">A soundless game designed to accompany listening.</p>
           </div>
         </section>
       </div>
     </div>
   </main>
 
-  <script src="/hiddenegg/games/eidos-content.js"></script>
+  <script src="/hiddenegg/games/eidos-content-en.js"></script>
   <script>
     (() => {
       "use strict";
@@ -832,18 +832,18 @@
 
         if (number === 1) {
           spawnFormation();
-          showBanner("FASE I · FORMACIÓN", "Rompe el enjambre");
+          showBanner("PHASE I · FORMATION", "Break the swarm");
         } else if (number === 2) {
           spawnBrood();
-          showBanner("FASE II · ECLOSIÓN", "Destrúyelos antes de que despierten");
+          showBanner("PHASE II · HATCHING", "Destroy them before they wake");
         } else if (number === 3) {
           spawnHunters();
-          showBanner("FASE III · DESCENSO", "Evita los rayos de captura");
+          showBanner("PHASE III · DESCENT", "Avoid the capture beams");
         } else {
           spawnBoss();
           showBanner(
-            "FASE FINAL · NAVE NODRIZA",
-            cycle >= 2 ? "Espera a que coincidan los dos sectores abiertos" : "Busca el hueco de su escudo",
+            "FINAL PHASE · MOTHERSHIP",
+            cycle >= 2 ? "Wait until the two open sectors align" : "Find the gap in its shield",
             3
           );
         }
@@ -949,7 +949,7 @@
           outcomeClock: 0,
           sparks: 0
         };
-        showBanner(`ACOPLAMIENTO ${targetLevel - 1}/2`, "Alinea la nave con el módulo", 2.5);
+        showBanner(`DOCKING ${targetLevel - 1}/2`, "Align the ship with the module", 2.5);
       }
 
       function finishDocking(success) {
@@ -960,26 +960,26 @@
           player.level = docking.targetLevel;
           score += docking.targetLevel === 2 ? 500 : 900;
           burst(docking.x, docking.y + 25, COLORS.gold, 28, 170);
-          showBanner("ACOPLAMIENTO COMPLETO", player.level === 2 ? "Disparo doble activado" : "Tríada activada", 1.55);
+          showBanner("DOCKING COMPLETE", player.level === 2 ? "Double fire activated" : "Triad activated", 1.55);
         } else {
           burst(docking.x, docking.y, COLORS.red, 34, 210);
-          showBanner("MÓDULO PERDIDO", "Continúas con la nave actual", 1.55);
+          showBanner("MODULE LOST", "You continue with the current ship", 1.55);
         }
       }
 
       function advanceStage() {
         transitionClock = 0;
         if (stage === 1) {
-          showPhaseUnlock("FASE I SUPERADA · FORMACIÓN", () => {
+          showPhaseUnlock("PHASE I CLEARED · FORMATION", () => {
             stage = 2;
             spawnStage(stage);
           });
         } else if (stage === 2) {
-          showPhaseUnlock("FASE II SUPERADA · ECLOSIÓN", () => {
+          showPhaseUnlock("PHASE II CLEARED · HATCHING", () => {
             beginDocking(Math.min(3, player.level + 1));
           });
         } else if (stage === 3) {
-          showPhaseUnlock("FASE III SUPERADA · DESCENSO", () => {
+          showPhaseUnlock("PHASE III CLEARED · DESCENT", () => {
             beginDocking(Math.min(3, player.level + 1));
           });
         }
@@ -1006,14 +1006,14 @@
         let rewardSubtitle;
         if (lives < MAX_LIVES) {
           lives += 1;
-          rewardTitle = "VIDA RECUPERADA";
-          rewardSubtitle = `${lives}/${MAX_LIVES} vidas · atrapa el núcleo de energía`;
+          rewardTitle = "LIFE RECOVERED";
+          rewardSubtitle = `${lives}/${MAX_LIVES} lives · catch the energy core`;
         } else {
           score += 1500;
           player.shieldCooldown = 0;
           shieldButton.classList.add("ready");
-          rewardTitle = "RESERVA COMPLETA";
-          rewardSubtitle = "+1.500 puntos · escudo recargado · atrapa el núcleo";
+          rewardTitle = "RESERVE FULL";
+          rewardSubtitle = "+1,500 points · shield recharged · catch the core";
         }
 
         playerBullets = [];
@@ -1041,12 +1041,12 @@
             score += 750;
             burst(reward.x, reward.y, COLORS.mint, 38, 190);
             burst(reward.x, reward.y, COLORS.gold, 20, 135);
-            showBanner("NÚCLEO CAPTURADO", "Disparo potenciado durante 15 segundos", 1.35);
+            showBanner("CORE CAPTURED", "Powered fire for 15 seconds", 1.35);
           }
         }
 
         if (reward.time <= 0 || reward.y > H + 30) {
-          showPhaseUnlock("FASE FINAL SUPERADA · NAVE NODRIZA", completeCycle);
+          showPhaseUnlock("FINAL PHASE CLEARED · MOTHERSHIP", completeCycle);
         }
       }
 
@@ -1065,7 +1065,7 @@
         transitionClock = 2.4;
         showBanner(
           `CICLO ${completedCycle} COMPLETADO`,
-          player.powered > 0 ? "Potencia preparada · separación de módulos" : "Separación de módulos",
+          player.powered > 0 ? "Power ready · module separation" : "Module separation",
           2.2
         );
       }
@@ -1423,7 +1423,7 @@
           if (boss.shell <= 0) {
             boss.shell = 0;
             burst(boss.x, boss.y + 15, COLORS.gold, 42, 220);
-            showBanner("CORAZA DESTRUIDA · NÚCLEO EXPUESTO", "El escudo deja ahora media circunferencia abierta", 2.1);
+            showBanner("ARMOR DESTROYED · CORE EXPOSED", "The shield now leaves half the circumference open", 2.1);
           }
           return true;
         }
@@ -1478,7 +1478,7 @@
         burst(boss.x, boss.y, COLORS.mint, 30, 175);
         shake = Math.max(shake, 0.55);
         flash = Math.max(flash, 0.32);
-        showBanner("ESCUDO INTERNO DESTRUIDO", "Solo permanece la barrera exterior", 2);
+        showBanner("INNER SHIELD DESTROYED", "Only the outer barrier remains", 2);
       }
 
       function damageEnemy(enemy, damage) {
@@ -1528,8 +1528,8 @@
           shake = Math.max(shake, 0.42);
           flash = Math.max(flash, 0.24);
           showBanner(
-            "MÓDULO DESPRENDIDO",
-            `${lives} ${lives === 1 ? "vida intacta" : "vidas intactas"} · nave nivel ${player.level}`,
+            "MODULE DETACHED",
+            `${lives} ${lives === 1 ? "life intact" : "lives intact"} · ship level ${player.level}`,
             1.55
           );
           return;
@@ -1552,7 +1552,7 @@
         shake = 0.8;
         flash = 0.52;
         if (lives <= 0) gameOver();
-        else showBanner("NAVE DESTRUIDA", `Reconstrucción iniciada · ${lives} ${lives === 1 ? "vida" : "vidas"} restantes`, 1.45);
+        else showBanner("SHIP DESTROYED", `Reconstruction started · ${lives} ${lives === 1 ? "life" : "lives"} remaining`, 1.45);
       }
 
       function gameOver() {
@@ -1705,11 +1705,11 @@
 
         ctx.font = "10px Arial";
         ctx.fillStyle = "#8aa596";
-        ctx.fillText("PUNTOS", 16, 17);
-        ctx.fillText("RÉCORD", 126, 17);
-        ctx.fillText("FASE", 249, 17);
-        ctx.fillText("VIDAS", 333, 17);
-        ctx.fillText("ESCUDO", 407, 17);
+        ctx.fillText("SCORE", 16, 17);
+        ctx.fillText("BEST", 126, 17);
+        ctx.fillText("PHASE", 249, 17);
+        ctx.fillText("LIVES", 333, 17);
+        ctx.fillText("SHIELD", 407, 17);
 
         ctx.font = "bold 16px Arial";
         ctx.fillStyle = COLORS.cream;
@@ -1744,7 +1744,7 @@
         ctx.strokeRect(14.5, 62.5, 163, 27);
         ctx.font = "bold 9px Arial";
         ctx.fillStyle = COLORS.gold;
-        ctx.fillText(`POTENCIA · ${player.powered.toFixed(1)} s`, 23, 74);
+        ctx.fillText(`POWER · ${player.powered.toFixed(1)} s`, 23, 74);
         ctx.fillStyle = "rgba(255,255,255,0.09)";
         ctx.fillRect(23, 79, 146, 5);
         ctx.fillStyle = COLORS.mint;
@@ -1905,7 +1905,7 @@
           ctx.restore();
         }
 
-        const label = elapsed < 0.34 ? "NAVE DESTRUIDA" : "RECONSTRUCCIÓN · INMUNIDAD";
+        const label = elapsed < 0.34 ? "SHIP DESTROYED" : "RECONSTRUCTION · IMMUNITY";
         const barWidth = 230;
         const barX = W / 2 - barWidth / 2;
         const barY = PLAYER_Y - 75;
@@ -2311,7 +2311,7 @@
         ctx.font = "bold 9px Arial";
         ctx.textAlign = "center";
         ctx.fillStyle = COLORS.cream;
-        ctx.fillText(boss.shell > 0 ? "CORAZA" : "NÚCLEO", W / 2, 264);
+        ctx.fillText(boss.shell > 0 ? "ARMOR" : "CORE", W / 2, 264);
 
         if (boss.shieldCount >= 2) {
           const ratio = clamp(boss.innerShieldLife / boss.innerShieldMax, 0, 1);
@@ -2319,8 +2319,8 @@
           ctx.fillStyle = boss.innerShieldActive ? COLORS.gold : "#7d817c";
           ctx.fillText(
             boss.innerShieldActive
-              ? `ESCUDO INTERNO · ${boss.innerShieldLife}/${boss.innerShieldMax}`
-              : "ESCUDO INTERNO · DESTRUIDO",
+              ? `INNER SHIELD · ${boss.innerShieldLife}/${boss.innerShieldMax}`
+              : "INNER SHIELD · DESTROYED",
             W / 2,
             300
           );
@@ -2458,10 +2458,10 @@
             ? COLORS.red
             : COLORS.cream;
         const dockingLabel = docking.outcome === "success"
-          ? "ENLACE CONFIRMADO"
+          ? "LINK CONFIRMED"
           : docking.outcome === "failed"
-            ? "MÓDULO FUERA DE ALCANCE"
-            : `ALINEACIÓN · ${remaining.toFixed(1)} s`;
+            ? "MODULE OUT OF RANGE"
+            : `ALIGNMENT · ${remaining.toFixed(1)} s`;
         ctx.fillText(dockingLabel, W / 2, 77);
 
         const meterX = W / 2 - 76;
@@ -2475,7 +2475,7 @@
         ctx.fillRect(markerX - 2, meterY - 4, 4, 13);
         ctx.fillStyle = aligned ? COLORS.mint : COLORS.gold;
         ctx.font = "bold 8px Arial";
-        ctx.fillText(aligned ? "CORREDOR ESTABLE" : `DESVIACIÓN ${Math.round(Math.abs(error))}`, W / 2, 102);
+        ctx.fillText(aligned ? "STABLE CORRIDOR" : `DEVIATION ${Math.round(Math.abs(error))}`, W / 2, 102);
         ctx.restore();
       }
 
@@ -2631,7 +2631,7 @@
         ctx.textAlign = "center";
         ctx.font = "bold 11px Arial";
         ctx.fillStyle = COLORS.mint;
-        ctx.fillText(`ATRAPA EL NÚCLEO · ${Math.max(0, reward.time).toFixed(1)} s`, W / 2, 104);
+        ctx.fillText(`CATCH THE CORE · ${Math.max(0, reward.time).toFixed(1)} s`, W / 2, 104);
         ctx.textAlign = "left";
       }
 
@@ -2713,15 +2713,15 @@
         ctx.textAlign = "center";
         ctx.fillStyle = COLORS.gold;
         ctx.font = "bold 13px Arial";
-        ctx.fillText("FIN DE LA TRANSMISIÓN", W / 2, 278);
+        ctx.fillText("END OF TRANSMISSION", W / 2, 278);
         ctx.fillStyle = COLORS.cream;
         ctx.font = "normal 42px Georgia";
-        ctx.fillText("TRÍADA", W / 2, 327);
+        ctx.fillText("TRIAD", W / 2, 327);
         ctx.font = "bold 18px Arial";
-        ctx.fillText(`${score.toLocaleString("es-ES")} puntos`, W / 2, 366);
+        ctx.fillText(`${score.toLocaleString("en-US")} points`, W / 2, 366);
         ctx.fillStyle = "#a7afa9";
         ctx.font = "13px Arial";
-        ctx.fillText("Pulsa o toca para volver a intentarlo", W / 2, 407);
+        ctx.fillText("Press or tap to try again", W / 2, 407);
         ctx.textAlign = "left";
       }
 
@@ -2731,10 +2731,10 @@
         ctx.textAlign = "center";
         ctx.fillStyle = COLORS.cream;
         ctx.font = "normal 35px Georgia";
-        ctx.fillText("PAUSA", W / 2, H / 2);
+        ctx.fillText("PAUSE", W / 2, H / 2);
         ctx.fillStyle = "#a7afa9";
         ctx.font = "13px Arial";
-        ctx.fillText("Pulsa P para continuar", W / 2, H / 2 + 31);
+        ctx.fillText("Press P to continue", W / 2, H / 2 + 31);
         ctx.textAlign = "left";
       }
 

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Controla la plataforma, rompe las estructuras y supera niveles cada vez más inestables.">
-<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemuros.html">
+<meta name="description" content="Control the paddle, break the structures and clear increasingly unstable levels.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemurosEN.html">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
-<meta property="og:title" content="EIDOS · Rompemuros">
-<meta property="og:description" content="Rompe el muro. Conserva la esfera. Supera cada nivel.">
-<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemuros.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="EIDOS Book">
+<meta property="og:title" content="EIDOS · Wallbreaker">
+<meta property="og:description" content="Break the wall. Keep the ball alive. Clear every level.">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemurosEN.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-wallbreaker-share.png">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-wallbreaker-share.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS Rompemuros">
+<meta property="og:image:alt" content="EIDOS Wallbreaker">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIDOS · Rompemuros">
-<meta name="twitter:description" content="Rompe el muro. Conserva la esfera. Supera cada nivel.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
+<meta name="twitter:title" content="EIDOS · Wallbreaker">
+<meta name="twitter:description" content="Break the wall. Keep the ball alive. Clear every level.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-wallbreaker-share.png">
 <style>
   * {
     box-sizing: border-box;
@@ -470,9 +470,9 @@
     }
   }
 </style>
-<title>EIDOS · Rompemuros</title>
+<title>EIDOS · Wallbreaker</title>
 
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<!-- Google Analytics: loaded only after cookie consent -->
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -485,10 +485,10 @@
     s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
     document.head.appendChild(s);
     window.gtag('js',new Date());
-    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Rompemuros"});
+    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Wallbreaker"});
   };
   try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}
-  catch(error){console.warn("No se pudo leer el consentimiento de Analytics.",error);}
+  catch(error){console.warn("Analytics consent could not be read.",error);}
 })();
 </script>
 
@@ -497,14 +497,14 @@
 </style>
 </head>
 <body>
-<aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
-  <p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
-  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Aceptar</button><button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button></div>
+<aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden>
+  <p>This game uses analytics cookies to measure visits. <a href="https://www.eidoslibro.com/termsandconditions.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Accept</button><button class="consent-btn decline" id="consent-reject" type="button">Reject</button></div>
 </aside>
 <script id="eidos-consent-handler">
 (function(){
  const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
- function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("No se pudo guardar el consentimiento de Analytics.",error);} banner.hidden=true;}
+ function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("Analytics consent could not be saved.",error);} banner.hidden=true;}
  yes.addEventListener('click',()=>{save(true); if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
  no.addEventListener('click',()=>save(false));
  try{const c=localStorage.getItem('consentGiven'); banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
@@ -514,29 +514,29 @@
 
 <div id="top-bar">
   <div id="hud">
-    <span id="scoreEl">Puntos: 0</span>
-    <span id="bestEl">Récord: 0</span>
-    <span id="levelEl">Nivel 1</span>
+    <span id="scoreEl">Score: 0</span>
+    <span id="bestEl">Best: 0</span>
+    <span id="levelEl">Level 1</span>
     <span id="livesEl">&#9829; &#9829; &#9829;</span>
   </div>
 
-  <button id="close-btn" onclick="window.parent.postMessage('cerrar-eidos','*')">&#x2715; Cerrar</button>
+  <button id="close-btn" onclick="window.parent.postMessage('cerrar-eidos','*')">&#x2715; Close</button>
 
-  <div id="speed-control" role="group" aria-label="Cadencia de la bola">
+  <div id="speed-control" role="group" aria-label="Ball cadence">
     <button
       class="speed-arrow"
       type="button"
-      aria-label="Reducir cadencia"
+      aria-label="Decrease cadence"
       onclick="changeSpeedMode(-1)">
       &#10094;
     </button>
 
-    <span id="speed-label" aria-live="polite">Estable</span>
+    <span id="speed-label" aria-live="polite">Stable</span>
 
     <button
       class="speed-arrow"
       type="button"
-      aria-label="Aumentar cadencia"
+      aria-label="Increase cadence"
       onclick="changeSpeedMode(1)">
       &#10095;
     </button>
@@ -547,15 +547,15 @@
   <canvas id="c" width="480" height="650"></canvas>
   <div id="quote-screen" onclick="dismissQuote()">
     <div id="quote-text"></div>
-    <div id="quote-hint">— Toca para continuar —</div>
+    <div id="quote-hint">— Tap to continue —</div>
   </div>
 </div>
 
 <div id="spin"></div>
-<div id="msg">Mueve el rat&#243;n para empezar</div>
-<button id="game-btn">Siguiente nivel</button>
+<div id="msg">Move the mouse to start</div>
+<button id="game-btn">Next level</button>
 
-<script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="/hiddenegg/games/eidos-content-en.js"></script>
 
 <script>
 /* Contenido compartido cargado desde eidos-content.js */
@@ -657,7 +657,7 @@ const SPEED_MODES = {
     accel: 0.00024
   },
   classic: {
-    label: 'Estable',
+    label: 'Stable',
     base: 3.8,
     levelStep: 0.10,
     max: 5.4,
@@ -946,8 +946,8 @@ function resetBall(){
 function nextLevel(){
   win=false;initBricks(level);resetBall();
   document.getElementById('game-btn').style.display='none';
-  document.getElementById('msg').textContent='Mueve el rat\u00f3n para empezar';
-  document.getElementById('levelEl').textContent='Nivel '+level;
+  document.getElementById('msg').textContent='Move the mouse to start';
+  document.getElementById('levelEl').textContent='Level '+level;
   loop();
 }
 function restart(){
@@ -967,11 +967,11 @@ function restart(){
   initBricks(1);
   resetBall();
   document.getElementById('game-btn').style.display='none';
-  document.getElementById('msg').textContent='Mueve el rat\u00f3n para empezar';
-  document.getElementById('scoreEl').textContent='Puntos: 0';
-  document.getElementById('bestEl').textContent='Récord: '+bestScore;
+  document.getElementById('msg').textContent='Move the mouse to start';
+  document.getElementById('scoreEl').textContent='Score: 0';
+  document.getElementById('bestEl').textContent='Best: '+bestScore;
   document.getElementById('livesEl').textContent='\u2665 \u2665 \u2665';
-  document.getElementById('levelEl').textContent='Nivel 1';
+  document.getElementById('levelEl').textContent='Level 1';
   loop();
 }
 
@@ -980,7 +980,7 @@ function updateBestScore() {
 
   bestScore = score;
   saveBestScore(bestScore);
-  document.getElementById('bestEl').textContent = 'Récord: ' + bestScore;
+  document.getElementById('bestEl').textContent = 'Best: ' + bestScore;
 }
 
 function update() {
@@ -1069,7 +1069,7 @@ function update() {
       spinEffect = paddleVelocity > 0 ? 1 : -1;
       spinTimer = 60;
       document.getElementById('spin').textContent =
-        spinEffect > 0 ? 'Efecto derecha' : 'Efecto izquierda';
+        spinEffect > 0 ? 'Right effect' : 'Left effect';
     }
 
     const reboundSpeed = Math.hypot(ball.dx, ball.dy);
@@ -1101,7 +1101,7 @@ function update() {
         score += brick.moving ? 20 : 5;
       }
 
-      document.getElementById('scoreEl').textContent = 'Puntos: ' + score;
+      document.getElementById('scoreEl').textContent = 'Score: ' + score;
       updateBestScore();
 
       const fromLeft = ball.x + ball.r - brick.x;
@@ -1283,7 +1283,7 @@ ctx.globalAlpha = 1;
     ctx.fillStyle='#f5ecd0';ctx.font='bold 22px Georgia,serif';ctx.textAlign='center';
     ctx.fillText('E I D O S',W/2,H/2-16);
     ctx.font='13px sans-serif';ctx.fillStyle='#c8c8b0';
-    ctx.fillText('Mueve el rat\u00f3n o toca para empezar',W/2,H/2+14);
+    ctx.fillText('Move the mouse or tap to start',W/2,H/2+14);
     ctx.textAlign='left';
   }
 }
@@ -1297,7 +1297,7 @@ function loop(){
       running=false;draw();
       const msg=document.getElementById('msg'),btn=document.getElementById('game-btn');
       if(win){level++;showQuote();}
-      else{msg.textContent='Game over - '+score+' puntos';btn.textContent='Reiniciar';btn.onclick=restart;btn.style.display='inline-block';}
+      else{msg.textContent='Game over - '+score+' points';btn.textContent='Restart';btn.onclick=restart;btn.style.display='inline-block';}
       return;
     }
     update();draw();requestAnimationFrame(frame);
@@ -1306,7 +1306,7 @@ function loop(){
 }
 
 currentBg = nextBackground();
-document.getElementById('bestEl').textContent = 'Récord: ' + bestScore;
+document.getElementById('bestEl').textContent = 'Best: ' + bestScore;
 updateSpeedControl();
 initBricks(1);
 loop();

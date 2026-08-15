@@ -576,7 +576,7 @@
       <section class="archive" aria-labelledby="archive-title">
         <div class="archive-heading">
           <h2 id="archive-title">Available transmissions</h2>
-          <p class="archive-count" id="archive-count" data-singular="active system" data-plural="active systems">04 active systems</p>
+          <p class="archive-count" id="archive-count" data-singular="active system" data-plural="active systems">07 active systems</p>
         </div>
 
         <div class="game-grid">
@@ -626,10 +626,72 @@
             </div>
           </article>
 
+          
           <article class="game-card">
+            <div class="game-visual" style="--visual-glow: rgba(121,217,192,.19)">
+              <p class="visual-label">Neural network</p>
+              <span class="visual-index">02</span>
+              <svg viewBox="0 0 560 310" role="img" aria-label="Nodes connected by fibers on a neural grid">
+                <defs><filter id="connectGlow"><feGaussianBlur stdDeviation="8"/></filter></defs>
+                <g stroke="#4a7c6f" stroke-opacity=".18"><path d="M95 64V246M150 64V246M205 64V246M260 64V246M315 64V246M370 64V246M425 64V246M95 64H425M95 110H425M95 156H425M95 202H425M95 246H425"/></g>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M95 110H205V202H315" stroke="#79d9c0" stroke-width="5"/>
+                  <path d="M150 246V156H370V64" stroke="#c8a84b" stroke-width="5"/>
+                  <path d="M260 110H425V202H370" stroke="#d88991" stroke-width="5"/>
+                </g>
+                <g fill="#07150e" stroke-width="3">
+                  <circle cx="95" cy="110" r="15" stroke="#79d9c0"/><circle cx="315" cy="202" r="15" stroke="#79d9c0"/>
+                  <circle cx="150" cy="246" r="15" stroke="#c8a84b"/><circle cx="370" cy="64" r="15" stroke="#c8a84b"/>
+                  <circle cx="260" cy="110" r="15" stroke="#d88991"/><circle cx="370" cy="202" r="15" stroke="#d88991"/>
+                </g>
+                <circle cx="260" cy="156" r="54" fill="#79d9c0" opacity=".07" filter="url(#connectGlow)"/>
+              </svg>
+            </div>
+            <div class="game-content">
+              <div class="game-meta"><span>Puzzle</span><span>Connectivity</span></div>
+              <h3 class="game-title">Connectome</h3>
+              <p class="game-description">Rebuild every pair of nodes without crossing fibers, recover the pattern and advance into increasingly deep networks.</p>
+              <div class="game-actions">
+                <button class="play-button" type="button" data-game-title="Connectome" data-game-url="games/conectoma/conectomaEN.html">Play</button>
+                <button class="language-button" type="button" data-game-title="Conectoma · ES" data-game-url="games/conectoma/conectoma.html" aria-label="Play Connectome in Spanish">ES</button>
+                <a class="article-link" href="/blog/articulos/02_mente_humana.html">Article</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-visual" style="--visual-glow: rgba(85,189,241,.18)">
+              <p class="visual-label">Spatial grid</p>
+              <span class="visual-index">03</span>
+              <svg viewBox="0 0 560 310" role="img" aria-label="Geometric pieces fitting on a triangular grid">
+                <defs><filter id="formGlow"><feGaussianBlur stdDeviation="10"/></filter></defs>
+                <g stroke="#3d647a" stroke-opacity=".32" fill="none">
+                  <path d="M100 236L280 72L460 236Z"/><path d="M145 195H415M190 154H370M235 113H325"/>
+                  <path d="M145 195L235 113M190 236L280 154M235 236L325 154M280 236L370 154M325 236L415 195"/>
+                  <path d="M415 195L325 113M370 236L280 154M325 236L235 154M280 236L190 154M235 236L145 195"/>
+                </g>
+                <path d="M190 236L235 195L280 236Z" fill="#55bdf1" fill-opacity=".42" stroke="#9bdcff" stroke-width="2"/>
+                <path d="M235 195L280 154L325 195L280 236Z" fill="#d5b25d" fill-opacity=".36" stroke="#d5b25d" stroke-width="2"/>
+                <path d="M325 195L370 154L415 195L370 236Z" fill="#8fd26b" fill-opacity=".32" stroke="#8fd26b" stroke-width="2"/>
+                <circle cx="280" cy="174" r="62" fill="#55bdf1" opacity=".07" filter="url(#formGlow)"/>
+              </svg>
+            </div>
+            <div class="game-content">
+              <div class="game-meta"><span>Puzzle</span><span>Spatial intelligence</span></div>
+              <h3 class="game-title">Form</h3>
+              <p class="game-description">Drag, rotate and fit every piece on the same triangular grid. Six blocks of progressive difficulty and an endless mode.</p>
+              <div class="game-actions">
+                <button class="play-button" type="button" data-game-title="Form" data-game-url="games/forma/formaEN.html">Play</button>
+                <button class="language-button" type="button" data-game-title="Forma · ES" data-game-url="games/forma/forma.html" aria-label="Play Form in Spanish">ES</button>
+                <a class="article-link" href="/blog/articulos/07_inteligente_para_que.html">Article</a>
+              </div>
+            </div>
+          </article>
+
+<article class="game-card">
             <div class="game-visual" style="--visual-glow: rgba(200,168,75,.18)">
               <p class="visual-label">Linked orbits</p>
-              <span class="visual-index">02</span>
+              <span class="visual-index">04</span>
               <svg viewBox="0 0 560 310" role="img" aria-label="Pendulums and linked organisms orbiting an emitter">
                 <defs>
                   <filter id="pendGlow"><feGaussianBlur stdDeviation="9"/></filter>
@@ -650,14 +712,15 @@
               </svg>
             </div>
             <div class="game-content">
-              <div class="game-meta"><span>Arcade</span><span>Precision</span><span>ES</span></div>
+              <div class="game-meta"><span>Arcade</span><span>Precision</span></div>
               <h3 class="game-title">Pendulums and Chains</h3>
               <p class="game-description">
                 Move the emitter, split the chained organisms and destroy their
                 gravity wells before the signal is lost.
               </p>
               <div class="game-actions">
-                <button class="play-button" type="button" data-game-title="Pendulums and Chains · ES" data-game-url="games/pendulos/eidos_pendulos.html">Play</button>
+                <button class="play-button" type="button" data-game-title="Pendulums and Chains" data-game-url="games/pendulos/eidos_pendulosEN.html">Play</button>
+                <button class="language-button" type="button" data-game-title="Péndulos y cadenas · ES" data-game-url="games/pendulos/eidos_pendulos.html" aria-label="Play Pendulums and Chains in Spanish">ES</button>
               </div>
             </div>
           </article>
@@ -665,7 +728,7 @@
           <article class="game-card">
             <div class="game-visual" style="--visual-glow: rgba(207,114,106,.14)">
               <p class="visual-label">Defensive structure</p>
-              <span class="visual-index">03</span>
+              <span class="visual-index">05</span>
               <svg viewBox="0 0 560 310" role="img" aria-label="A sphere breaking through a modular structure">
                 <defs>
                   <filter id="wallGlow"><feGaussianBlur stdDeviation="10"/></filter>
@@ -686,14 +749,15 @@
               </svg>
             </div>
             <div class="game-content">
-              <div class="game-meta"><span>Arcade</span><span>Endurance</span><span>ES</span></div>
+              <div class="game-meta"><span>Arcade</span><span>Endurance</span></div>
               <h3 class="game-title">Wallbreaker</h3>
               <p class="game-description">
                 Control the platform, break through the structures and cross
                 increasingly unstable levels without losing the sphere.
               </p>
               <div class="game-actions">
-                <button class="play-button" type="button" data-game-title="Wallbreaker · ES" data-game-url="games/thewall/rompemuros.html">Play</button>
+                <button class="play-button" type="button" data-game-title="Wallbreaker" data-game-url="games/thewall/rompemurosEN.html">Play</button>
+                <button class="language-button" type="button" data-game-title="Rompemuros · ES" data-game-url="games/thewall/rompemuros.html" aria-label="Play Wallbreaker in Spanish">ES</button>
               </div>
             </div>
           </article>
@@ -701,7 +765,7 @@
           <article class="game-card">
             <div class="game-visual" style="--visual-glow: rgba(121,217,192,.16)">
               <p class="visual-label">Modular coupling</p>
-              <span class="visual-index">04</span>
+              <span class="visual-index">06</span>
               <svg viewBox="0 0 560 310" role="img" aria-label="Three modules forming a triangular structure">
                 <defs>
                   <filter id="triGlow"><feGaussianBlur stdDeviation="11"/></filter>
@@ -722,14 +786,15 @@
               </svg>
             </div>
             <div class="game-content">
-              <div class="game-meta"><span>Arcade</span><span>Assembly</span><span>ES</span></div>
+              <div class="game-meta"><span>Arcade</span><span>Assembly</span></div>
               <h3 class="game-title">Triad</h3>
               <p class="game-description">
                 Break the formations, withstand the creatures and connect three
                 modules before facing the mothership.
               </p>
               <div class="game-actions">
-                <button class="play-button" type="button" data-game-title="Triad · ES" data-game-url="games/triada/triada.html">Play</button>
+                <button class="play-button" type="button" data-game-title="Triad" data-game-url="games/triada/triadaEN.html">Play</button>
+                <button class="language-button" type="button" data-game-title="Tríada · ES" data-game-url="games/triada/triada.html" aria-label="Play Triad in Spanish">ES</button>
               </div>
             </div>
           </article>
@@ -737,7 +802,7 @@
           <article class="game-card">
             <div class="game-visual" style="--visual-glow: rgba(121,217,192,.18)">
               <p class="visual-label">Mind synchronisation</p>
-              <span class="visual-index">05</span>
+              <span class="visual-index">07</span>
               <svg viewBox="0 0 560 310" role="img" aria-label="Two minds cross different circuits while preserving the same memories">
                 <defs>
                   <linearGradient id="transferLink" x1="0" x2="1">
@@ -785,14 +850,15 @@
               </svg>
             </div>
             <div class="game-content">
-              <div class="game-meta"><span>Puzzle</span><span>Synchronisation</span><span>ES</span></div>
-              <h3 class="game-title">Transference</h3>
+              <div class="game-meta"><span>Puzzle</span><span>Synchronisation</span></div>
+              <h3 class="game-title">Transfer</h3>
               <p class="game-description">
                 Move the original mind and its copy at once, preserve the same
                 memories and cross seven stages until both can separate.
               </p>
               <div class="game-actions">
-                <button class="play-button" type="button" data-game-title="Transference · ES" data-game-url="games/transferencia/transferencia.html?sound=1">Play</button>
+                <button class="play-button" type="button" data-game-title="Transfer" data-game-url="games/transferencia/transfer.html?sound=1">Play</button>
+                <button class="language-button" type="button" data-game-title="Transferencia · ES" data-game-url="games/transferencia/transferencia.html?sound=1" aria-label="Play Transfer in Spanish">ES</button>
                 <a class="article-link" href="/blog/articles/02_human_mind.html">Article</a>
               </div>
             </div>

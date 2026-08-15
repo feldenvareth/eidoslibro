@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Controla el emisor, divide las cadenas y destruye sus pozos gravitatorios.">
-<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos_pendulos.html">
+<meta name="description" content="Control the emitter, split the chains and destroy their gravity wells.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos_pendulosEN.html">
 <meta property="og:type" content="website">
-<meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
-<meta property="og:title" content="EIDOS · Péndulos y cadenas">
-<meta property="og:description" content="Mueve el emisor. Divide las cadenas. Resiste el aumento de cadencia.">
-<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos_pendulos.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulos-compartir.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulos-compartir.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="EIDOS Book">
+<meta property="og:title" content="EIDOS · Pendulums and Chains">
+<meta property="og:description" content="Move the emitter. Split the chains. Endure the rising cadence.">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos_pendulosEN.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulums-share.png">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulums-share.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS Péndulos y cadenas">
+<meta property="og:image:alt" content="EIDOS Pendulums and Chains">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EIDOS · Péndulos y cadenas">
-<meta name="twitter:description" content="Mueve el emisor. Divide las cadenas. Resiste el aumento de cadencia.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulos-compartir.png">
-<title>EIDOS · Péndulos y cadenas</title>
+<meta name="twitter:title" content="EIDOS · Pendulums and Chains">
+<meta name="twitter:description" content="Move the emitter. Split the chains. Endure the rising cadence.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/pendulos/eidos-pendulums-share.png">
+<title>EIDOS · Pendulums and Chains</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:100%;height:100%;overflow:hidden}
@@ -50,7 +50,7 @@
   .cadence-arrow{width:26px;height:24px;border:0;border-radius:50%;background:transparent;color:#c8a84b;cursor:pointer;font:15px/1 Georgia,serif}
   .cadence-arrow:hover{background:rgba(200,168,75,.09);color:#f5d76e}
   #cadence-label{min-width:125px;padding-inline:8px;color:#f5ecd0;font:11px/1.1 Georgia,serif;text-align:center;white-space:nowrap}
-  #cadence-label::before{content:"Cadencia · ";color:#819188;font-size:10px}
+  #cadence-label::before{content:"Cadence · ";color:#819188;font-size:10px}
   .canvas-wrap{position:relative;width:min(480px,100%,calc((100dvh - 126px)*480/650));aspect-ratio:480/650;min-width:0;min-height:0}
   canvas{display:block;width:100%;height:100%;border:2px solid #4a7c6f;border-radius:8px;cursor:crosshair;touch-action:none;background:#111a14}
   #quote-screen{display:none;position:absolute;inset:0;z-index:20;padding:clamp(20px,8vw,40px) clamp(18px,7vw,36px);border-radius:8px;align-items:center;justify-content:center;flex-direction:column;text-align:center;cursor:pointer}
@@ -65,7 +65,7 @@
   @media(max-height:720px){body{padding:4px;gap:2px}#top-bar,.canvas-wrap{width:min(480px,100%,calc((100dvh - 94px)*480/650))}#cadence-control{min-height:25px}#msg{min-height:16px;font-size:12px;line-height:16px}}
 </style>
 
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<!-- Google Analytics: loaded only after cookie consent -->
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -78,10 +78,10 @@
     s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
     document.head.appendChild(s);
     window.gtag('js',new Date());
-    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Péndulos y cadenas"});
+    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Pendulums and Chains"});
   };
   try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}
-  catch(error){console.warn("No se pudo leer el consentimiento de Analytics.",error);}
+  catch(error){console.warn("Analytics consent could not be read.",error);}
 })();
 </script>
 
@@ -90,14 +90,14 @@
 </style>
 </head>
 <body>
-<aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
-  <p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
-  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Aceptar</button><button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button></div>
+<aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden>
+  <p>This game uses analytics cookies to measure visits. <a href="https://www.eidoslibro.com/termsandconditions.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
+  <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Accept</button><button class="consent-btn decline" id="consent-reject" type="button">Reject</button></div>
 </aside>
 <script id="eidos-consent-handler">
 (function(){
  const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
- function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("No se pudo guardar el consentimiento de Analytics.",error);} banner.hidden=true;}
+ function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("Analytics consent could not be saved.",error);} banner.hidden=true;}
  yes.addEventListener('click',()=>{save(true); if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
  no.addEventListener('click',()=>save(false));
  try{const c=localStorage.getItem('consentGiven'); banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
@@ -106,28 +106,28 @@
 
 <div id="top-bar">
   <div id="hud">
-    <span id="scoreEl">Puntos: 0</span>
-    <span id="bestEl">Récord: 0</span>
-    <span id="levelEl">Nivel 1</span>
+    <span id="scoreEl">Score: 0</span>
+    <span id="bestEl">Best: 0</span>
+    <span id="levelEl">Level 1</span>
     <span id="livesEl">♥ ♥ ♥</span>
   </div>
-  <button id="close-btn" type="button" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Cerrar</button>
-  <div id="cadence-control" role="group" aria-label="Cadencia del juego">
-    <button class="cadence-arrow" type="button" aria-label="Reducir cadencia" onclick="changeCadence(-1)">❮</button>
-    <span id="cadence-label" aria-live="polite">Estable</span>
-    <button class="cadence-arrow" type="button" aria-label="Aumentar cadencia" onclick="changeCadence(1)">❯</button>
+  <button id="close-btn" type="button" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Close</button>
+  <div id="cadence-control" role="group" aria-label="Game cadence">
+    <button class="cadence-arrow" type="button" aria-label="Decrease cadence" onclick="changeCadence(-1)">❮</button>
+    <span id="cadence-label" aria-live="polite">Stable</span>
+    <button class="cadence-arrow" type="button" aria-label="Increase cadence" onclick="changeCadence(1)">❯</button>
   </div>
 </div>
 <div class="canvas-wrap">
   <canvas id="c" width="480" height="650"></canvas>
   <div id="quote-screen" onclick="dismissQuote()">
     <div id="quote-text"></div>
-    <div id="quote-hint">— Toca para continuar —</div>
+    <div id="quote-hint">— Tap to continue —</div>
   </div>
 </div>
-<div id="msg">Mueve el ratón o toca para empezar · disparo automático</div>
-<button id="game-btn" type="button">Reiniciar</button>
-<script src="/hiddenegg/games/eidos-content.js"></script>
+<div id="msg">Move the mouse or tap to start · automatic fire</div>
+<button id="game-btn" type="button">Restart</button>
+<script src="/hiddenegg/games/eidos-content-en.js"></script>
 
 <script>
 const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
@@ -205,7 +205,7 @@ const cadenceLabel=document.getElementById('cadence-label');
 
 const CADENCES=[
   {name:'Contemplativa',factor:.82,shotDelay:275,autoShotDelay:650,enemyDelay:2550,crawler:1.00},
-  {name:'Estable',factor:1,shotDelay:225,autoShotDelay:500,enemyDelay:2150,crawler:1.18},
+  {name:'Stable',factor:1,shotDelay:225,autoShotDelay:500,enemyDelay:2150,crawler:1.18},
   {name:'Intensa',factor:1.22,shotDelay:185,autoShotDelay:380,enemyDelay:1780,crawler:1.38}
 ];
 const CADENCE_KEY='eidosPendulumCrawlerCadenceV1';
@@ -224,7 +224,7 @@ selectNextBackground();
 let score=0,level=1,lives=3,started=false,over=false,quoteVisible=false,running=false,transitioning=false;
 const PENDULUM_COLORS=['#c8a84b','#8fd4c2','#d9895b'];
 let best=Number(localStorage.getItem('eidosPendulumCrawlerBestV1'))||0;
-bestEl.textContent='Récord: '+best;
+bestEl.textContent='Best: '+best;
 let lastTime=0,elapsed=0,lastShot=-9999,lastAutoShot=-9999,lastEnemyShot=0;
 let invulnerableUntil=0;
 const INVULNERABILITY_MS=1100;
@@ -280,23 +280,23 @@ function resetLevel(){
   player.shotFlash=0;
 
   makePendulums();
-  levelEl.textContent='Nivel '+level;
-  msg.textContent='Mueve el emisor · el disparo es automático';
+  levelEl.textContent='Level '+level;
+  msg.textContent='Move the emitter · firing is automatic';
   gameBtn.style.display='none';
 }
 function restart(){
   score=0;level=1;lives=3;
   bgCarousel=[];lastBgIndex=-1;selectNextBackground();
   quoteCarousel=[];lastQuoteIndex=-1;
-  scoreEl.textContent='Puntos: 0';livesEl.textContent='♥ ♥ ♥';
+  scoreEl.textContent='Score: 0';livesEl.textContent='♥ ♥ ♥';
   lastShot=-9999;
   lastAutoShot=-9999;
   invulnerableUntil=0;
   resetLevel();lastTime=0;loop();
 }
 function updateScore(points){
-  score+=points;scoreEl.textContent='Puntos: '+score;
-  if(score>best){best=score;bestEl.textContent='Récord: '+best;localStorage.setItem('eidosPendulumCrawlerBestV1',String(best));}
+  score+=points;scoreEl.textContent='Score: '+score;
+  if(score>best){best=score;bestEl.textContent='Best: '+best;localStorage.setItem('eidosPendulumCrawlerBestV1',String(best));}
 }
 function shoot(now){
   if(
@@ -502,8 +502,8 @@ function loseLife(now=performance.now()){
   burst(player.x,player.y,'#c8a84b',22);
 
   msg.textContent=lives>0
-    ? 'Reconstruyendo emisor…'
-    : 'Secuencia finalizando…';
+    ? 'Rebuilding emitter…'
+    : 'Sequence ending…';
 }
 function updatePlayerDeath(dt,now){
   if(player.state==='alive')return;
@@ -529,8 +529,8 @@ function updatePlayerDeath(dt,now){
         started=false;
         player.state='gone';
 
-        msg.textContent='Fin de la secuencia · '+score+' puntos';
-        gameBtn.textContent='Reiniciar';
+        msg.textContent='End of sequence · '+score+' points';
+        gameBtn.textContent='Restart';
         gameBtn.onclick=restart;
         gameBtn.style.display='inline-block';
       }else{
@@ -539,7 +539,7 @@ function updatePlayerDeath(dt,now){
         player.hitFlash=0;
         invulnerableUntil=now+INVULNERABILITY_MS;
 
-        msg.textContent='Mueve el emisor · el disparo es automático';
+        msg.textContent='Move the emitter · firing is automatic';
       }
     }
   }
@@ -950,9 +950,9 @@ function draw(){
   if(!started&&!over&&!quoteVisible&&player.state==='alive'){
     ctx.fillStyle='rgba(0,0,0,.50)';ctx.fillRect(0,0,W,H);
     ctx.fillStyle='#f5ecd0';ctx.font='bold 21px Georgia,serif';ctx.textAlign='center';
-    ctx.fillText('PÉNDULOS Y CADENAS',W/2,H/2-20);
+    ctx.fillText('PENDULUMS AND CHAINS',W/2,H/2-20);
     ctx.font='13px Arial,sans-serif';ctx.fillStyle='#c8c8b0';
-    ctx.fillText('Mueve el emisor · dispara automáticamente',W/2,H/2+12);
+    ctx.fillText('Move the emitter · fires automatically',W/2,H/2+12);
     ctx.textAlign='left';
   }
 }
@@ -976,7 +976,7 @@ function dismissQuote(){
   qt.classList.remove('show');qh.classList.remove('show');
   let op=.9;const id=setInterval(()=>{op=Math.max(0,op-.06);qs.style.background='rgba(5,12,8,'+op+')';if(op<=0){clearInterval(id);qs.classList.remove('visible');quoteVisible=false;selectNextBackground();resetLevel();lastTime=0;loop()}},30);
 }
-cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*W/r.width;if(!started&&!over&&!quoteVisible){started=true;msg.textContent='Divide los gusanos y destruye sus pozos gravitatorios'};});
+cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*W/r.width;if(!started&&!over&&!quoteVisible){started=true;msg.textContent='Split the worms and destroy their gravity wells'};});
 cv.addEventListener('mousedown',e=>{e.preventDefault();if(!started&&!over&&!quoteVisible)started=true;shoot(performance.now())});
 cv.addEventListener('touchstart',e=>{if(quoteVisible)return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width;if(!started)started=true;shoot(performance.now())},{passive:false});
 cv.addEventListener('touchmove',e=>{if(quoteVisible)return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width},{passive:false});
