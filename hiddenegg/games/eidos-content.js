@@ -13,8 +13,25 @@ window.EIDOS_SHARED_CONTENT = {
     '/assets/images/screenshot/03.webp',
     '/assets/images/screenshot/rel1.webp',
     '/assets/images/screenshot/video_navidad.webp',
-    '/assets/images/screenshot/video_teaser.webp'
+    '/assets/images/screenshot/video_teaser.webp',
+	'/hiddenegg/games/_images/fondo1.jpg',
+	'/hiddenegg/games/_images/fondo2.jpg',
+	'/hiddenegg/games/_images/fondo3.jpg',
+	'/hiddenegg/games/_images/fondo4.jpg',
+	'/hiddenegg/games/_images/fondo5.jpg',
+	'/hiddenegg/games/_images/fondo6.jpg',
+	'/hiddenegg/games/_images/fondo7.jpg',
+	'/hiddenegg/games/_images/fondo8.jpg',
+	'/hiddenegg/games/_images/fondo9.jpg',
+	'/hiddenegg/games/_images/fondo10.jpg',
+	'/hiddenegg/games/_images/fondo11.jpg',
+	'/hiddenegg/games/_images/fondo12.jpg',
+	'/hiddenegg/games/_images/fondo13.jpg'
+	
+	
   ],
+  
+  
 
   quotes: [
     `La tierra no murió de golpe.
