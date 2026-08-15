@@ -54,6 +54,11 @@ button{font:inherit;color:inherit;touch-action:manipulation}
   animation:drift 18s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate(20px,-18px) scale(1.035)}}
 
+#eidos-shared-bg{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+#eidos-shared-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.045);filter:saturate(.72) brightness(.34) contrast(1.08);transition:opacity 1.05s ease,transform 3.8s ease}
+#eidos-shared-bg img.active{opacity:.19;transform:scale(1)}
+#eidos-shared-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,8,13,.28),rgba(3,8,13,.46) 52%,rgba(3,8,13,.72)),radial-gradient(circle at 50% 35%,transparent,rgba(3,8,13,.32) 76%)}
+
 #topbar{position:relative;z-index:10;height:50px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:9px;padding:5px 9px;border-bottom:1px solid rgba(61,100,122,.36);background:rgba(4,10,15,.54);backdrop-filter:blur(7px)}
 .brand{min-width:0;font-size:17px;font-weight:850;letter-spacing:.24em;white-space:nowrap}.brand small{display:block;margin-top:1px;color:#79b8d6;font-size:6.9px;font-weight:700;letter-spacing:.16em}
 .hudbox{min-width:56px;text-align:center;color:#8fa9b8;font-size:7px;letter-spacing:.11em}.hudbox b{display:block;margin-top:1px;color:#f5fbff;font-size:15px;line-height:1;font-weight:820}.hudbox em{display:block;color:#8fd26b;font-style:normal;font-size:6.5px;margin-top:1px}
@@ -88,6 +93,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 .screen{position:absolute;z-index:60;inset:0;display:none;place-items:center;padding:18px;background:radial-gradient(circle at 50% 25%,rgba(44,102,136,.24),transparent 38%),rgba(3,9,14,.95);backdrop-filter:blur(7px)}.screen.open{display:grid;animation:fade .2s ease}@keyframes fade{from{opacity:0}}
 .card{width:min(408px,96%);max-height:94%;overflow:auto;padding:23px 20px 19px;border:1px solid rgba(77,124,150,.62);border-radius:17px;background:linear-gradient(160deg,rgba(12,29,40,.98),rgba(5,14,21,.98));text-align:center;box-shadow:0 22px 65px rgba(0,0,0,.58)}
 .kicker{margin:0 0 6px;color:#55bdf1;font-size:8px;font-weight:800;letter-spacing:.27em}.card h1,.card h2{margin:0;color:#f2f8fb;font-weight:780;letter-spacing:.16em}.card h1{font-size:33px}.card h2{font-size:22px}.sub{margin:5px 0 15px;color:#80b9d5;font-size:8px;letter-spacing:.14em}.intro{margin:0 auto 15px;max-width:340px;color:#bacbd4;font-size:10.4px;line-height:1.47}.intro strong{color:#eef8fc}.rulegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 16px}.rule{padding:9px 5px;border:1px solid rgba(68,102,121,.45);border-radius:8px;background:rgba(255,255,255,.025);color:#8fa5b1;font-size:7.4px;line-height:1.28}.rule b{display:block;margin-bottom:3px;color:#d9e9f0;font-size:8.4px}.rule .glyph{display:block;color:#69c4ef;font-size:18px;margin-bottom:4px}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}.bigbtn{min-width:145px;padding:10px 15px;border-radius:999px;border:1px solid #3c6176;background:#0b1e2a;color:#e9f3f7;cursor:pointer;font-size:8.3px;font-weight:800;letter-spacing:.11em}.bigbtn.primary{border-color:#3ca6dc;background:#17618a;box-shadow:0 8px 25px rgba(23,97,138,.26)}.bigbtn.gold{border-color:#d5b25d;background:#b18e3f;color:#061019}.smallnote{margin:10px 0 0;color:#657d8a;font-size:7.4px}.quote{margin:14px 0 0;padding:12px;border-left:2px solid #55bdf1;background:rgba(55,124,161,.07);color:#a9c0cb;font:italic 10px/1.45 Georgia,serif;text-align:left}
+.article-link{display:block;margin-top:13px;padding-top:11px;border-top:1px solid rgba(61,100,122,.42);color:#9fb1bb;text-decoration:none;font-size:7.8px;line-height:1.35;letter-spacing:.03em}.article-link b{display:block;margin-top:4px;color:var(--gold);font-size:8px;letter-spacing:.1em}.article-link:hover b{color:#f1d98f}
 
 #levelGrid{display:grid;gap:8px;margin:12px 0 15px}.blockrow{display:grid;grid-template-columns:74px repeat(10,1fr);gap:4px;align-items:center}.blocklabel{color:#6f8b9a;font-size:6.2px;line-height:1.15;text-align:left;letter-spacing:.08em}.blocklabel b{display:block;color:#86c9e8;font-size:6.7px;margin-bottom:2px}.lvl{aspect-ratio:1;border:1px solid #2d4a5b;border-radius:5px;background:#08151e;color:#8297a2;font-size:7px;cursor:pointer}.lvl.done{color:#bfe2f2;border-color:#376c88;background:#0b2230}.lvl.current{color:#fff;border-color:#55bdf1;box-shadow:0 0 10px rgba(85,189,241,.25)}.lvl.lock{opacity:.25;cursor:default}.menurow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.menurow .bigbtn{min-width:0;width:100%}
 
@@ -141,6 +147,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 </script>
 
 <div id="game-shell">
+  <div id="eidos-shared-bg" aria-hidden="true"><img id="eidos-bg-a" alt=""><img id="eidos-bg-b" alt=""></div>
   <header id="topbar">
     <div class="brand">FORM<small>THE BODY OF INTELLIGENCE</small></div>
     <div class="hudbox">LEVEL<b id="levelN">1</b><em id="difficulty">EASY</em></div>
@@ -189,6 +196,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       </div>
       <div class="actions">
         <button id="continueBtn" class="bigbtn primary">START</button>
+        <button id="levelSelectBtn" class="bigbtn">LEVEL SELECT</button>
         <button id="newBtn" class="bigbtn">NEW GAME</button>
       </div>
       <p class="smallnote">6 blocks of 10 levels · progressive difficulty · then, endless mode</p>
@@ -202,7 +210,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <p class="sub" id="menuProgress">PROGRESS 1 / 60</p>
       <div id="levelGrid"></div>
       <div class="menurow">
-        <button id="resumeBtn" class="bigbtn primary">BACK TO GAME</button>
+        <button id="resumeBtn" class="bigbtn primary">BACK</button>
         <button id="soundBtn" class="bigbtn">SOUND: ON</button>
       </div>
       <div class="menurow">
@@ -221,6 +229,8 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <div id="winStats"><div class="statcard">MOVES<b id="winMoves">0</b></div><div class="statcard">BEST SCORE<b id="winBest">0</b></div></div>
       <p class="intro" id="winCopy">You rebuilt a whole from fragments that could move and change orientation.</p>
       <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">NEXT LEVEL</button><button id="winMenuBtn" class="bigbtn">VIEW LEVELS</button></div>
+      <!-- FORM ARTICLE EN: replace only href="#" with the URL of the English article -->
+      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer">The idea continues beyond the puzzle.<b>READ THE ARTICLE LINKED TO THIS GAME</b></a>
       <div class="quote" id="winQuote">Spatial intelligence does not see only pieces. It sees possible relationships between them.</div>
     </div>
   </section>
@@ -256,9 +266,13 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <p class="intro">You moved from simple shapes to increasingly dense configurations. The difficulty was not in each triangle, but in imagining how one part could become another position within the whole.</p>
       <div class="quote">A body capable of acting on the world multiplies the problems an intelligence can learn to solve.</div>
       <div class="actions" style="margin-top:16px"><button id="infiniteBtn" class="bigbtn primary">ENDLESS CAMPAIGN</button><button id="finishMenuBtn" class="bigbtn">BACK TO LEVELS</button></div>
+      <!-- FORM ARTICLE EN: replace only href="#" with the URL of the English article -->
+      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer">The idea continues beyond the puzzle.<b>READ THE ARTICLE LINKED TO THIS GAME</b></a>
     </div>
   </section>
 </div>
+
+<script src="/hiddenegg/games/eidos-content-en.js"></script>
 
 <script>
 (()=>{'use strict';
@@ -281,6 +295,21 @@ const WIN_COPY=[
   'The solution depended on anticipating spatial relationships before they could be tested.',
   'The board was no longer a figure, but a space of possible transformations.'
 ];
+const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[]};
+const BG_IMAGES=Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[];
+const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
+let bgDeck=[],activeBg=0,lastBg=-1;
+function shuffleBackgrounds(values){for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}return values}
+function refillBackgroundDeck(){bgDeck=shuffleBackgrounds(BG_IMAGES.map((_,i)=>i));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}
+function changeBackground(){
+  if(!BG_IMAGES.length||!BG_LAYERS[0]||!BG_LAYERS[1])return;
+  if(!bgDeck.length)refillBackgroundDeck();
+  const index=bgDeck.shift(),next=1-activeBg,img=BG_LAYERS[next],old=BG_LAYERS[activeBg];
+  lastBg=index;
+  img.onload=()=>{old.classList.remove('active');img.classList.add('active');activeBg=next};
+  img.onerror=()=>{};
+  img.src=BG_IMAGES[index];
+}
 const board=$('board'), tray=$('tray'), dragCanvas=$('drag-canvas');
 const bc=board.getContext('2d'), tc=tray.getContext('2d'), dc=dragCanvas.getContext('2d');
 let dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));
@@ -293,16 +322,28 @@ let boardGeom={scale:30,originX:0,originY:0,bbox:null};
 let trayHit=[];let hintPiece=null,hintTimer=0,toastTimer=0;
 let pointerId=null,startPointer=null,dragMoved=false,selectedBeforeDrag=false;
 let won=false;
+let menuReturnScreen='game';
 
 function readSave(){
-  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{}},v)}catch(e){}
-  return {unlocked:1,last:1,best:{}};
+  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{},pending:null,campaignComplete:false},v)}catch(e){}
+  return {unlocked:1,last:1,best:{},pending:null,campaignComplete:false};
 }
 function save(){
   if(!infinite){progress.last=level;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level));}
-  try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}
+  persistProgress();
 }
-function resetProgress(){progress={unlocked:1,last:1,best:{}};infinite=false;level=1;try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}startLevel(1);closeAllScreens();}
+function markCampaignResult(type){
+  if(infinite)return;
+  const next=Math.min(60,level+1);
+  progress.unlocked=Math.max(progress.unlocked,next);
+  progress.last=next;
+  if(level===60)progress.campaignComplete=true;
+  progress.pending={type,level,moves,best:progress.best[String(level)]||moves};
+  persistProgress();
+}
+function persistProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}}
+function clearPending(){if(progress.pending){progress.pending=null;persistProgress()}}
+function resetProgress(){progress={unlocked:1,last:1,best:{},pending:null,campaignComplete:false};infinite=false;level=1;persistProgress();startLevel(1);closeAllScreens();}
 function seeded(seed){return function(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
 function hash(n){n=Math.imul(n^n>>>16,0x45d9f3b);n=Math.imul(n^n>>>16,0x45d9f3b);return (n^n>>>16)>>>0}
 
@@ -471,7 +512,7 @@ function pieceCountFor(n,cells){
   const base=[3,4,5,5,6,7][tier],extra=pos>=6?1:0;
   return Math.min(base+extra,Math.max(3,Math.floor(cells/3.6)));
 }
-function startLevel(n,inf=false){
+function startLevel(n,inf=false,remember=true){
   won=false;surrendered=false;infinite=inf;
   if(infinite){if(!infiniteRunSeed)infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);infiniteIndex=Math.max(1,n);level=60+infiniteIndex}else{level=Math.max(1,Math.min(60,n));}
   moves=0;hints=3;occupied.clear();selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
@@ -481,7 +522,7 @@ function startLevel(n,inf=false){
   const block=infinite?null:blockFor(level);$('shapeName').textContent=spec.name;$('levelN').textContent=infinite?'∞'+infiniteIndex:level;$('difficulty').textContent=difficultyFor(level);$('movesN').textContent='0';
   $('blockNote').textContent=infinite?'ENDLESS CAMPAIGN · SEED '+String(infiniteRunSeed).slice(-4):'BLOCK '+block.index+' · '+block.name;
   $('instructionText').textContent='Cover the shape completely. You can also move and rotate pieces already placed.';
-  updateHUD();save();resizeAll();drawAll();
+  updateHUD();if(remember)save();resizeAll();drawAll();changeBackground();
 }
 
 function resizeCanvas(c){const r=c.getBoundingClientRect();c.width=Math.max(1,Math.round(r.width*dpr));c.height=Math.max(1,Math.round(r.height*dpr));c.getContext('2d').setTransform(dpr,0,0,dpr,0,0)}
@@ -547,8 +588,8 @@ function drawDrag(){
 function drawAll(){drawBoard();drawTray();drawDrag();updateHUD()}
 function updateHUD(){
   $('movesN').textContent=moves;const hintBtn=$('hint');
-  if(hints>0){hintBtn.childNodes[0].nodeValue='✧  HINT (+hints+')';hintBtn.querySelector('span').textContent='shows one area';hintBtn.classList.add('primary')}
-  else{hintBtn.childNodes[0].nodeValue='⚑  RENDIRSE';hintBtn.querySelector('span').textContent='show solution';hintBtn.classList.add('primary')}
+  if(hints>0){hintBtn.childNodes[0].nodeValue='✧  HINT ('+hints+')';hintBtn.querySelector('span').textContent='shows one area';hintBtn.classList.add('primary')}
+  else{hintBtn.childNodes[0].nodeValue='⚑  SURRENDER';hintBtn.querySelector('span').textContent='show solution';hintBtn.classList.add('primary')}
   hintBtn.disabled=won||surrendered;
   const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';
   $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?('OVERLAP · '+placed+'/'+pieces.length):issues.outside?('OUTSIDE · '+placed+'/'+pieces.length):(placed+' / '+pieces.length+' pieces');
@@ -712,22 +753,52 @@ function openSurrender(){
 function revealSolution(){
   closeAllScreens();surrendered=true;won=true;selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
   for(const p of pieces){p.rot=0;p.t={...p.solutionT};p.placed=true;p.matched=p.solutionKeys.slice();p.prev=null}rebuildOccupancy();
-  if(!infinite){progress.unlocked=Math.max(progress.unlocked,Math.min(60,level+1));save()}
+  if(!infinite)markCampaignResult('solution');
   $('solutionLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' · SOLUTION SHOWN':'LEVEL '+level+' · SOLUTION SHOWN';
   updateHUD();drawAll();play('hint');setTimeout(()=>openScreen('solutionScreen'),520);
 }
 function winLevel(){
-  play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level+1));save()}
+  play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
   $('winLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' CLEARED':'LEVEL '+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=QUOTES[(level-1)%QUOTES.length];$('nextLevelBtn').textContent=!infinite&&level===60?'FINISH CAMPAIGN':'NEXT LEVEL';openScreen('winScreen')
 }
-function nextLevel(){closeAllScreens();if(!infinite&&level===60){openScreen('finishScreen');return}if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(level+1)}
+function nextLevel(){
+  const completed=(!infinite&&progress.pending&&progress.pending.level)?progress.pending.level:level;
+  if(!infinite){progress.pending=null;persistProgress()}
+  closeAllScreens();
+  if(!infinite&&completed===60){openScreen('finishScreen');return}
+  if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(completed+1)
+}
+function restorePendingResult(){
+  const p=progress.pending;if(!p||!p.level)return false;
+  startLevel(p.level,false,false);
+  if(p.type==='solution'){
+    surrendered=true;won=true;selected=null;active=null;
+    for(const piece of pieces){piece.rot=0;piece.t={...piece.solutionT};piece.placed=true;piece.matched=piece.solutionKeys.slice();piece.prev=null}
+    rebuildOccupancy();updateHUD();drawAll();
+    $('solutionLevel').textContent='LEVEL '+p.level+' · SOLUTION SHOWN';
+    openScreen('solutionScreen');
+  }else{
+    won=true;
+    $('winLevel').textContent='LEVEL '+p.level+' CLEARED';
+    $('winMoves').textContent=p.moves||0;
+    $('winBest').textContent=p.best||p.moves||0;
+    $('winCopy').textContent=WIN_COPY[(p.level-1)%WIN_COPY.length];
+    $('winQuote').textContent=QUOTES[(p.level-1)%QUOTES.length];
+    $('nextLevelBtn').textContent=p.level===60?'FINISH CAMPAIGN':'NEXT LEVEL';
+    openScreen('winScreen');
+  }
+  return true;
+}
 
 function showToast(text){const t=$('toast');t.textContent=text;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),1350)}
 function openScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'));$(id).classList.add('open');if(id==='menuScreen')renderMenu()}
 function closeAllScreens(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'))}
+function currentScreen(){const s=document.querySelector('.screen.open');return s?s.id:'game'}
+function openMenu(returnTo){menuReturnScreen=returnTo||currentScreen();openScreen('menuScreen')}
+function returnFromMenu(){const target=menuReturnScreen||'game';menuReturnScreen='game';if(target==='game'){closeAllScreens();return}openScreen(target)}
 function renderMenu(){
-  $('menuProgress').textContent='PROGRESO '+Math.min(60,progress.unlocked)+' / 60';const grid=$('levelGrid');grid.innerHTML='';
-  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+(i<progress.unlocked?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.addEventListener('click',()=>{closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
+  const unlocked=Math.min(60,progress.unlocked),completed=progress.campaignComplete?60:Math.max(0,unlocked-1);$('menuProgress').textContent='UNLOCKED '+unlocked+' / 60 · CLEARED '+completed;const grid=$('levelGrid');grid.innerHTML='';
+  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+((i<progress.unlocked||(progress.campaignComplete&&i===60))?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.title=i>progress.unlocked?'Locked level':(i<progress.unlocked?'Cleared level · play again':'Current level');b.addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
   $('soundBtn').textContent='SOUND: '+(sound?'YES':'NO')
 }
 function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent='SOUND: '+(sound?'YES':'NO');if(sound)play('select')}
@@ -735,19 +806,20 @@ function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAu
 function tone(freq,dur=.08,type='sine',vol=.035,delay=0){if(!sound)return;ensureAudio();const o=audio.createOscillator(),g=audio.createGain(),now=audio.currentTime+delay;o.type=type;o.frequency.setValueAtTime(freq,now);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(vol,now+.012);g.gain.exponentialRampToValueAtTime(.0001,now+dur);o.connect(g);g.connect(audio.destination);o.start(now);o.stop(now+dur+.02)}
 function play(kind){if(!sound)return;try{if(kind==='pick')tone(330,.06,'sine',.025);if(kind==='select')tone(420,.05,'sine',.022);if(kind==='rotate'){tone(390,.055,'triangle',.026);tone(520,.06,'triangle',.018,.035)}if(kind==='place'){tone(440,.07,'sine',.03);tone(660,.08,'sine',.022,.04)}if(kind==='bad'){tone(150,.09,'sawtooth',.018);tone(115,.12,'sawtooth',.012,.05)}if(kind==='hint'){tone(620,.08,'sine',.022);tone(830,.12,'sine',.016,.07)}if(kind==='reset')tone(250,.09,'triangle',.022);if(kind==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.18,'sine',.028,i*.085))}}catch(e){}}
 
+document.querySelectorAll('.article-link').forEach(link=>link.addEventListener('click',e=>{if(link.getAttribute('href')==='#'){e.preventDefault();showToast('Article link pending')}}));
+
 tray.addEventListener('pointerdown',startFromTray,{passive:false});board.addEventListener('pointerdown',startFromBoard,{passive:false});window.addEventListener('pointermove',pointerMove,{passive:false});window.addEventListener('pointerup',pointerUp,{passive:false});window.addEventListener('pointercancel',pointerCancel);
 $('rotateLeft').addEventListener('click',()=>rotateSelected(-1,false));$('rotateRight').addEventListener('click',()=>rotateSelected(1,false));$('reset').addEventListener('click',resetCurrent);$('hint').addEventListener('click',useHint);
-$('menuButton').addEventListener('click',()=>openScreen('menuScreen'));$('resumeBtn').addEventListener('click',closeAllScreens);$('soundBtn').addEventListener('click',toggleSound);$('restartMenuBtn').addEventListener('click',()=>{closeAllScreens();resetCurrent()});$('startOverBtn').addEventListener('click',resetProgress);
-$('continueBtn').addEventListener('click',()=>{closeAllScreens();startLevel(progress.last||1)});$('newBtn').addEventListener('click',resetProgress);
-$('prev').addEventListener('click',()=>{if(level>1)startLevel(level-1)});$('nextNav').addEventListener('click',()=>{if(level<progress.unlocked&&level<60)startLevel(level+1)});
-$('nextLevelBtn').addEventListener('click',nextLevel);$('winMenuBtn').addEventListener('click',()=>openScreen('menuScreen'));$('finishMenuBtn').addEventListener('click',()=>openScreen('menuScreen'));$('infiniteBtn').addEventListener('click',()=>{closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
-$('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurrenderBtn').addEventListener('click',closeAllScreens);$('retrySolutionBtn').addEventListener('click',()=>{closeAllScreens();resetCurrent()});$('continueSolutionBtn').addEventListener('click',()=>{closeAllScreens();nextLevel()});
-window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))closeAllScreens();else openScreen('menuScreen')}});
+$('menuButton').addEventListener('click',()=>openMenu('game'));$('resumeBtn').addEventListener('click',returnFromMenu);$('soundBtn').addEventListener('click',toggleSound);$('restartMenuBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();resetCurrent()});$('startOverBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
+$('continueBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();if(progress.campaignComplete){openScreen('finishScreen');return}startLevel(progress.last||1)});$('levelSelectBtn').addEventListener('click',()=>openMenu('startScreen'));$('newBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
+$('prev').addEventListener('click',()=>{if(level>1){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level-1)}});$('nextNav').addEventListener('click',()=>{if(level<progress.unlocked&&level<60){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level+1)}});
+$('nextLevelBtn').addEventListener('click',nextLevel);$('winMenuBtn').addEventListener('click',()=>openMenu('winScreen'));$('finishMenuBtn').addEventListener('click',()=>openMenu('finishScreen'));$('infiniteBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
+$('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurrenderBtn').addEventListener('click',closeAllScreens);$('retrySolutionBtn').addEventListener('click',()=>{const retryLevel=progress.pending&&progress.pending.level?progress.pending.level:level;progress.pending=null;persistProgress();closeAllScreens();startLevel(retryLevel)});$('continueSolutionBtn').addEventListener('click',nextLevel);
+window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))returnFromMenu();else openMenu(currentScreen())}});
 window.addEventListener('resize',()=>{dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));resizeAll()});
 
-$('continueBtn').textContent=progress.unlocked>1?'CONTINUE LEVEL '+(progress.last||1):'START';$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
-startLevel(progress.last||1);
-openScreen('startScreen');
+$('continueBtn').textContent=progress.campaignComplete?'CAMPAIGN COMPLETE':(progress.unlocked>1?'CONTINUE LEVEL '+(progress.last||1):'START');$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
+if(!restorePendingResult()){startLevel(progress.last||1);openScreen('startScreen')}
 })();
 </script>
 </body>
