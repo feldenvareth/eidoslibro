@@ -100,6 +100,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 
 #levelGrid{display:grid;gap:8px;margin:12px 0 15px}.blockrow{display:grid;grid-template-columns:74px repeat(10,1fr);gap:4px;align-items:center}.blocklabel{color:#6f8b9a;font-size:6.2px;line-height:1.15;text-align:left;letter-spacing:.08em}.blocklabel b{display:block;color:#86c9e8;font-size:6.7px;margin-bottom:2px}.lvl{aspect-ratio:1;border:1px solid #2d4a5b;border-radius:5px;background:#08151e;color:#8297a2;font-size:7px;cursor:pointer}.lvl.done{color:#bfe2f2;border-color:#376c88;background:#0b2230}.lvl.current{color:#fff;border-color:#55bdf1;box-shadow:0 0 10px rgba(85,189,241,.25)}.lvl.lock{opacity:.25;cursor:default}.menurow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.menurow .bigbtn{min-width:0;width:100%}
 
+.phase-card{overflow:hidden}.phase-next{margin:14px auto 16px;padding:12px 14px;border:1px solid rgba(85,189,241,.46);border-radius:11px;background:linear-gradient(180deg,rgba(25,82,112,.22),rgba(8,27,39,.32));box-shadow:inset 0 0 24px rgba(85,189,241,.05)}.phase-next span{display:block;color:#718f9f;font-size:6.8px;letter-spacing:.2em}.phase-next b{display:block;margin-top:5px;color:#9bdcff;font-size:15px;letter-spacing:.14em}.phase-next small{display:block;margin-top:3px;color:#d5b25d;font-size:7.2px;letter-spacing:.12em}
 #winStats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:14px 0}.statcard{padding:10px;border:1px solid #2c4a5b;border-radius:9px;background:rgba(255,255,255,.025);color:#7f97a4;font-size:7px;letter-spacing:.1em}.statcard b{display:block;margin-top:3px;color:#f0f8fb;font-size:18px}.shape-glyph{font-size:46px;line-height:1;color:#66c7f4;text-shadow:0 0 20px rgba(85,189,241,.35);margin:2px 0 8px}.danger-note{color:#f3a29b!important}.solution-screen{background:linear-gradient(to bottom,rgba(3,9,14,.08) 0%,rgba(3,9,14,.28) 42%,rgba(3,9,14,.94) 70%);backdrop-filter:none;place-items:end center;padding-bottom:16px}.solution-screen .card{max-width:420px;background:rgba(7,20,29,.96)}
 
 @media(max-height:610px){
@@ -261,6 +262,26 @@ button{font:inherit;color:inherit;touch-action:manipulation}
     </div>
   </section>
 
+
+  <section id="phaseScreen" class="screen">
+    <div class="card phase-card">
+      <p class="kicker" id="phaseKicker">PHASE 1 COMPLETE</p>
+      <div class="shape-glyph">◆</div>
+      <h2 id="phaseTitle">FOUNDATIONS CLEARED</h2>
+      <p class="sub" id="phaseProgress">10 / 60 LEVELS</p>
+      <p class="intro" id="phaseCopy">You completed the first phase of the campaign. The next block increases the spatial complexity.</p>
+      <div class="phase-next">
+        <span>NEXT PHASE</span>
+        <b id="phaseNextName">COMBINATION</b>
+        <small id="phaseNextLevel">LEVEL 11</small>
+      </div>
+      <div class="actions">
+        <button id="phaseContinueBtn" class="bigbtn primary">START PHASE 2 →</button>
+        <button id="phaseLevelsBtn" class="bigbtn">VIEW LEVELS</button>
+      </div>
+    </div>
+  </section>
+
   <section id="finishScreen" class="screen">
     <div class="card">
       <p class="kicker">60 / 60</p>
@@ -276,7 +297,9 @@ button{font:inherit;color:inherit;touch-action:manipulation}
   </section>
 </div>
 
-<script src="/hiddenegg/games/eidos-content-en.js"></script>
+<script>
+document.write('<script src="/hiddenegg/games/eidos-content-en.js?v='+Date.now()+'"><\\/script>');
+</script>
 
 <script>
 (()=>{'use strict';
@@ -284,14 +307,6 @@ const $=id=>document.getElementById(id);
 const SQ3=Math.sqrt(3), HUNIT=SQ3/2;
 const SAVE_KEY='eidos-forma-save-v4', SOUND_KEY='eidos-forma-sound-v1';
 const COLORS=['#2da7e8','#f0b83d','#78c751','#ef624f','#a779e7','#41c2ae','#e887c2','#e89b4a','#7b99f2'];
-const QUOTES=[
-  'Spatial intelligence does not see only pieces. It sees possible relationships between them.',
-  'Rotating a form requires mentally preserving what changes while its orientation changes.',
-  'A solution appears when the whole stops looking like a sum of fragments.',
-  'Manipulating the world is also a way of thinking about it.',
-  'The same structure can acquire different meanings when its position changes.',
-  'Seeing a form is immediate. Imagining every form it can occupy requires a different kind of mental work.'
-];
 const WIN_COPY=[
   'You rebuilt a whole from fragments that could move and change orientation.',
   'The correct piece was not enough: it also needed the correct orientation and position.',
@@ -301,10 +316,15 @@ const WIN_COPY=[
 ];
 const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
 const BG_IMAGES=Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[];
-const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(Boolean):[];
-const DISPLAY_QUOTES=SHARED_QUOTES.length?SHARED_QUOTES:QUOTES;
+const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(q=>typeof q==='string'&&q.trim()):[];
 function quoteForLevel(n){
-  return DISPLAY_QUOTES[(Math.max(1,n)-1)%DISPLAY_QUOTES.length]||'';
+  if(!SHARED_QUOTES.length)return'';
+  return SHARED_QUOTES[(Math.max(1,n)-1)%SHARED_QUOTES.length];
+}
+function applyLevelQuote(n){
+  const box=$('winQuote'),quote=quoteForLevel(n);
+  box.textContent=quote;
+  box.style.display=quote?'block':'none';
 }
 const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
 let bgDeck=[],activeBg=0,lastBg=-1;
@@ -334,8 +354,8 @@ let won=false;
 let menuReturnScreen='game';
 
 function readSave(){
-  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{},pending:null,campaignComplete:false},v)}catch(e){}
-  return {unlocked:1,last:1,best:{},pending:null,campaignComplete:false};
+  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false},v)}catch(e){}
+  return {unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};
 }
 function save(){
   if(!infinite){progress.last=level;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level));}
@@ -352,7 +372,7 @@ function markCampaignResult(type){
 }
 function persistProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}}
 function clearPending(){if(progress.pending){progress.pending=null;persistProgress()}}
-function resetProgress(){progress={unlocked:1,last:1,best:{},pending:null,campaignComplete:false};infinite=false;level=1;persistProgress();startLevel(1);closeAllScreens();}
+function resetProgress(){progress={unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};infinite=false;level=1;persistProgress();startLevel(1);closeAllScreens();}
 function seeded(seed){return function(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
 function hash(n){n=Math.imul(n^n>>>16,0x45d9f3b);n=Math.imul(n^n>>>16,0x45d9f3b);return (n^n>>>16)>>>0}
 
@@ -513,6 +533,13 @@ const BLOCKS=[
   {name:'ANTICIPATION',diff:'ROTATION'},
   {name:'ABSTRACTION',diff:'ABSTRACTION'},
   {name:'SYNTHESIS',diff:'EIDOS'}
+];
+const PHASE_COPY=[
+  'You completed the foundations phase. From now on, the pieces require combining more relationships at the same time.',
+  'You cleared the combination phase. The next block makes rotation a central part of the problem.',
+  'You completed the rotation phase. Now you will need to anticipate positions before testing them.',
+  'You cleared the anticipation phase. The next block requires working with more abstract configurations.',
+  'You completed the abstraction phase. Only the final synthesis of all these skills remains.'
 ];
 function blockFor(n){const i=Math.min(5,Math.floor((Math.max(1,n)-1)/10));return{index:i+1,...BLOCKS[i]}}
 function difficultyFor(n){if(infinite)return'INFINITO';return blockFor(n).diff}
@@ -768,13 +795,40 @@ function revealSolution(){
 }
 function winLevel(){
   play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
-  $('winLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' CLEARED':'LEVEL '+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=quoteForLevel(level);$('nextLevelBtn').textContent=!infinite&&level===60?'FINISH CAMPAIGN':'NEXT LEVEL';openScreen('winScreen')
+  $('winLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' CLEARED':'LEVEL '+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];applyLevelQuote(level);$('nextLevelBtn').textContent=!infinite&&level===60?'FINISH CAMPAIGN':(!infinite&&level<60&&level%10===0?'NEXT PHASE':'NEXT LEVEL');openScreen('winScreen')
 }
+
+function isPhaseBoundary(n){return !infinite&&n<60&&n%10===0}
+function showPhaseTransition(completed){
+  const phase=Math.floor(completed/10),nextPhase=phase+1,nextLevelN=completed+1;
+  progress.phasePending=completed;persistProgress();
+  $('phaseKicker').textContent='PHASE '+phase+' COMPLETE';
+  $('phaseTitle').textContent=BLOCKS[phase-1].name+' CLEARED';
+  $('phaseProgress').textContent=completed+' / 60 LEVELS';
+  $('phaseCopy').textContent=PHASE_COPY[phase-1]||'Phase complete.';
+  $('phaseNextName').textContent=BLOCKS[nextPhase-1].name;
+  $('phaseNextLevel').textContent='LEVEL '+nextLevelN;
+  $('phaseContinueBtn').textContent='START PHASE '+nextPhase+' →';
+  openScreen('phaseScreen');
+}
+function continueFromPhase(){
+  const completed=Number(progress.phasePending)||Math.floor((Math.max(11,progress.last)-1)/10)*10;
+  progress.phasePending=null;progress.pending=null;persistProgress();
+  closeAllScreens();startLevel(Math.min(60,completed+1));
+}
+
 function nextLevel(){
   const completed=(!infinite&&progress.pending&&progress.pending.level)?progress.pending.level:level;
-  if(!infinite){progress.pending=null;persistProgress()}
+  if(!infinite&&completed===60){
+    progress.pending=null;progress.phasePending=null;persistProgress();
+    closeAllScreens();openScreen('finishScreen');return;
+  }
+  if(!infinite&&isPhaseBoundary(completed)){
+    progress.pending=null;persistProgress();
+    closeAllScreens();showPhaseTransition(completed);return;
+  }
+  if(!infinite){progress.pending=null;progress.phasePending=null;persistProgress()}
   closeAllScreens();
-  if(!infinite&&completed===60){openScreen('finishScreen');return}
   if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(completed+1)
 }
 function restorePendingResult(){
@@ -792,8 +846,8 @@ function restorePendingResult(){
     $('winMoves').textContent=p.moves||0;
     $('winBest').textContent=p.best||p.moves||0;
     $('winCopy').textContent=WIN_COPY[(p.level-1)%WIN_COPY.length];
-    $('winQuote').textContent=quoteForLevel(p.level);
-    $('nextLevelBtn').textContent=p.level===60?'FINISH CAMPAIGN':'NEXT LEVEL';
+    applyLevelQuote(p.level);
+    $('nextLevelBtn').textContent=p.level===60?'FINISH CAMPAIGN':(p.level<60&&p.level%10===0?'NEXT PHASE':'NEXT LEVEL');
     openScreen('winScreen');
   }
   return true;
@@ -807,7 +861,7 @@ function openMenu(returnTo){menuReturnScreen=returnTo||currentScreen();openScree
 function returnFromMenu(){const target=menuReturnScreen||'game';menuReturnScreen='game';if(target==='game'){closeAllScreens();return}openScreen(target)}
 function renderMenu(){
   const unlocked=Math.min(60,progress.unlocked),completed=progress.campaignComplete?60:Math.max(0,unlocked-1);$('menuProgress').textContent='UNLOCKED '+unlocked+' / 60 · CLEARED '+completed;const grid=$('levelGrid');grid.innerHTML='';
-  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+((i<progress.unlocked||(progress.campaignComplete&&i===60))?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.title=i>progress.unlocked?'Locked level':(i<progress.unlocked?'Cleared level · play again':'Current level');b.addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
+  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+((i<progress.unlocked||(progress.campaignComplete&&i===60))?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.title=i>progress.unlocked?'Locked level':(i<progress.unlocked?'Cleared level · play again':'Current level');b.addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;progress.phasePending=null;persistProgress();closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
   $('soundBtn').textContent='SOUND: '+(sound?'YES':'NO')
 }
 function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent='SOUND: '+(sound?'YES':'NO');if(sound)play('select')}
@@ -822,13 +876,18 @@ $('rotateLeft').addEventListener('click',()=>rotateSelected(-1,false));$('rotate
 $('menuButton').addEventListener('click',()=>openMenu('game'));$('resumeBtn').addEventListener('click',returnFromMenu);$('soundBtn').addEventListener('click',toggleSound);$('restartMenuBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();resetCurrent()});$('startOverBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
 $('continueBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();if(progress.campaignComplete){openScreen('finishScreen');return}startLevel(progress.last||1)});$('levelSelectBtn').addEventListener('click',()=>openMenu('startScreen'));$('newBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
 $('prev').addEventListener('click',()=>{if(level>1){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level-1)}});$('nextNav').addEventListener('click',()=>{if(level<progress.unlocked&&level<60){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level+1)}});
-$('nextLevelBtn').addEventListener('click',nextLevel);$('winMenuBtn').addEventListener('click',()=>openMenu('winScreen'));$('finishMenuBtn').addEventListener('click',()=>openMenu('finishScreen'));$('infiniteBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
+$('nextLevelBtn').addEventListener('click',nextLevel);$('phaseContinueBtn').addEventListener('click',continueFromPhase);$('phaseLevelsBtn').addEventListener('click',()=>openMenu('phaseScreen'));$('winMenuBtn').addEventListener('click',()=>openMenu('winScreen'));$('finishMenuBtn').addEventListener('click',()=>openMenu('finishScreen'));$('infiniteBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
 $('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurrenderBtn').addEventListener('click',closeAllScreens);$('retrySolutionBtn').addEventListener('click',()=>{const retryLevel=progress.pending&&progress.pending.level?progress.pending.level:level;progress.pending=null;persistProgress();closeAllScreens();startLevel(retryLevel)});$('continueSolutionBtn').addEventListener('click',nextLevel);
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))returnFromMenu();else openMenu(currentScreen())}});
 window.addEventListener('resize',()=>{dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));resizeAll()});
 
 $('continueBtn').textContent=progress.campaignComplete?'CAMPAIGN COMPLETE':(progress.unlocked>1?'CONTINUE LEVEL '+(progress.last||1):'START');$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
-if(!restorePendingResult()){startLevel(progress.last||1);openScreen('startScreen')}
+if(progress.phasePending){
+  startLevel(Math.min(60,Number(progress.phasePending)+1),false,false);
+  showPhaseTransition(Number(progress.phasePending));
+}else if(!restorePendingResult()){
+  startLevel(progress.last||1);openScreen('startScreen')
+}
 })();
 </script>
 </body>
