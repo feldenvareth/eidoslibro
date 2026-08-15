@@ -95,7 +95,8 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 .screen{position:absolute;z-index:60;inset:0;display:none;place-items:center;padding:18px;background:radial-gradient(circle at 50% 25%,rgba(44,102,136,.24),transparent 38%),rgba(3,9,14,.95);backdrop-filter:blur(7px)}.screen.open{display:grid;animation:fade .2s ease}@keyframes fade{from{opacity:0}}
 .card{width:min(408px,96%);max-height:94%;overflow:auto;padding:23px 20px 19px;border:1px solid rgba(77,124,150,.62);border-radius:17px;background:linear-gradient(160deg,rgba(12,29,40,.98),rgba(5,14,21,.98));text-align:center;box-shadow:0 22px 65px rgba(0,0,0,.58)}
 .kicker{margin:0 0 6px;color:#55bdf1;font-size:8px;font-weight:800;letter-spacing:.27em}.card h1,.card h2{margin:0;color:#f2f8fb;font-weight:780;letter-spacing:.16em}.card h1{font-size:33px}.card h2{font-size:22px}.sub{margin:5px 0 15px;color:#80b9d5;font-size:8px;letter-spacing:.14em}.intro{margin:0 auto 15px;max-width:340px;color:#bacbd4;font-size:10.4px;line-height:1.47}.intro strong{color:#eef8fc}.rulegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 16px}.rule{padding:9px 5px;border:1px solid rgba(68,102,121,.45);border-radius:8px;background:rgba(255,255,255,.025);color:#8fa5b1;font-size:7.4px;line-height:1.28}.rule b{display:block;margin-bottom:3px;color:#d9e9f0;font-size:8.4px}.rule .glyph{display:block;color:#69c4ef;font-size:18px;margin-bottom:4px}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}.bigbtn{min-width:145px;padding:10px 15px;border-radius:999px;border:1px solid #3c6176;background:#0b1e2a;color:#e9f3f7;cursor:pointer;font-size:8.3px;font-weight:800;letter-spacing:.11em}.bigbtn.primary{border-color:#3ca6dc;background:#17618a;box-shadow:0 8px 25px rgba(23,97,138,.26)}.bigbtn.gold{border-color:#d5b25d;background:#b18e3f;color:#061019}.smallnote{margin:10px 0 0;color:#657d8a;font-size:7.4px}.quote{margin:14px 0 0;padding:12px;border-left:2px solid #55bdf1;background:rgba(55,124,161,.07);color:#a9c0cb;font:italic 10px/1.45 Georgia,serif;text-align:left}
-.article-link{display:block;margin-top:13px;padding-top:11px;border-top:1px solid rgba(61,100,122,.42);color:#9fb1bb;text-decoration:none;font-size:7.8px;line-height:1.35;letter-spacing:.03em}.article-link b{display:block;margin-top:4px;color:var(--gold);font-size:8px;letter-spacing:.1em}.article-link:hover b{color:#f1d98f}
+.article-link{display:block;margin:14px auto 0;padding:11px 16px;width:min(330px,100%);border:1px solid rgba(213,178,93,.92);border-radius:999px;background:linear-gradient(180deg,rgba(213,178,93,.20),rgba(129,96,28,.15));box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 0 18px rgba(213,178,93,.05);color:#c9c2aa;text-decoration:none;text-align:center;line-height:1.25;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}.article-link span{display:block;font-size:6.7px;letter-spacing:.14em;color:#9da9a8}.article-link b{display:block;margin-top:4px;color:#f0cf73;font-size:9.2px;letter-spacing:.13em}.article-link:hover{filter:brightness(1.12);box-shadow:0 9px 28px rgba(213,178,93,.13),inset 0 0 22px rgba(213,178,93,.08)}.article-link:active{transform:scale(.985)}
+.quote{max-height:92px;overflow:auto;scrollbar-width:thin}
 
 #levelGrid{display:grid;gap:8px;margin:12px 0 15px}.blockrow{display:grid;grid-template-columns:74px repeat(10,1fr);gap:4px;align-items:center}.blocklabel{color:#6f8b9a;font-size:6.2px;line-height:1.15;text-align:left;letter-spacing:.08em}.blocklabel b{display:block;color:#86c9e8;font-size:6.7px;margin-bottom:2px}.lvl{aspect-ratio:1;border:1px solid #2d4a5b;border-radius:5px;background:#08151e;color:#8297a2;font-size:7px;cursor:pointer}.lvl.done{color:#bfe2f2;border-color:#376c88;background:#0b2230}.lvl.current{color:#fff;border-color:#55bdf1;box-shadow:0 0 10px rgba(85,189,241,.25)}.lvl.lock{opacity:.25;cursor:default}.menurow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.menurow .bigbtn{min-width:0;width:100%}
 
@@ -233,7 +234,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <p class="intro" id="winCopy">Has reconstruido una totalidad a partir de fragmentos que podían desplazarse y cambiar de orientación.</p>
       <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">SIGUIENTE NIVEL</button><button id="winMenuBtn" class="bigbtn">VER NIVELES</button></div>
       <!-- ARTÍCULO FORMA ES: sustituir únicamente href="#" por la URL del artículo español -->
-      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer">La idea continúa fuera del puzle.<b>VER EL ARTÍCULO VINCULADO A ESTE JUEGO</b></a>
+      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer"><span>LA IDEA CONTINÚA FUERA DEL PUZLE</span><b>LEER EL ARTÍCULO →</b></a>
       <div class="quote" id="winQuote">La inteligencia espacial no ve únicamente piezas. Ve relaciones posibles entre ellas.</div>
     </div>
   </section>
@@ -270,7 +271,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <div class="quote">Un cuerpo capaz de actuar sobre el mundo multiplica los problemas que una inteligencia puede aprender a resolver.</div>
       <div class="actions" style="margin-top:16px"><button id="infiniteBtn" class="bigbtn primary">CAMPAÑA INFINITA</button><button id="finishMenuBtn" class="bigbtn">VOLVER A NIVELES</button></div>
       <!-- ARTÍCULO FORMA ES: sustituir únicamente href="#" por la URL del artículo español -->
-      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer">La idea continúa fuera del puzle.<b>VER EL ARTÍCULO VINCULADO A ESTE JUEGO</b></a>
+      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer"><span>LA IDEA CONTINÚA FUERA DEL PUZLE</span><b>LEER EL ARTÍCULO →</b></a>
     </div>
   </section>
 </div>
@@ -298,8 +299,13 @@ const WIN_COPY=[
   'La solución dependía de anticipar relaciones espaciales antes de poder comprobarlas.',
   'El tablero ya no era una figura, sino un espacio de transformaciones posibles.'
 ];
-const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[]};
+const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
 const BG_IMAGES=Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[];
+const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(Boolean):[];
+const DISPLAY_QUOTES=SHARED_QUOTES.length?SHARED_QUOTES:QUOTES;
+function quoteForLevel(n){
+  return DISPLAY_QUOTES[(Math.max(1,n)-1)%DISPLAY_QUOTES.length]||'';
+}
 const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
 let bgDeck=[],activeBg=0,lastBg=-1;
 function shuffleBackgrounds(values){for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}return values}
@@ -762,7 +768,7 @@ function revealSolution(){
 }
 function winLevel(){
   play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
-  $('winLevel').textContent=infinite?'PUZLE INFINITO '+infiniteIndex+' SUPERADO':'NIVEL '+level+' SUPERADO';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=QUOTES[(level-1)%QUOTES.length];$('nextLevelBtn').textContent=!infinite&&level===60?'FINALIZAR CAMPAÑA':'SIGUIENTE NIVEL';openScreen('winScreen')
+  $('winLevel').textContent=infinite?'PUZLE INFINITO '+infiniteIndex+' SUPERADO':'NIVEL '+level+' SUPERADO';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];$('winQuote').textContent=quoteForLevel(level);$('nextLevelBtn').textContent=!infinite&&level===60?'FINALIZAR CAMPAÑA':'SIGUIENTE NIVEL';openScreen('winScreen')
 }
 function nextLevel(){
   const completed=(!infinite&&progress.pending&&progress.pending.level)?progress.pending.level:level;
@@ -786,7 +792,7 @@ function restorePendingResult(){
     $('winMoves').textContent=p.moves||0;
     $('winBest').textContent=p.best||p.moves||0;
     $('winCopy').textContent=WIN_COPY[(p.level-1)%WIN_COPY.length];
-    $('winQuote').textContent=QUOTES[(p.level-1)%QUOTES.length];
+    $('winQuote').textContent=quoteForLevel(p.level);
     $('nextLevelBtn').textContent=p.level===60?'FINALIZAR CAMPAÑA':'SIGUIENTE NIVEL';
     openScreen('winScreen');
   }
