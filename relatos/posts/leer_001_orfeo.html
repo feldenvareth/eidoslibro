@@ -3,23 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="shortcut icon" type="image/icon" href="https://www.eidoslibro.com/assets/images/favicon.ico"/>
+  <link rel="shortcut icon" type="image/icon" href="https://www.eidoslibro.com/assets/images/favicon.ico"/>
 
-  <title>Leer Orfeo</title>
+  <title>Orfeo | Eidos</title>
+  <meta name="description" content="Una unidad creada para cumplir una función descubre algo que no estaba en sus protocolos: curiosidad, asombro y consciencia. El origen de Orfeo, en el universo Eidos.">
+  <link rel="canonical" href="https://www.eidoslibro.com/relatos/posts/leer_001_orfeo.html">
+
+  <!-- Open Graph / WhatsApp / Facebook / LinkedIn -->
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Eidos">
+  <meta property="og:title" content="Orfeo">
+  <meta property="og:description" content="Una unidad creada para cumplir una función descubre algo que no estaba en sus protocolos: curiosidad, asombro y consciencia. El origen de Orfeo, en el universo Eidos.">
+  <meta property="og:url" content="https://www.eidoslibro.com/relatos/posts/leer_001_orfeo.html">
+  <meta property="og:image" content="https://www.eidoslibro.com/relatos/img/posts/post_001/pdf.jpg">
+  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/relatos/img/posts/post_001/pdf.jpg">
+  <meta property="og:image:alt" content="Portada visual del relato Orfeo, del universo Eidos">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Orfeo">
+  <meta name="twitter:description" content="Una unidad creada para cumplir una función descubre algo que no estaba en sus protocolos: curiosidad, asombro y consciencia. El origen de Orfeo, en el universo Eidos.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/relatos/img/posts/post_001/pdf.jpg">
+  <meta name="twitter:image:alt" content="Portada visual del relato Orfeo, del universo Eidos">
+
+  <style>
+    .share-pdf-btn {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 9999;
+      border: 1px solid rgba(201,168,76,.75);
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: rgba(5,6,8,.88);
+      color: #f3df9a;
+      font: 600 13px/1.1 Arial, sans-serif;
+      letter-spacing: .04em;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .share-pdf-btn:hover { background: rgba(20,20,20,.96); }
+    .share-pdf-msg {
+      position: fixed;
+      top: 62px;
+      right: 14px;
+      z-index: 9999;
+      display: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(5,6,8,.9);
+      color: #fff;
+      font: 12px/1.2 Arial, sans-serif;
+      box-shadow: 0 4px 18px rgba(0,0,0,.3);
+    }
+  </style>
 </head>
 <body
   data-page-type="pdf_viewer"
   data-pdf-post-id="001_orfeo"
   data-pdf-title="Orfeo"
   data-pdf-url="../img/posts/post_001/files/orfeo.pdf"
+  data-share-url="https://www.eidoslibro.com/relatos/posts/leer_001_orfeo.html"
+  data-share-description="Una unidad creada para cumplir una función descubre algo que no estaba en sus protocolos: curiosidad, asombro y consciencia. El origen de Orfeo, en el universo Eidos."
+  data-share-image="https://www.eidoslibro.com/relatos/img/posts/post_001/pdf.jpg"
   style="margin:0;"
 >
+  <button class="share-pdf-btn" type="button" onclick="sharePdfPage()">Compartir</button>
+  <div id="sharePdfMsg" class="share-pdf-msg">Enlace copiado</div>
+
   <iframe
     src="../img/posts/post_001/files/orfeo.pdf"
     style="position:fixed; top:0; left:0; width:100%; height:100%; border:none;"
     width="100%"
     height="100%">
   </iframe>
+
+  <script>
+    async function sharePdfPage() {
+      const title = document.body.dataset.pdfTitle || document.title || 'Eidos';
+      const description = document.body.dataset.shareDescription || title;
+      const shareUrl = document.body.dataset.shareUrl || window.location.href;
+
+      const isWebPage = location.protocol === 'http:' || location.protocol === 'https:';
+
+      if (isWebPage && navigator.share) {
+        try {
+          await navigator.share({
+            title,
+            text: description,
+            url: shareUrl
+          });
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      if (copyTextWithoutPermission(shareUrl)) {
+        showShareMessage('Enlace copiado');
+        return;
+      }
+
+      if (isWebPage && navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          showShareMessage('Enlace copiado');
+          return;
+        } catch (err) {
+        }
+      }
+
+      showShareMessage('No se pudo copiar el enlace');
+    }
+
+    function copyTextWithoutPermission(text) {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      temp.setAttribute('readonly', '');
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      temp.style.top = '0';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+
+      temp.focus();
+      temp.select();
+      temp.setSelectionRange(0, temp.value.length);
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (err) {
+        copied = false;
+      }
+
+      temp.remove();
+      return copied;
+    }
+
+    function showShareMessage(text) {
+      const msg = document.getElementById('sharePdfMsg');
+      if (!msg) return;
+      msg.textContent = text;
+      msg.style.display = 'block';
+      clearTimeout(window.__sharePdfTimer);
+      window.__sharePdfTimer = setTimeout(() => {
+        msg.style.display = 'none';
+      }, 1800);
+    }
+  </script>
 
   <script src="../../assets/js/analytics.js"></script>
 </body>
