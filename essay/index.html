@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ENSAYOS | Vida, mente, evolución e inteligencia · Felden Vareth</title>
+  <meta name="description" content="ENSAYOS, de Felden Vareth. Nueve ensayos de divulgación y reflexión sobre mente, vida, evolución, inteligencia, identidad y tecnología, nacidos de las preguntas de EIDOS. Próxima publicación.">
+  <meta name="author" content="Felden Vareth">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#070710">
+  <link rel="canonical" href="https://www.eidoslibro.com/ensayos/">
+
+  <link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="../assets/images/favicon.ico">
+
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="book">
+  <meta property="og:site_name" content="EIDOS">
+  <meta property="og:title" content="ENSAYOS | Vida, mente, evolución e inteligencia · Felden Vareth">
+  <meta property="og:description" content="Nueve ensayos de divulgación y reflexión nacidos de las preguntas de EIDOS: mente, vida, evolución, inteligencia, identidad y tecnología.">
+  <meta property="og:url" content="https://www.eidoslibro.com/ensayos/">
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/tapaensayo.jpg">
+  <meta property="og:image:alt" content="Portada de ENSAYOS de Felden Vareth">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ENSAYOS | Vida, mente, evolución e inteligencia · Felden Vareth">
+  <meta name="twitter:description" content="Nueve ensayos de divulgación y reflexión nacidos de las preguntas de EIDOS.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/tapaensayo.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS GENERAL DE EIDOS -->
+  <link rel="stylesheet" href="../assets/css/stylenew.css">
+
+  <style>
+    /* =========================================================
+       ENSAYOS · LANDING
+       Estilos específicos. El lenguaje visual base procede de
+       ../assets/css/stylenew.css
+       ========================================================= */
+
+    body {
+      background: var(--deep);
+    }
+
+    .essay-page {
+      min-height: 100vh;
+    }
+
+    .essay-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.32), transparent);
+    }
+
+    /* NAV · versión de landing */
+    .essay-nav-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold) !important;
+    }
+
+    /* HERO */
+    .essay-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 52% 70% at 76% 48%, rgba(201,168,76,.08) 0%, transparent 68%),
+        radial-gradient(ellipse 45% 60% at 12% 86%, rgba(58,122,110,.07) 0%, transparent 70%),
+        var(--deep);
+    }
+
+    .essay-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,.34), transparent);
+    }
+
+    .essay-hero-noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+      background-size: 84px 84px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    .essay-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 138px 60px 92px;
+      display: grid;
+      grid-template-columns: minmax(0,1.08fr) minmax(300px,.72fr);
+      gap: 92px;
+      align-items: center;
+    }
+
+    .essay-eyebrow {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: essayFadeUp .9s .15s forwards;
+    }
+
+    .essay-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(66px, 8.5vw, 112px);
+      font-weight: 300;
+      line-height: .88;
+      letter-spacing: .06em;
+      color: var(--paper);
+      margin: 0 0 34px;
+      opacity: 0;
+      animation: essayFadeUp .95s .3s forwards;
+    }
+
+    .essay-hero-title em {
+      display: block;
+      margin-top: 16px;
+      font-size: clamp(27px, 3.2vw, 43px);
+      line-height: 1.08;
+      letter-spacing: .01em;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .essay-hero-lead {
+      max-width: 680px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.2vw, 29px);
+      font-weight: 300;
+      line-height: 1.48;
+      color: rgba(212,207,198,.88);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: essayFadeUp .95s .45s forwards;
+    }
+
+    .essay-hero-copy {
+      max-width: 610px;
+      font-size: 13px;
+      line-height: 1.9;
+      letter-spacing: .35px;
+      color: rgba(212,207,198,.56);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: essayFadeUp .95s .58s forwards;
+    }
+
+    .essay-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+      opacity: 0;
+      animation: essayFadeUp .95s .68s forwards;
+    }
+
+    .essay-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid rgba(201,168,76,.18);
+      background: rgba(201,168,76,.035);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(212,207,198,.58);
+    }
+
+    .essay-chip--status {
+      color: var(--gold);
+      border-color: rgba(201,168,76,.45);
+      background: rgba(201,168,76,.08);
+    }
+
+    .essay-chip--status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(201,168,76,.7);
+    }
+
+    .essay-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      opacity: 0;
+      animation: essayFadeUp .95s .78s forwards;
+    }
+
+    .essay-cover-column {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      animation: essayFadeIn 1.25s .45s forwards;
+    }
+
+    .essay-cover-wrap {
+      position: relative;
+      width: min(100%, 390px);
+      padding: 12px;
+      border: 1px solid rgba(201,168,76,.22);
+      background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
+      box-shadow: 0 35px 85px rgba(0,0,0,.52);
+    }
+
+    .essay-cover-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 24px -30px -36px 24px;
+      z-index: -1;
+      border: 1px solid rgba(201,168,76,.09);
+      background: rgba(201,168,76,.015);
+    }
+
+    .essay-cover {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .55s ease, filter .55s ease;
+      filter: drop-shadow(0 22px 38px rgba(0,0,0,.55));
+    }
+
+    .essay-cover-wrap:hover .essay-cover {
+      transform: translateY(-6px) scale(1.012);
+      filter: drop-shadow(0 30px 52px rgba(0,0,0,.65));
+    }
+
+    .essay-coming {
+      position: absolute;
+      top: 30px;
+      right: -14px;
+      padding: 10px 16px 9px;
+      background: var(--gold);
+      color: var(--deep);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      box-shadow: 0 12px 30px rgba(0,0,0,.32);
+      z-index: 3;
+    }
+
+    .essay-cover-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 4px 3px;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(212,207,198,.35);
+    }
+
+    .essay-cover-caption strong {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    /* INTRO / MANIFIESTO */
+    .essay-intro {
+      position: relative;
+      padding: 130px 0;
+      background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
+      overflow: hidden;
+    }
+
+    .essay-intro::before {
+      content: "E";
+      position: absolute;
+      right: 4vw;
+      top: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(180px, 28vw, 420px);
+      font-weight: 300;
+      line-height: .85;
+      color: rgba(201,168,76,.025);
+      pointer-events: none;
+    }
+
+    .essay-intro-grid {
+      display: grid;
+      grid-template-columns: .76fr 1.24fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .essay-intro-side {
+      position: sticky;
+      top: 120px;
+    }
+
+    .essay-intro-side h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 58px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--paper);
+    }
+
+    .essay-intro-side h2 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .essay-prose p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 300;
+      line-height: 1.82;
+      color: rgba(212,207,198,.82);
+      margin-bottom: 25px;
+    }
+
+    .essay-prose p:first-child::first-letter {
+      float: left;
+      font-size: 78px;
+      line-height: .72;
+      padding: 13px 12px 0 0;
+      color: var(--gold);
+    }
+
+    .essay-prose .essay-pullquote {
+      margin: 50px 0 8px;
+      padding: 8px 0 8px 34px;
+      border-left: 1px solid rgba(201,168,76,.6);
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.38;
+      font-style: italic;
+      color: var(--paper);
+    }
+
+    /* TEMAS */
+    .essay-topics {
+      padding: 125px 0 135px;
+      position: relative;
+      background: var(--mist);
+    }
+
+    .essay-topics::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 45% 40% at 82% 18%, rgba(58,122,110,.045), transparent 70%);
+    }
+
+    .essay-topics .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .essay-topic-intro {
+      max-width: 720px;
+      margin-top: -20px;
+      margin-bottom: 58px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.65;
+      color: rgba(212,207,198,.68);
+    }
+
+    .essay-topics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .essay-topic {
+      min-height: 410px;
+      padding: 0 0 30px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(5,5,14,.58);
+      border: 1px solid rgba(201,168,76,.08);
+      transition: background .4s ease, transform .4s ease, border-color .4s ease;
+    }
+
+    .essay-topic::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+
+    .essay-topic:hover {
+      background: rgba(201,168,76,.045);
+      border-color: rgba(201,168,76,.22);
+      transform: translateY(-5px);
+    }
+
+    .essay-topic:hover::after {
+      transform: scaleX(1);
+    }
+
+    .essay-topic-media {
+      position: relative;
+      aspect-ratio: 3 / 1;
+      overflow: hidden;
+      background: #0a0e24;
+      border-bottom: 1px solid rgba(201,168,76,.12);
+    }
+
+    .essay-topic-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(7,7,16,.22) 100%);
+      pointer-events: none;
+    }
+
+    .essay-topic-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform .6s ease, filter .5s ease;
+    }
+
+    .essay-topic:hover .essay-topic-media img {
+      transform: scale(1.025);
+      filter: brightness(1.05);
+    }
+
+    .essay-topic-body {
+      padding: 25px 28px 0;
+    }
+
+    .essay-topic-number {
+      display: block;
+      margin-bottom: 15px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: rgba(201,168,76,.62);
+    }
+
+    .essay-topic h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--paper);
+      margin-bottom: 15px;
+    }
+
+    .essay-topic p {
+      font-size: 12px;
+      line-height: 1.78;
+      letter-spacing: .32px;
+      color: rgba(212,207,198,.54);
+    }
+
+    /* RECORRIDO */
+    .essay-journey {
+      padding: 130px 0;
+      background: linear-gradient(180deg, var(--mist) 0%, var(--deep) 100%);
+      position: relative;
+    }
+
+    .essay-journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 54px;
+      align-items: stretch;
+    }
+
+    .essay-journey-card {
+      padding: 48px 44px;
+      border: 1px solid rgba(201,168,76,.15);
+      background: rgba(5,5,14,.38);
+      box-shadow: 0 22px 55px rgba(0,0,0,.20);
+    }
+
+    .essay-journey-card .essay-topic-number {
+      margin-bottom: 24px;
+    }
+
+    .essay-journey-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 300;
+      color: var(--paper);
+      margin-bottom: 18px;
+    }
+
+    .essay-journey-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      line-height: 1.72;
+      color: rgba(212,207,198,.72);
+    }
+
+    .essay-thread {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+      padding: 48px 48px 46px;
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 50px;
+      align-items: center;
+      border-top: 1px solid rgba(201,168,76,.18);
+      border-bottom: 1px solid rgba(201,168,76,.18);
+      background: linear-gradient(90deg, rgba(201,168,76,.035), transparent 58%);
+    }
+
+    .essay-thread-label {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .essay-thread p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(23px, 2.5vw, 31px);
+      line-height: 1.5;
+      color: rgba(245,240,232,.88);
+    }
+
+    /* ORIGEN / EIDOS */
+    .essay-origin {
+      position: relative;
+      padding: 135px 0;
+      overflow: hidden;
+      background: #080811;
+    }
+
+    .essay-origin::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(7,7,16,.96) 0%, rgba(7,7,16,.79) 52%, rgba(7,7,16,.88) 100%),
+        url("../assets/images/img_v2.jpg") center / cover no-repeat;
+      opacity: .42;
+    }
+
+    .essay-origin .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .essay-origin-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 88px;
+      align-items: center;
+    }
+
+    .essay-origin h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 5vw, 62px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--paper);
+      margin-bottom: 28px;
+    }
+
+    .essay-origin h2 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .essay-origin-copy p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      line-height: 1.78;
+      color: rgba(212,207,198,.78);
+      margin-bottom: 22px;
+    }
+
+    .essay-origin-mark {
+      padding: 42px 38px;
+      border: 1px solid rgba(201,168,76,.19);
+      background: rgba(7,7,16,.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .essay-origin-mark .mini {
+      display: block;
+      margin-bottom: 24px;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .essay-origin-mark blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(27px, 3.2vw, 39px);
+      font-weight: 300;
+      line-height: 1.36;
+      color: var(--paper);
+      margin: 0 0 28px;
+    }
+
+    .essay-origin-mark p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: .8px;
+      color: rgba(212,207,198,.46);
+    }
+
+    /* AUTOR */
+    .essay-author {
+      padding: 125px 0;
+      background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
+    }
+
+    .essay-author-grid {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 74px;
+      align-items: center;
+    }
+
+    .essay-author-monogram {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      position: relative;
+      border: 1px solid rgba(201,168,76,.20);
+      background:
+        radial-gradient(circle at 50% 46%, rgba(201,168,76,.07), transparent 58%),
+        rgba(5,5,14,.46);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 92px;
+      font-weight: 300;
+      letter-spacing: -.08em;
+      color: rgba(201,168,76,.74);
+    }
+
+    .essay-author-monogram::before,
+    .essay-author-monogram::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(201,168,76,.08);
+      transform: rotate(45deg);
+    }
+
+    .essay-author-monogram::after {
+      inset: 42px;
+      transform: rotate(0deg);
+    }
+
+    .essay-author-copy h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 5vw, 58px);
+      font-weight: 300;
+      color: var(--paper);
+      margin-bottom: 22px;
+    }
+
+    .essay-author-copy p {
+      max-width: 680px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      line-height: 1.78;
+      color: rgba(212,207,198,.72);
+      margin-bottom: 30px;
+    }
+
+    .essay-author-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      margin-bottom: 34px;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(212,207,198,.38);
+    }
+
+    .essay-author-meta strong {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+
+    /* AUTOR · ACCIONES Y REDES */
+    .essay-author-connect {
+      display: flex;
+      align-items: flex-end;
+      gap: 34px;
+      flex-wrap: wrap;
+    }
+
+    .essay-author-connect .author-social {
+      margin-top: 0;
+    }
+
+    .essay-author-connect .author-social-label {
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .essay-author-connect {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .essay-author-connect .author-social {
+        text-align: center;
+      }
+
+      .essay-author-connect .author-social-links {
+        justify-content: center;
+      }
+    }
+
+    /* CTA FINAL */
+    .essay-finale {
+      position: relative;
+      padding: 145px 0 150px;
+      overflow: hidden;
+      text-align: center;
+      background: var(--deep);
+    }
+
+    .essay-finale::before {
+      content: "";
+      position: absolute;
+      width: 680px;
+      height: 680px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,.065), transparent 68%);
+      pointer-events: none;
+    }
+
+    .essay-finale .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .essay-finale-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 26px;
+      padding: 9px 14px;
+      border: 1px solid rgba(201,168,76,.34);
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .essay-finale-status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .essay-finale h2 {
+      max-width: 860px;
+      margin: 0 auto 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(46px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .essay-finale h2 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .essay-finale p {
+      max-width: 690px;
+      margin: 0 auto 38px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.65;
+      color: rgba(212,207,198,.64);
+    }
+
+    .essay-finale-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    @keyframes essayFadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes essayFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px) {
+      .essay-hero-inner {
+        grid-template-columns: 1fr .68fr;
+        gap: 55px;
+      }
+
+      .essay-topics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav-more { display: none; }
+
+      .essay-hero {
+        min-height: auto;
+      }
+
+      .essay-hero-inner {
+        grid-template-columns: 1fr;
+        padding: 110px 24px 78px;
+        gap: 58px;
+      }
+
+      .essay-cover-column {
+        order: -1;
+      }
+
+      .essay-cover-wrap {
+        width: min(82vw, 340px);
+      }
+
+      .essay-coming {
+        right: -10px;
+      }
+
+      .essay-intro,
+      .essay-topics,
+      .essay-journey,
+      .essay-origin,
+      .essay-author,
+      .essay-finale {
+        padding-top: 90px;
+        padding-bottom: 95px;
+      }
+
+      .essay-intro-grid,
+      .essay-origin-grid,
+      .essay-author-grid {
+        grid-template-columns: 1fr;
+        gap: 46px;
+      }
+
+      .essay-intro-side {
+        position: static;
+      }
+
+      .essay-journey-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .essay-thread {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 40px 30px;
+      }
+
+      .essay-author-monogram {
+        width: min(70vw, 270px);
+        margin: 0 auto;
+      }
+
+      .essay-author-copy {
+        text-align: center;
+      }
+
+      .essay-author-meta,
+      .essay-author-copy .essay-author-actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .essay-hero-title {
+        font-size: 58px;
+      }
+
+      .essay-hero-title em {
+        font-size: 27px;
+      }
+
+      .essay-hero-lead {
+        font-size: 22px;
+      }
+
+      .essay-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .essay-hero-actions a {
+        justify-content: center;
+      }
+
+      .essay-status {
+        gap: 8px;
+      }
+
+      .essay-topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .essay-topic {
+        min-height: 0;
+      }
+
+      .essay-prose p {
+        font-size: 19px;
+      }
+
+      .essay-journey-card {
+        padding: 36px 28px;
+      }
+
+      .essay-origin-mark {
+        padding: 34px 26px;
+      }
+
+      .essay-finale-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  
+
+    /* AMAZON · PRÓXIMAMENTE */
+    .amazon-coming-btn {
+      cursor: pointer;
+      font: inherit;
+      transition: all .3s ease;
+    }
+
+    .amazon-coming-btn i {
+      position: relative;
+      z-index: 1;
+    }
+
+    .essay-hero-actions .amazon-coming-btn {
+      border: 1px solid rgba(201,168,76,.48);
+      background: rgba(201,168,76,.08);
+      color: var(--gold);
+      box-shadow: inset 0 0 0 1px rgba(201,168,76,.04);
+    }
+
+    .essay-hero-actions .amazon-coming-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,.28);
+    }
+
+    .amazon-notice {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(7,7,16,.72);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .amazon-notice.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .amazon-notice-card {
+      width: min(480px, 100%);
+      position: relative;
+      padding: 42px 42px 38px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(26,26,46,.98), rgba(7,7,16,.99));
+      border: 1px solid rgba(201,168,76,.35);
+      box-shadow: 0 28px 80px rgba(0,0,0,.55), 0 0 40px rgba(201,168,76,.08);
+    }
+
+    .amazon-notice-icon {
+      color: var(--gold);
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .amazon-notice-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 300;
+      color: var(--paper);
+      margin-bottom: 14px;
+    }
+
+    .amazon-notice-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      line-height: 1.55;
+      color: rgba(212,207,198,.76);
+      margin: 0;
+    }
+
+    .amazon-notice-card strong {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .amazon-notice-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(201,168,76,.28);
+      background: transparent;
+      color: var(--gold);
+      font-size: 22px;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+
+    .amazon-notice-close:hover {
+      background: var(--gold);
+      color: var(--deep);
+      border-color: var(--gold);
+    }
+
+    @media (max-width: 600px) {
+      .amazon-notice-card { padding: 38px 24px 32px; }
+      .amazon-notice-card h3 { font-size: 30px; }
+      .amazon-notice-card p { font-size: 18px; }
+    }
+</style>
+
+  <!-- Google Analytics / mismo identificador que EIDOS principal -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SCSFPYKJTX');
+  </script>
+
+</head>
+
+<body>
+
+<!-- Consent Banner -->
+<div id="consent-banner">
+  <p>Este sitio utiliza cookies para mejorar la experiencia. <a href="../terminosycondiciones.html">Política de Privacidad</a></p>
+  <button class="consent-btn" onclick="consentGranted()">Aceptar</button>
+  <button class="consent-btn decline" onclick="consentDeclined()">Rechazar</button>
+</div>
+
+<script>
+  function consentGranted() {
+    gtag('consent','update',{
+      'ad_storage':'granted',
+      'ad_user_data':'granted',
+      'ad_personalization':'granted',
+      'analytics_storage':'granted'
+    });
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','true');
+  }
+
+  function consentDeclined() {
+    gtag('consent','update',{
+      'ad_storage':'denied',
+      'ad_user_data':'denied',
+      'ad_personalization':'denied',
+      'analytics_storage':'denied'
+    });
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','false');
+  }
+
+  (function(){
+    const c=localStorage.getItem('consentGiven');
+    if(c==='true') consentGranted();
+    else if(c==='false') consentDeclined();
+  })();
+</script>
+
+<div class="essay-page">
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="../index.html" aria-label="Volver a EIDOS">EIDOS</a>
+
+    <ul class="nav-links">
+      <li><a href="#libro">El libro</a></li>
+      <li><a href="#temas">Temas</a></li>
+      <li><a href="#recorrido">Recorrido</a></li>
+      <li><a href="#autor">Autor</a></li>
+      <li><a class="essay-nav-home" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Volver a EIDOS</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" role="button">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#libro" onclick="closeMenu()">El libro</a>
+    <a href="#temas" onclick="closeMenu()">Temas</a>
+    <a href="#recorrido" onclick="closeMenu()">Recorrido</a>
+    <a href="#autor" onclick="closeMenu()">Autor</a>
+    <a class="essay-nav-home" href="../index.html" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i>&nbsp; Volver a EIDOS</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="essay-hero" id="inicio">
+    <div class="essay-hero-noise"></div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <div class="essay-hero-inner">
+      <div class="essay-hero-copycol">
+        <p class="essay-eyebrow">Felden Vareth · Próxima publicación</p>
+
+        <h1 class="essay-hero-title">
+          ENSAYOS
+          <em>Vida, mente, evolución e inteligencia</em>
+        </h1>
+
+        <p class="essay-hero-lead">
+          Las preguntas de EIDOS, fuera de la ficción.
+        </p>
+
+        <p class="essay-hero-copy">
+          Nueve ensayos de divulgación y reflexión nacidos junto a EIDOS. Cada capítulo parte de investigaciones, experimentos, tecnologías o debates reales para distinguir entre lo que ya sabemos, lo que empezamos a comprender y lo que todavía pertenece al terreno de la hipótesis.
+        </p>
+
+        <div class="essay-status" aria-label="Temas del libro">
+          <span class="essay-chip essay-chip--status">Próximamente</span>
+          <span class="essay-chip">Vida</span>
+          <span class="essay-chip">Mente</span>
+          <span class="essay-chip">Evolución</span>
+          <span class="essay-chip">Inteligencia</span>
+        </div>
+
+        <div class="essay-hero-actions">
+          <a class="btn-primary" href="#libro">
+            <i class="fa-regular fa-file-lines"></i> Conocer el libro
+          </a>
+          <button class="btn-outline amazon-coming-btn" type="button" data-amazon-coming>
+            <i class="fa-brands fa-amazon"></i> Comprar en Amazon
+          </button>
+        </div>
+      </div>
+
+      <div class="essay-cover-column" aria-label="Portada del libro ENSAYOS">
+        <div class="essay-cover-wrap">
+          <span class="essay-coming">Próximamente</span>
+          <img class="essay-cover" src="../assets/images/tapaensayo.jpg" alt="Portada de ENSAYOS de Felden Vareth">
+          <div class="essay-cover-caption">
+            <span>Felden Vareth</span>
+            <strong>Ensayo</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- EL LIBRO -->
+  <section class="essay-intro" id="libro">
+    <div class="container">
+      <div class="essay-intro-grid">
+        <div class="essay-intro-side reveal">
+          <span class="section-tag">El libro</span>
+          <h2>De las preguntas de Eidos<br><em>a una biblioteca de ensayos.</em></h2>
+        </div>
+
+        <div class="essay-prose reveal reveal-delay-1">
+          <p>
+            Estos ensayos nacieron junto a Eidos. Algunas preguntas estaban allí desde el principio: qué es una mente, qué parte de nosotros tendría que conservarse para seguir hablando de la misma persona, hasta qué punto el cuerpo condiciona la inteligencia o si la vida está necesariamente ligada a la biología. Otras aparecieron cuando esas ideas tuvieron que funcionar dentro de una historia.
+          </p>
+          <p>
+            Al principio fueron piezas independientes. Después empezaron a formar un recorrido: cada respuesta abría otra pregunta. ENSAYOS reúne ese itinerario en un solo volumen y lo ordena desde la mente y la identidad hasta la evolución, el cuerpo, la inteligencia, lo humano y la tecnología.
+          </p>
+          <p>
+            No pretende ser un manual universitario ni una colección de certezas. Es un libro de divulgación y reflexión, dirigido a lectores curiosos. Cada capítulo parte de investigaciones, experimentos, tecnologías o debates reales y procura separar lo que ya sabemos, lo que empezamos a comprender y lo que todavía pertenece al terreno de la hipótesis.
+          </p>
+
+          <p class="essay-pullquote">
+            La ciencia explica hasta dónde hemos llegado. La curiosidad pregunta qué hay después. La ficción permite imaginarlo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="essay-rule"></div>
+
+  <!-- TEMAS -->
+  <section class="essay-topics" id="temas">
+    <div class="container">
+      <span class="section-tag reveal">Los ensayos</span>
+      <h2 class="section-title reveal">Nueve ensayos, <em>un mismo recorrido</em></h2>
+      <p class="essay-topic-intro reveal">
+        El recorrido comienza con la mente, pasa por la longevidad, amplía la escala hacia la evolución, regresa al cuerpo y a las distintas formas de inteligencia, y desemboca en la pregunta por lo humano. El M1 cierra el círculo regresando al texto que estuvo en el origen de esta pequeña biblioteca lateral.
+      </p>
+
+      <div class="essay-topics-grid">
+        <article class="essay-topic reveal">
+          <div class="essay-topic-media"><img src="images/02.jpg" alt="Ilustración del ensayo sobre copiar una mente humana" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">01</span>
+            <h3>¿Podremos copiar una mente humana?</h3>
+            <p>El connectoma de la mosca, el problema difícil de la consciencia y la pregunta que la ciencia todavía no sabe formular: qué es exactamente lo que hace que seas tú.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-1">
+          <div class="essay-topic-media"><img src="images/03.jpg" alt="Ilustración del ensayo sobre inmortalidad humana" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">02</span>
+            <h3>¿Podremos alcanzar la inmortalidad humana?</h3>
+            <p>Longevidad, telómeros, reprogramación epigenética, senolíticos, criónica y transferencia mental: las fronteras científicas de no morir.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-2">
+          <div class="essay-topic-media"><img src="images/04.jpg" alt="Ilustración del ensayo sobre vida digital y evolución" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">03</span>
+            <h3>¿Es la vida digital el siguiente paso de la evolución?</h3>
+            <p>Del replicador primitivo a la consciencia digital: una hipótesis sobre la vida, la información y la posibilidad de abandonar el soporte biológico.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal">
+          <div class="essay-topic-media"><img src="images/05.jpg" alt="Ilustración del ensayo Las mil formas de continuar" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">04</span>
+            <h3>Las mil formas de continuar</h3>
+            <p>Cómo la vida copia, mezcla, resiste y viaja para atravesar generaciones y ambientes sin depender de una única estrategia de continuidad.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-1">
+          <div class="essay-topic-media"><img src="images/06.jpg" alt="Ilustración del ensayo El cuerpo de la inteligencia" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">05</span>
+            <h3>El cuerpo de la inteligencia</h3>
+            <p>De las manos que fabricaron herramientas a los pulpos, la percepción artificial y los robots blandos: qué ocurre cuando el cuerpo se convierte en una variable de diseño.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-2">
+          <div class="essay-topic-media"><img src="images/07.jpg" alt="Ilustración del ensayo sobre formas de inteligencia" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">06</span>
+            <h3>¿Inteligente para qué?</h3>
+            <p>Por qué la inteligencia no es una escalera evolutiva: del perro, el cuervo y el pulpo a la cultura humana y las inteligencias artificiales.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal">
+          <div class="essay-topic-media"><img src="images/08.jpg" alt="Ilustración del ensayo El animal que seguimos siendo" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">07</span>
+            <h3>El animal que seguimos siendo</h3>
+            <p>Instinto, pertenencia, territorio, cooperación y cultura: qué queda del animal bajo la inteligencia, las leyes y las instituciones humanas.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-1">
+          <div class="essay-topic-media"><img src="images/09.jpg" alt="Ilustración del ensayo sobre qué define al ser humano" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">08</span>
+            <h3>El ser humano: el animal que no cabe en una definición</h3>
+            <p>Biología, cuerpo, consciencia, memoria, cultura, derecho e identidad: qué habría que conservar si alguna vez intentáramos transferir a una persona.</p>
+          </div>
+        </article>
+
+        <article class="essay-topic reveal reveal-delay-2">
+          <div class="essay-topic-media"><img src="images/01.jpg" alt="Ilustración del ensayo sobre el material M1" loading="lazy"></div>
+          <div class="essay-topic-body">
+            <span class="essay-topic-number">09</span>
+            <h3>El M1: material que aún no existe (pero podría)</h3>
+            <p>Cristales de memoria, ADN como almacenamiento y tecnologías reales que permiten preguntar cuánto de un material imaginario está realmente fuera de nuestro alcance.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="essay-rule"></div>
+
+  <!-- RECORRIDO -->
+  <section class="essay-journey" id="recorrido">
+    <div class="container">
+      <span class="section-tag reveal">Cómo leerlo</span>
+      <h2 class="section-title reveal">Un recorrido, <em>muchas entradas</em></h2>
+
+      <div class="essay-journey-grid">
+        <article class="essay-journey-card reveal">
+          <span class="essay-topic-number">Lectura I</span>
+          <h3>Como un recorrido</h3>
+          <p>
+            El orden no sigue la cronología de publicación. La mente abre la pregunta; la inmortalidad la lleva a la frontera de la continuidad; la evolución cambia la escala; el cuerpo y la inteligencia muestran otras formas de resolver el mundo; animalidad y humanidad devuelven la mirada hacia nosotros. El M1 cierra regresando al principio.
+          </p>
+        </article>
+
+        <article class="essay-journey-card reveal reveal-delay-1">
+          <span class="essay-topic-number">Lectura II</span>
+          <h3>Como ensayos independientes</h3>
+          <p>
+            Los textos nacieron como piezas independientes y cada uno conserva su propia pregunta, estructura y contexto científico. Las referencias se reúnen al final del volumen, organizadas por capítulo y por la sección del texto a la que estaban asociadas.
+          </p>
+        </article>
+
+        <div class="essay-thread reveal">
+          <div class="essay-thread-label">El hilo común</div>
+          <p>
+            La ciencia cambia. Estos ensayos deben leerse como fotografías de un momento del conocimiento: <em>una invitación a distinguir entre hechos, fronteras abiertas e hipótesis, no como declaraciones definitivas.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGEN EIDOS -->
+  <section class="essay-origin" id="origen">
+    <div class="container">
+      <div class="essay-origin-grid">
+        <div class="essay-origin-copy reveal">
+          <span class="section-tag">Del universo EIDOS</span>
+          <h2>Las mismas preguntas,<br><em>otro lenguaje.</em></h2>
+          <p>
+            La relación entre EIDOS y ENSAYOS funciona en ambos sentidos. La ficción lleva una posibilidad más lejos de lo que hoy permiten los laboratorios y permite observar sus consecuencias; después, la ciencia obliga a regresar y preguntar qué parte de aquella posibilidad tiene raíces reales.
+          </p>
+          <p>
+            La ficción no intenta demostrar que ese futuro llegará. Crea un lugar desde el que pensar qué significaría si llegara. Los ensayos vuelven después a la biología, la neurociencia, la evolución, la tecnología, la filosofía y, en algunos casos, la fe para mirar esas preguntas desde fuera de la narración. No es necesario haber leído la novela para seguir el recorrido.
+          </p>
+          <a class="btn-outline" href="../index.html">
+            <i class="fa-solid fa-arrow-left"></i> Volver al universo EIDOS
+          </a>
+        </div>
+
+        <aside class="essay-origin-mark reveal reveal-delay-1">
+          <span class="mini">EIDOS · ENSAYOS</span>
+          <blockquote>
+            Primero imaginamos qué podría ocurrir.<br>Después preguntamos qué sabemos de verdad.
+          </blockquote>
+          <p>
+            Ficción y ensayo comparten preguntas, no respuestas. Cada formato permite observarlas desde un lugar distinto.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div class="essay-rule"></div>
+
+  <!-- AUTOR -->
+  <section class="essay-author" id="autor">
+    <div class="container">
+      <div class="essay-author-grid">
+        <div class="essay-author-monogram reveal" aria-hidden="true">FV</div>
+
+        <div class="essay-author-copy reveal reveal-delay-1">
+          <span class="section-tag">Autor</span>
+          <h2>Felden Vareth</h2>
+          <div class="essay-author-meta">
+            <span>Autor de <strong>EIDOS</strong></span>
+            <span>Ficción · Ciencia · Futuro humano</span>
+          </div>
+          <p>
+            Con ENSAYOS, Felden Vareth reúne en un solo volumen los textos nacidos al mirar desde fuera de la ficción algunas de las preguntas de EIDOS. El libro se mueve deliberadamente entre divulgación y reflexión: no busca convertir hipótesis en certezas, sino seguir el recorrido entre lo que la ciencia conoce, lo que empieza a comprender y lo que todavía podemos imaginar.
+          </p>
+          <div class="essay-author-connect">
+            <div class="essay-author-actions">
+              <a class="btn-outline" href="../index.html#author">
+                <i class="fa-solid fa-pen-nib"></i> Sobre el autor
+              </a>
+            </div>
+
+            <div class="author-social">
+              <span class="author-social-label">Seguir el universo Eidos</span>
+              <div class="author-social-links">
+                <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" rel="noopener" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@FeldenVareth" target="_blank" rel="noopener" aria-label="YouTube">
+                  <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://x.com/FVareth27586" target="_blank" rel="noopener" aria-label="X">
+                  <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" rel="noopener" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank" rel="noopener" aria-label="TikTok">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="essay-finale">
+    <div class="container reveal">
+      <span class="essay-finale-status">Próxima publicación</span>
+      <h2>ENSAYOS<br><em>fuera de la ficción.</em></h2>
+      <p>
+        Nueve ensayos de divulgación y reflexión reunidos en un solo volumen, con referencias organizadas por capítulos. Próximamente disponible en Amazon.
+      </p>
+      <div class="essay-finale-actions">
+        <button class="btn-primary amazon-coming-btn" type="button" data-amazon-coming>
+          <i class="fa-brands fa-amazon"></i> Comprar en Amazon
+        </button>
+        <a class="btn-outline" href="../index.html">
+          <i class="fa-solid fa-arrow-left"></i> Volver a EIDOS
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVISO AMAZON · mientras el libro no esté publicado -->
+  <div class="amazon-notice" id="amazonNotice" role="dialog" aria-modal="true" aria-labelledby="amazonNoticeTitle" aria-hidden="true">
+    <div class="amazon-notice-card">
+      <button class="amazon-notice-close" id="amazonNoticeClose" type="button" aria-label="Cerrar">×</button>
+      <div class="amazon-notice-icon"><i class="fa-brands fa-amazon"></i></div>
+      <h3 id="amazonNoticeTitle">Aún no está a la venta</h3>
+      <p><strong>ENSAYOS</strong> estará disponible próximamente en Amazon.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">EIDOS</div>
+      <div class="footer-links">
+        <a href="../index.html"><i class="fa-solid fa-arrow-left"></i>&nbsp; Volver a EIDOS</a>
+        <a href="../terminosycondiciones.html">Privacidad</a>
+      </div>
+      <div class="footer-copy">Felden Vareth · EIDOS</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  /* NAV + MENÚ MÓVIL */
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    if (!menu || !burger) return;
+
+    menu.classList.toggle('open');
+    burger.classList.toggle('active');
+    const isOpen = menu.classList.contains('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  function closeMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    if (!menu || !burger) return;
+    menu.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  /* NAV AL HACER SCROLL */
+  const navbar = document.getElementById('navbar');
+  function updateNav() {
+    if (!navbar) return;
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  }
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  /* PARTÍCULAS DEL HERO · mismo sistema que la home de EIDOS */
+  (function createParticles() {
+    const container = document.getElementById('particles');
+    if (!container || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const count = 60;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = (Math.random() * 2 + 1) + 'px';
+      p.style.height = p.style.width;
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      container.appendChild(p);
+    }
+  })();
+
+  /* ANIMACIONES REVEAL */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -45px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+
+  /* AVISO AMAZON · el botón queda listo para sustituirlo por el enlace real */
+  (function amazonComingSoon() {
+    const notice = document.getElementById('amazonNotice');
+    const closeBtn = document.getElementById('amazonNoticeClose');
+    const triggers = document.querySelectorAll('[data-amazon-coming]');
+    if (!notice || !triggers.length) return;
+
+    function openNotice() {
+      notice.classList.add('is-open');
+      notice.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeNotice() {
+      notice.classList.remove('is-open');
+      notice.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    triggers.forEach(btn => btn.addEventListener('click', openNotice));
+    if (closeBtn) closeBtn.addEventListener('click', closeNotice);
+
+    notice.addEventListener('click', function (e) {
+      if (e.target === notice) closeNotice();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && notice.classList.contains('is-open')) closeNotice();
+    });
+  })();
+</script>
+
+</body>
+</html>
