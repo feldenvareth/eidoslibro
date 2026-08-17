@@ -128,6 +128,7 @@
     <li><a href="#video">Vídeo</a></li>
     <li><a href="#themes">Temas</a></li>
     <li><a href="#editions">Volúmenes</a></li>
+    <li><a href="#essay">Ensayo</a></li>
     <li><a href="#stories">Relatos</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#download">Comienza</a></li>
@@ -136,9 +137,23 @@
     <li><a href="#mentions">Menciones</a></li>
     <li><a href="#author">Autor</a></li>
     <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
-    
-    
-    
+
+    <li class="nav-more" id="navMore">
+      <a class="nav-more-toggle" href="#" role="button" aria-expanded="false" aria-controls="navMoreMenu">
+        Más <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </a>
+      <div class="nav-more-menu" id="navMoreMenu">
+        <a href="music/index.html">
+          <i class="fa-solid fa-headphones" aria-hidden="true"></i>
+          <span>Reproductor de música</span>
+        </a>
+        <a href="gallery/index.html">
+          <i class="fa-regular fa-images" aria-hidden="true"></i>
+          <span>Galería / Salvapantallas</span>
+        </a>
+      </div>
+    </li>
+
 <a href="indexeng.html" class="lang-switch" aria-label="English version">
   <img src="assets/images/flaguk.webp" alt="English" style="width: 24px; height: auto;">
 </a>
@@ -150,12 +165,157 @@
   </div>
 </nav>
 
+<style>
+/* ===== NAVEGACIÓN · MENÚ MÁS ===== */
+.nav-more {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-more-toggle i {
+  font-size: .62em;
+  transition: transform .22s ease;
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  z-index: 1000;
+  min-width: 245px;
+  padding: 8px;
+  border: 1px solid rgba(211, 174, 73, .24);
+  border-radius: 8px;
+  background: rgba(8, 9, 18, .97);
+  box-shadow: 0 18px 45px rgba(0,0,0,.42);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.nav-more-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -15px;
+  height: 15px;
+}
+
+.nav-more-menu a {
+  display: flex !important;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 12px !important;
+  border-radius: 5px;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-transform: none !important;
+}
+
+.nav-more-menu a i {
+  width: 18px;
+  color: #d3ae49;
+  text-align: center;
+}
+
+.nav-more-menu a:hover,
+.nav-more-menu a:focus-visible {
+  background: rgba(211, 174, 73, .08);
+}
+
+.nav-more:hover .nav-more-menu,
+.nav-more:focus-within .nav-more-menu,
+.nav-more.open .nav-more-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-more:hover .nav-more-toggle i,
+.nav-more:focus-within .nav-more-toggle i,
+.nav-more.open .nav-more-toggle i {
+  transform: rotate(180deg);
+}
+
+.mobile-more {
+  width: 100%;
+}
+
+.mobile-more-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: inherit;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-more-toggle i {
+  margin-left: 12px;
+  font-size: .72em;
+  transition: transform .22s ease;
+}
+
+.mobile-more-menu {
+  display: none;
+  padding: 2px 0 8px 18px;
+}
+
+.mobile-more.open .mobile-more-menu {
+  display: block;
+}
+
+.mobile-more.open .mobile-more-toggle i {
+  transform: rotate(180deg);
+}
+
+.mobile-more-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .92em;
+  opacity: .88;
+}
+
+.mobile-more-menu a i {
+  width: 18px;
+  color: #d3ae49;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .nav-more { display: none; }
+}
+</style>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="#synopsis" onclick="closeMenu()">La novela</a>
   <a href="#video" onclick="closeMenu()">Vídeo</a>
   <a href="#themes" onclick="closeMenu()">Temas</a>
   <a href="#editions" onclick="closeMenu()">Volúmenes</a>
+  <a href="#essay" onclick="closeMenu()">Ensayo</a>
   <a href="#stories" onclick="closeMenu()">Relatos</a>
   <a href="#blog" onclick="closeMenu()">Blog</a>
   <a href="#download" onclick="closeMenu()">Comienza</a>
@@ -165,9 +325,22 @@
   
   <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
-  
-  
-  
+
+  <div class="mobile-more" id="mobileMore">
+    <a class="mobile-more-toggle" href="#" role="button" aria-expanded="false" aria-controls="mobileMoreMenu" onclick="toggleMobileMore(event)">
+      <span>Más</span>
+      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+    </a>
+    <div class="mobile-more-menu" id="mobileMoreMenu">
+      <a href="music/index.html" onclick="closeMenu()">
+        <i class="fa-solid fa-headphones" aria-hidden="true"></i> Reproductor de música
+      </a>
+      <a href="gallery/index.html" onclick="closeMenu()">
+        <i class="fa-regular fa-images" aria-hidden="true"></i> Galería / Salvapantallas
+      </a>
+    </div>
+  </div>
+
 <a href="indexeng.html" class="lang-switch" aria-label="English version" onclick="closeMenu()">
   <img src="assets/images/flaguk.webp" alt="English" style="width: 24px; height: auto;">
 </a>
@@ -196,7 +369,48 @@
     menu.classList.remove('open');
     burger.classList.remove('active');
     burger.setAttribute('aria-expanded', 'false');
+
+    const mobileMore = document.getElementById('mobileMore');
+    const mobileMoreToggle = mobileMore ? mobileMore.querySelector('.mobile-more-toggle') : null;
+    if (mobileMore) mobileMore.classList.remove('open');
+    if (mobileMoreToggle) mobileMoreToggle.setAttribute('aria-expanded', 'false');
   }
+
+  function toggleMobileMore(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const mobileMore = document.getElementById('mobileMore');
+    if (!mobileMore) return;
+    const toggle = mobileMore.querySelector('.mobile-more-toggle');
+    const isOpen = mobileMore.classList.toggle('open');
+    if (toggle) toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  (function initNavMore() {
+    const navMore = document.getElementById('navMore');
+    const toggle = navMore ? navMore.querySelector('.nav-more-toggle') : null;
+    if (!navMore || !toggle) return;
+
+    toggle.addEventListener('click', function (event) {
+      event.stopPropagation();
+      const isOpen = navMore.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!navMore.contains(event.target)) {
+        navMore.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        navMore.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
   window.addEventListener('resize', function () {
     if (window.innerWidth > 900) {
@@ -755,6 +969,433 @@
   
   
 </section>
+
+<!-- ===== ENSAYO ===== -->
+<div class="glow-line"></div>
+
+<section id="essay" class="essay-section">
+  <div class="container">
+    <span class="section-tag reveal">Ensayo</span>
+    <h2 class="section-title reveal">Las preguntas de EIDOS, <em>fuera de la ficción</em></h2>
+
+    <div class="essay-feature reveal reveal-delay-1">
+      <div class="essay-cover-col">
+        <div class="essay-cover-frame essay-hover-media" data-video="docs/ensayos.mp4">
+          <a href="ensayos/index.html" aria-label="Descubrir ENSAYOS">
+            <img src="assets/images/tapaensayo.jpg" alt="Portada del próximo ensayo de Felden Vareth" loading="lazy">
+            <video
+              class="essay-hover-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapaensayo.jpg"
+            ></video>
+          </a>
+          <span class="essay-coming">PRÓXIMAMENTE</span>
+        </div>
+      </div>
+
+      <div class="essay-brand-card">
+        <div class="essay-brand-topline">
+          <span>PRÓXIMA PUBLICACIÓN</span>
+          <span class="essay-brand-dot"></span>
+          <span>ENSAYO</span>
+        </div>
+
+        <p class="essay-kicker">DEL UNIVERSO DE FICCIÓN A LAS PREGUNTAS REALES</p>
+        <h3>Una mirada a lo humano desde la ciencia, la tecnología y la reflexión.</h3>
+
+        <p class="essay-copy">
+          Un ensayo que toma algunas de las preguntas que atraviesan EIDOS y las explora fuera de la ficción: consciencia, cuerpo, inteligencia, evolución, identidad e inteligencia artificial.
+        </p>
+
+        <div class="essay-signature" aria-label="Felden Vareth — EIDOS Ensayo">
+          <span class="essay-signature-mark">E</span>
+          <div>
+            <strong>FELDEN VARETH</strong>
+            <small>EIDOS · ENSAYO</small>
+          </div>
+        </div>
+
+        <a class="btn-primary essay-btn" href="ensayos/index.html">
+          Descubrir el ensayo <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== ENSAYO / PRÓXIMA PUBLICACIÓN ===== */
+.essay-section {
+  position: relative;
+  padding: 110px 0;
+  overflow: hidden;
+}
+
+.essay-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -220px;
+  top: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197,164,106,.12) 0%, rgba(197,164,106,0) 70%);
+  pointer-events: none;
+}
+
+.essay-feature {
+  max-width: 1120px;
+  margin: 64px auto 0;
+  display: grid;
+  grid-template-columns: minmax(320px, .96fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: 52px;
+}
+
+.essay-cover-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.essay-cover-frame {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 13px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.018));
+  box-shadow: 0 30px 70px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.essay-cover-frame::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.essay-cover-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Vídeo hover de la portada ENSAYOS */
+.essay-hover-media {
+  overflow: hidden;
+}
+
+.essay-hover-media > a {
+  display: block;
+  position: relative;
+}
+
+.essay-hover-media img,
+.essay-hover-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.essay-hover-media .essay-hover-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  background: #000;
+}
+
+.essay-hover-media.is-playing .essay-hover-video {
+  opacity: 1;
+}
+
+.essay-hover-media.is-playing img {
+  opacity: 0;
+}
+
+.essay-hover-media img {
+  transition: opacity .3s ease;
+}
+
+.essay-coming {
+  position: absolute;
+  top: 28px;
+  right: -12px;
+  padding: 9px 15px 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  font-weight: 600;
+  color: #0b1020;
+  background: #d8c096;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+}
+
+.essay-brand-card {
+  position: relative;
+  min-height: 100%;
+  padding: 44px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    rgba(8,12,24,.54);
+  box-shadow: 0 26px 70px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.essay-brand-card::before {
+  content: "E";
+  position: absolute;
+  right: -16px;
+  bottom: -88px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21rem;
+  line-height: 1;
+  font-weight: 300;
+  color: rgba(255,255,255,.022);
+  pointer-events: none;
+}
+
+.essay-brand-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(216,192,150,.72), transparent);
+}
+
+.essay-brand-topline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .23em;
+  color: rgba(255,255,255,.62);
+}
+
+.essay-brand-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d8c096;
+}
+
+.essay-kicker {
+  margin: 0 0 12px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .72rem;
+  line-height: 1.55;
+  letter-spacing: .19em;
+  color: #d8c096;
+}
+
+.essay-brand-card h3 {
+  max-width: 680px;
+  margin: 0 0 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.essay-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 0 16px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.80);
+}
+
+
+.essay-signature {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 20px 0 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.essay-signature-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,192,150,.55);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  color: #d8c096;
+}
+
+.essay-signature strong,
+.essay-signature small {
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.essay-signature strong {
+  margin-bottom: 4px;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  color: rgba(255,255,255,.86);
+}
+
+.essay-signature small {
+  font-size: .58rem;
+  letter-spacing: .20em;
+  color: rgba(255,255,255,.42);
+}
+
+.essay-btn {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.essay-btn i {
+  font-size: .78em;
+  transition: transform .25s ease;
+}
+
+.essay-btn:hover i {
+  transform: translateX(4px);
+}
+
+
+@media (max-width: 900px) {
+  .essay-section { padding: 88px 0; }
+
+  .essay-feature {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 720px;
+  }
+
+  .essay-cover-frame {
+    width: min(82vw, 390px);
+  }
+
+  .essay-brand-card {
+    padding: 40px 34px 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  .essay-feature { margin-top: 34px; }
+
+  .essay-brand-card {
+    padding: 34px 24px 30px;
+  }
+
+  .essay-brand-card h3 {
+    font-size: 2.05rem;
+  }
+
+  .essay-copy {
+    font-size: .95rem;
+    line-height: 1.72;
+  }
+
+  .essay-coming {
+    top: 22px;
+    right: -8px;
+    font-size: .60rem;
+    padding: 8px 11px 7px;
+  }
+}
+</style>
+
+<script>
+/* ===== VIDEO HOVER · ENSAYOS ===== */
+(function () {
+  const card = document.querySelector('.essay-hover-media');
+  if (!card) return;
+
+  const video = card.querySelector('.essay-hover-video');
+  const src = card.dataset.video;
+  if (!video || !src) return;
+
+  const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo() {
+    if (video.dataset.loaded === 'true') return;
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo() {
+    loadVideo();
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo() {
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadVideo();
+          obs.unobserve(card);
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+    observer.observe(card);
+  }
+
+  if (!isTouchDevice) {
+    card.addEventListener('mouseenter', playVideo);
+    card.addEventListener('mouseleave', stopVideo);
+  } else {
+    const link = card.querySelector('a');
+    card.addEventListener('click', function (e) {
+      if (!card.classList.contains('is-playing')) {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!card.contains(e.target)) stopVideo();
+    });
+    if (link) link.addEventListener('blur', stopVideo);
+  }
+})();
+</script>
 
 
 
@@ -2868,7 +3509,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Mobile menu
   function openMenu() { document.getElementById('mobile-menu').classList.add('open'); }
-  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+  function closeMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
+    const mobileMore = document.getElementById('mobileMore');
+    const mobileMoreToggle = mobileMore ? mobileMore.querySelector('.mobile-more-toggle') : null;
+
+    if (menu) menu.classList.remove('open');
+    if (burger) {
+      burger.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    if (mobileMore) mobileMore.classList.remove('open');
+    if (mobileMoreToggle) mobileMoreToggle.setAttribute('aria-expanded', 'false');
+  }
 
   // Particles
   (function createParticles() {
