@@ -62,3 +62,82 @@ Si algo piensa, recuerda, duda, sufre y llega a preguntarse por la existencia, �
 —Nada se planifica —añadió Orfeo—. Es una estampida desde el origen. Cada especie, cada organismo, replicándose con una fuerza ciega, sabiendo, o intuyendo, que serán consumidos.`
   ]
 };
+
+// Añade automáticamente todas las imágenes de /gallery/images/gallery.
+// NO elimina duplicados: cada aparición cuenta como una entrada independiente,
+// de modo que una imagen repetida tiene más probabilidad de salir.
+(() => {
+  'use strict';
+
+  const content = window.EIDOS_SHARED_CONTENT;
+  if (!content || !Array.isArray(content.images)) return;
+
+  const IMAGE_SOURCE_SCRIPT = '/gallery/js/image-source.js';
+
+  function shuffleInPlace(items) {
+    for (let i = items.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    return items;
+  }
+
+  function ensureImageSource() {
+    if (window.EidosImageSource && typeof window.EidosImageSource.loadImages === 'function') {
+      return Promise.resolve(window.EidosImageSource);
+    }
+
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${IMAGE_SOURCE_SCRIPT}"]`);
+
+      const finish = () => {
+        if (window.EidosImageSource && typeof window.EidosImageSource.loadImages === 'function') {
+          resolve(window.EidosImageSource);
+        } else {
+          reject(new Error('EidosImageSource no está disponible.'));
+        }
+      };
+
+      if (existing) {
+        existing.addEventListener('load', finish, { once: true });
+        existing.addEventListener('error', () => reject(new Error('No se pudo cargar image-source.js.')), { once: true });
+        window.setTimeout(() => {
+          if (window.EidosImageSource) finish();
+        }, 0);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = IMAGE_SOURCE_SCRIPT;
+      script.async = true;
+      script.onload = finish;
+      script.onerror = () => reject(new Error('No se pudo cargar image-source.js.'));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function prepareImages() {
+    try {
+      const source = await ensureImageSource();
+      const galleryItems = await source.loadImages();
+
+      // Se añaden TODAS las entradas de la galería, incluso si una imagen
+      // ya está también entre las fijas. Las repeticiones funcionan como peso.
+      for (const item of galleryItems) {
+        if (item && item.url) content.images.push(item.url);
+      }
+    } catch (error) {
+      // Si GitHub o la galería fallan, se mantienen las imágenes fijas.
+      console.warn('[EIDOS] No se pudieron añadir las imágenes de la galería:', error);
+    }
+
+    // Mezcla el saco completo (fijas + fondos + galería) sin crear otra matriz,
+    // para conservar la misma referencia que puedan estar usando los juegos.
+    shuffleInPlace(content.images);
+    return content.images;
+  }
+
+  // Solo se cargan las rutas de la galería; los JPG/WEBP se descargan cuando
+  // el juego realmente los utiliza.
+  content.imagesReady = prepareImages();
+})();

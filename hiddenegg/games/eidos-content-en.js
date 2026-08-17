@@ -13,7 +13,20 @@ window.EIDOS_SHARED_CONTENT = {
     '/assets/images/screenshot/03.webp',
     '/assets/images/screenshot/rel1.webp',
     '/assets/images/screenshot/video_navidad.webp',
-    '/assets/images/screenshot/video_teaser.webp'
+    '/assets/images/screenshot/video_teaser.webp',
+    '/hiddenegg/games/_images/fondo1.jpg',
+    '/hiddenegg/games/_images/fondo2.jpg',
+    '/hiddenegg/games/_images/fondo3.jpg',
+    '/hiddenegg/games/_images/fondo4.jpg',
+    '/hiddenegg/games/_images/fondo5.jpg',
+    '/hiddenegg/games/_images/fondo6.jpg',
+    '/hiddenegg/games/_images/fondo7.jpg',
+    '/hiddenegg/games/_images/fondo8.jpg',
+    '/hiddenegg/games/_images/fondo9.jpg',
+    '/hiddenegg/games/_images/fondo10.jpg',
+    '/hiddenegg/games/_images/fondo11.jpg',
+    '/hiddenegg/games/_images/fondo12.jpg',
+    '/hiddenegg/games/_images/fondo13.jpg'
   ],
 
   quotes: [
@@ -45,3 +58,82 @@ If something thinks, remembers, doubts, suffers and comes to question existence,
 —Nothing is planned —Orpheus added—. It is a stampede from the origin. Every species, every organism, replicating with blind force, knowing, or sensing, that they will be consumed.`
   ]
 };
+
+// Añade automáticamente todas las imágenes de /gallery/images/gallery.
+// NO elimina duplicados: cada aparición cuenta como una entrada independiente,
+// de modo que una imagen repetida tiene más probabilidad de salir.
+(() => {
+  'use strict';
+
+  const content = window.EIDOS_SHARED_CONTENT;
+  if (!content || !Array.isArray(content.images)) return;
+
+  const IMAGE_SOURCE_SCRIPT = '/gallery/js/image-source.js';
+
+  function shuffleInPlace(items) {
+    for (let i = items.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    return items;
+  }
+
+  function ensureImageSource() {
+    if (window.EidosImageSource && typeof window.EidosImageSource.loadImages === 'function') {
+      return Promise.resolve(window.EidosImageSource);
+    }
+
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${IMAGE_SOURCE_SCRIPT}"]`);
+
+      const finish = () => {
+        if (window.EidosImageSource && typeof window.EidosImageSource.loadImages === 'function') {
+          resolve(window.EidosImageSource);
+        } else {
+          reject(new Error('EidosImageSource no está disponible.'));
+        }
+      };
+
+      if (existing) {
+        existing.addEventListener('load', finish, { once: true });
+        existing.addEventListener('error', () => reject(new Error('No se pudo cargar image-source.js.')), { once: true });
+        window.setTimeout(() => {
+          if (window.EidosImageSource) finish();
+        }, 0);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = IMAGE_SOURCE_SCRIPT;
+      script.async = true;
+      script.onload = finish;
+      script.onerror = () => reject(new Error('No se pudo cargar image-source.js.'));
+      document.head.appendChild(script);
+    });
+  }
+
+  async function prepareImages() {
+    try {
+      const source = await ensureImageSource();
+      const galleryItems = await source.loadImages();
+
+      // Se añaden TODAS las entradas de la galería, incluso si una imagen
+      // ya está también entre las fijas. Las repeticiones funcionan como peso.
+      for (const item of galleryItems) {
+        if (item && item.url) content.images.push(item.url);
+      }
+    } catch (error) {
+      // Si GitHub o la galería fallan, se mantienen las imágenes fijas.
+      console.warn('[EIDOS] No se pudieron añadir las imágenes de la galería:', error);
+    }
+
+    // Mezcla el saco completo (fijas + fondos + galería) sin crear otra matriz,
+    // para conservar la misma referencia que puedan estar usando los juegos.
+    shuffleInPlace(content.images);
+    return content.images;
+  }
+
+  // Solo se cargan las rutas de la galería; los JPG/WEBP se descargan cuando
+  // el juego realmente los utiliza.
+  content.imagesReady = prepareImages();
+})();
