@@ -1,15 +1,15 @@
-EIDOS MUSIC V9
+EIDOS MUSIC V35 — VOLUMEN INDEPENDIENTE Y FADE DE PORTADAS
 
 Sustituye únicamente:
 music/index.html
 
-Cambios añadidos:
-- onda de transferencia expansiva cuando hay golpes fuertes;
-- filamentos de datos que salen del cubo;
-- constelaciones fugaces alrededor de la escena;
-- respiración cromática lenta en el fondo;
-- se mantiene el cubo pequeño, las portadas laterales y el fade lento.
+CAMBIOS
+1. El analizador recibe siempre la señal original de la canción.
+2. El volumen y el silencio solo afectan a lo que escucha el usuario.
+3. Las barras, ondas, estrellas y portadas mantienen la misma reacción
+   con volumen alto, bajo o silenciado.
+4. El fade de las portadas pasa de unos 7,2 segundos a 3 segundos.
+5. Si llega otro impacto durante el fade, la portada recupera intensidad
+   y el tiempo de desaparición vuelve a contar desde ese impacto.
 
-No cambies:
-music/Songs/
-music/assets/
+No se ha modificado ninguna otra parte del visor.
