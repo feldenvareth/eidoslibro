@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>EIDOS · Screensaver</title>
+  <meta name="description" content="Visual screensaver from the EIDOS universe.">
+  <link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/screen.css">
+</head>
+<body>
+  <main id="screensaver" class="screensaver" aria-live="polite">
+    <div class="screen-bg screen-bg--current"></div>
+    <div class="screen-bg screen-bg--next"></div>
+    <div class="screen-shade"></div>
+
+    <div class="screen-stage">
+      <img class="screen-image screen-image--current" alt="">
+      <img class="screen-image screen-image--next" alt="">
+    </div>
+
+    <div id="screen-status" class="screen-status">Loading image folder…</div>
+
+    <header id="screen-controls" class="screen-controls">
+      <a class="screen-brand" href="../indexeng.html" aria-label="Return to the EIDOS homepage">EIDOS</a>
+      <nav class="screen-nav" aria-label="Screensaver navigation">
+        <a href="indexeng.html">Gallery</a>
+        <span class="screen-current">Screensaver</span>
+        <button id="screen-pause" class="screen-button" type="button" aria-pressed="false">Pause</button>
+        <button id="screen-next" class="screen-button" type="button">Next</button>
+        <button id="screen-fullscreen" class="screen-button" type="button">Fullscreen</button>
+      </nav>
+    </header>
+  </main>
+
+  <script src="js/image-source.js"></script>
+  <script src="js/screen.js"></script>
+</body>
+</html>
