@@ -124,25 +124,27 @@
   <a class="nav-logo" href="#hero">EIDOS</a>
 
   <ul class="nav-links">
-    <li><a href="#synopsis">La novela</a></li>
-    <li><a href="#video">Vídeo</a></li>
-    <li><a href="#themes">Temas</a></li>
-    <li><a href="#editions">Volúmenes</a></li>
-    <li><a href="#essay">Ensayo</a></li>
-    <li><a href="#stories">Relatos</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#download">Comienza</a></li>
-    <li><a href="#scenes">Escenas</a></li>
-    <li><a href="#reviews">Reseñas</a></li>
-    <li><a href="#mentions">Menciones</a></li>
-    <li><a href="#author">Autor</a></li>
-    <li><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
+    <li class="nav-priority-item" data-nav-priority="100"><a href="#synopsis">La novela</a></li>
+    <li class="nav-priority-item" data-nav-priority="90"><a href="#video">Vídeo</a></li>
+    <li class="nav-priority-item" data-nav-priority="85"><a href="#themes">Temas</a></li>
+    <li class="nav-priority-item" data-nav-priority="80"><a href="#editions">Volúmenes</a></li>
+    <li class="nav-priority-item" data-nav-priority="75"><a href="#essay">Ensayo</a></li>
+    <li class="nav-priority-item" data-nav-priority="70"><a href="#stories">Relatos</a></li>
+    <li class="nav-priority-item" data-nav-priority="65"><a href="#blog">Blog</a></li>
+    <li class="nav-priority-item" data-nav-priority="60"><a href="#download">Comienza</a></li>
+    <li class="nav-priority-item" data-nav-priority="50"><a href="#scenes">Escenas</a></li>
+    <li class="nav-priority-item" data-nav-priority="45"><a href="#reviews">Reseñas</a></li>
+    <li class="nav-priority-item" data-nav-priority="40"><a href="#mentions">Menciones</a></li>
+    <li class="nav-priority-item" data-nav-priority="35"><a href="#author">Autor</a></li>
+    <li class="nav-priority-item" data-nav-priority="95"><a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Comprar</a></li>
 
     <li class="nav-more" id="navMore">
       <a class="nav-more-toggle" href="#" role="button" aria-expanded="false" aria-controls="navMoreMenu">
         Más <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
       </a>
       <div class="nav-more-menu" id="navMoreMenu">
+        <div class="nav-more-dynamic" id="navMoreDynamic"></div>
+        <div class="nav-more-separator" id="navMoreSeparator" aria-hidden="true"></div>
         <a href="music/index.html">
           <i class="fa-solid fa-headphones" aria-hidden="true"></i>
           <span>Reproductor de música</span>
@@ -304,8 +306,138 @@
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  .nav-more { display: none; }
+/* ===== NAVEGACIÓN ADAPTATIVA · PRIORITY+ ===== */
+.nav-priority-item.nav-collapsed {
+  display: none !important;
+}
+
+.nav-more-dynamic {
+  display: contents;
+}
+
+.nav-more-separator {
+  height: 1px;
+  margin: 7px 8px;
+  background: linear-gradient(90deg, transparent, rgba(211,174,73,.34), transparent);
+}
+
+.nav-more-separator.is-empty {
+  display: none;
+}
+
+.nav-more-toggle {
+  padding: 7px 10px !important;
+  border: 1px solid rgba(211,174,73,.20) !important;
+  border-radius: 999px;
+  color: #d8c096 !important;
+  background: rgba(211,174,73,.025) !important;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.nav-more:hover .nav-more-toggle,
+.nav-more:focus-within .nav-more-toggle,
+.nav-more.open .nav-more-toggle {
+  border-color: rgba(211,174,73,.48) !important;
+  background: rgba(211,174,73,.075) !important;
+  color: #ead8a9 !important;
+}
+
+/* El hueco se comprime antes de empezar a enviar opciones a “Más”. */
+@media (min-width: 769px) and (max-width: 1650px) {
+  #navbar .nav-links {
+    gap: 20px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1350px) {
+  #navbar .nav-links {
+    gap: 14px !important;
+  }
+
+  #navbar .nav-links > li > a,
+  #navbar .nav-links > .lang-switch {
+    letter-spacing: .17em !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1080px) {
+  #navbar .nav-links {
+    gap: 10px !important;
+  }
+
+  #navbar .nav-links > li > a,
+  #navbar .nav-links > .lang-switch {
+    font-size: .62rem !important;
+    letter-spacing: .14em !important;
+  }
+}
+
+/* Entre tablet horizontal y escritorio estrecho seguimos con el menú de barra.
+   La hamburguesa queda reservada para móvil real. */
+@media (min-width: 769px) and (max-width: 900px) {
+  #navbar .nav-links {
+    display: flex !important;
+    min-width: 0 !important;
+  }
+
+  #navbar .hamburger {
+    display: none !important;
+  }
+
+  #mobile-menu {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-more { display: none !important; }
+
+  /* En móvil no hay un segundo “Más”: los extras aparecen directamente
+     tras el menú principal, conservando la misma separación visual. */
+  #mobile-menu .mobile-extra-links {
+    width: min(82%, 300px);
+    margin: 8px auto 0;
+    padding: 3px 0 8px;
+  }
+
+  #mobile-menu .mobile-extra-separator {
+    height: 1px;
+    margin: 0 0 10px;
+    background: linear-gradient(90deg, transparent, rgba(211,174,73,.34), transparent);
+  }
+
+  #mobile-menu .mobile-extra-links a {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 8px !important;
+    font-size: .68rem !important;
+    letter-spacing: .12em !important;
+    line-height: 1.35;
+    opacity: .90;
+    text-align: center;
+  }
+
+  #mobile-menu .mobile-extra-links a i {
+    flex: 0 0 18px;
+    color: #d3ae49;
+    text-align: center;
+  }
+
+  #mobile-menu {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(34px, env(safe-area-inset-bottom)) !important;
+  }
+
+  /* El control de audio no invade el menú abierto. */
+  body.mobile-nav-open .audio-ctrl {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(10px);
+  }
 }
 </style>
 
@@ -326,19 +458,14 @@
   <a href="#author" onclick="closeMenu()">Autor</a>
   <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" onclick="closeMenu()">Comprar</a>
 
-  <div class="mobile-more" id="mobileMore">
-    <a class="mobile-more-toggle" href="#" role="button" aria-expanded="false" aria-controls="mobileMoreMenu" onclick="toggleMobileMore(event)">
-      <span>Más</span>
-      <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+  <div class="mobile-extra-links" aria-label="Contenido adicional">
+    <div class="mobile-extra-separator" aria-hidden="true"></div>
+    <a href="music/index.html" onclick="closeMenu()">
+      <i class="fa-solid fa-headphones" aria-hidden="true"></i> Reproductor de música
     </a>
-    <div class="mobile-more-menu" id="mobileMoreMenu">
-      <a href="music/index.html" onclick="closeMenu()">
-        <i class="fa-solid fa-headphones" aria-hidden="true"></i> Reproductor de música
-      </a>
-      <a href="gallery/index.html" onclick="closeMenu()">
-        <i class="fa-regular fa-images" aria-hidden="true"></i> Galería / Salvapantallas
-      </a>
-    </div>
+    <a href="gallery/index.html" onclick="closeMenu()">
+      <i class="fa-regular fa-images" aria-hidden="true"></i> Galería / Salvapantallas
+    </a>
   </div>
 
 <a href="indexeng.html" class="lang-switch" aria-label="English version" onclick="closeMenu()">
@@ -360,6 +487,7 @@
 
     const isOpen = menu.classList.contains('open');
     burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.classList.toggle('mobile-nav-open', isOpen);
   }
 
   function closeMenu() {
@@ -369,21 +497,8 @@
     menu.classList.remove('open');
     burger.classList.remove('active');
     burger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-nav-open');
 
-    const mobileMore = document.getElementById('mobileMore');
-    const mobileMoreToggle = mobileMore ? mobileMore.querySelector('.mobile-more-toggle') : null;
-    if (mobileMore) mobileMore.classList.remove('open');
-    if (mobileMoreToggle) mobileMoreToggle.setAttribute('aria-expanded', 'false');
-  }
-
-  function toggleMobileMore(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    const mobileMore = document.getElementById('mobileMore');
-    if (!mobileMore) return;
-    const toggle = mobileMore.querySelector('.mobile-more-toggle');
-    const isOpen = mobileMore.classList.toggle('open');
-    if (toggle) toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
 
   (function initNavMore() {
@@ -412,11 +527,135 @@
     });
   })();
 
-  window.addEventListener('resize', function () {
-    if (window.innerWidth > 900) {
-      closeMenu();
+  /*
+   * Priority+ desktop navigation:
+   * - first compresses spacing through CSS;
+   * - if the bar still does not fit, lower-priority items move into “Más”;
+   * - when space returns, they automatically come back.
+   */
+  (function initPriorityNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = navbar ? navbar.querySelector('.nav-links') : null;
+    const navMore = document.getElementById('navMore');
+    const dynamicMenu = document.getElementById('navMoreDynamic');
+    const separator = document.getElementById('navMoreSeparator');
+    const items = navLinks ? Array.from(navLinks.querySelectorAll(':scope > .nav-priority-item')) : [];
+
+    if (!navbar || !navLinks || !navMore || !dynamicMenu || !items.length) return;
+
+    navbar.classList.add('priority-nav');
+
+    function isDesktopNav() {
+      return window.innerWidth > 768;
     }
-  });
+
+    function itemLabel(item) {
+      const link = item.querySelector('a');
+      return link ? link.textContent.trim() : '';
+    }
+
+    function rebuildMore() {
+      dynamicMenu.innerHTML = '';
+
+      items.forEach(function (item) {
+        if (!item.classList.contains('nav-collapsed')) return;
+        const source = item.querySelector('a');
+        if (!source) return;
+
+        const link = document.createElement('a');
+        link.className = 'nav-dynamic-link';
+        link.href = source.getAttribute('href') || '#';
+        if (source.hasAttribute('target')) link.setAttribute('target', source.getAttribute('target'));
+        if (source.hasAttribute('rel')) link.setAttribute('rel', source.getAttribute('rel'));
+
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-angle-right';
+        icon.setAttribute('aria-hidden', 'true');
+
+        const span = document.createElement('span');
+        span.textContent = itemLabel(item);
+
+        link.appendChild(icon);
+        link.appendChild(span);
+        dynamicMenu.appendChild(link);
+      });
+
+      if (separator) {
+        separator.classList.toggle('is-empty', dynamicMenu.children.length === 0);
+      }
+    }
+
+    function navOverflows() {
+      const navbarRect = navbar.getBoundingClientRect();
+      const navRect = navLinks.getBoundingClientRect();
+      const logo = navbar.querySelector('.nav-logo');
+      const logoRect = logo ? logo.getBoundingClientRect() : null;
+      const lang = navLinks.querySelector(':scope > .lang-switch');
+      const langRect = lang ? lang.getBoundingClientRect() : null;
+
+      // Detect both internal scroll overflow and geometric collision/clipping.
+      if (navLinks.scrollWidth > navLinks.clientWidth + 2) return true;
+      if (navRect.right > navbarRect.right - 8) return true;
+      if (logoRect && navRect.left < logoRect.right + 18) return true;
+      if (langRect && langRect.right > navbarRect.right - 8) return true;
+      return false;
+    }
+
+    function fitNavigation() {
+      if (!isDesktopNav()) {
+        items.forEach(function (item) { item.classList.remove('nav-collapsed'); });
+        rebuildMore();
+        return;
+      }
+
+      // Start each pass with every principal item visible.
+      items.forEach(function (item) { item.classList.remove('nav-collapsed'); });
+      rebuildMore();
+
+      // Lower priority disappears first. DOM order breaks ties from right to left.
+      const candidates = items.slice().sort(function (a, b) {
+        const pa = Number(a.dataset.navPriority || 0);
+        const pb = Number(b.dataset.navPriority || 0);
+        if (pa !== pb) return pa - pb;
+        return items.indexOf(b) - items.indexOf(a);
+      });
+
+      let guard = 0;
+      while (navOverflows() && candidates.length && guard < items.length + 2) {
+        const item = candidates.shift();
+        item.classList.add('nav-collapsed');
+        rebuildMore();
+        guard += 1;
+      }
+    }
+
+    let resizeTimer = null;
+    function scheduleFit() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(fitNavigation, 40);
+    }
+
+    // Run after layout/fonts settle and whenever the available width changes.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitNavigation).catch(fitNavigation);
+    } else {
+      window.addEventListener('load', fitNavigation, { once: true });
+    }
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) closeMenu();
+      scheduleFit();
+    });
+
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(scheduleFit);
+      ro.observe(navbar);
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fitNavigation);
+    });
+  })();
 </script>
 
 <!-- Hero -->
@@ -3512,16 +3751,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeMenu() {
     const menu = document.getElementById('mobile-menu');
     const burger = document.getElementById('hamburger');
-    const mobileMore = document.getElementById('mobileMore');
-    const mobileMoreToggle = mobileMore ? mobileMore.querySelector('.mobile-more-toggle') : null;
-
     if (menu) menu.classList.remove('open');
     if (burger) {
       burger.classList.remove('active');
       burger.setAttribute('aria-expanded', 'false');
     }
-    if (mobileMore) mobileMore.classList.remove('open');
-    if (mobileMoreToggle) mobileMoreToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-nav-open');
   }
 
   // Particles
