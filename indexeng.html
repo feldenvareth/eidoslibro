@@ -125,6 +125,7 @@
     <li class="nav-priority-item" data-nav-priority="90"><a href="#video">Video</a></li>
     <li class="nav-priority-item" data-nav-priority="85"><a href="#themes">Themes</a></li>
     <li class="nav-priority-item" data-nav-priority="80"><a href="#editions">Volumes</a></li>
+    <li class="nav-priority-item" data-nav-priority="75"><a href="#essay">Essays</a></li>
 <li class="nav-priority-item" data-nav-priority="70"><a href="#stories">Stories</a></li>
     <li class="nav-priority-item" data-nav-priority="65"><a href="#blog">Blog</a></li>
     <li class="nav-priority-item" data-nav-priority="60"><a href="#download">Start</a></li>
@@ -443,6 +444,7 @@
   <a href="#video" onclick="closeMenu()">Video</a>
   <a href="#themes" onclick="closeMenu()">Themes</a>
   <a href="#editions" onclick="closeMenu()">Volumes</a>
+  <a href="#essay" onclick="closeMenu()">Essays</a>
 <a href="#stories" onclick="closeMenu()">Stories</a>
   <a href="#blog" onclick="closeMenu()">Blog</a>
   <a href="#download" onclick="closeMenu()">Start</a>
@@ -1029,9 +1031,439 @@
   </div>
 </section>
 
+<!-- ===== ESSAYS ===== -->
 <div class="glow-line"></div>
 
+<section id="essay" class="essay-section">
+  <div class="container">
+    <span class="section-tag reveal">Essays</span>
+    <h2 class="section-title reveal">The questions of EIDOS, <em>beyond fiction</em></h2>
 
+    <div class="essay-feature reveal reveal-delay-1">
+      <div class="essay-cover-col">
+        <div class="essay-cover-frame essay-hover-media" data-video="docs/ensayos.mp4">
+          <a href="essay/indexeng.html" aria-label="Discover ESSAYS">
+            <img src="assets/images/tapaessey.jpg" alt="Cover of the forthcoming ESSAYS by Felden Vareth" loading="lazy">
+            <video
+              class="essay-hover-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapaessey.jpg"
+            ></video>
+          </a>
+          <span class="essay-coming">COMING SOON</span>
+        </div>
+      </div>
+
+      <div class="essay-brand-card">
+        <div class="essay-brand-topline">
+          <span>COMING SOON</span>
+          <span class="essay-brand-dot"></span>
+          <span>ESSAYS</span>
+        </div>
+
+        <p class="essay-kicker">FROM THE FICTIONAL UNIVERSE TO REAL QUESTIONS</p>
+        <h3>A look at what it means to be human through science, technology and reflection.</h3>
+
+        <p class="essay-copy">
+          A collection of essays that takes some of the questions running through EIDOS and explores them beyond fiction: consciousness, the body, intelligence, evolution, identity and artificial intelligence.
+        </p>
+
+        <div class="essay-signature" aria-label="Felden Vareth — EIDOS Essays">
+          <span class="essay-signature-mark">E</span>
+          <div>
+            <strong>FELDEN VARETH</strong>
+            <small>EIDOS · ESSAYS</small>
+          </div>
+        </div>
+
+        <a class="btn-primary essay-btn" href="essay/indexeng.html">
+          Discover the essays <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== ESSAYS / COMING SOON ===== */
+.essay-section {
+  position: relative;
+  padding: 110px 0;
+  overflow: hidden;
+}
+
+.essay-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -220px;
+  top: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197,164,106,.12) 0%, rgba(197,164,106,0) 70%);
+  pointer-events: none;
+}
+
+.essay-feature {
+  max-width: 1120px;
+  margin: 64px auto 0;
+  display: grid;
+  grid-template-columns: minmax(320px, .96fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: 52px;
+}
+
+.essay-cover-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.essay-cover-frame {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 13px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.018));
+  box-shadow: 0 30px 70px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.essay-cover-frame::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.essay-cover-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Hover video for the ESSAYS cover */
+.essay-hover-media {
+  overflow: hidden;
+}
+
+.essay-hover-media > a {
+  display: block;
+  position: relative;
+}
+
+.essay-hover-media img,
+.essay-hover-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.essay-hover-media .essay-hover-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  background: #000;
+}
+
+.essay-hover-media.is-playing .essay-hover-video {
+  opacity: 1;
+}
+
+.essay-hover-media.is-playing img {
+  opacity: 0;
+}
+
+.essay-hover-media img {
+  transition: opacity .3s ease;
+}
+
+.essay-coming {
+  position: absolute;
+  top: 28px;
+  right: -12px;
+  padding: 9px 15px 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  font-weight: 600;
+  color: #0b1020;
+  background: #d8c096;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+}
+
+.essay-brand-card {
+  position: relative;
+  min-height: 100%;
+  padding: 44px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    rgba(8,12,24,.54);
+  box-shadow: 0 26px 70px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.essay-brand-card::before {
+  content: "E";
+  position: absolute;
+  right: -16px;
+  bottom: -88px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21rem;
+  line-height: 1;
+  font-weight: 300;
+  color: rgba(255,255,255,.022);
+  pointer-events: none;
+}
+
+.essay-brand-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(216,192,150,.72), transparent);
+}
+
+.essay-brand-topline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .23em;
+  color: rgba(255,255,255,.62);
+}
+
+.essay-brand-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d8c096;
+}
+
+.essay-kicker {
+  margin: 0 0 12px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .72rem;
+  line-height: 1.55;
+  letter-spacing: .19em;
+  color: #d8c096;
+}
+
+.essay-brand-card h3 {
+  max-width: 680px;
+  margin: 0 0 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.essay-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 0 16px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.80);
+}
+
+
+.essay-signature {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 20px 0 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.essay-signature-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,192,150,.55);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  color: #d8c096;
+}
+
+.essay-signature strong,
+.essay-signature small {
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.essay-signature strong {
+  margin-bottom: 4px;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  color: rgba(255,255,255,.86);
+}
+
+.essay-signature small {
+  font-size: .58rem;
+  letter-spacing: .20em;
+  color: rgba(255,255,255,.42);
+}
+
+.essay-btn {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.essay-btn i {
+  font-size: .78em;
+  transition: transform .25s ease;
+}
+
+.essay-btn:hover i {
+  transform: translateX(4px);
+}
+
+
+@media (max-width: 900px) {
+  .essay-section { padding: 88px 0; }
+
+  .essay-feature {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 720px;
+  }
+
+  .essay-cover-frame {
+    width: min(82vw, 390px);
+  }
+
+  .essay-brand-card {
+    padding: 40px 34px 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  .essay-feature { margin-top: 34px; }
+
+  .essay-brand-card {
+    padding: 34px 24px 30px;
+  }
+
+  .essay-brand-card h3 {
+    font-size: 2.05rem;
+  }
+
+  .essay-copy {
+    font-size: .95rem;
+    line-height: 1.72;
+  }
+
+  .essay-coming {
+    top: 22px;
+    right: -8px;
+    font-size: .60rem;
+    padding: 8px 11px 7px;
+  }
+}
+</style>
+
+<script>
+/* ===== HOVER VIDEO · ESSAYS ===== */
+(function () {
+  const card = document.querySelector('.essay-hover-media');
+  if (!card) return;
+
+  const video = card.querySelector('.essay-hover-video');
+  const src = card.dataset.video;
+  if (!video || !src) return;
+
+  const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo() {
+    if (video.dataset.loaded === 'true') return;
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo() {
+    loadVideo();
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo() {
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadVideo();
+          obs.unobserve(card);
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+    observer.observe(card);
+  }
+
+  if (!isTouchDevice) {
+    card.addEventListener('mouseenter', playVideo);
+    card.addEventListener('mouseleave', stopVideo);
+  } else {
+    const link = card.querySelector('a');
+    card.addEventListener('click', function (e) {
+      if (!card.classList.contains('is-playing')) {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!card.contains(e.target)) stopVideo();
+    });
+    if (link) link.addEventListener('blur', stopVideo);
+  }
+})();
+</script>
+
+
+
+
+
+
+<div class="glow-line"></div>
 
 <section id="stories">
   <div class="container">
