@@ -25,6 +25,14 @@
 
     <div id="screen-status" class="screen-status">Loading image folder…</div>
 
+    <section id="eidos-clock" class="eidos-clock" aria-label="EIDOS Clock">
+      <div class="eidos-clock__frame">
+        <div id="eidos-clock-time" class="eidos-clock__time" aria-live="off" aria-label="00:00"></div>
+        <div id="eidos-clock-date" class="eidos-clock__date">01 · JAN · 2026</div>
+        <div class="eidos-clock__signal" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
     <header id="screen-controls" class="screen-controls">
       <a class="screen-brand" href="../indexeng.html" aria-label="Return to the EIDOS homepage">EIDOS</a>
       <nav class="screen-nav" aria-label="Screensaver navigation">
@@ -32,9 +40,111 @@
         <span class="screen-current">Screensaver</span>
         <button id="screen-pause" class="screen-button" type="button" aria-pressed="false">Pause</button>
         <button id="screen-next" class="screen-button" type="button">Next</button>
+        <button id="screen-clock-settings" class="screen-button" type="button" aria-expanded="false">Clock</button>
         <button id="screen-fullscreen" class="screen-button" type="button">Fullscreen</button>
       </nav>
     </header>
+
+    <aside id="clock-panel" class="clock-panel" hidden>
+      <div class="clock-panel__head">
+        <span>EIDOS CLOCK</span>
+        <button id="clock-panel-close" type="button" aria-label="Close settings">×</button>
+      </div>
+
+      <label class="clock-panel__master"><input id="clock-enabled" type="checkbox"> Enable display</label>
+
+      <label class="clock-panel__select">
+        <span>Mode</span>
+        <select id="clock-mode">
+          <option value="clock" selected>Clock</option>
+          <option value="countdown">Countdown</option>
+        </select>
+      </label>
+
+      <div id="clock-normal-options" class="clock-panel__group">
+        <label><input id="clock-show-time" type="checkbox" checked> Show time</label>
+        <label><input id="clock-show-date" type="checkbox" checked> Show date</label>
+        <label><input id="clock-show-seconds" type="checkbox"> Show seconds</label>
+        <label><input id="clock-24h" type="checkbox" checked> 24-hour format</label>
+      </div>
+
+      <div id="clock-countdown-options" class="clock-panel__group clock-countdown" hidden>
+        <div class="clock-panel__time-setting">
+          <span class="clock-panel__time-label">Time</span>
+
+          <div class="clock-time-editor" role="group" aria-label="Countdown duration">
+            <button id="clock-countdown-minus" class="clock-time-step" type="button" aria-label="Subtract from selected field">−</button>
+
+            <div class="clock-time-values">
+              <label class="clock-time-cell">
+                <span class="clock-time-unit">HOURS</span>
+                <input id="clock-countdown-hours" type="number" min="0" max="99" step="1" inputmode="numeric" value="0" aria-label="Hours">
+              </label>
+
+              <span class="clock-time-colon" aria-hidden="true">:</span>
+
+              <label class="clock-time-cell">
+                <span class="clock-time-unit">MIN</span>
+                <input id="clock-countdown-minutes" type="number" min="0" max="59" step="1" inputmode="numeric" value="10" aria-label="Minutes">
+              </label>
+
+              <span class="clock-time-colon" aria-hidden="true">:</span>
+
+              <label class="clock-time-cell">
+                <span class="clock-time-unit">SEC</span>
+                <input id="clock-countdown-seconds" type="number" min="0" max="59" step="1" inputmode="numeric" value="0" aria-label="Seconds">
+              </label>
+            </div>
+
+            <button id="clock-countdown-plus" class="clock-time-step" type="button" aria-label="Add to selected field">+</button>
+          </div>
+        </div>
+
+        <label class="clock-countdown__sound"><input id="clock-countdown-sound" type="checkbox" checked> Sound when finished</label>
+        <div class="clock-countdown__actions">
+          <button id="clock-countdown-start" type="button">Start</button>
+          <button id="clock-countdown-pause" type="button">Pause</button>
+          <button id="clock-countdown-reset" type="button">Reset</button>
+        </div>
+        <div class="clock-countdown__preset">
+          <select id="clock-countdown-preset" class="sr-only" aria-label="Quick duration">
+            <option value="300">5 minutes</option>
+            <option value="600" selected>10 minutes</option>
+            <option value="900">15 minutes</option>
+            <option value="1800">30 minutes</option>
+            <option value="2700">45 minutes</option>
+            <option value="3600">1 hour</option>
+            <option value="7200">2 hours</option>
+            <option value="custom">Custom</option>
+          </select>
+          <button id="clock-preset-button" class="clock-preset-button" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span id="clock-preset-label">10 minutes</span><span class="clock-preset-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div id="clock-preset-menu" class="clock-preset-menu" role="listbox" aria-label="Quick duration">
+            <button type="button" role="option" data-value="300">5 minutes</button>
+            <button type="button" role="option" data-value="600" class="is-selected">10 minutes</button>
+            <button type="button" role="option" data-value="900">15 minutes</button>
+            <button type="button" role="option" data-value="1800">30 minutes</button>
+            <button type="button" role="option" data-value="2700">45 minutes</button>
+            <button type="button" role="option" data-value="3600">1 hour</button>
+            <button type="button" role="option" data-value="7200">2 hours</button>
+            <button type="button" role="option" data-value="custom">Custom</button>
+          </div>
+        </div>
+        <div id="clock-countdown-status" class="clock-countdown__status sr-only" aria-live="polite">Ready · 10 min</div>
+      </div>
+
+      <div class="clock-panel__divider"></div>
+      <label><input id="clock-motion" type="checkbox" checked> Smooth movement</label>
+      <label class="clock-panel__select">
+        <span>Style</span>
+        <select id="clock-style">
+          <option value="evolving" selected>Evolving</option>
+          <option value="digital">Digital</option>
+          <option value="fluid">Fluid</option>
+        </select>
+      </label>
+    </aside>
   </main>
 
   <script src="js/image-source.js"></script>
