@@ -148,6 +148,10 @@
       pointer-events: none;
     }
 
+    #startPanel[hidden] {
+      display: none !important;
+    }
+
     .start-card {
       width: min(680px, 100%);
       padding: clamp(26px, 5vw, 48px);
@@ -1356,6 +1360,115 @@
         letter-spacing: 2.4px;
       }
     }
+  
+    /* V6 · idioma solo en la pantalla inicial */
+    body.visualizer-started .top-nav .lang-switch,
+    body.visualizer-started .mobile-menu .lang-switch {
+      display: none !important;
+    }
+
+    /* V6 · filtros universales por icono/bandera */
+    .selector-tabs .selector-tab--icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      min-height: 36px;
+    }
+    .selector-tabs .selector-tab--icon img {
+      display: block;
+      width: 24px;
+      height: 16px;
+      object-fit: cover;
+    }
+    .selector-tabs .selector-tab--world {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+  
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  
+    /* V7 · selector de idioma solo antes de entrar al reproductor */
+    body.visualizer-started .lang-switch {
+      display: none !important;
+    }
+
+    /* V7 · filtros universales */
+    .selector-tabs button[data-filter="all"],
+    .selector-tabs button[data-filter="esp"],
+    .selector-tabs button[data-filter="eng"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .selector-tabs button[data-filter="esp"] img,
+    .selector-tabs button[data-filter="eng"] img {
+      width: 24px;
+      height: 16px;
+      display: block;
+      object-fit: cover;
+    }
+    .selector-tabs button[data-filter="all"] .world-filter-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+    
+  
+    /* V8 · filtros universales reales */
+    .language-filter-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .language-filter-flag {
+      display: block;
+      width: 24px;
+      height: 16px;
+      object-fit: cover;
+    }
+    .language-filter-world {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+  
+    /* FINAL · globo internacional lineal dorado */
+    .language-filter-world {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+    .language-filter-world-svg {
+      display: block;
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: #d7b33e;
+      stroke-width: 1.35;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .95;
+      filter: drop-shadow(0 0 4px rgba(215,179,62,.14));
+    }
+    .language-filter-button.active .language-filter-world-svg {
+      stroke: #e5c24a;
+      opacity: 1;
+      filter: drop-shadow(0 0 5px rgba(229,194,74,.22));
+    }
+
   </style>
 
   <!-- Google tag (gtag.js), igual que en la página principal -->
@@ -1689,6 +1802,15 @@
       const preloadAudio = new Audio();
       preloadAudio.preload = 'auto';
       const panel = document.getElementById('startPanel');
+      const languageSwitches = Array.from(document.querySelectorAll('.lang-switch'));
+
+      function setPlayerLanguageSwitchesVisible(visible) {
+        languageSwitches.forEach(element => {
+          element.hidden = !visible;
+          element.style.display = visible ? '' : 'none';
+        });
+      }
+
       const startButton = document.getElementById('startButton');
       const pauseButton = document.getElementById('pauseButton');
       const pauseIcon = document.getElementById('pauseIcon');
@@ -4189,9 +4311,14 @@
         languageFilter.replaceChildren();
 
         const filterOptions = [
-          { key: 'all', label: 'All' },
+          { key: 'all', type: 'world', label: 'All' },
           ...availableKeys.map(key => ({
             key,
+            type: ['esp','es'].includes(key)
+              ? 'spain'
+              : ['eng','en'].includes(key)
+                ? 'uk'
+                : 'text',
             label: formatLanguageLabel(key)
           }))
         ];
@@ -4201,8 +4328,35 @@
           button.type = 'button';
           button.className = 'language-filter-button';
           button.dataset.language = option.key;
-          button.textContent = option.label;
           button.setAttribute('aria-pressed', 'false');
+          button.setAttribute('aria-label', option.label);
+
+          if (option.type === 'world') {
+            const icon = document.createElement('span');
+            icon.className = 'language-filter-world';
+            icon.setAttribute('aria-hidden', 'true');
+            icon.innerHTML = `<svg class="language-filter-world-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <circle cx="12" cy="12" r="8.5"></circle>
+  <path d="M3.8 12h16.4"></path>
+  <path d="M12 3.5c2.25 2.25 3.35 5.08 3.35 8.5S14.25 18.25 12 20.5"></path>
+  <path d="M12 3.5C9.75 5.75 8.65 8.58 8.65 12S9.75 18.25 12 20.5"></path>
+  <path d="M5.45 7.2h13.1"></path>
+  <path d="M5.45 16.8h13.1"></path>
+</svg>`;
+            button.appendChild(icon);
+          } else if (option.type === 'spain' || option.type === 'uk') {
+            const image = document.createElement('img');
+            image.className = 'language-filter-flag';
+            image.src = option.type === 'spain'
+              ? '../assets/images/flagspain.webp'
+              : '../assets/images/flaguk.webp';
+            image.alt = '';
+            image.setAttribute('aria-hidden', 'true');
+            button.appendChild(image);
+          } else {
+            button.textContent = option.label;
+          }
+
           languageFilter.appendChild(button);
         }
 
@@ -4507,11 +4661,19 @@
 
           panel.classList.add('hidden');
           document.body.classList.add('visualizer-started');
+          setPlayerLanguageSwitchesVisible(false);
           updatePauseButtonUI();
           updateTrackLabels();
 
           const playPromise = audio.play();
           await Promise.all([resumePromise, playPromise, fullscreenPromise.catch(() => {})]);
+
+          // La reproducción ya ha arrancado: tras el fundido, retiramos
+          // completamente la carátula de entrada para que no pueda quedar
+          // visible ni interceptar eventos.
+          window.setTimeout(() => {
+            if (panel.classList.contains('hidden')) panel.hidden = true;
+          }, 900);
 
           running = false;
           await delay(START_DELAY_MS);
@@ -4528,8 +4690,10 @@
           setOutputGain(desiredVolume);
           running = false;
           updateVolumeUI();
+          panel.hidden = false;
           panel.classList.remove('hidden');
           document.body.classList.remove('visualizer-started');
+          setPlayerLanguageSwitchesVisible(true);
           startStatus.textContent = `The track could not be started. ${error.message}`;
           console.error(error);
         } finally {
@@ -4768,6 +4932,7 @@
 
         selectorPanel.classList.remove('open');
         chooseLauncherCover();
+        panel.hidden = false;
         panel.classList.remove('hidden');
         updatePauseButtonUI();
         startStatus.textContent = '';
@@ -5140,10 +5305,11 @@
         scheduleNavigationFade();
       }
 
-      window.toggleMenu = async function toggleMenu() {
+      window.toggleMenu = function toggleMenu() {
         const opening = !menu.classList.contains('open');
-        const wasFullscreen = Boolean(document.fullscreenElement);
 
+        // Abrir o cerrar navegación es una operación puramente visual.
+        // Nunca llama a requestFullscreen/exitFullscreen.
         menu.classList.toggle('open', opening);
         burger.classList.toggle('active', opening);
         burger.setAttribute('aria-expanded', opening ? 'true' : 'false');
@@ -5151,19 +5317,6 @@
 
         document.body.classList.add('nav-visible');
         clearTimeout(navigationTimer);
-
-        /*
-         * Abrir el menú nunca debe sacar al reproductor de fullscreen.
-         * Si un navegador pierde el estado durante el cambio de viewport,
-         * lo recuperamos dentro del mismo gesto del usuario.
-         */
-        if (opening && wasFullscreen && !document.fullscreenElement) {
-          try {
-            await document.documentElement.requestFullscreen();
-          } catch (_) {
-            // El navegador puede bloquear una segunda petición; no alteramos el menú.
-          }
-        }
 
         if (!opening) scheduleNavigationFade();
       };
@@ -5198,7 +5351,14 @@
           const breakpointChanged =
             nextCompactNavigation !== compactNavigation;
 
-          if (forceClose || breakpointChanged) {
+          // Mientras estamos en fullscreen, un resize/viewport-change
+          // provocado por el navegador no debe cerrar el menú ni alterar
+          // la experiencia. Solo el usuario lo cierra.
+          const keepFullscreenMenu =
+            Boolean(document.fullscreenElement) &&
+            menu.classList.contains('open');
+
+          if (!keepFullscreenMenu && (forceClose || breakpointChanged)) {
             closeMenu();
           }
 
@@ -5258,8 +5418,15 @@
       );
 
       function syncFullscreenState() {
-        document.body.classList.toggle('is-fullscreen', Boolean(document.fullscreenElement));
-        stabilizeNavigationAfterViewportChange(false);
+        // Fullscreen solo cambia el estado visual del botón/opción.
+        // No cerramos menú ni forzamos ningún reajuste de navegación.
+        document.body.classList.toggle(
+          'is-fullscreen',
+          Boolean(document.fullscreenElement)
+        );
+        document.body.classList.add('nav-visible');
+        clearTimeout(navigationTimer);
+        scheduleNavigationFade();
       }
 
       document.addEventListener('fullscreenchange', syncFullscreenState);
