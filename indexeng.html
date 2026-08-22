@@ -981,9 +981,17 @@
     <div class="editions-grid">
 
       <div class="edition-card reveal">
-        <div class="edition-img-wrap">
-          <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">
-            <img src="assets/images/tapa.jpg" alt="EIDOS Spanish edition" loading="lazy">
+        <div class="edition-img-wrap edition-media" data-video="docs/eidos.mp4">
+          <a href="https://www.amazon.es/dp/B0FC5ZDRKR" target="_blank">
+            <img src="assets/images/tapa.jpg" alt="EIDOS English edition" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapa.jpg"
+            ></video>
           </a>
           <div class="edition-overlay"></div>
         </div>
@@ -998,9 +1006,17 @@
       </div>
 
       <div class="edition-card reveal reveal-delay-1">
-        <div class="edition-img-wrap">
-          <a href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
-            <img src="assets/images/tapatales.jpg" alt="EIDOS Stories" loading="lazy">
+        <div class="edition-img-wrap edition-media" data-video="docs/eidosrelatos.mp4">
+          <a href="https://www.amazon.es/dp/B0GDNQW7VZ" target="_blank">
+            <img src="assets/images/tapatales.jpg" alt="EIDOS Tales" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapatales.jpg"
+            ></video>
           </a>
           <div class="edition-overlay"></div>
         </div>
@@ -1029,6 +1045,159 @@
 
     </div>
   </div>
+
+  <style>
+/* ===== VIDEO HOVER ON EDITIONS ===== */
+
+.edition-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.edition-media > a {
+  display: block;
+  position: relative;
+}
+
+/* Image and video occupy exactly the same area */
+.edition-media img,
+.edition-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Video layered over the cover */
+.edition-media video.edition-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: #000;
+}
+
+/* Active state (hover on desktop or tap on touch devices) */
+.edition-media.is-playing video.edition-video {
+  opacity: 1;
+}
+
+.edition-media.is-playing img {
+  opacity: 0;
+}
+
+.edition-media img {
+  transition: opacity 0.3s ease;
+}
+
+.edition-media .edition-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.edition-media:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .edition-media video.edition-video {
+    transition: opacity 0.25s ease;
+  }
+}
+</style>
+
+<script>
+(function () {
+  const cards = document.querySelectorAll('.edition-media');
+  if (!cards.length) return;
+
+  const isTouchDevice =
+    window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo(video, src) {
+    if (video.dataset.loaded === 'true') return;
+
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo(card) {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    loadVideo(video, src);
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo(card) {
+    const video = card.querySelector('.edition-video');
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  cards.forEach(card => {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    // Lightweight preload only when the block approaches the viewport.
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadVideo(video, src);
+            obs.unobserve(card);
+          }
+        });
+      }, { rootMargin: '250px 0px' });
+
+      observer.observe(card);
+    }
+
+    if (!isTouchDevice) {
+      card.addEventListener('mouseenter', () => playVideo(card));
+      card.addEventListener('mouseleave', () => stopVideo(card));
+    } else {
+      // Touch devices: first tap plays the video; second tap follows the link.
+      card.addEventListener('click', function (e) {
+        if (!card.classList.contains('is-playing')) {
+          e.preventDefault();
+          playVideo(card);
+        }
+      });
+
+      card.addEventListener('mouseleave', () => stopVideo(card));
+
+      document.addEventListener('click', function (e) {
+        if (!card.contains(e.target)) {
+          stopVideo(card);
+        }
+      });
+    }
+
+    video.addEventListener('ended', function () {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+  });
+})();
+</script>
+
 </section>
 
 <!-- ===== ESSAYS ===== -->
@@ -1053,13 +1222,13 @@
               poster="assets/images/tapaessey.jpg"
             ></video>
           </a>
-          <span class="essay-coming">COMING SOON</span>
+       <!--   <span class="essay-coming">COMING SOON</span>-->
         </div>
       </div>
 
       <div class="essay-brand-card">
         <div class="essay-brand-topline">
-          <span>COMING SOON</span>
+          <span>PUBLICATIONS</span>
           <span class="essay-brand-dot"></span>
           <span>ESSAYS</span>
         </div>
