@@ -1235,6 +1235,25 @@
       color: #c9a84c;
     }
 
+    .fullscreen-exit-item {
+      display: none;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    body.is-fullscreen .fullscreen-exit-item { display: block; }
+    .fullscreen-exit-item:hover { color: #f0d16d; }
+
     #brand {
       top: 18px;
       transition: opacity 260ms ease, transform 260ms ease, top 500ms ease;
@@ -1437,6 +1456,7 @@
     <a href="index.html" class="lang-switch" aria-label="Spanish version" onclick="closeMenu()">
       <img src="../assets/images/flagspain.webp" alt="Spanish">
     </a>
+    <button class="fullscreen-exit-item" type="button" onclick="exitPlayerFullscreen()">Exit fullscreen</button>
   </div>
 
   <canvas id="visualizer" aria-label="Reactive music visualizer inspired by Eidos"></canvas>
@@ -5120,8 +5140,9 @@
         scheduleNavigationFade();
       }
 
-      window.toggleMenu = function toggleMenu() {
+      window.toggleMenu = async function toggleMenu() {
         const opening = !menu.classList.contains('open');
+        const wasFullscreen = Boolean(document.fullscreenElement);
 
         menu.classList.toggle('open', opening);
         burger.classList.toggle('active', opening);
@@ -5131,7 +5152,31 @@
         document.body.classList.add('nav-visible');
         clearTimeout(navigationTimer);
 
+        /*
+         * Abrir el menú nunca debe sacar al reproductor de fullscreen.
+         * Si un navegador pierde el estado durante el cambio de viewport,
+         * lo recuperamos dentro del mismo gesto del usuario.
+         */
+        if (opening && wasFullscreen && !document.fullscreenElement) {
+          try {
+            await document.documentElement.requestFullscreen();
+          } catch (_) {
+            // El navegador puede bloquear una segunda petición; no alteramos el menú.
+          }
+        }
+
         if (!opening) scheduleNavigationFade();
+      };
+
+      window.exitPlayerFullscreen = async function exitPlayerFullscreen() {
+        closeMenu();
+        if (document.fullscreenElement && document.exitFullscreen) {
+          try {
+            await document.exitFullscreen();
+          } catch (_) {
+            // Escape sigue siendo la alternativa nativa del navegador.
+          }
+        }
       };
 
       window.closeMenu = function closeMenu() {
@@ -5212,10 +5257,13 @@
         { passive: true }
       );
 
-      document.addEventListener(
-        'fullscreenchange',
-        () => stabilizeNavigationAfterViewportChange(false)
-      );
+      function syncFullscreenState() {
+        document.body.classList.toggle('is-fullscreen', Boolean(document.fullscreenElement));
+        stabilizeNavigationAfterViewportChange(false);
+      }
+
+      document.addEventListener('fullscreenchange', syncFullscreenState);
+      syncFullscreenState();
 
       if (window.visualViewport) {
         window.visualViewport.addEventListener(
