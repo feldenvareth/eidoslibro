@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>ENSAYOS | Vida, mente, evolución e inteligencia · Felden Vareth</title>
-  <meta name="description" content="ENSAYOS, de Felden Vareth. Nueve ensayos de divulgación y reflexión sobre mente, vida, evolución, inteligencia, identidad y tecnología, nacidos de las preguntas de EIDOS. Próxima publicación.">
+  <meta name="description" content="ENSAYOS, de Felden Vareth. Nueve ensayos de divulgación y reflexión sobre mente, vida, evolución, inteligencia, identidad y tecnología, nacidos de las preguntas de EIDOS. Ya disponible en Amazon.">
   <meta name="author" content="Felden Vareth">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="theme-color" content="#070710">
@@ -977,119 +977,48 @@
         transition-duration: .01ms !important;
       }
     }
-  
 
-    /* AMAZON · PRÓXIMAMENTE */
-    .amazon-coming-btn {
-      cursor: pointer;
-      font: inherit;
-      transition: all .3s ease;
-    }
-
-    .amazon-coming-btn i {
+    /* CTA COMPRA · más luminosidad */
+    .essay-promo-buy {
       position: relative;
-      z-index: 1;
+      border-color: rgba(201,168,76,.82) !important;
+      background: linear-gradient(180deg, rgba(201,168,76,.24), rgba(201,168,76,.13)) !important;
+      color: #f4e7bc !important;
+      box-shadow:
+        0 0 0 1px rgba(201,168,76,.10) inset,
+        0 10px 34px rgba(201,168,76,.22),
+        0 0 26px rgba(201,168,76,.12);
     }
 
-    .essay-hero-actions .amazon-coming-btn {
-      border: 1px solid rgba(201,168,76,.48);
-      background: rgba(201,168,76,.08);
-      color: var(--gold);
-      box-shadow: inset 0 0 0 1px rgba(201,168,76,.04);
-    }
-
-    .essay-hero-actions .amazon-coming-btn:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--deep);
+    .essay-promo-buy:hover,
+    .essay-promo-buy:focus-visible {
+      background: linear-gradient(180deg, rgba(201,168,76,.98), rgba(201,168,76,.84)) !important;
+      color: var(--deep) !important;
+      border-color: var(--gold) !important;
+      box-shadow:
+        0 14px 42px rgba(201,168,76,.34),
+        0 0 34px rgba(201,168,76,.20);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201,168,76,.28);
     }
 
-    .amazon-notice {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
+    .essay-origin-actions {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(7,7,16,.72);
-      backdrop-filter: blur(8px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .25s ease, visibility .25s ease;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .amazon-notice.is-open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+    @media (max-width: 640px) {
+      .essay-origin-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .essay-origin-actions a {
+        justify-content: center;
+      }
     }
 
-    .amazon-notice-card {
-      width: min(480px, 100%);
-      position: relative;
-      padding: 42px 42px 38px;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(26,26,46,.98), rgba(7,7,16,.99));
-      border: 1px solid rgba(201,168,76,.35);
-      box-shadow: 0 28px 80px rgba(0,0,0,.55), 0 0 40px rgba(201,168,76,.08);
-    }
-
-    .amazon-notice-icon {
-      color: var(--gold);
-      font-size: 30px;
-      margin-bottom: 20px;
-    }
-
-    .amazon-notice-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px;
-      font-weight: 300;
-      color: var(--paper);
-      margin-bottom: 14px;
-    }
-
-    .amazon-notice-card p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      line-height: 1.55;
-      color: rgba(212,207,198,.76);
-      margin: 0;
-    }
-
-    .amazon-notice-card strong {
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .amazon-notice-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(201,168,76,.28);
-      background: transparent;
-      color: var(--gold);
-      font-size: 22px;
-      cursor: pointer;
-      transition: all .25s ease;
-    }
-
-    .amazon-notice-close:hover {
-      background: var(--gold);
-      color: var(--deep);
-      border-color: var(--gold);
-    }
-
-    @media (max-width: 600px) {
-      .amazon-notice-card { padding: 38px 24px 32px; }
-      .amazon-notice-card h3 { font-size: 30px; }
-      .amazon-notice-card p { font-size: 18px; }
-    }
 </style>
 
   <!-- Google Analytics / mismo identificador que EIDOS principal -->
@@ -1195,7 +1124,7 @@
 
     <div class="essay-hero-inner">
       <div class="essay-hero-copycol">
-        <p class="essay-eyebrow">Felden Vareth · Próxima publicación</p>
+        <p class="essay-eyebrow">Felden Vareth · YA disponible</p>
 
         <h1 class="essay-hero-title">
           ENSAYOS
@@ -1211,7 +1140,7 @@
         </p>
 
         <div class="essay-status" aria-label="Temas del libro">
-          <span class="essay-chip essay-chip--status">Próximamente</span>
+          <span class="essay-chip essay-chip--status">Temas</span>
           <span class="essay-chip">Vida</span>
           <span class="essay-chip">Mente</span>
           <span class="essay-chip">Evolución</span>
@@ -1222,16 +1151,17 @@
           <a class="btn-primary" href="#libro">
             <i class="fa-regular fa-file-lines"></i> Conocer el libro
           </a>
-          <button class="btn-outline amazon-coming-btn" type="button" data-amazon-coming>
+          <a class="btn-outline essay-promo-buy" href="https://www.amazon.es/dp/B0HG5QHSXW" target="_blank" rel="noopener">
             <i class="fa-brands fa-amazon"></i> Comprar en Amazon
-          </button>
+          </a>
         </div>
       </div>
 
       <div class="essay-cover-column" aria-label="Portada del libro ENSAYOS">
         <div class="essay-cover-wrap">
-          <span class="essay-coming">Próximamente</span>
-          <img class="essay-cover" src="../assets/images/tapaensayo.jpg" alt="Portada de ENSAYOS de Felden Vareth">
+          <a href="https://www.amazon.es/dp/B0HG5QHSXW" target="_blank" rel="noopener" aria-label="Comprar ENSAYOS en Amazon">
+            <img class="essay-cover" src="../assets/images/tapaensayo.jpg" alt="Portada de ENSAYOS de Felden Vareth">
+          </a>
           <div class="essay-cover-caption">
             <span>Felden Vareth</span>
             <strong>Ensayo</strong>
@@ -1413,9 +1343,14 @@
           <p>
             La ficción no intenta demostrar que ese futuro llegará. Crea un lugar desde el que pensar qué significaría si llegara. Los ensayos vuelven después a la biología, la neurociencia, la evolución, la tecnología, la filosofía y, en algunos casos, la fe para mirar esas preguntas desde fuera de la narración. No es necesario haber leído la novela para seguir el recorrido.
           </p>
-          <a class="btn-outline" href="../index.html">
-            <i class="fa-solid fa-arrow-left"></i> Volver al universo EIDOS
-          </a>
+          <div class="essay-origin-actions">
+            <a class="btn-primary essay-promo-buy" href="https://www.amazon.es/dp/B0HG5QHSXW" target="_blank" rel="noopener">
+              <i class="fa-brands fa-amazon"></i> Comprar en Amazon
+            </a>
+            <a class="btn-outline" href="../index.html">
+              <i class="fa-solid fa-globe"></i> Visitar web EIDOS
+            </a>
+          </div>
         </div>
 
         <aside class="essay-origin-mark reveal reveal-delay-1">
@@ -1488,31 +1423,21 @@
   <!-- FINAL -->
   <section class="essay-finale">
     <div class="container reveal">
-      <span class="essay-finale-status">Próxima publicación</span>
+      <span class="essay-finale-status">Ya disponible</span>
       <h2>ENSAYOS<br><em>fuera de la ficción.</em></h2>
       <p>
-        Nueve ensayos de divulgación y reflexión reunidos en un solo volumen, con referencias organizadas por capítulos. Próximamente disponible en Amazon.
+        Nueve ensayos de divulgación y reflexión reunidos en un solo volumen, con referencias organizadas por capítulos. Ya disponible en Amazon.
       </p>
       <div class="essay-finale-actions">
-        <button class="btn-primary amazon-coming-btn" type="button" data-amazon-coming>
+        <a class="btn-primary essay-promo-buy" href="https://www.amazon.es/dp/B0HG5QHSXW" target="_blank" rel="noopener">
           <i class="fa-brands fa-amazon"></i> Comprar en Amazon
-        </button>
+        </a>
         <a class="btn-outline" href="../index.html">
           <i class="fa-solid fa-arrow-left"></i> Volver a EIDOS
         </a>
       </div>
     </div>
   </section>
-
-  <!-- AVISO AMAZON · mientras el libro no esté publicado -->
-  <div class="amazon-notice" id="amazonNotice" role="dialog" aria-modal="true" aria-labelledby="amazonNoticeTitle" aria-hidden="true">
-    <div class="amazon-notice-card">
-      <button class="amazon-notice-close" id="amazonNoticeClose" type="button" aria-label="Cerrar">×</button>
-      <div class="amazon-notice-icon"><i class="fa-brands fa-amazon"></i></div>
-      <h3 id="amazonNoticeTitle">Aún no está a la venta</h3>
-      <p><strong>ENSAYOS</strong> estará disponible próximamente en Amazon.</p>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -1597,38 +1522,6 @@
   } else {
     revealEls.forEach(el => el.classList.add('visible'));
   }
-
-  /* AVISO AMAZON · el botón queda listo para sustituirlo por el enlace real */
-  (function amazonComingSoon() {
-    const notice = document.getElementById('amazonNotice');
-    const closeBtn = document.getElementById('amazonNoticeClose');
-    const triggers = document.querySelectorAll('[data-amazon-coming]');
-    if (!notice || !triggers.length) return;
-
-    function openNotice() {
-      notice.classList.add('is-open');
-      notice.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      if (closeBtn) closeBtn.focus();
-    }
-
-    function closeNotice() {
-      notice.classList.remove('is-open');
-      notice.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    triggers.forEach(btn => btn.addEventListener('click', openNotice));
-    if (closeBtn) closeBtn.addEventListener('click', closeNotice);
-
-    notice.addEventListener('click', function (e) {
-      if (e.target === notice) closeNotice();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && notice.classList.contains('is-open')) closeNotice();
-    });
-  })();
 </script>
 
 </body>
