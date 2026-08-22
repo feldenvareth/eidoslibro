@@ -1,0 +1,241 @@
+
+/* EIDOS Gallery Enhanced — capa adicional y reversible.
+   No sustituye gallery.css: sólo amplía movimiento, lightbox y tarjetas. */
+
+:root{
+  --eidos-fx-duration: 920ms;
+  --eidos-fx-ease: cubic-bezier(.18,.72,.18,1);
+}
+
+.eidos-grid > *{
+  --gx:0deg;
+  --gy:0deg;
+  --gs:1;
+  transform-origin:center;
+  will-change:transform,opacity,filter,clip-path;
+}
+
+.eidos-grid > *.eidos-card-enter{
+  animation:eidos-card-enter .85s var(--eidos-fx-ease) both;
+  animation-delay:var(--eidos-card-delay,0ms);
+}
+@keyframes eidos-card-enter{
+  from{opacity:0;transform:translateY(22px) scale(.975);filter:blur(7px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+@media (hover:hover) and (pointer:fine){
+  .eidos-grid > *{
+    transition:transform .55s var(--eidos-fx-ease),filter .45s ease,opacity .45s ease;
+  }
+  .eidos-grid > *:hover{
+    transform:perspective(900px) rotateX(var(--gx)) rotateY(var(--gy)) scale(var(--gs));
+    filter:brightness(1.06) saturate(1.03);
+    z-index:2;
+  }
+}
+
+/* Lightbox: la imagen anterior se conserva temporalmente como clon para que
+   la transición sea realmente de una fotografía a la siguiente. */
+.lightbox__figure{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+#lightbox-image{
+  position:relative;
+  z-index:2;
+  will-change:transform,opacity,filter,clip-path;
+}
+.eidos-lightbox-old{
+  position:absolute!important;
+  inset:0;
+  z-index:1!important;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+  will-change:transform,opacity,filter,clip-path;
+}
+
+/* Micro-overlay digital para algunos efectos. */
+.eidos-gallery-fx-overlay{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  overflow:hidden;
+}
+.eidos-gallery-fx-overlay i{
+  position:absolute;
+  background-repeat:no-repeat;
+  opacity:0;
+  animation:eidos-gallery-tile .78s var(--eidos-fx-ease) both;
+  animation-delay:var(--d,0ms);
+}
+@keyframes eidos-gallery-tile{
+  from{opacity:0;transform:scale(.15) rotateY(80deg);filter:blur(4px) brightness(1.5)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+.ambient__image{
+  will-change:transform,opacity,filter,clip-path;
+}
+
+/* Respeta usuarios que han pedido menos movimiento. */
+@media (prefers-reduced-motion:reduce){
+  .eidos-grid > *,
+  #lightbox-image,
+  .eidos-lightbox-old,
+  .ambient__image{
+    animation:none!important;
+    transition:none!important;
+  }
+  .eidos-gallery-fx-overlay{display:none!important}
+}
+
+
+/* === Gallery Enhanced V2: 60 efectos realmente diferenciados === */
+.eidos-gallery-fx-overlay i{
+  animation-name:eidos-gallery-tile;
+}
+
+/* 30 Pixel dissolve: microceldas que nacen desde puntos casi invisibles. */
+.fx-pixel-dissolve i{animation-name:fx-pixel-dissolve!important;animation-duration:.72s!important}
+@keyframes fx-pixel-dissolve{
+  from{opacity:0;transform:scale(.02);filter:brightness(2) blur(3px)}
+  55%{opacity:.8;transform:scale(1.14)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+
+/* 31 Pixel build: bloques grandes que se compactan. */
+.fx-pixel-build i{animation-name:fx-pixel-build!important;animation-duration:.82s!important}
+@keyframes fx-pixel-build{
+  from{opacity:0;transform:scale(1.8);filter:blur(10px) saturate(.3)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+
+/* 32 Digital mosaic: piezas con giro Z alterno. */
+.fx-digital-mosaic i{animation-name:fx-digital-mosaic!important;animation-duration:.8s!important}
+.fx-digital-mosaic i:nth-child(odd){--rz:10deg}
+.fx-digital-mosaic i:nth-child(even){--rz:-10deg}
+@keyframes fx-digital-mosaic{
+  from{opacity:0;transform:scale(.62) rotate(var(--rz));filter:contrast(1.8)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 33 Random tiles: cada bloque entra desde una dirección distinta. */
+.fx-random-tiles i{animation-name:fx-random-tiles!important}
+.fx-random-tiles i:nth-child(4n+1){--tx:-32px;--ty:-24px}
+.fx-random-tiles i:nth-child(4n+2){--tx:34px;--ty:-18px}
+.fx-random-tiles i:nth-child(4n+3){--tx:-28px;--ty:28px}
+.fx-random-tiles i:nth-child(4n){--tx:30px;--ty:24px}
+@keyframes fx-random-tiles{
+  from{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.76) rotateY(48deg)}
+  to{opacity:1;transform:none}
+}
+
+/* 34 Wave tiles */
+.fx-wave-tiles i{animation-name:fx-wave-tiles!important}
+@keyframes fx-wave-tiles{
+  from{opacity:0;transform:translateY(38%) scale(.7) rotateX(62deg);filter:blur(4px)}
+  60%{opacity:1;transform:translateY(-4%) scale(1.04)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 39 Fragmentation: piezas grandes convergen desde fuera. */
+.fx-fragmentation i{animation-name:fx-fragmentation!important;animation-duration:.95s!important}
+@keyframes fx-fragmentation{
+  from{
+    opacity:0;
+    transform:translate(calc(var(--cx)*10px),calc(var(--cy)*10px))
+              rotate(calc((var(--x) - var(--y))*3deg)) scale(.74);
+    filter:blur(3px)
+  }
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 41 Checkerboard: alternancia visible en dos tandas. */
+.fx-checkerboard i{animation-name:fx-checkerboard!important}
+@keyframes fx-checkerboard{
+  from{opacity:0;transform:rotateY(90deg) scale(.82)}
+  to{opacity:1;transform:none}
+}
+
+/* 42 Radial pixels: expansión desde el centro. */
+.fx-radial-pixels i{animation-name:fx-radial-pixels!important}
+@keyframes fx-radial-pixels{
+  from{opacity:0;transform:scale(.04) rotate(16deg);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 45 Pixel fusion: puntos minúsculos se incrustan sin giro. */
+.fx-pixel-fusion i{animation-name:fx-pixel-fusion!important;animation-duration:.58s!important}
+@keyframes fx-pixel-fusion{
+  from{opacity:0;transform:scale(.3);filter:contrast(1.8) brightness(1.5)}
+  to{opacity:.98;transform:scale(1);filter:none}
+}
+
+/* 46 Crystallize: cada microbloque llega nítido desde blur. */
+.fx-pixel-crystallize i{animation-name:fx-pixel-crystallize!important;animation-duration:.75s!important}
+@keyframes fx-pixel-crystallize{
+  from{opacity:0;transform:scale(1.55);filter:blur(8px) brightness(1.55)}
+  70%{opacity:.9;transform:scale(.95);filter:blur(1px)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+
+/* 47 Organic erosion: células redondeadas de tamaños diferentes. */
+.fx-organic-erosion i{
+  animation-name:fx-organic-erosion!important;
+  border-radius:42% 58% 54% 46% / 55% 42% 58% 45%;
+}
+.fx-organic-erosion i:nth-child(3n){border-radius:60% 40% 38% 62% / 45% 58% 42% 55%}
+.fx-organic-erosion i:nth-child(5n){border-radius:35% 65% 62% 38% / 61% 37% 63% 39%}
+@keyframes fx-organic-erosion{
+  from{opacity:0;transform:scale(.02);filter:blur(2px)}
+  55%{opacity:.85;transform:scale(1.35)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+
+/* 48 Burn map sin fuego: zonas orgánicas menos numerosas y crecimiento lento. */
+.fx-organic-burn-map i{
+  animation-name:fx-organic-burn-map!important;
+  border-radius:55% 45% 63% 37% / 44% 59% 41% 56%;
+  animation-duration:1.05s!important;
+}
+@keyframes fx-organic-burn-map{
+  from{opacity:0;transform:scale(.02);filter:contrast(1.4) brightness(.72)}
+  72%{opacity:.92;transform:scale(1.55);filter:contrast(1.1)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+
+/* 49 Grid Flip 3D */
+.fx-grid-flip-3d i{animation-name:fx-grid-flip-3d!important;transform-origin:left center}
+@keyframes fx-grid-flip-3d{
+  from{opacity:0;transform:perspective(500px) rotateY(-92deg) scale(.85);filter:brightness(.55)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 55 Spiral tiles */
+.fx-spiral-tiles i{animation-name:fx-spiral-tiles!important}
+@keyframes fx-spiral-tiles{
+  from{opacity:0;transform:rotate(-72deg) scale(.04);filter:blur(4px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
+/* 56 Domino tiles */
+.fx-domino-tiles i{animation-name:fx-domino-tiles!important;transform-origin:right center}
+@keyframes fx-domino-tiles{
+  from{opacity:0;transform:perspective(520px) rotateY(90deg)}
+  to{opacity:1;transform:none}
+}
+
+/* 60 Hex dissolve */
+.fx-hex-dissolve i{
+  animation-name:fx-hex-dissolve!important;
+  clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);
+}
+@keyframes fx-hex-dissolve{
+  from{opacity:0;transform:scale(.03) rotate(-30deg);filter:blur(3px)}
+  to{opacity:1;transform:none;filter:none}
+}
