@@ -11,6 +11,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/screen.css">
+
+  <style>
+    /* Selector de idioma: referencia visual del reproductor EIDOS, sin alterar el menú. */
+    .screen-nav .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      padding: 0;
+      line-height: 1;
+    }
+    .screen-nav .lang-switch img {
+      display: block;
+      width: 24px;
+      height: auto;
+    }
+    .screen-nav .lang-switch--text {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+  </style>
+
 </head>
 <body>
   <main id="screensaver" class="screensaver" aria-live="polite">
@@ -42,6 +64,9 @@
         <button id="screen-next" class="screen-button" type="button">Siguiente</button>
         <button id="screen-clock-settings" class="screen-button" type="button" aria-expanded="false">Reloj</button>
         <button id="screen-fullscreen" class="screen-button" type="button">Pantalla completa</button>
+        <a href="screeneng.html" class="lang-switch" aria-label="English version">
+          <img src="../assets/images/flaguk.webp" alt="English">
+        </a>
       </nav>
     </header>
 
@@ -147,6 +172,7 @@
     </aside>
   </main>
 
+  <script src="js/image-manifest.js"></script>
   <script src="js/image-source.js"></script>
   <script src="js/screen.js"></script>
 </body>

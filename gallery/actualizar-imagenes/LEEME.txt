@@ -1,0 +1,27 @@
+EIDOS · GALERÍA SIMPLE
+======================
+
+CARPETA DE IMÁGENES:
+  gallery/images/gallery/
+
+PARA ACTUALIZAR:
+  doble clic en gallery/actualizar-imagenes/ACTUALIZAR_GALERIA.bat
+
+QUÉ HACE:
+  generar_galeria.py escanea la carpeta REAL y reconstruye DESDE CERO:
+  gallery/js/image-manifest.js
+
+Por eso:
+- nueva imagen -> se añade;
+- imagen borrada -> desaparece;
+- imagen renombrada -> desaparece el nombre antiguo y entra el nuevo;
+- subcarpetas -> admitidas.
+
+Después sube a GitHub las imágenes modificadas y image-manifest.js.
+No hay GitHub Actions y ningún visitante consulta la API de GitHub.
+
+ROBUSTEZ:
+Si por cualquier motivo un manifiesto viejo conserva una ruta inexistente,
+Gallery y Screensaver descartan esa imagen rota y continúan con las demás.
+
+Imágenes actuales registradas: 57

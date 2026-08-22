@@ -503,6 +503,18 @@
     status.hidden = true;
   }
 
+  async function nextLoadableItem(){
+    if(!deck)return null;
+    const attempts=Math.max(deck.images?deck.images.length:1,1);
+    for(let i=0;i<attempts;i+=1){
+      const item=deck.next();
+      if(!item)return null;
+      try{await preload(item.url);return item;}
+      catch{deck.reject(item.url);}
+    }
+    return null;
+  }
+
   async function showNext() {
     if (!deck || paused || changing || document.hidden) return;
     const item = deck.next(new Set(currentItem ? [currentItem.url] : []));
@@ -512,7 +524,8 @@
     try {
       loadedImage = await preload(item.url);
     } catch {
-      window.setTimeout(showNext, 500);
+      if(deck)deck.reject(item.url);
+      window.setTimeout(showNext,120);
       return;
     }
 
@@ -595,7 +608,13 @@
       }
 
       deck = new EidosImageSource.ImageDeck(images);
-      setInitial(deck.next());
+      const firstItem=await nextLoadableItem();
+      if(!firstItem){
+        status.classList.add('is-error');
+        status.textContent='No se pudo cargar ninguna imagen registrada. Ejecuta ACTUALIZAR_GALERIA.bat para reconstruir la lista.';
+        return;
+      }
+      setInitial(firstItem);
       schedule();
       revealControls();
     } catch (error) {

@@ -12,6 +12,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/gallery.css">
   <link rel="stylesheet" href="css/gallery-enhanced.css">
+
+  <style>
+    /* Selector de idioma: referencia visual del reproductor EIDOS, sin alterar el menú. */
+    .topbar__nav .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      padding: 0;
+      line-height: 1;
+    }
+    .topbar__nav .lang-switch img {
+      display: block;
+      width: 24px;
+      height: 16px;
+    }
+    .topbar__nav .lang-switch--text {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+  </style>
+
 </head>
 <body>
   <div class="ambient" aria-hidden="true">
@@ -26,6 +48,9 @@
       <span class="topbar__current">Gallery</span>
       <a href="screeneng.html">Screensaver</a>
       <button id="motion-toggle" class="icon-button" type="button" aria-pressed="false">Pause</button>
+      <a href="index.html" class="lang-switch" aria-label="Spanish version">
+          <img src="../assets/images/flagspain.webp" alt="Spanish">
+        </a>
     </nav>
   </header>
 
@@ -52,6 +77,7 @@
     <button id="lightbox-next" class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Next image">›</button>
   </div>
 
+  <script src="js/image-manifest.js"></script>
   <script src="js/image-source.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/gallery-enhanced.js"></script>

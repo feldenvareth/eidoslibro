@@ -49,6 +49,29 @@
     return effectQueue.shift();
   }
 
+  function setTileImmediate(tile,item) {
+    const current=tile.querySelector('.tile__current');
+    const next=tile.querySelector('.tile__next');
+    current.style.backgroundImage=`url("${cleanUrl(item.url)}")`;
+    next.style.backgroundImage='';
+    tile.dataset.url=item.url;
+    tile.dataset.name=item.name;
+    tile.setAttribute('aria-label',`Ampliar ${item.name}`);
+  }
+
+  function repairTileIfBroken(tile,item) {
+    preload(item.url).catch(()=>{
+      if (!deck) return;
+      deck.reject(item.url);
+      const used=new Set(tiles.filter(t=>t!==tile).map(t=>t.dataset.url));
+      const replacement=deck.next(used);
+      if (!replacement) return;
+      preload(replacement.url)
+        .then(()=>setTileImmediate(tile,replacement))
+        .catch(()=>{deck.reject(replacement.url);repairTileIfBroken(tile,replacement);});
+    });
+  }
+
   function createTile(item) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -66,6 +89,7 @@
 
     button.append(current, next);
     button.addEventListener('click', () => openLightbox(button.dataset.url));
+    window.setTimeout(()=>repairTileIfBroken(button,item),0);
     return button;
   }
 
@@ -201,6 +225,7 @@
         await preload(change.item.url);
         return change;
       } catch {
+        if (deck) deck.reject(change.item.url);
         return null;
       }
     }))).filter(Boolean);
@@ -229,9 +254,15 @@
     visibleBackground = nextIndex;
   }
 
-  function rotateBackground() {
+  async function rotateBackground() {
     if (paused || document.hidden || !deck) return;
-    setBackground(deck.next());
+    const attempts=Math.max(images.length,1);
+    for(let i=0;i<attempts;i+=1){
+      const item=deck.next();
+      if(!item)return;
+      try{await preload(item.url);setBackground(item);return;}
+      catch{deck.reject(item.url);}
+    }
   }
 
   function openLightbox(url) {
@@ -253,6 +284,18 @@
     lightboxIndex = (lightboxIndex + direction + images.length) % images.length;
     showLightboxImage();
   }
+
+  lightboxImage.addEventListener('error',()=>{
+    const broken=images[lightboxIndex];
+    if(broken && deck)deck.reject(broken.url);
+    if(broken)images=images.filter(item=>item.url!==broken.url);
+    if(images.length){
+      lightboxIndex=Math.min(lightboxIndex,images.length-1);
+      showLightboxImage();
+    }else{
+      closeLightbox();
+    }
+  });
 
   function closeLightbox() {
     lightbox.hidden = true;
