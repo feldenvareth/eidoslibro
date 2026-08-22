@@ -1,0 +1,42 @@
+EIDOS MUSIC V3
+==============
+
+ESTRUCTURA:
+music/
+  index.html
+  indexeng.html
+  assets/
+  songs/                 <- conserva aquí tus canciones, en minúscula
+  js/
+    music-manifest.js
+  actualizar-musica/
+    ACTUALIZAR_MUSICA.bat
+    ABRIR_MUSIC_LOCAL.bat
+    ABRIR_MUSIC_LOCAL_ENG.bat
+
+IMPORTANTE PARA PROBAR EN LOCAL
+-------------------------------
+No abras index.html con doble clic si quieres probar sonido + visualizador.
+
+Chrome/Edge pueden silenciar MediaElementAudioSource cuando el audio procede
+de file://. El contador puede avanzar, pero Web Audio recibe ceros: no se oye
+y el visualizador no reacciona.
+
+Usa:
+  ABRIR_MUSIC_LOCAL.bat
+
+Abrirá:
+  http://localhost:8765/music/index.html
+
+Así la prueba local reproduce sonido y alimenta el visualizador exactamente
+como en la web publicada.
+
+ACTUALIZACIÓN DE CANCIONES
+--------------------------
+1. Cambia archivos dentro de music/songs/
+2. Ejecuta ACTUALIZAR_MUSICA.bat
+3. Sube canciones modificadas + music/js/music-manifest.js
+
+No API GitHub. No Actions. El idioma se toma de la subcarpeta.
+
+Canciones actuales del manifiesto: 24

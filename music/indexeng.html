@@ -1400,10 +1400,8 @@
            rel="noopener">Buy</a>
       </li>
       <li>
-        <a href="https://www.eidoslibro.com/music/"
-           class="lang-switch"
-           aria-label="Spanish version">
-          <span aria-hidden="true">ES</span>
+        <a href="index.html" class="lang-switch" aria-label="Spanish version">
+          <img src="../assets/images/flagspain.webp" alt="Spanish">
         </a>
       </li>
     </ul>
@@ -1436,10 +1434,9 @@
        target="_blank"
        rel="noopener"
        onclick="closeMenu()">Buy</a>
-    <a href="https://www.eidoslibro.com/music/"
-       class="lang-switch"
-       aria-label="Spanish version"
-       onclick="closeMenu()">ES</a>
+    <a href="index.html" class="lang-switch" aria-label="Spanish version" onclick="closeMenu()">
+      <img src="../assets/images/flagspain.webp" alt="Spanish">
+    </a>
   </div>
 
   <canvas id="visualizer" aria-label="Reactive music visualizer inspired by Eidos"></canvas>
@@ -1631,10 +1628,11 @@
 
   <audio id="audio" preload="auto"></audio>
 
+  <script src="js/music-manifest.js?v=3"></script>
+
   <script>
     (() => {
       'use strict';
-      const GITHUB_CONTENTS_URL = 'https://api.github.com/repos/feldenvareth/eidoslibro/contents/music/Songs?ref=main';
       const ROOT_LANGUAGE_KEY = 'root';
 
       const LANGUAGE_LABELS = {
@@ -1662,34 +1660,8 @@
       };
 
       const AUDIO_EXTENSION = /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|webm)$/i;
-      const PLAYLIST_CACHE_KEY = 'eidosGithubSongsCacheV4';
-      const PLAYLIST_CACHE_MS = 24 * 60 * 60 * 1000;
-      const SONGS_DIRECTORY = './Songs/';
+      const SONGS_DIRECTORY = './songs/';
       const START_DELAY_MS = 2000;
-
-      /*
-        Lista de seguridad. Permite que el reproductor funcione incluso
-        cuando api.github.com esté temporalmente bloqueada, limitada o
-        no responda desde el navegador.
-
-        La API sigue consultándose en segundo plano para incorporar
-        canciones nuevas automáticamente cuando esté disponible.
-      */
-      const FALLBACK_TRACK_FILES = [
-        { file: 'eng/Eidos - Mention.mp3', language: 'eng' },
-        { file: 'eng/Eidos - Rap Remix.mp3', language: 'eng' },
-        { file: 'eng/Eidos - The Final Transfer.mp3', language: 'eng' },
-        { file: 'eng/Eidos - The First Time Never Returns.mp3', language: 'eng' },
-        { file: 'eng/Eidos - The Iron Tracks - Country.mp3', language: 'eng' },
-        { file: 'eng/Eidos - The Iron Tracks - Duet- Country .mp3', language: 'eng' },
-
-        { file: 'esp/Eidos - El Último Billete.mp3', language: 'esp' },
-        { file: 'esp/Eidos - Gran Transferencia Fem.mp3', language: 'esp' },
-        { file: 'esp/Eidos - La vida desaparecia female.mp3', language: 'esp' },
-        { file: 'esp/Eidos - La vida desaparecia male.mp3', language: 'esp' },
-        { file: 'esp/Eidos - No vuelve la primera vez.mp3', language: 'esp' },
-        { file: 'esp/Eidos - Última Transferencia para Eidos.mp3', language: 'esp' }
-      ];
 
       const canvas = document.getElementById('visualizer');
       const ctx = canvas.getContext('2d', { alpha: false });
@@ -4335,149 +4307,6 @@
         });
       }
 
-      function readPlaylistCache() {
-        try {
-          const cached = JSON.parse(
-            localStorage.getItem(PLAYLIST_CACHE_KEY) || 'null'
-          );
-
-          if (
-            cached &&
-            Array.isArray(cached.tracks) &&
-            cached.tracks.length &&
-            Date.now() - Number(cached.savedAt || 0) < PLAYLIST_CACHE_MS
-          ) {
-            return cached.tracks;
-          }
-        } catch (_) {
-          // La caché local es opcional.
-        }
-
-        return null;
-      }
-
-      function writePlaylistCache(tracks) {
-        try {
-          localStorage.setItem(
-            PLAYLIST_CACHE_KEY,
-            JSON.stringify({
-              tracks,
-              savedAt: Date.now()
-            })
-          );
-        } catch (_) {
-          // La caché local es opcional.
-        }
-      }
-
-      async function fetchGithubJson(url, signal) {
-        const response = await fetch(url, {
-          cache: 'no-store',
-          signal,
-          headers: { 'Accept': 'application/vnd.github+json' }
-        });
-
-        if (!response.ok) {
-          const remaining = response.headers.get('x-ratelimit-remaining');
-
-          throw new Error(
-            remaining === '0'
-              ? 'GitHub has temporarily reached its request limit.'
-              : `GitHub devolvió HTTP ${response.status}.`
-          );
-        }
-
-        return response.json();
-      }
-
-      async function fetchGithubPlaylist() {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 11000);
-
-        try {
-          const rootContents = await fetchGithubJson(
-            GITHUB_CONTENTS_URL,
-            controller.signal
-          );
-
-          if (!Array.isArray(rootContents)) {
-            throw new Error(
-              'GitHub did not return the folder contents.'
-            );
-          }
-
-          const rootTracks = rootContents
-            .filter(item =>
-              item &&
-              item.type === 'file' &&
-              typeof item.name === 'string' &&
-              AUDIO_EXTENSION.test(item.name)
-            )
-            .map(item => ({
-              title: item.name
-                .replace(/\.[^.]+$/, '')
-                .replace(/[_-]+/g, ' ')
-                .replace(/\s+/g, ' ')
-                .trim(),
-              file: item.name,
-              language: ROOT_LANGUAGE_KEY
-            }));
-
-          const directories = rootContents.filter(item =>
-            item &&
-            item.type === 'dir' &&
-            typeof item.name === 'string' &&
-            typeof item.url === 'string'
-          );
-
-          const directoryGroups = await Promise.all(
-            directories.map(async directory => {
-              const language = normalizeLanguageKey(directory.name);
-              if (!language) return [];
-
-              const contents = await fetchGithubJson(
-                directory.url,
-                controller.signal
-              );
-
-              if (!Array.isArray(contents)) return [];
-
-              return contents
-                .filter(item =>
-                  item &&
-                  item.type === 'file' &&
-                  typeof item.name === 'string' &&
-                  AUDIO_EXTENSION.test(item.name)
-                )
-                .map(item => ({
-                  title: item.name
-                    .replace(/\.[^.]+$/, '')
-                    .replace(/[_-]+/g, ' ')
-                    .replace(/\s+/g, ' ')
-                    .trim(),
-                  file: `${directory.name}/${item.name}`,
-                  language
-                }));
-            })
-          );
-
-          const tracks = [
-            ...rootTracks,
-            ...directoryGroups.flat()
-          ];
-
-          if (!tracks.length) {
-            throw new Error(
-              'GitHub did not find any compatible audio files.'
-            );
-          }
-
-          return tracks;
-        } finally {
-          clearTimeout(timeout);
-        }
-      }
-
       function applyPlaylist(rawTracks, {
         preserveCurrentTrack = false
       } = {}) {
@@ -4584,73 +4413,17 @@
         return true;
       }
 
-      async function refreshPlaylistFromGithub() {
-        try {
-          const githubTracks = await fetchGithubPlaylist();
-
-          writePlaylistCache(githubTracks);
-
-          const currentFiles = localPlaylist
-            .map(track => `${track.language}:${track.file}`)
-            .filter(Boolean)
-            .sort()
-            .join('\n');
-
-          const githubFiles = githubTracks
-            .map(track => `${track.language}:${track.file}`)
-            .filter(Boolean)
-            .sort()
-            .join('\n');
-
-          if (githubFiles !== currentFiles) {
-            applyPlaylist(
-              githubTracks,
-              { preserveCurrentTrack: true }
-            );
-          }
-        } catch (error) {
-          /*
-            No se muestra un error al visitante porque ya existe una
-            lista funcional de respaldo. El detalle queda en consola.
-          */
-          console.warn(
-            'The playlist could not be updated from GitHub. ' +
-            'The local fallback playlist will be used.',
-            error
-          );
-        }
-      }
-
       function loadPlaylist() {
         try {
-          /*
-            Primero se usa la caché; si no existe, se aplica
-            inmediatamente la lista de seguridad. El botón queda
-            disponible sin esperar a GitHub.
-          */
-          const cachedTracks = readPlaylistCache();
-          const initialTracks = cachedTracks ||
-            rawTracksFromFiles(FALLBACK_TRACK_FILES);
-
-          const loaded = applyPlaylist(initialTracks);
-
-          if (!loaded) {
-            throw new Error(
-              'The track list could not be built.'
-            );
-          }
-
-          /*
-            La consulta remota no bloquea el reproductor. Solo actualiza
-            la lista si GitHub responde y detecta cambios.
-          */
-          refreshPlaylistFromGithub();
+          const manifest = Array.isArray(window.EIDOS_MUSIC_MANIFEST)
+            ? window.EIDOS_MUSIC_MANIFEST
+            : [];
+          const loaded = applyPlaylist(manifest);
+          if (!loaded) throw new Error('No compatible audio tracks were found in js/music-manifest.js.');
         } catch (error) {
           console.error(error);
-          startTrack.textContent =
-            'The music could not be prepared.';
-          startStatus.textContent =
-            'Check that the audio files are still inside music/Songs.';
+          startTrack.textContent = 'The music could not be prepared.';
+          startStatus.textContent = 'Run ACTUALIZAR_MUSICA.bat after changing files inside music/songs.';
           startButton.disabled = true;
         }
       }
@@ -5441,7 +5214,7 @@
 
       document.addEventListener(
         'fullscreenchange',
-        () => stabilizeNavigationAfterViewportChange(true)
+        () => stabilizeNavigationAfterViewportChange(false)
       );
 
       if (window.visualViewport) {
