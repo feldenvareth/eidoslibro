@@ -942,5 +942,390 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+/* =========================================================
+   GLOSARIO CONTEXTUAL
+   Las definiciones se leen desde <template data-eidos-glossary>
+   en cada HTML. Este archivo solo gestiona la interacción.
+   ========================================================= */
+
+(function () {
+  'use strict';
+
+  const CLOSE_DELAY_MS = 150;
+  const VIEWPORT_MARGIN = 14;
+  const POPOVER_GAP = 12;
+
+  let activeTrigger = null;
+  let closeTimer = null;
+  let hideTimer = null;
+  let pinned = false;
+  let popover = null;
+  let contentHost = null;
+  let closeButton = null;
+  let suppressNextFocus = false;
+
+  function normalise(value) {
+    return String(value || '')
+      .normalize('NFC')
+      .toLocaleLowerCase(document.documentElement.lang || undefined);
+  }
+
+  function isExcludedTextNode(node) {
+    const parent = node.parentElement;
+
+    if (!parent || !node.nodeValue.trim()) {
+      return true;
+    }
+
+    return Boolean(parent.closest(
+      'a, button, script, style, template, textarea, code, pre, ' +
+      '.eidos-glossary-term, [data-no-glossary]'
+    ));
+  }
+
+  function findFirstOccurrence(root, term) {
+    const needle = normalise(term);
+    const walker = document.createTreeWalker(
+      root,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function (node) {
+          return isExcludedTextNode(node)
+            ? NodeFilter.FILTER_REJECT
+            : NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    let node;
+
+    while ((node = walker.nextNode())) {
+      const index = normalise(node.nodeValue).indexOf(needle);
+
+      if (index !== -1) {
+        return { node: node, index: index, length: term.length };
+      }
+    }
+
+    return null;
+  }
+
+  function wrapOccurrence(match, key, term) {
+    const original = match.node.nodeValue;
+    const before = original.slice(0, match.index);
+    const visibleTerm = original.slice(match.index, match.index + match.length);
+    const after = original.slice(match.index + match.length);
+    const fragment = document.createDocumentFragment();
+    const trigger = document.createElement('button');
+    const language = (document.documentElement.lang || 'es').toLowerCase();
+    const definitionLabel = language.startsWith('en')
+      ? ': view definition'
+      : ': ver definición';
+
+    trigger.type = 'button';
+    trigger.className = 'eidos-glossary-term';
+    trigger.dataset.glossaryKey = key;
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-controls', 'eidos-glossary-popover');
+    trigger.setAttribute('aria-label', visibleTerm + definitionLabel);
+    trigger.textContent = visibleTerm || term;
+
+    if (before) {
+      fragment.appendChild(document.createTextNode(before));
+    }
+
+    fragment.appendChild(trigger);
+
+    if (after) {
+      fragment.appendChild(document.createTextNode(after));
+    }
+
+    match.node.parentNode.replaceChild(fragment, match.node);
+    return trigger;
+  }
+
+  function createPopover() {
+    const language = (document.documentElement.lang || 'es').toLowerCase();
+    const closeLabel = language.startsWith('en')
+      ? 'Close definition'
+      : 'Cerrar definición';
+
+    popover = document.createElement('aside');
+    popover.id = 'eidos-glossary-popover';
+    popover.hidden = true;
+    popover.setAttribute('role', 'tooltip');
+    popover.setAttribute('aria-live', 'polite');
+
+    closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'eidos-glossary-close';
+    closeButton.setAttribute('aria-label', closeLabel);
+    closeButton.textContent = '\u00d7';
+
+    contentHost = document.createElement('div');
+    contentHost.className = 'eidos-glossary-content';
+
+    popover.appendChild(closeButton);
+    popover.appendChild(contentHost);
+    document.body.appendChild(popover);
+  }
+
+  function clearTimers() {
+    window.clearTimeout(closeTimer);
+    window.clearTimeout(hideTimer);
+    closeTimer = null;
+    hideTimer = null;
+  }
+
+  function positionPopover() {
+    if (!activeTrigger || !popover || popover.hidden) {
+      return;
+    }
+
+    if (window.matchMedia('(max-width: 620px)').matches) {
+      popover.style.removeProperty('--eidos-glossary-arrow-left');
+      return;
+    }
+
+    const triggerRect = activeTrigger.getBoundingClientRect();
+    const popoverRect = popover.getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const roomBelow = viewportHeight - triggerRect.bottom;
+    const roomAbove = triggerRect.top;
+    const placeAbove = roomBelow < popoverRect.height + POPOVER_GAP &&
+      roomAbove > roomBelow;
+
+    let left = triggerRect.left + (triggerRect.width / 2) - 42;
+    left = Math.max(
+      VIEWPORT_MARGIN,
+      Math.min(left, viewportWidth - popoverRect.width - VIEWPORT_MARGIN)
+    );
+
+    let top = placeAbove
+      ? triggerRect.top - popoverRect.height - POPOVER_GAP
+      : triggerRect.bottom + POPOVER_GAP;
+
+    top = Math.max(
+      VIEWPORT_MARGIN,
+      Math.min(top, viewportHeight - popoverRect.height - VIEWPORT_MARGIN)
+    );
+
+    const arrowLeft = Math.max(
+      18,
+      Math.min(
+        triggerRect.left + (triggerRect.width / 2) - left - 5,
+        popoverRect.width - 28
+      )
+    );
+
+    popover.dataset.placement = placeAbove ? 'top' : 'bottom';
+    popover.style.left = Math.round(left) + 'px';
+    popover.style.top = Math.round(top) + 'px';
+    popover.style.setProperty(
+      '--eidos-glossary-arrow-left',
+      Math.round(arrowLeft) + 'px'
+    );
+  }
+
+  function setPinned(nextPinned) {
+    pinned = nextPinned;
+    popover.classList.toggle('is-pinned', pinned);
+    popover.setAttribute('role', pinned ? 'dialog' : 'tooltip');
+  }
+
+  function showPopover(trigger, shouldPin) {
+    const template = document.querySelector(
+      'template[data-eidos-glossary][data-glossary-key="' +
+      CSS.escape(trigger.dataset.glossaryKey) + '"]'
+    );
+
+    if (!template) {
+      return;
+    }
+
+    clearTimers();
+
+    if (activeTrigger && activeTrigger !== trigger) {
+      activeTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    activeTrigger = trigger;
+    activeTrigger.setAttribute('aria-expanded', 'true');
+    contentHost.replaceChildren(template.content.cloneNode(true));
+
+    const entry = contentHost.querySelector('.eidos-glossary-entry');
+    if (entry && entry.querySelector('.eidos-glossary-media')) {
+      entry.classList.add('has-media');
+    }
+
+    setPinned(Boolean(shouldPin));
+    popover.hidden = false;
+
+    window.requestAnimationFrame(function () {
+      positionPopover();
+      popover.classList.add('is-visible');
+    });
+  }
+
+  function closePopover(force) {
+    if (!popover || popover.hidden || (pinned && !force)) {
+      return;
+    }
+
+    clearTimers();
+    setPinned(false);
+    popover.classList.remove('is-visible');
+
+    if (activeTrigger) {
+      activeTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    activeTrigger = null;
+    hideTimer = window.setTimeout(function () {
+      popover.hidden = true;
+      contentHost.replaceChildren();
+      popover.style.removeProperty('left');
+      popover.style.removeProperty('top');
+    }, 180);
+  }
+
+  function scheduleClose() {
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(function () {
+      closePopover(false);
+    }, CLOSE_DELAY_MS);
+  }
+
+  function bindTrigger(trigger) {
+    trigger.addEventListener('pointerenter', function (event) {
+      if (event.pointerType === 'mouse' && !pinned) {
+        showPopover(trigger, false);
+      }
+    });
+
+    trigger.addEventListener('pointerleave', function (event) {
+      if (event.pointerType === 'mouse' && !pinned) {
+        scheduleClose();
+      }
+    });
+
+    trigger.addEventListener('focus', function () {
+      if (suppressNextFocus) {
+        suppressNextFocus = false;
+        return;
+      }
+
+      if (!pinned) {
+        showPopover(trigger, false);
+      }
+    });
+
+    trigger.addEventListener('blur', function (event) {
+      if (!pinned && !popover.contains(event.relatedTarget)) {
+        scheduleClose();
+      }
+    });
+
+    trigger.addEventListener('click', function () {
+      showPopover(trigger, true);
+    });
+  }
+
+  function initialiseGlossary() {
+    const article = document.querySelector('[data-article-content]');
+    const templates = Array.from(
+      document.querySelectorAll('template[data-eidos-glossary][data-term]')
+    );
+
+    if (!article || !templates.length) {
+      return;
+    }
+
+    createPopover();
+
+    templates.forEach(function (template, index) {
+      const term = template.dataset.term.trim();
+      const aliases = (template.dataset.aliases || '')
+        .split('|')
+        .map(function (alias) { return alias.trim(); })
+        .filter(Boolean);
+      const candidates = [term].concat(aliases)
+        .sort(function (a, b) { return b.length - a.length; });
+      const key = template.dataset.glossaryKey || 'glossary-' + (index + 1);
+      let match = null;
+      let matchedTerm = term;
+
+      template.dataset.glossaryKey = key;
+
+      candidates.some(function (candidate) {
+        match = findFirstOccurrence(article, candidate);
+        if (match) {
+          matchedTerm = candidate;
+          return true;
+        }
+        return false;
+      });
+
+      if (match) {
+        bindTrigger(wrapOccurrence(match, key, matchedTerm));
+      }
+    });
+
+    popover.addEventListener('pointerenter', function (event) {
+      if (event.pointerType === 'mouse') {
+        window.clearTimeout(closeTimer);
+      }
+    });
+
+    popover.addEventListener('pointerleave', function (event) {
+      if (event.pointerType === 'mouse' && !pinned) {
+        scheduleClose();
+      }
+    });
+
+    popover.addEventListener('click', function (event) {
+      if (!event.target.closest('.eidos-glossary-close') && !pinned) {
+        setPinned(true);
+      }
+    });
+
+    closeButton.addEventListener('click', function (event) {
+      const triggerToFocus = activeTrigger;
+
+      event.stopPropagation();
+      closePopover(true);
+
+      if (triggerToFocus) {
+        suppressNextFocus = true;
+        triggerToFocus.focus();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && popover && !popover.hidden) {
+        const triggerToFocus = activeTrigger;
+
+        closePopover(true);
+
+        if (triggerToFocus) {
+          suppressNextFocus = true;
+          triggerToFocus.focus();
+        }
+      }
+    });
+
+    window.addEventListener('resize', positionPopover);
+    window.addEventListener('scroll', positionPopover, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiseGlossary);
+  } else {
+    initialiseGlossary();
+  }
+})();
+
+
 
 

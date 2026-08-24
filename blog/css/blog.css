@@ -1451,3 +1451,273 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
     margin-bottom:clamp(52px,7vw,72px);
 
 }
+
+
+/* =========================================================
+   GLOSARIO CONTEXTUAL
+   El contenido de cada ficha vive en el HTML de cada artículo.
+   ========================================================= */
+
+.eidos-glossary-term{
+    display:inline;
+    padding:0;
+    border:0;
+    border-bottom:1px dotted rgba(201,168,76,.95);
+    background:transparent;
+    color:inherit;
+    font:inherit;
+    line-height:inherit;
+    text-align:inherit;
+    cursor:help;
+    transition:color .18s ease,
+               border-color .18s ease,
+               text-shadow .18s ease;
+}
+
+.eidos-glossary-term:hover,
+.eidos-glossary-term:focus-visible,
+.eidos-glossary-term[aria-expanded="true"]{
+    color:#d9bd69;
+    border-bottom-color:#e4c86f;
+    text-shadow:0 0 12px rgba(201,168,76,.22);
+}
+
+.eidos-glossary-term:focus-visible{
+    outline:1px solid rgba(201,168,76,.5);
+    outline-offset:3px;
+    border-radius:2px;
+}
+
+#eidos-glossary-popover,
+#eidos-glossary-popover *{
+    box-sizing:border-box;
+}
+
+#eidos-glossary-popover{
+    --eidos-glossary-arrow-left:28px;
+
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:1000001;
+
+    width:min(390px,calc(100vw - 28px));
+    overflow:visible;
+
+    padding:22px 24px 21px;
+    border:1px solid rgba(201,168,76,.38);
+    border-radius:14px;
+    background:
+        radial-gradient(circle at 100% 0%,rgba(201,168,76,.11),transparent 42%),
+        linear-gradient(145deg,rgba(17,18,21,.985),rgba(7,8,10,.985));
+    color:#d8d4ca;
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.48),
+        0 0 0 1px rgba(255,255,255,.025) inset;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(7px) scale(.985);
+    transform-origin:top left;
+    pointer-events:none;
+    transition:opacity .16s ease,
+               visibility .16s ease,
+               transform .16s ease;
+}
+
+#eidos-glossary-popover[data-placement="top"]{
+    transform:translateY(-7px) scale(.985);
+    transform-origin:bottom left;
+}
+
+#eidos-glossary-popover.is-visible{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+}
+
+#eidos-glossary-popover::before{
+    content:"";
+    position:absolute;
+    left:var(--eidos-glossary-arrow-left);
+    top:-6px;
+    width:10px;
+    height:10px;
+    border-left:1px solid rgba(201,168,76,.38);
+    border-top:1px solid rgba(201,168,76,.38);
+    background:#111215;
+    transform:rotate(45deg);
+}
+
+#eidos-glossary-popover[data-placement="top"]::before{
+    top:auto;
+    bottom:-6px;
+    border:0;
+    border-right:1px solid rgba(201,168,76,.38);
+    border-bottom:1px solid rgba(201,168,76,.38);
+    background:#08090b;
+}
+
+.eidos-glossary-close{
+    position:absolute;
+    top:10px;
+    right:11px;
+    z-index:2;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    padding:0;
+
+    border:1px solid rgba(201,168,76,.28);
+    border-radius:50%;
+    background:rgba(7,8,10,.68);
+    color:#c9a84c;
+    font:300 22px/1 Arial,sans-serif;
+    cursor:pointer;
+    transition:background .18s ease,
+               border-color .18s ease,
+               color .18s ease,
+               transform .18s ease;
+}
+
+#eidos-glossary-popover.is-pinned .eidos-glossary-close{
+    display:flex;
+}
+
+.eidos-glossary-close:hover,
+.eidos-glossary-close:focus-visible{
+    border-color:rgba(201,168,76,.68);
+    background:rgba(201,168,76,.12);
+    color:#ead889;
+    transform:rotate(4deg);
+}
+
+.eidos-glossary-close:focus-visible{
+    outline:1px solid rgba(201,168,76,.62);
+    outline-offset:2px;
+}
+
+.eidos-glossary-content{
+    min-width:0;
+    max-height:min(476px,calc(100vh - 72px));
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(201,168,76,.38) transparent;
+}
+
+.eidos-glossary-entry{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:0;
+}
+
+.eidos-glossary-entry.has-media{
+    grid-template-columns:minmax(0,1fr) 112px;
+    column-gap:18px;
+}
+
+.eidos-glossary-entry h3{
+    grid-column:1;
+    margin:0 34px 10px 0;
+    color:#d5b85f;
+    font-family:'Cinzel',Georgia,serif;
+    font-size:1.02rem;
+    font-weight:500;
+    line-height:1.3;
+    letter-spacing:.035em;
+    text-transform:none;
+}
+
+.eidos-glossary-entry p{
+    grid-column:1;
+    margin:0;
+    color:#c9c5bb;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:1.03rem;
+    line-height:1.52;
+}
+
+.eidos-glossary-entry p + p{
+    margin-top:.72em;
+}
+
+.eidos-glossary-entry a{
+    color:#d2b457;
+    text-decoration:none;
+    border-bottom:1px solid rgba(201,168,76,.38);
+}
+
+.eidos-glossary-entry a:hover,
+.eidos-glossary-entry a:focus-visible{
+    color:#ead889;
+    border-bottom-color:#ead889;
+}
+
+.eidos-glossary-media{
+    grid-column:2;
+    grid-row:1 / span 4;
+    margin:0;
+    align-self:start;
+}
+
+.eidos-glossary-media img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:128px;
+    object-fit:cover;
+    border:1px solid rgba(201,168,76,.22);
+    border-radius:8px;
+}
+
+.eidos-glossary-media figcaption{
+    margin-top:6px;
+    color:#8f8a7e;
+    font-size:.68rem;
+    line-height:1.3;
+}
+
+@media (max-width:620px){
+    #eidos-glossary-popover{
+        left:14px !important;
+        right:14px;
+        top:auto !important;
+        bottom:14px;
+        width:auto;
+        padding:21px 21px 20px;
+        border-radius:15px;
+        transform:translateY(12px) scale(.99);
+        transform-origin:bottom center;
+    }
+
+    #eidos-glossary-popover.is-visible{
+        transform:translateY(0) scale(1);
+    }
+
+    #eidos-glossary-popover::before{
+        display:none;
+    }
+
+    .eidos-glossary-content{
+        max-height:calc(70vh - 41px);
+    }
+
+    .eidos-glossary-entry.has-media{
+        grid-template-columns:minmax(0,1fr) 92px;
+        column-gap:14px;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .eidos-glossary-term,
+    #eidos-glossary-popover,
+    .eidos-glossary-close{
+        transition:none;
+    }
+}
