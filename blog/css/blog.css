@@ -1607,6 +1607,8 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
     min-width:0;
     max-height:min(476px,calc(100vh - 72px));
     overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
     scrollbar-width:thin;
     scrollbar-color:rgba(201,168,76,.38) transparent;
 }
@@ -1685,23 +1687,15 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
 
 @media (max-width:620px){
     #eidos-glossary-popover{
-        left:14px !important;
-        right:14px;
-        top:auto !important;
-        bottom:14px;
-        width:auto;
+        right:auto;
+        bottom:auto;
+        width:min(390px,calc(100vw - 28px));
         padding:21px 21px 20px;
         border-radius:15px;
-        transform:translateY(12px) scale(.99);
-        transform-origin:bottom center;
-    }
-
-    #eidos-glossary-popover.is-visible{
-        transform:translateY(0) scale(1);
     }
 
     #eidos-glossary-popover::before{
-        display:none;
+        display:block;
     }
 
     .eidos-glossary-content{

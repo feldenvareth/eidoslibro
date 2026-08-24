@@ -1082,11 +1082,6 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    if (window.matchMedia('(max-width: 620px)').matches) {
-      popover.style.removeProperty('--eidos-glossary-arrow-left');
-      return;
-    }
-
     const triggerRect = activeTrigger.getBoundingClientRect();
     const popoverRect = popover.getBoundingClientRect();
     const viewportWidth = document.documentElement.clientWidth;
@@ -1216,6 +1211,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
+      if (pinned && activeTrigger !== trigger) {
+        showPopover(trigger, true);
+        return;
+      }
+
       if (!pinned) {
         showPopover(trigger, false);
       }
@@ -1227,7 +1227,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    trigger.addEventListener('click', function () {
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
       showPopover(trigger, true);
     });
   }
@@ -1296,9 +1297,9 @@ document.addEventListener('DOMContentLoaded', function () {
       event.stopPropagation();
       closePopover(true);
 
-      if (triggerToFocus) {
+      if (triggerToFocus && event.detail === 0) {
         suppressNextFocus = true;
-        triggerToFocus.focus();
+        triggerToFocus.focus({ preventScroll: true });
       }
     });
 
@@ -1310,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (triggerToFocus) {
           suppressNextFocus = true;
-          triggerToFocus.focus();
+          triggerToFocus.focus({ preventScroll: true });
         }
       }
     });
