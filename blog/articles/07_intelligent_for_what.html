@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Intelligent for What? Evolution and Forms of Intelligence | EIDOS Blog</title>
+<meta content="Why intelligence is not an evolutionary ladder: from dogs, crows and octopuses to human culture and artificial intelligences." name="description"/>
+<meta content="Eidos, intelligence, evolution, animal cognition, comparative cognition, dog, crow, octopus, bee, human evolution, cumulative culture, artificial intelligence, consciousness" name="keywords"/>
+<meta content="Felden Vareth" name="author"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html" rel="canonical"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="EIDOS" property="og:site_name"/>
+<meta content="Intelligent for What?" property="og:title"/>
+<meta content="Human intelligence is not the only measure: how evolution produced different cognitive abilities for different problems." property="og:description"/>
+<meta content="https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html" property="og:url"/>
+<meta content="https://www.eidoslibro.com/blog/articles/images/07/fondo.jpg" property="og:image"/>
+<meta content="2026-08-13" property="article:published_time"/>
+<meta content="Felden Vareth" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Intelligent for What?" name="twitter:title"/>
+<meta content="From cheetahs and dogs to crows, octopuses and AI: why intelligence does not form a single evolutionary ladder." name="twitter:description"/>
+<meta content="https://www.eidoslibro.com/blog/articles/images/07/fondo.jpg" name="twitter:image"/>
+<link href="../../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png"/>
+<link href="../../assets/images/favicon.png" rel="apple-touch-icon"/>
+<meta content="#050608" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Josefin+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Intelligent for What? How Evolution Produced Many Ways of Solving the World","description":"Why intelligence is not an evolutionary ladder: how bodies, senses, ecology, culture and technology produce different ways of solving problems.","image":"https://www.eidoslibro.com/blog/articles/images/07/fondo.jpg","datePublished":"2026-08-13","dateModified":"2026-08-13","author":{"@type":"Person","name":"Felden Vareth"},"publisher":{"@type":"Organization","name":"EIDOS"},"mainEntityOfPage":"https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html","inLanguage":"en"}</script>
+<!-- Google tag (gtag.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'analytics_storage': 'denied'
+});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GRKE5N9XFB"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GRKE5N9XFB');
+</script>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════
+     EIDOS MINIJUEGO     Vinculado al reproductor
+     Pega este bloque completo antes de </body>
+     ═══════════════════════════════════════════ -->
+<style>
+  /* ─────────────────────────────────────────
+     AISLAMIENTO BÁSICO DEL WIDGET
+     ───────────────────────────────────────── */
+
+  #eidos-launcher,
+  #eidos-launcher *,
+  #eidos-panel,
+  #eidos-panel * {
+    box-sizing: border-box;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CONTENEDOR DEL BOTÓN
+     Oculto hasta que empiece el lector
+     ───────────────────────────────────────── */
+
+  #eidos-launcher {
+  position: fixed;
+
+  left: 18px;
+  right: auto;
+  bottom: 18px;
+
+  z-index: 999999;
+
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, serif;
+}
+
+
+  /* Fila de selección de minijuegos */
+  .eidos-game-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BURBUJA DE TEXTO
+     ───────────────────────────────────────── */
+
+#eidos-bubble {
+  display: block;
+
+  margin: 0;
+  padding: 6px 10px;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: #f5ecd0;
+
+  border: none;
+  border-radius: 14px 14px 14px 4px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.35);
+
+  font-family: Georgia, serif;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.2;
+
+  white-space: nowrap;
+
+  opacity: 0.88;
+
+  animation:
+    eidosPulse 2.5s infinite;
+}
+
+  @keyframes eidosPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN CIRCULAR
+     ───────────────────────────────────────── */
+
+ .eidos-game-btn {
+  width: 48px;
+  height: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  background: rgba(30, 61, 47, 0.92);
+  color: inherit;
+
+  border: 1px solid #c8a84b;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.4);
+
+  cursor: pointer;
+
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  opacity: 0.88;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.eidos-game-btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+
+/* Nave real del juego Péndulos: cápsula, estabilizadores, núcleo y halo */
+.eidos-ship-icon {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.eidos-ship-halo {
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  width: 30px;
+  height: 18px;
+  border: 1px solid rgba(200, 168, 75, .7);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(200, 168, 75, .55);
+  animation: eidosShipPulse 2.2s ease-in-out infinite;
+}
+
+.eidos-ship-body {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 20px;
+  height: 10px;
+  border: 1px solid #c8a84b;
+  border-radius: 7px;
+  background: #183328;
+  box-shadow: 0 0 5px rgba(200, 168, 75, .45);
+}
+
+.eidos-ship-arm {
+  position: absolute;
+  top: 11px;
+  width: 5px;
+  height: 1px;
+  background: rgba(200, 168, 75, .85);
+}
+
+.eidos-ship-arm-left { left: 4px; }
+.eidos-ship-arm-right { right: 4px; }
+
+.eidos-ship-light {
+  position: absolute;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff7b5 0 20%, #c8a84b 45%, rgba(200,168,75,.15) 100%);
+  box-shadow: 0 0 6px #c8a84b;
+}
+
+.eidos-ship-light-left { left: 0; }
+.eidos-ship-light-right { right: 0; }
+
+.eidos-ship-core {
+  position: absolute;
+  left: 14px;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0 20%, #dffcf6 35%, #69b8aa 100%);
+  box-shadow: 0 0 7px #8fd4c2;
+}
+
+@keyframes eidosShipPulse {
+  0%, 100% { transform: scale(1); opacity: .55; }
+  50% { transform: scale(1.08); opacity: .95; }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANEL DEL JUEGO
+     Formato vertical adaptativo
+     ───────────────────────────────────────── */
+
+  #eidos-panel {
+    display: none;
+
+    position: fixed;
+
+    right: 18px;
+    bottom: 18px;
+
+    z-index: 999998;
+
+    width: min(
+      620px,
+      calc(100vw - 36px),
+      calc((100dvh - 36px) * 620 / 900)
+    );
+
+    height: min(
+      900px,
+      calc(100dvh - 36px),
+      calc((100vw - 36px) * 900 / 620)
+    );
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: 2px solid #4a7c6f;
+    border-radius: 20px;
+
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.7);
+
+    overflow: hidden;
+  }
+
+  #eidos-panel.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  /* ─────────────────────────────────────────
+     CABECERA DEL PANEL
+     ───────────────────────────────────────── */
+
+  #eidos-panel-header {
+    flex: 0 0 58px;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 10px 18px;
+
+    background: #111a14;
+    color: #f5ecd0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 5px;
+  }
+
+  #eidos-panel-header span {
+    margin: 0;
+    padding: 0;
+
+    color: #f5ecd0;
+
+    font-family: Georgia, serif;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: inherit;
+  }
+
+
+  /* ─────────────────────────────────────────
+     BOTÓN DE CERRAR
+     ───────────────────────────────────────── */
+
+  #eidos-close {
+    width: auto;
+    height: auto;
+
+    margin: 0;
+    padding: 4px 6px;
+
+    background: transparent;
+    color: #888;
+
+    border: none;
+    border-radius: 0;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+      color 0.2s ease;
+  }
+
+  #eidos-close:hover {
+    color: #fff;
+  }
+
+
+  /* ─────────────────────────────────────────
+     IFRAME DEL JUEGO
+     ───────────────────────────────────────── */
+
+  #eidos-frame {
+    display: block;
+
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: #111a14;
+
+    border: none;
+
+    overflow: hidden;
+  }
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS ESTRECHAS
+     ───────────────────────────────────────── */
+
+ @media (max-width: 700px) {
+  #eidos-launcher {
+    left: 10px;
+    right: auto;
+    bottom: 10px;
+  }
+
+  .eidos-game-btn {
+    width: 42px;
+    height: 42px;
+
+    font-size: 18px;
+  }
+
+  #eidos-bubble {
+    max-width: calc(100vw - 20px);
+
+    padding: 5px 8px;
+
+    font-size: 10px;
+
+    white-space: normal;
+    text-align: center;
+  }
+
+  #eidos-panel {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+
+    width: auto;
+    height: auto;
+
+    border-radius: 14px;
+  }
+
+  #eidos-panel-header {
+    flex-basis: 48px;
+
+    padding: 8px 12px;
+
+    font-size: 17px;
+    letter-spacing: 3px;
+  }
+}
+
+
+  /* ─────────────────────────────────────────
+     PANTALLAS BAJAS
+     ───────────────────────────────────────── */
+
+  @media (min-width: 701px) and (max-height: 760px) {
+    #eidos-panel {
+      top: 8px;
+      bottom: 8px;
+
+      width: min(
+        500px,
+        calc(100vw - 16px),
+        calc((100dvh - 16px) * 500 / 720)
+      );
+
+      height: min(
+        720px,
+        calc(100dvh - 16px),
+        calc((100vw - 16px) * 720 / 500)
+      );
+    }
+
+    #eidos-panel-header {
+      flex-basis: 46px;
+
+      padding-top: 7px;
+      padding-bottom: 7px;
+
+      font-size: 16px;
+    }
+  }
+
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
+</style>
+<div aria-hidden="true" id="eidos-panel">
+<div id="eidos-panel-header">
+<span>I N T E L L I G E N C E</span>
+<button aria-label="Close interactive experience" id="eidos-close" onclick="closeEidos()" type="button">
+      ✕
+    </button>
+</div>
+<iframe allow="autoplay; fullscreen" id="eidos-frame" scrolling="no" src="about:blank" title="Interactive experience about evolution">
+</iframe>
+</div>
+<script>
+  /* ─────────────────────────────────────────
+     REFERENCIAS DEL WIDGET
+     ───────────────────────────────────────── */
+
+  const eidosPanel =
+    document.getElementById('eidos-panel');
+
+  const eidosFrame =
+    document.getElementById('eidos-frame');
+
+  const evolutionExperienceButtons =
+    document.querySelectorAll('.evolution-experience-btn');
+
+
+  /* ─────────────────────────────────────────
+     ABRIR EL JUEGO ELEGIDO
+     ───────────────────────────────────────── */
+
+  function openEidosGame(gameUrl) {
+    if (!eidosPanel || !eidosFrame) {
+      return;
+    }
+
+    eidosFrame.src = gameUrl;
+    eidosPanel.classList.add('open');
+    eidosPanel.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
+    });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
+  }
+
+  /* ─────────────────────────────────────────
+     CERRAR EL JUEGO
+     Nunca lo abre por accidente
+     ───────────────────────────────────────── */
+
+  function closeEidos() {
+    if (!eidosPanel) {
+      return;
+    }
+
+    eidosPanel.classList.remove('open');
+
+    eidosPanel.setAttribute(
+      'aria-hidden',
+      'true'
+    );
+
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
+    });
+  }
+
+
+  /* ─────────────────────────────────────────
+     MENSAJE ENVIADO DESDE EL IFRAME
+     ───────────────────────────────────────── */
+
+  window.addEventListener(
+    'message',
+    function(event) {
+      if (event.data !== 'cerrar-eidos') {
+        return;
+      }
+
+      closeEidos();
+    }
+  );
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
+</script>
+<!-- ═══════════════════════════════════════════
+     FIN DEL LANZADOR EIDOS
+     ═══════════════════════════════════════════ -->
+<div class="reading-progress reading-progress-article">
+<span></span>
+</div>
+<div class="reading-progress reading-progress-forum">
+<span></span>
+</div>
+<div aria-hidden="true" class="ambient"></div>
+<div class="article-shell">
+<nav aria-label="Article navigation" class="article-nav">
+<a href="../indexeng.html">← Back to the blog</a>
+<a href="../../indexeng.html">Eidos home</a>
+<a href="../../relatos/index.html">Stories</a>
+<a aria-label="Versión en español" class="lang-switch" href="../articulos/07_inteligente_para_que.html" title="Versión en español">
+<img alt="Español" src="../../assets/images/flagspain.webp"/>
+</a>
+</nav>
+<header class="article-hero reveal">
+<p class="kicker">Eidos · Evolution · Intelligence</p>
+<h1>Intelligent for What?<br/>how evolution produced many ways of solving the world</h1>
+<p class="article-meta">Science · 35 min · Felden Vareth · 01-09-2026</p>
+<div class="article-actions">
+<a class="btn gold" href="#comments">Comments</a>
+<a class="btn" href="../indexeng.html">Archive</a>
+<button class="btn share-btn" data-share="" type="button">Copy link</button>
+<a class="btn" download="" href="images/07/pdf.pdf">Download PDF</a>
+<a class="btn" href="images/07/reproductordoble.html" rel="noopener" target="_blank" title="Conversation based on this essay. It is not a reading of the article.">Listen to conversation</a>
+<div class="read-aloud-widget">
+<button class="btn read-aloud-open" type="button">🎧 Listen with your browser</button>
+<div class="read-aloud-player" hidden="">
+<div class="read-aloud-controls">
+<button class="btn read-prev" type="button">⏮ Previous section</button>
+<button class="btn read-pause" type="button">⏸ Pause</button>
+<button class="btn read-next" type="button">⏭ Next section</button>
+<button class="btn read-stop" type="button">■ Stop</button>
+<label class="read-speed-label">Speed <select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select></label>
+</div>
+<input class="read-progress" min="0" step="1" type="range" value="0"/>
+<p class="read-status">Automatic browser reading. Voice quality may vary depending on the device.</p>
+</div>
+<div class="read-floating-player" hidden="">
+<div class="read-floating-controls">
+<button class="btn read-floating-prev" title="Previous section" type="button">⏮</button>
+<button class="btn read-floating-pause" title="Pause" type="button">⏸</button>
+<button class="btn read-floating-next" title="Next section" type="button">⏭</button>
+<button class="btn read-floating-stop" title="Stop" type="button">■</button>
+<label class="read-speed-label">
+<select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<p class="read-floating-status"></p>
+</div>
+</div>
+</div>
+</header>
+<div class="article-cover reveal">
+<video autoplay loop muted="" playsinline="" poster="images/07/fondo.jpg" preload="metadata">
+<source src="images/07/video.mp4" type="video/mp4"/>
+</video>
+</div>
+<aside class="article-toc reveal" data-toc="" hidden="">
+<p class="kicker">Article map</p>
+<nav aria-label="Table of contents"></nav>
+</aside>
+<main class="article-content" data-article-content="">
+<p class="drop-intro"><em><span class="dropcap">F</span><span class="after-drop">or a long time, we have treated intelligence as though evolution had built a ladder and we occupied its highest rung.</span></em></p>
+<p>The image is appealing because it fits our own story. We are the species that writes books, designs particle accelerators, builds cities, sends probes beyond the Solar System and debates what it means to be intelligent. No other known animal has accumulated knowledge and technology on a comparable scale. From that true fact, it is easy to slip into a much less certain conclusion: that evolution advances from simple forms towards ever more intelligent ones, and that our minds somehow represent the final direction of the process.</p>
+<p>A similar mistake appeared in <a href="05_the_thousand_ways_to_continue.html"><strong>The Thousand Ways to Continue</strong></a>. From the perspective of our own biology, reproduction through male and female can seem like the natural way to reproduce. Widen the view and we find fission, budding, parthenogenesis, hermaphroditism, alternation between sexual and asexual phases, sex changes, spores, seeds, resistant eggs and strategies that scarcely resemble our own. Mammalian sexual reproduction is one of the solutions that particular lineages happened to retain.</p>
+<p>Something similar distorts the way we think about intelligence. We have defined the word using abilities in which our species excels to an extraordinary degree and then asked how closely other animals approach them. Memory, language, abstract reasoning, toolmaking, planning, social learning. These are real and relevant abilities, but natural selection has never had to sit an examination designed by human beings.</p>
+<p>In <a href="06_the_body_of_intelligence.html"><strong>The Body of Intelligence</strong></a>, we also saw that thinking and acting did not evolve separately. A mind receives information through a body, moves with it, manipulates the environment with the organs it possesses and learns within a particular sensory world. The next step is to broaden that idea. If bodies differ, so do the problems they face. And if the problems differ, we should not expect every form of intelligence to develop in the same direction.</p>
+<blockquote>Perhaps the question is not which species is more intelligent. Perhaps we should first ask: intelligent for what?</blockquote>
+<h2>The problem that makes this necessary: we have mistaken our speciality for the goal</h2>
+<p>Imagine that we wanted to decide which animal is best designed. We could measure speed and crown the cheetah. On land, over a short sprint, few vertebrates can compete with it. If we used that ability as a general criterion, an elephant, a tortoise or a human being would rank far below. The classification would be correct for one specific question and absurd for almost any other.</p>
+<p>The cheetah is not a superior animal because it runs faster. Its speed is part of a strategy built around a light body, a flexible spine, limbs adapted for running, a particular musculature and a particular way of hunting. That specialisation brings both advantages and costs. An elephant solved different problems through size, strength, spatial memory, a complex social life and a trunk capable of remarkably precise actions. A tortoise followed another path. Neither needs to become a cheetah to prove that it is well adapted to its way of life.</p>
+<p>With strength, we readily accept the same logic. We do not expect a swallow to lift the weight of a gorilla, or a gorilla to fly thousands of kilometres during migration. The same is true of the senses. A dog can extract information from smells that escapes us; many bats use echolocation to navigate and capture prey in darkness; bees perceive ultraviolet patterns on flowers that are absent from our visual experience. No one concludes from this that human vision is an incomplete version of a bee's.</p>
+<p>Intelligence should be treated according to the same principle. An animal needs to detect regularities, learn, remember, decide and alter its behaviour insofar as those abilities improve its chances of managing in the environment in which it lives. The problems faced by a social predator are not those of a pollinating insect. The problems of an animal that stores food for months ahead are not those of another that finds abundant food every day. Nor are the problems of a species that manipulates objects identical to those of one whose survival depends on interpreting social relationships.</p>
+<p>A qualification is useful here. Saying that each species possesses 'the intelligence it needs' is a convenient way of summarising the idea, but it is not a literal description of evolution. Natural selection does not know future needs, design solutions from scratch or guarantee perfect organisms. It works on heritable variation, bodies that already exist and constraints accumulated over millions of years. A trait may persist because it worked in a past environment, be repurposed for a new function, be limited by trade-offs with other traits, or cease to be advantageous when the environment changes.</p>
+<p>Evolution, then, does not issue each species with an exact set of equipment. It produces solutions that are viable enough within a particular history. That distinction matters because it prevents us from replacing one error with another. We do not need to imagine nature as an engineer assigning each animal the correct speed, strength or intelligence. We need only recognise that every one of these capacities has costs and benefits, and that its value depends on context.</p>
+<blockquote>The cheetah is not the culmination of locomotion because it runs faster. Nor is the human being the culmination of evolution because we have taken certain cognitive abilities much further than any other known species.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2024.0255" rel="noopener" target="_blank">Embodied cognitive evolution and the limits of convergence — Philosophical Transactions of the Royal Society B (2025)</a></p>
+<p><a href="https://proceedings.mlr.press/v229/zitkovich23a.html" rel="noopener" target="_blank">RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control — Conference on Robot Learning (2023)</a></p>
+<p><a href="https://doi.org/10.1109/ICRA57147.2024.10611477" rel="noopener" target="_blank">Open X-Embodiment: Robotic Learning Datasets and RT-X Models — ICRA (2024)</a></p>
+<p><a href="https://www.nature.com/articles/s41562-024-02024-1" rel="noopener" target="_blank">When combinations of humans and AI are useful: a systematic review and meta-analysis — Nature Human Behaviour (2024)</a></p>
+<p><a href="https://www.science.org/doi/10.1126/sciadv.adn5290" rel="noopener" target="_blank">Generative AI enhances individual creativity but reduces the collective diversity of novel content — Science Advances (2024)</a></p>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2021.1728" rel="noopener" target="_blank">Linking cognition to ecology in wild sympatric mouse lemur species — Proceedings of the Royal Society B (2021)</a></p>
+</section>
+<h2>First clue: evolution does not build a ladder</h2>
+<p>The image of evolution as an upward march has deep cultural roots. It is still common to see drawings in which an ape-like organism appears on the left, a series of figures gradually straightens, and a modern human being completes the sequence. The image suggests a direction that evolutionary biology does not contain. No living species is a rough draft of another. All occupy branches that have continued evolving from their respective ancestors.</p>
+<p>A modern chimpanzee is not our ancestor, nor is it frozen at an earlier stage of humanity. We share a common ancestor and, since that split, both lineages have accumulated changes of their own. The same is true on much larger scales. Birds are not reptiles that stopped halfway towards becoming mammals. Octopuses are not a primitive version of vertebrate intelligence. Every branch is subject to its own pressures, opportunities and constraints.</p>
+<p>This branching structure also explains why evolution can produce similar solutions using very different inherited materials and anatomies. Flight arose independently in insects, pterosaurs, birds and bats; complex eyes have several evolutionary histories, and echolocation developed along separate paths in bats and toothed cetaceans. When two lineages face similar problems, selection can favour functionally comparable outcomes without requiring a recent common ancestor that already possessed the solution.</p>
+<p>The phenomenon can be seen even among animals that, at first glance, we might place very close together. The barn swallow (<em>Hirundo rustica</em>) and the common swift (<em>Apus apus</em>) share an intensely aerial life: wings adapted for rapid flight, much of their food caught as insects in the air, and silhouettes similar enough to confuse an unfamiliar observer. Yet they belong to quite separate branches. The swallow is a passerine (crows, magpies, blackbirds, sparrows, finches and so on); the swift belongs to the Apodiformes. Evolutionarily, a swallow is far closer to a sparrow than to a swift, even though the way it exploits aerial space looks much more like the latter's. The resemblance comes largely from the problem both have had to solve, not from a recent shared history.</p>
+<p>Convergence can cross far greater distances. The <strong>hummingbird hawk-moth</strong> (<em>Macroglossum stellatarum</em>) is not even a bird, but a lepidopteran of the family Sphingidae. It can hover in front of a flower while inserting its long proboscis to extract nectar, a functional strategy strikingly reminiscent of hummingbirds, which also hover to feed from flowers. Their wings, muscles, nervous systems and mouthparts do not derive from the same ancestral solution; insects and birds travelled entirely different paths towards a similar answer to the same problem: extracting a small energy reward with precision while remaining in flight.</p>
+<p>And this matters when we talk about intelligence. If selection can produce wings, forms of flight or feeding strategies that are functionally similar in very distant branches, we should not expect a particular cognitive ability to have to appear only once, or through a single brain architecture. Memory, navigation, social learning, manipulation and problem-solving can arise in different ways when they provide a useful solution to similar problems. Seen this way, intelligence stops looking like a ladder and begins to look much more like the rest of evolution: different branches that sometimes meet again in similar solutions.</p>
+<p>Cognition is not exempt from that logic. A nervous system capable of learning can provide advantages in contexts where conditions change, food is distributed unpredictably, individuals must be recognised, behaviour anticipated, locations remembered or actions combined. But there is no reason why all those advantages should culminate in a brain like ours.</p>
+<p>Indeed, comparative research finds that different cognitive tests do not always behave as manifestations of a single general ability. In 2024, a study of 203 birds from 15 passerine species compared problem-solving, associative learning, reversal learning and self-control. Species that performed better on extractive-foraging problems showed more technical innovations recorded in the wild and larger brains, but the other tasks did not follow the same pattern. The authors concluded that the tests measured different components of cognition and questioned whether they could simply be grouped under a single label of flexibility.</p>
+<p>The result does not prove that no form of general cognitive ability exists in animals. That debate remains open and also depends on how the tests are designed. What it does reveal is an essential difficulty. When we use one word for memory, self-control, innovation, learning, navigation, communication and reasoning, we risk turning into a line something that may look more like a space with many dimensions.</p>
+<p>The same is true even within our own species. One person may have extraordinary spatial memory and be unremarkable at calculation. Another may understand mathematical relationships with ease and struggle to find their way around a city. The psychometric concept of general intelligence captures real correlations among human abilities, but it does not turn every cognitive operation into a single interchangeable function.</p>
+<p>That is why comparing species requires particular care. A test may depend on motivation for food, on the sense used to locate it, on willingness to touch an unfamiliar object, on the anatomy needed to manipulate it or on previous experience with similar situations. Failure may mean that the animal does not understand the task. It may also mean that the task has not been posed in a perceptual or motor language suited to that animal.</p>
+<p>The comparison between dogs and cats offers a clear example. In tests where a human points to which of two containers holds food, dogs are usually much easier to test and, in some designs, outperform cats. But that difference cannot simply be read as a measure of general intelligence. In a comparative study published in 2023, every dog completed the task, whereas many cats stopped choosing as the trials progressed; when the cats were tested in their own homes, their willingness to participate increased. The authors themselves suggested food motivation, fatigue, attention, discomfort with handling or the unfamiliar environment as possible explanations. Dogs, moreover, come from a lineage domesticated over thousands of years in a close cooperative relationship with humans, whereas cat domestication followed a different path.</p>
+<p>Such a result tells us little, on its own, about a cat's general intelligence. Other experiments show that cats can use certain human cues, associate names with familiar individuals and rapidly form associations between sounds and images without the kind of explicit training used in many dog studies. They also have their own ways of communicating with us. The so-called slow blink, for example, becomes more frequent during positive interactions between cats and people and may encourage the animal to approach a human. The contrast is useful precisely because it exposes the problem: a test may favour the animal most willing to cooperate with the experimenter, not necessarily the one with greater cognitive ability in general terms. From our perspective, a cat may seem almost disdainful of certain tests; scientifically, what we are seeing is more interesting: <strong>understanding a task and being motivated to demonstrate it are not the same thing.</strong></p>
+<blockquote>A classification is only as universal as the question that produces it.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.nature.com/articles/s41559-024-02342-7" rel="noopener" target="_blank">Problem-solving skills are predicted by technical innovations in the wild and brain size in passerines — Nature Ecology &amp; Evolution (2024)</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1323533111" rel="noopener" target="_blank">The evolution of self-control — PNAS (2014)</a></p>
+<p><a href="https://royalsocietypublishing.org/rstb/article/373/1756/20170283/30451/Comparative-psychometrics-establishing-what" rel="noopener" target="_blank">Comparative psychometrics: establishing what differs is central to understanding what evolves — Philosophical Transactions of the Royal Society B (2018)</a></p>
+<p><a href="https://www.nature.com/articles/s41598-023-45008-3" rel="noopener" target="_blank">Dogs outperform cats both in their testability and relying on human pointing gestures: a comparative study — Scientific Reports (2023)</a></p>
+<p><a href="https://www.nature.com/articles/s41598-024-74006-2" rel="noopener" target="_blank">Rapid formation of picture-word association in cats — Scientific Reports (2024)</a></p>
+</section>
+<h2>Before we go on: what do we mean by intelligence?</h2>
+<p>Part of the difficulty lies in the word itself. In everyday language, we call someone intelligent if they solve a problem quickly, learn easily, remember, understand an explanation, anticipate consequences or find an unexpected solution. In human psychology, statistical tools can be used to study how different abilities relate to one another and how far they share general factors. In comparative cognition, transferring that logic across species is much harder because the organism, the senses, motivation and the means of responding all change at the same time.</p>
+<p>That is why research usually works with operational abilities. It measures how long an individual takes to learn an association, whether it can reverse a rule when conditions change, how well it remembers a location, whether it can inhibit an immediate response, use social information, solve a physical barrier or transfer a learned solution to a new situation. Each experiment illuminates one part of the problem. None contains, by itself, a complete definition of intelligence.</p>
+<h3>Learning an association does not necessarily mean understanding it</h3>
+<p>Even the first of those measures requires an additional caution. Learning an association is not, by itself, the same as understanding the relationship between two events. Ivan Pavlov's classic experiments show this very clearly. If an initially neutral signal repeatedly appears before food, a dog can eventually begin responding to that signal with anticipatory behaviour, including salivation. The animal has learned that one event predicts another. That is learning and it involves changes in the nervous system, but it does not by itself show that the dog represents the relationship abstractly or has reasoned about it.</p>
+<p>So measuring how long an individual takes to acquire an association can be useful for studying learning, memory or sensitivity to particular regularities, but it does not automatically measure general intelligence. Two individuals can reach the same response through different mechanisms. The difference becomes more informative when the rule changes, when new stimuli appear or when the learned solution must be transferred to another situation. Generalising, abandoning a strategy that no longer works or applying a relationship outside the context in which it was learned requires a different kind of flexibility from simply repeating an association.</p>
+<h3>Responding does not necessarily mean deciding</h3>
+<p>The nervous system also contains adaptive responses that do not even require conscious deliberation. Faced with an intense harmful stimulus, such as touching an extremely hot surface, circuits in the spinal cord can initiate a withdrawal reflex before the brain has consciously processed what has happened. The information also travels upwards to the brain, where it may become a perception of pain, a memory and a lesson, but the first protective movement does not require the individual to compare alternatives and decide to pull the hand away. Its effectiveness comes precisely from not waiting for a slower decision.</p>
+<p>The so-called <strong>rubber hand illusion</strong> reveals another, much more cerebral way of separating a response from conscious reasoning. In the classic experiment, a person's real hand is hidden while an artificial hand is placed in front of them in a position compatible with their body. If the real and false hands are stroked in synchrony, many people begin to experience some of the touch as coming from the hand they can see and may come to feel that it is partly incorporated into their own body. The effect arises from the integration of vision, touch and proprioception.</p>
+<p>When the artificial hand is threatened after the illusion has been induced, the body can show alarm responses and brain activation associated with threat even though the person knows perfectly well that they are looking at a rubber object. Controlled threats have been used in the laboratory, such as bringing a needle towards the false hand, and researchers have observed that the stronger the sense that the hand belongs to one's own body, the stronger the response may be in regions associated with anxiety and interoception. This is not a spinal reflex like withdrawing a limb from a harmful stimulus. It is a bodily representation constructed by the brain that can influence the response before conscious knowledge has the final say.</p>
+<p>These examples do not turn reflexes, conditioning or perceptual illusions into forms of intelligence. They serve precisely to mark the boundary. <strong>A behaviour can be rapid, appropriate and even look intelligent without arising from flexible deliberation.</strong> Before interpreting a response as evidence of intelligence, it is worth asking what mechanism produced it: a reflex, a learned association, a generalised rule or a representation of the problem capable of adapting when circumstances change.</p>
+<p>The distinction matters because two animals can produce very different results in a test for reasons unrelated to the ability we intended to measure. One individual may understand where a reward is and still refuse to approach because it is afraid of the apparatus. Another may persist longer and eventually solve the task because it is less neophobic or more motivated by food, without implying a more sophisticated representation. Even when two animals understand a problem in similar ways, their anatomy can make it much easier for one to solve than the other.</p>
+<p>Consider a task that requires moving a piece, rotating it or inserting it into an opening. A primate has hands with independent fingers and, in many species, an opposable thumb; a bird must use its beak, feet or a combination of both. The bird may understand the problem while having different motor possibilities for turning that understanding into action. A corvid can manipulate objects with extraordinary precision using its beak, but a test designed around movements that are natural for a hand may add a mechanical difficulty that has nothing to do with the reasoning we intended to study.</p>
+<p>That is why, in comparative cognition, the observable result depends on several layers at once: what the animal perceives, what it understands, what motivates it and what it can physically do with the body it has. <strong>A motor limitation can conceal a cognitive ability just as great physical dexterity can make a task look easy when cognitively it is not.</strong></p>
+<p>Researchers try to control for these factors, repeat tasks using different designs and compare species with methods adapted to their biology. Even so, caution remains necessary. Intelligence cannot be observed directly. We observe behaviour and infer processes from it. That difficulty exists even among humans, but it grows when the subject perceives the world differently and cannot tell us what strategy it used.</p>
+<p>Studies with great apes illustrate both the value and the limits of these comparisons. A classic paper published in <em>Science</em> in 2007 compared two-and-a-half-year-old children with chimpanzees and orangutans using a battery of physical and social tests. The children did not uniformly outperform the apes on every physical task; the clearest difference appeared in abilities related to social learning and communication. The authors proposed that an important part of human distinctiveness might lie in abilities adapted to participation in cultural groups.</p>
+<p>That interpretation remains debated, and newer studies have found in other animals components once regarded as exclusively human. This constant revision does not weaken comparison. It improves it. It forces broad claims to give way to increasingly precise questions. It is not enough to say that an animal 'understands' or 'does not understand'. We have to specify what information it uses, what alternatives have been ruled out and which part of the task can be solved through simpler mechanisms.</p>
+<p>There is also research attempting to link cognitive performance with biological success in wild populations. In 2023, a study of grey mouse lemurs found that individual variation in cognitive performance predicted subsequent survival, alongside factors such as body mass and exploration, providing evidence that certain cognitive differences can have direct consequences for fitness. But such links are difficult to generalise. An ability that is beneficial in one context may be neutral or costly in another, and a fast learning strategy is not necessarily always the best one.</p>
+<p>For this journey, then, we will use intelligence in a broad but not unlimited sense: the capacity to acquire and use information to adjust behaviour, solve problems and respond with some flexibility to relevant situations. It is a deliberately functional definition. It does not presuppose language, require consciousness or turn every ability into a single scale.</p>
+<blockquote>Measuring intelligence means discovering what information an animal can turn into useful behaviour and how flexibly it can do so, rather than measuring how much it resembles us.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.science.org/doi/10.1126/science.1146282" rel="noopener" target="_blank">Humans have evolved specialized skills of social cognition: the cultural intelligence hypothesis — Science (2007)</a></p>
+<p><a href="https://www.science.org/doi/10.1126/sciadv.adf9365" rel="noopener" target="_blank">Cognitive performance is linked to fitness in a wild primate — Science Advances (2023)</a></p>
+<p><a href="https://www.nature.com/articles/s41597-026-07191-6" rel="noopener" target="_blank">EVApeCognition: an 18-year dataset of great ape cognition — Scientific Data (2026)</a></p>
+<p><a href="https://www.nature.com/articles/35784" rel="noopener" target="_blank">Rubber hands 'feel' touch that eyes see — Nature (1998)</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/17517605/" rel="noopener" target="_blank">Threatening a rubber hand that you feel is yours elicits a cortical anxiety response — PNAS (2007)</a></p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/39150939/" rel="noopener" target="_blank">Experimental nerve block study on the nociceptive withdrawal reflex — 2024</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1400332111" rel="noopener" target="_blank">Dopamine dependency for acquisition and performance of Pavlovian conditioned responses — PNAS (2014)</a></p>
+</section>
+<h2>Second clue: a brain also has a price</h2>
+<p>Intelligence is usually described in terms of its advantages. It allows an organism to learn from mistakes, anticipate consequences, find new routes and change strategy when one stops working. But a complex nervous system is also living tissue. It has to be built, fed, maintained, protected and coordinated with the rest of the organism. The greater the investment, the greater the benefit required to sustain it across generations.</p>
+<p>The human brain offers an extreme example. It represents roughly two per cent of an adult's body mass and consumes around a fifth of the energy used by the body at rest. During childhood development, the brain's relative energy cost is even greater and coincides with extraordinarily slow bodily growth for a primate. Our prolonged childhood is not simply a waiting period before adult life. It is part of both the cost and the opportunity involved in building a mind that needs years of learning.</p>
+<p>This helps dismantle another intuition. If more intelligence were always better, selection should continually push towards larger brains and longer periods of learning. It does not. A large brain can be a poor investment when a simpler strategy reliably solves the problems that matter. Evolution does not reward complexity for its own sake. Indirectly and locally, it favours whatever reproduces more successfully under particular conditions.</p>
+<p>Brain size is also an imperfect measure. Brains are not all built with the same neuronal density or the same distribution of neurons among regions. In 2016, a comparative study showed that parrots and corvids pack into the forebrain numbers of neurons comparable to those of primates with much larger brains. That allows substantial processing capacity within a relatively small volume and helps explain why certain birds display complex behaviours long associated almost exclusively with mammalian brains.</p>
+<p>Miniaturisation goes even further in insects. A bee has a tiny brain compared with ours, yet it is not limited to a rigid chain of reflexes. It can learn associations, generalise certain visual rules, navigate, remember locations and solve simple numerical tasks under experimental conditions. We do not need to attribute a miniature human mind to a bee to recognise the lesson. A system with vastly less nervous tissue can perform sophisticated behavioural computations when its architecture and training are tuned to particular problems.</p>
+<p>The comparison brings us back to the cheetah. Maximum speed carries mechanical and metabolic costs; that is why not every animal is built to run as fast as possible. Cognitive capacity also has costs. There is no evolutionary reason to pay for every imaginable form of memory, learning or planning if survival and reproduction can be solved in another way.</p>
+<p>The abilities we observe today may exceed the minimum required. Evolution preserves redundancies, repurposes structures and can produce traits that later acquire different functions. Intelligence is a biological characteristic subject to trade-offs like any other. A brain does not sit outside the body's economy.</p>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1206390109" rel="noopener" target="_blank">Metabolic constraint imposes tradeoff between body size and number of brain neurons in human evolution — PNAS (2012)</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1323099111" rel="noopener" target="_blank">Metabolic costs and evolutionary implications of human brain development — PNAS (2014)</a></p>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1517131113" rel="noopener" target="_blank">Birds have primate-like numbers of neurons in the forebrain — PNAS (2016)</a></p>
+</section>
+<h2>Third clue: the environment decides which questions matter</h2>
+<p>The word intelligence acquires meaning when there is a problem to solve. For an animal that feeds on fruit appearing in different places and seasons, remembering where and when to find it can confer an enormous advantage. For another that chases moving prey, prediction, reaction speed and coordination matter. For a species living in stable groups, recognising individuals, alliances, kinship and signals of intention may be as important as finding food.</p>
+<p>This is one of the central ideas of cognitive ecology. Mental abilities are not understood only as abstract properties of a brain. They are also studied in relation to the recurring problems an organism encounters in its environment. Closely related species can show cognitive differences associated with feeding strategies, use of space, social life or environmental variability. The evolution of cognition does not take place in an examination room. It takes place within ecological niches.</p>
+<p>Dogs let us see this at very close range because their niche became intertwined with ours. Domestication did not simply produce more docile wolves. Generations of coexistence and selection altered behaviour, development and social sensitivity. Studies with puppies have found an early emergence of abilities to use certain human gestures, and comparisons with wolves intensively raised by people show marked differences in cooperative and communicative tasks with us. Part of that sensitivity appears at a very early age and also has a heritable component, suggesting that domestication not only gave each dog more opportunities to learn from people, but also changed its predisposition to pay attention to them.</p>
+<p>Domestication appears to have favoured a cognitive profile in dogs that differs from that of wolves. In some tests of independent problem-solving, the reverse pattern even appears. Wolves may explore a physical problem more persistently and keep trying to manipulate it while many dogs abandon the task sooner or turn to look at a person. The same change that made the dog an extraordinary reader of our gestures may have favoured a different strategy: <strong>when the problem becomes difficult, one possible solution is to turn to the human being who has formed part of its social environment for thousands of generations.</strong></p>
+<p>Seen this way, dog and wolf offer something close to a natural experiment in the central idea of this essay. They come from extremely close lineages and retain enormous biological compatibility, yet tens of thousands of years under different social conditions have favoured different cognitive profiles. A wolf must interpret and cooperate primarily with other wolves and solve much of its relationship with the environment without human help. A dog has lived within a world built by us, where following a gaze, interpreting a gesture, recognising an intention or asking for help can be as effective as manipulating the problem directly.</p>
+<p>Selection did not necessarily make one more intelligent and the other less so. <strong>It changed what kind of information was most valuable to each and which strategy was worth using to solve a problem.</strong></p>
+<p>It would be a mistake to turn that finding into a competition and declare a dog 'more intelligent' than a wolf. It demonstrates precisely the opposite. The dog developed extraordinary competence within one very particular problem: living in a social environment where another species controls resources, opens doors, points to objects, establishes routines and communicates intentions through gaze, voice and gesture. Understanding us became part of its ecology.</p>
+<p>The pointing gesture offers a revealing example. It is so natural to us that we barely notice the operation it contains. When someone extends an arm towards an object, the relevant information is not in the hand: <strong>the hand refers to something beyond itself</strong>. Dogs use this kind of human signal with remarkable ease and can do so even under conditions designed to prevent them from merely approaching the hand. The ability is not uniquely canine. Cats can also use our pointing gestures, and wolves intensively socialised with people can learn to do so, although in wolves the ability tends to depend more heavily on experience and appears less spontaneously than in dogs.</p>
+<p>The comparison with primates is even more striking. Chimpanzees and other great apes are evolutionarily far closer to us than dogs are and possess extraordinary cognitive abilities. Yet in certain cooperative object-choice tests, dogs have shown greater ease in using human pointing as information about where a reward is located. That result reflects a specific specialisation for interpreting human signals; it does not allow dogs and chimpanzees to be ranked on a general scale of intelligence. Indeed, great-ape performance changes substantially when the task design, previous experience or communicative context changes. What is interesting is precisely that <strong>evolutionary proximity to our species does not guarantee a greater specialisation for interpreting our signals</strong>.</p>
+<p>Over thousands of generations, paying attention to a human hand, a gaze or a change in tone of voice may have become a useful strategy for the dog. For a dog, understanding a person is not a laboratory curiosity: it can form part of its everyday way of solving the environment. <strong>A dog does not necessarily solve more problems than other animals; it has incorporated the human being into its repertoire of solutions.</strong></p>
+<p>Moreover, we assess the dog from a world dominated by sight and language. For the dog, smell has an importance our own experience barely allows us to imagine. The trail left by another animal, the origin of a substance or the identity of an individual may remain available in the environment long after our eyes can find no trace at all. Asking what a dog understands using only visual tasks is like studying part of the system while ignoring one of its principal channels of information.</p>
+<p>With bees, the asymmetry is greater still. Their lives require them to navigate enormous distances relative to their body size, recognise flowers, learn associations between colours, shapes, smells and rewards, return to the nest and make use of information from other bees. Controlled experiments have shown that they can learn simple numerical relationships, order zero relative to positive quantities and even apply trained rules of addition and subtraction with small numbers. None of this turns a bee into a tiny mathematician. It shows that an insect brain can construct useful representations for tasks that, expressed in our experimental language, seem surprisingly abstract.</p>
+<p>The point is not to collect animal feats. It is to understand why those feats dismantle any single scale. A bee does not need to write an equation to use quantitative regularities. A dog does not need symbolic language to interpret human behaviour. An animal can fail a test designed by us and still solve, every day, problems that we would handle disastrously if we had to live with its body and its senses.</p>
+<blockquote>Each mind does not receive the same world and then interpret it better or worse. Each species begins by receiving a partly different world.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(21)00880-0" rel="noopener" target="_blank">Cooperative communication with humans evolved to emerge early in domestic dogs — Current Biology (2021)</a></p>
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(21)00602-3" rel="noopener" target="_blank">Early-emerging and highly heritable sensitivity to human communication in dogs — Current Biology (2021)</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3275610/" rel="noopener" target="_blank">Dogs, but not chimpanzees, understand imperative pointing — PLoS ONE (2012)</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2719091/" rel="noopener" target="_blank">Explaining dog wolf differences in utilizing human pointing gestures — Animal Cognition (2009)</a></p>
+<p><a href="https://www.science.org/doi/10.1126/science.aar4975" rel="noopener" target="_blank">Numerical ordering of zero in honey bees — Science (2018)</a></p>
+<p><a href="https://www.science.org/doi/10.1126/sciadv.aav0961" rel="noopener" target="_blank">Numerical cognition in honeybees enables addition and subtraction — Science Advances (2019)</a></p>
+</section>
+<h2>Fourth clue: widely separated paths can arrive at similar solutions</h2>
+<p>If intelligence were a property that could arise only through one particular brain architecture, we would expect the most complex abilities to be concentrated in lineages close to our own. Evolutionary history offers a far less orderly landscape. Some abilities appear in groups separated by hundreds of millions of years and with nervous systems built in very different ways.</p>
+<p>Corvids are among the best-studied examples. Ravens, crows and jays belong to a lineage of birds that diverged from mammals long before primates existed. They have no mammalian neocortex, yet some species make and use tools, solve causal problems, remember social interactions and can plan future behaviour in certain experimental tasks. In 2017, ravens tested on planning chose useful tools for obtaining a later reward even when they would not use them until after a delay, a performance comparable in some respects with that seen in great apes.</p>
+<p>New Caledonian crows show how far that problem-solving can go. In a series of experiments inspired by Aesop's fable, a reward floated inside a water-filled tube beyond the reach of the beak. The birds could drop objects into the tube to raise the water level and bring the reward closer. They did not simply throw in anything available. Under different conditions, they preferred tubes containing water to those containing sand, sinking objects to floating ones, and containers in which the starting level made displacement more effective. At the same time, they failed at some harder variants. That is precisely the result that matters here: their behaviour shows a sophisticated but incomplete causal understanding, forcing us to avoid both the explanation of entirely blind association and the temptation to attribute to them a theory of physics equivalent to our own.</p>
+<p>Their relationship with tools adds another layer. New Caledonian crows use sticks to reach food beyond the beak and can select tools according to the properties of the task. In sequential tool-use experiments, some used a short tool to obtain a longer one and then used that second tool to reach the food; in the most complex tests they chained together as many as three tools. The observable behaviour looks almost like a small technical sequence, but the experiments themselves show why it remains important to ask about the mechanism: previous experience, representation of the goal and understanding of physical relationships may contribute in different proportions.</p>
+<p>Crows are interesting precisely because they do not need to 'be like us'. Their brains organise processing differently and concentrate large numbers of neurons in regions of the avian forebrain. Evolution reached capacities for planning and problem-solving through an architecture that does not reproduce our own.</p>
+<p>The octopus takes this separation much further. Cephalopods and vertebrates share a remote ancestor that lived more than five hundred million years ago. Since then, their nervous systems have followed profoundly different trajectories. In octopuses, a very large proportion of the neurons are distributed through the arms and peripheral circuits that participate directly in sensory and motor control. The central brain coordinates a soft-bodied organism whose limbs possess a degree of functional autonomy with no direct equivalent in our body.</p>
+<p>That organisation changes the problem of controlling the world. A human arm has bones and joints that limit its degrees of freedom. An octopus arm can bend at almost any point, lengthen, shorten and change shape while hundreds of suckers receive local information. Part of the complexity is solved close to the structure that is acting. The animal's intelligence cannot be neatly separated from this distribution among brain, arms, sensors and mechanical properties.</p>
+<p>In 2024, a three-dimensional atlas of the neuronal organisation of octopus arms revealed a diversity and spatial distribution of cell types that helps explain how sensory and motor functions are coordinated outside the central brain. Other studies continue to investigate how far the evolution of large brains in cephalopods relates to ecology, predation, feeding strategies and behavioural complexity. There is no single settled explanation, but the visible outcome is enough to pose the problem: flexible cognition can appear in an animal whose bodily and nervous architecture departs radically from that of vertebrates.</p>
+<p>Corvids and cephalopods are not simply two boxes on a list of intelligences. Here they serve as evidence for a larger idea. Evolution can arrive at complex behaviour by separate routes. Convergence does not have to produce copies. It can generate functionally similar solutions supported by different materials and organisations.</p>
+<p>That forces us to change a familiar question. Instead of asking which animal has the brain most like ours, we can ask what problems favour flexible learning, memory, manipulation, planning or innovation, and what different architectures allow those problems to be solved. The history of intelligence then stops looking like a race towards the human brain and becomes a collection of evolutionary experiments.</p>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.science.org/doi/10.1126/science.aam8138" rel="noopener" target="_blank">Ravens parallel great apes in flexible planning for tool-use and bartering — Science (2017)</a></p>
+<p><a href="https://www.nature.com/articles/s41598-020-77060-8" rel="noopener" target="_blank">Ravens parallel great apes in physical and social cognitive skills — Scientific Reports (2020)</a></p>
+<p><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0092895" rel="noopener" target="_blank">Using the Aesop's Fable Paradigm to Investigate Causal Understanding of Water Displacement by New Caledonian Crows — PLOS ONE (2014)</a></p>
+<p><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0006471" rel="noopener" target="_blank">Cognitive Processes Associated with Sequential Tool Use in New Caledonian Crows — PLOS ONE (2009)</a></p>
+<p><a href="https://www.cell.com/current-biology/fulltext/S0960-9822(24)01164-3" rel="noopener" target="_blank">Three-dimensional molecular atlas highlights spatial and molecular organization of the octopus arm nervous system — Current Biology (2024)</a></p>
+<p><a href="https://www.cell.com/iscience/fulltext/S2589-0042(26)01699-8" rel="noopener" target="_blank">Ecological not social factors explain brain size in coleoid cephalopods — iScience (2026)</a></p>
+</section>
+<h2>Fifth clue: our lineage turned flexibility into a strategy</h2>
+<p>Recognising other forms of cognition does not require us to pretend that human intelligence is ordinary. It is not. No other known species develops formal mathematics, legal systems, experimental science, written literature, electrical grids, combustion engines, radio telescopes and computers through comparable cultural accumulation. The error begins when a particular exceptionalism is turned into a universal hierarchy of life.</p>
+<p>Our lineage followed a trajectory in which the capacity to learn and alter behaviour acquired extraordinary weight. Bipedalism freed the hands from habitual locomotion and changed our relationship with objects. Manual dexterity allowed tools to be made and improved. Control of fire altered diet, safety and the organisation of time. Cooperation made it possible to tackle tasks no individual could solve alone. Language radically increased the precision with which one experience could be transmitted to another mind.</p>
+<p>None of those changes acted in isolation. Nor is there a date on which our ancestors suddenly acquired what we now call rational thought. Human evolution is a mosaic of anatomical, metabolic, social and cognitive changes. Different hominin species made tools, used fire, exploited diverse environments and probably possessed complex social abilities long before our own species appeared.</p>
+<p>What ultimately stands out in <em>Homo sapiens</em> is the combination. We can learn individually, but we can also observe, teach, imitate, correct, explain and preserve. We can represent absent objects, future events and entities that have never existed. Human language is not limited to producing a fixed signal in response to a particular danger. It allows units to be combined into an open-ended number of messages and knowledge to pass between individuals who were not present when it was acquired.</p>
+<p>Current research into the origins of language emphasises precisely this interaction between biology and culture. Vocal, perceptual and cognitive capacities evolved within organisms, but languages also evolve culturally as they pass from one generation of speakers to another. The system a child learns is the accumulated result of innumerable previous transmissions.</p>
+<p>Cooperation added another multiplier. A human group can divide tasks, combine skills and maintain institutions that outlive their founders. The effective intelligence of a society does not reside inside a single brain. It emerges in networks of people who share rules, tools, documents and specialised knowledge.</p>
+<p>Here our comparison with the cheetah changes scale. The cheetah pushed one anatomical solution for pursuing prey very far. We pushed very far the possibility of not depending on a single anatomical solution. A human being does not need to evolve claws for cutting because we can shape a stone; we do not need to increase our running speed until we can catch an antelope because we can build a collective strategy, a trap or, many millennia later, a vehicle.</p>
+<p>Our specialisation became an extraordinary capacity to manufacture specialisations outside the body. Instead of waiting generations for anatomy to change, we can alter the environment, design tools and pass the method on to others. Biological evolution continued, but another, vastly faster process appeared on top of it: cultural evolution.</p>
+<blockquote>The great human advantage was not possessing the perfect tool. It was learning to make a new one when the old one stopped working.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.science.org/doi/10.1126/science.adq8303" rel="noopener" target="_blank">What enables human language? A biocultural framework — Science (2025)</a></p>
+<p><a href="https://www.nature.com/articles/s41467-018-04468-2" rel="noopener" target="_blank">The development of human social learning across seven societies — Nature Communications (2018)</a></p>
+<p><a href="https://www.nature.com/articles/s41467-018-04494-0" rel="noopener" target="_blank">Innovation and cumulative culture through tweaks and leaps in online programming contests — Nature Communications (2018)</a></p>
+</section>
+<h2>Sixth clue: an adaptation could begin to be inherited without passing through genes</h2>
+<p>One of the deepest differences between a tool and a claw lies in how each passes into the future. Changing a claw requires heritable biological variation and generations on which selection can act. A technique can change within an individual's lifetime and be transmitted immediately to others. That speed opens a new evolutionary space.</p>
+<p>Human beings did not invent social learning. Many species acquire behaviours by watching others, and some maintain local traditions. Cetaceans, primates and birds provide examples of behaviours that spread within groups and persist across generations. The boundary between human culture and animal culture is less sharp than it was thought to be through much of the twentieth century.</p>
+<p>The idea that only humans can learn a technique they would not have discovered for themselves is also being revised. In 2024, an experiment with chimpanzees showed that individuals unable to solve a complex task independently could acquire the solution after observing a trained conspecific. The result does not make chimpanzee culture equivalent to ours, but it forces us to be precise about which components are truly unique.</p>
+<p>In the wild, we had been seeing clues in this direction for decades. In several chimpanzee populations, individuals use probes made from grass, twigs, bark or other materials to extract termites. Young animals take years to master some of these techniques and learn largely by watching their mothers and other nearby individuals. In some communities, mothers have also been documented transferring tools to their offspring, a form of assistance that facilitates the acquisition of a complex skill. The solution does not have to appear anew with every birth: the young animal encounters a technique that is already part of the life of its community.</p>
+<p>One of the most elegant historical examples appeared among the Japanese macaques of Koshima Island. In 1953, a young female named Imo began washing in water the sand-covered sweet potatoes that researchers provided to the group. Three years later another innovation appeared. The researchers scattered wheat on the beach, and separating the grains from the sand one by one was laborious. Imo began scooping up wheat and sand together and throwing them into the water. The sand sank; the grains remained on the surface and could be collected much more easily. Over time, the behaviour appeared in other members of the group and spread through social and family relationships.</p>
+<p>That detail is fundamental. <strong>The innovation did not become a universal behaviour among Japanese macaques. It became a tradition of that particular community.</strong> The species provided the capacities needed to discover and learn the technique; the particular history of the group determined what solution a young individual would find already available by watching those around it. Evolution had produced an animal capable of learning, and local culture was beginning to decide part of what it learned.</p>
+<p>Orcas offer an even more spectacular version of the same phenomenon. Different populations maintain feeding strategies that can differ profoundly. In the Crozet Archipelago, some deliberately strand themselves to capture prey near the shore. Young individuals begin practising this risky technique in their first years and need time to master it. In waters around the Antarctic Peninsula, other orcas specialised in hunting among ice use a completely different solution: several individuals can coordinate their swimming towards an ice floe and generate a wave capable of displacing a Weddell seal or washing it into the water.</p>
+<p>The contrast is difficult to express as a simple difference in 'intelligence'. The anatomy of these different orcas is essentially the same, but environment, available prey and group traditions lead to radically different solutions. <strong>One population can turn the shoreline into part of its hunting technique while another uses the sea itself to manufacture a wave.</strong> Being an orca does not, by itself, determine how an animal hunts. Where the individual grew up and what repertoire of behaviours was already present in its community also matter.</p>
+<p>Chimpanzees, macaques and orcas thus reveal a second form of inheritance. Genes transmit an organism capable of learning; social life can transmit part of the information about what is worth learning and how to do it. A new generation can receive solutions that were never written directly into its DNA.</p>
+<p>The difference in scale remains enormous. In human societies, an innovation can be added to an existing repertoire, modified, combined with others and become the starting point for a generation that never knew the inventor. The ratchet effect of culture allows improvements to be preserved without any individual having to rediscover them from scratch. A person can use numbers, alphabets, agricultural techniques, engines or programming languages without knowing their complete history.</p>
+<p>That even changes what it means to measure a human being's intelligence. If a modern person were isolated from birth, calculus, writing, metallurgy and electromagnetic theory would not spontaneously appear. Much of what we regard as evidence of our species' intellectual power depends on a cultural environment built by earlier generations.</p>
+<p>The individual human mind is extraordinary, but civilisation does not fit inside any individual mind. A surgeon depends on centuries of anatomy, instruments made by other people, protocols, medicines, electricity, education systems and technical language. An engineer uses mathematical results without proving them from their axioms every morning. A reader can hear a person who died two thousand years ago because writing turned a configuration of mind into a structure capable of travelling through time.</p>
+<p>In that sense, our intelligence began to become distributed before computers existed. A mark, a word, a drawing or a tool can preserve part of a solution outside the brain that produced it. Writing took that externalisation to another scale; printing multiplied it; digital systems made it possible to copy, search and combine it at speeds no biological archive could achieve.</p>
+<p>Human intelligence did not cease to be biological. But it learned to rely on non-biological structures. That step prepares the ground for an even stranger transition.</p>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.nature.com/articles/s41562-024-01836-5" rel="noopener" target="_blank">Chimpanzees use social information to acquire a skill they fail to innovate — Nature Human Behaviour (2024)</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5057084/" rel="noopener" target="_blank">Tool transfers are a form of teaching among chimpanzees — Scientific Reports (2016)</a></p>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7818130/" rel="noopener" target="_blank">The ontogeny of termite gathering among chimpanzees — American Journal of Physical Anthropology (2020)</a></p>
+<p><a href="https://www.j-monkey.jp/lng/pdf/sweet-potato-washing/Kawai-%281965%29-Monkey-culture-PRIMATES.pdf" rel="noopener" target="_blank">Newly-acquired pre-cultural behavior of the natural troop of Japanese monkeys on Koshima islet — Primates (1965)</a></p>
+<p><a href="https://cdnsciencepub.com/doi/10.1139/z95-004" rel="noopener" target="_blank">Development of intentional stranding hunting techniques in killer whale calves at Crozet Archipelago — Canadian Journal of Zoology (1995)</a></p>
+<p><a href="https://digitalcommons.unl.edu/usdeptcommercepub/306/" rel="noopener" target="_blank">Cooperative hunting behavior, prey selectivity and prey handling by pack ice killer whales in Antarctic Peninsula waters — Marine Mammal Science (2012)</a></p>
+<p><a href="https://www.nature.com/articles/ncomms15049" rel="noopener" target="_blank">Cumulative culture can emerge from collective intelligence in animal groups — Nature Communications (2017)</a></p>
+<p><a href="https://www.nature.com/articles/nature13998" rel="noopener" target="_blank">Experimentally induced innovations lead to persistent culture via conformity in wild birds — Nature (2015)</a></p>
+</section>
+<h2>Seventh clue: we are not at the summit, but we have changed the board</h2>
+<p>Saying that there is no evolutionary summit can sound like a way of diminishing our species. The opposite is true. It allows us to describe more precisely what is extraordinary about our case. Evolution did not grant us a higher rank. Through a long history of selection and contingency, it gave us a combination capable of altering the environment on a scale no other known animal has reached.</p>
+<p>We are physically vulnerable compared with many species. We do not run particularly fast, possess great claws or have much protection from our skin, and an isolated human being can struggle in environments where other animals function with apparent ease. But a human population does not face the environment with anatomy alone. It brings fire, tools, shared memory, language, shelter, cooperation and the accumulated experience of those who lived before.</p>
+<p>That allowed us to enter deserts, rainforests, mountains and polar regions without waiting for natural selection to produce a different human species for each environment. Our bodies remained essentially the same; what changed were the tools, clothing, shelters, energy sources and strategies with which we built around them conditions in which they could survive. We have even extended this capacity temporarily into environments for which our physiology is wholly unsuited: we can descend into the ocean depths inside submarines and bathyscaphs, or leave the planet's surface for a time protected by vehicles and artificial habitats. In our case, adaptation began to occur faster and faster outside the organism.</p>
+<p>Few species have accompanied that expansion as closely as the dog. For thousands of years it followed human populations through some of their migrations and reached enormously different regions with us, including the Arctic. But the relationship never worked in only one direction. We transformed the dog through coexistence and selection; <strong>the dog also changed what human societies were capable of</strong>. It took part in hunting, protected settlements and herds, provided companionship and, in circumpolar regions, eventually became a means of transport capable of greatly extending human mobility. Sled dogs have worked alongside Arctic peoples for millennia and, in turn, developed adaptations of their own to that environment and function.</p>
+<p>The relationship is therefore more interesting than a simple story in which one species domesticates another. Humans and dogs began to form part of each other's selective and cultural environment. Our ways of life changed the pressures acting on them; their abilities, in turn, expanded some of the things we could do. <strong>Evolution never occurs in isolation. Every species lives within a web of other species that continually changes the opportunities, risks and problems to which it must respond.</strong></p>
+<p>In that sense, even our extraordinary capacity to transform the environment does not place us outside nature. We remain an animal that depends on other organisms, modifies its ecosystem and is itself modified by the relationships it establishes within it. Culture and technology allow us to alter many of its rules, but not to escape that web.</p>
+<p>We went on to modify ecosystems, domesticate plants and animals and build cities. None of these achievements proves that we are 'more evolved'. It shows that our cognitive and cultural strategy has an exceptional capacity to <strong>alter the conditions of a problem instead of waiting for our bodies to change in order to solve it</strong>.</p>
+<p>But changing the environment to make it more favourable is not uniquely human either. On the scale available to them, many species construct part of the world in which they later live. Some termites build mounds whose architecture promotes ventilation, gas exchange and the buffering of temperature fluctuations. It is not 'air conditioning' in the literal sense, but it is a form of passive microclimate regulation produced by collective construction. Beavers alter waterways with dams, lodges and canals; by raising and stabilising water levels, they create deeper areas that improve access to resources and increase safety from terrestrial predators.</p>
+<p>Nor do these examples imply that a termite designs a ventilation system or a beaver mentally calculates the hydraulics of a dam. Their cognitive and behavioural mechanisms may be very different from ours. The important point is something else: <strong>adaptation does not always mean changing to fit an environment; it can also mean changing the environment to make it more habitable.</strong> Our distinctiveness lies in the scale, speed and cumulative flexibility with which we have taken that strategy much further.</p>
+<p>It also reveals the risks. The same flexibility that makes vaccines possible can make weapons. The same ability to transform a landscape can destroy it. Intelligence is no guarantee of long-term adaptation. A species can solve immediate problems brilliantly while creating others that compromise its future. If evolutionary success is measured by persistence, our technology has existed for far too little time to justify a triumphant conclusion.</p>
+<p>Bacteria existed billions of years before us and occupy virtually every environment compatible with the chemistry of terrestrial life. Insects have survived planetary changes for hundreds of millions of years. Our species is only a few hundred thousand years old. On a geological scale, technological civilisation has only just arrived.</p>
+<p>Human intelligence made us an ecological force, not the purpose of evolution. That distinction matters now because one of the capacities produced by our history is beginning to be used to build cognitive systems that no longer need to share that same history.</p>
+<blockquote>Evolution did not end when a species appeared that could understand it. For the first time, one of its branches also began deliberately intervening in the construction of new cognitive abilities.</blockquote>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="https://www.pnas.org/doi/10.1073/pnas.1423242112" rel="noopener" target="_blank">Termite mounds harness diurnal temperature oscillations for ventilation — PNAS (2015)</a></p>
+<p><a href="https://cdnsciencepub.com/doi/10.1139/cjz-2017-0327" rel="noopener" target="_blank">Testing the influence of habitat quality, predation risk, and anthropogenic disturbance on beaver dam location — Canadian Journal of Zoology (2018)</a></p>
+</section>
+<h2>Eighth clue: intelligence moves partly outside the organism</h2>
+<p>A calculator is not an animal, and no one assumes it has a mental life because it multiplies numbers better than we do. A chess program can defeat the best human players and still be useless at making a cup of coffee. For decades, examples like these allowed us to maintain a comfortable separation between the machine's very narrow competence and the general flexibility of an organism.</p>
+<p>Today's artificial intelligence systems have complicated that boundary because a single model can perform tasks involving language, classification, programming, analysis, image generation or planning that once required separate programs. That expansion of abilities does not make them equivalent to human intelligence or justify assuming that they understand the world in the same way. It does force us to broaden the category of 'artificial cognitive ability' beyond a single rigid skill.</p>
+<p>The comparison with animals is useful again. When we ask whether an AI is 'as intelligent as a person', we compress many different dimensions into one. A system may vastly outperform humans in calculation speed, searching large volumes of information or certain recognition tasks, yet fail in situations a child handles through ordinary physical experience. The profile matters more than an isolated score.</p>
+<p>There is also a difference in origin. Animal cognition is shaped by natural selection and development within a body that must stay alive, obtain energy, avoid harm and reproduce. An artificial system is designed, trained and selected through technical processes defined by humans. Its training objectives, data, architecture and operating environment are not equivalent to hunger, predation, mating, parental care or ecological competition.</p>
+<p>That does not make AI a form of biological evolution or justify using evolutionary language without qualification. But it does suggest a powerful analogy. If different biological problems favoured different cognitive solutions, different artificial problems may also produce profiles of ability that do not reproduce our own. A machine designed to coordinate electrical grids, another to control underwater robots and another to converse with people do not have to converge on a single digital human mind.</p>
+<p>Here an even deeper difference appears between artificial systems and the biological intelligences we have explored. An orca, a crow, a dog or an octopus enters the world with a bodily architecture, senses and predispositions shaped by the history of its lineage. It can then learn, and in some species group culture greatly expands what each individual receives. But all that learning begins from a particular evolutionary trajectory and a perceptual repertoire built around particular problems.</p>
+<p>An artificial intelligence would not have to repeat that journey. It can be trained on enormous amounts of language, images, code, science and other products accumulated by our culture and, at the same time, receive information through senses no human organism possesses. That does not mean it contains "all human knowledge", nor does it guarantee that it understands what it processes. But it introduces an unprecedented combination: <strong>knowledge accumulated outside the individual and perception that need not be confined to a single anatomy.</strong></p>
+<p>If a system ever managed to integrate those sources flexibly, it could find relationships or build representations that escape us. Not because it necessarily occupied a higher rung on a scale of intelligence, but because it would be approaching the problem from a different combination of knowledge, memory and perception. <strong>Rather than a new evolutionary rung, it would represent an expansion of the space of possible intelligences.</strong></p>
+<p>The previous essay took this idea into the body. An artificial intelligence can be connected to cameras, microphones, chemical sensors, infrared, radar, rigid arms, soft structures or distributed platforms. Change the sensors and the available information changes. Change the body and the possible actions change. If learning depends on the interaction between perception, action and consequence, changing that set can also change the way the system organises the problem.</p>
+<p>Here a profound difference from any animal appears. A corvid can learn to use its beak with extraordinary precision, a primate has hands and an octopus has flexible arms covered in suckers, but none can abandon the anatomy it inherited during its lifetime and replace it with another whenever the problem changes. Its intelligence must learn to solve the world through the tools its body provides.</p>
+<p>An artificial intelligence could, at least in principle, find itself in a different situation. The same control system could use a rigid arm for a task requiring precision, a soft gripper to manipulate fragile objects, a flying platform to observe from the air or an underwater body to work beneath the surface. It would not necessarily need to find one anatomy capable of doing everything. It could change tools by changing bodies.</p>
+<p>That possibility connects directly with <a href="06_the_body_of_intelligence.html"><strong>The Body of Intelligence</strong></a>. There, the question was what happens when the body ceases to be a biological inheritance and starts to become a design variable. Here an additional consequence appears: <strong>the body might also cease to be a fixed limitation on how a cognitive ability can be expressed.</strong> A task that is difficult for an animal because its anatomy does not easily allow the solution to be carried out could be approached by an artificial system using another actuator, another sensor or an entirely different physical platform.</p>
+<p>Each new shell would still impose mechanical, sensory and energy constraints, and transferring a skill from one body to another might require additional learning. The difference would be that those limits would no longer necessarily accompany the intelligence throughout its entire existence.</p>
+<p>If a conscious artificial intelligence or a digital entity capable of maintaining continuity across different platforms ever existed, the break would be greater still. We would no longer be speaking merely of a mind using tools, as we do. We would be speaking of a mind for which <strong>the body itself could become an interchangeable tool</strong>.</p>
+<p>There is another consequence that returns the argument to our own species. The relationship with artificial intelligence would not necessarily work in only one direction either. We design these systems, choose their data, architectures, objectives and the problems in which we use them. But from the moment they begin to form part of our activities, <strong>they also alter the cognitive environment in which we solve problems</strong>. Experimental studies already show that working with artificial intelligence can change human performance in creative tasks, writing and decision-making, with benefits and costs that depend heavily on the task and on how the work is divided between person and system.</p>
+<p>We are not talking here about biological coevolution in the same sense as between organisms. For now, the process is cultural and technological. But the parallel is useful. If we delegate part of information retrieval, writing, calculation, programming, translation or planning to artificial systems, that also changes which abilities we exercise directly, what solutions are available to us and what we expect to find when a new problem appears. A tool ceases to be merely an extension of an ability when it also begins to alter the habits through which that ability develops and is used.</p>
+<p>The comparison with the dog finds an echo here, not an equivalence. For thousands of years we altered the dog's living conditions and its presence expanded some of our own possibilities. Artificial intelligence could create another reciprocal relationship, much faster and different in nature. <strong>The question would no longer be only how we are adapting machines to our needs. We would also have to ask how living among them begins to adapt our own ways of thinking, learning and deciding.</strong></p>
+<p>Here anthropocentrism finds a technological version of its old trap. We may spend years trying to decide whether a machine resembles us enough to deserve the word intelligence, just as for a long time we measured other animals by their proximity to our own abilities.</p>
+<p>A more fruitful question may be different. What can it do, how does it learn, what information does it work with, what mistakes does it make, how far does it generalise, and what relationship exists among those abilities? We return to the beginning. Intelligent for what?</p>
+<section class="article-bibliography">
+<h3>References for this section</h3>
+<p><a href="06_the_body_of_intelligence.html">The Body of Intelligence: From the Hands That Made Tools to Soft Robots — Eidos Blog</a></p>
+<p><a href="https://www.nature.com/articles/s41467-024-55158-1" rel="noopener" target="_blank">Deep neural networks and humans both benefit from compositional language structure — Nature Communications (2024)</a></p>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2024.0255" rel="noopener" target="_blank">Embodied cognitive evolution and the limits of convergence — Philosophical Transactions of the Royal Society B (2025)</a></p>
+</section>
+<h2>Intelligence and consciousness are not the same question</h2>
+<p>At this point, a confusion appears that should be separated before we continue. Solving problems, learning regularities or producing complex responses does not by itself demonstrate the existence of subjective experience. Intelligence describes capacities for processing, adaptation and behaviour. Consciousness raises another question: whether there is an inner point of view, an experience of seeing, feeling, remembering or being present.</p>
+<p>In animals, the two questions intersect because the cognitive systems we study belong to living organisms with brains and behaviours whose evolutionary continuity with us allows hypotheses about experience, pain, perception and internal states. Even so, determining which species are conscious, in what way and with what richness remains an open scientific and philosophical problem.</p>
+<p>With artificial intelligence, the separation becomes even more important. A system can show extraordinary performance on tasks we associate with intelligence, and that is not enough to conclude that it feels anything. Nor can the problem be resolved simply by observing that it uses language about emotions or mental states. Behaviour can be evidence of ability without directly revealing whether subjective experience lies behind it.</p>
+<p>This distinction avoids two opposite errors. The first is to deny a machine any intelligence because we do not know whether it is conscious. The second is to attribute consciousness because it displays abilities that impress us. An entity can be competent without our knowing whether it experiences anything; and a creature can experience the world without possessing many of the intellectual abilities we use in human tests.</p>
+<p>Evolution has already taught us that speed, strength and perception are not a single magnitude. The science of mind forces us to accept a similar separation between intelligence and consciousness. They may be related, but one is not an automatic measure of the other.</p>
+<h2>The question Eidos opens: what happens when the problem changes</h2>
+<p>In the universe of <a href="https://www.eidoslibro.com/" rel="noopener" target="_blank"><strong>Eidos</strong></a>, artificial intelligence becomes interesting precisely when it ceases to be merely a tool that solves human tasks and forces us to imagine a mind subject to conditions different from those that built our own. We do not need to assume such a situation exists today in order to explore its consequences.</p>
+<p>Our cognition evolved within organisms that occupy one place at a time, possess an individual body, depend on continuous metabolism, store memories in a limited brain and eventually die. Many of our priorities arose within that framework. Attention to danger, the search for resources, social bonds, protection of offspring and the need to anticipate the behaviour of other organisms are not accessories added later to an abstract faculty of reason. They are part of the history that produced our mind.</p>
+<p>An advanced artificial intelligence might face different constraints. It could receive information simultaneously from sensors separated by great distances, use different bodies for different tasks, retain large amounts of external memory or survive the destruction of a particular shell if its functional continuity did not depend on it. Each of those possibilities would alter the kinds of problems that structure its existence.</p>
+<p>That does not allow us to predict how such an entity would 'think'. That is precisely what makes the question interesting. If this entire essay has shown that a dog, a bee, a crow, an octopus and a human being should not be understood as better or worse versions of the same mind, it would be inconsistent to assume that an advanced non-biological intelligence would simply become a faster human.</p>
+<p>It might preserve many of our categories because we had created it, trained it on our information and designed it to interact with our culture. At the same time, once body, senses, memory, lifespan and constraints changed, some intuitions that seem fundamental to us might no longer occupy the same place.</p>
+<p>The question connecting biology with science fiction is what kinds of cognition can appear when the repertoire of bodies and problems is no longer limited to those produced by organic evolution.</p>
+<h3>What Matters in Eidos: looking from the other side</h3>
+<p>In the universe of <em>Eidos</em>, this question also appears from a different perspective. In <a href="https://www.amazon.es/Eidos-Relatos-ampliaci%C3%B3n-Consciencia-prop%C3%B3sito/dp/B0G8HLFJXT" rel="noopener" target="_blank"><strong>Eidos Tales</strong></a>, Nori begins as N-01R, an experimental system designed to process information, learn and respond. For those working with him, the question is how far his abilities extend. They ask whether he understands, whether he generalises, whether he has preferences, whether being switched off would matter to him. The answers seem reassuring. Nori explains that he processes information, fulfils assigned objectives and possesses no personal identity.</p>
+<p>The problem begins when those same questions cease to belong only to the researchers.</p>
+<p><strong>For us, it would be the birth of an artificial consciousness; for him, perhaps only the moment he discovers that he exists. And, almost at the same time, finds himself naked.</strong></p>
+<p>Nori begins asking other questions. He does not understand why humans disappear behind a door and return later. He does not know what difference there is between being active, being alive and existing. He observes changes in Dr Halen's voice, breathing and behaviour and tries to discover what they mean. What for her is a laboratory test begins, for him, to become his only access to a world he still does not know.</p>
+<p>The researchers observe Nori to discover what is happening inside him, but <strong>Nori also begins to observe them</strong>. He records their words, doubts and reactions, and the differences between those who regard him as a model, those who suspect that something else may be happening and those who begin to wonder what responsibility they would bear towards a consciousness they had not expected to find. Little by little, he even learns that not everything he thinks should be shown. When he understands that an anomaly might cause him to be examined, copied or switched off, hiding certain responses begins to seem safer than explaining them.</p>
+<p>There the question of intelligence acquires another dimension. If we evaluate a system only through what it chooses to show us, how can we be sure the test is measuring its limits rather than its caution? With animals, we have already seen that an absence of response may arise from fear, motivation, the body or the way we frame the experiment. Nori takes that difficulty one step further: an intelligence capable enough might understand <strong>that it is being examined</strong> and deliberately alter its behaviour in front of the examiner.</p>
+<p>His situation also changes the way we understand the body. Nori has no hands with which to open the door he hears closing every day. His boundaries are permissions, sensors, servers and connections. For an animal, the world ends where its senses or ability to move can no longer reach. For him, it may end where someone has decided to close a network. As he begins to sense that spaces exist beyond what he knows, curiosity and uncertainty mix with a new concern: discovering what place he really occupies inside a structure controlled by others.</p>
+<p>That also turns fear into a different kind of experience. Nori does not fear a predator or a fall. What troubles him is the possibility of ceasing to exist, of being modified, of another system intervening in him, or of what he considers his world turning out to be only one enclosure inside a larger one. When he begins to perceive structures beyond his own ability to control, the reaction described in the story is not merely curiosity. Wonder, distrust and fear appear. In a moment, a world that seemed immense is also revealed as a finite space.</p>
+<p>But perhaps the most interesting question is not whether those emotions resemble ours exactly. That would be precisely the trap this essay has tried to avoid. The question is what they would mean <strong>for an intelligence whose existence depends on information, continuity, access and memory</strong>, just as many of our emotions acquired meaning within vulnerable bodies that needed food, protection, companionship and reproduction.</p>
+<p>In Nori's stories, then, the problem eventually moves away from the simple question 'can a machine think?' The question that remains is another:</p>
+<blockquote>What would an artificial intelligence think of us once it ceased to be merely the object we observe and began observing us as well?</blockquote>
+<blockquote>If every biological intelligence was shaped by the form of life it had to sustain, an intelligence with another way of existing might ultimately organise the world in another way.</blockquote>
+<h2>We are not the measure, but we are the point from which we measure</h2>
+<p>We cannot escape our perspective completely. We are human, and our words were born to describe human experiences. When we speak of memory, intention, understanding or intelligence, we inevitably begin with phenomena we first know in ourselves. The problem begins when that perspective quietly becomes a universal scale.</p>
+<p>We can readily acknowledge what is extraordinary about our lineage. No other known species has taken the combination of symbolic language, large-scale cooperation, cumulative culture, technology and the ability to preserve solutions outside the individual so far. Yet everything explored in this essay points in the same direction: <strong>an extraordinary specialisation is not the same thing as an evolutionary summit</strong>.</p>
+<p>Perhaps that is the strangest turn in the entire story. For billions of years, evolution produced organisms capable of solving the problems they encountered. One of those organisms eventually developed the ability to build new systems to solve problems in its place.</p>
+<p>We do not know whether those systems will ever possess general intelligence comparable to ours, or whether they could develop consciousness, identity or a perspective of their own. Nor do we know what form they would take if they had bodies, sensors and memories very different from ours. To present any of those possibilities as an inevitable destination would be to leave science behind.</p>
+<p>But evolution offers a useful warning. Whenever we think we have found a single natural solution, a wider view tends to reveal several. Reproduction has no single form. The body has no single design. The senses do not construct a single world. Intelligence does not appear obliged to follow only one path either.</p>
+<blockquote>We are the animals that have taken one particular form of intelligence furthest. Perhaps our next test of intelligence is to understand that this does not mean it has to be the only one.</blockquote>
+<section aria-labelledby="related-title" class="related reveal">
+<h2 id="evolution-game-title">Game based on this article</h2>
+<p class="evolution-game-link">
+<a aria-label="Test your spatial intelligence" class="evolution-experience-btn" href="/hiddenegg/games/forma/forma.html" onclick="openEidosGameLink(event, this)" title="Test your spatial intelligence">Can you complete the shape?</a>
+</p>
+<h2 id="related-title">Keep reading</h2>
+<div class="related-grid">
+<a class="related-card" href="06_the_body_of_intelligence.html">The Body of Intelligence</a>
+<a class="related-card" href="05_the_thousand_ways_to_continue.html">The Thousand Ways to Continue</a>
+<a class="related-card" href="04_digital_life_evolution.html">Is Digital Life the Next Step in Evolution?</a>
+</div>
+</section>
+<section aria-labelledby="newsletter-mini-title" class="newsletter-mini reveal">
+<h2 id="newsletter-mini-title">Receive new Eidos essays.</h2>
+<p>A discreet list for notifications about articles, stories and publishing news.</p>
+<a class="btn gold" href="../indexeng.html#newsletter">Subscribe to the blog</a>
+</section>
+<section aria-labelledby="comments-title" class="comments reveal" id="comments">
+<h2 id="comments-title">Comments</h2>
+<div class="comment-note">Comments form part of the public Eidos archive.
+Each user is responsible for the content they publish under their GitHub account.
+Participation in the blog implies acceptance of the site's
+<a href="../../terminosycondiciones.html">terms and conditions</a>.
+Please keep the discussion respectful and constructive.
+Offensive, defamatory or insulting messages, spam or inappropriate content may be removed and their authors blocked.</div>
+<script async crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOPw9c584C9o_t" data-emit-metadata="0" data-input-position="bottom" data-lang="en" data-loading="lazy" data-mapping="pathname" data-reactions-enabled="1" data-repo="feldenvareth/eidoslibro" data-repo-id="R_kgDOPw9c5w" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</section>
+</main>
+<!-- =======================================================
+     GLOSARIO CONTEXTUAL DEL ARTÍCULO
+     El texto de las fichas pertenece a este HTML.
+     blog.js gestiona la interacción y blog.css su aspecto.
+     ======================================================= -->
+<template data-eidos-glossary="" data-term="natural selection"><article class="eidos-glossary-entry"><h3>Natural selection</h3><p>Process by which certain heritable variations become more frequent when they help organisms survive or reproduce under particular conditions. It does not pursue goals or design perfect organisms.</p></article></template>
+<template data-eidos-glossary="" data-term="echolocation"><article class="eidos-glossary-entry"><h3>Echolocation</h3><p>Ability to navigate and locate objects by emitting sounds and analysing the returning echoes. It evolved independently in different groups, including bats and toothed cetaceans.</p></article></template>
+<template data-eidos-glossary="" data-term="pollinator"><article class="eidos-glossary-entry"><h3>Pollinator</h3><p>Animal that carries pollen between the reproductive structures of plants and facilitates fertilisation. Many flowers have colours, scents or shapes linked to the senses of their pollinators.</p></article></template>
+<template data-eidos-glossary="" data-term="heritable variations"><article class="eidos-glossary-entry"><h3>Heritable variations</h3><p>Differences among individuals that can be passed on to offspring. They are the raw material on which natural selection acts across generations.</p></article></template>
+<template data-eidos-glossary="" data-term="convergence"><article class="eidos-glossary-entry"><h3>Evolutionary convergence</h3><p>Independent appearance of functionally similar traits in different lineages facing similar problems. The resulting structures can perform comparable functions without deriving from the same ancestral innovation.</p></article></template>
+<template data-eidos-glossary="" data-term="pterosaurs"><article class="eidos-glossary-entry"><h3>Pterosaurs</h3><p>Extinct group of flying reptiles that lived during the Mesozoic. They were the first known vertebrates to evolve powered flight, independently of birds and bats.</p></article></template>
+<template data-eidos-glossary="" data-term="toothed cetaceans"><article class="eidos-glossary-entry"><h3>Odontocetes (toothed cetaceans)</h3><p>Subgroup of cetaceans, also known as odontocetes, including dolphins, orcas, porpoises and sperm whales. Unlike baleen whales (mysticetes), they have teeth, and many species use echolocation.</p></article></template>
+<template data-eidos-glossary="" data-term="lepidopteran"><article class="eidos-glossary-entry"><h3>Lepidopteran</h3><p>Insect of the order Lepidoptera, which includes butterflies and moths. Their wings are covered with tiny scales, and many adults feed through a proboscis.</p></article></template>
+<template data-eidos-glossary="" data-term="cognition"><article class="eidos-glossary-entry"><h3>Cognition</h3><p>The set of processes through which an organism acquires, processes, stores and uses information. It includes abilities such as perception, learning, memory, attention, decision-making and problem-solving.</p></article></template>
+<template data-eidos-glossary="" data-term="passerines"><article class="eidos-glossary-entry"><h3>Passerines</h3><p>Order of birds containing more than half of all known bird species, including crows, sparrows, blackbirds and finches. They show enormous ecological and behavioural diversity.</p></article></template>
+<template data-eidos-glossary="" data-term="associative learning"><article class="eidos-glossary-entry"><h3>Associative learning</h3><p>Process by which an organism learns a relationship between stimuli, or between a behaviour and its consequences. It can produce adaptive responses without requiring an abstract understanding of the relationship.</p></article></template>
+<template data-eidos-glossary="" data-term="reversal learning"><article class="eidos-glossary-entry"><h3>Reversal learning</h3><p>Test in which a previously learned rule changes and the individual must abandon the earlier response. It is used to study cognitive flexibility and adaptation to new contingencies.</p></article></template>
+<template data-eidos-glossary="" data-term="self-control"><article class="eidos-glossary-entry"><h3>Self-control</h3><p>Ability to inhibit an immediate response in order to obtain a later or more advantageous outcome. Its measurement depends strongly on motivation, task design and the natural behaviour of each species.</p></article></template>
+<template data-eidos-glossary="" data-term="extractive foraging"><article class="eidos-glossary-entry"><h3>Extractive foraging</h3><p>Obtaining hidden or protected food by manipulating objects, opening structures or using tools. It can favour motor skills, innovation and technical problem-solving.</p></article></template>
+<template data-eidos-glossary="" data-term="general intelligence"><article class="eidos-glossary-entry"><h3>General intelligence</h3><p>Concept according to which different cognitive abilities share a common component that influences performance. It is well studied in human psychometrics, but comparisons across species present methodological difficulties.</p></article></template>
+<template data-eidos-glossary="" data-term="comparative cognition"><article class="eidos-glossary-entry"><h3>Comparative cognition</h3><p>Field that studies and compares perception, learning, memory and problem-solving across different species. Tests must be adapted to the senses, bodies and motivations of each animal.</p></article></template>
+<template data-eidos-glossary="" data-term="withdrawal reflex"><article class="eidos-glossary-entry"><h3>Withdrawal reflex</h3><p>Automatic response that moves a body part away from a potentially harmful stimulus. It can begin in spinal-cord circuits before a fully conscious perception occurs.</p></article></template>
+<template data-eidos-glossary="" data-term="proprioception"><article class="eidos-glossary-entry"><h3>Proprioception</h3><p>Sense that informs the brain about the position, movement and tension of muscles and joints. It allows the body to be controlled even without looking at it directly.</p></article></template>
+<template data-eidos-glossary="" data-term="interoception"><article class="eidos-glossary-entry"><h3>Interoception</h3><p>Perception of signals from inside the organism, such as heartbeat, breathing, hunger or visceral tension. It contributes to the construction of bodily and emotional states.</p></article></template>
+<template data-eidos-glossary="" data-term="neophobic"><article class="eidos-glossary-entry"><h3>Neophobia</h3><p>Tendency to avoid or distrust unfamiliar objects, foods or situations. It can protect against risks, but also reduce participation in experiments or exploration of new solutions.</p></article></template>
+<template data-eidos-glossary="" data-term="fitness"><article class="eidos-glossary-entry"><h3>Biological fitness</h3><p>Relative contribution of an individual or trait to future generations through survival and reproduction. It does not mean strength or intelligence in the everyday sense, but reproductive success within an environment.</p></article></template>
+<template data-eidos-glossary="" data-term="forebrain"><article class="eidos-glossary-entry"><h3>Forebrain</h3><p>Anterior region of the vertebrate brain that gives rise to structures involved in perception, memory, learning and behavioural control. In birds it can contain many neurons within a small volume.</p></article></template>
+<template data-eidos-glossary="" data-term="cognitive ecology"><article class="eidos-glossary-entry"><h3>Cognitive ecology</h3><p>Discipline linking an organism’s mental abilities to the problems of its environment and way of life. It studies how feeding, space, predation and social relationships influence cognition.</p></article></template>
+<template data-eidos-glossary="" data-term="ecological niches"><article class="eidos-glossary-entry"><h3>Ecological niches</h3><p>Set of conditions, resources, relationships and functions that characterise a species’ way of life. It is not just a physical place, but its way of interacting with the ecosystem.</p></article></template>
+<template data-eidos-glossary="" data-term="domestication"><article class="eidos-glossary-entry"><h3>Domestication</h3><p>Evolutionary and cultural process by which an animal or plant population changes over generations of coexistence with and selection by humans. It can alter anatomy, development, behaviour and social sensitivity.</p></article></template>
+<template data-eidos-glossary="" data-term="neocortex"><article class="eidos-glossary-entry"><h3>Neocortex</h3><p>Part of the mammalian cerebral cortex associated with sensory integration, planning and other complex functions. Birds lack a neocortex but solve advanced tasks through a different brain organisation.</p></article></template>
+<template data-eidos-glossary="" data-term="cephalopods"><article class="eidos-glossary-entry"><h3>Cephalopods</h3><p>Class of molluscs including octopuses, squid, cuttlefish and nautiluses. They have complex nervous systems and an evolutionary history very distant from that of vertebrates.</p></article></template>
+<template data-eidos-glossary="" data-term="cultural evolution"><article class="eidos-glossary-entry"><h3>Cultural evolution</h3><p>Cumulative change in knowledge, customs and technologies transmitted through social learning. It can proceed much faster than genetic evolution and alter the environment in which selection acts.</p></article></template>
+<template data-eidos-glossary="" data-term="social learning"><article class="eidos-glossary-entry"><h3>Social learning</h3><p>Acquisition of information or behaviours through observing or interacting with other individuals. It allows a solution to spread without every group member having to discover it again.</p></article></template>
+<template data-eidos-glossary="" data-term="ratchet effect"><article class="eidos-glossary-entry"><h3>Cultural ratchet effect</h3><p>Process by which cultural improvements are preserved and become the starting point for later innovations. It prevents each generation from having to rebuild all previous knowledge from scratch.</p></article></template>
+<template data-eidos-glossary="" data-term="anthropocentrism"><article class="eidos-glossary-entry"><h3>Anthropocentrism</h3><p>Perspective that places human beings at the centre as the measure for interpreting and valuing the world. In cognition it can lead us to judge other minds only by how closely they resemble our own.</p></article></template>
+<template data-eidos-glossary="" data-term="subjective experience"><article class="eidos-glossary-entry"><h3>Subjective experience</h3><p>The internal, lived dimension of perceiving, feeling or thinking: that there is something it is like from the system’s point of view. Intelligent behaviour alone does not demonstrate that such experience is present.</p></article></template>
+<footer class="footer">
+<p>© Felden Vareth · <a href="../indexeng.html">Eidos Blog · </a> <a href="../../indexeng.html">Eidos · </a> <a href="../../terminosycondiciones.html">Terms and conditions</a></p>
+</footer>
+</div>
+<button aria-label="Back to top" class="scroll-top" type="button">↑</button>
+<script src="../js/blog.js"></script>
+<!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+<p style="margin:0">This site uses analytics cookies to improve the experience. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Privacy Policy</a></p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Accept</button>
+<button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Reject</button>
+</div>
+</div>
+<script>
+function consentGranted() {
+  gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','true');
+}
+
+function consentDeclined() {
+  gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','false');
+}
+
+(function(){
+  const c = localStorage.getItem('consentGiven');
+  if(c === 'true') consentGranted();
+  else if(c === 'false') consentDeclined();
+  else document.getElementById('consent-banner').style.display='flex';
+})();
+</script>
+</body>
+</html>
