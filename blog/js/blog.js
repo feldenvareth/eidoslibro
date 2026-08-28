@@ -1000,10 +1000,28 @@ document.addEventListener('DOMContentLoaded', function () {
     let node;
 
     while ((node = walker.nextNode())) {
-      const index = normalise(node.nodeValue).indexOf(needle);
+      const haystack = normalise(node.nodeValue);
+      let searchFrom = 0;
 
-      if (index !== -1) {
-        return { node: node, index: index, length: term.length };
+      while (searchFrom <= haystack.length - needle.length) {
+        const index = haystack.indexOf(needle, searchFrom);
+
+        if (index === -1) {
+          break;
+        }
+
+        const before = index > 0 ? haystack[index - 1] : '';
+        const afterIndex = index + needle.length;
+        const after = afterIndex < haystack.length ? haystack[afterIndex] : '';
+        const isWordChar = function (char) {
+          return char && /[\p{L}\p{N}_]/u.test(char);
+        };
+
+        if (!isWordChar(before) && !isWordChar(after)) {
+          return { node: node, index: index, length: term.length };
+        }
+
+        searchFrom = index + 1;
       }
     }
 
