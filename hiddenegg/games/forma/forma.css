@@ -12,8 +12,8 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:
 body{display:grid;place-items:center}
 button{font:inherit;color:inherit;touch-action:manipulation}
 #game-shell{
-  position:relative;z-index:2;width:min(480px,100vw,calc(100dvh * 480 / 650));
-  height:min(650px,100dvh,calc(100vw * 650 / 480));overflow:hidden;
+  position:relative;z-index:2;width:min(480px,100vw);
+  height:min(710px,100dvh);overflow:hidden;
   background:
     radial-gradient(circle at 50% 31%,rgba(58,142,188,.13),transparent 38%),
     linear-gradient(160deg,#0b1924,#050b11 76%);
@@ -40,7 +40,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 .hudbox{min-width:56px;text-align:center;color:#8fa9b8;font-size:7px;letter-spacing:.11em}.hudbox b{display:block;margin-top:1px;color:#f5fbff;font-size:15px;line-height:1;font-weight:820}.hudbox em{display:block;color:#8fd26b;font-style:normal;font-size:6.5px;margin-top:1px}
 #hintHud{min-width:45px}.iconbtn{width:34px;height:34px;border:1px solid #31536a;border-radius:8px;background:#0a1721;display:grid;place-items:center;cursor:pointer;font-size:17px}.iconbtn:active{transform:scale(.97);background:#102431}
 
-#game-area{position:relative;z-index:2;height:calc(100% - 50px);display:grid;grid-template-rows:36px minmax(208px,1fr) 25px 138px 51px 25px;gap:5px;padding:6px 9px 8px}
+#game-area{position:relative;z-index:2;height:calc(100% - 50px);display:grid;grid-template-rows:36px minmax(208px,286px) 25px 138px 51px 25px;gap:5px;padding:6px 9px 8px;align-content:start}
 #instruction{display:flex;align-items:center;gap:8px;padding:0 10px;border:1px solid rgba(57,92,111,.46);border-radius:9px;background:rgba(8,20,29,.76);font-size:9.3px;color:#dce9ef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #instruction .info{flex:0 0 auto;width:19px;height:19px;border:1px solid #6e9eb8;border-radius:50%;display:grid;place-items:center;color:#8fc4df;font-size:11px;font-weight:800}
 
