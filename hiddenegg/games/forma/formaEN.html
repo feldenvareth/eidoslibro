@@ -54,9 +54,9 @@ button{font:inherit;color:inherit;touch-action:manipulation}
   animation:drift 18s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate(20px,-18px) scale(1.035)}}
 
-#eidos-shared-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#03080d}
+#eidos-shared-bg{--bg-opacity:.26;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#03080d}
 #eidos-shared-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.045);filter:saturate(.88) brightness(.68) contrast(1.06);transition:opacity 1.05s ease,transform 3.8s ease}
-#eidos-shared-bg img.active{opacity:.62;transform:scale(1)}
+#eidos-shared-bg img.active{opacity:var(--bg-opacity);transform:scale(1)}
 #eidos-shared-bg:after{content:"";position:absolute;inset:0;background:
   linear-gradient(to bottom,rgba(3,8,13,.22),rgba(3,8,13,.38) 52%,rgba(3,8,13,.58)),
   radial-gradient(circle at 50% 35%,transparent 0 32%,rgba(3,8,13,.30) 78%)}
@@ -297,6 +297,8 @@ button{font:inherit;color:inherit;touch-action:manipulation}
   </section>
 </div>
 
+<script src="/gallery/js/image-manifest.js"></script>
+
 <script>
 document.write('<script src="/hiddenegg/games/eidos-content-en.js?v='+Date.now()+'"><\\/script>');
 </script>
@@ -315,7 +317,10 @@ const WIN_COPY=[
   'The board was no longer a figure, but a space of possible transformations.'
 ];
 const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
-const BG_IMAGES=Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[];
+const GALLERY_MANIFEST=Array.isArray(window.EIDOS_IMAGE_MANIFEST)?window.EIDOS_IMAGE_MANIFEST:[];
+const BG_IMAGES=GALLERY_MANIFEST.length
+  ? GALLERY_MANIFEST.map(item=>item&&item.url).filter(Boolean).map(url=>/^(?:https?:)?\/\//.test(url)||url.startsWith('/')?url:'/gallery/'+String(url).replace(/^\.?\//,''))
+  : (Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[]);
 const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(q=>typeof q==='string'&&q.trim()):[];
 function quoteForLevel(n){
   if(!SHARED_QUOTES.length)return'';
@@ -327,17 +332,24 @@ function applyLevelQuote(n){
   box.style.display=quote?'block':'none';
 }
 const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
+const BG_ROOT=$('eidos-shared-bg');
 let bgDeck=[],activeBg=0,lastBg=-1;
+const invalidBackgrounds=new Set();
 function shuffleBackgrounds(values){for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}return values}
-function refillBackgroundDeck(){bgDeck=shuffleBackgrounds(BG_IMAGES.map((_,i)=>i));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}
-function changeBackground(){
+function refillBackgroundDeck(){bgDeck=shuffleBackgrounds(BG_IMAGES.map((_,i)=>i).filter(i=>!invalidBackgrounds.has(i)));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}
+function changeBackground(attempt=0){
   if(!BG_IMAGES.length||!BG_LAYERS[0]||!BG_LAYERS[1])return;
   if(!bgDeck.length)refillBackgroundDeck();
+  if(!bgDeck.length)return;
   const index=bgDeck.shift(),next=1-activeBg,img=BG_LAYERS[next],old=BG_LAYERS[activeBg];
-  lastBg=index;
-  img.onload=()=>{old.classList.remove('active');img.classList.add('active');activeBg=next};
-  img.onerror=()=>{};
+  img.onload=()=>{old.classList.remove('active');img.classList.add('active');activeBg=next;lastBg=index};
+  img.onerror=()=>{invalidBackgrounds.add(index);img.removeAttribute('src');if(attempt<BG_IMAGES.length-1)changeBackground(attempt+1)};
   img.src=BG_IMAGES[index];
+}
+function updateBackgroundStrength(progressRatio){
+  if(!BG_ROOT)return;
+  const ratio=Math.max(0,Math.min(1,Number(progressRatio)||0));
+  BG_ROOT.style.setProperty('--bg-opacity',String(.26+ratio*.44));
 }
 const board=$('board'), tray=$('tray'), dragCanvas=$('drag-canvas');
 const bc=board.getContext('2d'), tc=tray.getContext('2d'), dc=dragCanvas.getContext('2d');
@@ -627,7 +639,7 @@ function updateHUD(){
   if(hints>0){hintBtn.childNodes[0].nodeValue='✧  HINT ('+hints+')';hintBtn.querySelector('span').textContent='shows one area';hintBtn.classList.add('primary')}
   else{hintBtn.childNodes[0].nodeValue='⚑  SURRENDER';hintBtn.querySelector('span').textContent='show solution';hintBtn.classList.add('primary')}
   hintBtn.disabled=won||surrendered;
-  const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';
+  const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';updateBackgroundStrength(pct/100);
   $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?('OVERLAP · '+placed+'/'+pieces.length):issues.outside?('OUTSIDE · '+placed+'/'+pieces.length):(placed+' / '+pieces.length+' pieces');
   $('rotateLeft').disabled=!selected;$('rotateRight').disabled=!selected;$('prev').disabled=infinite||level<=1;$('nextNav').disabled=infinite||level>=progress.unlocked||level>=60;
   renderDots();

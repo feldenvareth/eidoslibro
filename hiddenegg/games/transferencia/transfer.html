@@ -132,6 +132,7 @@
     }
 
     #eidos-background {
+      --eidos-bg-opacity: .20;
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -152,7 +153,7 @@
     }
 
     #eidos-background img.active {
-      opacity: .42;
+      opacity: var(--eidos-bg-opacity);
       transform: scale(1);
     }
 
@@ -1100,13 +1101,34 @@
     </section>
   </main>
 
+  <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content.js"></script>
   <script>
     (() => {
       "use strict";
 
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
-      const BG_IMAGES = Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images : [];
+
+      function galleryImageUrl(item) {
+        const raw = typeof item === "string"
+          ? item
+          : String(item?.url || "").trim();
+
+        if (!raw) return "";
+        if (/^(?:https?:)?\/\//i.test(raw) || raw.startsWith("/")) return raw;
+
+        return "/gallery/" + raw.replace(/^\.?\//, "");
+      }
+
+      const GALLERY_IMAGES = Array.isArray(window.EIDOS_IMAGE_MANIFEST)
+        ? window.EIDOS_IMAGE_MANIFEST.map(galleryImageUrl).filter(Boolean)
+        : [];
+
+      const BG_IMAGES = GALLERY_IMAGES.length
+        ? GALLERY_IMAGES
+        : (Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images.filter(Boolean) : []);
+
+      const backgroundRoot = document.getElementById("eidos-background");
       const backgroundLayers = [
         document.getElementById("background-a"),
         document.getElementById("background-b")
@@ -1253,6 +1275,7 @@
       let activeBackgroundLayer = 0;
       let backgroundDeck = [];
       let lastBackgroundIndex = -1;
+      const badBackgroundIndexes = new Set();
       let hasStartedBefore = false;
       let transferAnimationFrame = 0;
 
@@ -1314,28 +1337,61 @@
       }
 
       function refillBackgroundDeck() {
-        backgroundDeck = shuffle(BG_IMAGES.map((_, index) => index), Math.random);
+        backgroundDeck = shuffle(
+          BG_IMAGES.map((_, index) => index).filter(index => !badBackgroundIndexes.has(index)),
+          Math.random
+        );
         if (backgroundDeck.length > 1 && backgroundDeck[0] === lastBackgroundIndex) {
           [backgroundDeck[0], backgroundDeck[1]] = [backgroundDeck[1], backgroundDeck[0]];
         }
       }
 
-      function changeBackground() {
-        if (!BG_IMAGES.length) return;
+      function changeBackground(attempt = 0) {
+        if (!BG_IMAGES.length || badBackgroundIndexes.size >= BG_IMAGES.length) return;
         if (!backgroundDeck.length) refillBackgroundDeck();
+        if (!backgroundDeck.length) return;
+
         const imageIndex = backgroundDeck.shift();
         const imageUrl = BG_IMAGES[imageIndex];
         const nextLayerIndex = 1 - activeBackgroundLayer;
         const nextLayer = backgroundLayers[nextLayerIndex];
         const previousLayer = backgroundLayers[activeBackgroundLayer];
-        lastBackgroundIndex = imageIndex;
+
         nextLayer.onload = () => {
+          nextLayer.onload = null;
+          nextLayer.onerror = null;
+          lastBackgroundIndex = imageIndex;
           previousLayer.classList.remove("active");
           nextLayer.classList.add("active");
           activeBackgroundLayer = nextLayerIndex;
         };
-        nextLayer.onerror = () => {};
+
+        nextLayer.onerror = () => {
+          nextLayer.onload = null;
+          nextLayer.onerror = null;
+          badBackgroundIndexes.add(imageIndex);
+          nextLayer.removeAttribute("src");
+          if (attempt < BG_IMAGES.length - 1) changeBackground(attempt + 1);
+        };
+
         nextLayer.src = imageUrl;
+      }
+
+      function updateBackgroundPresence() {
+        if (!backgroundRoot) return;
+
+        const totalMemories = stage?.targets?.length || 2;
+        const currentStageProgress = stageIndex >= completedStages
+          ? Math.min(1, Math.max(0, targetIndex / Math.max(1, totalMemories)))
+          : 0;
+
+        const overallProgress = Math.min(
+          1,
+          Math.max(0, (completedStages + currentStageProgress) / TOTAL_STAGES)
+        );
+
+        const opacity = .20 + overallProgress * .52;
+        backgroundRoot.style.setProperty("--eidos-bg-opacity", opacity.toFixed(3));
       }
 
       function indexOf(x, y) { return y * N + x; }
@@ -1700,6 +1756,7 @@
       }
 
       function updateHud() {
+        updateBackgroundPresence();
         scoreHud.textContent = String(Math.max(0, Math.round(score)));
         bestHud.textContent = String(Math.max(best, Math.round(score)));
         stageHud.textContent = `Stage ${progressStageNumber()}/${TOTAL_STAGES}`;

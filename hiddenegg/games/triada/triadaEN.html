@@ -533,6 +533,7 @@
     </div>
   </main>
 
+  <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content-en.js"></script>
   <script>
     (() => {
@@ -552,7 +553,26 @@
       const unlockContinue = document.getElementById("unlock-continue");
 
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
-      const BG_IMAGES = Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images : [];
+
+      function galleryImageUrl(item) {
+        const raw = typeof item === "string"
+          ? item
+          : String(item?.url || "").trim();
+
+        if (!raw) return "";
+        if (/^(?:https?:)?\/\//i.test(raw) || raw.startsWith("/")) return raw;
+
+        return "/gallery/" + raw.replace(/^\.?\//, "");
+      }
+
+      const GALLERY_IMAGES = Array.isArray(window.EIDOS_IMAGE_MANIFEST)
+        ? window.EIDOS_IMAGE_MANIFEST.map(galleryImageUrl).filter(Boolean)
+        : [];
+
+      const BG_IMAGES = GALLERY_IMAGES.length
+        ? GALLERY_IMAGES
+        : (Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images.filter(Boolean) : []);
+
       const QUOTES = Array.isArray(EIDOS_CONTENT.quotes) ? EIDOS_CONTENT.quotes : [];
 
       const W = 500;
@@ -618,6 +638,7 @@
       let imageBag = [];
       let lastQuoteIndex = -1;
       let lastImageIndex = -1;
+      const badImageIndexes = new Set();
 
       const player = {
         x: W / 2,
@@ -668,7 +689,15 @@
         if (!source.length) return -1;
 
         if (type === "image") {
-          if (!imageBag.length) imageBag = shuffledIndices(source.length, lastImageIndex);
+          if (badImageIndexes.size >= source.length) return -1;
+
+          if (!imageBag.length) {
+            imageBag = shuffledIndices(source.length, lastImageIndex)
+              .filter(index => !badImageIndexes.has(index));
+          }
+
+          if (!imageBag.length) return -1;
+
           lastImageIndex = imageBag.shift();
           return lastImageIndex;
         }
@@ -699,20 +728,41 @@
         const selectedQuoteText = selectedQuote >= 0 ? quoteText(QUOTES[selectedQuote]) : "";
         unlockQuote.textContent = selectedQuoteText ? `“${selectedQuoteText}”` : "";
 
-        const selectedImage = nextContentIndex("image");
-        const selectedUrl = selectedImage >= 0 ? imageUrl(BG_IMAGES[selectedImage]) : "";
-        unlockImage.classList.remove("loaded");
-        unlockImageFallback.style.display = "block";
-        unlockImage.onload = () => {
-          unlockImage.classList.add("loaded");
-          unlockImageFallback.style.display = "none";
-        };
-        unlockImage.onerror = () => {
+        function loadUnlockImage(attempt = 0) {
+          const selectedImage = nextContentIndex("image");
+          const selectedUrl = selectedImage >= 0 ? imageUrl(BG_IMAGES[selectedImage]) : "";
+
           unlockImage.classList.remove("loaded");
           unlockImageFallback.style.display = "block";
-        };
-        if (selectedUrl) unlockImage.src = selectedUrl;
-        else unlockImage.removeAttribute("src");
+
+          if (!selectedUrl) {
+            unlockImage.removeAttribute("src");
+            return;
+          }
+
+          unlockImage.onload = () => {
+            unlockImage.onload = null;
+            unlockImage.onerror = null;
+            unlockImage.classList.add("loaded");
+            unlockImageFallback.style.display = "none";
+          };
+
+          unlockImage.onerror = () => {
+            unlockImage.onload = null;
+            unlockImage.onerror = null;
+            badImageIndexes.add(selectedImage);
+            imageBag = imageBag.filter(index => index !== selectedImage);
+            unlockImage.removeAttribute("src");
+
+            if (attempt < BG_IMAGES.length - 1) {
+              loadUnlockImage(attempt + 1);
+            }
+          };
+
+          unlockImage.src = selectedUrl;
+        }
+
+        loadUnlockImage();
 
         unlockScreen.classList.add("open");
         unlockScreen.setAttribute("aria-hidden", "false");

@@ -1416,13 +1416,22 @@
     </section>
   </main>
 
+  <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content.js"></script>
   <script>
     (() => {
       "use strict";
 
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
-      const BG_IMAGES = Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images : [];
+      const GALLERY_MANIFEST = Array.isArray(window.EIDOS_IMAGE_MANIFEST) ? window.EIDOS_IMAGE_MANIFEST : [];
+      const BG_IMAGES = GALLERY_MANIFEST.length
+        ? GALLERY_MANIFEST
+            .map(item => item && item.url)
+            .filter(Boolean)
+            .map(url => /^(?:https?:)?\/\//.test(url) || url.startsWith("/")
+              ? url
+              : "/gallery/" + String(url).replace(/^\.?\//, ""))
+        : (Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images : []);
       const backgroundLayers = [
         document.getElementById("background-a"),
         document.getElementById("background-b")

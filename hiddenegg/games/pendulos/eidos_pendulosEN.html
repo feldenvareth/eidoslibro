@@ -127,6 +127,7 @@
 </div>
 <div id="msg">Move the mouse or tap to start · automatic fire</div>
 <button id="game-btn" type="button">Restart</button>
+<script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content-en.js"></script>
 
 <script>
@@ -135,7 +136,18 @@ const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
   quotes: []
 };
 
-const BG_IMAGES = EIDOS_CONTENT.images;
+function galleryImageUrl(item){
+  const raw=typeof item==='string'?item:String(item?.url||'').trim();
+  if(!raw)return '';
+  if(/^(?:https?:)?\/\//i.test(raw)||raw.startsWith('/'))return raw;
+  return '/gallery/'+raw.replace(/^\.?\//,'');
+}
+
+const MANIFEST_IMAGES=Array.isArray(window.EIDOS_IMAGE_MANIFEST)
+  ?window.EIDOS_IMAGE_MANIFEST.map(galleryImageUrl).filter(Boolean)
+  :[];
+const SHARED_IMAGES=Array.isArray(EIDOS_CONTENT.images)?EIDOS_CONTENT.images.filter(Boolean):[];
+const BG_IMAGES=MANIFEST_IMAGES.length?MANIFEST_IMAGES:SHARED_IMAGES;
 const QUOTES = EIDOS_CONTENT.quotes;
 
 let bgCarousel=[];
@@ -167,11 +179,21 @@ function selectNextBackground(){
     return;
   }
 
-  if(!bgCarousel.length)refillBackgroundCarousel();
+  let attempts=0;
+  while(attempts<bgImgs.length){
+    if(!bgCarousel.length)refillBackgroundCarousel();
+    const candidateIndex=bgCarousel.shift();
+    const candidate=bgImgs[candidateIndex];
+    attempts++;
+    if(!candidate||candidate._broken)continue;
+    bgIndex=candidateIndex;
+    lastBgIndex=bgIndex;
+    currentBg=candidate;
+    return;
+  }
 
-  bgIndex=bgCarousel.shift();
-  lastBgIndex=bgIndex;
-  currentBg=bgImgs[bgIndex];
+  bgIndex=-1;
+  currentBg=null;
 }
 
 function refillQuoteCarousel(){
@@ -218,7 +240,17 @@ function changeCadence(dir){
 }
 cadenceLabel.textContent=CADENCES[cadenceIndex].name;
 
-const bgImgs=BG_IMAGES.map(src=>{const im=new Image();im.crossOrigin='anonymous';im.src=src;return im});
+const bgImgs=BG_IMAGES.map(src=>{
+  const im=new Image();
+  im.crossOrigin='anonymous';
+  im._broken=false;
+  im.onerror=()=>{
+    im._broken=true;
+    if(currentBg===im)selectNextBackground();
+  };
+  im.src=src;
+  return im;
+});
 let bgIndex=-1,currentBg=null;
 selectNextBackground();
 let score=0,level=1,lives=3,started=false,over=false,quoteVisible=false,running=false,transitioning=false;

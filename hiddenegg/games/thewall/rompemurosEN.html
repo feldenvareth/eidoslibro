@@ -555,6 +555,7 @@
 <div id="msg">Move the mouse to start</div>
 <button id="game-btn">Next level</button>
 
+<script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content-en.js"></script>
 
 <script>
@@ -564,7 +565,25 @@ const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
   quotes: []
 };
 
-const BG_IMAGES = EIDOS_CONTENT.images;
+function galleryImageUrl(item) {
+  const raw = typeof item === 'string'
+    ? item
+    : String(item?.url || '').trim();
+
+  if (!raw) return '';
+  if (/^(?:https?:)?\/\//i.test(raw) || raw.startsWith('/')) return raw;
+
+  return '/gallery/' + raw.replace(/^\.?\//, '');
+}
+
+const GALLERY_IMAGES = Array.isArray(window.EIDOS_IMAGE_MANIFEST)
+  ? window.EIDOS_IMAGE_MANIFEST.map(galleryImageUrl).filter(Boolean)
+  : [];
+
+const BG_IMAGES = GALLERY_IMAGES.length
+  ? GALLERY_IMAGES
+  : (Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images.filter(Boolean) : []);
+
 const QUOTES = EIDOS_CONTENT.quotes;
 
 
@@ -575,16 +594,25 @@ const ctx = cv.getContext('2d');
 const W = 480;
 const H = 650;
 
-const bgImgs = BG_IMAGES.map(url => {
+let currentBg = null;
+const badBgIndices = new Set();
+
+const bgImgs = BG_IMAGES.map((url, index) => {
   const image = new Image();
 
   image.crossOrigin = 'anonymous';
+  image.onerror = () => {
+    badBgIndices.add(index);
+    imageBag = imageBag.filter(i => i !== index);
+
+    if (currentBg === image) {
+      currentBg = nextBackground();
+    }
+  };
   image.src = url;
 
   return image;
 });
-
-let currentBg = null;
 
 const BEST_SCORE_KEY = 'eidosRompemurosBestScore';
 
@@ -640,8 +668,15 @@ function nextQuoteIndex(){
   return lastQuoteIndex;
 }
 function nextBackground(){
-  if(!bgImgs.length)return null;
-  if(!imageBag.length)imageBag=shuffledIndices(bgImgs.length,lastImageIndex);
+  if(!bgImgs.length || badBgIndices.size >= bgImgs.length)return null;
+
+  if(!imageBag.length){
+    imageBag=shuffledIndices(bgImgs.length,lastImageIndex)
+      .filter(index => !badBgIndices.has(index));
+  }
+
+  if(!imageBag.length)return null;
+
   lastImageIndex=imageBag.shift();
   return bgImgs[lastImageIndex];
 }
