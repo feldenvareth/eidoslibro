@@ -433,10 +433,16 @@ function pointerUp(e){
   const boardRect=board.getBoundingClientRect(),inside=e.clientX>=boardRect.left-10&&e.clientX<=boardRect.right+10&&e.clientY>=boardRect.top-10&&e.clientY<=boardRect.bottom+10;
   const trayRect=tray.getBoundingClientRect(),overTray=e.clientX>=trayRect.left&&e.clientX<=trayRect.right&&e.clientY>=trayRect.top&&e.clientY<=trayRect.bottom;
 
-  // Un toque corto sobre una pieza ya colocada solo la selecciona: no cuenta movimiento ni la desplaza.
+  // En móvil: primer toque sobre una pieza colocada la selecciona; un segundo toque la gira 60°.
+  // Así la rotación sigue siendo accesible aunque los botones inferiores queden fuera del área visible.
   if(!dragMoved&&wasPlaced){
     restorePrevious(p);active=null;releasePointer(pointerId);pointerId=null;
-    play('select');showToast(tr('Piece selected · drag it to move'));drawAll();return;
+    if(selectedBeforeDrag){
+      rotateSelected(1,true);
+    }else{
+      play('select');showToast(tr('Piece selected · use ↺ or ↻ to rotate it'));drawAll();
+    }
+    return;
   }
   // En la bandeja, primer toque selecciona y segundo toque gira.
   if(!dragMoved&&overTray&&p.prev&&!p.prev.placed){
