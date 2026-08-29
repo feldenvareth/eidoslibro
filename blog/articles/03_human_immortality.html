@@ -60,6 +60,203 @@ gtag('config', 'G-SCSFPYKJTX');
 </script>
 </head>
 <body>
+
+<style>
+  #eidos-panel,
+  #eidos-panel * {
+    box-sizing: border-box;
+  }
+
+  #eidos-panel {
+    display: none;
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 999998;
+    width: min(620px, calc(100vw - 36px), calc((100dvh - 36px) * 620 / 900));
+    height: min(900px, calc(100dvh - 36px), calc((100vw - 36px) * 900 / 620));
+    margin: 0;
+    padding: 0;
+    background: #111a14;
+    border: 2px solid #4a7c6f;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.7);
+    overflow: hidden;
+  }
+
+  #eidos-panel.open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #eidos-panel-header {
+    flex: 0 0 58px;
+    width: 100%;
+    margin: 0;
+    padding: 10px 18px;
+    background: #111a14;
+    color: #f5ecd0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 1;
+    letter-spacing: 5px;
+  }
+
+  #eidos-panel-header span {
+    color: #f5ecd0;
+    font-family: Georgia, serif;
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
+
+  #eidos-close {
+    margin: 0;
+    padding: 4px 6px;
+    background: transparent;
+    color: #888;
+    border: none;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  #eidos-close:hover { color: #fff; }
+
+  #eidos-frame {
+    display: block;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    background: #111a14;
+    border: none;
+    overflow: hidden;
+  }
+
+  .evolution-experience-btn[aria-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  body.evolution-experience-active {
+    overflow: hidden;
+  }
+
+  body.evolution-experience-active .read-floating-player {
+    display: none !important;
+  }
+
+  @media (max-width: 700px) {
+    #eidos-panel {
+      top: 8px;
+      right: 8px;
+      bottom: 8px;
+      left: 8px;
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+    }
+
+    #eidos-panel-header {
+      flex-basis: 48px;
+      padding: 8px 12px;
+      font-size: 17px;
+      letter-spacing: 3px;
+    }
+  }
+
+  @media (min-width: 701px) and (max-height: 760px) {
+    #eidos-panel {
+      top: 8px;
+      bottom: 8px;
+      width: min(500px, calc(100vw - 16px), calc((100dvh - 16px) * 500 / 720));
+      height: min(720px, calc(100dvh - 16px), calc((100vw - 16px) * 720 / 500));
+    }
+
+    #eidos-panel-header {
+      flex-basis: 46px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+<div id="eidos-panel" aria-hidden="true">
+  <div id="eidos-panel-header">
+    <span>E I D O S</span>
+    <button id="eidos-close" type="button" aria-label="Close interactive experience" onclick="closeEidos()">✕</button>
+  </div>
+  <iframe
+    id="eidos-frame"
+    src="about:blank"
+    title="Interactive EIDOS experience"
+    scrolling="no"
+    allow="autoplay; fullscreen">
+  </iframe>
+</div>
+
+<script>
+  const eidosPanel = document.getElementById('eidos-panel');
+  const eidosFrame = document.getElementById('eidos-frame');
+  const evolutionExperienceButtons = document.querySelectorAll('.evolution-experience-btn');
+
+  function openEidosGame(gameUrl) {
+    if (!eidosPanel || !eidosFrame) {
+      return;
+    }
+    eidosFrame.src = gameUrl;
+    eidosPanel.classList.add('open');
+    eidosPanel.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.setAttribute('aria-disabled', 'true');
+    });
+  }
+
+  function openEidosGameLink(event, link) {
+    event.preventDefault();
+    if (link.getAttribute('aria-disabled') === 'true') {
+      return;
+    }
+    openEidosGame(link.href);
+  }
+
+  function closeEidos() {
+    if (!eidosPanel) {
+      return;
+    }
+    eidosPanel.classList.remove('open');
+    eidosPanel.setAttribute('aria-hidden', 'true');
+    eidosFrame.src = 'about:blank';
+    document.body.classList.remove('evolution-experience-active');
+    evolutionExperienceButtons.forEach(function(control) {
+      control.removeAttribute('aria-disabled');
+    });
+  }
+
+  window.addEventListener('message', function(event) {
+    if (event.data === 'cerrar-eidos') {
+      closeEidos();
+    }
+  });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && eidosPanel?.classList.contains('open')) {
+      closeEidos();
+    }
+  });
+</script>
+
 <div class="reading-progress reading-progress-article"><span></span></div>
 <div class="reading-progress reading-progress-forum"><span></span></div>
 <div aria-hidden="true" class="ambient"></div>
@@ -441,6 +638,81 @@ Perhaps no one can say with certainty that we will one day defeat aging. But it 
 <p><a href="https://www.amazon.com/dp/B0GDNQW7VZ" rel="noopener" target="_blank">EIDOS Stories — stories from the EIDOS universe on Amazon</a></p>
 <p><a href="https://www.eidoslibro.com/relatos" rel="noopener" >EIDOS Stories — free stories on the official website</a></p>
 <section aria-labelledby="related-title" class="related reveal">
+
+<h2 id="repair-game-title">Game based on this article</h2>
+<p class="evolution-game-link">
+<a
+  class="evolution-experience-btn"
+  href="/hiddenegg/games/heal/reparacionEN.html"
+  title="Restore the altered tissue and recover its balance"
+  onclick="openEidosGameLink(event, this)">
+  How much balance can you recover?
+</a>
+</p>
+
+<section class="eidos-editorial-bridge reveal" aria-labelledby="eidos-editorial-title">
+  <div class="eidos-editorial-bridge__head">
+    <h2 class="eidos-editorial-bridge__title" id="eidos-editorial-title">Beyond this article</h2>
+  </div>
+
+  <div class="eidos-editorial-grid">
+
+    <article class="eidos-editorial-card">
+      <a class="eidos-editorial-cover"
+         href="../../indexeng.html"
+         aria-label="More about the EIDOS novel">
+        <img src="../../assets/images/eidoscoverbotheng.webp"
+             alt="Cover of the novel EIDOS by Felden Vareth"
+             loading="lazy">
+      </a>
+
+      <div class="eidos-editorial-copy">
+        <p class="eidos-editorial-label">Novel</p>
+        <h3>EIDOS</h3>
+        <p>A science fiction novel about consciousness, identity, and the possibility that the human essence might continue beyond the body.</p>
+
+        <div class="eidos-editorial-actions">
+          <a class="btn" href="../../indexeng.html">More about EIDOS</a>
+
+          <a class="btn gold"
+             href="https://www.amazon.es/dp/B0FC5ZDRKR"
+             target="_blank"
+             rel="noopener">Buy the novel</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="eidos-editorial-card">
+      <a class="eidos-editorial-cover"
+         href="../../essay/indexeng.html"
+         aria-label="More about EIDOS — Essays">
+        <img src="../../assets/images/tapaessey.jpg"
+             alt="Cover of EIDOS — Essays by Felden Vareth"
+             loading="lazy">
+      </a>
+
+      <div class="eidos-editorial-copy">
+        <p class="eidos-editorial-label">Essays</p>
+        <h3>EIDOS — Essays</h3>
+        <p>Nine essays on life, mind, evolution, consciousness, identity, and artificial intelligence, following the same questions explored throughout this blog.</p>
+
+        <div class="eidos-editorial-actions">
+          <a class="btn" href="../../essay/indexeng.html">More about the essays</a>
+
+          <a class="btn gold"
+             href="https://www.amazon.es/dp/B0HG7JTVC8"
+             target="_blank"
+             rel="noopener">Buy EIDOS — Essays</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+
+
 <h2 id="related-title">Keep reading</h2>
 <div class="related-grid">
 <a class="related-card" href="01_m1.html">M1: A Material That Doesn't Exist Yet (But Might One Day)</a>
