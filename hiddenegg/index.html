@@ -7,11 +7,48 @@
   <meta name="theme-color" content="#07100c">
   <title>EIDOS · Juegos</title>
   <meta name="description" content="Archivo interactivo de juegos ambientados en el universo de EIDOS.">
-  <link rel="icon" href="/assets/images/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/images/favicon.png" type="image/png">
+  <link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+
+  <link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/index.html">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EIDOS">
+  <meta property="og:title" content="EIDOS · Juegos">
+  <meta property="og:description" content="Archivo interactivo de puzles y arcades nacidos del universo de EIDOS.">
+  <meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/index.html">
+  <meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/compartir.jpg">
+  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/compartir.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="EIDOS Juegos · Archivo interactivo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EIDOS · Juegos">
+  <meta name="twitter:description" content="Explora los juegos nacidos del universo de EIDOS.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/compartir.jpg">
+
+  <link rel="apple-touch-icon" href="../assets/images/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Josefin+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied'
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-SCSFPYKJTX');
+  </script>
 
   <style>
     :root {
@@ -131,6 +168,35 @@
       font-weight: 600;
       letter-spacing: .3em;
       text-transform: uppercase;
+    }
+
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      background: rgba(10, 24, 19, .62);
+      text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .lang-switch:hover {
+      transform: translateY(-1px);
+      border-color: rgba(200, 168, 75, .55);
+      background: rgba(200, 168, 75, .05);
+    }
+
+    .lang-switch img {
+      display: block;
+      width: 24px;
+      height: auto;
+      border-radius: 2px;
     }
 
     .header-links {
@@ -547,9 +613,19 @@
 </head>
 
 <body>
+
+  <aside id="consent-banner" hidden role="dialog" aria-label="Preferencias de cookies">
+    <p>Este sitio utiliza cookies de analítica para medir el uso del archivo.
+      <a href="../terminosycondiciones.html">Política de privacidad</a>
+    </p>
+    <div class="consent-actions">
+      <button class="consent-button" id="consent-accept" type="button">Aceptar</button>
+      <button class="consent-button" id="consent-reject" type="button">Rechazar</button>
+    </div>
+  </aside>
   <div class="page-shell">
     <header class="site-header">
-      <a class="brand" href="/index.html" aria-label="Ir a EIDOS">
+      <a class="brand" href="../index.html" aria-label="Ir a EIDOS">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-copy">
           <span class="brand-name">EIDOS</span>
@@ -558,8 +634,13 @@
       </a>
 
       <nav class="header-links" aria-label="Enlaces principales">
-        <a class="quiet-link" href="/index.html">Conocer EIDOS</a>
-        <a class="quiet-link" href="/blog/index.html">Leer el blog</a>
+        <a class="quiet-link" href="../index.html">Conocer EIDOS</a>
+        <a class="quiet-link" href="../blog/index.html">Leer el blog</a>
+        <button class="quiet-link copy-link-button" id="copy-page-link" type="button" data-copy-url="https://www.eidoslibro.com/hiddenegg/index.html">Copiar enlace</button>
+        <a class="quiet-link" href="../terminosycondiciones.html">Privacidad</a>
+        <a class="lang-switch" href="indexeng.html" aria-label="English version" title="English">
+          <img src="../assets/images/flaguk.webp" alt="English">
+        </a>
       </nav>
     </header>
 
@@ -621,7 +702,7 @@
               <div class="game-actions">
                 <button class="play-button" type="button" data-game-title="Evolución" data-game-url="games/evolution/evolucion.html?sound=1">Jugar</button>
                 <button class="language-button" type="button" data-game-title="Evolution · EN" data-game-url="games/evolution/evolution.html?sound=1" aria-label="Jugar a Evolución en inglés">EN</button>
-                <a class="article-link" href="/blog/articulos/04_vida_digital_evolucion.html">Artículo</a>
+                <a class="article-link" href="../blog/articulos/04_vida_digital_evolucion.html">Artículo</a>
               </div>
             </div>
           </article>
@@ -654,7 +735,7 @@
               <div class="game-actions">
                 <button class="play-button" type="button" data-game-title="Conectoma" data-game-url="games/conectoma/conectoma.html">Jugar</button>
                 <button class="language-button" type="button" data-game-title="Connectome · EN" data-game-url="games/conectoma/conectomaEN.html" aria-label="Jugar a Conectoma en inglés">EN</button>
-                <a class="article-link" href="/blog/articulos/02_mente_humana.html">Artículo</a>
+                <a class="article-link" href="../blog/articulos/02_mente_humana.html">Artículo</a>
               </div>
             </div>
           </article>
@@ -683,7 +764,7 @@
               <div class="game-actions">
                 <button class="play-button" type="button" data-game-title="Forma" data-game-url="games/forma/forma.html">Jugar</button>
                 <button class="language-button" type="button" data-game-title="Form · EN" data-game-url="games/forma/formaEN.html" aria-label="Jugar a Forma en inglés">EN</button>
-                <a class="article-link" href="/blog/articulos/07_inteligente_para_que.html">Artículo</a>
+                <a class="article-link" href="../blog/articulos/07_inteligente_para_que.html">Artículo</a>
               </div>
             </div>
           </article>
@@ -859,7 +940,126 @@
               <div class="game-actions">
                 <button class="play-button" type="button" data-game-title="Transferencia" data-game-url="games/transferencia/transferencia.html?sound=1">Jugar</button>
                 <button class="language-button" type="button" data-game-title="Transfer · EN" data-game-url="games/transferencia/transfer.html?sound=1" aria-label="Jugar a Transferencia en inglés">EN</button>
-                <a class="article-link" href="/blog/articulos/02_mente_humana.html">Artículo</a>
+                <a class="article-link" href="../blog/articulos/02_mente_humana.html">Artículo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="game-card">
+            <div class="game-visual" style="--visual-glow: rgba(121,217,192,.18)">
+
+              <p class="visual-label">Reparación celular</p>
+              <span class="visual-index">08</span>
+              <svg viewBox="0 0 560 310" role="img" aria-label="Representación abstracta de una red celular en reparación">
+                <defs>
+                  <radialGradient id="healEsCore">
+                    <stop offset="0" stop-color="#f5ecd0"/>
+                    <stop offset=".18" stop-color="#c8a84b"/>
+                    <stop offset="1" stop-color="#18382c" stop-opacity=".08"/>
+                  </radialGradient>
+                  <radialGradient id="healEsGood">
+                    <stop offset="0" stop-color="#d9fff6"/>
+                    <stop offset=".18" stop-color="#79d9c0"/>
+                    <stop offset="1" stop-color="#18382c" stop-opacity=".06"/>
+                  </radialGradient>
+                  <radialGradient id="healEsBad">
+                    <stop offset="0" stop-color="#ffd4cf"/>
+                    <stop offset=".18" stop-color="#cf726a"/>
+                    <stop offset="1" stop-color="#351615" stop-opacity=".06"/>
+                  </radialGradient>
+                  <filter id="healEsGlow"><feGaussianBlur stdDeviation="7"/></filter>
+                </defs>
+
+                <rect x="124" y="42" width="312" height="226" rx="7"
+                      fill="none" stroke="#4a7c6f" stroke-opacity=".42"/>
+                <g stroke="#4a7c6f" stroke-opacity=".24">
+                  <path d="M186 42V268M248 42V268M310 42V268M372 42V268"/>
+                  <path d="M124 87H436M124 132H436M124 177H436M124 222H436"/>
+                </g>
+
+                <g fill="#79d9c0" fill-opacity=".48">
+                  <circle cx="124" cy="42" r="3"/><circle cx="186" cy="42" r="3"/>
+                  <circle cx="248" cy="42" r="3"/><circle cx="310" cy="42" r="3"/>
+                  <circle cx="372" cy="42" r="3"/><circle cx="436" cy="42" r="3"/>
+                  <circle cx="124" cy="87" r="3"/><circle cx="436" cy="87" r="3"/>
+                  <circle cx="124" cy="132" r="3"/><circle cx="436" cy="132" r="3"/>
+                  <circle cx="124" cy="177" r="3"/><circle cx="436" cy="177" r="3"/>
+                  <circle cx="124" cy="222" r="3"/><circle cx="436" cy="222" r="3"/>
+                  <circle cx="124" cy="268" r="3"/><circle cx="186" cy="268" r="3"/>
+                  <circle cx="248" cy="268" r="3"/><circle cx="310" cy="268" r="3"/>
+                  <circle cx="372" cy="268" r="3"/><circle cx="436" cy="268" r="3"/>
+                </g>
+
+                <g opacity=".24" filter="url(#healEsGlow)">
+                  <circle cx="280" cy="177" r="31" fill="#c8a84b"/>
+                  <circle cx="280" cy="132" r="24" fill="#79d9c0"/>
+                  <circle cx="218" cy="177" r="24" fill="#79d9c0"/>
+                  <circle cx="342" cy="177" r="24" fill="#79d9c0"/>
+                  <circle cx="280" cy="222" r="24" fill="#79d9c0"/>
+                </g>
+
+                <g stroke-linecap="round">
+                  <path d="M280 132V222" stroke="#79d9c0" stroke-width="3" stroke-opacity=".9"/>
+                  <path d="M218 177H342" stroke="#79d9c0" stroke-width="3" stroke-opacity=".9"/>
+                  <path d="M280 132V177M218 177H280M280 177H342"
+                        stroke="#c8a84b" stroke-width="2" stroke-opacity=".92"/>
+                </g>
+
+                <g>
+                  <circle cx="156" cy="65" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".62"/>
+                  <circle cx="218" cy="65" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+                  <circle cx="280" cy="65" r="17" fill="none" stroke="#cf726a" stroke-width="2" stroke-opacity=".82"/>
+                  <circle cx="342" cy="65" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+                  <circle cx="404" cy="65" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+
+                  <circle cx="156" cy="120" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+                  <circle cx="280" cy="132" r="19" fill="none" stroke="#79d9c0" stroke-width="3" stroke-opacity=".96"/>
+                  <circle cx="404" cy="120" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+
+                  <circle cx="156" cy="177" r="17" fill="none" stroke="#cf726a" stroke-width="2" stroke-opacity=".82"/>
+                  <circle cx="218" cy="177" r="19" fill="none" stroke="#79d9c0" stroke-width="3" stroke-opacity=".96"/>
+                  <circle cx="280" cy="177" r="22" fill="none" stroke="#c8a84b" stroke-width="3" stroke-opacity=".98"/>
+                  <circle cx="342" cy="177" r="19" fill="none" stroke="#79d9c0" stroke-width="3" stroke-opacity=".96"/>
+                  <circle cx="404" cy="177" r="17" fill="none" stroke="#cf726a" stroke-width="2" stroke-opacity=".82"/>
+
+                  <circle cx="156" cy="234" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+                  <circle cx="280" cy="222" r="19" fill="none" stroke="#79d9c0" stroke-width="3" stroke-opacity=".96"/>
+                  <circle cx="404" cy="234" r="17" fill="none" stroke="#79d9c0" stroke-width="2" stroke-opacity=".58"/>
+
+                  <circle cx="156" cy="65" r="9" fill="url(#healEsGood)" opacity=".8"/>
+                  <circle cx="218" cy="65" r="9" fill="url(#healEsGood)" opacity=".76"/>
+                  <circle cx="280" cy="65" r="9" fill="url(#healEsBad)" opacity=".8"/>
+                  <circle cx="342" cy="65" r="9" fill="url(#healEsGood)" opacity=".76"/>
+                  <circle cx="404" cy="65" r="9" fill="url(#healEsGood)" opacity=".76"/>
+
+                  <circle cx="156" cy="120" r="9" fill="url(#healEsGood)" opacity=".76"/>
+                  <circle cx="280" cy="132" r="11" fill="url(#healEsGood)" opacity=".96"/>
+                  <circle cx="404" cy="120" r="9" fill="url(#healEsGood)" opacity=".76"/>
+
+                  <circle cx="156" cy="177" r="9" fill="url(#healEsBad)" opacity=".8"/>
+                  <circle cx="218" cy="177" r="11" fill="url(#healEsGood)" opacity=".96"/>
+                  <circle cx="280" cy="177" r="13" fill="url(#healEsCore)" opacity=".98"/>
+                  <circle cx="342" cy="177" r="11" fill="url(#healEsGood)" opacity=".96"/>
+                  <circle cx="404" cy="177" r="9" fill="url(#healEsBad)" opacity=".8"/>
+
+                  <circle cx="156" cy="234" r="9" fill="url(#healEsGood)" opacity=".76"/>
+                  <circle cx="280" cy="222" r="11" fill="url(#healEsGood)" opacity=".96"/>
+                  <circle cx="404" cy="234" r="9" fill="url(#healEsGood)" opacity=".76"/>
+                </g>
+              </svg>
+
+            </div>
+            <div class="game-content">
+              <div class="game-meta"><span>Puzle</span><span>Reparación</span></div>
+              <h3 class="game-title">Reparación</h3>
+              <p class="game-description">
+                Restaura el tejido alterado. Cada intervención cambia una célula y sus cuatro vecinas.
+                Cincuenta niveles, mapa de progreso y continuidad infinita.
+              </p>
+              <div class="game-actions">
+                <button class="play-button" type="button" data-game-title="Reparación" data-game-url="games/heal/reparacion.html">Jugar</button>
+                <button class="language-button" type="button" data-game-title="Repair · EN" data-game-url="games/heal/reparacionEN.html" aria-label="Jugar a Reparación en inglés">EN</button>
+                <a class="article-link" href="../blog/articulos/03_inmortalidad_humana.html">Artículo</a>
               </div>
             </div>
           </article>
@@ -869,10 +1069,11 @@
 
     <footer class="page-footer">
       <nav class="footer-links" aria-label="Más sobre EIDOS">
-        <a class="footer-link" href="/index.html">EIDOS</a>
-        <a class="footer-link" href="/blog/index.html">Artículos</a>
+        <a class="footer-link" href="../index.html">EIDOS</a>
+        <a class="footer-link" href="../blog/index.html">Artículos</a>
         <a class="footer-link" href="https://www.amazon.com/dp/B0FC5ZDRKR" target="_blank" rel="noopener">EIDOS en Amazon</a>
         <a class="footer-link" href="indexeng.html">English</a>
+        <a class="footer-link" href="../terminosycondiciones.html">Privacidad</a>
       </nav>
     </footer>
   </div>
@@ -896,6 +1097,49 @@
   <script>
     (() => {
       "use strict";
+
+      const copyPageLink = document.getElementById("copy-page-link");
+      const consentBanner = document.getElementById("consent-banner");
+      const consentAccept = document.getElementById("consent-accept");
+      const consentReject = document.getElementById("consent-reject");
+
+      async function copyPageUrl() {
+        const url = copyPageLink?.dataset.copyUrl || window.location.href;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(url);
+            const original = copyPageLink.textContent;
+            copyPageLink.textContent = 'Enlace copiado';
+            window.setTimeout(() => { copyPageLink.textContent = original; }, 1500);
+            return;
+          }
+        } catch (error) {}
+        window.prompt('Copia este enlace', url);
+      }
+
+      function setConsent(granted) {
+        gtag('consent', 'update', {
+          'ad_storage': granted ? 'granted' : 'denied',
+          'ad_user_data': granted ? 'granted' : 'denied',
+          'ad_personalization': granted ? 'granted' : 'denied',
+          'analytics_storage': granted ? 'granted' : 'denied'
+        });
+        try { localStorage.setItem('consentGiven', granted ? 'true' : 'false'); } catch (error) {}
+        if (consentBanner) consentBanner.hidden = true;
+      }
+
+      copyPageLink?.addEventListener("click", copyPageUrl);
+      consentAccept?.addEventListener("click", () => setConsent(true));
+      consentReject?.addEventListener("click", () => setConsent(false));
+
+      try {
+        const consent = localStorage.getItem('consentGiven');
+        if (consent === 'true') setConsent(true);
+        else if (consent === 'false') setConsent(false);
+        else if (consentBanner) consentBanner.hidden = false;
+      } catch (error) {
+        if (consentBanner) consentBanner.hidden = false;
+      }
 
       const modal = document.getElementById("game-modal");
       const frame = document.getElementById("game-frame");

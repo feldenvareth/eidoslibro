@@ -6,110 +6,28 @@
 <meta name="theme-color" content="#071019">
 <meta name="description" content="FORM · An EIDOS spatial-intelligence puzzle. Drag, rotate and fit pieces on a triangular grid.">
 <link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/forma/formaEN.html">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.png">
+
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="EIDOS Book">
 <meta property="og:title" content="EIDOS · FORM">
 <meta property="og:description" content="Drag, rotate and fit. Rebuild the shape on a triangular grid.">
 <meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/forma/formaEN.html">
-<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
-<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
-<meta property="og:image:type" content="image/png">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.jpg">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="EIDOS FORM: a spatial-intelligence puzzle">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EIDOS · FORM">
 <meta name="twitter:description" content="Drag, rotate and fit. Rebuild the shape on a triangular grid.">
-<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.png">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/forma/eidos-form-share.jpg">
 <title>EIDOS · FORM</title>
-<style>
-:root{
-  color-scheme:dark;
-  --bg:#061019;--bg2:#03080d;--panel:#0a1721;--panel2:#0d1d28;
-  --line:#294657;--line2:#3d647a;--ink:#eef7fb;--muted:#8ca3b0;
-  --accent:#55bdf1;--accent2:#9bdcff;--gold:#d5b25d;--good:#8fd26b;--bad:#ec7168;
-}
-*{box-sizing:border-box}
-html,body{width:100%;height:100%;margin:0;overflow:hidden;background:
-  radial-gradient(circle at 50% -12%,#183146 0,#09141e 43%,#03080d 100%);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);
-  touch-action:none;user-select:none;-webkit-user-select:none}
-body{display:grid;place-items:center}
-button{font:inherit;color:inherit;touch-action:manipulation}
-#game-shell{
-  position:relative;z-index:2;width:min(480px,100vw,calc(100dvh * 480 / 650));
-  height:min(650px,100dvh,calc(100vw * 650 / 480));overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 31%,rgba(58,142,188,.13),transparent 38%),
-    linear-gradient(160deg,#0b1924,#050b11 76%);
-  border:1px solid #315164;border-radius:10px;box-shadow:0 22px 70px rgba(0,0,0,.58)
-}
-#game-shell:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.18;background-image:
-  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
-#game-shell:after{content:"";position:absolute;inset:-30%;z-index:0;pointer-events:none;background:
-  repeating-radial-gradient(circle at 50% 40%,transparent 0 46px,rgba(85,189,241,.018) 47px 48px);
-  animation:drift 18s ease-in-out infinite alternate}
-@keyframes drift{to{transform:translate(20px,-18px) scale(1.035)}}
 
-#eidos-shared-bg{--bg-opacity:.26;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#03080d}
-#eidos-shared-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.045);filter:saturate(.88) brightness(.68) contrast(1.06);transition:opacity 1.05s ease,transform 3.8s ease}
-#eidos-shared-bg img.active{opacity:var(--bg-opacity);transform:scale(1)}
-#eidos-shared-bg:after{content:"";position:absolute;inset:0;background:
-  linear-gradient(to bottom,rgba(3,8,13,.22),rgba(3,8,13,.38) 52%,rgba(3,8,13,.58)),
-  radial-gradient(circle at 50% 35%,transparent 0 32%,rgba(3,8,13,.30) 78%)}
-
-#topbar{position:relative;z-index:10;height:50px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:9px;padding:5px 9px;border-bottom:1px solid rgba(61,100,122,.36);background:rgba(4,10,15,.54);backdrop-filter:blur(7px)}
-.brand{min-width:0;font-size:17px;font-weight:850;letter-spacing:.24em;white-space:nowrap}.brand small{display:block;margin-top:1px;color:#79b8d6;font-size:6.9px;font-weight:700;letter-spacing:.16em}
-.hudbox{min-width:56px;text-align:center;color:#8fa9b8;font-size:7px;letter-spacing:.11em}.hudbox b{display:block;margin-top:1px;color:#f5fbff;font-size:15px;line-height:1;font-weight:820}.hudbox em{display:block;color:#8fd26b;font-style:normal;font-size:6.5px;margin-top:1px}
-#hintHud{min-width:45px}.iconbtn{width:34px;height:34px;border:1px solid #31536a;border-radius:8px;background:#0a1721;display:grid;place-items:center;cursor:pointer;font-size:17px}.iconbtn:active{transform:scale(.97);background:#102431}
-
-#game-area{position:relative;z-index:2;height:calc(100% - 50px);display:grid;grid-template-rows:36px minmax(208px,1fr) 25px 138px 51px 25px;gap:5px;padding:6px 9px 8px}
-#instruction{display:flex;align-items:center;gap:8px;padding:0 10px;border:1px solid rgba(57,92,111,.46);border-radius:9px;background:rgba(8,20,29,.76);font-size:9.3px;color:#dce9ef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#instruction .info{flex:0 0 auto;width:19px;height:19px;border:1px solid #6e9eb8;border-radius:50%;display:grid;place-items:center;color:#8fc4df;font-size:11px;font-weight:800}
-
-#board-wrap{position:relative;min-height:0;border:1px solid rgba(47,82,102,.36);border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 45%,rgba(27,62,83,.32),rgba(5,13,19,.62) 66%);box-shadow:inset 0 0 32px rgba(0,0,0,.32)}
-#board,#tray,#drag-canvas{display:block;width:100%;height:100%;touch-action:none}
-#board{position:absolute;inset:0}
-#board-wrap .corner-note{position:absolute;right:9px;top:7px;color:#557284;font-size:6.5px;letter-spacing:.14em;pointer-events:none}
-#toast{position:absolute;left:50%;top:8px;z-index:8;transform:translate(-50%,-5px);max-width:88%;padding:6px 10px;border:1px solid #385a6e;border-radius:999px;background:rgba(5,18,27,.94);color:#b9d0dc;font-size:8.2px;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s}
-#toast.on{opacity:1;transform:translate(-50%,0)}
-
-#progress-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:0 3px;color:#7f97a4;font-size:7.2px;letter-spacing:.1em}
-#shapeName{color:#9fc4d6;font-weight:760}#progress-track{height:3px;border-radius:99px;background:#12232d;overflow:hidden}#progress-fill{height:100%;width:0;background:linear-gradient(90deg,#50b6e9,#8ed8f7);box-shadow:0 0 8px rgba(85,189,241,.45);transition:width .25s ease}#progressText{min-width:55px;text-align:right}
-
-#tray-wrap{position:relative;border:1px solid rgba(53,89,108,.55);border-radius:10px;overflow:hidden;background:linear-gradient(180deg,rgba(8,20,29,.92),rgba(4,11,17,.92));box-shadow:inset 0 8px 28px rgba(0,0,0,.18)}
-#tray-wrap:before{content:"";position:absolute;inset:28px 0 0;pointer-events:none;opacity:.14;background-image:radial-gradient(circle,#77a2b8 1px,transparent 1.2px);background-size:18px 18px}
-#trayTitle{position:absolute;z-index:4;left:11px;top:8px;color:#758f9e;font-size:7.6px;font-weight:750;letter-spacing:.15em;pointer-events:none}#trayTitle b{color:#55bdf1}
-#trayHelp{position:absolute;z-index:4;right:10px;top:8px;color:#617a88;font-size:6.5px;letter-spacing:.08em;pointer-events:none}
-#tray{position:absolute;inset:25px 0 0;height:calc(100% - 25px)}
-
-#controls{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.control{position:relative;border:1px solid #2f5064;border-radius:9px;background:linear-gradient(180deg,#0d1b25,#08131b);cursor:pointer;font-weight:800;font-size:8.2px;letter-spacing:.02em}.control span{display:block;color:#7f9aaa;font-size:6.3px;font-weight:600;margin-top:1px;letter-spacing:.02em}.control.primary{border-color:#2c8bc0;background:linear-gradient(180deg,#103d59,#0b2b40);box-shadow:inset 0 0 18px rgba(51,148,203,.12)}.control:active{transform:scale(.985);filter:brightness(1.1)}.control:disabled{opacity:.34;cursor:default}
-#navrow{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;color:#607988;font-size:7.4px;letter-spacing:.08em}.navbtn{border:0;background:transparent;padding:2px 5px;color:#6d8795;cursor:pointer;font-weight:750}.navbtn:last-child{justify-self:end;color:#58bdf0}.navbtn:disabled{opacity:.26}.leveldots{display:flex;align-items:center;gap:4px}.leveldots i{width:5px;height:5px;border-radius:50%;background:#203744}.leveldots i.on{background:#51b9ed;box-shadow:0 0 8px rgba(81,185,237,.55)}
-
-#drag-canvas{position:absolute;z-index:30;inset:0;pointer-events:none}
-
-.screen{position:absolute;z-index:60;inset:0;display:none;place-items:center;padding:18px;background:radial-gradient(circle at 50% 25%,rgba(44,102,136,.24),transparent 38%),rgba(3,9,14,.95);backdrop-filter:blur(7px)}.screen.open{display:grid;animation:fade .2s ease}@keyframes fade{from{opacity:0}}
-.card{width:min(408px,96%);max-height:94%;overflow:auto;padding:23px 20px 19px;border:1px solid rgba(77,124,150,.62);border-radius:17px;background:linear-gradient(160deg,rgba(12,29,40,.98),rgba(5,14,21,.98));text-align:center;box-shadow:0 22px 65px rgba(0,0,0,.58)}
-.kicker{margin:0 0 6px;color:#55bdf1;font-size:8px;font-weight:800;letter-spacing:.27em}.card h1,.card h2{margin:0;color:#f2f8fb;font-weight:780;letter-spacing:.16em}.card h1{font-size:33px}.card h2{font-size:22px}.sub{margin:5px 0 15px;color:#80b9d5;font-size:8px;letter-spacing:.14em}.intro{margin:0 auto 15px;max-width:340px;color:#bacbd4;font-size:10.4px;line-height:1.47}.intro strong{color:#eef8fc}.rulegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 16px}.rule{padding:9px 5px;border:1px solid rgba(68,102,121,.45);border-radius:8px;background:rgba(255,255,255,.025);color:#8fa5b1;font-size:7.4px;line-height:1.28}.rule b{display:block;margin-bottom:3px;color:#d9e9f0;font-size:8.4px}.rule .glyph{display:block;color:#69c4ef;font-size:18px;margin-bottom:4px}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}.bigbtn{min-width:145px;padding:10px 15px;border-radius:999px;border:1px solid #3c6176;background:#0b1e2a;color:#e9f3f7;cursor:pointer;font-size:8.3px;font-weight:800;letter-spacing:.11em}.bigbtn.primary{border-color:#3ca6dc;background:#17618a;box-shadow:0 8px 25px rgba(23,97,138,.26)}.bigbtn.gold{border-color:#d5b25d;background:#b18e3f;color:#061019}.smallnote{margin:10px 0 0;color:#657d8a;font-size:7.4px}.quote{margin:14px 0 0;padding:12px;border-left:2px solid #55bdf1;background:rgba(55,124,161,.07);color:#a9c0cb;font:italic 10px/1.45 Georgia,serif;text-align:left}
-.article-link{display:block;margin:14px auto 0;padding:11px 16px;width:min(330px,100%);border:1px solid rgba(213,178,93,.92);border-radius:999px;background:linear-gradient(180deg,rgba(213,178,93,.20),rgba(129,96,28,.15));box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 0 18px rgba(213,178,93,.05);color:#c9c2aa;text-decoration:none;text-align:center;line-height:1.25;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}.article-link span{display:block;font-size:6.7px;letter-spacing:.14em;color:#9da9a8}.article-link b{display:block;margin-top:4px;color:#f0cf73;font-size:9.2px;letter-spacing:.13em}.article-link:hover{filter:brightness(1.12);box-shadow:0 9px 28px rgba(213,178,93,.13),inset 0 0 22px rgba(213,178,93,.08)}.article-link:active{transform:scale(.985)}
-.quote{max-height:92px;overflow:auto;scrollbar-width:thin}
-
-#levelGrid{display:grid;gap:8px;margin:12px 0 15px}.blockrow{display:grid;grid-template-columns:74px repeat(10,1fr);gap:4px;align-items:center}.blocklabel{color:#6f8b9a;font-size:6.2px;line-height:1.15;text-align:left;letter-spacing:.08em}.blocklabel b{display:block;color:#86c9e8;font-size:6.7px;margin-bottom:2px}.lvl{aspect-ratio:1;border:1px solid #2d4a5b;border-radius:5px;background:#08151e;color:#8297a2;font-size:7px;cursor:pointer}.lvl.done{color:#bfe2f2;border-color:#376c88;background:#0b2230}.lvl.current{color:#fff;border-color:#55bdf1;box-shadow:0 0 10px rgba(85,189,241,.25)}.lvl.lock{opacity:.25;cursor:default}.menurow{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.menurow .bigbtn{min-width:0;width:100%}
-
-.phase-card{overflow:hidden}.phase-next{margin:14px auto 16px;padding:12px 14px;border:1px solid rgba(85,189,241,.46);border-radius:11px;background:linear-gradient(180deg,rgba(25,82,112,.22),rgba(8,27,39,.32));box-shadow:inset 0 0 24px rgba(85,189,241,.05)}.phase-next span{display:block;color:#718f9f;font-size:6.8px;letter-spacing:.2em}.phase-next b{display:block;margin-top:5px;color:#9bdcff;font-size:15px;letter-spacing:.14em}.phase-next small{display:block;margin-top:3px;color:#d5b25d;font-size:7.2px;letter-spacing:.12em}
-#winStats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:14px 0}.statcard{padding:10px;border:1px solid #2c4a5b;border-radius:9px;background:rgba(255,255,255,.025);color:#7f97a4;font-size:7px;letter-spacing:.1em}.statcard b{display:block;margin-top:3px;color:#f0f8fb;font-size:18px}.shape-glyph{font-size:46px;line-height:1;color:#66c7f4;text-shadow:0 0 20px rgba(85,189,241,.35);margin:2px 0 8px}.danger-note{color:#f3a29b!important}.solution-screen{background:linear-gradient(to bottom,rgba(3,9,14,.08) 0%,rgba(3,9,14,.28) 42%,rgba(3,9,14,.94) 70%);backdrop-filter:none;place-items:end center;padding-bottom:16px}.solution-screen .card{max-width:420px;background:rgba(7,20,29,.96)}
-
-@media(max-height:610px){
-  #topbar{height:44px}.brand{font-size:15px}.hudbox{min-width:48px}.iconbtn{height:30px;width:30px}
-  #game-area{height:calc(100% - 44px);grid-template-rows:31px minmax(184px,1fr) 21px 122px 45px 21px;gap:4px;padding-top:4px}
-  #tray-wrap{border-radius:8px}#trayTitle,#trayHelp{top:6px}.control{font-size:8.5px}
-}
-@media(max-width:390px){.brand small{display:none}.brand{font-size:15px}.hudbox{min-width:44px}.hudbox:nth-of-type(2){display:none}#trayHelp{display:none}.rulegrid{gap:4px}.rule{padding-inline:3px}}
-</style>
 
 <!-- Google Analytics: loaded only after cookie consent -->
 <script id="eidos-analytics-loader">
@@ -131,9 +49,8 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 })();
 </script>
 
-<style id="eidos-consent-style">
-#consent-banner{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:10000;width:min(620px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;padding:12px 14px;color:#ded7c1;background:rgba(7,16,12,.97);border:1px solid rgba(200,168,75,.62);border-radius:9px;box-shadow:0 12px 36px rgba(0,0,0,.5);font:12px/1.35 Arial,sans-serif;touch-action:manipulation}#consent-banner[hidden]{display:none}#consent-banner p{flex:1;margin:0}#consent-banner a{color:#79d9c0}.consent-actions{display:flex;gap:7px}.consent-btn{padding:7px 10px;color:#07100c;background:#f5d76e;border:1px solid #c8a84b;border-radius:5px;font-weight:700;cursor:pointer}.consent-btn.decline{color:#cbd3ce;background:transparent;border-color:rgba(121,217,192,.4)}@media(max-width:430px){#consent-banner{flex-direction:column;text-align:center}.consent-actions{justify-content:center}}
-</style>
+
+  <link rel="stylesheet" href="forma.css">
 </head>
 <body>
 <aside id="consent-banner" role="dialog" aria-label="Cookie preferences" hidden>
@@ -199,12 +116,15 @@ button{font:inherit;color:inherit;touch-action:manipulation}
         <div class="rule"><span class="glyph">↺ ↻</span><b>ROTATE 60°</b>In both directions, including on the board.</div>
         <div class="rule"><span class="glyph">△</span><b>COMPLETE</b>You can test overlaps; the final solution allows none.</div>
       </div>
-      <div class="actions">
-        <button id="continueBtn" class="bigbtn primary">START</button>
-        <button id="levelSelectBtn" class="bigbtn">LEVEL SELECT</button>
-        <button id="newBtn" class="bigbtn">NEW GAME</button>
+      <div class="start-actions">
+        <button id="newBtn" class="bigbtn primary" type="button">START</button>
+        <button id="levelSelectBtn" class="bigbtn" type="button">LEVELS</button>
+        <button id="copyLinkBtn" class="bigbtn" type="button">COPY LINK</button>
+        <a id="startArticleBtn" class="start-link" href="https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html" target="_blank" rel="noopener noreferrer">READ THE ARTICLE</a>
+        <a id="discoverEidosBtn" class="start-link full-start-action" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener noreferrer">DISCOVER EIDOS</a>
       </div>
       <p class="smallnote">6 blocks of 10 levels · progressive difficulty · then, endless mode</p>
+      <p class="collection-note">The article explores the ideas about intelligence, form and adaptation that inspired this game.</p>
     </div>
   </section>
 
@@ -220,10 +140,24 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       </div>
       <div class="menurow">
         <button id="restartMenuBtn" class="bigbtn">RESET LEVEL</button>
-        <button id="startOverBtn" class="bigbtn">NEW GAME</button>
+        <button id="startOverBtn" class="bigbtn danger" type="button">DELETE CAMPAIGN</button>
       </div>
     </div>
   </section>
+  <section id="deleteCampaignScreen" class="screen">
+    <div class="card delete-campaign-card">
+      <p class="kicker">CAMPAIGN</p>
+      <h2>DELETE CAMPAIGN</h2>
+      <p class="sub danger-sub">THIS ACTION CANNOT BE UNDONE</p>
+      <p class="intro">You are about to start from zero. Completed levels, unlocked levels, best scores and campaign progress saved in this browser will be deleted.</p>
+      <div class="delete-warning"><strong>Your entire campaign history will be erased.</strong><span>The game will return to level 1 immediately.</span></div>
+      <div class="actions delete-actions">
+        <button id="confirmDeleteCampaignBtn" class="bigbtn danger" type="button">DELETE AND START FROM ZERO</button>
+        <button id="cancelDeleteCampaignBtn" class="bigbtn" type="button">CANCEL</button>
+      </div>
+    </div>
+  </section>
+
 
   <section id="winScreen" class="screen">
     <div class="card">
@@ -235,7 +169,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <p class="intro" id="winCopy">You rebuilt a whole from fragments that could move and change orientation.</p>
       <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">NEXT LEVEL</button><button id="winMenuBtn" class="bigbtn">VIEW LEVELS</button></div>
       <!-- FORM ARTICLE EN: replace only href="#" with the URL of the English article -->
-      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer"><span>THE IDEA CONTINUES BEYOND THE PUZZLE</span><b>READ THE ARTICLE →</b></a>
+      <a class="article-link" href="https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html" target="_blank" rel="noopener noreferrer"><span>THE IDEA CONTINUES BEYOND THE PUZZLE</span><b>READ THE ARTICLE →</b></a>
       <div class="quote" id="winQuote">Spatial intelligence does not see only pieces. It sees possible relationships between them.</div>
     </div>
   </section>
@@ -292,7 +226,7 @@ button{font:inherit;color:inherit;touch-action:manipulation}
       <div class="quote">A body capable of acting on the world multiplies the problems an intelligence can learn to solve.</div>
       <div class="actions" style="margin-top:16px"><button id="infiniteBtn" class="bigbtn primary">ENDLESS CAMPAIGN</button><button id="finishMenuBtn" class="bigbtn">BACK TO LEVELS</button></div>
       <!-- FORM ARTICLE EN: replace only href="#" with the URL of the English article -->
-      <a class="article-link" href="#" target="_blank" rel="noopener noreferrer"><span>THE IDEA CONTINUES BEYOND THE PUZZLE</span><b>READ THE ARTICLE →</b></a>
+      <a class="article-link" href="https://www.eidoslibro.com/blog/articles/07_intelligent_for_what.html" target="_blank" rel="noopener noreferrer"><span>THE IDEA CONTINUES BEYOND THE PUZZLE</span><b>READ THE ARTICLE →</b></a>
     </div>
   </section>
 </div>
@@ -303,604 +237,6 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 document.write('<script src="/hiddenegg/games/eidos-content-en.js?v='+Date.now()+'"><\\/script>');
 </script>
 
-<script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id);
-const SQ3=Math.sqrt(3), HUNIT=SQ3/2;
-const SAVE_KEY='eidos-forma-save-v4', SOUND_KEY='eidos-forma-sound-v1';
-const COLORS=['#2da7e8','#f0b83d','#78c751','#ef624f','#a779e7','#41c2ae','#e887c2','#e89b4a','#7b99f2'];
-const WIN_COPY=[
-  'You rebuilt a whole from fragments that could move and change orientation.',
-  'The correct piece was not enough: it also needed the correct orientation and position.',
-  'Each rotation changed the appearance without changing the internal structure of the piece.',
-  'The solution depended on anticipating spatial relationships before they could be tested.',
-  'The board was no longer a figure, but a space of possible transformations.'
-];
-const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
-const GALLERY_MANIFEST=Array.isArray(window.EIDOS_IMAGE_MANIFEST)?window.EIDOS_IMAGE_MANIFEST:[];
-const BG_IMAGES=GALLERY_MANIFEST.length
-  ? GALLERY_MANIFEST.map(item=>item&&item.url).filter(Boolean).map(url=>/^(?:https?:)?\/\//.test(url)||url.startsWith('/')?url:'/gallery/'+String(url).replace(/^\.?\//,''))
-  : (Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[]);
-const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(q=>typeof q==='string'&&q.trim()):[];
-function quoteForLevel(n){
-  if(!SHARED_QUOTES.length)return'';
-  return SHARED_QUOTES[(Math.max(1,n)-1)%SHARED_QUOTES.length];
-}
-function applyLevelQuote(n){
-  const box=$('winQuote'),quote=quoteForLevel(n);
-  box.textContent=quote;
-  box.style.display=quote?'block':'none';
-}
-const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
-const BG_ROOT=$('eidos-shared-bg');
-let bgDeck=[],activeBg=0,lastBg=-1;
-const invalidBackgrounds=new Set();
-function shuffleBackgrounds(values){for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}return values}
-function refillBackgroundDeck(){bgDeck=shuffleBackgrounds(BG_IMAGES.map((_,i)=>i).filter(i=>!invalidBackgrounds.has(i)));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}
-function changeBackground(attempt=0){
-  if(!BG_IMAGES.length||!BG_LAYERS[0]||!BG_LAYERS[1])return;
-  if(!bgDeck.length)refillBackgroundDeck();
-  if(!bgDeck.length)return;
-  const index=bgDeck.shift(),next=1-activeBg,img=BG_LAYERS[next],old=BG_LAYERS[activeBg];
-  img.onload=()=>{old.classList.remove('active');img.classList.add('active');activeBg=next;lastBg=index};
-  img.onerror=()=>{invalidBackgrounds.add(index);img.removeAttribute('src');if(attempt<BG_IMAGES.length-1)changeBackground(attempt+1)};
-  img.src=BG_IMAGES[index];
-}
-function updateBackgroundStrength(progressRatio){
-  if(!BG_ROOT)return;
-  const ratio=Math.max(0,Math.min(1,Number(progressRatio)||0));
-  BG_ROOT.style.setProperty('--bg-opacity',String(.26+ratio*.44));
-}
-const board=$('board'), tray=$('tray'), dragCanvas=$('drag-canvas');
-const bc=board.getContext('2d'), tc=tray.getContext('2d'), dc=dragCanvas.getContext('2d');
-let dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));
-let progress=readSave();
-let sound=true,audio=null;try{sound=localStorage.getItem(SOUND_KEY)!=='off'}catch(e){}
-let level=1, infinite=false, infiniteIndex=0, infiniteRunSeed=0, moves=0, hints=3, surrendered=false;
-let target=[], targetMap=new Map(), neighbors=new Map(), boundaryEdges=[];
-let pieces=[], occupied=new Map(), selected=null, active=null;
-let boardGeom={scale:30,originX:0,originY:0,bbox:null};
-let trayHit=[];let hintPiece=null,hintTimer=0,toastTimer=0;
-let pointerId=null,startPointer=null,dragMoved=false,selectedBeforeDrag=false;
-let won=false;
-let menuReturnScreen='game';
-
-function readSave(){
-  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false},v)}catch(e){}
-  return {unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};
-}
-function save(){
-  if(!infinite){progress.last=level;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level));}
-  persistProgress();
-}
-function markCampaignResult(type){
-  if(infinite)return;
-  const next=Math.min(60,level+1);
-  progress.unlocked=Math.max(progress.unlocked,next);
-  progress.last=next;
-  if(level===60)progress.campaignComplete=true;
-  progress.pending={type,level,moves,best:progress.best[String(level)]||moves};
-  persistProgress();
-}
-function persistProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}}
-function clearPending(){if(progress.pending){progress.pending=null;persistProgress()}}
-function resetProgress(){progress={unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};infinite=false;level=1;persistProgress();startLevel(1);closeAllScreens();}
-function seeded(seed){return function(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
-function hash(n){n=Math.imul(n^n>>>16,0x45d9f3b);n=Math.imul(n^n>>>16,0x45d9f3b);return (n^n>>>16)>>>0}
-
-function axialToCart(v){return{x:v.q+v.r*.5,y:v.r*HUNIT}}
-function rotateV(v,steps){let q=v.q,r=v.r;steps=((steps%6)+6)%6;for(let i=0;i<steps;i++){const nq=-r,nr=q+r;q=nq;r=nr}return{q,r}}
-function addV(a,b){return{q:a.q+b.q,r:a.r+b.r}}
-function vkey(v){return v.q+','+v.r}
-function sortVerts(a,b){return a.q-b.q||a.r-b.r}
-function ckey(verts){return verts.slice().sort(sortVerts).map(vkey).join('|')}
-function ekey(a,b){return [a,b].sort(sortVerts).map(vkey).join('|')}
-function centroidVerts(verts){return{x:verts.reduce((s,v)=>s+axialToCart(v).x,0)/3,y:verts.reduce((s,v)=>s+axialToCart(v).y,0)/3}}
-function pointInPoly(p,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){
-  const a=axialToCart(poly[i]),b=axialToCart(poly[j]);
-  const hit=((a.y>p.y)!=(b.y>p.y))&&(p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y+1e-12)+a.x);if(hit)inside=!inside;
-}return inside}
-function rotatePoly(poly,steps){return poly.map(v=>rotateV(v,steps))}
-function shiftPoly(poly,dq,dr){return poly.map(v=>({q:v.q+dq,r:v.r+dr}))}
-
-function cellsFromPolys(polys){
-  let qs=[],rs=[];polys.flat().forEach(v=>{qs.push(v.q);rs.push(v.r)});
-  const q0=Math.floor(Math.min(...qs))-2,q1=Math.ceil(Math.max(...qs))+2,r0=Math.floor(Math.min(...rs))-2,r1=Math.ceil(Math.max(...rs))+2;
-  const out=new Map();
-  for(let q=q0;q<=q1;q++)for(let r=r0;r<=r1;r++){
-    const tris=[
-      [{q,r},{q:q+1,r},{q,r:r+1}],
-      [{q:q+1,r},{q:q+1,r:r+1},{q,r:r+1}]
-    ];
-    for(const verts of tris){const cen=centroidVerts(verts);if(polys.some(poly=>pointInPoly(cen,poly))){const key=ckey(verts);out.set(key,{key,verts,cen})}}
-  }
-  return [...out.values()];
-}
-function triangle(n,rot=0,dq=0,dr=0){return shiftPoly(rotatePoly([{q:0,r:0},{q:n,r:0},{q:0,r:n}],rot),dq,dr)}
-function rhombus(w,h,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:w,r:0},{q:w,r:h},{q:0,r:h}],dq,dr)}
-function hexagon(s,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:s,r:0},{q:s,r:s},{q:0,r:2*s},{q:-s,r:2*s},{q:-s,r:s}],dq,dr)}
-function trapezoid(top,h,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:top,r:0},{q:top,r:h},{q:-h,r:h}],dq,dr)}
-function arrowShape(scale){
-  const head=shiftPoly(triangle(scale+1,1),0,0);
-  const shaft=rhombus(Math.max(2,scale-1),scale+1,-Math.max(1,scale-1),scale+1);
-  return [head,shaft];
-}
-function crownShape(s){
-  const base=trapezoid(s+1,2,0,s);
-  // Tres puntas unidas por aristas a la parte superior de la base.
-  const y=s-2;
-  const t1=triangle(2,1,1,y),t2=triangle(2,1,3,y),t3=triangle(2,1,5,y);
-  return [base,t1,t2,t3];
-}
-function shapeFor(n){
-  const tier=Math.min(5,Math.floor((n-1)/10));
-  const pos=(n-1)%10,phase=pos>=7?1:0;
-  let name,polys;
-  if(n<=3){const s=4+(n===3?1:0);name='TRIANGLE';polys=[triangle(s,1)];}
-  else{
-    const kind=(pos+2*tier)%6;
-    if(kind===0){const s=5+Math.floor(tier/2)+phase;name='TRIANGLE';polys=[triangle(s,1)];}
-    if(kind===1){const w=4+Math.floor(tier/2)+phase,h=3+(tier%2);name='ROMBO';polys=[rhombus(w,h)];}
-    if(kind===2){const s=2+(tier>=3?1:0)+phase;name='HEXAGON';polys=[hexagon(s)];}
-    if(kind===3){const t=3+Math.floor(tier/2)+phase,h=3+(tier>=4?1:0);name='TRAPECIO';polys=[trapezoid(t,h)];}
-    if(kind===4){const s=3+(tier>=3?1:0)+phase;name='FLECHA';polys=arrowShape(s);}
-    if(kind===5){const s=3+(tier>=4?1:0)+phase;name='CORONA';polys=crownShape(s);}
-  }
-  let cells=cellsFromPolys(polys);
-  // Si una unión concreta generase una parte aislada, conservar solo el componente principal.
-  cells=largestConnected(cells);
-  return{name,polys,cells};
-}
-function largestConnected(cells){
-  if(!cells.length)return cells;
-  const map=new Map(cells.map(c=>[c.key,c])),adj=buildNeighborMap(cells),seen=new Set();let best=[];
-  for(const c of cells)if(!seen.has(c.key)){const stack=[c.key],comp=[];seen.add(c.key);while(stack.length){const k=stack.pop();comp.push(map.get(k));for(const nb of adj.get(k)||[])if(!seen.has(nb)){seen.add(nb);stack.push(nb)}}if(comp.length>best.length)best=comp}
-  return best;
-}
-function buildNeighborMap(cells){
-  const edgeOwners=new Map(),adj=new Map(cells.map(c=>[c.key,[]]));
-  for(const c of cells){for(let i=0;i<3;i++){const k=ekey(c.verts[i],c.verts[(i+1)%3]);if(!edgeOwners.has(k))edgeOwners.set(k,[]);edgeOwners.get(k).push(c.key)}}
-  for(const owners of edgeOwners.values())if(owners.length===2){adj.get(owners[0]).push(owners[1]);adj.get(owners[1]).push(owners[0])}
-  return adj;
-}
-function buildBoundary(cells){
-  const edges=new Map();for(const c of cells)for(let i=0;i<3;i++){const a=c.verts[i],b=c.verts[(i+1)%3],k=ekey(a,b);if(!edges.has(k))edges.set(k,{a,b,n:0});edges.get(k).n++}
-  return [...edges.values()].filter(e=>e.n===1);
-}
-
-function partition(cells,k,seed){
-  k=Math.max(2,Math.min(k,Math.floor(cells.length/3)));
-  const rnd=seeded(seed),map=new Map(cells.map(c=>[c.key,c])),adj=buildNeighborMap(cells);
-  const unassigned=new Set(cells.map(c=>c.key)),groups=Array.from({length:k},()=>[]);
-  // Semillas alejadas entre sí para producir pieces compactas y reconocibles.
-  let first=cells[Math.floor(rnd()*cells.length)];const seeds=[first];
-  while(seeds.length<k){let best=null,score=-1;for(const c of cells){if(seeds.includes(c))continue;let d=Infinity;for(const s of seeds)d=Math.min(d,Math.hypot(c.cen.x-s.cen.x,c.cen.y-s.cen.y));const jitter=rnd()*.18;if(d+jitter>score){score=d+jitter;best=c}}seeds.push(best)}
-  seeds.forEach((c,i)=>{groups[i].push(c.key);unassigned.delete(c.key)});
-  const goals=Array(k).fill(Math.floor(cells.length/k));for(let i=0;i<cells.length%k;i++)goals[i]++;
-  let guard=0;
-  while(unassigned.size&&guard++<10000){
-    const order=[...Array(k).keys()].sort((a,b)=>(groups[a].length/goals[a])-(groups[b].length/goals[b])||rnd()-.5);
-    let did=false;
-    for(const gi of order){
-      if(!unassigned.size)break;
-      const cand=new Map();for(const id of groups[gi])for(const nb of adj.get(id)||[])if(unassigned.has(nb))cand.set(nb,(cand.get(nb)||0)+1);
-      if(!cand.size)continue;
-      let choices=[...cand.entries()].sort((a,b)=>b[1]-a[1]||rnd()-.5);
-      // Evita convertir todas las pieces en manchas: un poco de azar entre los mejores bordes.
-      const max=choices[0][1];choices=choices.filter(x=>x[1]>=max-1);const pick=choices[Math.floor(rnd()*choices.length)][0];
-      groups[gi].push(pick);unassigned.delete(pick);did=true;
-      if(groups[gi].length>=goals[gi]&&rnd()>.14)continue;
-    }
-    if(!did)break;
-  }
-  // Cualquier resto se anexa a un grupo vecino, conservando conectividad.
-  while(unassigned.size){let did=false;for(const id of [...unassigned]){for(let gi=0;gi<k;gi++){if((adj.get(id)||[]).some(nb=>groups[gi].includes(nb))){groups[gi].push(id);unassigned.delete(id);did=true;break}}}if(!did)break}
-  return groups.filter(g=>g.length);
-}
-function makePieces(groups,seed){
-  const rnd=seeded(seed),map=targetMap;
-  return groups.map((keys,i)=>{
-    const verts=[...new Map(keys.flatMap(k=>map.get(k).verts).map(v=>[vkey(v),v])).values()].sort(sortVerts);
-    const pivot=verts[0];
-    const local=keys.map(k=>map.get(k).verts.map(v=>({q:v.q-pivot.q,r:v.r-pivot.r})));
-    const tier=Math.min(5,Math.floor((Math.max(1,level)-1)/10));
-    const rotationSets=[[0,1,5],[0,1,2,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]];
-    let rot=rotationSets[tier][Math.floor(rnd()*rotationSets[tier].length)];if(i===0&&level===1)rot=1;
-    return{id:i,color:COLORS[i%COLORS.length],local,solutionKeys:keys.slice(),solutionT:{q:pivot.q,r:pivot.r},rot,placed:false,t:null,matched:[],trayPolys:[],traySlot:i};
-  });
-}
-function transformedTris(piece,rot,t){return piece.local.map(tri=>tri.map(v=>addV(rotateV(v,rot),t)))}
-function transformedKeys(piece,rot,t){return transformedTris(piece,rot,t).map(ckey)}
-function rebuildOccupancy(){
-  occupied.clear();
-  for(const p of pieces){
-    if(!p.placed||!p.t)continue;
-    const tris=transformedTris(p,p.rot,p.t);p.matched=tris.map(ckey);
-    tris.forEach((verts,i)=>{const key=p.matched[i];if(!occupied.has(key))occupied.set(key,{verts,owners:[]});occupied.get(key).owners.push(p.id)});
-  }
-}
-function validPlacement(piece,rot,t){
-  const keys=transformedKeys(piece,rot,t);
-  for(const k of keys){
-    if(!targetMap.has(k))return null;
-    const entry=occupied.get(k);if(entry&&entry.owners.some(id=>id!==piece.id))return null;
-  }
-  return keys;
-}
-function placementIssues(){
-  let overlap=0,outside=0;
-  for(const [k,e] of occupied){if(e.owners.length>1)overlap++;if(!targetMap.has(k))outside++;}
-  return{overlap,outside};
-}
-function isSolved(){
-  if(!pieces.length||!pieces.every(p=>p.placed))return false;rebuildOccupancy();
-  if(occupied.size!==target.length)return false;
-  for(const [k,e] of occupied){if(!targetMap.has(k)||e.owners.length!==1)return false}
-  return target.every(c=>occupied.has(c.key));
-}
-const BLOCKS=[
-  {name:'FOUNDATIONS',diff:'EASY'},
-  {name:'COMBINATION',diff:'ATTENTION'},
-  {name:'ROTATION',diff:'SPATIAL'},
-  {name:'ANTICIPATION',diff:'ROTATION'},
-  {name:'ABSTRACTION',diff:'ABSTRACTION'},
-  {name:'SYNTHESIS',diff:'EIDOS'}
-];
-const PHASE_COPY=[
-  'You completed the foundations phase. From now on, the pieces require combining more relationships at the same time.',
-  'You cleared the combination phase. The next block makes rotation a central part of the problem.',
-  'You completed the rotation phase. Now you will need to anticipate positions before testing them.',
-  'You cleared the anticipation phase. The next block requires working with more abstract configurations.',
-  'You completed the abstraction phase. Only the final synthesis of all these skills remains.'
-];
-function blockFor(n){const i=Math.min(5,Math.floor((Math.max(1,n)-1)/10));return{index:i+1,...BLOCKS[i]}}
-function difficultyFor(n){if(infinite)return'INFINITO';return blockFor(n).diff}
-function pieceCountFor(n,cells){
-  const tier=Math.min(5,Math.floor((n-1)/10)),pos=(n-1)%10;
-  const base=[3,4,5,5,6,7][tier],extra=pos>=6?1:0;
-  return Math.min(base+extra,Math.max(3,Math.floor(cells/3.6)));
-}
-function startLevel(n,inf=false,remember=true){
-  won=false;surrendered=false;infinite=inf;
-  if(infinite){if(!infiniteRunSeed)infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);infiniteIndex=Math.max(1,n);level=60+infiniteIndex}else{level=Math.max(1,Math.min(60,n));}
-  moves=0;hints=3;occupied.clear();selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
-  const spec=shapeFor(level),cells=spec.cells;target=cells;targetMap=new Map(cells.map(c=>[c.key,c]));neighbors=buildNeighborMap(cells);boundaryEdges=buildBoundary(cells);
-  const seed=infinite?hash(infiniteRunSeed^(infiniteIndex*9173+41)):hash(level*9173+41),k=pieceCountFor(level,cells.length),groups=partition(cells,k,seed);pieces=makePieces(groups,seed^0x9e3779b9);
-  rebuildOccupancy();
-  const block=infinite?null:blockFor(level);$('shapeName').textContent=spec.name;$('levelN').textContent=infinite?'∞'+infiniteIndex:level;$('difficulty').textContent=difficultyFor(level);$('movesN').textContent='0';
-  $('blockNote').textContent=infinite?'ENDLESS CAMPAIGN · SEED '+String(infiniteRunSeed).slice(-4):'BLOCK '+block.index+' · '+block.name;
-  $('instructionText').textContent='Cover the shape completely. You can also move and rotate pieces already placed.';
-  updateHUD();if(remember)save();resizeAll();drawAll();changeBackground();
-}
-
-function resizeCanvas(c){const r=c.getBoundingClientRect();c.width=Math.max(1,Math.round(r.width*dpr));c.height=Math.max(1,Math.round(r.height*dpr));c.getContext('2d').setTransform(dpr,0,0,dpr,0,0)}
-function resizeAll(){resizeCanvas(board);resizeCanvas(tray);resizeCanvas(dragCanvas);computeBoardGeom();drawAll()}
-function computeBoardGeom(){
-  if(!target.length)return;let xs=[],ys=[];for(const c of target)for(const v of c.verts){const p=axialToCart(v);xs.push(p.x);ys.push(p.y)}
-  const bbox={minx:Math.min(...xs),maxx:Math.max(...xs),miny:Math.min(...ys),maxy:Math.max(...ys)};
-  const w=board.clientWidth,h=board.clientHeight,pad=Math.max(18,Math.min(w,h)*.075);const bw=bbox.maxx-bbox.minx,bh=bbox.maxy-bbox.miny;
-  const scale=Math.min((w-2*pad)/(bw||1),(h-2*pad)/(bh||1));
-  boardGeom={scale,originX:(w-bw*scale)/2-bbox.minx*scale,originY:(h-bh*scale)/2-bbox.miny*scale,bbox};
-}
-function toBoard(v){const p=axialToCart(v);return{x:boardGeom.originX+p.x*boardGeom.scale,y:boardGeom.originY+p.y*boardGeom.scale}}
-function nearestLattice(screen){
-  const x=(screen.x-boardGeom.originX)/boardGeom.scale,y=(screen.y-boardGeom.originY)/boardGeom.scale;const rf=y/HUNIT,qf=x-rf*.5;const qr=Math.round(qf),rr=Math.round(rf);let best=null;
-  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){const v={q:qr+dq,r:rr+dr},p=toBoard(v),d=Math.hypot(screen.x-p.x,screen.y-p.y);if(!best||d<best.d)best={v,d}}
-  return best;
-}
-function candidateFor(piece,pivotScreen){
-  // Imán deliberadamente generoso: una pieza ya colocada puede moverse con fluidez
-  // a cualquier otra posición válida de la retícula sin tener que acertar al píxel.
-  const near=nearestLattice(pivotScreen),base=near.v,cands=[];
-  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){
-    const t={q:base.q+dq,r:base.r+dr},p=toBoard(t),d=Math.hypot(pivotScreen.x-p.x,pivotScreen.y-p.y),keys=validPlacement(piece,piece.rot,t);
-    if(keys)cands.push({t,keys,d});
-  }
-  if(!cands.length)return null;
-  cands.sort((a,b)=>a.d-b.d);
-  return cands[0].d<=boardGeom.scale*1.32?cands[0]:null;
-}
-function colorAlpha(hex,a){const n=parseInt(hex.slice(1),16);return`rgba(${n>>16},${(n>>8)&255},${n&255},${a})`}
-function drawTri(ctx,poly,fill,stroke='#061019',lw=1,alpha=1){ctx.save();ctx.globalAlpha=alpha;ctx.beginPath();ctx.moveTo(poly[0].x,poly[0].y);ctx.lineTo(poly[1].x,poly[1].y);ctx.lineTo(poly[2].x,poly[2].y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke();ctx.restore()}
-function targetPoly(c){return c.verts.map(toBoard)}
-function drawBoard(){
-  const w=board.clientWidth,h=board.clientHeight;bc.clearRect(0,0,w,h);
-  bc.save();bc.shadowColor='rgba(81,185,237,.16)';bc.shadowBlur=16;
-  for(const c of target)drawTri(bc,targetPoly(c),'rgba(7,21,30,.82)','rgba(83,127,151,.55)',.75);bc.restore();
-
-  // Las pieces colocadas se dibujan por su geometría real, incluso durante pruebas con solape.
-  for(const p of pieces){if(!p.placed||!p.t)continue;const tris=transformedTris(p,p.rot,p.t);for(const verts of tris){const key=ckey(verts),poly=verts.map(toBoard),outside=!targetMap.has(key);drawTri(bc,poly,p.color,outside?'rgba(236,113,104,.95)':'rgba(3,11,16,.72)',outside?1.7:1.05,.88)}}
-
-  // Si dos pieces ocupan el mismo triángulo, mezcla visualmente sus colores.
-  for(const [key,entry] of occupied){if(entry.owners.length<2)continue;const poly=entry.verts.map(toBoard);bc.save();bc.globalCompositeOperation='screen';for(const id of entry.owners)drawTri(bc,poly,pieces[id].color,'rgba(255,255,255,.28)',.7,.48);bc.restore();drawTri(bc,poly,'rgba(255,255,255,.06)','rgba(255,210,238,.95)',1.35,1)}
-
-  if(selected&&selected.placed&&selected.t){bc.save();bc.strokeStyle='#c8ebfb';bc.lineWidth=1.35;bc.shadowColor='#67c8f3';bc.shadowBlur=8;for(const verts of transformedTris(selected,selected.rot,selected.t)){const poly=verts.map(toBoard);bc.beginPath();bc.moveTo(poly[0].x,poly[0].y);bc.lineTo(poly[1].x,poly[1].y);bc.lineTo(poly[2].x,poly[2].y);bc.closePath();bc.stroke()}bc.restore()}
-
-  if(hintPiece!=null){const p=pieces[hintPiece],pulse=.16+.12*(.5+.5*Math.sin(performance.now()/130));for(const k of p.solutionKeys){const c=targetMap.get(k);if(c)drawTri(bc,targetPoly(c),colorAlpha(p.color,pulse),'rgba(155,220,255,.8)',1.3,1)}}
-  if(active){const cand=candidateFor(active,active.pivotBoard);if(cand){for(const k of cand.keys){const c=targetMap.get(k);drawTri(bc,targetPoly(c),colorAlpha(active.color,.24),'rgba(194,237,255,.72)',1.1)}}}
-  bc.save();bc.strokeStyle='#9ac7dd';bc.lineWidth=1.65;bc.shadowColor='rgba(85,189,241,.48)';bc.shadowBlur=7;bc.beginPath();for(const e of boundaryEdges){const a=toBoard(e.a),b=toBoard(e.b);bc.moveTo(a.x,a.y);bc.lineTo(b.x,b.y)}bc.stroke();bc.restore();
-}
-function localPolysCart(piece,rot){return piece.local.map(tri=>tri.map(v=>axialToCart(rotateV(v,rot))))}
-function bboxPolys(polys){let xs=[],ys=[];for(const tri of polys)for(const p of tri){xs.push(p.x);ys.push(p.y)}return{minx:Math.min(...xs),maxx:Math.max(...xs),miny:Math.min(...ys),maxy:Math.max(...ys)}}
-function drawTray(){
-  const w=tray.clientWidth,h=tray.clientHeight;tc.clearRect(0,0,w,h);trayHit=[];const count=pieces.length,cols=Math.min(count,5),rows=Math.ceil(count/cols),slotW=w/cols,slotH=h/rows;
-  for(const p of pieces){if(p.placed||p===active)continue;const i=p.traySlot,col=i%cols,row=Math.floor(i/cols);const raw=localPolysCart(p,p.rot),bb=bboxPolys(raw);const bw=bb.maxx-bb.minx,bh=bb.maxy-bb.miny;const scale=Math.min(slotW*.66/(bw||1),slotH*.68/(bh||1),boardGeom.scale*.76);const cx=slotW*(col+.5),cy=slotH*(row+.5);const offx=cx-(bb.minx+bb.maxx)*.5*scale,offy=cy-(bb.miny+bb.maxy)*.5*scale;const polys=raw.map(tri=>tri.map(v=>({x:offx+v.x*scale,y:offy+v.y*scale})));p.trayPolys=polys;trayHit.push({p,polys});
-    for(const poly of polys)drawTri(tc,poly,p.color,'rgba(3,10,15,.8)',1.15,selected===p?1:.9);
-    if(selected===p){tc.save();tc.strokeStyle='#c9efff';tc.lineWidth=1.15;tc.shadowColor='#6cd1ff';tc.shadowBlur=7;for(const poly of polys){tc.beginPath();tc.moveTo(poly[0].x,poly[0].y);tc.lineTo(poly[1].x,poly[1].y);tc.lineTo(poly[2].x,poly[2].y);tc.closePath();tc.stroke()}tc.restore()}
-  }
-}
-function drawDrag(){
-  const w=dragCanvas.clientWidth,h=dragCanvas.clientHeight;dc.clearRect(0,0,w,h);if(!active)return;const shellRect=$('game-shell').getBoundingClientRect(),boardRect=board.getBoundingClientRect();const px=boardRect.left-shellRect.left+active.pivotBoard.x,py=boardRect.top-shellRect.top+active.pivotBoard.y;const raw=localPolysCart(active,active.rot);
-  dc.save();dc.shadowColor=colorAlpha(active.color,.58);dc.shadowBlur=12;for(const tri of raw){const poly=tri.map(v=>({x:px+v.x*boardGeom.scale,y:py+v.y*boardGeom.scale}));drawTri(dc,poly,active.color,'rgba(3,10,15,.8)',1.25,.92)}dc.restore();
-}
-function drawAll(){drawBoard();drawTray();drawDrag();updateHUD()}
-function updateHUD(){
-  $('movesN').textContent=moves;const hintBtn=$('hint');
-  if(hints>0){hintBtn.childNodes[0].nodeValue='✧  HINT ('+hints+')';hintBtn.querySelector('span').textContent='shows one area';hintBtn.classList.add('primary')}
-  else{hintBtn.childNodes[0].nodeValue='⚑  SURRENDER';hintBtn.querySelector('span').textContent='show solution';hintBtn.classList.add('primary')}
-  hintBtn.disabled=won||surrendered;
-  const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';updateBackgroundStrength(pct/100);
-  $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?('OVERLAP · '+placed+'/'+pieces.length):issues.outside?('OUTSIDE · '+placed+'/'+pieces.length):(placed+' / '+pieces.length+' pieces');
-  $('rotateLeft').disabled=!selected;$('rotateRight').disabled=!selected;$('prev').disabled=infinite||level<=1;$('nextNav').disabled=infinite||level>=progress.unlocked||level>=60;
-  renderDots();
-}
-function renderDots(){const box=$('levelDots');box.innerHTML='';const pos=infinite?infiniteIndex:(level-1)%10+1;for(let i=1;i<=10;i++){const d=document.createElement('i');if(i===pos)d.className='on';box.appendChild(d)}}
-
-function pointInTri(p,t){const [a,b,c]=t,d=(b.y-c.y)*(a.x-c.x)+(c.x-b.x)*(a.y-c.y);if(Math.abs(d)<1e-9)return false;const u=((b.y-c.y)*(p.x-c.x)+(c.x-b.x)*(p.y-c.y))/d,v=((c.y-a.y)*(p.x-c.x)+(a.x-c.x)*(p.y-c.y))/d,w=1-u-v;return u>=-.03&&v>=-.03&&w>=-.03}
-function trayPieceAt(pos){for(let i=trayHit.length-1;i>=0;i--){if(trayHit[i].polys.some(t=>pointInTri(pos,t)))return trayHit[i].p}return null}
-function boardPieceAt(pos){
-  const order=[];if(selected&&selected.placed)order.push(selected);for(let i=pieces.length-1;i>=0;i--)if(pieces[i]!==selected&&pieces[i].placed)order.push(pieces[i]);
-  for(const p of order){for(const verts of transformedTris(p,p.rot,p.t)){if(pointInTri(pos,verts.map(toBoard)))return p}}return null
-}
-function canvasPos(e,c){const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
-function clientToBoard(e){return canvasPos(e,board)}
-function localCentroidCartAt(piece,rot){
-  // Centro de gravedad real del área de la pieza: todos los microtriángulos tienen la misma superficie,
-  // por lo que promediar sus tres vértices equivale a promediar los centroides de cada celda.
-  let sx=0,sy=0,n=0;
-  for(const tri of piece.local)for(const v of tri){const c=axialToCart(rotateV(v,rot));sx+=c.x;sy+=c.y;n++}
-  return n?{x:sx/n,y:sy/n}:{x:0,y:0};
-}
-function localCentroidCart(piece){return localCentroidCartAt(piece,piece.rot)}
-function nearestAxialToCartPoint(pt){
-  // Convierte una posición cartesiana a la traslación entera de la retícula más cercana.
-  const rf=pt.y/HUNIT,qf=pt.x-rf*.5;
-  const q0=Math.round(qf),r0=Math.round(rf);let best={q:q0,r:r0},bestD=Infinity;
-  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){
-    const t={q:q0+dq,r:r0+dr},c=axialToCart(t),d=(c.x-pt.x)**2+(c.y-pt.y)**2;
-    if(d<bestD){bestD=d;best=t}
-  }
-  return best;
-}
-function rotationTranslationAroundCentroid(piece,newRot){
-  // Conserva el centro de gravedad visual de la pieza al girarla. Como el centro puede caer entre nodos,
-  // después ajustamos la traslación al nodo de retícula más próximo. Si ese ajuste deja parte fuera,
-  // buscamos el pequeño desplazamiento interior más cercano SIN tener en cuenta solapes con otras pieces:
-  // los solapes siguen permitidos y se muestran mezclando colores, tal como exige la mecánica.
-  const oldLocal=localCentroidCartAt(piece,piece.rot),base=axialToCart(piece.t);
-  const fixedCenter={x:base.x+oldLocal.x,y:base.y+oldLocal.y};
-  const newLocal=localCentroidCartAt(piece,newRot);
-  const desiredBase={x:fixedCenter.x-newLocal.x,y:fixedCenter.y-newLocal.y};
-  const snapped=nearestAxialToCartPoint(desiredBase);
-  let best=null;
-  const radius=6;
-  for(let dq=-radius;dq<=radius;dq++)for(let dr=-radius;dr<=radius;dr++){
-    const t={q:snapped.q+dq,r:snapped.r+dr};
-    const keys=transformedKeys(piece,newRot,t);
-    if(keys.some(k=>!targetMap.has(k)))continue;
-    const cb=axialToCart(t),center={x:cb.x+newLocal.x,y:cb.y+newLocal.y};
-    const centerShift=(center.x-fixedCenter.x)**2+(center.y-fixedCenter.y)**2;
-    const gridShift=dq*dq+dr*dr;
-    // Prioridad absoluta: que el centro se mueva lo mínimo posible. El segundo término desempata
-    // favoreciendo el snap local más cercano al punto originalmente calculado.
-    const score=centerShift+gridShift*1e-5;
-    if(!best||score<best.score)best={t,score,centerShift};
-  }
-  return best?best.t:null;
-}
-function restorePrevious(p){if(!p.prev)return;p.placed=p.prev.placed;p.t=p.prev.t;p.rot=p.prev.rot;p.matched=p.prev.matched.slice();p.prev=null;rebuildOccupancy()}
-function capturePointer(el,id){try{if(el&&el.setPointerCapture)el.setPointerCapture(id)}catch(_){} }
-function releasePointer(id){for(const el of [board,tray]){try{if(el&&el.hasPointerCapture&&el.hasPointerCapture(id))el.releasePointerCapture(id)}catch(_){}}}
-function startFromTray(e){
-  const pos=canvasPos(e,tray),p=trayPieceAt(pos);if(!p)return;
-  e.preventDefault();capturePointer(tray,e.pointerId);
-  selectedBeforeDrag=selected===p;selected=p;active=p;
-  p.prev={placed:false,t:null,rot:p.rot,matched:[]};
-  const cent=localCentroidCart(p),pb=clientToBoard(e);
-  active.pivotBoard={x:pb.x-cent.x*boardGeom.scale,y:pb.y-cent.y*boardGeom.scale};
-  active.grab={x:pb.x-active.pivotBoard.x,y:pb.y-active.pivotBoard.y};
-  pointerId=e.pointerId;startPointer={x:e.clientX,y:e.clientY};dragMoved=false;play('pick');drawAll();
-}
-function startFromBoard(e){
-  const pos=canvasPos(e,board),p=boardPieceAt(pos);if(!p)return;
-  e.preventDefault();capturePointer(board,e.pointerId);
-  selectedBeforeDrag=selected===p;selected=p;
-  // Guardamos exactamente el estado anterior. Mientras se arrastra, sus casillas quedan libres,
-  // de modo que puede bajarse, desplazarse o incluso devolverse a la bandeja para abrir hueco.
-  p.prev={placed:true,t:{...p.t},rot:p.rot,matched:p.matched.slice()};
-  const oldT={...p.t};p.placed=false;p.matched=[];rebuildOccupancy();active=p;
-  const pivot=toBoard(oldT);active.pivotBoard={...pivot};active.grab={x:pos.x-pivot.x,y:pos.y-pivot.y};
-  pointerId=e.pointerId;startPointer={x:e.clientX,y:e.clientY};dragMoved=false;play('pick');drawAll();
-}
-function pointerMove(e){
-  if(!active||e.pointerId!==pointerId)return;e.preventDefault();
-  const pb=clientToBoard(e);active.pivotBoard={x:pb.x-active.grab.x,y:pb.y-active.grab.y};
-  if(startPointer&&Math.hypot(e.clientX-startPointer.x,e.clientY-startPointer.y)>5)dragMoved=true;
-  drawAll();
-}
-function pointerUp(e){
-  if(!active||e.pointerId!==pointerId)return;e.preventDefault();
-  const p=active,wasPlaced=!!(p.prev&&p.prev.placed);
-  const boardRect=board.getBoundingClientRect(),inside=e.clientX>=boardRect.left-10&&e.clientX<=boardRect.right+10&&e.clientY>=boardRect.top-10&&e.clientY<=boardRect.bottom+10;
-  const trayRect=tray.getBoundingClientRect(),overTray=e.clientX>=trayRect.left&&e.clientX<=trayRect.right&&e.clientY>=trayRect.top&&e.clientY<=trayRect.bottom;
-
-  // Un toque corto sobre una pieza ya colocada solo la selecciona: no cuenta movimiento ni la desplaza.
-  if(!dragMoved&&wasPlaced){
-    restorePrevious(p);active=null;releasePointer(pointerId);pointerId=null;
-    play('select');showToast('Piece selected · drag it to move');drawAll();return;
-  }
-  // En la bandeja, primer toque selecciona y segundo toque gira.
-  if(!dragMoved&&overTray&&p.prev&&!p.prev.placed){
-    active=null;releasePointer(pointerId);pointerId=null;p.prev=null;
-    if(selectedBeforeDrag){rotateSelected(1,true)}else{showToast('Piece selected · use ↺ or ↻ to rotate it');play('select');drawAll()}
-    return;
-  }
-
-  // Una pieza que estaba en el tablero puede retirarse de nuevo a la bandeja.
-  // Esto permite liberar una zona cuando se descubre que otra pieza debe ocuparla.
-  if(dragMoved&&wasPlaced&&overTray){
-    p.placed=false;p.t=null;p.matched=[];p.prev=null;active=null;moves++;rebuildOccupancy();
-    releasePointer(pointerId);pointerId=null;play('place');showToast('Piece removed · space freed');updateHUD();drawAll();return;
-  }
-
-  let placed=false;
-  if(inside){
-    const cand=candidateFor(p,p.pivotBoard);
-    if(cand){
-      p.t=cand.t;p.matched=cand.keys;p.placed=true;p.prev=null;rebuildOccupancy();
-      placed=true;moves++;play('place');showToast(wasPlaced?'Piece repositioned':'Piece fitted');
-    }
-  }
-  active=null;releasePointer(pointerId);pointerId=null;
-  if(!placed){restorePrevious(p);play('bad');showToast(wasPlaced?'It does not fit there · returning to its previous position':'That space does not fit the piece')}
-  updateHUD();drawAll();if(placed)checkWin();
-}
-function pointerCancel(){if(!active)return;const p=active;active=null;releasePointer(pointerId);pointerId=null;restorePrevious(p);drawAll()}
-
-function rotateSelected(dir=1,fromTap=false){
-  const p=selected;if(!p||won||surrendered)return;
-  const newRot=(p.rot+(dir>0?1:5))%6;
-  if(p.placed&&p.t){
-    // Una pieza colocada gira alrededor de SU CENTRO DE GRAVEDAD, no alrededor del vértice-pivote.
-    // Después se encaja al grid más próximo que mantenga toda la pieza dentro de la figura objetivo.
-    // Las demás pieces NO bloquean el giro: si hay solape, se mantiene y se visualiza por mezcla de color.
-    const newT=rotationTranslationAroundCentroid(p,newRot);
-    if(!newT){play('bad');showToast('There is no room inside the shape to complete that rotation');drawAll();return}
-    p.rot=newRot;p.t=newT;p.matched=transformedKeys(p,p.rot,p.t);moves++;play('rotate');rebuildOccupancy();
-    const issues=placementIssues();
-    if(issues.overlap)showToast('Rotation around center · colors mixed where pieces overlap');
-    else showToast('Rotation around center · snapped to the grid');
-  }else{
-    p.rot=newRot;moves++;play('rotate');
-    if(!fromTap)showToast(dir>0?'60° rotation to the right':'60° rotation to the left');
-  }
-  updateHUD();drawAll();checkWin();
-}
-function resetCurrent(){startLevel(infinite?infiniteIndex:level,infinite);showToast('Level reset');play('reset')}
-function pieceAtSolution(p){if(!p.placed||!p.t)return false;const a=transformedKeys(p,p.rot,p.t).slice().sort(),b=p.solutionKeys.slice().sort();return a.length===b.length&&a.every((k,i)=>k===b[i])}
-function useHint(){
-  if(won||surrendered)return;if(hints<=0){openSurrender();return}
-  let p=(selected&&!pieceAtSolution(selected))?selected:pieces.find(x=>!pieceAtSolution(x));if(!p){showToast('The current arrangement already matches the solution');return}
-  hints--;hintPiece=p.id;clearTimeout(hintTimer);hintTimer=setTimeout(()=>{hintPiece=null;drawAll()},2100);play('hint');showToast('The highlighted area is the exact position of this piece');updateHUD();drawAll();
-}
-function checkWin(){if(isSolved()){won=true;updateHUD();setTimeout(winLevel,260)}}
-function openSurrender(){
-  $('surrenderCopy').textContent=infinite?'If you confirm, this endless puzzle will be closed as a surrender and you will see its solution. If you then leave it, this combination may not appear again in another endless campaign.':'If you confirm, this level will be closed as a surrender and you will see its solution. Because it is part of the campaign, you can replay this exact level from the menu.';
-  openScreen('surrenderScreen');
-}
-function revealSolution(){
-  closeAllScreens();surrendered=true;won=true;selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
-  for(const p of pieces){p.rot=0;p.t={...p.solutionT};p.placed=true;p.matched=p.solutionKeys.slice();p.prev=null}rebuildOccupancy();
-  if(!infinite)markCampaignResult('solution');
-  $('solutionLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' · SOLUTION SHOWN':'LEVEL '+level+' · SOLUTION SHOWN';
-  updateHUD();drawAll();play('hint');setTimeout(()=>openScreen('solutionScreen'),520);
-}
-function winLevel(){
-  play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
-  $('winLevel').textContent=infinite?'ENDLESS PUZZLE '+infiniteIndex+' CLEARED':'LEVEL '+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];applyLevelQuote(level);$('nextLevelBtn').textContent=!infinite&&level===60?'FINISH CAMPAIGN':(!infinite&&level<60&&level%10===0?'NEXT PHASE':'NEXT LEVEL');openScreen('winScreen')
-}
-
-function isPhaseBoundary(n){return !infinite&&n<60&&n%10===0}
-function showPhaseTransition(completed){
-  const phase=Math.floor(completed/10),nextPhase=phase+1,nextLevelN=completed+1;
-  progress.phasePending=completed;persistProgress();
-  $('phaseKicker').textContent='PHASE '+phase+' COMPLETE';
-  $('phaseTitle').textContent=BLOCKS[phase-1].name+' CLEARED';
-  $('phaseProgress').textContent=completed+' / 60 LEVELS';
-  $('phaseCopy').textContent=PHASE_COPY[phase-1]||'Phase complete.';
-  $('phaseNextName').textContent=BLOCKS[nextPhase-1].name;
-  $('phaseNextLevel').textContent='LEVEL '+nextLevelN;
-  $('phaseContinueBtn').textContent='START PHASE '+nextPhase+' →';
-  openScreen('phaseScreen');
-}
-function continueFromPhase(){
-  const completed=Number(progress.phasePending)||Math.floor((Math.max(11,progress.last)-1)/10)*10;
-  progress.phasePending=null;progress.pending=null;persistProgress();
-  closeAllScreens();startLevel(Math.min(60,completed+1));
-}
-
-function nextLevel(){
-  const completed=(!infinite&&progress.pending&&progress.pending.level)?progress.pending.level:level;
-  if(!infinite&&completed===60){
-    progress.pending=null;progress.phasePending=null;persistProgress();
-    closeAllScreens();openScreen('finishScreen');return;
-  }
-  if(!infinite&&isPhaseBoundary(completed)){
-    progress.pending=null;persistProgress();
-    closeAllScreens();showPhaseTransition(completed);return;
-  }
-  if(!infinite){progress.pending=null;progress.phasePending=null;persistProgress()}
-  closeAllScreens();
-  if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(completed+1)
-}
-function restorePendingResult(){
-  const p=progress.pending;if(!p||!p.level)return false;
-  startLevel(p.level,false,false);
-  if(p.type==='solution'){
-    surrendered=true;won=true;selected=null;active=null;
-    for(const piece of pieces){piece.rot=0;piece.t={...piece.solutionT};piece.placed=true;piece.matched=piece.solutionKeys.slice();piece.prev=null}
-    rebuildOccupancy();updateHUD();drawAll();
-    $('solutionLevel').textContent='LEVEL '+p.level+' · SOLUTION SHOWN';
-    openScreen('solutionScreen');
-  }else{
-    won=true;
-    $('winLevel').textContent='LEVEL '+p.level+' CLEARED';
-    $('winMoves').textContent=p.moves||0;
-    $('winBest').textContent=p.best||p.moves||0;
-    $('winCopy').textContent=WIN_COPY[(p.level-1)%WIN_COPY.length];
-    applyLevelQuote(p.level);
-    $('nextLevelBtn').textContent=p.level===60?'FINISH CAMPAIGN':(p.level<60&&p.level%10===0?'NEXT PHASE':'NEXT LEVEL');
-    openScreen('winScreen');
-  }
-  return true;
-}
-
-function showToast(text){const t=$('toast');t.textContent=text;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),1350)}
-function openScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'));$(id).classList.add('open');if(id==='menuScreen')renderMenu()}
-function closeAllScreens(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'))}
-function currentScreen(){const s=document.querySelector('.screen.open');return s?s.id:'game'}
-function openMenu(returnTo){menuReturnScreen=returnTo||currentScreen();openScreen('menuScreen')}
-function returnFromMenu(){const target=menuReturnScreen||'game';menuReturnScreen='game';if(target==='game'){closeAllScreens();return}openScreen(target)}
-function renderMenu(){
-  const unlocked=Math.min(60,progress.unlocked),completed=progress.campaignComplete?60:Math.max(0,unlocked-1);$('menuProgress').textContent='UNLOCKED '+unlocked+' / 60 · CLEARED '+completed;const grid=$('levelGrid');grid.innerHTML='';
-  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML='<b>BLOCK '+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+((i<progress.unlocked||(progress.campaignComplete&&i===60))?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.title=i>progress.unlocked?'Locked level':(i<progress.unlocked?'Cleared level · play again':'Current level');b.addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;progress.phasePending=null;persistProgress();closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
-  $('soundBtn').textContent='SOUND: '+(sound?'YES':'NO')
-}
-function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent='SOUND: '+(sound?'YES':'NO');if(sound)play('select')}
-function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}
-function tone(freq,dur=.08,type='sine',vol=.035,delay=0){if(!sound)return;ensureAudio();const o=audio.createOscillator(),g=audio.createGain(),now=audio.currentTime+delay;o.type=type;o.frequency.setValueAtTime(freq,now);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(vol,now+.012);g.gain.exponentialRampToValueAtTime(.0001,now+dur);o.connect(g);g.connect(audio.destination);o.start(now);o.stop(now+dur+.02)}
-function play(kind){if(!sound)return;try{if(kind==='pick')tone(330,.06,'sine',.025);if(kind==='select')tone(420,.05,'sine',.022);if(kind==='rotate'){tone(390,.055,'triangle',.026);tone(520,.06,'triangle',.018,.035)}if(kind==='place'){tone(440,.07,'sine',.03);tone(660,.08,'sine',.022,.04)}if(kind==='bad'){tone(150,.09,'sawtooth',.018);tone(115,.12,'sawtooth',.012,.05)}if(kind==='hint'){tone(620,.08,'sine',.022);tone(830,.12,'sine',.016,.07)}if(kind==='reset')tone(250,.09,'triangle',.022);if(kind==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.18,'sine',.028,i*.085))}}catch(e){}}
-
-document.querySelectorAll('.article-link').forEach(link=>link.addEventListener('click',e=>{if(link.getAttribute('href')==='#'){e.preventDefault();showToast('Article link pending')}}));
-
-tray.addEventListener('pointerdown',startFromTray,{passive:false});board.addEventListener('pointerdown',startFromBoard,{passive:false});window.addEventListener('pointermove',pointerMove,{passive:false});window.addEventListener('pointerup',pointerUp,{passive:false});window.addEventListener('pointercancel',pointerCancel);
-$('rotateLeft').addEventListener('click',()=>rotateSelected(-1,false));$('rotateRight').addEventListener('click',()=>rotateSelected(1,false));$('reset').addEventListener('click',resetCurrent);$('hint').addEventListener('click',useHint);
-$('menuButton').addEventListener('click',()=>openMenu('game'));$('resumeBtn').addEventListener('click',returnFromMenu);$('soundBtn').addEventListener('click',toggleSound);$('restartMenuBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();resetCurrent()});$('startOverBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
-$('continueBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();if(progress.campaignComplete){openScreen('finishScreen');return}startLevel(progress.last||1)});$('levelSelectBtn').addEventListener('click',()=>openMenu('startScreen'));$('newBtn').addEventListener('click',()=>{menuReturnScreen='game';resetProgress()});
-$('prev').addEventListener('click',()=>{if(level>1){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level-1)}});$('nextNav').addEventListener('click',()=>{if(level<progress.unlocked&&level<60){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level+1)}});
-$('nextLevelBtn').addEventListener('click',nextLevel);$('phaseContinueBtn').addEventListener('click',continueFromPhase);$('phaseLevelsBtn').addEventListener('click',()=>openMenu('phaseScreen'));$('winMenuBtn').addEventListener('click',()=>openMenu('winScreen'));$('finishMenuBtn').addEventListener('click',()=>openMenu('finishScreen'));$('infiniteBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
-$('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurrenderBtn').addEventListener('click',closeAllScreens);$('retrySolutionBtn').addEventListener('click',()=>{const retryLevel=progress.pending&&progress.pending.level?progress.pending.level:level;progress.pending=null;persistProgress();closeAllScreens();startLevel(retryLevel)});$('continueSolutionBtn').addEventListener('click',nextLevel);
-window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))returnFromMenu();else openMenu(currentScreen())}});
-window.addEventListener('resize',()=>{dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));resizeAll()});
-
-$('continueBtn').textContent=progress.campaignComplete?'CAMPAIGN COMPLETE':(progress.unlocked>1?'CONTINUE LEVEL '+(progress.last||1):'START');$('newBtn').style.display=progress.unlocked>1?'inline-block':'none';
-if(progress.phasePending){
-  startLevel(Math.min(60,Number(progress.phasePending)+1),false,false);
-  showPhaseTransition(Number(progress.phasePending));
-}else if(!restorePendingResult()){
-  startLevel(progress.last||1);openScreen('startScreen')
-}
-})();
-</script>
+<script src="forma.js"></script>
 </body>
 </html>

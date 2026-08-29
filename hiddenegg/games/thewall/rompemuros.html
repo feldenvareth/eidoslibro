@@ -1,478 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Controla la plataforma, rompe las estructuras y supera niveles cada vez más inestables.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111a14">
+<meta name="description" content="Controla la plataforma, rompe las estructuras y supera una campaña de 50 niveles.">
 <link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemuros.html">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="EIDOS Libro">
+<meta property="og:site_name" content="EIDOS">
 <meta property="og:title" content="EIDOS · Rompemuros">
-<meta property="og:description" content="Rompe el muro. Conserva la esfera. Supera cada nivel.">
+<meta property="og:description" content="Rompe el muro. Conserva la esfera. Supera 50 niveles y continúa en modo infinito.">
 <meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/rompemuros.html">
 <meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
 <meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EIDOS Rompemuros">
+<meta property="og:image:alt" content="EIDOS · Rompemuros">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EIDOS · Rompemuros">
-<meta name="twitter:description" content="Rompe el muro. Conserva la esfera. Supera cada nivel.">
+<meta name="twitter:description" content="Rompe el muro. Conserva la esfera. Supera 50 niveles y continúa en modo infinito.">
 <meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  body {
-    height: 100dvh;
-
-    background: #111a14;
-
-    display: grid;
-    grid-template-rows:
-      auto
-      minmax(0, 1fr)
-      minmax(16px, auto)
-      minmax(20px, auto)
-      minmax(0, auto);
-
-    justify-items: center;
-    align-items: center;
-
-    gap: 3px;
-    padding: 8px;
-
-    font-family: sans-serif;
-
-    overflow: hidden;
-  }
-
-#top-bar {
-  position: relative;
-  z-index: 20;
-
-  width: min(
-    480px,
-    100%,
-    calc((100dvh - 116px) * 480 / 650)
-  );
-
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "hud close"
-    "speed speed";
-  align-items: center;
-
-  column-gap: 10px;
-  row-gap: 5px;
-  padding: 2px 4px 4px;
-}
-
-#hud {
-  grid-area: hud;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
-  gap: 4px 14px;
-  min-width: 0;
-
-  color: #eee;
-  font-size: clamp(11px, 3.4vw, 14px);
-}
-
-#speed-control {
-  grid-area: speed;
-  justify-self: center;
-
-  display: inline-grid;
-  grid-template-columns: 28px minmax(110px, auto) 28px;
-  align-items: center;
-
-  min-height: 28px;
-  padding: 2px 5px;
-
-  background: rgba(8, 17, 12, 0.58);
-  border: 1px solid rgba(74, 124, 111, 0.42);
-  border-radius: 999px;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.015),
-    0 2px 8px rgba(0,0,0,.18);
-}
-
-.speed-arrow {
-  width: 26px;
-  height: 24px;
-  padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: transparent;
-  color: #c8a84b;
-  border: 0;
-  border-radius: 50%;
-
-  cursor: pointer;
-  font-family: Georgia, serif;
-  font-size: 15px;
-  line-height: 1;
-
-  transition:
-    color .18s ease,
-    background .18s ease,
-    transform .18s ease;
-}
-
-.speed-arrow:hover {
-  color: #f5d76e;
-  background: rgba(200,168,75,.09);
-  transform: scale(1.08);
-}
-
-#speed-label {
-  min-width: 110px;
-  padding: 0 8px;
-
-  color: #f5ecd0;
-  font-family: Georgia, serif;
-  font-size: 11px;
-  line-height: 1.1;
-  letter-spacing: .2px;
-  text-align: center;
-  white-space: nowrap;
-}
-
-#speed-label::before {
-  content: 'Cadencia · ';
-  color: #819188;
-  font-size: 10px;
-}
-
-  #close-btn {
-    grid-area: close;
-    flex: 0 0 auto;
-
-    background: none;
-
-    border: 1px solid #4a7c6f;
-    border-radius: 4px;
-
-    color: #888;
-
-    padding: 4px 10px;
-
-    cursor: pointer;
-
-    font-family: Georgia, serif;
-    font-size: 12px;
-    letter-spacing: 1px;
-
-    transition:
-      color .2s,
-      border-color .2s;
-  }
-
-  #close-btn:hover {
-    color: #f5ecd0;
-    border-color: #c8a84b;
-  }
-
-.canvas-wrap {
-  position: relative;
-
-  width: min(
-    480px,
-    100%,
-    calc((100dvh - 104px) * 480 / 650)
-  );
-
-  aspect-ratio: 480 / 650;
-
-  align-self: center;
-
-  min-width: 0;
-  min-height: 0;
-}
-  
-  
-  
-
-  canvas {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    border: 2px solid #4a7c6f;
-    border-radius: 8px;
-
-    cursor: none;
-    touch-action: none;
-  }
-
-  #spin,
-  #msg,
-  #game-btn {
-    flex-shrink: 0;
-  }
-
-  #spin {
-    min-height: 16px;
-
-    margin-top: 0;
-
-    color: #f5d76e;
-
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-  }
-
-  #msg {
-    min-height: 20px;
-
-    margin-top: 0;
-    padding-inline: 8px;
-
-    color: #f5ecd0;
-
-    font-size: 15px;
-    line-height: 18px;
-    text-align: center;
-
-    text-shadow: 0 1px 4px #000;
-  }
-
-  #game-btn {
-    display: none;
-
-    margin-top: 2px;
-    margin-bottom: 2px;
-
-    padding: 7px 26px;
-
-    background: #c8a84b;
-    color: #1a1a2e;
-
-    border: none;
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    font-family: serif;
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  #quote-screen {
-    display: none;
-
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 10;
-
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding:
-      clamp(20px, 8vw, 40px)
-      clamp(18px, 7vw, 36px);
-
-    background: rgba(0, 0, 0, 0);
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    text-align: center;
-  }
-
-  #quote-screen.visible {
-    display: flex;
-  }
-
-  #quote-text {
-    max-width: 380px;
-
-    color: #f5ecd0;
-
-    font-family: Georgia, serif;
-    font-size: clamp(
-      12px,
-      3.6vw,
-      15px
-    );
-    line-height: 1.8;
-
-    white-space: pre-line;
-
-    opacity: 0;
-
-    transition: opacity 1.2s ease;
-
-    text-shadow:
-      0 2px 12px rgba(0, 0, 0, 0.9);
-  }
-
-  #quote-text.show {
-    opacity: 1;
-  }
-
-  #quote-hint {
-    margin-top: 28px;
-
-    color: #c8a84b;
-
-    font-size: 12px;
-    letter-spacing: 1px;
-
-    opacity: 0;
-
-    transition:
-      opacity 1s ease 2s;
-  }
-
-  #quote-hint.show {
-    opacity: 1;
-  }
-
-  @media (max-width: 430px) {
-    body {
-      padding: 6px;
-    }
-
-    #top-bar {
-      width: 100%;
-      column-gap: 6px;
-      row-gap: 4px;
-      padding-inline: 0;
-    }
-
-    #hud {
-      gap: 3px 9px;
-      font-size: 11px;
-    }
-
-    #speed-control {
-      grid-template-columns: 24px minmax(98px, auto) 24px;
-      min-height: 26px;
-      padding-inline: 3px;
-    }
-
-    .speed-arrow {
-      width: 23px;
-      height: 22px;
-      font-size: 13px;
-    }
-
-    #speed-label {
-      min-width: 98px;
-      padding-inline: 4px;
-      font-size: 10px;
-    }
-
-    #speed-label::before {
-      font-size: 9px;
-    }
-
-    #close-btn {
-      padding: 4px 7px;
-
-      font-size: 10px;
-    }
-
-    #quote-hint {
-      margin-top: 18px;
-
-      font-size: 10px;
-    }
-
-    #msg {
-      padding-inline: 8px;
-
-      font-size: 13px;
-    }
-  }
-
-  @media (max-height: 720px) {
-    body {
-      padding: 4px;
-
-      gap: 2px;
-    }
-
-    #top-bar {
-      padding-top: 0;
-      padding-bottom: 2px;
-    }
-
-    #hud {
-      font-size: 12px;
-    }
-
-    #close-btn {
-      padding: 3px 8px;
-
-      font-size: 10px;
-    }
-
-    #msg {
-      min-height: 16px;
-
-      font-size: 12px;
-      line-height: 16px;
-    }
-
-    #spin {
-      min-height: 13px;
-
-      font-size: 10px;
-      line-height: 13px;
-    }
-
-    #game-btn {
-      padding: 5px 20px;
-
-      font-size: 12px;
-    }
-
-
-	
-    .canvas-wrap,
-    #top-bar {
-      width: min(
-        480px,
-        100%,
-        calc((100dvh - 84px) * 480 / 650)
-      );
-    }
-  }
-</style>
 <title>EIDOS · Rompemuros</title>
-
-<!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
+<link rel="stylesheet" href="rompemuros.css">
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -480,871 +34,121 @@
   window.dataLayer=window.dataLayer||[];
   window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
   window.loadEidosAnalytics=function(){
-    if(analyticsLoaded)return; analyticsLoaded=true;
-    const s=document.createElement('script'); s.async=true;
-    s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
-    document.head.appendChild(s);
-    window.gtag('js',new Date());
-    window.gtag('config',GA_MEASUREMENT_ID,{page_title:"EIDOS · Rompemuros"});
+    if(analyticsLoaded)return;analyticsLoaded=true;
+    const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_MEASUREMENT_ID;
+    document.head.appendChild(s);window.gtag('js',new Date());window.gtag('config',GA_MEASUREMENT_ID,{page_title:document.title});
   };
-  try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}
-  catch(error){console.warn("No se pudo leer el consentimiento de Analytics.",error);}
+  try{if(localStorage.getItem('consentGiven')==='true')window.loadEidosAnalytics();}catch(error){}
 })();
 </script>
-
-<style id="eidos-consent-style">
-#consent-banner{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:10000;width:min(620px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;padding:12px 14px;color:#ded7c1;background:rgba(7,16,12,.97);border:1px solid rgba(200,168,75,.62);border-radius:9px;box-shadow:0 12px 36px rgba(0,0,0,.5);font:12px/1.35 Arial,sans-serif;touch-action:manipulation}#consent-banner[hidden]{display:none}#consent-banner p{flex:1;margin:0}#consent-banner a{color:#79d9c0}.consent-actions{display:flex;gap:7px}.consent-btn{padding:7px 10px;color:#07100c;background:#f5d76e;border:1px solid #c8a84b;border-radius:5px;font-weight:700;cursor:pointer}.consent-btn.decline{color:#cbd3ce;background:transparent;border-color:rgba(121,217,192,.4)}@media(max-width:430px){#consent-banner{flex-direction:column;text-align:center}.consent-actions{justify-content:center}}
-</style>
 </head>
-<body>
+<body aria-label="Minijuego EIDOS Rompemuros">
 <aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
   <p>Este juego utiliza cookies de analítica para medir sus visitas. <a href="https://www.eidoslibro.com/terminosycondiciones.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a></p>
   <div class="consent-actions"><button class="consent-btn" id="consent-accept" type="button">Aceptar</button><button class="consent-btn decline" id="consent-reject" type="button">Rechazar</button></div>
 </aside>
 <script id="eidos-consent-handler">
 (function(){
- const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
- function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){console.warn("No se pudo guardar el consentimiento de Analytics.",error);} banner.hidden=true;}
- yes.addEventListener('click',()=>{save(true); if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
- no.addEventListener('click',()=>save(false));
- try{const c=localStorage.getItem('consentGiven'); banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
+  const banner=document.getElementById('consent-banner'),yes=document.getElementById('consent-accept'),no=document.getElementById('consent-reject');
+  function save(v){try{localStorage.setItem('consentGiven',v?'true':'false');}catch(error){}banner.hidden=true;}
+  yes.addEventListener('click',()=>{save(true);if(typeof window.loadEidosAnalytics==='function')window.loadEidosAnalytics();});
+  no.addEventListener('click',()=>save(false));
+  try{const c=localStorage.getItem('consentGiven');banner.hidden=c==='true'||c==='false';}catch(error){banner.hidden=false;}
 })();
 </script>
 
-
 <div id="top-bar">
   <div id="hud">
-    <span id="scoreEl">Puntos: 0</span>
-    <span id="bestEl">Récord: 0</span>
-    <span id="levelEl">Nivel 1</span>
-    <span id="livesEl">&#9829; &#9829; &#9829;</span>
+    <span id="scoreEl"></span>
+    <span id="bestEl"></span>
+    <span id="levelEl"></span>
+    <span id="livesEl"></span>
   </div>
-
-  <button id="close-btn" onclick="window.parent.postMessage('cerrar-eidos','*')">&#x2715; Cerrar</button>
-
-  <div id="speed-control" role="group" aria-label="Cadencia de la bola">
-    <button
-      class="speed-arrow"
-      type="button"
-      aria-label="Reducir cadencia"
-      onclick="changeSpeedMode(-1)">
-      &#10094;
-    </button>
-
-    <span id="speed-label" aria-live="polite">Estable</span>
-
-    <button
-      class="speed-arrow"
-      type="button"
-      aria-label="Aumentar cadencia"
-      onclick="changeSpeedMode(1)">
-      &#10095;
-    </button>
+  <button id="levels-btn" class="top-btn" type="button"></button>
+  <button id="close-btn" class="top-btn" type="button"></button>
+  <div id="speed-control" role="group">
+    <button id="speed-down" class="speed-arrow" type="button">&#10094;</button>
+    <span id="speed-label" aria-live="polite"></span>
+    <button id="speed-up" class="speed-arrow" type="button">&#10095;</button>
   </div>
 </div>
 
 <div class="canvas-wrap">
   <canvas id="c" width="480" height="650"></canvas>
-  <div id="quote-screen" onclick="dismissQuote()">
+  <div id="quote-screen">
     <div id="quote-text"></div>
-    <div id="quote-hint">— Toca para continuar —</div>
+    <div id="quote-hint"></div>
   </div>
 </div>
-
 <div id="spin"></div>
-<div id="msg">Mueve el rat&#243;n para empezar</div>
-<button id="game-btn">Siguiente nivel</button>
+<div id="msg"></div>
+<button id="game-btn" type="button"></button>
+
+<section id="start-screen" class="screen open" aria-hidden="false">
+  <div class="card">
+    <p class="card-kicker">E I D O S</p>
+    <h1 id="start-title"></h1>
+    <p id="start-subtitle" class="card-subtitle"></p>
+    <p id="start-intro" class="intro"></p>
+    <div class="wall-demo" aria-hidden="true">
+      <div class="demo-bricks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <span class="demo-ball"></span><span class="demo-paddle"></span>
+    </div>
+    <div class="rule-grid">
+      <div class="rule"><strong id="rule-move-title"></strong><span id="rule-move-text"></span></div>
+      <div class="rule"><strong id="rule-rebound-title"></strong><span id="rule-rebound-text"></span></div>
+      <div class="rule"><strong id="rule-cadence-title"></strong><span id="rule-cadence-text"></span></div>
+      <div class="rule"><strong id="rule-goal-title"></strong><span id="rule-goal-text"></span></div>
+    </div>
+    <div class="start-actions">
+      <button id="start-button" class="primary" type="button"></button>
+      <button id="start-levels-button" class="secondary" type="button"></button>
+      <button id="copy-link-button" class="secondary" type="button"></button>
+      <a id="discover-eidos" class="secondary start-link" target="_blank" rel="noopener noreferrer"></a>
+    </div>
+    <p id="campaign-note" class="collection-note"></p>
+  </div>
+</section>
+
+<section id="levels-screen" class="screen" aria-hidden="true">
+  <div class="card levels-card">
+    <p class="card-kicker">E I D O S</p>
+    <h2 id="campaign-title"></h2>
+    <p id="campaign-subtitle" class="card-subtitle"></p>
+    <div id="campaign-summary"><span id="campaign-completed"></span><span id="campaign-unlocked"></span></div>
+    <div id="level-map"></div>
+    <div id="endless-panel" hidden>
+      <h3 id="endless-title"></h3>
+      <p id="endless-description"></p>
+      <div class="endless-jump">
+        <input id="endless-input" type="number" min="1" step="1" inputmode="numeric">
+        <button id="endless-play" class="primary" type="button"></button>
+      </div>
+    </div>
+    <p id="levels-help" class="levels-help"></p>
+    <div class="levels-footer-actions">
+      <button id="levels-back" class="secondary" type="button"></button>
+      <button id="delete-campaign-button" class="secondary danger-button" type="button" hidden></button>
+    </div>
+  </div>
+</section>
+
+<section id="delete-campaign-screen" class="screen" aria-hidden="true">
+  <div class="card delete-campaign-card">
+    <p class="card-kicker">E I D O S</p>
+    <h2 id="delete-title"></h2>
+    <p id="delete-subtitle" class="card-subtitle danger-subtitle"></p>
+    <p id="delete-intro" class="intro"></p>
+    <div class="delete-warning"><strong id="delete-warning-title"></strong><span id="delete-warning-text"></span></div>
+    <div class="delete-actions">
+      <button id="confirm-delete-campaign" class="primary danger-confirm" type="button"></button>
+      <button id="cancel-delete-campaign" class="secondary" type="button"></button>
+    </div>
+  </div>
+</section>
 
 <script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content.js"></script>
-
-<script>
-/* Contenido compartido cargado desde eidos-content.js */
-const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
-  images: [],
-  quotes: []
-};
-
-function galleryImageUrl(item) {
-  const raw = typeof item === 'string'
-    ? item
-    : String(item?.url || '').trim();
-
-  if (!raw) return '';
-  if (/^(?:https?:)?\/\//i.test(raw) || raw.startsWith('/')) return raw;
-
-  return '/gallery/' + raw.replace(/^\.?\//, '');
-}
-
-const GALLERY_IMAGES = Array.isArray(window.EIDOS_IMAGE_MANIFEST)
-  ? window.EIDOS_IMAGE_MANIFEST.map(galleryImageUrl).filter(Boolean)
-  : [];
-
-const BG_IMAGES = GALLERY_IMAGES.length
-  ? GALLERY_IMAGES
-  : (Array.isArray(EIDOS_CONTENT.images) ? EIDOS_CONTENT.images.filter(Boolean) : []);
-
-const QUOTES = EIDOS_CONTENT.quotes;
-
-
-
-const cv = document.getElementById('c');
-const ctx = cv.getContext('2d');
-
-const W = 480;
-const H = 650;
-
-let currentBg = null;
-const badBgIndices = new Set();
-
-const bgImgs = BG_IMAGES.map((url, index) => {
-  const image = new Image();
-
-  image.crossOrigin = 'anonymous';
-  image.onerror = () => {
-    badBgIndices.add(index);
-    imageBag = imageBag.filter(i => i !== index);
-
-    if (currentBg === image) {
-      currentBg = nextBackground();
-    }
-  };
-  image.src = url;
-
-  return image;
-});
-
-const BEST_SCORE_KEY = 'eidosRompemurosBestScore';
-
-function loadBestScore() {
-  try {
-    return Number(localStorage.getItem(BEST_SCORE_KEY)) || 0;
-  } catch (error) {
-    return 0;
-  }
-}
-
-function saveBestScore(value) {
-  try {
-    localStorage.setItem(BEST_SCORE_KEY, String(value));
-  } catch (error) {
-    // El juego sigue funcionando aunque el navegador bloquee localStorage.
-  }
-}
-
-let score = 0;
-let bestScore = loadBestScore();
-let lives = 3;
-let started = false;
-let over = false;
-let win = false;
-let level = 1;
-
-let spinEffect = 0;
-let spinTimer = 0;
-let quoteVisible = false;
-
-let quoteBag = [];
-let imageBag = [];
-
-let lastQuoteIndex = -1;
-let lastImageIndex = -1;
-
-let totalBricks = 0;
-
-function shuffledIndices(length,lastIndex=-1){
-  const arr=Array.from({length},(_,i)=>i);
-  for(let i=arr.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-  }
-  if(arr.length>1&&arr[0]===lastIndex)[arr[0],arr[1]]=[arr[1],arr[0]];
-  return arr;
-}
-function nextQuoteIndex(){
-  if(!QUOTES.length)return -1;
-  if(!quoteBag.length)quoteBag=shuffledIndices(QUOTES.length,lastQuoteIndex);
-  lastQuoteIndex=quoteBag.shift();
-  return lastQuoteIndex;
-}
-function nextBackground(){
-  if(!bgImgs.length || badBgIndices.size >= bgImgs.length)return null;
-
-  if(!imageBag.length){
-    imageBag=shuffledIndices(bgImgs.length,lastImageIndex)
-      .filter(index => !badBgIndices.has(index));
-  }
-
-  if(!imageBag.length)return null;
-
-  lastImageIndex=imageBag.shift();
-  return bgImgs[lastImageIndex];
-}
-
-const SPEED_MODE_KEY = 'eidosRompemurosCadenceModeV2';
-
-const SPEED_MODES = {
-  soft: {
-    label: 'Contemplativa',
-    base: 3.15,
-    levelStep: 0.07,
-    max: 4.55,
-    accel: 0.00024
-  },
-  classic: {
-    label: 'Estable',
-    base: 3.8,
-    levelStep: 0.10,
-    max: 5.4,
-    accel: 0.00035
-  },
-  fast: {
-    label: 'Intensa',
-    base: 5.0,
-    levelStep: 0.14,
-    max: 7.2,
-    accel: 0.00055
-  }
-};
-
-function loadSpeedMode() {
-  try {
-    const stored = localStorage.getItem(SPEED_MODE_KEY);
-    return SPEED_MODES[stored] ? stored : 'classic';
-  } catch (error) {
-    return 'classic';
-  }
-}
-
-let speedMode = loadSpeedMode();
-
-function getSpeedSettings() {
-  return SPEED_MODES[speedMode];
-}
-
-function updateSpeedControl() {
-  const label = document.getElementById('speed-label');
-  if (!label) return;
-
-  label.textContent = getSpeedSettings().label;
-}
-
-const SPEED_ORDER = ['soft', 'classic', 'fast'];
-
-function changeSpeedMode(direction) {
-  const currentIndex = SPEED_ORDER.indexOf(speedMode);
-  const nextIndex = Math.max(
-    0,
-    Math.min(SPEED_ORDER.length - 1, currentIndex + direction)
-  );
-
-  setSpeedMode(SPEED_ORDER[nextIndex]);
-}
-
-function setSpeedMode(mode) {
-  if (!SPEED_MODES[mode] || mode === speedMode) return;
-
-  speedMode = mode;
-
-  try {
-    localStorage.setItem(SPEED_MODE_KEY, mode);
-  } catch (error) {
-    // La elección seguirá funcionando durante esta sesión.
-  }
-
-  updateSpeedControl();
-
-  const settings = getSpeedSettings();
-  const targetSpeed = Math.min(
-    settings.max,
-    settings.base + (level - 1) * settings.levelStep
-  );
-
-  const currentSpeed = Math.hypot(ball.dx, ball.dy);
-  ball.speed = targetSpeed;
-
-  if (currentSpeed > 0) {
-    ball.dx = ball.dx / currentSpeed * ball.speed;
-    ball.dy = ball.dy / currentSpeed * ball.speed;
-  }
-
-  document.getElementById('msg').textContent =
-    'Cadencia ' + settings.label.toLowerCase();
-}
-
-const pad = {
-  w: 80,
-  h: 12,
-  x: W / 2 - 40,
-  y: H - 40,
-  prevX: W / 2 - 40
-};
-
-const ball = {
-  r: 8,
-  x: W / 2,
-  y: H - 60,
-  dx: SPEED_MODES.classic.base,
-  dy: -SPEED_MODES.classic.base,
-  speed: SPEED_MODES.classic.base
-};
-
-const COLORS = ['#f5d76e', '#c8a84b', '#8fd4c2', '#e8c49a', '#a8d4a0'];
-const BW = 52;
-const BH = 18;
-const GAP = 4;
-
-let bricks = [];
-
-function getRandomLayout() {
-  const all = [];
-  const rows = 6;
-  const cols = 8;
-  const target = 18 + Math.floor(Math.random() * 17);
-  const symmetric = Math.random() < 0.72;
-  const used = new Set();
-
-  const add = (r, c) => {
-    if (r < 0 || r >= rows || c < 0 || c >= cols) return;
-
-    const key = r + ',' + c;
-
-    if (!used.has(key)) {
-      used.add(key);
-      all.push({ r, c });
-    }
-  };
-
-  let attempts = 0;
-
-  while (all.length < target && attempts < 400) {
-    attempts++;
-
-    const r = Math.floor(Math.random() * rows);
-    const c = Math.floor(Math.random() * cols);
-
-    add(r, c);
-
-    if (symmetric) add(r, cols - 1 - c);
-    if (Math.random() < 0.22) add(Math.min(rows - 1, r + 1), c);
-  }
-
-  return all.slice(0, target);
-}
-
-function getLayout(lvl) {
-  if (lvl > 6) return getRandomLayout();
-
-  const l = lvl;
-  const all = [];
-
-  if (l === 1) {
-    for (let r = 0; r < 5; r++) {
-      for (let c = 0; c < 8; c++) all.push({ r, c });
-    }
-  } else if (l === 2) {
-    [[0,3],[0,4],[1,2],[1,3],[1,4],[1,5],[2,1],[2,2],[2,3],[2,4],[2,5],[2,6],[3,0],[3,1],[3,2],[3,3],[3,4],[3,5],[3,6],[3,7],[4,1],[4,2],[4,3],[4,4],[4,5],[4,6]]
-      .forEach(([r, c]) => all.push({ r, c }));
-  } else if (l === 3) {
-    for (let r = 0; r < 5; r++) {
-      for (let c = 0; c < 8; c++) {
-        if ((r + c) % 2 === 0) all.push({ r, c });
-      }
-    }
-  } else if (l === 4) {
-    for (let i = 0; i < 4; i++) {
-      all.push({ r: i, c: i });
-      all.push({ r: i, c: 7 - i });
-    }
-    for (let c = 3; c <= 4; c++) all.push({ r: 4, c });
-  } else if (l === 5) {
-    for (let c = 0; c < 8; c++) all.push({ r: 2, c });
-    for (let r = 0; r < 5; r++) {
-      all.push({ r, c: 3 });
-      all.push({ r, c: 4 });
-    }
-  } else {
-    for (let r = 0; r < 5; r++) {
-      const start = r % 2 === 0 ? 0 : 1;
-      for (let c = start; c < 8; c += 2) all.push({ r, c });
-    }
-  }
-
-  return all;
-}
-
-function initBricks(lvl) {
-  bricks = [];
-
-  const layout = getLayout(lvl);
-
-  // Solo 2 o 3 ladrillos dobles por nivel, elegidos al azar.
-  const doubleCount = Math.min(
-    layout.length,
-    2 + Math.floor(Math.random() * 2)
-  );
-
-  const doubleIndices = new Set(
-    shuffledIndices(layout.length).slice(0, doubleCount)
-  );
-
-  layout.forEach(({ r, c }, index) => {
-    const isDouble = doubleIndices.has(index);
-    const rowColor = COLORS[r % COLORS.length];
-
-    bricks.push({
-      x: 4 + c * (BW + GAP),
-      y: 45 + r * (BH + GAP),
-      w: BW,
-      h: BH,
-      alive: true,
-      hits: isDouble ? 2 : 1,
-      maxHits: isDouble ? 2 : 1,
-      moving: false,
-      dx: 0,
-      special: isDouble ? 'double' : 'normal',
-      color: rowColor,
-      baseColor: rowColor
-    });
-  });
-
-  const movingWidth = 72;
-  const movingBaseColor = COLORS[(lvl + 2) % COLORS.length];
-
-  bricks.push({
-    x: Math.max(10, Math.min(W - movingWidth - 10, W / 2 - movingWidth / 2)),
-    y: 185 + ((lvl - 1) % 3) * 28,
-    w: movingWidth,
-    h: 20,
-    alive: true,
-    hits: 2,
-    maxHits: 2,
-    moving: true,
-    dx: 1.15 + Math.min(lvl, 10) * 0.08,
-    special: 'moving',
-    color: movingBaseColor,
-    baseColor: movingBaseColor
-  });
-
-  totalBricks = bricks.length;
-}
-
-let mouseX=W/2;
-cv.addEventListener('mousemove',e=>{if(quoteVisible)return;const rect=cv.getBoundingClientRect();mouseX=(e.clientX-rect.left)*(W/rect.width);started=true;});
-cv.addEventListener('touchmove',e=>{if(quoteVisible)return;e.preventDefault();const rect=cv.getBoundingClientRect();mouseX=(e.touches[0].clientX-rect.left)*(W/rect.width);started=true;},{passive:false});
-cv.addEventListener('click',()=>{if(!quoteVisible)started=true;});
-
-function showQuote(){
-  const idx=nextQuoteIndex();
-  if(idx<0){currentBg=nextBackground()||currentBg;nextLevel();return;}
-  quoteVisible=true;
-  const qs=document.getElementById('quote-screen'),qt=document.getElementById('quote-text'),qh=document.getElementById('quote-hint');
-  qt.textContent=QUOTES[idx]||'';
-  qh.classList.remove('show');qt.classList.remove('show');
-  qs.classList.add('visible');qs.style.background='rgba(0,0,0,0)';
-  let op=0;
-  const fi=setInterval(()=>{
-    op=Math.min(op+0.04,0.88);
-    qs.style.background='rgba(5,12,8,'+op+')';
-    if(op>=0.88){clearInterval(fi);qt.classList.add('show');qh.classList.add('show');}
-  },30);
-}
-function dismissQuote(){
-  if(!quoteVisible)return;
-  const qs=document.getElementById('quote-screen'),qt=document.getElementById('quote-text'),qh=document.getElementById('quote-hint');
-  qt.classList.remove('show');qh.classList.remove('show');
-  let op=0.88;
-  const fo=setInterval(()=>{
-    op=Math.max(op-0.05,0);
-    qs.style.background='rgba(5,12,8,'+op+')';
-    if(op<=0){clearInterval(fo);qs.classList.remove('visible');quoteVisible=false;currentBg=nextBackground()||currentBg;nextLevel();}
-  },30);
-}
-
-function resetBall(){
-  const settings = getSpeedSettings();
-
-  ball.x = W / 2;
-  ball.y = H - 60;
-  ball.speed = Math.min(
-    settings.max,
-    settings.base + (level - 1) * settings.levelStep
-  );
-  ball.dx = ball.speed * (Math.random() < .5 ? 1 : -1);
-  ball.dy = -ball.speed;
-
-  spinEffect = 0;
-  spinTimer = 0;
-  document.getElementById('spin').textContent = '';
-  started = false;
-}
-function nextLevel(){
-  win=false;initBricks(level);resetBall();
-  document.getElementById('game-btn').style.display='none';
-  document.getElementById('msg').textContent='Mueve el rat\u00f3n para empezar';
-  document.getElementById('levelEl').textContent='Nivel '+level;
-  loop();
-}
-function restart(){
-  score=0;
-  lives=3;
-  over=false;
-  win=false;
-  level=1;
-
-  quoteBag=[];
-  imageBag=[];
-  lastQuoteIndex=-1;
-  lastImageIndex=-1;
-
-  currentBg=nextBackground();
-
-  initBricks(1);
-  resetBall();
-  document.getElementById('game-btn').style.display='none';
-  document.getElementById('msg').textContent='Mueve el rat\u00f3n para empezar';
-  document.getElementById('scoreEl').textContent='Puntos: 0';
-  document.getElementById('bestEl').textContent='Récord: '+bestScore;
-  document.getElementById('livesEl').textContent='\u2665 \u2665 \u2665';
-  document.getElementById('levelEl').textContent='Nivel 1';
-  loop();
-}
-
-function updateBestScore() {
-  if (score <= bestScore) return;
-
-  bestScore = score;
-  saveBestScore(bestScore);
-  document.getElementById('bestEl').textContent = 'Récord: ' + bestScore;
-}
-
-function update() {
-  if (quoteVisible) return;
-
-  pad.prevX = pad.x;
-  pad.x = Math.max(0, Math.min(W - pad.w, mouseX - pad.w / 2));
-
-  for (const brick of bricks) {
-    if (!brick.alive || !brick.moving) continue;
-
-    brick.x += brick.dx;
-
-    if (brick.x <= 2) {
-      brick.x = 2;
-      brick.dx = Math.abs(brick.dx);
-    }
-
-    if (brick.x + brick.w >= W - 2) {
-      brick.x = W - brick.w - 2;
-      brick.dx = -Math.abs(brick.dx);
-    }
-  }
-
-  if (!started) return;
-
-  const speedSettings = getSpeedSettings();
-
-  if (ball.speed < speedSettings.max) {
-    ball.speed = Math.min(
-      speedSettings.max,
-      ball.speed + speedSettings.accel
-    );
-
-    const currentSpeed = Math.hypot(ball.dx, ball.dy);
-
-    if (currentSpeed > 0) {
-      ball.dx = ball.dx / currentSpeed * ball.speed;
-      ball.dy = ball.dy / currentSpeed * ball.speed;
-    }
-  }
-
-  if (spinEffect !== 0 && spinTimer > 0) {
-    ball.dx += spinEffect * ball.speed * 0.016;
-    spinTimer--;
-
-    if (spinTimer <= 0) {
-      spinEffect = 0;
-      document.getElementById('spin').textContent = '';
-    }
-  }
-
-  ball.x += ball.dx;
-  ball.y += ball.dy;
-
-  if (ball.x - ball.r < 0) {
-    ball.x = ball.r;
-    ball.dx = Math.abs(ball.dx);
-  }
-
-  if (ball.x + ball.r > W) {
-    ball.x = W - ball.r;
-    ball.dx = -Math.abs(ball.dx);
-  }
-
-  if (ball.y - ball.r < 0) {
-    ball.y = ball.r;
-    ball.dy = Math.abs(ball.dy);
-  }
-
-  if (
-    ball.dy > 0 &&
-    ball.y + ball.r >= pad.y &&
-    ball.y - ball.r <= pad.y + pad.h &&
-    ball.x >= pad.x &&
-    ball.x <= pad.x + pad.w
-  ) {
-    const paddleVelocity = pad.x - pad.prevX;
-    const relativeHit = (ball.x - (pad.x + pad.w / 2)) / (pad.w / 2);
-
-    ball.dx = relativeHit * 5;
-    ball.dy = -Math.abs(ball.dy);
-    ball.y = pad.y - ball.r;
-
-    if (Math.abs(paddleVelocity) > 2) {
-      spinEffect = paddleVelocity > 0 ? 1 : -1;
-      spinTimer = 60;
-      document.getElementById('spin').textContent =
-        spinEffect > 0 ? 'Efecto derecha' : 'Efecto izquierda';
-    }
-
-    const reboundSpeed = Math.hypot(ball.dx, ball.dy);
-
-    if (reboundSpeed > 0) {
-      ball.dx = ball.dx / reboundSpeed * ball.speed;
-      ball.dy = ball.dy / reboundSpeed * ball.speed;
-    }
-  }
-
-  for (const brick of bricks) {
-    if (!brick.alive) continue;
-
-    const bw = brick.w;
-    const bh = brick.h;
-
-    if (
-      ball.x + ball.r > brick.x &&
-      ball.x - ball.r < brick.x + bw &&
-      ball.y + ball.r > brick.y &&
-      ball.y - ball.r < brick.y + bh
-    ) {
-      brick.hits--;
-
-      if (brick.hits <= 0) {
-        brick.alive = false;
-        score += brick.moving ? 100 : (brick.maxHits > 1 ? 20 : 10);
-      } else {
-        score += brick.moving ? 20 : 5;
-      }
-
-      document.getElementById('scoreEl').textContent = 'Puntos: ' + score;
-      updateBestScore();
-
-      const fromLeft = ball.x + ball.r - brick.x;
-      const fromRight = brick.x + bw - (ball.x - ball.r);
-      const fromTop = ball.y + ball.r - brick.y;
-      const fromBottom = brick.y + bh - (ball.y - ball.r);
-
-      if (Math.min(fromLeft, fromRight) < Math.min(fromTop, fromBottom)) {
-        ball.dx *= -1;
-      } else {
-        ball.dy *= -1;
-      }
-
-      break;
-    }
-  }
-
-  if (ball.y - ball.r > H) {
-    lives--;
-    document.getElementById('livesEl').textContent =
-      '♥ '.repeat(Math.max(0, lives)).trim() || 'x';
-
-    if (lives <= 0) {
-      over = true;
-      return;
-    }
-
-    resetBall();
-  }
-
-  if (bricks.every(brick => !brick.alive)) win = true;
-}
-
-function draw() {
-	
-	
-ctx.globalAlpha = 1;
-  ctx.fillStyle = '#111a14';
-  ctx.fillRect(0, 0, W, H);
-
-  if(
-    currentBg &&
-    currentBg.complete &&
-    currentBg.naturalWidth > 0
-  ){
-
-    const iW = currentBg.naturalWidth;
-    const iH = currentBg.naturalHeight;
-
-    const scale = Math.min(
-      W / iW,
-      H / iH
-    );
-
-    const dw = iW * scale;
-    const dh = iH * scale;
-
-    const alive = bricks.reduce(
-      (n, b) => n + (b.alive ? 1 : 0),
-      0
-    );
-
-    const progress = totalBricks
-      ? 1 - (alive / totalBricks)
-      : 0;
-
-    ctx.globalAlpha =
-      0.18 + progress * 0.82;
-
-    ctx.drawImage(
-      currentBg,
-      (W - dw) / 2,
-      (H - dh) / 2,
-      dw,
-      dh
-    );
-
-    ctx.globalAlpha = 1;
-
-    const darkness =
-      0.86 - progress * 0.68;
-
-    ctx.fillStyle =
-      'rgba(10,20,15,' + darkness + ')';
-
-    ctx.fillRect(0, 0, W, H);
-
-  } else {
-
-    ctx.fillStyle = '#1e3d2f';
-    ctx.fillRect(0, 0, W, H);
-
-  }
-
-  for (const b of bricks) {
-    if (!b.alive) continue;
-
-    const bw = b.w;
-    const bh = b.h;
-
-    const untouchedDouble =
-      b.special === 'double' && b.hits === b.maxHits;
-
-    const untouchedMoving =
-      b.special === 'moving' && b.hits === b.maxHits;
-
-    ctx.save();
-
-    if (untouchedDouble) {
-      ctx.shadowColor = 'rgba(255, 211, 92, 0.95)';
-      ctx.shadowBlur = 14;
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = '#d6ad38';
-    } else if (untouchedMoving) {
-      ctx.shadowColor = 'rgba(143, 212, 194, 0.85)';
-      ctx.shadowBlur = 12;
-      ctx.globalAlpha = 0.98;
-      ctx.fillStyle = '#5fae9c';
-    } else {
-      ctx.shadowBlur = 0;
-      ctx.globalAlpha = b.moving ? 0.98 : 0.85;
-      ctx.fillStyle = b.baseColor || b.color;
-    }
-
-    ctx.beginPath();
-    ctx.roundRect(b.x, b.y, bw, bh, b.moving ? 7 : 3);
-    ctx.fill();
-    ctx.restore();
-
-    ctx.globalAlpha = 0.22;
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(b.x + 2, b.y + 2, bw - 4, 4);
-
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = untouchedDouble
-      ? 'rgba(255,245,190,0.98)'
-      : b.moving
-        ? 'rgba(190,255,240,0.90)'
-        : b.maxHits > 1
-          ? 'rgba(255,255,255,0.48)'
-          : 'rgba(255,255,255,0.15)';
-    ctx.lineWidth = untouchedDouble ? 2 : (b.moving ? 2 : (b.maxHits > 1 ? 1.5 : 1));
-    ctx.beginPath();
-    ctx.roundRect(b.x, b.y, bw, bh, b.moving ? 7 : 3);
-    ctx.stroke();
-
-    if (b.maxHits > 1 && b.hits === 1) {
-      ctx.strokeStyle = 'rgba(30,20,8,0.75)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(b.x + bw * 0.20, b.y + 2);
-      ctx.lineTo(b.x + bw * 0.42, b.y + bh * 0.48);
-      ctx.lineTo(b.x + bw * 0.31, b.y + bh - 2);
-      ctx.moveTo(b.x + bw * 0.42, b.y + bh * 0.48);
-      ctx.lineTo(b.x + bw * 0.72, b.y + 3);
-      ctx.stroke();
-    }
-
-    if (b.moving) {
-      ctx.fillStyle = '#241d08';
-      ctx.font = 'bold 11px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('◆', b.x + bw / 2, b.y + bh / 2 + 0.5);
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'alphabetic';
-    }
-  }
-  ctx.globalAlpha=0.92;
-  ctx.fillStyle=spinEffect>0?'#f5d76e':spinEffect<0?'#8fd4c2':'rgba(255,255,255,0.88)';
-  ctx.beginPath();ctx.roundRect(pad.x,pad.y,pad.w,pad.h,6);ctx.fill();
-  ctx.globalAlpha=1;
-  if(spinEffect!==0){ctx.strokeStyle=spinEffect>0?'rgba(245,215,110,0.6)':'rgba(143,212,194,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r+5,0,Math.PI*2);ctx.stroke();}
-  const g=ctx.createRadialGradient(ball.x-2,ball.y-2,1,ball.x,ball.y,ball.r);
-  g.addColorStop(0,'#fff7a0');g.addColorStop(1,'#c8a020');
-  ctx.fillStyle=g;ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fill();
-  if(!started&&!over&&!win&&!quoteVisible){
-    ctx.fillStyle='rgba(0,0,0,0.52)';ctx.fillRect(0,0,W,H);
-    ctx.fillStyle='#f5ecd0';ctx.font='bold 22px Georgia,serif';ctx.textAlign='center';
-    ctx.fillText('E I D O S',W/2,H/2-16);
-    ctx.font='13px sans-serif';ctx.fillStyle='#c8c8b0';
-    ctx.fillText('Mueve el rat\u00f3n o toca para empezar',W/2,H/2+14);
-    ctx.textAlign='left';
-  }
-}
-
-let running=false;
-function loop(){
-  if(running)return;running=true;
-  function frame(){
-    if(quoteVisible){running=false;return;}
-    if(over||win){
-      running=false;draw();
-      const msg=document.getElementById('msg'),btn=document.getElementById('game-btn');
-      if(win){level++;showQuote();}
-      else{msg.textContent='Game over - '+score+' puntos';btn.textContent='Reiniciar';btn.onclick=restart;btn.style.display='inline-block';}
-      return;
-    }
-    update();draw();requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-
-currentBg = nextBackground();
-document.getElementById('bestEl').textContent = 'Récord: ' + bestScore;
-updateSpeedControl();
-initBricks(1);
-loop();
-</script>
+<script src="rompemuros.js"></script>
 </body>
 </html>

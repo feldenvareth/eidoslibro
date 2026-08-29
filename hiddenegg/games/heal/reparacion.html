@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08110d">
+<meta name="description" content="Repara un tejido alterado. Cada intervención afecta también a las células vecinas.">
+<link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/heal/reparacion.html">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+<link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EIDOS">
+<meta property="og:title" content="EIDOS · Reparación">
+<meta property="og:description" content="Repara un tejido alterado. Cada intervención afecta también a las células vecinas.">
+<meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/heal/reparacion.html">
+<meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/heal/rep_img.jpg">
+<meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/heal/rep_img.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:image:alt" content="EIDOS Reparación: puzle de reparación celular y equilibrio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EIDOS · Reparación">
+<meta name="twitter:description" content="Restaura el tejido alterado. Cada intervención cambia una célula y sus cuatro vecinas.">
+<meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/heal/rep_img.jpg">
+<title>EIDOS · Reparación</title>
+<link rel="stylesheet" href="reparacion.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SCSFPYKJTX');
+</script>
+
+</head>
+<body>
+<main id="game-shell" aria-label="Minijuego EIDOS Reparación">
+<div id="eidos-bg" aria-hidden="true"><img id="bg-a" alt=""><img id="bg-b" alt=""></div>
+<header id="topbar"><div id="hud"><span><i data-t="levelLabel"></i>: <strong id="level-hud">1</strong></span><span id="stage-hud"></span><span><i data-t="movesLabel"></i>: <strong id="moves-hud">0</strong></span><span><i data-t="bestLabel"></i>: <strong id="best-hud">—</strong></span></div><button id="sound-button" class="top-btn" aria-label="sound">♪</button><button id="close-button" class="top-btn" type="button" data-t="close"></button></header>
+<section id="content"><div id="title-block"><p id="eyebrow">E I D O S</p><h1 id="game-title" data-t="gameTitle"></h1><p id="subtitle" data-t="subtitle"></p></div><div id="board-wrap"><div id="board" role="application"></div></div><section id="info"><div id="progress-card"><div id="progress-head"><span data-t="tissue"></span><strong id="progress-number">0%</strong></div><div id="progress-track"><div id="progress-fill"></div></div><p id="status-line"><b id="stage-name"></b> · <span id="stage-desc"></span></p></div></section><div id="controls"><button id="hint-button" class="action-btn" data-t="hint"></button><button id="undo-button" class="action-btn" data-t="undo"></button><button id="restart-button" class="action-btn" data-t="restart"></button><button id="levels-button" class="action-btn" data-t="levels"></button></div></section>
+<section id="start-screen" class="screen open" aria-hidden="false"><div class="card"><p class="card-kicker">E I D O S</p><h2 data-t="gameTitle"></h2><p class="card-subtitle" data-t="subtitle"></p><p class="intro" data-t="intro"></p><div class="cross-demo" aria-hidden="true"><span></span><span class="on">●</span><span></span><span class="on">●</span><span class="on">●</span><span class="on">●</span><span></span><span class="on">●</span><span></span></div><div class="rule-box"><strong data-t="ruleTitle"></strong><span data-t="rule"></span><p class="target-note" data-t="targetNote"></p></div><p class="logic-note" data-t="note"></p><div class="start-actions"><button id="start-button" class="primary" data-t="start"></button><button id="start-levels-button" class="secondary" data-t="levels"></button><button id="share-button" class="secondary" type="button" data-t="shareGame"></button><a id="article-button" class="secondary" href="https://www.eidoslibro.com/blog/articulos/03_inmortalidad_humana.html" target="_blank" rel="noopener noreferrer" data-t="readArticle"></a><a id="discover-eidos-button" class="secondary full-start-action" href="https://www.eidoslibro.com/" target="_blank" rel="noopener noreferrer" data-t="discoverEidos"></a><p class="share-note" data-t="shareNote"></p></div></div></section>
+<section id="levels-screen" class="screen" aria-hidden="true">
+<div class="card levels-card">
+<p class="card-kicker">E I D O S</p>
+<h2 data-t="campaign"></h2>
+<p class="card-subtitle" data-t="campaignProgress"></p>
+<div id="campaign-summary"><span id="campaign-completed"></span><span id="campaign-unlocked"></span></div>
+<div id="level-map"></div>
+<div id="endless-panel" hidden>
+<h3 data-t="endlessTitle"></h3>
+<p id="endless-description"></p>
+<div class="endless-jump">
+<input id="endless-input" type="number" min="1" step="1" inputmode="numeric">
+<button id="endless-play" class="primary" data-t="play"></button>
+</div>
+</div>
+<p class="logic-note" data-t="levelMapHelp"></p>
+<div class="levels-footer-actions"><button id="levels-back" class="secondary" data-t="back"></button><button id="delete-campaign-button" class="secondary danger-button" type="button" data-t="deleteCampaign" hidden></button></div>
+</div>
+</section>
+<section id="delete-campaign-screen" class="screen" aria-hidden="true"><div class="card delete-campaign-card"><p class="card-kicker">E I D O S</p><h2 data-t="deleteCampaign"></h2><p class="card-subtitle danger-subtitle" data-t="deleteCampaignSubtitle"></p><p class="intro" data-t="deleteCampaignIntro"></p><div class="delete-warning"><strong data-t="deleteCampaignWarningTitle"></strong><span data-t="deleteCampaignWarningText"></span></div><div class="delete-actions"><button id="confirm-delete-campaign" class="primary danger-confirm" data-t="deleteCampaignConfirm"></button><button id="cancel-delete-campaign" class="secondary" data-t="cancel"></button></div></div></section><section id="result-screen" class="screen" aria-hidden="true"><div class="card"><p class="card-kicker">E I D O S</p><h2 id="result-title"></h2><p id="result-subtitle" class="card-subtitle"></p><p id="result-stats" class="result-stats"></p><blockquote id="result-quote" class="quote"></blockquote><div class="result-actions"><button id="next-button" class="primary"></button><button id="again-button" class="secondary" data-t="again"></button><button id="result-levels-button" class="secondary" data-t="levels"></button></div></div></section>
+</main>
+<script src="/gallery/js/image-manifest.js"></script>
+<script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="reparacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+(()=>{'use strict';
+const LANG=(document.documentElement.lang||'en').toLowerCase().startsWith('es')?'es':'en';
+const isES=LANG==='es';
+const ES_TEXT={"You rebuilt a whole from fragments that could move and change orientation.":"Has reconstruido una totalidad a partir de fragmentos que podían desplazarse y cambiar de orientación.","The correct piece was not enough: it also needed the correct orientation and position.":"La pieza correcta no era suficiente: también necesitaba la orientación y la posición correctas.","Each rotation changed the appearance without changing the internal structure of the piece.":"Cada giro modificaba la apariencia sin modificar la estructura interna de la pieza.","The solution depended on anticipating spatial relationships before they could be tested.":"La solución dependía de anticipar relaciones espaciales antes de poder comprobarlas.","The board was no longer a figure, but a space of possible transformations.":"El tablero ya no era una figura, sino un espacio de transformaciones posibles.","TRIANGLE":"TRIÁNGULO","HEXAGON":"HEXÁGONO","FOUNDATIONS":"FUNDAMENTOS","EASY":"FÁCIL","COMBINATION":"COMBINACIÓN","ATTENTION":"ATENCIÓN","ROTATION":"ROTACIÓN","SPATIAL":"ESPACIAL","ANTICIPATION":"ANTICIPACIÓN","ABSTRACTION":"ABSTRACCIÓN","SYNTHESIS":"SÍNTESIS","You completed the foundations phase. From now on, the pieces require combining more relationships at the same time.":"Has completado la fase de fundamentos. A partir de ahora las piezas exigirán combinar más relaciones al mismo tiempo.","You cleared the combination phase. The next block makes rotation a central part of the problem.":"Has superado la fase de combinación. El siguiente bloque convierte la rotación en parte central del problema.","You completed the rotation phase. Now you will need to anticipate positions before testing them.":"Has completado la fase de rotación. Ahora tendrás que anticipar posiciones antes de comprobarlas.","You cleared the anticipation phase. The next block requires working with more abstract configurations.":"Has superado la fase de anticipación. El siguiente bloque exige trabajar con configuraciones más abstractas.","You completed the abstraction phase. Only the final synthesis of all these skills remains.":"Has completado la fase de abstracción. Solo queda integrar todas las habilidades en la fase final.","ENDLESS CAMPAIGN · SEED ":"CAMPAÑA INFINITA · SEMILLA ","BLOCK ":"BLOQUE ","Cover the shape completely. You can also move and rotate pieces already placed.":"Cubre completamente la figura. Puedes mover y girar también las piezas ya colocadas.","✧  HINT (":"✧  PISTA (","shows one area":"muestra una zona","⚑  SURRENDER":"⚑  RENDIRSE","show solution":"ver solución","OVERLAP · ":"SOLAPE · ","OUTSIDE · ":"FUERA · "," pieces":" piezas","Piece selected · drag it to move":"Pieza seleccionada · arrástrala para moverla","Piece selected · use ↺ or ↻ to rotate it":"Pieza seleccionada · usa ↺ o ↻ para girarla","Piece removed · space freed":"Pieza retirada · hueco liberado","Piece repositioned":"Pieza recolocada","Piece fitted":"Pieza encajada","It does not fit there · returning to its previous position":"No cabe ahí · vuelve a su posición anterior","That space does not fit the piece":"Ese espacio no encaja con la pieza","There is no room inside the shape to complete that rotation":"No hay espacio dentro de la figura para completar ese giro","Rotation around center · colors mixed where pieces overlap":"Giro sobre el centro · colores mezclados donde se solapan","Rotation around center · snapped to the grid":"Giro sobre el centro · ajustado a la retícula","60° rotation to the right":"Giro 60° a la derecha","60° rotation to the left":"Giro 60° a la izquierda","Level reset":"Nivel reiniciado","The current arrangement already matches the solution":"La disposición actual ya coincide con la solución","The highlighted area is the exact position of this piece":"La zona iluminada es la posición exacta de esta pieza","If you confirm, this endless puzzle will be closed as a surrender and you will see its solution. If you then leave it, this combination may not appear again in another endless campaign.":"Si confirmas, este puzle infinito se cerrará como rendición y verás su solución. Si después lo abandonas, esta combinación puede no volver a aparecer en otra campaña infinita.","If you confirm, this level will be closed as a surrender and you will see its solution. Because it is part of the campaign, you can replay this exact level from the menu.":"Si confirmas, este nivel se cerrará como rendición y verás su solución. Al ser parte de la campaña, podrás volver a jugar exactamente este mismo nivel desde el menú.","ENDLESS PUZZLE ":"PUZLE INFINITO "," · SOLUTION SHOWN":" · SOLUCIÓN MOSTRADA","LEVEL ":"NIVEL ","FINISH CAMPAIGN":"FINALIZAR CAMPAÑA","NEXT PHASE":"SIGUIENTE FASE","NEXT LEVEL":"SIGUIENTE NIVEL","PHASE ":"FASE "," COMPLETE":" COMPLETADA"," / 60 LEVELS":" / 60 NIVELES","Phase complete.":"Fase completada.","START PHASE ":"COMENZAR FASE ","UNLOCKED ":"DESBLOQUEADOS "," / 60 · CLEARED ":" / 60 · COMPLETADOS ","<b>BLOCK ":"<b>BLOQUE ","Locked level":"Nivel bloqueado","Cleared level · play again":"Nivel superado · volver a jugar","Current level":"Nivel actual","SOUND: ":"SONIDO: ","YES":"SÍ","Article link pending":"Enlace al artículo pendiente","CAMPAIGN COMPLETE":"CAMPAÑA COMPLETA","CONTINUE LEVEL ":"CONTINUAR NIVEL ","START":"COMENZAR"};
+function tr(value){return isES?(ES_TEXT[value]??value):value}
+
+const $=id=>document.getElementById(id);
+const SQ3=Math.sqrt(3), HUNIT=SQ3/2;
+const SAVE_KEY='eidos-forma-save-v4', SOUND_KEY='eidos-forma-sound-v1';
+const COLORS=['#2da7e8','#f0b83d','#78c751','#ef624f','#a779e7','#41c2ae','#e887c2','#e89b4a','#7b99f2'];
+const WIN_COPY=[
+  tr('You rebuilt a whole from fragments that could move and change orientation.'),
+  tr('The correct piece was not enough: it also needed the correct orientation and position.'),
+  tr('Each rotation changed the appearance without changing the internal structure of the piece.'),
+  tr('The solution depended on anticipating spatial relationships before they could be tested.'),
+  tr('The board was no longer a figure, but a space of possible transformations.')
+];
+const SHARED_CONTENT=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};
+const GALLERY_MANIFEST=Array.isArray(window.EIDOS_IMAGE_MANIFEST)?window.EIDOS_IMAGE_MANIFEST:[];
+const BG_IMAGES=GALLERY_MANIFEST.length
+  ? GALLERY_MANIFEST.map(item=>item&&item.url).filter(Boolean).map(url=>/^(?:https?:)?\/\//.test(url)||url.startsWith('/')?url:'/gallery/'+String(url).replace(/^\.?\//,''))
+  : (Array.isArray(SHARED_CONTENT.images)?SHARED_CONTENT.images.filter(Boolean):[]);
+const SHARED_QUOTES=Array.isArray(SHARED_CONTENT.quotes)?SHARED_CONTENT.quotes.filter(q=>typeof q==='string'&&q.trim()):[];
+function quoteForLevel(n){
+  if(!SHARED_QUOTES.length)return'';
+  return SHARED_QUOTES[(Math.max(1,n)-1)%SHARED_QUOTES.length];
+}
+function applyLevelQuote(n){
+  const box=$('winQuote'),quote=quoteForLevel(n);
+  box.textContent=quote;
+  box.style.display=quote?'block':'none';
+}
+const BG_LAYERS=[$('eidos-bg-a'),$('eidos-bg-b')];
+const BG_ROOT=$('eidos-shared-bg');
+let bgDeck=[],activeBg=0,lastBg=-1;
+const invalidBackgrounds=new Set();
+function shuffleBackgrounds(values){for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]]}return values}
+function refillBackgroundDeck(){bgDeck=shuffleBackgrounds(BG_IMAGES.map((_,i)=>i).filter(i=>!invalidBackgrounds.has(i)));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}
+function changeBackground(attempt=0){
+  if(!BG_IMAGES.length||!BG_LAYERS[0]||!BG_LAYERS[1])return;
+  if(!bgDeck.length)refillBackgroundDeck();
+  if(!bgDeck.length)return;
+  const index=bgDeck.shift(),next=1-activeBg,img=BG_LAYERS[next],old=BG_LAYERS[activeBg];
+  img.onload=()=>{old.classList.remove('active');img.classList.add('active');activeBg=next;lastBg=index};
+  img.onerror=()=>{invalidBackgrounds.add(index);img.removeAttribute('src');if(attempt<BG_IMAGES.length-1)changeBackground(attempt+1)};
+  img.src=BG_IMAGES[index];
+}
+function updateBackgroundStrength(progressRatio){
+  if(!BG_ROOT)return;
+  const ratio=Math.max(0,Math.min(1,Number(progressRatio)||0));
+  BG_ROOT.style.setProperty('--bg-opacity',String(.26+ratio*.44));
+}
+const board=$('board'), tray=$('tray'), dragCanvas=$('drag-canvas');
+const bc=board.getContext('2d'), tc=tray.getContext('2d'), dc=dragCanvas.getContext('2d');
+let dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));
+let progress=readSave();
+let sound=true,audio=null;try{sound=localStorage.getItem(SOUND_KEY)!=='off'}catch(e){}
+let level=1, infinite=false, infiniteIndex=0, infiniteRunSeed=0, moves=0, hints=3, surrendered=false;
+let target=[], targetMap=new Map(), neighbors=new Map(), boundaryEdges=[];
+let pieces=[], occupied=new Map(), selected=null, active=null;
+let boardGeom={scale:30,originX:0,originY:0,bbox:null};
+let trayHit=[];let hintPiece=null,hintTimer=0,toastTimer=0;
+let pointerId=null,startPointer=null,dragMoved=false,selectedBeforeDrag=false;
+let won=false;
+let menuReturnScreen='game';
+
+function readSave(){
+  try{const v=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(v&&typeof v==='object')return Object.assign({unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false},v)}catch(e){}
+  return {unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};
+}
+function save(){
+  if(!infinite){progress.last=level;progress.unlocked=Math.max(progress.unlocked,Math.min(60,level));}
+  persistProgress();
+}
+function markCampaignResult(type){
+  if(infinite)return;
+  const next=Math.min(60,level+1);
+  progress.unlocked=Math.max(progress.unlocked,next);
+  progress.last=next;
+  if(level===60)progress.campaignComplete=true;
+  progress.pending={type,level,moves,best:progress.best[String(level)]||moves};
+  persistProgress();
+}
+function persistProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progress))}catch(e){}}
+function clearPending(){if(progress.pending){progress.pending=null;persistProgress()}}
+function resetProgress(){progress={unlocked:1,last:1,best:{},pending:null,phasePending:null,campaignComplete:false};infinite=false;level=1;persistProgress();startLevel(1);closeAllScreens();}
+function seeded(seed){return function(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}}
+function hash(n){n=Math.imul(n^n>>>16,0x45d9f3b);n=Math.imul(n^n>>>16,0x45d9f3b);return (n^n>>>16)>>>0}
+
+function axialToCart(v){return{x:v.q+v.r*.5,y:v.r*HUNIT}}
+function rotateV(v,steps){let q=v.q,r=v.r;steps=((steps%6)+6)%6;for(let i=0;i<steps;i++){const nq=-r,nr=q+r;q=nq;r=nr}return{q,r}}
+function addV(a,b){return{q:a.q+b.q,r:a.r+b.r}}
+function vkey(v){return v.q+','+v.r}
+function sortVerts(a,b){return a.q-b.q||a.r-b.r}
+function ckey(verts){return verts.slice().sort(sortVerts).map(vkey).join('|')}
+function ekey(a,b){return [a,b].sort(sortVerts).map(vkey).join('|')}
+function centroidVerts(verts){return{x:verts.reduce((s,v)=>s+axialToCart(v).x,0)/3,y:verts.reduce((s,v)=>s+axialToCart(v).y,0)/3}}
+function pointInPoly(p,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+  const a=axialToCart(poly[i]),b=axialToCart(poly[j]);
+  const hit=((a.y>p.y)!=(b.y>p.y))&&(p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y+1e-12)+a.x);if(hit)inside=!inside;
+}return inside}
+function rotatePoly(poly,steps){return poly.map(v=>rotateV(v,steps))}
+function shiftPoly(poly,dq,dr){return poly.map(v=>({q:v.q+dq,r:v.r+dr}))}
+
+function cellsFromPolys(polys){
+  let qs=[],rs=[];polys.flat().forEach(v=>{qs.push(v.q);rs.push(v.r)});
+  const q0=Math.floor(Math.min(...qs))-2,q1=Math.ceil(Math.max(...qs))+2,r0=Math.floor(Math.min(...rs))-2,r1=Math.ceil(Math.max(...rs))+2;
+  const out=new Map();
+  for(let q=q0;q<=q1;q++)for(let r=r0;r<=r1;r++){
+    const tris=[
+      [{q,r},{q:q+1,r},{q,r:r+1}],
+      [{q:q+1,r},{q:q+1,r:r+1},{q,r:r+1}]
+    ];
+    for(const verts of tris){const cen=centroidVerts(verts);if(polys.some(poly=>pointInPoly(cen,poly))){const key=ckey(verts);out.set(key,{key,verts,cen})}}
+  }
+  return [...out.values()];
+}
+function triangle(n,rot=0,dq=0,dr=0){return shiftPoly(rotatePoly([{q:0,r:0},{q:n,r:0},{q:0,r:n}],rot),dq,dr)}
+function rhombus(w,h,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:w,r:0},{q:w,r:h},{q:0,r:h}],dq,dr)}
+function hexagon(s,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:s,r:0},{q:s,r:s},{q:0,r:2*s},{q:-s,r:2*s},{q:-s,r:s}],dq,dr)}
+function trapezoid(top,h,dq=0,dr=0){return shiftPoly([{q:0,r:0},{q:top,r:0},{q:top,r:h},{q:-h,r:h}],dq,dr)}
+function arrowShape(scale){
+  const head=shiftPoly(triangle(scale+1,1),0,0);
+  const shaft=rhombus(Math.max(2,scale-1),scale+1,-Math.max(1,scale-1),scale+1);
+  return [head,shaft];
+}
+function crownShape(s){
+  const base=trapezoid(s+1,2,0,s);
+  // Tres puntas unidas por aristas a la parte superior de la base.
+  const y=s-2;
+  const t1=triangle(2,1,1,y),t2=triangle(2,1,3,y),t3=triangle(2,1,5,y);
+  return [base,t1,t2,t3];
+}
+function shapeFor(n){
+  const tier=Math.min(5,Math.floor((n-1)/10));
+  const pos=(n-1)%10,phase=pos>=7?1:0;
+  let name,polys;
+  if(n<=3){const s=4+(n===3?1:0);name=tr('TRIANGLE');polys=[triangle(s,1)];}
+  else{
+    const kind=(pos+2*tier)%6;
+    if(kind===0){const s=5+Math.floor(tier/2)+phase;name=tr('TRIANGLE');polys=[triangle(s,1)];}
+    if(kind===1){const w=4+Math.floor(tier/2)+phase,h=3+(tier%2);name='ROMBO';polys=[rhombus(w,h)];}
+    if(kind===2){const s=2+(tier>=3?1:0)+phase;name=tr('HEXAGON');polys=[hexagon(s)];}
+    if(kind===3){const t=3+Math.floor(tier/2)+phase,h=3+(tier>=4?1:0);name='TRAPECIO';polys=[trapezoid(t,h)];}
+    if(kind===4){const s=3+(tier>=3?1:0)+phase;name='FLECHA';polys=arrowShape(s);}
+    if(kind===5){const s=3+(tier>=4?1:0)+phase;name='CORONA';polys=crownShape(s);}
+  }
+  let cells=cellsFromPolys(polys);
+  // Si una unión concreta generase una parte aislada, conservar solo el componente principal.
+  cells=largestConnected(cells);
+  return{name,polys,cells};
+}
+function largestConnected(cells){
+  if(!cells.length)return cells;
+  const map=new Map(cells.map(c=>[c.key,c])),adj=buildNeighborMap(cells),seen=new Set();let best=[];
+  for(const c of cells)if(!seen.has(c.key)){const stack=[c.key],comp=[];seen.add(c.key);while(stack.length){const k=stack.pop();comp.push(map.get(k));for(const nb of adj.get(k)||[])if(!seen.has(nb)){seen.add(nb);stack.push(nb)}}if(comp.length>best.length)best=comp}
+  return best;
+}
+function buildNeighborMap(cells){
+  const edgeOwners=new Map(),adj=new Map(cells.map(c=>[c.key,[]]));
+  for(const c of cells){for(let i=0;i<3;i++){const k=ekey(c.verts[i],c.verts[(i+1)%3]);if(!edgeOwners.has(k))edgeOwners.set(k,[]);edgeOwners.get(k).push(c.key)}}
+  for(const owners of edgeOwners.values())if(owners.length===2){adj.get(owners[0]).push(owners[1]);adj.get(owners[1]).push(owners[0])}
+  return adj;
+}
+function buildBoundary(cells){
+  const edges=new Map();for(const c of cells)for(let i=0;i<3;i++){const a=c.verts[i],b=c.verts[(i+1)%3],k=ekey(a,b);if(!edges.has(k))edges.set(k,{a,b,n:0});edges.get(k).n++}
+  return [...edges.values()].filter(e=>e.n===1);
+}
+
+function partition(cells,k,seed){
+  k=Math.max(2,Math.min(k,Math.floor(cells.length/3)));
+  const rnd=seeded(seed),map=new Map(cells.map(c=>[c.key,c])),adj=buildNeighborMap(cells);
+  const unassigned=new Set(cells.map(c=>c.key)),groups=Array.from({length:k},()=>[]);
+  // Semillas alejadas entre sí para producir pieces compactas y reconocibles.
+  let first=cells[Math.floor(rnd()*cells.length)];const seeds=[first];
+  while(seeds.length<k){let best=null,score=-1;for(const c of cells){if(seeds.includes(c))continue;let d=Infinity;for(const s of seeds)d=Math.min(d,Math.hypot(c.cen.x-s.cen.x,c.cen.y-s.cen.y));const jitter=rnd()*.18;if(d+jitter>score){score=d+jitter;best=c}}seeds.push(best)}
+  seeds.forEach((c,i)=>{groups[i].push(c.key);unassigned.delete(c.key)});
+  const goals=Array(k).fill(Math.floor(cells.length/k));for(let i=0;i<cells.length%k;i++)goals[i]++;
+  let guard=0;
+  while(unassigned.size&&guard++<10000){
+    const order=[...Array(k).keys()].sort((a,b)=>(groups[a].length/goals[a])-(groups[b].length/goals[b])||rnd()-.5);
+    let did=false;
+    for(const gi of order){
+      if(!unassigned.size)break;
+      const cand=new Map();for(const id of groups[gi])for(const nb of adj.get(id)||[])if(unassigned.has(nb))cand.set(nb,(cand.get(nb)||0)+1);
+      if(!cand.size)continue;
+      let choices=[...cand.entries()].sort((a,b)=>b[1]-a[1]||rnd()-.5);
+      // Evita convertir todas las pieces en manchas: un poco de azar entre los mejores bordes.
+      const max=choices[0][1];choices=choices.filter(x=>x[1]>=max-1);const pick=choices[Math.floor(rnd()*choices.length)][0];
+      groups[gi].push(pick);unassigned.delete(pick);did=true;
+      if(groups[gi].length>=goals[gi]&&rnd()>.14)continue;
+    }
+    if(!did)break;
+  }
+  // Cualquier resto se anexa a un grupo vecino, conservando conectividad.
+  while(unassigned.size){let did=false;for(const id of [...unassigned]){for(let gi=0;gi<k;gi++){if((adj.get(id)||[]).some(nb=>groups[gi].includes(nb))){groups[gi].push(id);unassigned.delete(id);did=true;break}}}if(!did)break}
+  return groups.filter(g=>g.length);
+}
+function makePieces(groups,seed){
+  const rnd=seeded(seed),map=targetMap;
+  return groups.map((keys,i)=>{
+    const verts=[...new Map(keys.flatMap(k=>map.get(k).verts).map(v=>[vkey(v),v])).values()].sort(sortVerts);
+    const pivot=verts[0];
+    const local=keys.map(k=>map.get(k).verts.map(v=>({q:v.q-pivot.q,r:v.r-pivot.r})));
+    const tier=Math.min(5,Math.floor((Math.max(1,level)-1)/10));
+    const rotationSets=[[0,1,5],[0,1,2,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]];
+    let rot=rotationSets[tier][Math.floor(rnd()*rotationSets[tier].length)];if(i===0&&level===1)rot=1;
+    return{id:i,color:COLORS[i%COLORS.length],local,solutionKeys:keys.slice(),solutionT:{q:pivot.q,r:pivot.r},rot,placed:false,t:null,matched:[],trayPolys:[],traySlot:i};
+  });
+}
+function transformedTris(piece,rot,t){return piece.local.map(tri=>tri.map(v=>addV(rotateV(v,rot),t)))}
+function transformedKeys(piece,rot,t){return transformedTris(piece,rot,t).map(ckey)}
+function rebuildOccupancy(){
+  occupied.clear();
+  for(const p of pieces){
+    if(!p.placed||!p.t)continue;
+    const tris=transformedTris(p,p.rot,p.t);p.matched=tris.map(ckey);
+    tris.forEach((verts,i)=>{const key=p.matched[i];if(!occupied.has(key))occupied.set(key,{verts,owners:[]});occupied.get(key).owners.push(p.id)});
+  }
+}
+function validPlacement(piece,rot,t){
+  const keys=transformedKeys(piece,rot,t);
+  for(const k of keys){
+    if(!targetMap.has(k))return null;
+    const entry=occupied.get(k);if(entry&&entry.owners.some(id=>id!==piece.id))return null;
+  }
+  return keys;
+}
+function placementIssues(){
+  let overlap=0,outside=0;
+  for(const [k,e] of occupied){if(e.owners.length>1)overlap++;if(!targetMap.has(k))outside++;}
+  return{overlap,outside};
+}
+function isSolved(){
+  if(!pieces.length||!pieces.every(p=>p.placed))return false;rebuildOccupancy();
+  if(occupied.size!==target.length)return false;
+  for(const [k,e] of occupied){if(!targetMap.has(k)||e.owners.length!==1)return false}
+  return target.every(c=>occupied.has(c.key));
+}
+const BLOCKS=[
+  {name:tr('FOUNDATIONS'),diff:tr('EASY')},
+  {name:tr('COMBINATION'),diff:tr('ATTENTION')},
+  {name:tr('ROTATION'),diff:tr('SPATIAL')},
+  {name:tr('ANTICIPATION'),diff:tr('ROTATION')},
+  {name:tr('ABSTRACTION'),diff:tr('ABSTRACTION')},
+  {name:tr('SYNTHESIS'),diff:'EIDOS'}
+];
+const PHASE_COPY=[
+  tr('You completed the foundations phase. From now on, the pieces require combining more relationships at the same time.'),
+  tr('You cleared the combination phase. The next block makes rotation a central part of the problem.'),
+  tr('You completed the rotation phase. Now you will need to anticipate positions before testing them.'),
+  tr('You cleared the anticipation phase. The next block requires working with more abstract configurations.'),
+  tr('You completed the abstraction phase. Only the final synthesis of all these skills remains.')
+];
+function blockFor(n){const i=Math.min(5,Math.floor((Math.max(1,n)-1)/10));return{index:i+1,...BLOCKS[i]}}
+function difficultyFor(n){if(infinite)return'INFINITO';return blockFor(n).diff}
+function pieceCountFor(n,cells){
+  const tier=Math.min(5,Math.floor((n-1)/10)),pos=(n-1)%10;
+  const base=[3,4,5,5,6,7][tier],extra=pos>=6?1:0;
+  return Math.min(base+extra,Math.max(3,Math.floor(cells/3.6)));
+}
+function startLevel(n,inf=false,remember=true){
+  won=false;surrendered=false;infinite=inf;
+  if(infinite){if(!infiniteRunSeed)infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);infiniteIndex=Math.max(1,n);level=60+infiniteIndex}else{level=Math.max(1,Math.min(60,n));}
+  moves=0;hints=3;occupied.clear();selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
+  const spec=shapeFor(level),cells=spec.cells;target=cells;targetMap=new Map(cells.map(c=>[c.key,c]));neighbors=buildNeighborMap(cells);boundaryEdges=buildBoundary(cells);
+  const seed=infinite?hash(infiniteRunSeed^(infiniteIndex*9173+41)):hash(level*9173+41),k=pieceCountFor(level,cells.length),groups=partition(cells,k,seed);pieces=makePieces(groups,seed^0x9e3779b9);
+  rebuildOccupancy();
+  const block=infinite?null:blockFor(level);$('shapeName').textContent=spec.name;$('levelN').textContent=infinite?'∞'+infiniteIndex:level;$('difficulty').textContent=difficultyFor(level);$('movesN').textContent='0';
+  $('blockNote').textContent=infinite?tr('ENDLESS CAMPAIGN · SEED ')+String(infiniteRunSeed).slice(-4):tr('BLOCK ')+block.index+' · '+block.name;
+  $('instructionText').textContent=tr('Cover the shape completely. You can also move and rotate pieces already placed.');
+  updateHUD();if(remember)save();resizeAll();drawAll();changeBackground();
+}
+
+function resizeCanvas(c){const r=c.getBoundingClientRect();c.width=Math.max(1,Math.round(r.width*dpr));c.height=Math.max(1,Math.round(r.height*dpr));c.getContext('2d').setTransform(dpr,0,0,dpr,0,0)}
+function resizeAll(){resizeCanvas(board);resizeCanvas(tray);resizeCanvas(dragCanvas);computeBoardGeom();drawAll()}
+function computeBoardGeom(){
+  if(!target.length)return;let xs=[],ys=[];for(const c of target)for(const v of c.verts){const p=axialToCart(v);xs.push(p.x);ys.push(p.y)}
+  const bbox={minx:Math.min(...xs),maxx:Math.max(...xs),miny:Math.min(...ys),maxy:Math.max(...ys)};
+  const w=board.clientWidth,h=board.clientHeight,pad=Math.max(18,Math.min(w,h)*.075);const bw=bbox.maxx-bbox.minx,bh=bbox.maxy-bbox.miny;
+  const scale=Math.min((w-2*pad)/(bw||1),(h-2*pad)/(bh||1));
+  boardGeom={scale,originX:(w-bw*scale)/2-bbox.minx*scale,originY:(h-bh*scale)/2-bbox.miny*scale,bbox};
+}
+function toBoard(v){const p=axialToCart(v);return{x:boardGeom.originX+p.x*boardGeom.scale,y:boardGeom.originY+p.y*boardGeom.scale}}
+function nearestLattice(screen){
+  const x=(screen.x-boardGeom.originX)/boardGeom.scale,y=(screen.y-boardGeom.originY)/boardGeom.scale;const rf=y/HUNIT,qf=x-rf*.5;const qr=Math.round(qf),rr=Math.round(rf);let best=null;
+  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){const v={q:qr+dq,r:rr+dr},p=toBoard(v),d=Math.hypot(screen.x-p.x,screen.y-p.y);if(!best||d<best.d)best={v,d}}
+  return best;
+}
+function candidateFor(piece,pivotScreen){
+  // Imán deliberadamente generoso: una pieza ya colocada puede moverse con fluidez
+  // a cualquier otra posición válida de la retícula sin tener que acertar al píxel.
+  const near=nearestLattice(pivotScreen),base=near.v,cands=[];
+  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){
+    const t={q:base.q+dq,r:base.r+dr},p=toBoard(t),d=Math.hypot(pivotScreen.x-p.x,pivotScreen.y-p.y),keys=validPlacement(piece,piece.rot,t);
+    if(keys)cands.push({t,keys,d});
+  }
+  if(!cands.length)return null;
+  cands.sort((a,b)=>a.d-b.d);
+  return cands[0].d<=boardGeom.scale*1.32?cands[0]:null;
+}
+function colorAlpha(hex,a){const n=parseInt(hex.slice(1),16);return`rgba(${n>>16},${(n>>8)&255},${n&255},${a})`}
+function drawTri(ctx,poly,fill,stroke='#061019',lw=1,alpha=1){ctx.save();ctx.globalAlpha=alpha;ctx.beginPath();ctx.moveTo(poly[0].x,poly[0].y);ctx.lineTo(poly[1].x,poly[1].y);ctx.lineTo(poly[2].x,poly[2].y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke();ctx.restore()}
+function targetPoly(c){return c.verts.map(toBoard)}
+function drawBoard(){
+  const w=board.clientWidth,h=board.clientHeight;bc.clearRect(0,0,w,h);
+  bc.save();bc.shadowColor='rgba(81,185,237,.16)';bc.shadowBlur=16;
+  for(const c of target)drawTri(bc,targetPoly(c),'rgba(7,21,30,.82)','rgba(83,127,151,.55)',.75);bc.restore();
+
+  // Las pieces colocadas se dibujan por su geometría real, incluso durante pruebas con solape.
+  for(const p of pieces){if(!p.placed||!p.t)continue;const tris=transformedTris(p,p.rot,p.t);for(const verts of tris){const key=ckey(verts),poly=verts.map(toBoard),outside=!targetMap.has(key);drawTri(bc,poly,p.color,outside?'rgba(236,113,104,.95)':'rgba(3,11,16,.72)',outside?1.7:1.05,.88)}}
+
+  // Si dos pieces ocupan el mismo triángulo, mezcla visualmente sus colores.
+  for(const [key,entry] of occupied){if(entry.owners.length<2)continue;const poly=entry.verts.map(toBoard);bc.save();bc.globalCompositeOperation='screen';for(const id of entry.owners)drawTri(bc,poly,pieces[id].color,'rgba(255,255,255,.28)',.7,.48);bc.restore();drawTri(bc,poly,'rgba(255,255,255,.06)','rgba(255,210,238,.95)',1.35,1)}
+
+  if(selected&&selected.placed&&selected.t){bc.save();bc.strokeStyle='#c8ebfb';bc.lineWidth=1.35;bc.shadowColor='#67c8f3';bc.shadowBlur=8;for(const verts of transformedTris(selected,selected.rot,selected.t)){const poly=verts.map(toBoard);bc.beginPath();bc.moveTo(poly[0].x,poly[0].y);bc.lineTo(poly[1].x,poly[1].y);bc.lineTo(poly[2].x,poly[2].y);bc.closePath();bc.stroke()}bc.restore()}
+
+  if(hintPiece!=null){const p=pieces[hintPiece],pulse=.16+.12*(.5+.5*Math.sin(performance.now()/130));for(const k of p.solutionKeys){const c=targetMap.get(k);if(c)drawTri(bc,targetPoly(c),colorAlpha(p.color,pulse),'rgba(155,220,255,.8)',1.3,1)}}
+  if(active){const cand=candidateFor(active,active.pivotBoard);if(cand){for(const k of cand.keys){const c=targetMap.get(k);drawTri(bc,targetPoly(c),colorAlpha(active.color,.24),'rgba(194,237,255,.72)',1.1)}}}
+  bc.save();bc.strokeStyle='#9ac7dd';bc.lineWidth=1.65;bc.shadowColor='rgba(85,189,241,.48)';bc.shadowBlur=7;bc.beginPath();for(const e of boundaryEdges){const a=toBoard(e.a),b=toBoard(e.b);bc.moveTo(a.x,a.y);bc.lineTo(b.x,b.y)}bc.stroke();bc.restore();
+}
+function localPolysCart(piece,rot){return piece.local.map(tri=>tri.map(v=>axialToCart(rotateV(v,rot))))}
+function bboxPolys(polys){let xs=[],ys=[];for(const tri of polys)for(const p of tri){xs.push(p.x);ys.push(p.y)}return{minx:Math.min(...xs),maxx:Math.max(...xs),miny:Math.min(...ys),maxy:Math.max(...ys)}}
+function drawTray(){
+  const w=tray.clientWidth,h=tray.clientHeight;tc.clearRect(0,0,w,h);trayHit=[];const count=pieces.length,cols=Math.min(count,5),rows=Math.ceil(count/cols),slotW=w/cols,slotH=h/rows;
+  for(const p of pieces){if(p.placed||p===active)continue;const i=p.traySlot,col=i%cols,row=Math.floor(i/cols);const raw=localPolysCart(p,p.rot),bb=bboxPolys(raw);const bw=bb.maxx-bb.minx,bh=bb.maxy-bb.miny;const scale=Math.min(slotW*.66/(bw||1),slotH*.68/(bh||1),boardGeom.scale*.76);const cx=slotW*(col+.5),cy=slotH*(row+.5);const offx=cx-(bb.minx+bb.maxx)*.5*scale,offy=cy-(bb.miny+bb.maxy)*.5*scale;const polys=raw.map(tri=>tri.map(v=>({x:offx+v.x*scale,y:offy+v.y*scale})));p.trayPolys=polys;trayHit.push({p,polys});
+    for(const poly of polys)drawTri(tc,poly,p.color,'rgba(3,10,15,.8)',1.15,selected===p?1:.9);
+    if(selected===p){tc.save();tc.strokeStyle='#c9efff';tc.lineWidth=1.15;tc.shadowColor='#6cd1ff';tc.shadowBlur=7;for(const poly of polys){tc.beginPath();tc.moveTo(poly[0].x,poly[0].y);tc.lineTo(poly[1].x,poly[1].y);tc.lineTo(poly[2].x,poly[2].y);tc.closePath();tc.stroke()}tc.restore()}
+  }
+}
+function drawDrag(){
+  const w=dragCanvas.clientWidth,h=dragCanvas.clientHeight;dc.clearRect(0,0,w,h);if(!active)return;const shellRect=$('game-shell').getBoundingClientRect(),boardRect=board.getBoundingClientRect();const px=boardRect.left-shellRect.left+active.pivotBoard.x,py=boardRect.top-shellRect.top+active.pivotBoard.y;const raw=localPolysCart(active,active.rot);
+  dc.save();dc.shadowColor=colorAlpha(active.color,.58);dc.shadowBlur=12;for(const tri of raw){const poly=tri.map(v=>({x:px+v.x*boardGeom.scale,y:py+v.y*boardGeom.scale}));drawTri(dc,poly,active.color,'rgba(3,10,15,.8)',1.25,.92)}dc.restore();
+}
+function drawAll(){drawBoard();drawTray();drawDrag();updateHUD()}
+function updateHUD(){
+  $('movesN').textContent=moves;const hintBtn=$('hint');
+  if(hints>0){hintBtn.childNodes[0].nodeValue=tr('✧  HINT (')+hints+')';hintBtn.querySelector('span').textContent=tr('shows one area');hintBtn.classList.add('primary')}
+  else{hintBtn.childNodes[0].nodeValue=tr('⚑  SURRENDER');hintBtn.querySelector('span').textContent=tr('show solution');hintBtn.classList.add('primary')}
+  hintBtn.disabled=won||surrendered;
+  const placed=pieces.filter(p=>p.placed).length,pct=pieces.length?placed/pieces.length*100:0,issues=placementIssues();$('progress-fill').style.width=pct+'%';updateBackgroundStrength(pct/100);
+  $('progressText').classList.toggle('danger-note',!!(issues.overlap||issues.outside));$('progressText').textContent=issues.overlap?(tr('OVERLAP · ')+placed+'/'+pieces.length):issues.outside?(tr('OUTSIDE · ')+placed+'/'+pieces.length):(placed+' / '+pieces.length+tr(' pieces'));
+  $('rotateLeft').disabled=!selected;$('rotateRight').disabled=!selected;$('prev').disabled=infinite||level<=1;$('nextNav').disabled=infinite||level>=progress.unlocked||level>=60;
+  renderDots();
+}
+function renderDots(){const box=$('levelDots');box.innerHTML='';const pos=infinite?infiniteIndex:(level-1)%10+1;for(let i=1;i<=10;i++){const d=document.createElement('i');if(i===pos)d.className='on';box.appendChild(d)}}
+
+function pointInTri(p,t){const [a,b,c]=t,d=(b.y-c.y)*(a.x-c.x)+(c.x-b.x)*(a.y-c.y);if(Math.abs(d)<1e-9)return false;const u=((b.y-c.y)*(p.x-c.x)+(c.x-b.x)*(p.y-c.y))/d,v=((c.y-a.y)*(p.x-c.x)+(a.x-c.x)*(p.y-c.y))/d,w=1-u-v;return u>=-.03&&v>=-.03&&w>=-.03}
+function trayPieceAt(pos){for(let i=trayHit.length-1;i>=0;i--){if(trayHit[i].polys.some(t=>pointInTri(pos,t)))return trayHit[i].p}return null}
+function boardPieceAt(pos){
+  const order=[];if(selected&&selected.placed)order.push(selected);for(let i=pieces.length-1;i>=0;i--)if(pieces[i]!==selected&&pieces[i].placed)order.push(pieces[i]);
+  for(const p of order){for(const verts of transformedTris(p,p.rot,p.t)){if(pointInTri(pos,verts.map(toBoard)))return p}}return null
+}
+function canvasPos(e,c){const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+function clientToBoard(e){return canvasPos(e,board)}
+function localCentroidCartAt(piece,rot){
+  // Centro de gravedad real del área de la pieza: todos los microtriángulos tienen la misma superficie,
+  // por lo que promediar sus tres vértices equivale a promediar los centroides de cada celda.
+  let sx=0,sy=0,n=0;
+  for(const tri of piece.local)for(const v of tri){const c=axialToCart(rotateV(v,rot));sx+=c.x;sy+=c.y;n++}
+  return n?{x:sx/n,y:sy/n}:{x:0,y:0};
+}
+function localCentroidCart(piece){return localCentroidCartAt(piece,piece.rot)}
+function nearestAxialToCartPoint(pt){
+  // Convierte una posición cartesiana a la traslación entera de la retícula más cercana.
+  const rf=pt.y/HUNIT,qf=pt.x-rf*.5;
+  const q0=Math.round(qf),r0=Math.round(rf);let best={q:q0,r:r0},bestD=Infinity;
+  for(let dq=-2;dq<=2;dq++)for(let dr=-2;dr<=2;dr++){
+    const t={q:q0+dq,r:r0+dr},c=axialToCart(t),d=(c.x-pt.x)**2+(c.y-pt.y)**2;
+    if(d<bestD){bestD=d;best=t}
+  }
+  return best;
+}
+function rotationTranslationAroundCentroid(piece,newRot){
+  // Conserva el centro de gravedad visual de la pieza al girarla. Como el centro puede caer entre nodos,
+  // después ajustamos la traslación al nodo de retícula más próximo. Si ese ajuste deja parte fuera,
+  // buscamos el pequeño desplazamiento interior más cercano SIN tener en cuenta solapes con otras pieces:
+  // los solapes siguen permitidos y se muestran mezclando colores, tal como exige la mecánica.
+  const oldLocal=localCentroidCartAt(piece,piece.rot),base=axialToCart(piece.t);
+  const fixedCenter={x:base.x+oldLocal.x,y:base.y+oldLocal.y};
+  const newLocal=localCentroidCartAt(piece,newRot);
+  const desiredBase={x:fixedCenter.x-newLocal.x,y:fixedCenter.y-newLocal.y};
+  const snapped=nearestAxialToCartPoint(desiredBase);
+  let best=null;
+  const radius=6;
+  for(let dq=-radius;dq<=radius;dq++)for(let dr=-radius;dr<=radius;dr++){
+    const t={q:snapped.q+dq,r:snapped.r+dr};
+    const keys=transformedKeys(piece,newRot,t);
+    if(keys.some(k=>!targetMap.has(k)))continue;
+    const cb=axialToCart(t),center={x:cb.x+newLocal.x,y:cb.y+newLocal.y};
+    const centerShift=(center.x-fixedCenter.x)**2+(center.y-fixedCenter.y)**2;
+    const gridShift=dq*dq+dr*dr;
+    // Prioridad absoluta: que el centro se mueva lo mínimo posible. El segundo término desempata
+    // favoreciendo el snap local más cercano al punto originalmente calculado.
+    const score=centerShift+gridShift*1e-5;
+    if(!best||score<best.score)best={t,score,centerShift};
+  }
+  return best?best.t:null;
+}
+function restorePrevious(p){if(!p.prev)return;p.placed=p.prev.placed;p.t=p.prev.t;p.rot=p.prev.rot;p.matched=p.prev.matched.slice();p.prev=null;rebuildOccupancy()}
+function capturePointer(el,id){try{if(el&&el.setPointerCapture)el.setPointerCapture(id)}catch(_){} }
+function releasePointer(id){for(const el of [board,tray]){try{if(el&&el.hasPointerCapture&&el.hasPointerCapture(id))el.releasePointerCapture(id)}catch(_){}}}
+function startFromTray(e){
+  const pos=canvasPos(e,tray),p=trayPieceAt(pos);if(!p)return;
+  e.preventDefault();capturePointer(tray,e.pointerId);
+  selectedBeforeDrag=selected===p;selected=p;active=p;
+  p.prev={placed:false,t:null,rot:p.rot,matched:[]};
+  const cent=localCentroidCart(p),pb=clientToBoard(e);
+  active.pivotBoard={x:pb.x-cent.x*boardGeom.scale,y:pb.y-cent.y*boardGeom.scale};
+  active.grab={x:pb.x-active.pivotBoard.x,y:pb.y-active.pivotBoard.y};
+  pointerId=e.pointerId;startPointer={x:e.clientX,y:e.clientY};dragMoved=false;play('pick');drawAll();
+}
+function startFromBoard(e){
+  const pos=canvasPos(e,board),p=boardPieceAt(pos);if(!p)return;
+  e.preventDefault();capturePointer(board,e.pointerId);
+  selectedBeforeDrag=selected===p;selected=p;
+  // Guardamos exactamente el estado anterior. Mientras se arrastra, sus casillas quedan libres,
+  // de modo que puede bajarse, desplazarse o incluso devolverse a la bandeja para abrir hueco.
+  p.prev={placed:true,t:{...p.t},rot:p.rot,matched:p.matched.slice()};
+  const oldT={...p.t};p.placed=false;p.matched=[];rebuildOccupancy();active=p;
+  const pivot=toBoard(oldT);active.pivotBoard={...pivot};active.grab={x:pos.x-pivot.x,y:pos.y-pivot.y};
+  pointerId=e.pointerId;startPointer={x:e.clientX,y:e.clientY};dragMoved=false;play('pick');drawAll();
+}
+function pointerMove(e){
+  if(!active||e.pointerId!==pointerId)return;e.preventDefault();
+  const pb=clientToBoard(e);active.pivotBoard={x:pb.x-active.grab.x,y:pb.y-active.grab.y};
+  if(startPointer&&Math.hypot(e.clientX-startPointer.x,e.clientY-startPointer.y)>5)dragMoved=true;
+  drawAll();
+}
+function pointerUp(e){
+  if(!active||e.pointerId!==pointerId)return;e.preventDefault();
+  const p=active,wasPlaced=!!(p.prev&&p.prev.placed);
+  const boardRect=board.getBoundingClientRect(),inside=e.clientX>=boardRect.left-10&&e.clientX<=boardRect.right+10&&e.clientY>=boardRect.top-10&&e.clientY<=boardRect.bottom+10;
+  const trayRect=tray.getBoundingClientRect(),overTray=e.clientX>=trayRect.left&&e.clientX<=trayRect.right&&e.clientY>=trayRect.top&&e.clientY<=trayRect.bottom;
+
+  // Un toque corto sobre una pieza ya colocada solo la selecciona: no cuenta movimiento ni la desplaza.
+  if(!dragMoved&&wasPlaced){
+    restorePrevious(p);active=null;releasePointer(pointerId);pointerId=null;
+    play('select');showToast(tr('Piece selected · drag it to move'));drawAll();return;
+  }
+  // En la bandeja, primer toque selecciona y segundo toque gira.
+  if(!dragMoved&&overTray&&p.prev&&!p.prev.placed){
+    active=null;releasePointer(pointerId);pointerId=null;p.prev=null;
+    if(selectedBeforeDrag){rotateSelected(1,true)}else{showToast(tr('Piece selected · use ↺ or ↻ to rotate it'));play('select');drawAll()}
+    return;
+  }
+
+  // Una pieza que estaba en el tablero puede retirarse de nuevo a la bandeja.
+  // Esto permite liberar una zona cuando se descubre que otra pieza debe ocuparla.
+  if(dragMoved&&wasPlaced&&overTray){
+    p.placed=false;p.t=null;p.matched=[];p.prev=null;active=null;moves++;rebuildOccupancy();
+    releasePointer(pointerId);pointerId=null;play('place');showToast(tr('Piece removed · space freed'));updateHUD();drawAll();return;
+  }
+
+  let placed=false;
+  if(inside){
+    const cand=candidateFor(p,p.pivotBoard);
+    if(cand){
+      p.t=cand.t;p.matched=cand.keys;p.placed=true;p.prev=null;rebuildOccupancy();
+      placed=true;moves++;play('place');showToast(wasPlaced?tr('Piece repositioned'):tr('Piece fitted'));
+    }
+  }
+  active=null;releasePointer(pointerId);pointerId=null;
+  if(!placed){restorePrevious(p);play('bad');showToast(wasPlaced?tr('It does not fit there · returning to its previous position'):tr('That space does not fit the piece'))}
+  updateHUD();drawAll();if(placed)checkWin();
+}
+function pointerCancel(){if(!active)return;const p=active;active=null;releasePointer(pointerId);pointerId=null;restorePrevious(p);drawAll()}
+
+function rotateSelected(dir=1,fromTap=false){
+  const p=selected;if(!p||won||surrendered)return;
+  const newRot=(p.rot+(dir>0?1:5))%6;
+  if(p.placed&&p.t){
+    // Una pieza colocada gira alrededor de SU CENTRO DE GRAVEDAD, no alrededor del vértice-pivote.
+    // Después se encaja al grid más próximo que mantenga toda la pieza dentro de la figura objetivo.
+    // Las demás pieces NO bloquean el giro: si hay solape, se mantiene y se visualiza por mezcla de color.
+    const newT=rotationTranslationAroundCentroid(p,newRot);
+    if(!newT){play('bad');showToast(tr('There is no room inside the shape to complete that rotation'));drawAll();return}
+    p.rot=newRot;p.t=newT;p.matched=transformedKeys(p,p.rot,p.t);moves++;play('rotate');rebuildOccupancy();
+    const issues=placementIssues();
+    if(issues.overlap)showToast(tr('Rotation around center · colors mixed where pieces overlap'));
+    else showToast(tr('Rotation around center · snapped to the grid'));
+  }else{
+    p.rot=newRot;moves++;play('rotate');
+    if(!fromTap)showToast(dir>0?tr('60° rotation to the right'):tr('60° rotation to the left'));
+  }
+  updateHUD();drawAll();checkWin();
+}
+function resetCurrent(){startLevel(infinite?infiniteIndex:level,infinite);showToast(tr('Level reset'));play('reset')}
+function pieceAtSolution(p){if(!p.placed||!p.t)return false;const a=transformedKeys(p,p.rot,p.t).slice().sort(),b=p.solutionKeys.slice().sort();return a.length===b.length&&a.every((k,i)=>k===b[i])}
+function useHint(){
+  if(won||surrendered)return;if(hints<=0){openSurrender();return}
+  let p=(selected&&!pieceAtSolution(selected))?selected:pieces.find(x=>!pieceAtSolution(x));if(!p){showToast(tr('The current arrangement already matches the solution'));return}
+  hints--;hintPiece=p.id;clearTimeout(hintTimer);hintTimer=setTimeout(()=>{hintPiece=null;drawAll()},2100);play('hint');showToast(tr('The highlighted area is the exact position of this piece'));updateHUD();drawAll();
+}
+function checkWin(){if(isSolved()){won=true;updateHUD();setTimeout(winLevel,260)}}
+function openSurrender(){
+  $('surrenderCopy').textContent=infinite?tr('If you confirm, this endless puzzle will be closed as a surrender and you will see its solution. If you then leave it, this combination may not appear again in another endless campaign.'):tr('If you confirm, this level will be closed as a surrender and you will see its solution. Because it is part of the campaign, you can replay this exact level from the menu.');
+  openScreen('surrenderScreen');
+}
+function revealSolution(){
+  closeAllScreens();surrendered=true;won=true;selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
+  for(const p of pieces){p.rot=0;p.t={...p.solutionT};p.placed=true;p.matched=p.solutionKeys.slice();p.prev=null}rebuildOccupancy();
+  if(!infinite)markCampaignResult('solution');
+  $('solutionLevel').textContent=infinite?tr('ENDLESS PUZZLE ')+infiniteIndex+tr(' · SOLUTION SHOWN'):tr('LEVEL ')+level+tr(' · SOLUTION SHOWN');
+  updateHUD();drawAll();play('hint');setTimeout(()=>openScreen('solutionScreen'),520);
+}
+function winLevel(){
+  play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
+  $('winLevel').textContent=infinite?tr('ENDLESS PUZZLE ')+infiniteIndex+' CLEARED':tr('LEVEL ')+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];applyLevelQuote(level);$('nextLevelBtn').textContent=!infinite&&level===60?tr('FINISH CAMPAIGN'):(!infinite&&level<60&&level%10===0?tr('NEXT PHASE'):tr('NEXT LEVEL'));openScreen('winScreen')
+}
+
+function isPhaseBoundary(n){return !infinite&&n<60&&n%10===0}
+function showPhaseTransition(completed){
+  const phase=Math.floor(completed/10),nextPhase=phase+1,nextLevelN=completed+1;
+  progress.phasePending=completed;persistProgress();
+  $('phaseKicker').textContent=tr('PHASE ')+phase+tr(' COMPLETE');
+  $('phaseTitle').textContent=BLOCKS[phase-1].name+(isES?' SUPERADOS':' CLEARED');
+  $('phaseProgress').textContent=completed+tr(' / 60 LEVELS');
+  $('phaseCopy').textContent=PHASE_COPY[phase-1]||tr('Phase complete.');
+  $('phaseNextName').textContent=BLOCKS[nextPhase-1].name;
+  $('phaseNextLevel').textContent=tr('LEVEL ')+nextLevelN;
+  $('phaseContinueBtn').textContent=tr('START PHASE ')+nextPhase+' →';
+  openScreen('phaseScreen');
+}
+function continueFromPhase(){
+  const completed=Number(progress.phasePending)||Math.floor((Math.max(11,progress.last)-1)/10)*10;
+  progress.phasePending=null;progress.pending=null;persistProgress();
+  closeAllScreens();startLevel(Math.min(60,completed+1));
+}
+
+function nextLevel(){
+  const completed=(!infinite&&progress.pending&&progress.pending.level)?progress.pending.level:level;
+  if(!infinite&&completed===60){
+    progress.pending=null;progress.phasePending=null;persistProgress();
+    closeAllScreens();openScreen('finishScreen');return;
+  }
+  if(!infinite&&isPhaseBoundary(completed)){
+    progress.pending=null;persistProgress();
+    closeAllScreens();showPhaseTransition(completed);return;
+  }
+  if(!infinite){progress.pending=null;progress.phasePending=null;persistProgress()}
+  closeAllScreens();
+  if(infinite){startLevel(infiniteIndex+1,true)}else startLevel(completed+1)
+}
+function restorePendingResult(){
+  const p=progress.pending;if(!p||!p.level)return false;
+  startLevel(p.level,false,false);
+  if(p.type==='solution'){
+    surrendered=true;won=true;selected=null;active=null;
+    for(const piece of pieces){piece.rot=0;piece.t={...piece.solutionT};piece.placed=true;piece.matched=piece.solutionKeys.slice();piece.prev=null}
+    rebuildOccupancy();updateHUD();drawAll();
+    $('solutionLevel').textContent=tr('LEVEL ')+p.level+tr(' · SOLUTION SHOWN');
+    openScreen('solutionScreen');
+  }else{
+    won=true;
+    $('winLevel').textContent=tr('LEVEL ')+p.level+' CLEARED';
+    $('winMoves').textContent=p.moves||0;
+    $('winBest').textContent=p.best||p.moves||0;
+    $('winCopy').textContent=WIN_COPY[(p.level-1)%WIN_COPY.length];
+    applyLevelQuote(p.level);
+    $('nextLevelBtn').textContent=p.level===60?tr('FINISH CAMPAIGN'):(p.level<60&&p.level%10===0?tr('NEXT PHASE'):tr('NEXT LEVEL'));
+    openScreen('winScreen');
+  }
+  return true;
+}
+
+function showToast(text){const t=$('toast');t.textContent=text;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),1350)}
+function openScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'));$(id).classList.add('open');if(id==='menuScreen')renderMenu()}
+function closeAllScreens(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'))}
+function currentScreen(){const s=document.querySelector('.screen.open');return s?s.id:'game'}
+function openMenu(returnTo){menuReturnScreen=returnTo||currentScreen();openScreen('menuScreen')}
+function returnFromMenu(){const target=menuReturnScreen||'game';menuReturnScreen='game';if(target==='game'){closeAllScreens();return}openScreen(target)}
+function renderMenu(){
+  const unlocked=Math.min(60,progress.unlocked),completed=progress.campaignComplete?60:Math.max(0,unlocked-1);$('menuProgress').textContent=tr('UNLOCKED ')+unlocked+tr(' / 60 · CLEARED ')+completed;const grid=$('levelGrid');grid.innerHTML='';
+  for(let block=0;block<6;block++){const row=document.createElement('div');row.className='blockrow';const lab=document.createElement('div');lab.className='blocklabel';lab.innerHTML=tr('<b>BLOCK ')+(block+1)+'</b>'+BLOCKS[block].name;row.appendChild(lab);for(let j=1;j<=10;j++){const i=block*10+j,b=document.createElement('button');b.className='lvl '+((i<progress.unlocked||(progress.campaignComplete&&i===60))?'done ':'')+(i===level&&!infinite?'current ':'')+(i>progress.unlocked?'lock':'');b.textContent=i;b.disabled=i>progress.unlocked;b.title=i>progress.unlocked?tr('Locked level'):(i<progress.unlocked?tr('Cleared level · play again'):tr('Current level'));b.addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;progress.phasePending=null;persistProgress();closeAllScreens();startLevel(i)});row.appendChild(b)}grid.appendChild(row)}
+  $('soundBtn').textContent=tr('SOUND: ')+(sound?tr('YES'):'NO');$('startOverBtn').hidden=!hasCampaignProgress()
+}
+function toggleSound(){sound=!sound;try{localStorage.setItem(SOUND_KEY,sound?'on':'off')}catch(e){}$('soundBtn').textContent=tr('SOUND: ')+(sound?tr('YES'):'NO');if(sound)play('select')}
+function ensureAudio(){if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}
+function tone(freq,dur=.08,type='sine',vol=.035,delay=0){if(!sound)return;ensureAudio();const o=audio.createOscillator(),g=audio.createGain(),now=audio.currentTime+delay;o.type=type;o.frequency.setValueAtTime(freq,now);g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(vol,now+.012);g.gain.exponentialRampToValueAtTime(.0001,now+dur);o.connect(g);g.connect(audio.destination);o.start(now);o.stop(now+dur+.02)}
+function play(kind){if(!sound)return;try{if(kind==='pick')tone(330,.06,'sine',.025);if(kind==='select')tone(420,.05,'sine',.022);if(kind==='rotate'){tone(390,.055,'triangle',.026);tone(520,.06,'triangle',.018,.035)}if(kind==='place'){tone(440,.07,'sine',.03);tone(660,.08,'sine',.022,.04)}if(kind==='bad'){tone(150,.09,'sawtooth',.018);tone(115,.12,'sawtooth',.012,.05)}if(kind==='hint'){tone(620,.08,'sine',.022);tone(830,.12,'sine',.016,.07)}if(kind==='reset')tone(250,.09,'triangle',.022);if(kind==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.18,'sine',.028,i*.085))}}catch(e){}}
+
+document.querySelectorAll('.article-link').forEach(link=>link.addEventListener('click',e=>{if(link.getAttribute('href')==='#'){e.preventDefault();showToast(tr('Article link pending'))}}));
+
+tray.addEventListener('pointerdown',startFromTray,{passive:false});board.addEventListener('pointerdown',startFromBoard,{passive:false});window.addEventListener('pointermove',pointerMove,{passive:false});window.addEventListener('pointerup',pointerUp,{passive:false});window.addEventListener('pointercancel',pointerCancel);
+
+async function copyGameLink(){
+  const canonical=document.querySelector('link[rel="canonical"]')?.href||window.location.href;
+  try{
+    if(navigator.clipboard&&window.isSecureContext){
+      await navigator.clipboard.writeText(canonical);
+      const btn=$('copyLinkBtn'),original=btn.textContent;
+      btn.textContent=isES?'ENLACE COPIADO':'LINK COPIED';
+      setTimeout(()=>{btn.textContent=original},1500);
+      return;
+    }
+  }catch(e){}
+  window.prompt(isES?'Copia este enlace:':'Copy this link:',canonical);
+}
+function hasCampaignProgress(){
+  return Boolean(progress.campaignComplete||progress.phasePending||progress.pending||progress.unlocked>1||progress.last>1);
+}
+function updateStartActions(){
+  const hasProgress=hasCampaignProgress();
+  $('newBtn').textContent=hasProgress?(isES?'CONTINUAR PARTIDA':'CONTINUE GAME'):(isES?'INICIAR':'START');
+  $('startOverBtn').hidden=!hasProgress;
+}
+function continueOrStartCampaign(){
+  menuReturnScreen='game';
+  progress.pending=null;
+  persistProgress();
+  closeAllScreens();
+  if(progress.campaignComplete){
+    openScreen('finishScreen');
+    return;
+  }
+  startLevel(progress.last||1);
+}
+function openDeleteCampaignConfirmation(){
+  if(!hasCampaignProgress())return;
+  openScreen('deleteCampaignScreen');
+}
+function cancelDeleteCampaign(){
+  openScreen('menuScreen');
+}
+function confirmDeleteCampaign(){
+  resetProgress();
+  updateStartActions();
+}
+
+$('rotateLeft').addEventListener('click',()=>rotateSelected(-1,false));$('rotateRight').addEventListener('click',()=>rotateSelected(1,false));$('reset').addEventListener('click',resetCurrent);$('hint').addEventListener('click',useHint);
+$('menuButton').addEventListener('click',()=>openMenu('game'));$('resumeBtn').addEventListener('click',returnFromMenu);$('soundBtn').addEventListener('click',toggleSound);$('restartMenuBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();resetCurrent()});$('startOverBtn').addEventListener('click',openDeleteCampaignConfirmation);$('confirmDeleteCampaignBtn').addEventListener('click',confirmDeleteCampaign);$('cancelDeleteCampaignBtn').addEventListener('click',cancelDeleteCampaign);
+$('levelSelectBtn').addEventListener('click',()=>openMenu('startScreen'));$('newBtn').addEventListener('click',continueOrStartCampaign);$('copyLinkBtn').addEventListener('click',copyGameLink);
+$('prev').addEventListener('click',()=>{if(level>1){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level-1)}});$('nextNav').addEventListener('click',()=>{if(level<progress.unlocked&&level<60){menuReturnScreen='game';progress.pending=null;persistProgress();startLevel(level+1)}});
+$('nextLevelBtn').addEventListener('click',nextLevel);$('phaseContinueBtn').addEventListener('click',continueFromPhase);$('phaseLevelsBtn').addEventListener('click',()=>openMenu('phaseScreen'));$('winMenuBtn').addEventListener('click',()=>openMenu('winScreen'));$('finishMenuBtn').addEventListener('click',()=>openMenu('finishScreen'));$('infiniteBtn').addEventListener('click',()=>{menuReturnScreen='game';progress.pending=null;persistProgress();closeAllScreens();infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);startLevel(1,true)});
+$('confirmSurrenderBtn').addEventListener('click',revealSolution);$('cancelSurrenderBtn').addEventListener('click',closeAllScreens);$('retrySolutionBtn').addEventListener('click',()=>{const retryLevel=progress.pending&&progress.pending.level?progress.pending.level:level;progress.pending=null;persistProgress();closeAllScreens();startLevel(retryLevel)});$('continueSolutionBtn').addEventListener('click',nextLevel);
+window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){rotateSelected(-1,false);e.preventDefault()}if(e.key==='ArrowRight'||e.key==='r'||e.key==='R'){rotateSelected(1,false);e.preventDefault()}if(e.key==='h'||e.key==='H'){useHint();e.preventDefault()}if(e.key==='Escape'){if($('menuScreen').classList.contains('open'))returnFromMenu();else openMenu(currentScreen())}});
+window.addEventListener('resize',()=>{dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));resizeAll()});
+
+updateStartActions();
+if(progress.phasePending){
+  startLevel(Math.min(60,Number(progress.phasePending)+1),false,false);
+  showPhaseTransition(Number(progress.phasePending));
+}else if(!restorePendingResult()){
+  startLevel(progress.last||1);openScreen('startScreen')
+}
+})();
