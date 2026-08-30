@@ -1890,22 +1890,16 @@ a{color:inherit;text-decoration:none}.skip-link{position:absolute;left:-999px;to
   }
 
 
+
 /* ==========================================================
-   FIX móvil · fichas editoriales EIDOS / EIDOS — Ensayos
-   La portada queda limitada incluso si el breakpoint móvil
-   no se interpreta exactamente como esperamos.
+   FIX móvil v2 · fichas editoriales EIDOS / EIDOS — Ensayos
+   Conserva el halo/óvalo dorado original de los enlaces.
+   Solo limita el tamaño de las portadas en pantallas estrechas.
    ========================================================== */
 
 .article-content a.eidos-editorial-cover{
-  display:block;
   width:clamp(78px,22vw,132px);
   max-width:132px;
-  padding:0;
-  margin:auto;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  line-height:0;
   justify-self:center;
 }
 
