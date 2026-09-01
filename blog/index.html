@@ -84,6 +84,7 @@
         <a href="index.html">Blog</a>
         <a href="#articulos">Artículos</a>
         <a href="../relatos/index.html">Relatos</a>
+        <a href="../essay/index.html">Ensayos libro</a>
         <a href="#newsletter">Newsletter</a>
           <a href="indexeng.html"
      class="lang-switch"
@@ -215,10 +216,97 @@
             <h2 id="archivo-title">Más allá de la novela.</h2>
             <p>Este blog funciona como una extensión natural de Eidos: artículos largos, notas y reflexiones para explorar las preguntas que quedan abiertas cuando la tecnología parece haberlo resuelto casi todo.</p>
             <p> Es un archivo de ideas: consciencia digital, IA, transhumanismo, cuerpo, memoria, muerte, identidad y sentido.</p>
-            <a class="text-link" href="articulos/01_m1.html">Comenzar por la primera transmisión</a>
+            <a class="text-link" href="articulos/07_inteligente_para_que.html">Comenzar por la última transmisión</a>
           </div>
         </div>
       </section>
+
+
+      <section class="section reveal" id="ensayos-libro" aria-labelledby="ensayos-libro-title">
+        <div class="essays-bridge">
+          <div class="essays-covers single-cover" aria-label="Portada de EIDOS — Ensayos">
+            <a href="../essay/index.html" class="essay-cover-link" aria-label="Ver EIDOS — Ensayos">
+              <img src="../assets/images/tapaensayo.jpg" alt="Portada de EIDOS — Ensayos, de Felden Vareth">
+            </a>
+          </div>
+
+          <div class="essays-copy">
+            <p class="kicker">EIDOS — Ensayos</p>
+            <h2 id="ensayos-libro-title">Las preguntas permanecen. Algunas respuestas siguen cambiando.</h2>
+            <p class="essays-lead"><strong>Los ensayos fijan algunas de las grandes preguntas. El blog permite seguir aquellas cuyas respuestas continúan cambiando.</strong></p>
+            <p>Algunos textos forman parte de <em>EIDOS — Ensayos</em>. Otros nacen después, amplían sus preguntas o abordan campos en rápida evolución que encuentran aquí un espacio abierto a nuevas investigaciones, descubrimientos y perspectivas.</p>
+
+            <div class="essays-actions">
+              <a class="btn gold" href="https://www.amazon.es/dp/B0HG5QHSXW/" target="_blank" rel="noopener">Comprar EIDOS — Ensayos</a>
+              <a class="text-link essays-info-link" href="../essay/index.html">Conocer el libro</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .essays-bridge{
+          display:grid;
+          grid-template-columns:minmax(230px,340px) 1fr;
+          gap:clamp(30px,5vw,72px);
+          align-items:center;
+          padding:clamp(28px,4vw,52px);
+          border:1px solid rgba(201,168,76,.24);
+          border-radius:28px;
+          background:
+            radial-gradient(circle at 18% 50%,rgba(201,168,76,.08),transparent 36%),
+            linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
+          box-shadow:0 24px 80px rgba(0,0,0,.22);
+        }
+        .essays-covers{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          min-width:0;
+        }
+        .essay-cover-link{
+          display:block;
+          width:72%;
+          max-width:235px;
+          transition:transform .28s ease,filter .28s ease;
+        }
+        .essay-cover-link:hover{
+          transform:translateY(-6px);
+          filter:brightness(1.08);
+        }
+        .essay-cover-link img{
+          width:100%;
+          height:auto;
+          display:block;
+          border-radius:3px;
+          box-shadow:0 20px 45px rgba(0,0,0,.55);
+        }
+        .essays-copy h2{
+          margin:.18em 0 .55em;
+          max-width:760px;
+        }
+        .essays-copy p{
+          max-width:760px;
+        }
+        .essays-lead{
+          font-size:clamp(1.25rem,2vw,1.55rem);
+          line-height:1.35;
+          color:#e7deca;
+        }
+        .essays-actions{
+          display:flex;
+          flex-wrap:wrap;
+          align-items:center;
+          gap:10px 12px;
+          margin-top:24px;
+        }
+        .essays-info-link{margin-left:4px}
+        @media(max-width:760px){
+          .essays-bridge{grid-template-columns:1fr;padding:26px 20px}
+          .essays-covers{max-width:360px;margin:0 auto 12px}
+          .essay-cover-link{max-width:190px}
+        }
+      </style>
 
       <section class="section" id="articulos" aria-labelledby="articulos-title">
         <div class="section-head reveal">
@@ -229,7 +317,7 @@
         </div>
 
         <div class="archive-tools reveal" aria-label="Herramientas del archivo">
-          <div class="archive-count"><span id="article-count">6</span> artículos en el archivo</div>
+          <div class="archive-count"><span id="article-count">7</span> artículos en el archivo</div>
           <label class="search-box" for="article-search">
             <span class="sr-only">Buscar artículos</span>
             <input id="article-search" type="search" placeholder="Buscar por título, tema o palabra clave…" autocomplete="off">
@@ -243,6 +331,7 @@
             <button class="tag-filter" type="button" data-filter="inmortalidad">Inmortalidad</button>
             <button class="tag-filter" type="button" data-filter="medicina">Medicina</button>
             <button class="tag-filter" type="button" data-filter="evolucion">Evolución</button>
+            <button class="tag-filter" type="button" data-filter="inteligencia">Inteligencia</button>
             <button class="tag-filter" type="button" data-filter="biologia">Biología</button>
             <button class="tag-filter" type="button" data-filter="reproduccion">Reproducción</button>
             <button class="tag-filter" type="button" data-filter="ia">IA</button>
@@ -256,8 +345,55 @@
 
         <div class="grid" id="articles-grid">
 
+
 <article class="post-card reveal"
-         data-tags="material tecnología ia vida_digital"
+         data-tags="evolucion inteligencia ia biologia"
+         data-title="¿Inteligente para qué? Cómo la evolución produjo muchas formas de resolver el mundo"
+         data-excerpt="Inteligencia, cognición, evolución, biología, perros, cuervos, pulpos, abejas, cultura humana e inteligencia artificial: por qué no existe una única escala para medir la mente."
+         data-date="2026-09-01">
+
+  <a href="articulos/07_inteligente_para_que.html">
+
+    <span class="cover video-cover"
+          style="background-image:url('articulos/images/07/fondo.jpg')">
+
+      <video
+        class="card-preview-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        data-video-src="articulos/images/07/video.mp4">
+      </video>
+    </span>
+
+    <span class="content">
+      <span class="meta">Ciencia · 35 min</span>
+
+      <span class="tag-row">
+        <span>Evolución</span>
+        <span>Inteligencia</span>
+        <span>IA</span>
+        <span>Biología</span>
+      </span>
+
+      <h3>
+        ¿Inteligente para qué?:<br>
+        cómo la evolución produjo muchas formas de resolver el mundo
+      </h3>
+
+      <p>
+        Por qué la inteligencia no es una escalera evolutiva: del perro, el cuervo y el pulpo a la cultura humana y las inteligencias artificiales.
+      </p>
+    </span>
+  </a>
+</article>
+
+
+
+
+<article class="post-card reveal"
+         data-tags="material tecnología inteligencia ia vida_digital"
          data-title="El cuerpo de la inteligencia de las manos que fabricaron herramientas a los robots blandos"
          data-excerpt="De la evolución de la destreza en primates a la percepción artificial y la robótica blanda: qué ocurre cuando cuerpo, sentidos y forma de percibir el mundo se convierten en variables de diseño."
          data-date="2026-08-17">
@@ -283,6 +419,7 @@
       <span class="tag-row">
         <span>Material</span>
         <span>Tecnología</span>
+        <span>Inteligencia</span>
         <span>IA</span>
         <span>Vida digital</span>
       </span>

@@ -83,6 +83,7 @@
       <div class="nav-links">
         <a href="indexeng.html">Blog</a>
         <a href="#articulos">Articles</a>
+        <a href="../essay/indexeng.html">Essay Book</a>
         <a href="#newsletter">Newsletter</a>
       <a href="index.html"
      class="lang-switch"
@@ -205,10 +206,97 @@
             <h2 id="archivo-title">Beyond the Novel.</h2>
             <p>This blog works as a natural extension of Eidos: long-form essays, notes and reflections exploring the questions that remain once technology seems to have solved almost everything.</p>
             <p>It is an archive of ideas: digital consciousness, AI, transhumanism, body, memory, death, identity and meaning.</p>
-            <a class="text-link" href="articles/01_m1.html">Start with the first transmission</a>
+            <a class="text-link" href="articles/07_intelligent_for_what.html">Start with the latest transmission</a>
           </div>
         </div>
       </section>
+
+
+      <section class="section reveal" id="essays-book" aria-labelledby="essays-book-title">
+        <div class="essays-bridge">
+          <div class="essays-covers single-cover" aria-label="Cover of EIDOS — Essays">
+            <a href="../essay/indexeng.html" class="essay-cover-link" aria-label="View EIDOS — Essays">
+              <img src="../assets/images/tapaessey.jpg" alt="Cover of EIDOS — Essays, by Felden Vareth">
+            </a>
+          </div>
+
+          <div class="essays-copy">
+            <p class="kicker">EIDOS — Essays</p>
+            <h2 id="essays-book-title">The questions remain. Some answers keep changing.</h2>
+            <p class="essays-lead"><strong>The essays set down some of the larger questions. The blog follows those whose answers continue to change.</strong></p>
+            <p>Some texts are part of <em>EIDOS — Essays</em>. Others were written later, extend those questions, or explore fast-moving fields that need an open space for new research, discoveries and perspectives.</p>
+
+            <div class="essays-actions">
+              <a class="btn gold" href="https://www.amazon.es/dp/B0HG7JTVC8" target="_blank" rel="noopener">Buy EIDOS — Essays</a>
+              <a class="text-link essays-info-link" href="../essay/indexeng.html">Discover the book</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .essays-bridge{
+          display:grid;
+          grid-template-columns:minmax(230px,340px) 1fr;
+          gap:clamp(30px,5vw,72px);
+          align-items:center;
+          padding:clamp(28px,4vw,52px);
+          border:1px solid rgba(201,168,76,.24);
+          border-radius:28px;
+          background:
+            radial-gradient(circle at 18% 50%,rgba(201,168,76,.08),transparent 36%),
+            linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
+          box-shadow:0 24px 80px rgba(0,0,0,.22);
+        }
+        .essays-covers{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          min-width:0;
+        }
+        .essay-cover-link{
+          display:block;
+          width:72%;
+          max-width:235px;
+          transition:transform .28s ease,filter .28s ease;
+        }
+        .essay-cover-link:hover{
+          transform:translateY(-6px);
+          filter:brightness(1.08);
+        }
+        .essay-cover-link img{
+          width:100%;
+          height:auto;
+          display:block;
+          border-radius:3px;
+          box-shadow:0 20px 45px rgba(0,0,0,.55);
+        }
+        .essays-copy h2{
+          margin:.18em 0 .55em;
+          max-width:760px;
+        }
+        .essays-copy p{
+          max-width:760px;
+        }
+        .essays-lead{
+          font-size:clamp(1.25rem,2vw,1.55rem);
+          line-height:1.35;
+          color:#e7deca;
+        }
+        .essays-actions{
+          display:flex;
+          flex-wrap:wrap;
+          align-items:center;
+          gap:10px 12px;
+          margin-top:24px;
+        }
+        .essays-info-link{margin-left:4px}
+        @media(max-width:760px){
+          .essays-bridge{grid-template-columns:1fr;padding:26px 20px}
+          .essays-covers{max-width:360px;margin:0 auto 12px}
+          .essay-cover-link{max-width:190px}
+        }
+      </style>
 
       <section class="section" id="articulos" aria-labelledby="articulos-title">
         <div class="section-head reveal">
@@ -219,7 +307,7 @@
         </div>
 
         <div class="archive-tools reveal" aria-label="Archive tools">
-          <div class="archive-count"><span id="article-count">6</span> articles in the archive</div>
+          <div class="archive-count"><span id="article-count">7</span> articles in the archive</div>
           <label class="search-box" for="article-search">
             <span class="sr-only">Search articles</span>
             <input id="article-search" type="search" placeholder="Search by title, topic or keyword…" autocomplete="off">
@@ -233,6 +321,7 @@
 <button class="tag-filter" type="button" data-filter="immortality">Immortality</button>
 <button class="tag-filter" type="button" data-filter="medicine">Medicine</button>
 <button class="tag-filter" type="button" data-filter="evolution">Evolution</button>
+<button class="tag-filter" type="button" data-filter="intelligence">Intelligence</button>
 <button class="tag-filter" type="button" data-filter="biology">Biology</button>
 <button class="tag-filter" type="button" data-filter="reproduction">Reproduction</button>
 <button class="tag-filter" type="button" data-filter="ai">AI</button>
@@ -244,8 +333,55 @@
 
         <div class="grid" id="articles-grid">
 
+
 <article class="post-card reveal"
-         data-tags="material technology ai digital_life"
+         data-tags="evolution intelligence ai biology"
+         data-title="Intelligent for What? How Evolution Produced Many Ways of Solving the World"
+         data-excerpt="Intelligence, cognition, evolution, biology, dogs, crows, octopuses, bees, human culture and artificial intelligence: why there is no single scale for measuring minds."
+         data-date="2026-09-01">
+
+  <a href="articles/07_intelligent_for_what.html">
+
+    <span class="cover video-cover"
+          style="background-image:url('articles/images/07/fondo.jpg')">
+
+      <video
+        class="card-preview-video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        data-video-src="articles/images/07/video.mp4">
+      </video>
+    </span>
+
+    <span class="content">
+      <span class="meta">Science · 35 min</span>
+
+      <span class="tag-row">
+        <span>Evolution</span>
+        <span>Intelligence</span>
+        <span>AI</span>
+        <span>Biology</span>
+      </span>
+
+      <h3>
+        Intelligent for What?<br>
+        how evolution produced many ways of solving the world
+      </h3>
+
+      <p>
+        Why intelligence is not an evolutionary ladder: from dogs, crows and octopuses to human culture and artificial intelligences.
+      </p>
+    </span>
+  </a>
+</article>
+
+
+
+
+<article class="post-card reveal"
+         data-tags="material technology intelligence ai digital_life"
          data-title="The Body of Intelligence From the Hands That Made Tools to Soft Robots"
          data-excerpt="From primate dexterity and octopuses to artificial perception and soft robotics: what happens when body, senses and the way intelligence perceives the world become design variables."
          data-date="2026-08-17">
@@ -271,6 +407,7 @@
       <span class="tag-row">
         <span>Material</span>
         <span>Technology</span>
+        <span>Intelligence</span>
         <span>AI</span>
         <span>Digital Life</span>
       </span>
