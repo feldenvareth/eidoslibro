@@ -79,6 +79,7 @@
       }
 
       const startButton = document.getElementById('startButton');
+      const previousButton = document.getElementById('previousButton');
       const pauseButton = document.getElementById('pauseButton');
       const pauseIcon = document.getElementById('pauseIcon');
       const nextButton = document.getElementById('nextButton');
@@ -1772,12 +1773,14 @@
 
         const minSize = Math.min(width, height);
         const coverHeight = clamp(minSize * (compactDevice ? 0.40 : 0.52), 180, compactDevice ? 260 : 430);
-        const collectionHeight = coverHeight * 0.90;
+        const narrowCovers = width <= 650;
+        const collectionHeight = coverHeight * (narrowCovers ? 1.05 : 1.14);
         const collectionAspect = collectionImage.naturalWidth && collectionImage.naturalHeight
           ? collectionImage.naturalWidth / collectionImage.naturalHeight
           : 0.67;
         const collectionWidth = collectionHeight * collectionAspect;
-        const essayWidth = coverHeight * 0.63;
+        const essayHeight = coverHeight * (narrowCovers ? 0.88 : 0.92);
+        const essayWidth = essayHeight * 0.63;
         const sideOffset = clamp(
           width * (compactDevice ? 0.25 : 0.22),
           Math.max(collectionWidth, essayWidth) * 0.72,
@@ -1807,7 +1810,7 @@
           cx + sideOffset + spread,
           y,
           essayWidth,
-          coverHeight,
+          essayHeight,
           alpha,
           0.030 + Math.cos(time * 0.17) * 0.006,
           glow
@@ -2431,6 +2434,19 @@
         }
 
         return peekRandomIndex();
+      }
+
+      function choosePreviousIndex() {
+        const availableIndices = getAvailableTrackIndices();
+        if (!availableIndices.length) return -1;
+
+        const position = availableIndices.indexOf(currentTrackIndex);
+
+        return position >= 0
+          ? availableIndices[
+              (position - 1 + availableIndices.length) % availableIndices.length
+            ]
+          : availableIndices[availableIndices.length - 1];
       }
 
       const ICONS = {
@@ -3278,6 +3294,29 @@
       brandButton.addEventListener('click', event => {
         event.stopPropagation();
         returnToLauncher();
+      });
+
+      previousButton.addEventListener('click', async () => {
+        if (
+          starting ||
+          trackTransitioning ||
+          !localPlaylist.length
+        ) {
+          return;
+        }
+
+        if (audio.currentTime > 5) {
+          audio.currentTime = 0;
+          updateTransportUI();
+        } else {
+          const previousIndex = choosePreviousIndex();
+
+          if (previousIndex >= 0) {
+            await playPlaylistTrack(previousIndex, 0, 'previous');
+          }
+        }
+
+        showControls();
       });
 
       pauseButton.addEventListener('click', async () => {

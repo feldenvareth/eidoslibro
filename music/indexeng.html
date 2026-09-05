@@ -34,7 +34,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/music-player.css?v=4">
+  <link rel="stylesheet" href="css/music-player.css?v=6">
 
   <!-- Google tag (gtag.js), igual que en la página principal -->
   <script>
@@ -203,6 +203,21 @@
 
   <div id="controls" aria-label="Playback controls">
     <button
+      id="previousButton"
+      class="control-button icon-button"
+      type="button"
+      aria-label="Previous or restart"
+      title="Previous or restart"
+    >
+      <span class="button-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path d="M18.8 4.8v14.4L8.2 12l10.6-7.2Z"></path>
+          <path d="M6.8 5v14"></path>
+        </svg>
+      </span>
+    </button>
+
+    <button
       id="pauseButton"
       class="control-button icon-button primary-control"
       type="button"
@@ -326,6 +341,6 @@
 
   <audio id="audio" preload="auto"></audio>
   <script src="js/music-manifest.js?v=3"></script>
-  <script src="js/music-player.js?v=5"></script>
+  <script src="js/music-player.js?v=6"></script>
 </body>
 </html>
