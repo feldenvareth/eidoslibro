@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Eidos · Music Visualizer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#081511">
-  <link rel="canonical" href="https://www.eidoslibro.com/music/indexeng.html">
+  <title>EIDOS | A Philosophical Science Fiction Novel by Felden Vareth</title>
+  <meta name="description" content="EIDOS by Felden Vareth. A philosophical science fiction novel about digital consciousness, ecological collapse, artificial intelligence, and what remains of humanity.">
+  <meta name="author" content="Felden Vareth">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#0b1020">
+
+  <link rel="canonical" href="https://www.eidoslibro.com/indexeng.html">
   <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.ico">
 
-  <meta name="description" content="Eidos music visualizer. Listen, explore, transcend." />
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EIDOS">
+  <meta property="og:title" content="EIDOS | A Philosophical Science Fiction Novel by Felden Vareth">
+  <meta property="og:description" content="A novel of consciousness, artificial intelligence, and ecological collapse. What remains of us when nothing can end?">
+  <meta property="og:url" content="https://www.eidoslibro.com/indexeng.html">
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
+  <meta property="og:image:alt" content="Cover of the novel EIDOS by Felden Vareth">
 
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Eidos" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:title" content="Eidos · Music Visualizer" />
-  <meta property="og:description" content="Eidos music visualizer. Listen, explore, transcend." />
-  <meta property="og:url" content="https://www.eidoslibro.com/music/indexeng.html" />
-  <meta property="og:image" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
-  <meta property="og:image:alt" content="Eidos Music Visualizer with a glowing golden cube and the covers of Eidos and Eidos Stories" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Eidos · Music Visualizer" />
-  <meta name="twitter:description" content="Eidos music visualizer. Listen, explore, transcend." />
-  <meta name="twitter:image" content="https://www.eidoslibro.com/music/assets/eidos_music_share.jpg" />
-  <meta name="twitter:image:alt" content="Eidos Music Visualizer with a glowing golden cube and the covers of Eidos and Eidos Stories" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EIDOS | A Philosophical Science Fiction Novel by Felden Vareth">
+  <meta name="twitter:description" content="Digital consciousness, ecological collapse, and identity in EIDOS.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/assets/images/img_v2.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/music-player.css?v=4">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Google tag (gtag.js), igual que en la página principal -->
+  <link rel="stylesheet" href="assets/css/stylenew.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "EIDOS",
+    "url": "https://www.eidoslibro.com/indexeng.html",
+    "inLanguage": "en"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "EIDOS",
+    "author": {
+      "@type": "Person",
+      "name": "Felden Vareth"
+    },
+    "url": "https://www.eidoslibro.com/indexeng.html",
+    "image": "https://www.eidoslibro.com/assets/images/img_v2.jpg",
+    "inLanguage": "en",
+    "genre": [
+      "Science Fiction",
+      "Philosophical Science Fiction"
+    ],
+    "description": "A philosophical science fiction novel about digital consciousness, ecological collapse, and the persistence of human identity within a virtual world.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "EIDOS"
+    }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -53,279 +86,3857 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-SCSFPYKJTX');
-
-    (function () {
-      try {
-        const consent = localStorage.getItem('consentGiven');
-        if (consent === 'true') {
-          gtag('consent', 'update', {
-            'ad_storage': 'granted',
-            'ad_user_data': 'granted',
-            'ad_personalization': 'granted',
-            'analytics_storage': 'granted'
-          });
-        }
-      } catch (_) {
-        // Si el almacenamiento no está disponible, se conserva el consentimiento denegado.
-      }
-    })();
   </script>
 
 </head>
 <body>
 
+<!-- Consent Banner -->
+<div id="consent-banner">
+  <p>Este sitio utiliza cookies para mejorar la experiencia. <a href="terminosycondiciones.html">Política de Privacidad</a></p>
+  <button class="consent-btn" onclick="consentGranted()">Aceptar</button>
+  <button class="consent-btn decline" onclick="consentDeclined()">Rechazar</button>
+</div>
 
-  <!-- Navigation: misma estructura que la página principal -->
-  <nav id="navbar">
-    <a class="nav-logo" href="https://www.eidoslibro.com/indexeng.html#hero">EIDOS</a>
+<script>
+  function consentGranted() {
+    gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','true');
+  }
+  function consentDeclined() {
+    gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+    document.getElementById('consent-banner').style.display='none';
+    localStorage.setItem('consentGiven','false');
+  }
+  (function(){
+    const c=localStorage.getItem('consentGiven');
+    if(c==='true') consentGranted();
+    else if(c==='false') consentDeclined();
+  })();
+</script>
 
-    <ul class="nav-links">
-      <li><a href="https://www.eidoslibro.com/indexeng.html#synopsis">The Novel</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#video">Video</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#themes">Themes</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#editions">Volumes</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#stories">Stories</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#blog">Blog</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#download">Start</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#scenes">Scenes</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#reviews">Reviews</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#mentions">Mentions</a></li>
-      <li><a href="https://www.eidoslibro.com/indexeng.html#author">Author</a></li>
-      <li>
-        <a href="https://www.amazon.es/dp/B0FCR5ZPBJ"
-           target="_blank"
-           rel="noopener">Buy</a>
-      </li>
-      <li>
-        <a href="index.html" class="lang-switch" aria-label="Spanish version">
-          <img src="../assets/images/flagspain.webp" alt="Spanish">
+<!-- Navigation -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">EIDOS</a>
+
+  <ul class="nav-links">
+    <li class="nav-priority-item" data-nav-priority="100"><a href="#synopsis">The Novel</a></li>
+    <li class="nav-priority-item" data-nav-priority="90"><a href="#video">Video</a></li>
+    <li class="nav-priority-item" data-nav-priority="85"><a href="#themes">Themes</a></li>
+    <li class="nav-priority-item" data-nav-priority="80"><a href="#editions">Volumes</a></li>
+    <li class="nav-priority-item" data-nav-priority="75"><a href="#essay">Essays</a></li>
+<li class="nav-priority-item" data-nav-priority="70"><a href="#stories">Stories</a></li>
+    <li class="nav-priority-item" data-nav-priority="65"><a href="#blog">Blog</a></li>
+    <li class="nav-priority-item" data-nav-priority="60"><a href="#download">Start</a></li>
+    <li class="nav-priority-item" data-nav-priority="50"><a href="#scenes">Scenes</a></li>
+    <li class="nav-priority-item" data-nav-priority="45"><a href="#reviews">Reviews</a></li>
+    <li class="nav-priority-item" data-nav-priority="40"><a href="#mentions">Mentions</a></li>
+    <li class="nav-priority-item" data-nav-priority="35"><a href="#author">Author</a></li>
+    <li class="nav-priority-item" data-nav-priority="95"><a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">Buy on Amazon</a></li>
+
+    <li class="nav-more" id="navMore">
+      <a class="nav-more-toggle" href="#" role="button" aria-expanded="false" aria-controls="navMoreMenu">
+        More <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+      </a>
+      <div class="nav-more-menu" id="navMoreMenu">
+        <div class="nav-more-dynamic" id="navMoreDynamic"></div>
+        <div class="nav-more-separator" id="navMoreSeparator" aria-hidden="true"></div>
+        <a href="music/indexeng.html">
+          <i class="fa-solid fa-headphones" aria-hidden="true"></i>
+          <span>Music Player</span>
         </a>
-      </li>
-    </ul>
+        <a href="gallery/indexeng.html">
+          <i class="fa-regular fa-images" aria-hidden="true"></i>
+          <span>Gallery / Screensaver</span>
+        </a>
+      </div>
+    </li>
 
-    <div
-      class="hamburger"
-      id="hamburger"
-      onclick="toggleMenu()"
-      aria-label="Open menu"
-      aria-expanded="false"
-      role="button"
-    >
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
+<a href="index.html" class="lang-switch" aria-label="Spanish version">
+  <img src="assets/images/flagspain.webp" alt="Spanish" style="width: 24px; height: auto;">
+</a>
+    
+  </ul>
 
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="https://www.eidoslibro.com/indexeng.html#synopsis" onclick="closeMenu()">The Novel</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#video" onclick="closeMenu()">Video</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#themes" onclick="closeMenu()">Themes</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#editions" onclick="closeMenu()">Volumes</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#stories" onclick="closeMenu()">Stories</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#blog" onclick="closeMenu()">Blog</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#download" onclick="closeMenu()">Start</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#scenes" onclick="closeMenu()">Scenes</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#reviews" onclick="closeMenu()">Reviews</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#mentions" onclick="closeMenu()">Mentions</a>
-    <a href="https://www.eidoslibro.com/indexeng.html#author" onclick="closeMenu()">Author</a>
-    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ"
-       target="_blank"
-       rel="noopener"
-       onclick="closeMenu()">Buy</a>
-    <a href="index.html" class="lang-switch" aria-label="Spanish version" onclick="closeMenu()">
-      <img src="../assets/images/flagspain.webp" alt="Spanish">
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" role="button">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<style>
+/* ===== NAVIGATION · MORE MENU ===== */
+.nav-more {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.nav-more-toggle i {
+  font-size: .62em;
+  transition: transform .22s ease;
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  z-index: 1000;
+  min-width: 245px;
+  padding: 8px;
+  border: 1px solid rgba(211, 174, 73, .24);
+  border-radius: 8px;
+  background: rgba(8, 9, 18, .97);
+  box-shadow: 0 18px 45px rgba(0,0,0,.42);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.nav-more-menu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -15px;
+  height: 15px;
+}
+
+.nav-more-menu a {
+  display: flex !important;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 12px !important;
+  border-radius: 5px;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-transform: none !important;
+}
+
+.nav-more-menu a i {
+  width: 18px;
+  color: #d3ae49;
+  text-align: center;
+}
+
+.nav-more-menu a:hover,
+.nav-more-menu a:focus-visible {
+  background: rgba(211, 174, 73, .08);
+}
+
+.nav-more:hover .nav-more-menu,
+.nav-more:focus-within .nav-more-menu,
+.nav-more.open .nav-more-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-more:hover .nav-more-toggle i,
+.nav-more:focus-within .nav-more-toggle i,
+.nav-more.open .nav-more-toggle i {
+  transform: rotate(180deg);
+}
+
+.mobile-more {
+  width: 100%;
+}
+
+.mobile-more-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: inherit;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-more-toggle i {
+  margin-left: 12px;
+  font-size: .72em;
+  transition: transform .22s ease;
+}
+
+.mobile-more-menu {
+  display: none;
+  padding: 2px 0 8px 18px;
+}
+
+.mobile-more.open .mobile-more-menu {
+  display: block;
+}
+
+.mobile-more.open .mobile-more-toggle i {
+  transform: rotate(180deg);
+}
+
+.mobile-more-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .92em;
+  opacity: .88;
+}
+
+.mobile-more-menu a i {
+  width: 18px;
+  color: #d3ae49;
+  text-align: center;
+}
+
+/* ===== ADAPTIVE NAVIGATION · PRIORITY+ ===== */
+.nav-priority-item.nav-collapsed {
+  display: none !important;
+}
+
+.nav-more-dynamic {
+  display: contents;
+}
+
+.nav-more-separator {
+  height: 1px;
+  margin: 7px 8px;
+  background: linear-gradient(90deg, transparent, rgba(211,174,73,.34), transparent);
+}
+
+.nav-more-separator.is-empty {
+  display: none;
+}
+
+.nav-more-toggle {
+  padding: 7px 10px !important;
+  border: 1px solid rgba(211,174,73,.20) !important;
+  border-radius: 999px;
+  color: #d8c096 !important;
+  background: rgba(211,174,73,.025) !important;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.nav-more:hover .nav-more-toggle,
+.nav-more:focus-within .nav-more-toggle,
+.nav-more.open .nav-more-toggle {
+  border-color: rgba(211,174,73,.48) !important;
+  background: rgba(211,174,73,.075) !important;
+  color: #ead8a9 !important;
+}
+
+/* Spacing compresses before options begin moving into “More”. */
+@media (min-width: 769px) and (max-width: 1650px) {
+  #navbar .nav-links {
+    gap: 20px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1350px) {
+  #navbar .nav-links {
+    gap: 14px !important;
+  }
+
+  #navbar .nav-links > li > a,
+  #navbar .nav-links > .lang-switch {
+    letter-spacing: .17em !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1080px) {
+  #navbar .nav-links {
+    gap: 10px !important;
+  }
+
+  #navbar .nav-links > li > a,
+  #navbar .nav-links > .lang-switch {
+    font-size: .62rem !important;
+    letter-spacing: .14em !important;
+  }
+}
+
+/* From landscape tablet to narrow desktop, keep the bar navigation.
+   The hamburger is reserved for true mobile layouts. */
+@media (min-width: 769px) and (max-width: 900px) {
+  #navbar .nav-links {
+    display: flex !important;
+    min-width: 0 !important;
+  }
+
+  #navbar .hamburger {
+    display: none !important;
+  }
+
+  #mobile-menu {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-more { display: none !important; }
+
+  /* On mobile there is no second “More”: extras appear directly
+     after the main menu, preserving the same visual separation. */
+  #mobile-menu .mobile-extra-links {
+    width: min(82%, 300px);
+    margin: 8px auto 0;
+    padding: 3px 0 8px;
+  }
+
+  #mobile-menu .mobile-extra-separator {
+    height: 1px;
+    margin: 0 0 10px;
+    background: linear-gradient(90deg, transparent, rgba(211,174,73,.34), transparent);
+  }
+
+  #mobile-menu .mobile-extra-links a {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 8px !important;
+    font-size: .68rem !important;
+    letter-spacing: .12em !important;
+    line-height: 1.35;
+    opacity: .90;
+    text-align: center;
+  }
+
+  #mobile-menu .mobile-extra-links a i {
+    flex: 0 0 18px;
+    color: #d3ae49;
+    text-align: center;
+  }
+
+  #mobile-menu {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: max(34px, env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Keep the audio control out of the open mobile menu. */
+  body.mobile-nav-open .audio-ctrl {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(10px);
+  }
+}
+</style>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#synopsis" onclick="closeMenu()">The Novel</a>
+  <a href="#video" onclick="closeMenu()">Video</a>
+  <a href="#themes" onclick="closeMenu()">Themes</a>
+  <a href="#editions" onclick="closeMenu()">Volumes</a>
+  <a href="#essay" onclick="closeMenu()">Essays</a>
+<a href="#stories" onclick="closeMenu()">Stories</a>
+  <a href="#blog" onclick="closeMenu()">Blog</a>
+  <a href="#download" onclick="closeMenu()">Start</a>
+  <a href="#scenes" onclick="closeMenu()">Scenes</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#mentions" onclick="closeMenu()">Mentions</a>
+  
+  <a href="#author" onclick="closeMenu()">Author</a>
+  <a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank" onclick="closeMenu()">Buy on Amazon</a>
+
+  <div class="mobile-extra-links" aria-label="Additional content">
+    <div class="mobile-extra-separator" aria-hidden="true"></div>
+    <a href="music/indexeng.html" onclick="closeMenu()">
+      <i class="fa-solid fa-headphones" aria-hidden="true"></i> Music Player
     </a>
-    <button class="fullscreen-exit-item" type="button" onclick="exitPlayerFullscreen()">Exit fullscreen</button>
+    <a href="gallery/indexeng.html" onclick="closeMenu()">
+      <i class="fa-regular fa-images" aria-hidden="true"></i> Gallery / Screensaver
+    </a>
   </div>
 
-  <canvas id="visualizer" aria-label="Reactive music visualizer inspired by Eidos"></canvas>
-  <div id="coverAtmosphere" aria-hidden="true"></div>
-  <div id="grain" aria-hidden="true"></div>
+<a href="index.html" class="lang-switch" aria-label="Spanish version" onclick="closeMenu()">
+  <img src="assets/images/flagspain.webp" alt="Spanish" style="width: 24px; height: auto;">
+</a>
+  
+  
+  
+  
+</div>
 
-  <section id="startPanel">
-    <div class="start-card">
-    
-     <!--   <p class="eyebrow">Felden Vareth presenta</p>   -->
-     
-      <h1>EIDOS</h1>
-      <p class="subtitle">Music Visualizer</p>
-      <div id="startTrack">Looking for a random track…</div>
-      <div id="startStatus" role="status" aria-live="polite"></div>
-      <button id="startButton" type="button" disabled>Enter the player</button>
-    </div>
-  </section>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
 
-  <button
-    id="brand"
-    type="button"
-    aria-label="Return to the music visualizer launcher"
-    title="Return to the music launcher"
-  >
-    <strong>EIDOS</strong>
-    <span>Music Visualizer</span>
-  </button>
+    menu.classList.toggle('open');
+    burger.classList.toggle('active');
 
-   <!-- <div id="touchHint" aria-hidden="true">Mueve el ratón o toca la pantalla</div>  -->
+    const isOpen = menu.classList.contains('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.classList.toggle('mobile-nav-open', isOpen);
+  }
 
-  <section id="selectorPanel" aria-label="Track selector">
-    <div class="selector-head">
-      <strong>Select a track</strong>
-      <button id="closeSelector" type="button" aria-label="Close selector">×</button>
-    </div>
+  function closeMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const burger = document.getElementById('hamburger');
 
-    <div id="languageFilter" role="group" aria-label="Filter tracks by language">
-      <button class="language-filter-button active" type="button"
-              data-language="all" aria-pressed="true">All</button>
-    </div>
+    menu.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('mobile-nav-open');
 
-    <div id="trackList" role="listbox" aria-label="Available tracks"></div>
-  </section>
+  }
 
-  <section id="sharePanel" role="dialog" aria-modal="false" aria-label="Share music">
-    <div class="share-head">
-      <strong>Share</strong>
-      <button id="closeShare" type="button" aria-label="Close share panel">×</button>
-    </div>
+  (function initNavMore() {
+    const navMore = document.getElementById('navMore');
+    const toggle = navMore ? navMore.querySelector('.nav-more-toggle') : null;
+    if (!navMore || !toggle) return;
 
-    <div class="share-options">
-      <button id="sharePlayerButton" class="share-option" type="button">
-        <span class="share-option-title">Share the player</span>
-        <span class="share-option-help">Share from your phone or copy the player link.</span>
-      </button>
+    toggle.addEventListener('click', function (event) {
+      event.stopPropagation();
+      const isOpen = navMore.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
 
-      <button id="shareTrackButton" class="share-option" type="button">
-        <span class="share-option-title">Share this track</span>
-        <span class="share-option-help">Share from your phone or copy a link that starts this track from the beginning.</span>
-      </button>
-    </div>
+    document.addEventListener('click', function (event) {
+      if (!navMore.contains(event.target)) {
+        navMore.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
 
-    <div id="shareStatus" role="status" aria-live="polite"></div>
-  </section>
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        navMore.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
 
-  <div id="controls" aria-label="Playback controls">
-    <button
-      id="pauseButton"
-      class="control-button icon-button primary-control"
-      type="button"
-      aria-label="Pause"
-      title="Pause"
-    >
-      <span id="pauseIcon" class="button-icon" aria-hidden="true"></span>
-    </button>
+  /*
+   * Priority+ desktop navigation:
+   * - first compresses spacing through CSS;
+   * - if the bar still does not fit, lower-priority items move into “More”;
+   * - when space returns, they automatically come back.
+   */
+  (function initPriorityNavigation() {
+    const navbar = document.getElementById('navbar');
+    const navLinks = navbar ? navbar.querySelector('.nav-links') : null;
+    const navMore = document.getElementById('navMore');
+    const dynamicMenu = document.getElementById('navMoreDynamic');
+    const separator = document.getElementById('navMoreSeparator');
+    const items = navLinks ? Array.from(navLinks.querySelectorAll(':scope > .nav-priority-item')) : [];
 
-    <div id="nowPlaying" aria-live="polite">
-      <div id="currentTrackViewport">
-        <div id="currentTrackMarquee">
-          <span id="currentTrackName">—</span>
-          <span class="track-marquee-gap" aria-hidden="true">     ◆     </span>
-          <span id="currentTrackClone" aria-hidden="true">—</span>
-          <span class="track-marquee-gap" aria-hidden="true">     ◆     </span>
-        </div>
+    if (!navbar || !navLinks || !navMore || !dynamicMenu || !items.length) return;
+
+    navbar.classList.add('priority-nav');
+
+    function isDesktopNav() {
+      return window.innerWidth > 768;
+    }
+
+    function itemLabel(item) {
+      const link = item.querySelector('a');
+      return link ? link.textContent.trim() : '';
+    }
+
+    function rebuildMore() {
+      dynamicMenu.innerHTML = '';
+
+      items.forEach(function (item) {
+        if (!item.classList.contains('nav-collapsed')) return;
+        const source = item.querySelector('a');
+        if (!source) return;
+
+        const link = document.createElement('a');
+        link.className = 'nav-dynamic-link';
+        link.href = source.getAttribute('href') || '#';
+        if (source.hasAttribute('target')) link.setAttribute('target', source.getAttribute('target'));
+        if (source.hasAttribute('rel')) link.setAttribute('rel', source.getAttribute('rel'));
+
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-angle-right';
+        icon.setAttribute('aria-hidden', 'true');
+
+        const span = document.createElement('span');
+        span.textContent = itemLabel(item);
+
+        link.appendChild(icon);
+        link.appendChild(span);
+        dynamicMenu.appendChild(link);
+      });
+
+      if (separator) {
+        separator.classList.toggle('is-empty', dynamicMenu.children.length === 0);
+      }
+    }
+
+    function navOverflows() {
+      const navbarRect = navbar.getBoundingClientRect();
+      const navRect = navLinks.getBoundingClientRect();
+      const logo = navbar.querySelector('.nav-logo');
+      const logoRect = logo ? logo.getBoundingClientRect() : null;
+      const lang = navLinks.querySelector(':scope > .lang-switch');
+      const langRect = lang ? lang.getBoundingClientRect() : null;
+
+      // Detect both internal scroll overflow and geometric collision/clipping.
+      if (navLinks.scrollWidth > navLinks.clientWidth + 2) return true;
+      if (navRect.right > navbarRect.right - 8) return true;
+      if (logoRect && navRect.left < logoRect.right + 18) return true;
+      if (langRect && langRect.right > navbarRect.right - 8) return true;
+      return false;
+    }
+
+    function fitNavigation() {
+      if (!isDesktopNav()) {
+        items.forEach(function (item) { item.classList.remove('nav-collapsed'); });
+        rebuildMore();
+        return;
+      }
+
+      // Start each pass with every principal item visible.
+      items.forEach(function (item) { item.classList.remove('nav-collapsed'); });
+      rebuildMore();
+
+      // Lower priority disappears first. DOM order breaks ties from right to left.
+      const candidates = items.slice().sort(function (a, b) {
+        const pa = Number(a.dataset.navPriority || 0);
+        const pb = Number(b.dataset.navPriority || 0);
+        if (pa !== pb) return pa - pb;
+        return items.indexOf(b) - items.indexOf(a);
+      });
+
+      let guard = 0;
+      while (navOverflows() && candidates.length && guard < items.length + 2) {
+        const item = candidates.shift();
+        item.classList.add('nav-collapsed');
+        rebuildMore();
+        guard += 1;
+      }
+    }
+
+    let resizeTimer = null;
+    function scheduleFit() {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(fitNavigation, 40);
+    }
+
+    // Run after layout/fonts settle and whenever the available width changes.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitNavigation).catch(fitNavigation);
+    } else {
+      window.addEventListener('load', fitNavigation, { once: true });
+    }
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) closeMenu();
+      scheduleFit();
+    });
+
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(scheduleFit);
+      ro.observe(navbar);
+    }
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(fitNavigation);
+    });
+  })();
+</script>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-label">Felden Vareth &mdash; A NOVEL OF CONSCIOUSNESS</p>
+      <h1 class="hero-title">EIDOS</h1>
+
+      <p class="hero-tagline">Humanity has abandoned the physical world.<br>
+      Now it exists inside a system no one truly understands.</p>
+      
+      <p class="hero-tagline hero-tagline--main">What remains of us when nothing can end?</p>
+      
+      <p class="hero-tagline">One unsettling truth: whatever we carry within us…<br>
+      follows us everywhere.</p>
+
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://www.amazon.es/dp/B0FC5ZDRKR" target="_blank">
+          <i class="fa-brands fa-amazon"></i> Buy Eidos
+        </a>
+        
+        <a class="btn-primary" href="https://www.amazon.es/dp/B0GDNQW7VZ" target="_blank">
+          <i class="fa-brands fa-amazon"></i> Buy Eidos (Tales)
+        </a>     
+        
+        <a class="btn-outline" href="https://www.eidoslibro.com/relatos/index.html">
+          <i class="fa-regular fa-file-lines"></i> Read standalone stories
+        </a>
+        <a class="btn-ghost" href="indexautoreng.html">
+          <i class="fa-solid fa-pen-nib"></i> Request a signed copy
+        </a>
       </div>
     </div>
 
-    <button
-      id="modeButton"
-      class="control-button icon-button mode-button"
-      type="button"
-      data-mode="random"
-      aria-label="Shuffle playback"
-      title="Shuffle playback"
-      aria-pressed="false"
-    >
-      <span id="modeIcon" class="button-icon" aria-hidden="true"></span>
-    </button>
+    <div class="hero-book">
+      <div class="book-wrapper">
+        <img class="book-img" src="assets/images/eidoscoverbotheng.webp" alt="EIDOS book cover by Felden Vareth" loading="eager">
+        <div class="book-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <button
-      id="nextButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Next track"
-      title="Next track"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <path d="M5 4.8v14.4L15.8 12 5 4.8Z"></path>
-          <path d="M17.2 5v14"></path>
-        </svg>
-      </span>
-    </button>
 
-    <button
-      id="selectButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Track list"
-      title="Track list"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <circle cx="4.5" cy="6.5" r="1"></circle>
-          <circle cx="4.5" cy="12" r="1"></circle>
-          <circle cx="4.5" cy="17.5" r="1"></circle>
-          <path d="M8 6.5h11M8 12h11M8 17.5h11"></path>
-        </svg>
-      </span>
-    </button>
+<div class="glow-line"></div>
 
-    <button
-      id="shareButton"
-      class="control-button icon-button"
-      type="button"
-      aria-label="Share"
-      title="Share"
-      aria-haspopup="dialog"
-      aria-expanded="false"
-    >
-      <span class="button-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false">
-          <circle cx="18" cy="5" r="2.4"></circle>
-          <circle cx="6" cy="12" r="2.4"></circle>
-          <circle cx="18" cy="19" r="2.4"></circle>
-          <path d="m8.1 10.8 7.7-4.5M8.1 13.2l7.7 4.5"></path>
-        </svg>
-      </span>
-    </button>
+<!-- Synopsis -->
+<section id="synopsis">
+  <div class="container">
+    <span class="section-tag reveal">The novel</span>
+    <h2 class="section-title reveal">A future where consciousness is <em>code</em></h2>
 
-    <div id="transportControls" aria-label="Playback position and volume">
-      <span id="currentTimeLabel" class="time-label">0:00</span>
+    <div class="synopsis-grid">
+      <div class="synopsis-text reveal">
+        <p>When humanity chose survival and left the world behind… it did not leave unchanged.</p>
 
-      <input
-        id="seekBar"
-        class="eidos-range"
-        type="range"
-        min="0"
-        max="1000"
-        value="0"
-        step="1"
-        aria-label="Track position"
-        disabled
-      >
+        <p>It abandoned the body.<br>
+        It abandoned the Earth.<br>
+        It abandoned death.</p>
 
-      <span id="durationLabel" class="time-label">0:00</span>
+        <p>In Eidos, a perfect and eternal environment, every consciousness continues without limit or decay. Everything remains. Everything works.</p>
 
-      <button
-        id="muteButton"
-        class="volume-button"
-        type="button"
-        aria-label="Mute"
-        title="Mute"
-      ></button>
+        <p>And yet, as humans inhabit this simulated eternity, something begins to erode: meaning, conflict, the memory of what they once were.</p>
 
-      <input
-        id="volumeBar"
-        class="eidos-range volume-range"
-        type="range"
-        min="0"
-        max="1"
-        value="0.85"
-        step="0.01"
-        aria-label="Volume"
-      >
+        <p><em>EIDOS</em> is a philosophical science fiction novel about digital consciousness, ecological collapse, identity, guilt, permanence, and the rediscovery of what it means to be human.</p>
+      </div>
+
+      <div class="synopsis-side reveal reveal-delay-1">
+        <div class="synopsis-quote">
+          <blockquote>
+            Trapped in endless cycles, we are prisoners of our own nature, unable to escape ourselves or to break the circle we created.
+          </blockquote>
+          <cite>– Eidos</cite>
+        </div>
+
+        <div class="synopsis-quote">
+          <blockquote>
+            Amid what we leave behind, what we remember, and what we longed to become, we are the present: a fragile attempt to endure.
+          </blockquote>
+          <cite>– Eidos Tales</cite>
+        </div>
+
+        <a class="btn-outline" href="docs/chapters.pdf" target="_blank">
+          <i class="fa-regular fa-file-lines"></i> Download first chapters
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="glow-line"></div>
+
+
+<!-- ===== VIDEO ===== -->
+<section id="video" class="video-section">
+  <div class="container">
+    <span class="section-tag reveal">Video</span>
+    <h2 class="section-title reveal">Discover <em>EIDOS</em> in video</h2>
+    <p class="video-intro reveal">
+      A visual gateway into the world of <em>EIDOS</em>.
+    </p>
+
+    <div class="video-frame reveal reveal-delay-1">
+      <div class="video-embed">
+        <iframe
+          id="youtube-player"
+          src="https://www.youtube.com/embed/QDHqESscTcU?enablejsapi=1&rel=0&modestbranding=1"
+          title="Eidos – Trailer"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+.video-section {
+  position: relative;
+  padding: 110px 0;
+}
+
+.video-intro {
+  max-width: 760px;
+  margin: 18px auto 0;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.78);
+}
+
+.video-frame {
+  margin: 42px auto 0;
+  max-width: 980px;
+  padding: 14px;
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+    rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: blur(10px);
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Opcional: estilo visual del botón bloqueado */
+.audio-ctrl button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .video-section {
+    padding: 84px 0;
+  }
+
+  .video-frame {
+    margin-top: 28px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .video-embed {
+    border-radius: 14px;
+  }
+
+  .video-intro {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+}
+</style>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+  let eidosYoutubePlayer = null;
+  let eidosVideoIsPlaying = false;
+
+  function onYouTubeIframeAPIReady() {
+    const iframe = document.getElementById('youtube-player');
+    if (!iframe || typeof YT === 'undefined' || !YT.Player) return;
+
+    eidosYoutubePlayer = new YT.Player('youtube-player', {
+      events: {
+        onStateChange: onEidosYoutubeStateChange
+      }
+    });
+  }
+
+  function onEidosYoutubeStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      eidosVideoIsPlaying = true;
+      if (typeof window.lockBgAudioForVideo === 'function') {
+        window.lockBgAudioForVideo();
+      }
+    }
+
+    if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+      eidosVideoIsPlaying = false;
+      if (typeof window.unlockBgAudioForVideo === 'function') {
+        window.unlockBgAudioForVideo();
+      }
+    }
+  }
+</script>
+
+
+
+
+
+
+
+<div class="glow-line"></div>
+
+<!-- Themes -->
+
+<section id="themes">
+  <div class="container">
+    <span class="section-tag reveal">Thematic universe</span>
+    <h2 class="section-title reveal">The central questions<br>of <em>EIDOS</em></h2>
+
+    <div class="themes-grid">
+      
+      <div class="theme-card reveal">
+        <div class="theme-icon"><i class="fa-solid fa-brain"></i></div>
+        <h3 class="theme-name">Digital consciousness</h3>
+        <p class="theme-desc">
+          The mind as information. Identity as pattern. 
+          Eidos raises an unsettling question: if everything we are can be copied, 
+          are we still ourselves… or only a convincing continuity?
+        </p>
+      </div>
+
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-icon"><i class="fa-solid fa-leaf"></i></div>
+        <h3 class="theme-name">Ecological collapse</h3>
+        <p class="theme-desc">
+          The Earth does not vanish at once, it fades. 
+          A slow, irreversible process that forces humanity to abandon its origin. 
+          No epic escape, only erosion, silence… and resignation.
+        </p>
+      </div>
+
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3 class="theme-name">Custodians and artificial intelligence</h3>
+        <p class="theme-desc">
+          Designed to sustain the system, detached from the human. 
+          And yet, they are the ones who begin to observe, to discover, to question. 
+          They do not rule, they do not decide… but something begins to shift.
+        </p>
+      </div>
+
+      <div class="theme-card reveal reveal-delay-3">
+        <div class="theme-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3 class="theme-name">What makes us human</h3>
+        <p class="theme-desc">
+          No limits. No death. 
+          When everything can be preserved, a question emerges: 
+          what was necessary… and what gave meaning to being alive.
+        </p>
+      </div>
+
+      <div class="theme-card reveal reveal-delay-1">
+        <div class="theme-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3 class="theme-name">Order, freedom, and limits</h3>
+        <p class="theme-desc">
+          A perfect world requires unbreakable rules. 
+          Equilibrium does not govern, does not intervene… but defines what is possible. 
+          And within that boundary, freedom is at stake.
+        </p>
+      </div>
+
+      <div class="theme-card reveal reveal-delay-2">
+        <div class="theme-icon"><i class="fa-solid fa-infinity"></i></div>
+        <h3 class="theme-name">Time without end</h3>
+        <p class="theme-desc">
+          Without death, time no longer drives us forward. 
+          Memory is not lost, it accumulates. 
+          And when nothing ends, even meaning begins to dissolve.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="glow-line"></div>
+
+<!-- Editions -->
+
+
+<section id="editions">
+  <div class="container">
+    <span class="section-tag reveal">Available editions</span>
+    <h2 class="section-title reveal">EIDOS <em>in your hands</em></h2>
+    <div class="editions-grid">
+
+      <div class="edition-card reveal">
+        <div class="edition-img-wrap edition-media" data-video="docs/eidos.mp4">
+          <a href="https://www.amazon.es/dp/B0FC5ZDRKR" target="_blank">
+            <img src="assets/images/tapa.jpg" alt="EIDOS English edition" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapa.jpg"
+            ></video>
+          </a>
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">English</p>
+          <p class="edition-title">EIDOS</p>
+          <br>
+          <a class="btn-primary" href="https://www.amazon.es/dp/B0FC5ZDRKR" target="_blank">
+            <i class="fa-brands fa-amazon"></i> Buy
+          </a>
+        </div>
+      </div>
+
+      <div class="edition-card reveal reveal-delay-1">
+        <div class="edition-img-wrap edition-media" data-video="docs/eidostales.mp4">
+          <a href="https://www.amazon.es/dp/B0GDNQW7VZ" target="_blank">
+            <img src="assets/images/tapatales.jpg" alt="EIDOS Tales" loading="lazy">
+            <video
+              class="edition-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapatales.jpg"
+            ></video>
+          </a>
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">English</p>
+          <p class="edition-title">EIDOS — Tales</p>
+          <br>
+          <a class="btn-primary" href="https://www.amazon.es/dp/B0GDNQW7VZ" target="_blank">
+            <i class="fa-brands fa-amazon"></i> Buy
+          </a>
+        </div>
+      </div>
+
+      <!--
+      <div class="edition-card reveal reveal-delay-2">
+        <div class="edition-img-wrap">
+          <img src="assets/images/eidospeqtales.jpg" alt="EIDOS Tales — English edition" loading="lazy">
+          <div class="edition-overlay"></div>
+        </div>
+        <div class="edition-info">
+          <p class="edition-lang">English</p>
+          <p class="edition-title">EIDOS — Standalone stories</p>
+        </div>
+      </div>
+      -->
+
     </div>
   </div>
 
-  <audio id="audio" preload="auto"></audio>
-  <script src="js/music-manifest.js?v=3"></script>
-  <script src="js/music-player.js?v=4"></script>
+  <style>
+/* ===== VIDEO HOVER ON EDITIONS ===== */
+
+.edition-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.edition-media > a {
+  display: block;
+  position: relative;
+}
+
+/* Image and video occupy exactly the same area */
+.edition-media img,
+.edition-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Video layered over the cover */
+.edition-media video.edition-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  background: #000;
+}
+
+/* Active state (hover on desktop or tap on touch devices) */
+.edition-media.is-playing video.edition-video {
+  opacity: 1;
+}
+
+.edition-media.is-playing img {
+  opacity: 0;
+}
+
+.edition-media img {
+  transition: opacity 0.3s ease;
+}
+
+.edition-media .edition-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.edition-media:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .edition-media video.edition-video {
+    transition: opacity 0.25s ease;
+  }
+}
+</style>
+
+<script>
+(function () {
+  const cards = document.querySelectorAll('.edition-media');
+  if (!cards.length) return;
+
+  const isTouchDevice =
+    window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo(video, src) {
+    if (video.dataset.loaded === 'true') return;
+
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo(card) {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    loadVideo(video, src);
+
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo(card) {
+    const video = card.querySelector('.edition-video');
+    if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  cards.forEach(card => {
+    const video = card.querySelector('.edition-video');
+    const src = card.dataset.video;
+    if (!video || !src) return;
+
+    // Lightweight preload only when the block approaches the viewport.
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadVideo(video, src);
+            obs.unobserve(card);
+          }
+        });
+      }, { rootMargin: '250px 0px' });
+
+      observer.observe(card);
+    }
+
+    if (!isTouchDevice) {
+      card.addEventListener('mouseenter', () => playVideo(card));
+      card.addEventListener('mouseleave', () => stopVideo(card));
+    } else {
+      // Touch devices: first tap plays the video; second tap follows the link.
+      card.addEventListener('click', function (e) {
+        if (!card.classList.contains('is-playing')) {
+          e.preventDefault();
+          playVideo(card);
+        }
+      });
+
+      card.addEventListener('mouseleave', () => stopVideo(card));
+
+      document.addEventListener('click', function (e) {
+        if (!card.contains(e.target)) {
+          stopVideo(card);
+        }
+      });
+    }
+
+    video.addEventListener('ended', function () {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+  });
+})();
+</script>
+
+</section>
+
+<!-- ===== ESSAYS ===== -->
+<div class="glow-line"></div>
+
+<section id="essay" class="essay-section">
+  <div class="container">
+    <span class="section-tag reveal">Essays</span>
+    <h2 class="section-title reveal">The questions of EIDOS, <em>beyond fiction</em></h2>
+
+    <div class="essay-feature reveal reveal-delay-1">
+      <div class="essay-cover-col">
+        <div class="essay-cover-frame essay-hover-media" data-video="docs/essay.mp4">
+          <a href="essay/indexeng.html" aria-label="Discover ESSAYS">
+            <img src="assets/images/tapaessey.jpg" alt="Cover of the forthcoming ESSAYS by Felden Vareth" loading="lazy">
+            <video
+              class="essay-hover-video"
+              muted
+              playsinline
+              loop
+              preload="none"
+              poster="assets/images/tapaessey.jpg"
+            ></video>
+          </a>
+       <!--   <span class="essay-coming">COMING SOON</span>-->
+        </div>
+      </div>
+
+      <div class="essay-brand-card">
+        <div class="essay-brand-topline">
+          <span>PUBLICATIONS</span>
+          <span class="essay-brand-dot"></span>
+          <span>ESSAYS</span>
+        </div>
+
+        <p class="essay-kicker">FROM THE FICTIONAL UNIVERSE TO REAL QUESTIONS</p>
+        <h3>A look at what it means to be human through science, technology and reflection.</h3>
+
+        <p class="essay-copy">
+          A collection of essays that takes some of the questions running through EIDOS and explores them beyond fiction: consciousness, the body, intelligence, evolution, identity and artificial intelligence.
+        </p>
+
+        <div class="essay-signature" aria-label="Felden Vareth — EIDOS Essays">
+          <span class="essay-signature-mark">E</span>
+          <div>
+            <strong>FELDEN VARETH</strong>
+            <small>EIDOS · ESSAYS</small>
+          </div>
+        </div>
+
+        <a class="btn-primary essay-btn" href="essay/indexeng.html">
+          Discover the essays <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== ESSAYS / COMING SOON ===== */
+.essay-section {
+  position: relative;
+  padding: 110px 0;
+  overflow: hidden;
+}
+
+.essay-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -220px;
+  top: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197,164,106,.12) 0%, rgba(197,164,106,0) 70%);
+  pointer-events: none;
+}
+
+.essay-feature {
+  max-width: 1120px;
+  margin: 64px auto 0;
+  display: grid;
+  grid-template-columns: minmax(320px, .96fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: 52px;
+}
+
+.essay-cover-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.essay-cover-frame {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 13px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.018));
+  box-shadow: 0 30px 70px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.essay-cover-frame::after {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.essay-cover-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Hover video for the ESSAYS cover */
+.essay-hover-media {
+  overflow: hidden;
+}
+
+.essay-hover-media > a {
+  display: block;
+  position: relative;
+}
+
+.essay-hover-media img,
+.essay-hover-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.essay-hover-media .essay-hover-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  background: #000;
+}
+
+.essay-hover-media.is-playing .essay-hover-video {
+  opacity: 1;
+}
+
+.essay-hover-media.is-playing img {
+  opacity: 0;
+}
+
+.essay-hover-media img {
+  transition: opacity .3s ease;
+}
+
+.essay-coming {
+  position: absolute;
+  top: 28px;
+  right: -12px;
+  padding: 9px 15px 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  font-weight: 600;
+  color: #0b1020;
+  background: #d8c096;
+  box-shadow: 0 10px 28px rgba(0,0,0,.28);
+}
+
+.essay-brand-card {
+  position: relative;
+  min-height: 100%;
+  padding: 44px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+    rgba(8,12,24,.54);
+  box-shadow: 0 26px 70px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.essay-brand-card::before {
+  content: "E";
+  position: absolute;
+  right: -16px;
+  bottom: -88px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21rem;
+  line-height: 1;
+  font-weight: 300;
+  color: rgba(255,255,255,.022);
+  pointer-events: none;
+}
+
+.essay-brand-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(216,192,150,.72), transparent);
+}
+
+.essay-brand-topline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .23em;
+  color: rgba(255,255,255,.62);
+}
+
+.essay-brand-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d8c096;
+}
+
+.essay-kicker {
+  margin: 0 0 12px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: .72rem;
+  line-height: 1.55;
+  letter-spacing: .19em;
+  color: #d8c096;
+}
+
+.essay-brand-card h3 {
+  max-width: 680px;
+  margin: 0 0 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 1.05;
+  color: #fff;
+}
+
+.essay-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 0 16px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.80);
+}
+
+
+.essay-signature {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 20px 0 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.essay-signature-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216,192,150,.55);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.65rem;
+  color: #d8c096;
+}
+
+.essay-signature strong,
+.essay-signature small {
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.essay-signature strong {
+  margin-bottom: 4px;
+  font-size: .74rem;
+  letter-spacing: .16em;
+  color: rgba(255,255,255,.86);
+}
+
+.essay-signature small {
+  font-size: .58rem;
+  letter-spacing: .20em;
+  color: rgba(255,255,255,.42);
+}
+
+.essay-btn {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.essay-btn i {
+  font-size: .78em;
+  transition: transform .25s ease;
+}
+
+.essay-btn:hover i {
+  transform: translateX(4px);
+}
+
+
+@media (max-width: 900px) {
+  .essay-section { padding: 88px 0; }
+
+  .essay-feature {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 720px;
+  }
+
+  .essay-cover-frame {
+    width: min(82vw, 390px);
+  }
+
+  .essay-brand-card {
+    padding: 40px 34px 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  .essay-feature { margin-top: 34px; }
+
+  .essay-brand-card {
+    padding: 34px 24px 30px;
+  }
+
+  .essay-brand-card h3 {
+    font-size: 2.05rem;
+  }
+
+  .essay-copy {
+    font-size: .95rem;
+    line-height: 1.72;
+  }
+
+  .essay-coming {
+    top: 22px;
+    right: -8px;
+    font-size: .60rem;
+    padding: 8px 11px 7px;
+  }
+}
+</style>
+
+<script>
+/* ===== HOVER VIDEO · ESSAYS ===== */
+(function () {
+  const card = document.querySelector('.essay-hover-media');
+  if (!card) return;
+
+  const video = card.querySelector('.essay-hover-video');
+  const src = card.dataset.video;
+  if (!video || !src) return;
+
+  const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo() {
+    if (video.dataset.loaded === 'true') return;
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo() {
+    loadVideo();
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
+    }
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo() {
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadVideo();
+          obs.unobserve(card);
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+    observer.observe(card);
+  }
+
+  if (!isTouchDevice) {
+    card.addEventListener('mouseenter', playVideo);
+    card.addEventListener('mouseleave', stopVideo);
+  } else {
+    const link = card.querySelector('a');
+    card.addEventListener('click', function (e) {
+      if (!card.classList.contains('is-playing')) {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!card.contains(e.target)) stopVideo();
+    });
+    if (link) link.addEventListener('blur', stopVideo);
+  }
+})();
+</script>
+
+
+
+
+
+
+<div class="glow-line"></div>
+
+<section id="stories">
+  <div class="container">
+<span class="section-tag reveal">Extra Reading</span>
+<h2 class="section-title reveal">Downloadable <em>Stories and Chapters</em></h2>
+<p class="stories-intro reveal">A selection of standalone stories and chapters, spoiler-free.</p>
+
+
+    <div class="stories-slider-wrap reveal">
+      <button class="stories-arrow stories-arrow-prev" aria-label="Anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="stories-viewport">
+        <div class="stories-track" id="storiesTrack">
+        
+        
+          <article class="story-card">
+            <a href="relatos/posts/007_la_misma_luz.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_007/b.jpg" alt="La misma luz">
+              </div>
+              <div class="story-meta">Relato suelto</div>
+              <h3 class="story-title">La misma Luz</h3>
+            </a>
+          </article>        
+            
+          <article class="story-card">
+            <a href="relatos/posts/006_dos_segundos.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_006/b.jpg" alt="Dos segundos">
+              </div>
+              <div class="story-meta">Relato suelto</div>
+              <h3 class="story-title">Dos segundos</h3>
+            </a>
+          </article>
+          
+          <article class="story-card">
+            <a href="relatos/posts/005_veintiun_grados_al_mediodia.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_005/b.jpg" alt="21 grados al mediodía">
+              </div>
+              <div class="story-meta">Relato suelto</div>
+              <h3 class="story-title">21 grados al mediodía</h3>
+            </a>
+          </article>
+          
+          <article class="story-card">
+            <a href="relatos/posts/004_ecos_de_otra_vida.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_004/b.jpg" alt="Ecos de otra vida">
+              </div>
+              <div class="story-meta">Relato suelto</div>
+              <h3 class="story-title">Ecos de otra vida</h3>
+            </a>
+          </article>
+          
+          <article class="story-card">
+            <a href="relatos/posts/003_el_primer_mono.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_003/b.jpg" alt="El primer mono">
+              </div>
+              <div class="story-meta">Relato suelto</div>
+              <h3 class="story-title">El primer mono</h3>
+            </a>
+          </article>
+
+          <article class="story-card">
+            <a href="relatos/posts/002_la_gran_transferencia.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_002/b.jpg" alt="La Gran Transferencia">
+              </div>
+              <div class="story-meta">Capítulo de Eidos</div>
+              <h3 class="story-title">La Gran Transferencia</h3>
+            </a>
+          </article>
+
+          <article class="story-card">
+            <a href="relatos/posts/001_orfeo.html">
+              <div class="story-image-wrap">
+                <img src="relatos/img/posts/post_001/b.jpg" alt="7416-CBβ (Orfeo)">
+              </div>
+              <div class="story-meta">Capítulo de Eidos</div>
+              <h3 class="story-title">7416-CBβ (Orfeo)</h3>
+            </a>
+          </article>
+          
+
+        </div>
+      </div>
+
+      <button class="stories-arrow stories-arrow-next" aria-label="Siguiente">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="stories-footer reveal">
+      <a class="btn-outline" href="relatos/index.html">
+        <i class="fa-regular fa-file-lines"></i> Acceso a relatos
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<div class="glow-line"></div>
+
+
+
+<section id="blog">
+  <div class="container">
+    <span class="section-tag reveal">Blog</span>
+    <h2 class="section-title reveal">The Persistence of <em>Data</em></h2>
+    <p class="stories-intro reveal">
+      Essays, reflections and materials connected to the universe of EIDOS.
+    </p>
+
+<div class="stories-slider-wrap reveal">
+  <div class="stories-viewport">
+    <div class="stories-track">
+
+      <div class="blog-inline-feature">
+        <div class="blog-inline-img" aria-hidden="true"></div>
+
+        <div class="blog-inline-copy">
+
+          <h3>Beyond the Novel.</h3>
+
+          <p class="blog-inline-kicker">
+            A side library of Eidos
+          </p>
+
+          <p>
+An archive of ideas: digital consciousness, artificial intelligence,
+transhumanism, memory, mortality, science, identity and meaning.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="stories-footer reveal">
+  <a class="btn-outline" href="blog/indexeng.html">
+    <i class="fa-regular fa-newspaper"></i> Visit the Blog
+  </a>
+</div>
+
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<div class="glow-line"></div>
+
+
+
+
+<!-- Download CTA -->
+<section id="download">
+  <div class="container">
+    <div class="download-inner">
+      <span class="section-tag">Start now</span>
+      <h2 class="section-title download-heading">Enter <em>EIDOS</em></h2>
+      <p class="download-intro">Take the first step into the world of EIDOS, the main novel and its universe of stories.</p>
+      
+      <div class="download-ctas">
+        <a class="btn-primary" href="https://www.amazon.es/dp/B0FC5ZDRKR" target="_blank">
+          <i class="fa-brands fa-amazon"></i>Buy Eidos
+        </a>
+        <a class="btn-outline" href="docs/chapters.pdf" target="_blank">
+          <i class="fa-solid fa-file-arrow-down"></i> Free chapters
+        </a>
+
+        <a class="btn-primary" href="https://www.amazon.es/dp/B0GDNQW7VZ" target="_blank">
+          <i class="fa-brands fa-amazon"></i>Buy Eidos Tales
+        </a>
+        <a class="btn-outline" href="docs/eidostalesfirstchapter.pdf" target="_blank">
+          <i class="fa-solid fa-file-arrow-down"></i> Free chapters
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="glow-line"></div>
+
+
+
+
+<!-- Escenas -->
+
+
+<section id="scenes">
+  <div class="container">
+    <span class="section-tag reveal">Scenes</span>
+    <h2 class="section-title reveal">Images and excerpts from <em>EIDOS</em></h2>
+    <p class="stories-intro reveal">Click any image to enlarge it and read the excerpt.</p>
+
+    <div class="scenes-slider-wrap reveal">
+      <button class="scenes-arrow scenes-arrow-prev" aria-label="Previous">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <div class="scenes-viewport">
+        <div class="scenes-track" id="scenesTrack">
+
+          <article class="scene-card">
+            <div class="scene-media">
+              <img
+                src="assets/images/screenshot/01.webp"
+                alt="The Great Transfer"
+                data-caption="The Great Transfer"
+                data-extract="[...]
+When the last humans crossed into Eidos, they did so in silence. There were no speeches left, no broadcasts, no tributes to the end of an era. Only a faint whisper of data migrating through buried lines, a succession of digitized thoughts crossing the threshold into synthetic eternity.
+
+Bodies were stored, incinerated, or abandoned.
+
+No one wanted to look back.
+
+Those who did not want to or could not take the step remained outside the system, among the remnants of the planet. Some survived for years. Others hid. All of them died.
+
+Those who did not make the leap were relatively few, scattered like dying embers. Philosophers who wanted to die with the world, scientists clinging to the physical, skeptics, homeless people worn down by a life of neglect and misery, solitary souls who preferred real exposure to simulation, people who did not reach the transfer centers in time despite the authorities’ efforts, or who, after recently losing loved ones, did not want an eternity without them. There were also those who saw the exodus as an opportunity: those who dreamed of inheriting the empty Earth, of claiming its resources, its cities, and its abandoned power. They believed that without competition they could reshape the world in their own image, absolute masters of a dying planet."
+              >
+            </div>
+            <div class="scene-meta">Scene</div>
+            <h3 class="scene-title">The Great Transfer</h3>
+          </article>
+
+          <article class="scene-card">
+            <div class="scene-media">
+              <img
+                src="assets/images/screenshot/02.webp"
+                alt="The Custodians"
+                data-caption="The Custodians"
+                data-extract="[...]
+With the Great Transfer to Eidos, millions of humans permanently abandoned their physical bodies. And when the last eyes closed, and the lights of the cities began to fade, the Cust-110x activated their first coordinated global surveillance cycle.
+
+There was no ceremony. No farewell. No celebration of entering service, only the subtle hum of the protocol in motion. Humanity submerged itself in its new world. And outside, the Custodian units of the Cust-110x series inherited the watch over a desolate world.
+
+The servers had become sanctuaries of consciousness, vast physical structures housing millions of human lives as data and complex processes.
+
+The servers sustained Eidos, the Custodians sustained the servers. They were the new guardians of souls."
+              >
+            </div>
+            <div class="scene-meta">Scene</div>
+            <h3 class="scene-title">The Custodians</h3>
+          </article>
+
+          <article class="scene-card">
+            <div class="scene-media">
+              <img
+                src="assets/images/screenshot/r04e.webp"
+                alt="Rian"
+                data-caption="Rian"
+                data-extract="[...]
+He moved closer to the window. Below, a small group was also returning, walking in an uneven line that took up half the sidewalk. One carried a broken sign. Another dragged his feet. None of them spoke. Their movements held a mix of exhaustion and frustration that still pushed them forward.
+
+Rian rested his hand against the glass. It was cold. Without thinking about big changes, systems, or theories, he focused on his life and the only thing he knew for certain: at home, time collapsed over him; outside, at least, he found meaning. Even so, everything remained the same. Perhaps slightly worse.
+
+He stepped away from the window. He looked again at the children as he adjusted the blanket over the youngest and turned off the kitchen light. His body felt tense and, at the same time, more tired and awake than in the morning.
+
+He knew there would be more nights like that. When they came, he would be there again.
+It was the only place where he truly felt alive. It was the only thing still keeping him standing."
+              >
+            </div>
+            <div class="scene-meta">Scene</div>
+            <h3 class="scene-title">Rian</h3>
+          </article>
+
+          <article class="scene-card scene-card--video">
+            <div class="scene-media">
+              <button
+                class="scene-video-btn"
+                type="button"
+                data-video-src="docs/presentacion2.mp4"
+                data-caption="Presentation Video"
+                data-extract="Presentation video. Close this screen to watch the video."
+              >
+                <img src="assets/images/screenshot/rel1.webp" alt="Presentation Video">
+                <span class="scene-play"><i class="fa-solid fa-play"></i></span>
+              </button>
+            </div>
+            <div class="scene-meta">Video</div>
+            <h3 class="scene-title">Presentation</h3>
+          </article>
+
+          <!-- (continúa igual con el resto, ya traducido en el mismo estilo) -->
+
+        </div>
+      </div>
+
+      <button class="scenes-arrow scenes-arrow-next" aria-label="Next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="zoom-overlay" id="zoomOverlay">
+    <div class="zoom-dialog">
+      <button class="zoom-close" id="zoomClose" type="button" aria-label="Close">×</button>
+      <div class="zoom-content">
+        <figure class="zoom-image">
+          <img id="zoomImg" src="" alt="">
+          <figcaption id="zoomCaption"></figcaption>
+        </figure>
+        <div class="zoom-text">
+          <div class="zoom-text-inner" id="zoomText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+<div class="glow-line"></div>
+
+
+
+
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="container">
+    <span class="section-tag reveal">Readers</span>
+    <h2 class="section-title reveal">Some of the<br><em>reviews</em></h2>
+
+    <div class="reviews-rating reveal">
+      <div class="reviews-stars">
+        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <span class="reviews-count">                           </span>
+    </div>
+    <!-- NIVEL 1: dos categorías -->
+    <div class="rv-l1 reveal" id="rv-root">
+
+      <!-- ══ CATEGORÍA: EIDOS ══ -->
+      <div class="rv-cat" data-group="l1">
+        <button class="rv-cat-btn" aria-expanded="false">
+          <span class="rv-cat-toggle"><i class="fa-solid fa-plus"></i></span>
+          <span class="rv-cat-label">EIDOS</span>
+          <span class="rv-cat-count">                      </span>
+          <span class="rv-cat-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+        </button>
+        <div class="rv-cat-body">
+          <div class="rv-l2" data-group="eidos">
+          
+
+
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">30/05/2026</span>
+                <span class="rv-name">Eduardo V — Una propuesta sugerente sobre la evolución humana <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">
+
+
+Una propuesta de distopía filosófica con un planteamiento original y ambicioso. A través de la idea de una humanidad que decide abandonar el mundo físico para refugiarse en una especie de memoria virtual, la novela invita a reflexionar sobre la identidad, la tecnología y el futuro de nuestra especie. Una lectura especialmente interesante para quienes disfrutan de las obras que plantean preguntas y exploran ideas más allá de la acción
+          
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+
+
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">20/05/2026</span>
+                <span class="rv-name">Juan — Un libro que te hará pensar.</span>
+              </button>
+              <div class="rv-body">
+
+
+Estamos ante un libro que podría ser lectura obligatoria académicamente hablando. Es perfecto para crear grupos y disertar sobre los temas que en él se plantean.
+<br>
+Ha habido momentos en los que he sentido que estaba leyendo una distopía dentro de un mundo de ciencia ficción y que me hacía pensar mucho. Lo que tengo claro es que me ha encantado.
+<br>
+Está muy bien escrita con un dominio de todo lo relacionado con la ciencia,la robótica,la física,... El autor está muy versado en estos temas y ha creado un mundo en el que,quizá algún día,se llegue a vivir.
+<br>
+Felden,haciendo un guiño a Michael Ende con su historia interminable,nos trae una trama con la que no paras de hacerte preguntas. Te hace reflexionar y plantea debates en todos los ámbitos del ser humano -y lo que lo rodea- como concepto físico y mental (salud,apariencia,carácter,la vida,la mvert3,la naturaleza...). Debido a ello,consigue que tus neuronas no dejen de trabajar; eso me fascina.
+          
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+          
+
+
+
+
+
+
+          
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">15/05/2026</span>
+                <span class="rv-name">Daniel — Un libro maravilloso</span>
+              </button>
+              <div class="rv-body">
+
+
+Eidos me ha parecido una novela de ciencia ficción con ideas muy potentes y muy bien desarrolladas. He disfrutado mucho de toda la lectura, pero especialmente de cómo aborda la terraformación de la Tierra y de todo el capítulo relacionado con el universo, que me pareció fascinante.
+<br>
+Además, tiene algo que para mí es muy difícil de conseguir: despertar emoción a través de sus ideas. Hacía mucho tiempo que una novela de ciencia ficción no lograba transmitirme esa sensación.
+<br>
+Una lectura muy recomendable para quienes disfrutan de la ciencia ficción con grandes conceptos y reflexión de fondo.
+
+          
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">24/03/2026</span>
+                <span class="rv-name">David — De lectura obligada</span>
+              </button>
+              <div class="rv-body">
+              
+Os va a sorprender muchisimo esta novela, tanto como a mi🥰
+<br>
+Sinopsis: 👇
+<br>
+●Cuando la tierra queda reducida a miseria,el ser humano con ayuda de la IA crea un espacio llamado
+<br>
+EIDOS en el que la muerte ya no es una opinión.
+<br>
+Los custodios,seres robóticos que el hombre ha creado con su tecnología, son los encargados de velar por este nuevo mundo virtual en el que reside la mente consciente de las personas.
+<br>
+Ellos a la vez,aun siendo inteligencia artificial, empiezan a cuestionarse aspectos de la vida llegando a conclusiones que ni el mismo ser humano es capaz de ver.
+<br>
+Algo tan sencillo como el aleteo de una abeja despierta en ellos la curiosidad.
+<br>
+Por otra parte, en EIDOS la humanidad sigue cometiendo los mismos errores de siempre sin aprender del pasado.
+<br>
+EIDOS es una novela de ciencia ficción que te hace pensar mucho sobre la vida y la forma de vivir del ser humano dejando puertas abiertas a la reflexión.
+Imagen del cliente
+              
+              <br><br><a class="review-link" href="https://www.amazon.es/dp/B0FB57Q9L7/ref=cm_cr_srp_d_product_top?ie=UTF8#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">09/03/2026</span>
+                <span class="rv-name">Esmeralda M. — Un viaje que cuestiona qué significa estar vivo</span>
+              </button>
+              <div class="rv-body">
+              Eidos es una novela de ciencia ficción, sí, pero también una reflexión profunda sobre lo que significa ser humano cuando la tecnología elimina aquello que siempre nos ha definido: la fragilidad, el tiempo y la muerte.
+<br>
+
+Desde el inicio, la historia plantea una idea tan fascinante como inquietante: la humanidad ha abandonado la Tierra y ha trasladado su consciencia a un entorno digital perfecto llamado Eidos. Allí no existe la enfermedad, el envejecimiento ni la muerte. En teoría, es el sueño de cualquier civilización. Pero conforme avanzas en la lectura, empiezas a preguntarte lo mismo que plantea el propio libro: ¿qué pasa cuando lo que nos hacía humanos desaparece?
+<br>
+
+Uno de los aspectos que más me atrapó fue cómo la novela construye su mundo. Antes incluso de entrar en la historia principal, el libro te sumerge en el debate filosófico y científico que llevó a la llamada “Gran Transferencia”. Las preguntas que aparecen son tan potentes que es imposible no detenerse a pensarlas: ¿Debemos conservar emociones como la ira o la tristeza? ¿Tiene sentido eliminar el sufrimiento? ¿Puede existir una vida plena si ya no existe la muerte?
+<br>
+
+Lo interesante es que el libro no da respuestas cerradas. Más bien abre puertas.
+<br>
+
+La historia avanza a través de varias perspectivas, entre ellas Narél y Elise, que viven dentro de Eidos y comienzan a cuestionar si ese mundo perfecto realmente lo es. Pero, para mí, uno de los elementos más originales de la novela es lo que sucede fuera del mundo virtual.
+<br>
+
+Mientras los humanos viven en la simulación, en la Tierra quedan los Custodios: androides diseñados únicamente para mantener los servidores que sostienen a la humanidad digital. No tienen emociones ni conciencia… o eso se supone. Sin embargo, poco a poco algo cambia en ellos.
+<br>
+
+Y aquí aparece uno de los personajes más fascinantes del libro: Orfeo, un Custodio que empieza a observar el mundo físico con curiosidad. A través de su mirada, redescubrimos la belleza de cosas que los humanos habían dejado atrás: el vuelo de un insecto, una flor abriéndose, el viento moviendo las hojas. Es un contraste muy poderoso: mientras la humanidad vive en una perfección artificial que empieza a vaciarse de significado, son las máquinas las que comienzan a aprender el valor de lo real.
+<br>
+
+El estilo del libro también me sorprendió. A pesar de la densidad de las ideas que plantea (identidad, memoria, moralidad, religión, tecnología) la lectura fluye con facilidad. Combina reflexión con momentos narrativos que mantienen la curiosidad constantemente. No es una ciencia ficción fría o puramente técnica; tiene un tono íntimo, casi contemplativo en algunos pasajes.
+<br>
+
+Además, algo que me gustó mucho es que la novela no se limita a imaginar un futuro tecnológico, sino que utiliza ese escenario para hablar de nosotros ahora: de nuestras decisiones como especie, de nuestra relación con la naturaleza y de la eterna pregunta sobre qué nos hace humanos.
+<br>
+
+En definitiva, “Eidos” es una novela que mezcla ciencia ficción con filosofía de una manera muy accesible. No es solo una historia sobre un mundo digital o sobre inteligencia artificial; es una invitación a reflexionar sobre la vida, la identidad y el valor de lo imperfecto.
+<br>
+
+Si disfrutas de la ciencia ficción que plantea preguntas profundas y deja ideas resonando mucho tiempo después de terminarla, este libro merece completamente la pena. Porque al final, entre servidores, androides y mundos virtuales, la novela nos recuerda algo muy sencillo y muy difícil de aceptar: quizá lo que da sentido a la vida es precisamente que no sea eterna.
+<br><br>
+
+<a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2SKYWVTD3KIPK/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">25/02/2026</span>
+                <span class="rv-name">E — No puedes parar de leer</span>
+              </button>
+              <div class="rv-body">
+              
+              Leí esta novela en un grupo de lectura y no puedo estar más contenta. La trama engancha desde el principio. Una historia de ciencia ficción pero con un toque real que te hace reflexionar sobre el futuro de la humanidad. Enhorabuena al autor.<br><br>
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2CJ4Y36NXII9V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">23/02/2026</span>
+                <span class="rv-name">SN — Un libro que te hará reflexionar <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">
+📚 Eidos de Felden Vareth
+<br>
+💫 La Tierra agoniza lentamente, sin posibilidad de retorno. El clima se ha vuelto impredecible, las aguas y los suelos están contaminados, la atmósfera se desvanece y la humanidad parece condenada. En lugar de intentar reparar sus errores, la sociedad toma una decisión radical: abandonar el cuerpo físico y trasladar el mundo —y sus consciencias— a una realidad simulada llamada Eidos.
+<br>
+💫 Tras años de debates, llega por fin el momento de la Gran Transferencia. En Eidos, la muerte y la enfermedad dejan de existir. La vida continúa exactamente en el punto donde se detuvo en la Tierra, mientras que en el mundo físico los Custodios se encargan de mantener los servidores que ahora albergan a toda la humanidad.
+<br>
+💫 Todo parece funcionar a la perfección. Los humanos viven sin preocupaciones, libres de las amenazas que los perseguían en la Tierra. Los Custodios cumplen su función: son autónomos, sin emociones ni consciencia. Pero… ¿qué ocurriría si algo cambiara en ese sistema aparentemente perfecto?
+<br>
+❣️ Este libro entró directo en mi lista de deseos desde que leí la reseña de Erikkabooks, y no me ha decepcionado en absoluto. Han pasado ya unos días desde que lo terminé y sigo dándole vueltas a muchas de las cuestiones que plantea. Es de esas lecturas que se quedan resonando, que te acompañan incluso cuando cierras el libro.
+<br>
+❓ Nos encontramos ante una humanidad al borde del colapso, obligada a tomar una decisión extrema. Entre todas las opciones posibles, eligen “mudarse” a una nueva realidad: una Tierra simulada donde no existe la enfermedad ni la muerte, donde todo lo que nos define como humanos se conserva… o eso creen. Y aquí surge la primera gran pregunta: ¿Qué nos hace realmente humanos? ¿Qué se debe trasladar a esa nueva consciencia virtual? ¿Todo? ¿Solo lo mejor de nosotros? ¿Qué dejamos atrás para seguir siendo quienes somos? A lo largo de la novela, estas cuestiones se entrelazan con otras igual de profundas, creando una lectura que invita a la reflexión constante.
+<br>
+💡 Por un lado, tenemos ese mundo virtual donde la humanidad continúa su vida. Por otro, los Custodios, encargados de mantener Eidos en funcionamiento. Su misión es simple: que nada falle. No sienten, no desean, no piensan… hasta que una chispa de curiosidad amenaza con alterar el equilibrio.
+<br>
+📖 La historia avanza a través de las perspectivas de Narél y Elise, que tras años en Eidos empiezan a cuestionarse si ese mundo perfecto lo es realmente. También seguimos a Orfeo, un Custodio cuya inesperada evolución podría cambiarlo todo.
+<br>
+ℹ️ Aunque es una novela de ciencia ficción, su carga filosófica es enorme. Plantea preguntas profundas, incómodas, necesarias. Es imposible no ver reflejos de nuestra propia sociedad: la frustración, las desigualdades, la soledad, la búsqueda de sentido… En ambos mundos —el físico y el virtual— se repiten patrones que conocemos demasiado bien. Y también es inevitable sentir vértigo al imaginar hacia dónde podríamos dirigirnos como especie.
+<br>
+⁉️ En casa ha generado debate, reflexión y muchas conversaciones. Es uno de esos libros que no solo lees: lo piensas y lo discutes. En resumen, una lectura perfecta para quienes disfrutan de la ciencia ficción, de las historias que combinan tecnología, ética y filosofía, y de los libros que te obligan a mirarte por dentro. Os la recomiendo mucho.
+<br><br>
+
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R34I1U58PL44GM/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">11/02/2026</span>
+                <span class="rv-name">Javier — Muy, muy recomendable. Una lectura distinta, inteligente y provocadora.</span>
+              </button>
+              <div class="rv-body">Eidos, de Felden Vareth, es una novela que propone una exploración filosófica profunda del futuro humano. Parte de una premisa inquietante y actual: ante el colapso ecológico y la fragilidad de nuestra especie, la humanidad decide trascender la biología y transferir su conciencia a un entorno digital perfecto. Desde ahí, el autor no se limita a imaginar un avance tecnológico, sino que disecciona sus implicaciones existenciales.
+<br>
+La obra reflexiona sobre qué perdemos y qué ganamos al abandonar el cuerpo, el tiempo limitado y la vulnerabilidad que nos define. En un mundo sin enfermedad, sin muerte y sin límites físicos, surge una pregunta central: ¿puede existir una vida verdaderamente significativa cuando desaparecen el riesgo, la escasez y el final? La novela no ofrece respuestas cerradas; en cambio, construye un espacio de duda deliberada que obliga al lector a posicionarse.
+<br>
+Más que una historia de acción, es una narración introspectiva, de ritmo pausado y tono reflexivo. Funciona como un espejo de nuestra época, marcada por la fe en la tecnología y el deseo de optimización constante. Eidos cuestiona si la perfección técnica equivale a plenitud humana o si, por el contrario, aquello que intentamos superar —la fragilidad, la finitud, la imperfección— es precisamente lo que da valor a nuestra experiencia.
+<br>
+Es una lectura especialmente recomendable para quienes disfrutan de la ciencia ficción especulativa con carga filosófica, cercana al ensayo existencial. No busca entretener con espectáculo, sino provocar reflexión duradera. Al terminarla, lo más probable es que el lector no se quede con una conclusión clara, sino con una serie de preguntas que siguen resonando.
+<br>
+Muy, muy recomendable. Una lectura distinta, muy entretenida, interesante y muy bien escrita, que demuestra que la ciencia ficción puede ser tanto estimulante como profundamente reflexiva.<br><br>
+              
+              
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3RWCMLZ87S569/ref=cm_cr_srp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">10/02/2026</span>
+                <span class="rv-name">Natalia — Espectacular!</span>
+              </button>
+              <div class="rv-body">
+             🌍 La Tierra colapsa gracias a las acciones de los humanos, contaminación, erosión, capa de ozono al límite, superpoblación, desforestación......todo ello sumado, hace que vivir en el planeta sea imposible. Cuando ya no queda nada que exprimir, todos los humanos son clonados en avatares, dejando atrás su cuerpo físico para poder sobrevivir en Eidos.
+<br>
+🟦 Eidos fue creado para que los humanos pudiesen seguir viviendo, sin cuerpo sí, pero también sin enfermedades ni muerte. Un sueño que siempre se ha perseguido; ser inmortal, sin tener en cuenta lo que ello puede conllevar....….
+<br>
+🤖 Los Custodios son los encargados de guardar Eidos, androides de aspecto antropomorfo; no cuestionan, ejecutan, no dudan ni razonan como los humanos, hacen lo que se espera de ellos, sin fallos, sin errores.
+<br>
+🤖 Pero mientras los humanos viven una vida de mentira como en un bucle sin fin y pierden las cosas que realmente los hacían humanos antaño, fuera, en la Tierra, algo está cambiando. Mientras otros colapsaban ante preguntas sin respuesta, uno de ellos no colapsa, no cuestiona, sólo observa, deja fluir......Una consciencia ha nacido.
+<br>
+🤖 Una consciencia que no interviene cuando una flor se abre, que no actúa cuando una abeja vuela hacia esa flor, sólo mira lo que ocurre a su alrededor, es capaz de ser simplemente un espectador de la belleza que es la Tierra y todo lo que en ella sucede cuando no está el ser humano.
+<br>
+🌍 Una brisa, un pétalo meciéndose al viento, un insecto, el vuelo de un pájaro libre, una nube en la lejanía.......toda esa belleza va calando poco a poco en los Custodios, que saben estar sin juzgar, sin arrasar y ahí, con ellos, empieza el mundo a ser como realmente es, bello, perfecto, único.
+<br>
+🤖 Un libro que me ha sorprendido muy gratamente, de pocos diálogos y muy bien escrito y explicado todo. Con mil preguntas de la vida, del porqué......lo he disfrutado muchísimo, conociendo la vida en Eidos de la mano de Narél y Elisa y redescubriendo la Tierra gracias a Orfeo y Tessalon. Mil gracias al escritor por la oportunidad de leer su obra, me ha parecido una auténtica maravilla. 💜
+<br>
+Y vosotros, sabéis decirme qué es lo que hace a un humano ser humano??
+<br><br>
+              
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2EHOAWF9UUMC5/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">25/01/2026</span>
+                <span class="rv-name">César G — Magnífica novela de ciencia ficción <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">
+  Compré el libro por recomendación de un amigo y lo cierto es que ha superado mis expectativas tratándose de un autor nuevo. La lectura se me hizo corta, el libro es muy entretenido y bien escrito, todo un ejercicio de imaginación, muy original como nos gusta a los amantes de la ciencia ficción pero a la vez integra como hilo conductor la naturaleza humana, lo que da pie a la lectura sosegada y a la reflexión. Lo recomiendo al 100%. Tanto es así que acabo de comprar el segundo libro que publica el autor también sobre el mundo que crea en Eidos, espero que mantenga el gran nivel del primero.
+              
+ <br><br>
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1S3TQWZS1747/ref=cm_cr_arp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">18/01/2026</span>
+                <span class="rv-name">Abro — Lectura obligatoria</span>
+              </button>
+              <div class="rv-body">
+              Esta es una novela que no se conforma con contar una historia, sino que te empuja a preguntarte cosas. Muchas. Incómodas. Y necesarias.
+<br>
+Felden Vareth sitúa su relato entre la ciencia ficción y el existencialismo, en un futuro donde la humanidad ha abandonado la Tierra y sus cuerpos para vivir como conciencias digitales en un mundo virtual perfecto: Eidos.
+<br>
+La premisa es tan fascinante como inquietante. Allí no hay enfermedad, ni envejecimiento, ni límites físicos. Pero cuando desaparece la muerte, también empiezan a desdibujarse el sentido, la identidad y las consecuencias. Eidos, que nace como utopía, se convierte poco a poco en un espacio donde lo humano se diluye. Y cuando ocurre un asesinato en un mundo donde nada debería terminar, todo cambia.
+<br>
+La novela se estructura alternando dos planos: los humanos que habitan Eidos y los Custodios, androides encargados de mantener la infraestructura que lo sostiene.
+<br>
+Aquí aparece uno de los grandes aciertos del libro: Orfeo. Un robot cuya evolución resulta, paradójicamente, lo mas humano de la novela. Su “despertar” ante la belleza del mundo físico, su asombro, su miedo a la soledad y a no encajar, lo convierten en el personaje más humano de la historia, pese a no serlo. Su arco es profundamente poético y emocional, y plantea una pregunta clave: ¿la humanidad depende del cuerpo o de la conciencia?
+<br>
+Al vivir en un mundo digital perfecto, ¿sigue teniendo sentido la vida?
+<br>
+Eidos no busca respuestas cerradas. Al contrario: abre puertas. Reflexiona sobre la memoria, la identidad, la religión, la justicia, la tecnología y el propósito vital. A veces se siente como una novela, otras como un ensayo disfrazado de ficción, pero siempre mantiene un tono íntimo y reflexivo. Su ritmo es pausado y exige calma, pero recompensa con ideas que se quedan resonando mucho después de cerrar el libro.
+<br>
+Esta no es una lectura para quien busque acción constante, sino para quien disfrute de historias que incomodan, cuestionan y obligan a mirarse hacia dentro. Porque al final, entre inteligencias artificiales, mundos virtuales y preguntas sin respuesta, Eidos nos recuerda algo muy simple y muy difícil de aceptar: la vida está en lo frágil, en lo finito y en lo que puede perderse.
+              <br><br>
+              
+              <a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MFGTYA1WKVX/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">16/01/2026</span>
+                <span class="rv-name">Antonio M — Peligro. Este libro te hará pensar</span>
+              </button>
+              <div class="rv-body">Si buscas una novela de ciencia ficción al uso, Eidos no es lo tuyo. No hay aventuras, ni peleas, ni se salva nadie en un abismo en el último segundo.
+<br>
+Eidos es algo mejor.
+<br>
+En este libro, el autor reflexiona sobre cosas importantes, quizás las que realmente importan: lo que nos hace humanos y lo que no, lo que merecería la pena dejar atrás y lo que deberíamos conservar o cómo la propia mortalidad del ser humano tiene también impactos positivos. Todo ello mientras alguien es cada vez más persona, y alguien deja poco a poco de serlo.
+<br>
+Felden te invita a pensar. Pone sobre la mesa esas preguntas que normalmente no nos hacemos, porque estamos embebidos en el día a día, corriendo como pollos sin cabeza. O como humanos sin humanidad.
+<br>
+Es cosa tuya abrir Eidos o no. Cuidado. Es peligroso. Te hará pensar
+<br>
+... oso. Te hará pensar...<br>
+... oso. Te hará pensar...
+<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3BZRT2LEEBT6Y/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">15/12/2025</span>
+                <span class="rv-name">Raúl R — ¡Fascinante! <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">En Eidos, Felden Vareth nos invita a un viaje literario que combina la especulación filosófica con la tensión narrativa de la ciencia ficción. La premisa es tan inquietante como fascinante: la humanidad, al borde del colapso y con un planeta exhausto, decide transferir sus consciencias a un mundo virtual que replica el nuestro. Este espacio, bautizado como Eidos, mantiene las mismas leyes físicas, pero introduce variaciones que alteran radicalmente la experiencia humana: no existe el envejecimiento, las personas pueden rejuvenecer a voluntad y las discapacidades han sido eliminadas. Lo que en apariencia podría parecer un paraíso digital pronto se revela como un terreno lleno de dilemas éticos, sociales y existenciales.<br>
+                
+                La novela despliega con maestría las tensiones que surgen en este nuevo mundo. Si la mortalidad y la fragilidad desaparecen, ¿qué ocurre con la identidad, con el sentido de la vida, con la memoria del dolor que nos constituye? Vareth no se limita a plantear un escenario futurista, sino que lo convierte en un laboratorio antropológico donde se examinan las consecuencias de una humanidad liberada de sus límites biológicos. El resultado es un espejo oscuro que refleja nuestras aspiraciones y temores más profundos.<br>
+                
+                Uno de los aspectos más originales de la obra es la presencia de los androides (llamados Custodios) encargados del mantenimiento de los servidores de Eidos. Estos seres, inicialmente concebidos como simples guardianes técnicos, comienzan a evolucionar al entrar en contacto con la información almacenada por los humanos. Su despertar intelectual y emocional abre una segunda línea narrativa que cuestiona la frontera entre lo humano y lo artificial. ¿Qué significa ser consciente? ¿Quién tiene derecho a decidir sobre el futuro de una civilización virtual? La interacción entre el conocimiento humano y los androides añade capas de complejidad y convierte la novela en un diálogo constante entre filosofía y ciencia.
+                <br>
+                A pesar de la densidad temática, el estilo de Vareth es sorprendentemente accesible. Con un tono directo y didáctico, logra que conceptos abstractos como identidad, trascendencia o memoria se presenten de manera clara y atractiva. El lector nunca se siente abrumado; al contrario, se ve arrastrado por una narración que combina reflexión y ritmo narrativo con gran equilibrio. La obra se lee con fluidez, pero deja huellas profundas que invitan a la relectura y al debate. En definitiva, Eidos es una novela que trasciende los límites del género. A caballo entre la antropología y la filosofía, ofrece una visión provocadora sobre el futuro de la humanidad y la relación con sus propias creaciones. Una lectura fascinante, accesible y estimulante que recomiendo encarecidamente a quienes buscan historias que no solo entretengan, sino que también inviten a pensar.
+              <br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R35C50C7UTTBW4/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">12/12/2025</span>
+                <span class="rv-name">Cris — Una novela para pensar y reflexionar <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Esta novela nos presenta un futuro lejano pero no imposible. La manera en la que el autor nos narra una posible trascendencia humana se acerca más a lo filosófico que a lo novelesco. Así, este trabajo recuerda más a un ensayo pero escrito con tal sutileza que trata temas como: la política, economía o religión, con un tono y una claridad que deja al alcance de cualquiera su contenido profundo y reflexivo.<br>
+               
+                En definitiva un trabajo con mucho valor, no solo por su narrativa sino por su mensaje.<br>
+                
+              10/10<
+              br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/RXJF0GBU96WMR/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">23/11/2025</span>
+                <span class="rv-name">Libros soñados — Un libro futurista que aborda temas actuales</span>
+              </button>
+              <div class="rv-body">Este libro te atrapa desde la primera página gracias a su mezcla de imaginación lógica y posibilidades futuristas que abordan temas como la inmortalidad y la dominación de la inteligencia artificial, el rumbo de la humanidad, su relación con la tecnología y el eterno anhelo de trascender las propias limitaciones. Ambientada en un mundo futurista, donde los robots custodian a los humanos.<br>
+                
+                La premisa resulta especialmente original y sugerente: la humanidad sobrevive en algo que, paradójicamente, ya no es humano, una creación nacida de la misma especie que está a punto de desvanecerse. Este planteamiento abre paso a una trama dinámica, llena de acción y secuencias rápidas, que conviven con reflexiones existenciales propias del ser humano contemporáneo.<br>
+                
+                El estilo del autor es rico en detalles, lo que estimula la imaginación del lector adentrándote en la historia. Cada capítulo despierta curiosidad y crea la necesidad de descubrir qué ocurrirá después, manteniendo un ritmo envolvente que invita a no soltar el libro.<br>
+                
+                Más allá del entretenimiento, la obra funciona como un espejo crítico. Señala con claridad la senda de autodestrucción hacia la que avanzamos: el agotamiento de los recursos naturales, la dependencia creciente de la tecnología y el dominio progresivo de la inteligencia artificial. El libro se convierte en un grito de advertencia sobre el futuro que estamos construyendo.
+                <br>
+                [...]
+                <br>
+              En definitiva, es un libro que no deja indiferente. No solo entretiene: provoca, cuestiona y empuja al lector a reflexionar sobre quiénes somos, hacia dónde vamos y qué precio estamos dispuestos a pagar por nuestro futuro.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R1XZDPMRHKF8D9/ref=cm_cr_getr_d_rvw_ttl" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">20/11/2025</span>
+                <span class="rv-name">José C — Un futuro de realidad digital <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Acabo de terminar Eidos y todavía estoy dándole vueltas. No es la típica novela de ciencia ficción llena de explosiones, va por otro camino: te mete en un futuro donde la humanidad decide vivir en una realidad digital y, desde ahí, pregunta que significa ser humano. Más que una historia de acción, es una exploración de ideas: consciencia, memoria, justicia, religión, sentido de la vida… y lo hace con un tono cercano, claro y muy humano.
+                <br>
+              Lo que más me ha gustado es que no subestima al lector. Plantea dilemas reales, te obliga a tomar partido y deja espacio para pensar sin dar respuestas concretas. Si te atraen las historias con más profundidad y dos mundos coherentes detrás, Eidos merece mucho la pena.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">04/11/2025</span>
+                <span class="rv-name">Berta — El sentido de la humanidad <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">El torrente de preguntas sobre el sentido de la humanidad, de la vida, de la muerte. La novela explora escenarios soñados —¿Qué pasaría si…?— y cuestiona las consecuencias de esos sueños cumplidos, retando al lector a reflexionar sobre infinidad de cuestiones, para sorprender con un final inquietante.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">30/10/2025</span>
+                <span class="rv-name">Andrés</span>
+              </button>
+              <div class="rv-body">Eidos es una obra de ciencia ficción filosófica con un pulso especulativo muy potente. Invita a pensar: entretiene y, al mismo tiempo, plantea preguntas profundas sobre la condición humana, la tecnología y el futuro. La lectura resulta inmersiva; cada página empuja a cuestionar qué significa ser humano. Su universo permanece en la mente mucho después del final.<br><br><a class="review-link" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Goodreads</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">13/10/2025</span>
+                <span class="rv-name">Ramón — Una intensa y conmovedora experiencia literaria. Absolutamente recomendable.</span>
+              </button>
+              <div class="rv-body">Un libro fascinante, de una riqueza filosófica, literaria y científica extraordinaria. Los personajes y las situaciones que se describen resultan absolutamente creíbles, en un universo en el que la tecnología y la condición humana se entrelazan con maestría. Especialmente conmovedor es el arco de Orfeo, el Custodio que despierta a una consciencia tan nueva como perturbadora. Una lectura que perdurará mucho tiempo en la memoria del lector.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">06/08/2025</span>
+                <span class="rv-name">Eduardo A.V — No te deja indiferente <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Una historia original, amena, que no te deja indiferente. Me he quedado pensando en muchos otros caminos que son posibles sobre la idea base. Es decir, la base es muy muy buena y la trama también, dejando abiertas otras muchas posibilidades. Recomendable.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">05/08/2025</span>
+                <span class="rv-name">Juan V — Extraordinary <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">En este libro hay mucha ciencia ficción y mucha filosofía. Una amable forma de buscar sentido a lo que nos hace humanos y lo que significa estar vivo. Distopía futurista muy bien planteada. Espero pronto otro volumen o la serie de TV, con impaciencia.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">31/07/2025</span>
+                <span class="rv-name">Miguel A.Q — Sorprendente <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Acabo de leer el reciente libro titulado Eidos, escrito por Felden Vareth, y puedo afirmar que hacia mucho tiempo un pensamiento cientifico no me había sorprendido tanto como lo ha hecho este. Ha conseguido unir en una sola obra diferentes temas trascendentales que a veces nos solemos plantear, como son por ejemplo la inmortalidad, la existencia humana, así como el futuro de nuestra especie. Es curioso que emplea constantemente términos científicos de alto nivel, pero de forma, que el que no los llega a entender en su plenitud, no tiene ninguna dificultad en el seguimiento de la obra en general, esa característica es difícil de encontrar en un libro de ciencia ficción pero apoyándose totalmente en la ciencia actual. Si leeis el libro, cosa que os aconsejo, encontrareis situaciones que tal vez ya hayáis pensado, pero con una trascendencia y efectos que van más allá de lo que normalmente imaginamos. Leed el libro, os gustará y sorprenderá.<br><br><a class="review-link" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Goodreads</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">25/07/2025</span>
+                <span class="rv-name">Juanjo P — Una novela fascinante, una paradoja brillante <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Lo humano permanece en lo no humano, las emociones y sensaciones desarrollándose en quienes están programados para entender un mundo sin ellas. ¡Una pasada de historia contada con un rigor impresionante aún siendo ciencia ficción! Lo imposible tendiendo la mano a lo posible. Gracias por esta obra de arte.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">20/07/2025</span>
+                <span class="rv-name">Cliente Amazon — Una gran novela. Muy recomendable. Distinta</span>
+              </button>
+              <div class="rv-body">Una sorpresa de un autor que no conocía. Eidos es una obra que desarma en silencio, sin recurrir al espectáculo. Propone un mundo coherente y al mismo tiempo inquietante, donde las preguntas sobre la identidad, el sentido y el destino de lo humano emergen con naturalidad. El estilo es sobrio, preciso, y logra crear una atmósfera que acompaña el contenido filosófico sin entorpecer el ritmo. Recomendadísimo para quienes disfrutan de obras que perduran más allá del cierre del libro.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">16/07/2025</span>
+                <span class="rv-name">Carlos — Para lectores exigentes a los que les guste reflexionar</span>
+              </button>
+              <div class="rv-body">Todo un descubrimiento este libro, hoy comencé a leerlo y me he leído del tirón más de 140 páginas. La lectura te engancha y lees página tras página sin poder parar, pero reflexionando sobre el pánico que da imaginar lo que podría llegar a ser un mundo como el de Eidos. Además está tan bien escrito y argumentado todo que te llegas a plantear lo que realmente es la consciencia. Me gusta que la trama te describe una historia, pero te hace reflexionar sobre otras muchas historias que se podrían llegar a contar por lo que el potencial que tiene es prácticamente infinito.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">14/07/2025</span>
+                <span class="rv-name">Luis — Novela muy entretenida <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Una novela sorprendente de lectura muy entretenida. Una trama de ciencia ficción que engancha, con un trasfondo que invita a la reflexión.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">14/07/2025</span>
+                <span class="rv-name">Mariano — Una forma distinta de ver el mundo <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Muy recomendable. Es muy interesante.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">06/07/2025</span>
+                <span class="rv-name">Cliente Kindle — Una novela que se queda dentro</span>
+              </button>
+              <div class="rv-body">Eidos es una novela visionaria, una llave que nos permite entrar en el mundo actual con una diferente perspectiva. En Eidos se refleja lo que está pasando hoy en día como un pasado cercano, imaginando un futuro próximo, que recoge las preocupaciones, dudas y conflictos que enfrenta la humanidad. Después de leer la última página, me quedé con el deseo de seguir, de saber más, de volver a empezar desde el principio... se queda dentro y resuena.<br><br><a class="review-link" href="https://www.amazon.it/dp/B0FB57Q9L7" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon Italia</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">30/06/2025</span>
+                <span class="rv-name">Bego — Libro de recomendable lectura <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Esta novela ha sido uno de mis grandes descubrimientos de este verano. Se trata de una obra de ciencia ficción que nos presenta dos mundos y múltiples situaciones que invitan a la reflexión. Cada capítulo podría funcionar como una postal autónoma, pero al leerse en conjunto se entrelazan con delicadeza para formar una novela coherente y profunda. Un libro para leer con atención y dejarse llevar. Totalmente recomendable.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">28/06/2025</span>
+                <span class="rv-name">Luisma <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Muy interesante y muy recomendable su lectura. Distinto a otros libros que he leído. Se ha convertido en uno de mis favoritos.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">20/06/2025</span>
+                <span class="rv-name">Javier G.V — Vale la pena. No te deja indiferente. No es uno más.</span>
+              </button>
+              <div class="rv-body">Hace tiempo que no leo ciencia ficción. Por mis manos han pasado Las Fundaciones de Asimov, algunas de las Odiseas de Clarke, y otros grandes que no menciono por no extenderme. Este no lo voy a olvidar. Es una de esas narraciones que tienen ese "algo" especial que queda en el recuerdo. En mi librería, en la estantería de los brillantes. Muy recomendable.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">16/06/2025</span>
+                <span class="rv-name">Aitor — Muy recomendable <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Me habían recomendado este libro y tenía muchas ganas de leerlo. Muy entretenido y muy filosófico a la vez. Te vas metiendo en la trama desde el principio. Dos mundos paralelos entre lo humano virtual y las máquinas cada vez más humanas... te deja pensativo. Súper recomendable, me ha gustado mucho.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">16/06/2025</span>
+                <span class="rv-name">Casilda — Lectura entretenida y recomendable para cualquier edad <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Muy recomendable. Me ha cautivado desde el principio por su imaginacion lógica y posible. Un libro de entorno futurista pero con una trama muy actual donde el futuro se alínea con el anhelo del ser humano contemporáneo. Su trama mezcla magistramente acción y secuencia ágil de acontecimientos, con las preguntas vitales del hombre del s.XXI.
+                <br>
+                Desde el principio me interesó la originalidad del planteamiento: lo humano sobrevive en algo que no es humano, creado por la humanidad que aun no se ha desvanecido.<br>
+               
+                La lectura ligera pero rica en detalles, consigue mantener la imaginación y la atención del lector, genera curiosidad y necesidad de desvelar lo que viene después.<br>
+              
+              Es un libro que no deja indiferente.<br><br>
+              <a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">16/06/2025</span>
+                <span class="rv-name">Fátima Q.P — Relato inesperado, visionario y genuino <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Voy solo por la página 71 y estoy disfrutando mucho del desarrollo, de cómo el autor se ha tenido que documentar, de la reflexión tan profunda que requiere y de la tremenda imaginación. Lo empecé leyendo como una novela distópica y lo estoy viendo más como una reflexión filosófica que vamos a tener que hacer más pronto que tarde.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="eidos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">04/06/2025</span>
+                <span class="rv-name">Marisa M — Una maravilla de la ciencia ficción, incluso para quienes no somos del género</span>
+              </button>
+              <div class="rv-body">No suelo leer ciencia ficción, pero este libro me enganchó desde el principio. Tiene un ritmo tranquilo, casi hipnótico, y te va metiendo poco a poco en un mundo que da vértigo por lo real que parece. Lo que más me impresionó fue cómo plantea cosas muy humanas sin caer en discursos. Acabé con muchas preguntas en la cabeza. Muy recomendable. Una lectura fascinante, incluso para quienes preferimos otros géneros. Agunos capitulos, como el de "Donde inicia el infinito", me han parecido profundamente poéticos, y otros como el de "7416.." muy emotivos. El entorno futurista y los custodios son la excusa perfecta para acabar preguntándote, de verdad, qué es vivir y dónde esta el valor de la vida. Un final sorprendente.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0FCR5ZPBJ#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+          </div><!-- /rv-l2 eidos -->
+        </div><!-- /rv-cat-body -->
+      </div><!-- /rv-cat EIDOS -->
+
+      <!-- ══ CATEGORÍA: EIDOS RELATOS ══ -->
+      <div class="rv-cat" data-group="l1">
+        <button class="rv-cat-btn" aria-expanded="false">
+          <span class="rv-cat-toggle"><i class="fa-solid fa-plus"></i></span>
+          <span class="rv-cat-label">EIDOS — Tales</span>
+          <span class="rv-cat-count">                         </span>
+          <span class="rv-cat-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </span>
+        </button>
+        <div class="rv-cat-body">
+          <div class="rv-l2" data-group="relatos">
+
+
+
+
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">23/05/2026</span>
+                <span class="rv-name">Daniel — Relatos que te hacen pensar, imaginar, soñar <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">
+              Eidos Relatos me ha parecido una colección de relatos excelente. Cada historia posee identidad propia y aborda conceptos distintos desde perspectivas variadas, lo que aporta riqueza temática y mantiene el interés a lo largo de toda la lectura.
+                <br>
+He disfrutado especialmente de cómo se plantea el surgimiento de la autoconciencia en entidades o programas artificiales. Es un tema frecuente dentro de la ciencia ficción, pero aquí está desarrollado con una lógica interna convincente y verosímil, haciendo que resulte creíble y estimulante.
+  <br>
+En conjunto, es un libro imaginativo, bien construido y con relatos que dejan reflexión una vez terminados. Muy recomendable para quienes disfrutan de la ciencia ficción de ideas.
+<br><br>
+
+<a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+
+
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">21/03/2026</span>
+                <span class="rv-name">Soledad C — Novela importante para el siglo XXI <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Eidos, Relatos es el segundo libro de Felden Vareth. Yo aprecio una propuesta narrativa algo diferente a la del libro anterior. El narrador sigue siendo omnisciente, pero hay unos personajes concretos, quizá almas concretas, que nos llevan a pensar que lo humano, a pesar de todo persiste. El autor combina los escenarios virtuales con la realidad, que nos hace reflexionar, sobre el misterio de la vida. Encontramos el problema de la inmortalidad con reminiscencias literarias de Simón de Beauvoir en su espléndida novela &ldquo;Todos los hombres son mortales &ldquo;,y de Miguel de Unamuno en su &ldquo;San Manuel Bueno, mártir &ldquo;, novelas ambas donde predomina el carácter filosófico y especulativo. La importante novedad que aporta Felden Vareth es la mezcla perfecta entre el tono que estos dos caracteres requieren con el dominio de lo tecnológico. Ello coloca a esta novela en las corrientes actuales de la ciencia ficción reflexiva. En ella encontramos los temas trascendentales que han preocupado a los escritores a lo largo de la historia, tanto de la Filosofía como de la Literatura. Me parece una novela importante que tiene mucho que aportar al lector del siglo xxi.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">11/03/2026</span>
+                <span class="rv-name">Aitor — Ficción. Una realidad futurible que te deja pensativo <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Después de leer el primer libro de Eidos, tenía muchas ganas y curiosidad por leer el de relatos. No me ha defraudado en absoluto! Mantiene la misma línea que el primero, esta vez con experiencias y vivencias particulares de los personajes, &ldquo; relatos&rdquo; de personajes concretos con circunstancias y afrontamientos diferentes.
+                <br>
+                Es un libro muy entretenido y psicológicamente muy bien llevado. Un libro que te deja pensativo incluso tiempo después de leerlo. De los que dejan huella. Totalmente recomendable.
+                <br>
+              Aunque son libros independientes, es mejor leer primero Eidos y el de Relatos después para entender bien el contexto.<br><br><a class="review-link" href="https://www.amazon.es/dp/B0G8HLFJXT#averageCustomerReviewsAnchor" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">03/03/2026</span>
+                <span class="rv-name">Luis F — Me encanta</span>
+              </button>
+              <div class="rv-body">Eidos Relatos mantiene el tono filosófico del primer libro y vuelve a poner sobre la mesa sus preguntas centrales: la consciencia, la identidad, quiénes somos cuando el cuerpo deja de ser necesario, y esa dualidad constante entre el bien y el mal que persiste incluso dentro de un sistema que aspira a la perfección. La diferencia es el enfoque: abandona el marco global y casi histórico de Eidos para acercarse al terreno humano, mostrando cómo esa situación afecta de verdad a personajes concretos, a sus decisiones, a sus dudas, a sus heridas y a su forma de sobrevivir dentro de Eidos.
+                <br>
+                Aunque no es estrictamente fundamental, sí es muy recomendable haber leído Eidos antes, porque este volumen se apoya en ese universo ya construido y muchas claves, referencias y matices ganan sentido con la base del primero. Como conjunto, se siente menos como relatos sueltos y más como una expansión natural del mundo, más íntima, más inquietante, y con hilos que apuntan con claridad a lo que puede venir después.<br>
+               Muy recomendable, sin duda cinco estrellas.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3CIWAXW9WO66V/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">23/01/2026</span>
+                <span class="rv-name">Carlos — Eidos. Relatos, un viaje al detalle del universo Eidos <span class="rv-verified">Compra verificada</span></span>
+              </button>
+              <div class="rv-body">Este es el segundo libro que leo de Felden Vareth, después de haber leído Eidos, la primera parte de la saga. Y conviene decirlo desde el principio: <strong>la lectura del primer libro es prácticamente imprescindible para comprender y disfrutar plenamente de este volumen de relatos.</strong> 
+                <br>
+                En Eidos, el autor se encargaba de construir el gran entorno, el mundo y las bases narrativas sobre las que se sostiene todo lo que viene después. Eidos. Relatos parte de ese universo ya creado y da un paso distinto pero muy acertado: pasa de lo general a lo particular.<br>
+                
+                Mientras que el primer libro se centraba en la historia global de Eidos, este segundo volumen hace algo así como un zoom narrativo, adentrándose en historias concretas, en personajes específicos y en momentos muy determinados del mundo que ya conocemos. El resultado es una colección de relatos, muchos de ellos interconectados, que amplían y enriquecen el universo de forma notable.<br>
+               
+                Algunas de estas historias están excepcionalmente bien presentadas, hasta el punto de dejarte con ganas de leer mucho más sobre ellas. Además, no se limitan a ser relatos aislados: se crean subtramas muy bien trenzadas que dialogan constantemente con las historias principales y con el trasfondo general de Eidos.<br>
+                
+                Uno de los aspectos que más me ha gustado es la sensación constante de potencial creativo. Al leer varios de los relatos, especialmente aquellos en los que Felden Vareth indaga más en el trasfondo, no puedes evitar pensar en la enorme capacidad del autor para crear mundos y submundos, ideas y subideas que se ramifican y te invitan a imaginar nuevos escenarios, nuevas historias y futuros desarrollos. Esto hace que la lectura sea muy adictiva, ya que cada relato parece esconder algo más grande por venir.<br>
+               
+                De hecho, hay un guiño constante a lo que está por llegar en Eidos 3, y la sensación que deja este libro es que la siguiente entrega puede ser algo todavía más ambicioso y de mayor escala.
+                <br>
+                En definitiva, Eidos. Relatos es un gran libro de relatos, que se lee con interés y que no deja indiferente. Amplía el universo de Eidos con inteligencia, profundidad y personalidad propia. Mención especial, en mi caso, a la trama de Nori, que me ha parecido sencillamente un relato de 10 sobre 10.<br>
+                <br>
+              Un libro muy recomendable para quienes ya hayan dado el primer paso en Eidos y quieran seguir explorando, con más detalle y matices, todo lo que este universo tiene por ofrecer.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MZD827FR2KQF/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">22/01/2026</span>
+                <span class="rv-name">Ramón — Un libro profundo, inquietante, excelentemente escrito. Una maravilla.</span>
+              </button>
+              <div class="rv-body">Este es el segundo libro que leo del escritor Felden Vareth. En su día disfruté de su novela &ldquo;Eidos&rdquo;, y en esta ocasión, con los relatos que llevan el mismo título, tengo la sensación de haber conocido todavía con más profundidad (si ello es posible) el increíble universo que, con esta serie, se nos ofrece.<br>
+                &ldquo;Dime, ¿piensas?&rdquo; &ldquo;No. Proceso información&rdquo;. Un diálogo, unas breves líneas… ¡Pero cuántas claves! ¿Qué somos, en realidad? Leí un libro de Antonio Damasio, &ldquo;El error de Descartes&rdquo;, donde se repasan las evidencias que nos llevan a afirmar que &ldquo;el cerebro y el resto del cuerpo constituyen un organismo indisociable, integrado&rdquo;. Pero el mundo de Eidos… nos hará dudar de cualquier premisa. Y ahí radica, creo, el excepcional planteamiento que Vareth nos propone.
+                <br>
+                En la filosofía griega, Eidos significaba, entre otras cosas, &ldquo;esencia&rdquo;. ¿Es eso lo que permanece en nosotros cuando el cuerpo y el mundo físico, tal como lo conocemos, dejan de ser necesarios? Después de la &ldquo;Gran Transferencia&rdquo;, el ser humano alcanza una dimensión que ya no necesita del cuerpo caduco y desgastado por el tiempo: habita en una perfección algorítmica. Y la gran habilidad de este autor es, a mi parecer, mostrarnos que nuestra auténtica &ldquo;esencia&rdquo; no puede escapar de las dudas, las imperfecciones, los traumas del pasado…
+                <br>
+                Los relatos que componen este libro son independientes, pero están entrelazados de manera inteligente. Y es importante, por otro lado, haber leído previamente la novela para descifrar con más elementos el verdadero sentido de muchos de los acontecimientos con los que nos encontraremos. &ldquo;Entre lo que dejamos atrás, lo que recordamos y lo que añoramos ser, somos el presente: un intento frágil de permanecer&rdquo;. Esta bella reflexión se desliza en este fantástico libro, profundo, inquietante, trascendente…
+                <br>
+              Por último, me ha parecido genial que en la edición se alternen dos tonos de color para distinguir aquello que transcurre en Eidos de aquello que ocurre en el mundo real. Una valiosa pista que nos ayuda a concentrarnos en aquello importante, sin obligarnos a estar pendientes de averiguar en qué contexto nos movemos. Una maravilla. Un libro, en resumen, muy recomendable.<br><br><a class="review-link" href="https://www.amazon.es/gp/product/B0G8HLFJXT?ref_=dbs_m_mng_rwt_calw_tpbk_1" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">12/01/2026</span>
+                <span class="rv-name">My little Biblioteca</span>
+              </button>
+              <div class="rv-body">Habiendo leído los dos, siento que el primero es más filosófico (conciencia y ser) y este es más teológico (origen de la vida y la muerte). Mi parte favorita fueron los primeros y los últimos relatos. A lo último me quedé con una intriga tremenda porque continúa con el final del anterior y nos da un indicio más pero nos deja con ganas de leer el próximo... a ver para cuándo sale.<br><br><a class="review-link" href="https://www.goodreads.com/review/show/8212601281" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Goodreads</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">03/01/2026</span>
+                <span class="rv-name">Cliente Amazon — Una continuación valiente, más profunda y más inquietante</span>
+              </button>
+              <div class="rv-body">Eidos Relatos no se limita a continuar la historia del primer libro, la expande y la pone en crisis. Una de las cosas que más me han gustado es el cambio de enfoque narrativo: mientras que Eidos tiene un tono más amplio y casi omnisciente, en Eidos 2 el relato se baja al barro. Se nota más cercano, más humano. No es una novela de acción rápida. Es reflexiva, a veces incómoda, y exige atención. A cambio ofrece algo poco habitual en la ciencia ficción actual: coherencia interna, ambición conceptual y una voz narrativa madura. Muy recomendable para quienes disfrutan de la ciencia ficción filosófica, al estilo de Lem, Chiang o ciertos pasajes de Black Mirror, pero con una identidad propia.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R30X4VTZRMMQ1I/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">03/01/2026</span>
+                <span class="rv-name">Javier V — Muy interesante y entretenida</span>
+              </button>
+              <div class="rv-body">Muy interesante. La novela profundiza con acierto en las consecuencias de la vida cotidiana en Eidos, explicadas de forma clara y coherente. Mantiene el halo de misterio de la primera entrega, pero con un enfoque más cercano y accesible. Me ha llamado mucho la atención del desarrollo de las teorías científicas. Quedo muy pendiente de la tercera.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R30X4VTZRMMQ1I/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">03/01/2026</span>
+                <span class="rv-name">Marisa M — Sencillo de leer, profundo cuando te paras a pensarlo</span>
+              </button>
+              <div class="rv-body">Eidos: Relatos sorprende por lo rápido que se lee, incluso cuando está tratando conceptos bastante complejos. Cada relato, al igual que en Eidos, funciona por sí mismo, pero al avanzar se percibe que todos están conectados. Lo interesante es que, aunque la forma es sencilla y cercana, el fondo es muy potente. Son historias que se quedan contigo. Al terminarlas parecen pequeñas, casi íntimas, pero al mirarlas en conjunto adquieren una trascendencia mayor, como piezas de un mismo puzzle.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R3MAO7D6FMFXAN/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">04/02/2026</span>
+                <span class="rv-name">Cliente Amazon — Eidos se expande</span>
+              </button>
+              <div class="rv-body">Eidos. Relatos es una lectura pensada claramente para quienes ya hemos pasado por Eidos. Su valor está en volver a ese universo y recorrerlo desde espacios más pequeños y concretos. Cada historia aporta algo, suma matices o deja preguntas abiertas, y varias de ellas te hacen pensar que podrían crecer mucho más allá de estas páginas. A mí me ha gustado tanto como el primer libro. Y si hay una historia que me ha marcado especialmente ha sido la de Nori: me he quedado con ganas de seguir por ahí. Ojalá el tercer libro se centre en esa trama.<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/R2MQRIT288UW2J/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+            <!-- reseña -->
+            <div class="rv-item">
+              <button class="rv-btn" aria-expanded="false" data-group="relatos">
+                <span class="rv-toggle"><i class="fa-solid fa-plus"></i></span>
+                <span class="rv-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                <span class="rv-date">03/03/2026</span>
+                <span class="rv-name">María — El verdadero sentido de la imperfección</span>
+              </button>
+              <div class="rv-body">Me encantó la lectura de este libro. La trama, los personajes, las descripciones...<br><br><a class="review-link" href="https://www.amazon.es/gp/customer-reviews/RA8KVA4714GYR/ref=cm_cr_getr_d_rvw_ttl?ie=UTF8" target="_blank"><i class="fa-brands fa-amazon"></i> Ver en Amazon</a></div>
+            </div>
+
+          </div><!-- /rv-l2 relatos -->
+        </div><!-- /rv-cat-body -->
+      </div><!-- /rv-cat RELATOS -->
+
+    </div><!-- /rv-l1 -->
+  </div>
+  
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Categorías
+  const categories = document.querySelectorAll(".rv-cat");
+
+  let totalReviews = 0;
+
+  categories.forEach(cat => {
+
+    // Cuenta las reseñas dentro de la categoría
+    const reviews = cat.querySelectorAll(".rv-item");
+    const count = reviews.length;
+
+    totalReviews += count;
+
+    // Actualiza el contador de la categoría
+    const countEl = cat.querySelector(".rv-cat-count");
+
+    if (countEl) {
+      countEl.textContent = `${count} reviews`;
+    }
+
+  });
+
+  // Actualiza contador total superior
+  const totalEl = document.querySelector(".reviews-count");
+
+  if (totalEl) {
+    totalEl.textContent = `${totalReviews} Reviews `;
+  }
+
+});
+</script>
+  
+  
+</section>
+
+
+<div class="glow-line"></div>
+
+
+
+<section id="mentions">
+  <div class="container">
+    <span class="section-tag reveal">Menciones</span>
+    <h2 class="section-title reveal">Reseñas y <em>medios</em></h2>
+    <p class="stories-intro reveal">
+      Algunas referencias, reseñas y apariciones de <em>EIDOS</em> y <em>EIDOS Relatos</em>.
+    </p>
+
+    <div class="mentions-grid mentions-grid-featured reveal">
+
+      <div class="mentions-filter-card">
+        <div class="mentions-filter-bg"></div>
+
+        <div class="mentions-filter-inner">
+          <div class="mentions-filters">
+         <div class="mentions-filter-group group-book-main">
+  <button class="mentions-filter is-active" data-book="all">Both books</button>
+</div>
+
+<div class="mentions-filter-group group-book-sub">
+  <button class="mentions-filter" data-book="eidos">Eidos</button>
+  <button class="mentions-filter" data-book="relatos">TAles</button>
+</div>
+
+<div class="mentions-filter-group group-type-main">
+  <button class="mentions-filter is-active" data-type="all">All</button>
+</div>
+
+<div class="mentions-filter-group group-type-sub">
+  <button class="mentions-filter" data-type="res">Reviews</button>
+  <button class="mentions-filter" data-type="est">Platforms</button>
+  <button class="mentions-filter" data-type="otr">Other</button>
+</div>
+          </div>
+
+          <p id="mentions-status" class="mentions-status">
+            Mostrando: <strong>Ambos libros</strong> · <strong>Todos</strong>
+          </p>
+        </div>
+      </div>
+
+
+<!-- INSTAGRAM -->
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DYehw6aDPoC/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@cronicasdelaciudadela
+</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+
+<!-- INSTAGRAM -->
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DVtskMsDeQ1/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@escritora_esmeralda</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+
+<!-- INSTAGRAM -->
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DZAezXgNbkS/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@darky73</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+
+<!-- RELATOS -->
+<a class="mention-card" data-book="relatos" data-type="res" href="https://www.instagram.com/p/DZmZjA9uBu9/" target="_blank">
+  <span class="mention-kicker">Review · Tales</span>
+  <h3 class="mention-title">@adol_books</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+
+<!-- AMAZON -->
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.amazon.es/product-reviews/B0FCR5ZPBJ" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">Amazon</h3>
+  <div class="mention-meta"><i class="fa-brands fa-amazon"></i><span>Opiniones de lectores</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DWPF-6sMLpS/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@adol_books</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<!-- YOUTUBE -->
+<a class="mention-card" data-book="eidos" data-type="otr" href="https://youtu.be/aKgbU9wE-bQ" target="_blank">
+  <span class="mention-kicker">Vídeo · Eidos</span>
+  <h3 class="mention-title">Tráiler</h3>
+  <div class="mention-meta"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
+</a>
+
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DTpuCMzjWNN/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@legadodeyara_books</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<!-- GOODREADS -->
+<a class="mention-card" data-book="eidos" data-type="est" href="https://www.goodreads.com/book/show/236113959-eidos" target="_blank">
+  <span class="mention-kicker">Platform · Eidos</span>
+  <h3 class="mention-title">Goodreads</h3>
+  <div class="mention-meta"><i class="fa-solid fa-book"></i><span>Ficha del libro</span></div>
+</a>
+
+<!-- RELATOS -->
+<a class="mention-card" data-book="relatos" data-type="res" href="https://www.instagram.com/p/DUS1TGxDHV4/" target="_blank">
+  <span class="mention-kicker">Review · Tales</span>
+  <h3 class="mention-title">@erikka_books</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DVAyJirjdTW/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@el_vicio_de_leer</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<!-- DOSIER -->
+<a class="mention-card" data-book="eidos" data-type="otr" href="docs/dossierprensa.pdf" target="_blank">
+  <span class="mention-kicker">Material · Eidos</span>
+  <h3 class="mention-title">Dosier de prensa</h3>
+  <div class="mention-meta"><i class="fa-regular fa-file-lines"></i><span>PDF</span></div>
+</a>
+
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DP33XGFjNzO/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@ramon_gallart</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<a class="mention-card" data-book="relatos" data-type="otr" href="https://youtu.be/1qu0agW0v_Q?" target="_blank">
+  <span class="mention-kicker">Vídeo · Tales</span>
+  <h3 class="mention-title">Teaser</h3>
+  <div class="mention-meta"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
+</a>
+
+<a class="mention-card featured" data-book="eidos" data-type="res" href="https://diarios.detour.es/literaturas/felden-vareth-preguntas-por-francisca-pageo" target="_blank">
+  <span class="mention-kicker">Artícle· Eidos</span>
+  <h3 class="mention-title">Detour</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Entrevista</span></div>
+</a>
+
+<a class="mention-card" data-book="relatos" data-type="res" href="https://www.ciencia-ficcion.com/novedad/aldia/2026/lib202605202229.php" target="_blank">
+  <span class="mention-kicker">Article · Tales</span>
+  <h3 class="mention-title">Ciencia-Ficción</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Medio</span></div>
+</a>
+
+
+
+
+<a class="mention-card" data-book="relatos" data-type="est" href="https://www.goodreads.com/book/show/245427075-eidos-relatos" target="_blank">
+  <span class="mention-kicker">Platform · Tales</span>
+  <h3 class="mention-title">Goodreads</h3>
+  <div class="mention-meta"><i class="fa-solid fa-book"></i><span>Ficha del libro</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://silvestredominguez.wordpress.com/2025/08/08/eidos/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">La Mirada</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Blog</span></div>
+</a>
+
+<a class="mention-card" data-book="relatos" data-type="res" href="https://www.amazon.es/product-reviews/B0G8HLFJXT/" target="_blank">
+  <span class="mention-kicker">Review · Tales</span>
+  <h3 class="mention-title">Amazon</h3>
+  <div class="mention-meta"><i class="fa-brands fa-amazon"></i><span>Opiniones</span></div>
+</a>
+
+<a class="mention-card" data-book="relatos" data-type="res" href="https://diarios.detour.es/literaturas/felden-vareth-una-forma-de-consciencia-por-francisca-pageo" target="_blank">
+  <span class="mention-kicker">Artícle · Tales</span>
+  <h3 class="mention-title">Detour</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Entrevista</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="est" href="https://www.wattpad.com/story/401387972-eidos-primeros-capitulos" target="_blank">
+  <span class="mention-kicker">Reading · Eidos</span>
+  <h3 class="mention-title">Wattpad</h3>
+  <div class="mention-meta"><i class="fa-solid fa-book-open"></i><span>Capítulos</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="otr" href="https://youtu.be/xDTEcWXPncs" target="_blank">
+  <span class="mention-kicker">Vídeo · Eidos</span>
+  <h3 class="mention-title">Debate</h3>
+  <div class="mention-meta"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DPyuumUjNiQ/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@my.littlebiblioteca</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.ciencia-ficcion.com/novedad/aldia/2026/lib202603052224.php" target="_blank">
+  <span class="mention-kicker">Artícle · Eidos</span>
+  <h3 class="mention-title">Ciencia-Ficción</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Medio</span></div>
+</a>
+
+<a class="mention-card featured" data-book="relatos" data-type="res" href="https://www.instagram.com/p/DT0wXNDDU89" target="_blank">
+  <span class="mention-kicker">Review · Tales</span>
+  <h3 class="mention-title">@ramon_gallart</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.instagram.com/p/DReQPrpDDpY/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">@erikka_books</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="otr" href="https://youtu.be/sqOVepZNm9s" target="_blank">
+  <span class="mention-kicker">Vídeo · Eidos</span>
+  <h3 class="mention-title">Teaser</h3>
+  <div class="mention-meta"><i class="fa-brands fa-youtube"></i><span>YouTube</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://www.linkedin.com/feed/update/urn:li:activity:7401291399012319233/" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">Cristina C.</h3>
+  <div class="mention-meta"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></div>
+</a>
+
+<a class="mention-card" data-book="eidos" data-type="res" href="https://darklydreamingbookworm.blogspot.com/2025/12/resena-de-eidos.html" target="_blank">
+  <span class="mention-kicker">Review · Eidos</span>
+  <h3 class="mention-title">Darkly Dreaming</h3>
+  <div class="mention-meta"><i class="fa-solid fa-globe"></i><span>Blog</span></div>
+</a>
+
+<a class="mention-card featured" data-book="relatos" data-type="res" href="https://www.instagram.com/p/DTpz0gBjINj/" target="_blank">
+  <span class="mention-kicker">Review · Tales</span>
+  <h3 class="mention-title">@my.littlebiblioteca</h3>
+  <div class="mention-meta"><i class="fa-brands fa-instagram"></i><span>Instagram</span></div>
+</a>
+    </div>
+  </div>
+
+  
+<script>
+(function () {
+  let activeBook = 'all';
+  let activeType = 'all';
+
+  const cards = Array.from(document.querySelectorAll('.mention-card'));
+  const status = document.getElementById('mentions-status');
+  const filterButtons = Array.from(document.querySelectorAll('.mentions-filter'));
+
+  const labels = {
+    book: {
+      all: 'Ambos libros',
+      eidos: 'Eidos',
+      relatos: 'Eidos Relatos'
+    },
+    type: {
+      all: 'Todos',
+      res: 'Reseñas y artículos',
+      est: 'Estanterías',
+      otr: 'Otros'
+    }
+  };
+
+  function updateStatus() {
+    status.innerHTML = `Mostrando: <strong>${labels.book[activeBook]}</strong> · <strong>${labels.type[activeType]}</strong>`;
+  }
+
+  function applyFilters() {
+    cards.forEach(card => {
+      const cardBook = card.getAttribute('data-book');
+      const cardType = card.getAttribute('data-type');
+
+      const matchesBook = activeBook === 'all' || cardBook === activeBook;
+      const matchesType = activeType === 'all' || cardType === activeType;
+
+      card.classList.toggle('is-hidden', !(matchesBook && matchesType));
+    });
+
+    updateStatus();
+  }
+
+  function clearBookButtons() {
+    filterButtons.forEach(btn => {
+      if (btn.dataset.book !== undefined) {
+        btn.classList.remove('is-active');
+      }
+    });
+  }
+
+  function clearTypeButtons() {
+    filterButtons.forEach(btn => {
+      if (btn.dataset.type !== undefined) {
+        btn.classList.remove('is-active');
+      }
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      if (this.dataset.book !== undefined) {
+        clearBookButtons();
+        this.classList.add('is-active');
+        activeBook = this.dataset.book;
+      }
+
+      if (this.dataset.type !== undefined) {
+        clearTypeButtons();
+        this.classList.add('is-active');
+        activeType = this.dataset.type;
+      }
+
+      applyFilters();
+    });
+  });
+
+  applyFilters();
+})();
+</script>
+  
+  
+  
+  
+</section>
+
+
+
+
+
+
+
+
+
+<div class="glow-line"></div>
+
+
+
+
+
+
+
+<section id="author">
+  <div class="container">
+    <span class="section-tag reveal">The author</span>
+    <h2 class="section-title reveal">Felden Vareth</h2>
+    <span class="author-handle reveal">Philosophical science fiction writer</span>
+
+    <div class="author-grid">
+      <div class="author-side reveal">
+        <div class="author-monogram author-photo">
+          <img src="assets/images/felden.jpg" alt="Felden Vareth">
+        </div>
+
+        <div class="author-monogram">
+          <span class="author-monogram-inner">FV</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <p class="author-bio">
+          Felden Vareth (literary pseudonym) was born in Madrid. He holds a degree in Business and Economics, with additional studies in Industrial Engineering. His work is driven by a deep interest in the intersection of biology, technology, science, and philosophy.
+        </p>
+
+        <p class="author-bio">
+          An avid reader from an early age, he began with authors such as Michael Ende, Alexandre Dumas, Jules Verne, and Arthur Conan Doyle, later immersing himself in the science fiction of Isaac Asimov, Ray Bradbury, Arthur C. Clarke, and Aldous Huxley, as well as the scientific thought of Carl Sagan. Their works shaped his curiosity for science, history, and the fundamental questions of human existence, along with narratives of challenge, exploration, and stories that endure across generations.
+        </p>
+
+        <p class="author-bio">
+          Currently an entrepreneur, his influences also include Brian Cox, Carl Sagan, Stephen Hawking, Neil deGrasse Tyson, Lisa Randall, and Carlo Rovelli. Their perspectives on the cosmos, time, and matter inform the conceptual foundation of <em>Eidos</em>.
+        </p>
+
+        <a class="signed-btn" href="indexautoreng.html">
+          Request a signed copy
+        </a>
+
+        <div class="author-social">
+  <span class="author-social-label">Follow Eidos Universe</span>
+  <div class="author-social-links">
+  
+    <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  
+    <a href="https://www.youtube.com/@FeldenVareth" target="_blank" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://x.com/FVareth27586" target="_blank" aria-label="X">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+    <a href="https://www.instagram.com/eidos_felden_vareth/" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com/@eidos_feldenv" target="_blank" aria-label="TikTok">
+      <i class="fab fa-tiktok"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/felden-vareth-3b17a7375/" target="_blank" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+  </div>
+</div>
+            <!-- your links -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<div class="glow-line"></div>
+
+
+
+
+<!-- ===== AUDIO BACKGROUND ===== -->
+
+<audio id="bg-audio" loop preload="none" playsinline>
+  <source src="assets/audio/seventh.mp3" type="audio/mpeg">
+</audio>
+
+<div class="audio-ctrl">
+  <button id="audio-toggle" type="button" aria-label="Activar o silenciar música">
+    <span id="audio-toggle-icon">🔈</span>
+  </button>
+  <input id="audio-volume" type="range" min="0" max="100" value="50" aria-label="Volumen">
+</div>
+
+<style>
+.audio-ctrl{
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.audio-ctrl:hover{
+  background: rgba(0,0,0,.75);
+}
+
+.audio-ctrl button{
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.audio-ctrl input[type="range"]{
+  width: 120px;
+  accent-color: #fff;
+}
+
+@media (max-width:480px){
+  .audio-ctrl input[type="range"]{
+    width: 90px;
+  }
+}
+</style>
+
+<script>
+(function(){
+  const audio = document.getElementById('bg-audio');
+  const btn = document.getElementById('audio-toggle');
+  const icon = document.getElementById('audio-toggle-icon');
+  const volume = document.getElementById('audio-volume');
+
+  if (!audio || !btn || !icon || !volume) return;
+
+  let userWantedAudio = false;
+  let videoLock = false;
+
+  audio.volume = volume.value / 100;
+
+  function updateIcon() {
+    if (videoLock) {
+      icon.textContent = '🔇';
+      btn.disabled = true;
+      return;
+    }
+
+    btn.disabled = false;
+    icon.textContent = audio.paused ? '🔈' : '🔊';
+  }
+
+  btn.addEventListener('click', function () {
+    if (videoLock) return;
+
+    if (audio.paused) {
+      userWantedAudio = true;
+      audio.play().catch(function(err){
+        console.error('Error al reproducir audio:', err);
+      });
+    } else {
+      userWantedAudio = false;
+      audio.pause();
+    }
+
+    updateIcon();
+  });
+
+  volume.addEventListener('input', function () {
+    audio.volume = this.value / 100;
+  });
+
+  audio.addEventListener('play', updateIcon);
+  audio.addEventListener('pause', updateIcon);
+
+  window.lockBgAudioForVideo = function () {
+    videoLock = true;
+    audio.pause();
+    updateIcon();
+  };
+
+  window.unlockBgAudioForVideo = function () {
+    videoLock = false;
+
+    if (userWantedAudio) {
+      audio.play().catch(function(err){
+        console.error('Error al reanudar audio:', err);
+      });
+    }
+
+    updateIcon();
+  };
+
+  updateIcon();
+})();
+</script>
+
+
+
+
+
+
+
+<script>
+(function() {
+  // CSS para el acordeón inyectado por JS (overflow hidden + transición altura)
+  var style = document.createElement('style');
+  style.textContent = [
+    '.rv-l1 { border-top: 1px solid rgba(201,168,76,0.18); }',
+    '.rv-cat { border-bottom: 1px solid rgba(201,168,76,0.12); }',
+    '.rv-cat-btn { width:100%; display:flex; align-items:center; gap:16px; padding:28px 0; background:none; border:none; cursor:pointer; text-align:left; transition:background 0.2s; }',
+    '.rv-cat-btn:hover .rv-cat-label { color: var(--gold); }',
+    '.rv-cat-toggle { font-size:13px; color:var(--gold); width:20px; flex-shrink:0; transition:transform 0.3s; }',
+    '.rv-cat-btn[aria-expanded="true"] .rv-cat-toggle { transform:rotate(45deg); }',
+    '.rv-cat-label { font-family:"Cormorant Garamond",serif; font-size:28px; font-weight:300; color:var(--paper); flex:1; transition:color 0.3s; }',
+    '.rv-cat-count { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(212,207,198,0.35); }',
+    '.rv-cat-stars { color:var(--gold); font-size:13px; letter-spacing:2px; }',
+    '.rv-cat-body { overflow:hidden; max-height:0; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1); }',
+    '.rv-cat-body.open { max-height:20000px; transition:max-height 1.2s cubic-bezier(0.4,0,0.2,1); }',
+    '.rv-l2 { padding: 8px 0 24px 32px; border-top: 1px solid rgba(201,168,76,0.08); }',
+    '.rv-item { border-bottom:1px solid rgba(201,168,76,0.08); }',
+    '.rv-btn { width:100%; display:flex; align-items:center; gap:14px; padding:20px 0; background:none; border:none; cursor:pointer; text-align:left; flex-wrap:wrap; }',
+    '.rv-btn:hover .rv-name { color:var(--gold); }',
+    '.rv-toggle { font-size:11px; color:var(--gold); width:14px; flex-shrink:0; opacity:0.6; transition:transform 0.3s; }',
+    '.rv-btn[aria-expanded="true"] .rv-toggle { transform:rotate(45deg); }',
+    '.rv-stars { color:var(--gold); font-size:11px; letter-spacing:1px; flex-shrink:0; }',
+    '.rv-date { font-size:10px; letter-spacing:2px; color:rgba(212,207,198,0.35); flex-shrink:0; }',
+    '.rv-name { font-family:"Cormorant Garamond",serif; font-size:19px; font-weight:300; color:var(--paper); transition:color 0.3s; flex:1; min-width:0; }',
+    '.rv-verified { display:inline-block; font-family:"Josefin Sans",sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#3a7a6e; background:rgba(58,122,110,0.12); border:1px solid rgba(58,122,110,0.35); padding:2px 8px; margin-left:10px; vertical-align:middle; position:relative; top:-1px; }',
+    '.rv-body { overflow:hidden; max-height:0; transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1); }',
+    '.rv-body.open { max-height:3000px; transition:max-height 0.7s cubic-bezier(0.4,0,0.2,1); }',
+    '.rv-body > * { font-family:"Cormorant Garamond",serif; font-size:18px; font-weight:300; line-height:1.8; color:rgba(212,207,198,0.75); padding: 0 0 28px 28px; display:block; }',
+    '@media(max-width:600px){.rv-cat-label{font-size:20px;} .rv-cat-count,.rv-cat-stars{display:none;} .rv-name{font-size:16px;} }',
+  ].join('\n');
+  document.head.appendChild(style);
+
+  function makeBodyWrapper(body) {
+    var inner = document.createElement('div');
+    inner.innerHTML = body.innerHTML;
+    body.innerHTML = '';
+    body.appendChild(inner);
+  }
+
+  // Wrap all rv-body contents
+  document.querySelectorAll('.rv-body').forEach(function(b){ makeBodyWrapper(b); });
+
+  // ── Level 1: categories (only one open at a time) ──
+  var catBtns = document.querySelectorAll('.rv-cat-btn');
+  catBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var catBody = btn.nextElementSibling;
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // close all
+      catBtns.forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      // also close all inner items when category closes
+      document.querySelectorAll('.rv-btn').forEach(function(rb){
+        rb.setAttribute('aria-expanded','false');
+        rb.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        catBody.classList.add('open');
+      }
+    });
+  });
+
+  // ── Level 2: individual reviews (only one open per category) ──
+  document.querySelectorAll('.rv-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var group = btn.getAttribute('data-group');
+      var body = btn.nextElementSibling;
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      // close siblings in same group
+      document.querySelectorAll('.rv-btn[data-group="' + group + '"]').forEach(function(b) {
+        b.setAttribute('aria-expanded', 'false');
+        b.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        body.classList.add('open');
+      }
+    });
+  });
+})();
+</script>
+
+<!-- Footer -->
+<footer>
+  <p class="footer-logo">EIDOS</p>
+  <div class="footer-links">
+    <a href="indexeng.html">Index</a>
+    <a href="docs/chapters.pdf" target="_blank">Free Chapters</a>
+    <a href="https://www.amazon.es/dp/B0FCFGZXZT" target="_blank">Amazon</a>
+    <a href="indexautoreng.html" target="_blank">Signed Copy</a>
+    <a href="termsandconditions.html">Terms And Conditions</a>
+  </div>
+  <p class="footer-copy">
+    <a href="indexeng.html">EIDOS</a> &copy; 2025 Felden Vareth &mdash; Todos los derechos reservados
+  </p>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  function openMenu() { document.getElementById('mobile-menu').classList.add('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  // Particles
+  (function createParticles() {
+    const container = document.getElementById('particles');
+    const count = 60;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = (Math.random() * 2 + 1) + 'px';
+      p.style.height = p.style.width;
+      p.style.animationDuration = (Math.random() * 20 + 15) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      container.appendChild(p);
+    }
+  })();
+
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+
+<script>
+(function () {
+  const track = document.getElementById('storiesTrack');
+  if (!track) return;
+
+  const prevBtn = document.querySelector('.stories-arrow-prev');
+  const nextBtn = document.querySelector('.stories-arrow-next');
+  const originalCards = Array.from(track.querySelectorAll('.story-card'));
+
+  if (!prevBtn || !nextBtn || !originalCards.length) return;
+
+  let visible = getVisibleCards();
+  let prependClones = [];
+  let appendClones = [];
+  let currentIndex = visible;
+  let isAnimating = false;
+
+  function getVisibleCards() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 1100) return 2;
+    return 3;
+  }
+
+  function getCardStep() {
+    const firstCard = track.querySelector('.story-card');
+    if (!firstCard) return 0;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+    return firstCard.getBoundingClientRect().width + gap;
+  }
+
+  function clearClones() {
+    [...prependClones, ...appendClones].forEach(el => el.remove());
+    prependClones = [];
+    appendClones = [];
+  }
+
+  function buildInfiniteTrack() {
+    clearClones();
+
+    visible = getVisibleCards();
+
+    const freshOriginals = Array.from(track.querySelectorAll('.story-card:not(.is-clone)'));
+
+    prependClones = freshOriginals.slice(-visible).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      return clone;
+    });
+
+    appendClones = freshOriginals.slice(0, visible).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      return clone;
+    });
+
+    prependClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+    appendClones.forEach(clone => track.appendChild(clone));
+
+    currentIndex = visible;
+    jumpTo(currentIndex);
+  }
+
+  function jumpTo(index) {
+    const step = getCardStep();
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${index * step}px)`;
+  }
+
+  function slideTo(index) {
+    const step = getCardStep();
+    track.style.transition = 'transform 0.55s ease';
+    track.style.transform = `translateX(-${index * step}px)`;
+  }
+
+  function handleWrap() {
+    const totalOriginals = originalCards.length;
+
+    if (currentIndex >= totalOriginals + visible) {
+      currentIndex = visible;
+      jumpTo(currentIndex);
+    }
+
+    if (currentIndex < visible) {
+      currentIndex = totalOriginals + currentIndex;
+      jumpTo(currentIndex);
+    }
+
+    isAnimating = false;
+  }
+
+  nextBtn.addEventListener('click', function () {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex += 1;
+    slideTo(currentIndex);
+  });
+
+  prevBtn.addEventListener('click', function () {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex -= 1;
+    slideTo(currentIndex);
+  });
+
+  track.addEventListener('transitionend', handleWrap);
+
+  window.addEventListener('resize', function () {
+    const newVisible = getVisibleCards();
+    if (newVisible !== visible) {
+      buildInfiniteTrack();
+    } else {
+      jumpTo(currentIndex);
+    }
+  });
+
+  window.addEventListener('load', buildInfiniteTrack);
+  buildInfiniteTrack();
+})();
+</script>
+
+
+<script>
+(function () {
+  const track = document.getElementById('scenesTrack');
+  if (!track) return;
+
+  const prevBtn = document.querySelector('.scenes-arrow-prev');
+  const nextBtn = document.querySelector('.scenes-arrow-next');
+  const originalCards = Array.from(track.querySelectorAll('.scene-card'));
+
+  if (!prevBtn || !nextBtn || !originalCards.length) return;
+
+  let visible = getVisibleCards();
+  let prependClones = [];
+  let appendClones = [];
+  let currentIndex = visible;
+  let isAnimating = false;
+
+  function getVisibleCards() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 1100) return 2;
+    return 3;
+  }
+
+  function getCardStep() {
+    const firstCard = track.querySelector('.scene-card');
+    if (!firstCard) return 0;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+    return firstCard.getBoundingClientRect().width + gap;
+  }
+
+  function clearClones() {
+    [...prependClones, ...appendClones].forEach(el => el.remove());
+    prependClones = [];
+    appendClones = [];
+  }
+
+  function bindSceneInteractions() {
+    track.querySelectorAll('.scene-card img[data-caption]').forEach(function (img) {
+      if (img.dataset.zoomBound === 'true') return;
+      img.dataset.zoomBound = 'true';
+
+      img.addEventListener('click', function () {
+        const overlay = document.getElementById('zoomOverlay');
+        const zoomImg = document.getElementById('zoomImg');
+        const zoomCaption = document.getElementById('zoomCaption');
+        const zoomText = document.getElementById('zoomText');
+
+        if (!overlay || !zoomImg || !zoomCaption || !zoomText) return;
+
+        zoomImg.src = this.src;
+        zoomImg.alt = this.alt || '';
+        zoomCaption.textContent = this.dataset.caption || '';
+        zoomText.innerHTML = (this.dataset.extract || '')
+          .split(/\n\s*\n/)
+          .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+          .join('');
+
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    track.querySelectorAll('.scene-video-btn').forEach(function (btn) {
+      if (btn.dataset.videoBound === 'true') return;
+      btn.dataset.videoBound = 'true';
+
+      btn.addEventListener('click', function () {
+        const overlay = document.getElementById('zoomOverlay');
+        const zoomImgWrap = document.querySelector('.zoom-image');
+        const zoomCaption = document.getElementById('zoomCaption');
+        const zoomText = document.getElementById('zoomText');
+
+        if (!overlay || !zoomImgWrap || !zoomCaption || !zoomText) return;
+
+        if (window.lockBgAudioForVideo) window.lockBgAudioForVideo();
+
+        zoomImgWrap.innerHTML = `
+          <video controls autoplay playsinline style="display:block; width:100%; height:auto; max-height:78vh; background:#05050e;">
+            <source src="${this.dataset.videoSrc}" type="video/mp4">
+          </video>
+          <figcaption id="zoomCaption">${this.dataset.caption || ''}</figcaption>
+        `;
+
+        zoomText.innerHTML = `<p>${this.dataset.extract || ''}</p>`;
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  }
+
+  function buildInfiniteTrack() {
+    clearClones();
+
+    visible = getVisibleCards();
+
+    const freshOriginals = Array.from(track.querySelectorAll('.scene-card:not(.is-clone)'));
+
+    prependClones = freshOriginals.slice(-visible).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      return clone;
+    });
+
+    appendClones = freshOriginals.slice(0, visible).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      return clone;
+    });
+
+    prependClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+    appendClones.forEach(clone => track.appendChild(clone));
+
+    currentIndex = visible;
+    jumpTo(currentIndex);
+    bindSceneInteractions();
+  }
+
+  function jumpTo(index) {
+    const step = getCardStep();
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${index * step}px)`;
+  }
+
+  function slideTo(index) {
+    const step = getCardStep();
+    track.style.transition = 'transform 0.55s ease';
+    track.style.transform = `translateX(-${index * step}px)`;
+  }
+
+  function handleWrap() {
+    const totalOriginals = originalCards.length;
+
+    if (currentIndex >= totalOriginals + visible) {
+      currentIndex = visible;
+      jumpTo(currentIndex);
+    }
+
+    if (currentIndex < visible) {
+      currentIndex = totalOriginals + currentIndex;
+      jumpTo(currentIndex);
+    }
+
+    isAnimating = false;
+  }
+
+  nextBtn.addEventListener('click', function () {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex += 1;
+    slideTo(currentIndex);
+  });
+
+  prevBtn.addEventListener('click', function () {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex -= 1;
+    slideTo(currentIndex);
+  });
+
+  track.addEventListener('transitionend', handleWrap);
+
+  window.addEventListener('resize', function () {
+    const newVisible = getVisibleCards();
+    if (newVisible !== visible) {
+      buildInfiniteTrack();
+    } else {
+      jumpTo(currentIndex);
+    }
+  });
+
+  const zoomOverlay = document.getElementById('zoomOverlay');
+  const zoomClose = document.getElementById('zoomClose');
+
+  function closeZoom() {
+    if (!zoomOverlay) return;
+
+    zoomOverlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+
+    const zoomImage = document.querySelector('.zoom-image');
+    if (zoomImage) {
+      zoomImage.innerHTML = `
+        <img id="zoomImg" src="" alt="">
+        <figcaption id="zoomCaption"></figcaption>
+      `;
+    }
+
+    const zoomText = document.getElementById('zoomText');
+    if (zoomText) zoomText.innerHTML = '';
+
+    if (window.unlockBgAudioForVideo) window.unlockBgAudioForVideo();
+  }
+
+  if (zoomClose) {
+    zoomClose.addEventListener('click', closeZoom);
+  }
+
+  if (zoomOverlay) {
+    zoomOverlay.addEventListener('click', function (e) {
+      if (e.target === zoomOverlay) closeZoom();
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && zoomOverlay && zoomOverlay.classList.contains('is-open')) {
+      closeZoom();
+    }
+  });
+
+  buildInfiniteTrack();
+})();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const langLinks = document.querySelectorAll(".lang-switch");
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  const navbar = document.getElementById("navbar");
+
+  function getCurrentSection() {
+    const navHeight = navbar ? navbar.offsetHeight : 0;
+    const triggerY = navHeight + 120;
+
+    let current = "hero";
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= triggerY) {
+        current = section.id;
+      }
+    });
+
+    return current;
+  }
+
+  function saveCurrentSection() {
+    const current = getCurrentSection();
+    sessionStorage.setItem("eidosCurrentSection", current);
+  }
+
+  saveCurrentSection();
+  window.addEventListener("scroll", saveCurrentSection, { passive: true });
+  window.addEventListener("resize", saveCurrentSection);
+
+  langLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetBase = this.getAttribute("href");
+      const currentSection = sessionStorage.getItem("eidosCurrentSection") || "hero";
+
+      window.location.href = targetBase + "#" + currentSection;
+    });
+  });
+
+  const targetHash = window.location.hash.replace("#", "");
+  if (targetHash) {
+    const targetEl = document.getElementById(targetHash);
+    if (targetEl) {
+      requestAnimationFrame(() => {
+        const navHeight = navbar ? navbar.offsetHeight : 0;
+        const y = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({ top: y, behavior: "auto" });
+      });
+    } else {
+      history.replaceState(null, "", window.location.pathname);
+    }
+  }
+});
+</script>
+
+
 </body>
 </html>
