@@ -180,10 +180,16 @@
       if (desiredVolume > 0) lastNonZeroVolume = desiredVolume;
 
       const coverPaths = IS_ENGLISH
-        ? ['./assets/tapa.jpg', './assets/tapatales.jpg', './assets/tapaessey.jpg']
-        : ['./assets/tapa.jpg', './assets/taparelatos.jpg', './assets/tapaensayo.jpg'];
+        ? {
+            collection: './assets/eidoscover-both-eng.webp',
+            essay: './assets/tapaessey.jpg'
+          }
+        : {
+            collection: './assets/eidoscover-both.webp',
+            essay: './assets/tapaensayo.jpg'
+          };
 
-      const launcherCovers = coverPaths;
+      const launcherCovers = [coverPaths.collection, coverPaths.essay];
 
       let previousLauncherCover = -1;
 
@@ -221,12 +227,10 @@
       const dataFilaments = [];
       const constellations = [];
 
-      const coverLeftImage = new Image();
-      coverLeftImage.src = coverPaths[0];
-      const coverRightImage = new Image();
-      coverRightImage.src = coverPaths[1];
-      const coverCenterImage = new Image();
-      coverCenterImage.src = coverPaths[2];
+      const collectionImage = new Image();
+      collectionImage.src = coverPaths.collection;
+      const essayImage = new Image();
+      essayImage.src = coverPaths.essay;
 
       const sideCoverState = {
         alpha: 0,
@@ -1689,8 +1693,18 @@
         ctx.restore();
       }
 
-      function drawSingleSideCover(image, x, y, drawWidth, drawHeight, alpha, rotation, glow) {
-        if (!image.complete || alpha <= 0.005) return;
+      function drawSingleSideCover(
+        image,
+        x,
+        y,
+        drawWidth,
+        drawHeight,
+        alpha,
+        rotation,
+        glow,
+        transparentArtwork = false
+      ) {
+        if (!image.complete || !image.naturalWidth || alpha <= 0.005) return;
 
         ctx.save();
         ctx.translate(x, y);
@@ -1708,29 +1722,33 @@
         ctx.fillRect(-drawWidth * 0.75, -drawHeight * 0.72, drawWidth * 1.5, drawHeight * 1.44);
 
         ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = alpha * 0.22;
-        ctx.fillStyle = 'rgba(5, 16, 14, 0.90)';
-        roundedRect(-halfW - 10, -halfH - 10, drawWidth + 20, drawHeight + 20, 18);
-        ctx.fill();
+        if (!transparentArtwork) {
+          ctx.globalAlpha = alpha * 0.22;
+          ctx.fillStyle = 'rgba(5, 16, 14, 0.90)';
+          roundedRect(-halfW - 10, -halfH - 10, drawWidth + 20, drawHeight + 20, 18);
+          ctx.fill();
+        }
 
         ctx.globalAlpha = alpha * 0.94;
         ctx.shadowColor = `rgba(255, 211, 82, ${0.24 + glow * 0.18})`;
         ctx.shadowBlur = drawWidth * (0.06 + glow * 0.05);
         ctx.drawImage(image, -halfW, -halfH, drawWidth, drawHeight);
 
-        ctx.globalAlpha = alpha * 0.30;
-        const vignette = ctx.createLinearGradient(-halfW, -halfH, halfW, halfH);
-        vignette.addColorStop(0, 'rgba(255,255,255,0.20)');
-        vignette.addColorStop(0.26, 'rgba(255,255,255,0.02)');
-        vignette.addColorStop(0.72, 'rgba(10,20,18,0.02)');
-        vignette.addColorStop(1, 'rgba(0,0,0,0.28)');
-        ctx.fillStyle = vignette;
-        ctx.fillRect(-halfW, -halfH, drawWidth, drawHeight);
+        if (!transparentArtwork) {
+          ctx.globalAlpha = alpha * 0.30;
+          const vignette = ctx.createLinearGradient(-halfW, -halfH, halfW, halfH);
+          vignette.addColorStop(0, 'rgba(255,255,255,0.20)');
+          vignette.addColorStop(0.26, 'rgba(255,255,255,0.02)');
+          vignette.addColorStop(0.72, 'rgba(10,20,18,0.02)');
+          vignette.addColorStop(1, 'rgba(0,0,0,0.28)');
+          ctx.fillStyle = vignette;
+          ctx.fillRect(-halfW, -halfH, drawWidth, drawHeight);
 
-        ctx.globalAlpha = alpha * 0.16;
-        ctx.strokeStyle = 'rgba(239, 228, 195, 0.85)';
-        ctx.lineWidth = 1.1;
-        ctx.strokeRect(-halfW + 0.5, -halfH + 0.5, drawWidth - 1, drawHeight - 1);
+          ctx.globalAlpha = alpha * 0.16;
+          ctx.strokeStyle = 'rgba(239, 228, 195, 0.85)';
+          ctx.lineWidth = 1.1;
+          ctx.strokeRect(-halfW + 0.5, -halfH + 0.5, drawWidth - 1, drawHeight - 1);
+        }
         ctx.restore();
       }
 
@@ -1754,45 +1772,44 @@
 
         const minSize = Math.min(width, height);
         const coverHeight = clamp(minSize * (compactDevice ? 0.40 : 0.52), 180, compactDevice ? 260 : 430);
-        const coverWidth = coverHeight * 0.63;
-        const sideOffset = clamp(width * (compactDevice ? 0.25 : 0.22), coverWidth * 0.72, width * 0.29);
+        const collectionHeight = coverHeight * 0.90;
+        const collectionAspect = collectionImage.naturalWidth && collectionImage.naturalHeight
+          ? collectionImage.naturalWidth / collectionImage.naturalHeight
+          : 0.67;
+        const collectionWidth = collectionHeight * collectionAspect;
+        const essayWidth = coverHeight * 0.63;
+        const sideOffset = clamp(
+          width * (compactDevice ? 0.25 : 0.22),
+          Math.max(collectionWidth, essayWidth) * 0.72,
+          width * 0.29
+        );
         const cx = width * 0.5;
         const y = height * 0.52 + Math.sin(time * 0.22) * 8;
         const glow = clamp(energy.high * 0.65 + energy.smoothedBeat * 0.55 + sideCoverState.pulse * 0.28, 0, 1);
         const spread = Math.sin(time * 0.17) * minSize * 0.012;
 
-        // La tercera cubierta aparece detrás del cubo, algo más pequeña y elevada.
-        // Conserva el mismo pulso y las mismas entradas dictadas por la música.
+        // La ficción se presenta como una única composición transparente a la
+        // izquierda. Ensayos ocupa el lado derecho y el cubo queda despejado.
         drawSingleSideCover(
-          coverCenterImage,
-          cx,
-          y - coverHeight * 0.35,
-          coverWidth * 0.82,
-          coverHeight * 0.82,
-          alpha * 0.78,
-          Math.sin(time * 0.16) * 0.006,
-          glow * 0.92
-        );
-
-        drawSingleSideCover(
-          coverLeftImage,
+          collectionImage,
           cx - sideOffset - spread,
           y,
-          coverWidth,
-          coverHeight,
+          collectionWidth,
+          collectionHeight,
           alpha,
-          -0.040 - Math.sin(time * 0.19) * 0.008,
-          glow
+          -0.025 - Math.sin(time * 0.19) * 0.006,
+          glow,
+          true
         );
 
         drawSingleSideCover(
-          coverRightImage,
+          essayImage,
           cx + sideOffset + spread,
           y,
-          coverWidth,
+          essayWidth,
           coverHeight,
           alpha,
-          0.040 + Math.cos(time * 0.17) * 0.008,
+          0.030 + Math.cos(time * 0.17) * 0.006,
           glow
         );
       }
