@@ -27,6 +27,7 @@
         linkShared: 'Link shared.', nativeShareFailed: 'The native share menu could not be used. The link will be copied.',
         linkCopied: 'Link copied.', linkCopyFailed: 'The link could not be copied.',
         fullscreenExitFailed: 'Could not exit full-screen mode.',
+        enterFullscreen: 'Enter full screen', exitFullscreen: 'Exit full screen',
         shareTitle: 'Eidos · Music Visualizer', sharePlayer: 'Listen to the Eidos music visualizer.',
         shareTrack: name => `Listen to “${name}” in the Eidos music visualizer.`
       } : {
@@ -53,6 +54,7 @@
         linkShared: 'Enlace compartido.', nativeShareFailed: 'No se ha podido usar el menú nativo. Se copiará el enlace.',
         linkCopied: 'Enlace copiado.', linkCopyFailed: 'No se ha podido copiar el enlace.',
         fullscreenExitFailed: 'No se ha podido salir de pantalla completa.',
+        enterFullscreen: 'Entrar en pantalla completa', exitFullscreen: 'Salir de pantalla completa',
         shareTitle: 'Eidos · Visor musical', sharePlayer: 'Escucha el visor musical de Eidos.',
         shareTrack: name => `Escucha “${name}” en el visor musical de Eidos.`
       };
@@ -99,6 +101,8 @@
       const modeButton = document.getElementById('modeButton');
       const modeIcon = document.getElementById('modeIcon');
       const shareButton = document.getElementById('shareButton');
+      const fullscreenButton = document.getElementById('fullscreenButton');
+      const fullscreenIcon = document.getElementById('fullscreenIcon');
       const sharePanel = document.getElementById('sharePanel');
       const closeShare = document.getElementById('closeShare');
       const sharePlayerButton = document.getElementById('sharePlayerButton');
@@ -2494,6 +2498,16 @@
             <path d="M4 9h4l5-4v14l-5-4H4V9Z"></path>
             <path d="m17 9 4 4M21 9l-4 4"></path>
           </svg>
+        `,
+        fullscreenEnter: `
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M9 4H4v5M15 4h5v5M20 15v5h-5M9 20H4v-5"></path>
+          </svg>
+        `,
+        fullscreenExit: `
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M4 9h5V4M20 9h-5V4M15 20v-5h5M9 20v-5H4"></path>
+          </svg>
         `
       };
 
@@ -2531,6 +2545,20 @@
         modeIcon.innerHTML = ordered
           ? ICONS.ordered
           : ICONS.shuffle;
+      }
+
+      function updateFullscreenButtonUI() {
+        const isFullscreen = Boolean(document.fullscreenElement);
+        const label = isFullscreen
+          ? COPY.exitFullscreen
+          : COPY.enterFullscreen;
+
+        fullscreenIcon.innerHTML = isFullscreen
+          ? ICONS.fullscreenExit
+          : ICONS.fullscreenEnter;
+        fullscreenButton.setAttribute('aria-label', label);
+        fullscreenButton.title = label;
+        fullscreenButton.setAttribute('aria-pressed', isFullscreen ? 'true' : 'false');
       }
 
       function scheduleTrackMarqueeUpdate() {
@@ -3456,6 +3484,21 @@
         else openSharePanel();
       });
 
+      fullscreenButton.addEventListener('click', async () => {
+        if (document.fullscreenElement) {
+          try {
+            if (document.exitFullscreen) await document.exitFullscreen();
+          } catch (error) {
+            console.warn(COPY.fullscreenExitFailed, error);
+          }
+        } else {
+          await requestFullscreen();
+        }
+
+        updateFullscreenButtonUI();
+        showControls();
+      });
+
       closeSelector.addEventListener('click', closeTrackSelector);
       closeShare.addEventListener('click', () => closeSharePanel());
 
@@ -3551,6 +3594,10 @@
       audio.addEventListener('seeked', updateTransportUI);
       audio.addEventListener('emptied', updateTransportUI);
       audio.addEventListener('volumechange', updateVolumeUI);
+      document.addEventListener('fullscreenchange', () => {
+        updateFullscreenButtonUI();
+        showControls();
+      });
 
       audio.addEventListener('ended', () => {
         updateTransportUI();
@@ -3609,6 +3656,7 @@
       updateTransportUI();
       updatePlaybackModeUI();
       updatePauseButtonUI();
+      updateFullscreenButtonUI();
       updateLanguageFilterUI();
       loadPlaylist();
       resize();
