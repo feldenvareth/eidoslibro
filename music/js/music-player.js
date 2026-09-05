@@ -17,46 +17,46 @@
         oneTrack: 'track available', manyTracks: 'tracks available',
         sharedTrack: name => `Shared track: ${name}`,
         randomStart: name => `Starts at random: ${name}`,
-        noTracks: 'No tracks are available.', playerTitle: 'Eidos Â· Music Visualizer',
+        noTracks: 'No tracks are available.', playerTitle: 'Eidos · Music Visualizer',
         noCompatibleAudio: 'No compatible audio tracks were found in js/music-manifest.js.',
         musicFailed: 'The music could not be prepared.',
         updateManifest: 'Run ACTUALIZAR_MUSICA.bat after changing files inside music/songs.',
-        preparing: 'Preparing the visualizerâ€¦',
+        preparing: 'Preparing the visualizer…',
         startFailed: message => `The track could not be started. ${message}`,
         playFailed: name => `Could not play ${name}.`,
         linkShared: 'Link shared.', nativeShareFailed: 'The native share menu could not be used. The link will be copied.',
         linkCopied: 'Link copied.', linkCopyFailed: 'The link could not be copied.',
         fullscreenExitFailed: 'Could not exit full-screen mode.',
         enterFullscreen: 'Enter full screen', exitFullscreen: 'Exit full screen',
-        shareTitle: 'Eidos Â· Music Visualizer', sharePlayer: 'Listen to the Eidos music visualizer.',
-        shareTrack: name => `Listen to â€œ${name}â€ in the Eidos music visualizer.`
+        shareTitle: 'Eidos · Music Visualizer', sharePlayer: 'Listen to the Eidos music visualizer.',
+        shareTrack: name => `Listen to “${name}” in the Eidos music visualizer.`
       } : {
         languageLabels: {
-          esp: 'EspaÃ±ol', es: 'EspaÃ±ol', eng: 'English', en: 'English',
-          fra: 'FranÃ§ais', fre: 'FranÃ§ais', fr: 'FranÃ§ais', ita: 'Italiano', it: 'Italiano',
-          deu: 'Deutsch', ger: 'Deutsch', de: 'Deutsch', por: 'PortuguÃªs', pt: 'PortuguÃªs',
-          cat: 'CatalÃ ', ca: 'CatalÃ ', eus: 'Euskara', eu: 'Euskara',
+          esp: 'Español', es: 'Español', eng: 'English', en: 'English',
+          fra: 'Français', fre: 'Français', fr: 'Français', ita: 'Italiano', it: 'Italiano',
+          deu: 'Deutsch', ger: 'Deutsch', de: 'Deutsch', por: 'Português', pt: 'Português',
+          cat: 'Català', ca: 'Català', eus: 'Euskara', eu: 'Euskara',
           glg: 'Galego', gl: 'Galego', root: 'Otros'
         },
         unsupportedAudio: 'Este navegador no admite Web Audio API.',
         unmute: 'Recuperar volumen', mute: 'Silenciar', play: 'Reproducir', pause: 'Pausar',
-        ordered: 'ReproducciÃ³n en orden', random: 'ReproducciÃ³n aleatoria',
-        oneTrack: 'canciÃ³n disponible', manyTracks: 'canciones disponibles',
-        sharedTrack: name => `CanciÃ³n compartida: ${name}`,
-        randomStart: name => `ComenzarÃ¡ al azar: ${name}`,
-        noTracks: 'No hay canciones disponibles.', playerTitle: 'Eidos Â· Visor musical',
+        ordered: 'Reproducción en orden', random: 'Reproducción aleatoria',
+        oneTrack: 'canción disponible', manyTracks: 'canciones disponibles',
+        sharedTrack: name => `Canción compartida: ${name}`,
+        randomStart: name => `Comenzará al azar: ${name}`,
+        noTracks: 'No hay canciones disponibles.', playerTitle: 'Eidos · Visor musical',
         noCompatibleAudio: 'No se han encontrado audios compatibles en js/music-manifest.js.',
-        musicFailed: 'No se ha podido preparar la mÃºsica.',
-        updateManifest: 'Ejecuta ACTUALIZAR_MUSICA.bat despuÃ©s de cambiar archivos dentro de music/songs.',
-        preparing: 'Preparando la visualizaciÃ³nâ€¦',
-        startFailed: message => `No se pudo iniciar la canciÃ³n. ${message}`,
+        musicFailed: 'No se ha podido preparar la música.',
+        updateManifest: 'Ejecuta ACTUALIZAR_MUSICA.bat después de cambiar archivos dentro de music/songs.',
+        preparing: 'Preparando la visualización…',
+        startFailed: message => `No se pudo iniciar la canción. ${message}`,
         playFailed: name => `No se pudo reproducir ${name}.`,
-        linkShared: 'Enlace compartido.', nativeShareFailed: 'No se ha podido usar el menÃº nativo. Se copiarÃ¡ el enlace.',
+        linkShared: 'Enlace compartido.', nativeShareFailed: 'No se ha podido usar el menú nativo. Se copiará el enlace.',
         linkCopied: 'Enlace copiado.', linkCopyFailed: 'No se ha podido copiar el enlace.',
         fullscreenExitFailed: 'No se ha podido salir de pantalla completa.',
         enterFullscreen: 'Entrar en pantalla completa', exitFullscreen: 'Salir de pantalla completa',
-        shareTitle: 'Eidos Â· Visor musical', sharePlayer: 'Escucha el visor musical de Eidos.',
-        shareTrack: name => `Escucha â€œ${name}â€ en el visor musical de Eidos.`
+        shareTitle: 'Eidos · Visor musical', sharePlayer: 'Escucha el visor musical de Eidos.',
+        shareTrack: name => `Escucha “${name}” en el visor musical de Eidos.`
       };
 
       const LANGUAGE_LABELS = COPY.languageLabels;
@@ -136,7 +136,7 @@
 
       /*
         Bolsa aleatoria:
-        contiene las canciones aÃºn no reproducidas en el ciclo actual.
+        contiene las canciones aún no reproducidas en el ciclo actual.
         Solo se vuelve a llenar cuando todas han sonado.
       */
       let randomQueue = [];
@@ -245,13 +245,6 @@
         pulse: 0
       };
 
-      const cubeSparkState = {
-        currentVertex: -1,
-        previousVertex: -1,
-        transitionStart: 0,
-        transitionDuration: 0.38
-      };
-
       const random = (min, max) => min + Math.random() * (max - min);
       const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
       const lerp = (a, b, t) => a + (b - a) * t;
@@ -266,8 +259,8 @@
         ctx.closePath();
       };
 
-      // Ajuste automÃ¡tico de rendimiento. Mantiene el aspecto general,
-      // pero reduce carga en pantallas grandes, mÃ³viles y equipos modestos.
+      // Ajuste automático de rendimiento. Mantiene el aspecto general,
+      // pero reduce carga en pantallas grandes, móviles y equipos modestos.
       const compactDevice =
         window.matchMedia('(max-width: 820px)').matches ||
         (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
@@ -374,8 +367,8 @@
         outputGainNode = audioContext.createGain();
 
         /*
-          El analizador recibe siempre la seÃ±al original. El volumen
-          del usuario se aplica despuÃ©s, solo a la salida audible.
+          El analizador recibe siempre la señal original. El volumen
+          del usuario se aplica después, solo a la salida audible.
         */
         sourceNode.connect(analyser);
         analyser.connect(outputGainNode);
@@ -433,7 +426,7 @@
 
         if (alreadyVisible) {
           /*
-            Si llega otro impacto mientras las portadas estÃ¡n visibles
+            Si llega otro impacto mientras las portadas están visibles
             o entrando en fade-out, se recuperan suavemente.
           */
           sideCoverState.alpha = Math.max(
@@ -507,7 +500,6 @@
             });
           }
 
-
           for (let i = 0; i < nodes.length; i++) {
             links.push([i, (i + 1) % nodes.length]);
             if (i + 2 < nodes.length && Math.random() < 0.5) links.push([i, i + 2]);
@@ -550,7 +542,7 @@
         const highDelta = Math.max(0, highNow - energy.previousHigh);
 
         /*
-          Cambios de distribuciÃ³n de frecuencias: no importa solo subir
+          Cambios de distribución de frecuencias: no importa solo subir
           el volumen, sino que entren graves, voz o agudos de otra forma.
         */
         const structureShift = clamp(
@@ -664,7 +656,7 @@
 
         /*
           Momento estructural claro: golpe, cambio de espectro o subida.
-          Se recuerda brevemente para reconocer un clÃ­max que culmina
+          Se recuerda brevemente para reconocer un clímax que culmina
           y se mantiene.
         */
         const structureHitScore = Math.max(
@@ -702,7 +694,7 @@
         );
 
         /*
-          Rayas, cÃ­rculos y demÃ¡s: algo menos frecuentes que antes.
+          Rayas, círculos y demás: algo menos frecuentes que antes.
         */
         if (
           accentScore > 0.50 &&
@@ -715,9 +707,9 @@
         /*
           Portadas:
           - pueden iniciarse tras un momento fuerte;
-          - si ya estÃ¡n visibles o en fade, un nuevo impacto relevante
+          - si ya están visibles o en fade, un nuevo impacto relevante
             puede reactivarlas tras ~1 s;
-          - si han desaparecido, sÃ­ se espera mÃ¡s para que conserven
+          - si han desaparecido, sí se espera más para que conserven
             su valor promocional.
         */
         const coverVisible = sideCoverState.alpha > 0.035;
@@ -740,8 +732,8 @@
 
           /*
             Los efectos secundarios no deben dispararse siempre que se
-            refuerzan las portadas. Solo acompaÃ±an los impactos mÃ¡s
-            claros o cuando hacÃ­a bastante que no aparecÃ­an.
+            refuerzan las portadas. Solo acompañan los impactos más
+            claros o cuando hacía bastante que no aparecían.
           */
           if (
             coverScore > 0.61 &&
@@ -813,7 +805,7 @@
         ctx.fillStyle = halo;
         ctx.fillRect(0, 0, width, height);
 
-        // RespiraciÃ³n cromÃ¡tica lenta.
+        // Respiración cromática lenta.
         const breath = 0.5 + Math.sin(time * 0.11) * 0.5;
         const chroma = ctx.createLinearGradient(
           width * (0.10 + Math.sin(time * 0.045) * 0.08),
@@ -1019,7 +1011,7 @@
 
         ctx.restore();
 
-        // Ondas circulares deformadas por la mÃºsica.
+        // Ondas circulares deformadas por la música.
         for (let layer = 0; layer < quality.waveLayers; layer++) {
           const radius = baseRadius * (2.0 + layer * 0.42);
 
@@ -1084,8 +1076,8 @@
         }
 
         // Cono/altavoz central pulsante.
-        // Se conserva el efecto, pero se elimina el pequeÃ±o disco blanco
-        // que antes quedaba visible detrÃ¡s del cubo.
+        // Se conserva el efecto, pero se elimina el pequeño disco blanco
+        // que antes quedaba visible detrás del cubo.
         const outerSpeaker = baseRadius * 0.95;
         const innerSpeaker = outerSpeaker * 0.62;
 
@@ -1123,7 +1115,7 @@
 
         /*
           Eliminado intencionadamente:
-          el cÃ­rculo blanco sÃ³lido que se dibujaba aquÃ­.
+          el círculo blanco sólido que se dibujaba aquí.
         */
 
         ctx.restore();
@@ -1241,7 +1233,7 @@
             ctx.save();
             ctx.globalCompositeOperation = 'screen';
 
-            // halo sutil, mÃ¡s transparente
+            // halo sutil, más transparente
             ctx.strokeStyle = glowGradient;
             ctx.lineWidth = Math.max(3.0, barWidth * 1.95);
             ctx.lineCap = 'round';
@@ -1251,7 +1243,7 @@
             ctx.lineTo(x, cy + h * 0.52);
             ctx.stroke();
 
-            // barra principal, algo mÃ¡s limpia y transparente
+            // barra principal, algo más limpia y transparente
             ctx.strokeStyle = strokeGradient;
             ctx.lineWidth = barWidth;
             ctx.globalAlpha = 0.28 + amp * 0.28;
@@ -1260,7 +1252,7 @@
             ctx.lineTo(x, cy + h * 0.50);
             ctx.stroke();
 
-            // nÃºcleo luminoso pequeÃ±o
+            // núcleo luminoso pequeño
             ctx.strokeStyle = 'rgba(255, 246, 198, 0.24)';
             ctx.lineWidth = Math.max(0.9, barWidth * 0.30);
             ctx.globalAlpha = 0.08 + amp * 0.10;
@@ -1683,34 +1675,36 @@
           ctx.restore();
         }
 
-        const highlightVertexIndex = vertices.reduce(
-          (bestIndex, vertex, index) => {
-            const best = vertices[bestIndex];
-            return (
-              vertex.y < best.y ||
-              (vertex.y === best.y && vertex.z3 > best.z3)
-            ) ? index : bestIndex;
-          },
-          0
+        /*
+          El destello acompaña a cada vértice superior durante todo su relevo:
+          nace con poca intensidad en el lado iluminado de la izquierda,
+          alcanza el máximo cuando pasa a ser el más alto y se desvanece al
+          continuar hacia la derecha. Las dos intensidades son complementarias,
+          por lo que nunca se duplica la potencia total del brillo.
+        */
+        const upperVertices = [0, 1, 4, 5]
+          .map(index => ({ index, vertex: vertices[index] }))
+          .sort((a, b) =>
+            (a.vertex.y - b.vertex.y) ||
+            (b.vertex.z3 - a.vertex.z3)
+          );
+
+        const primarySpark = upperVertices[0];
+        const secondarySpark = upperVertices[1];
+        const verticalGap = Math.max(
+          0,
+          secondarySpark.vertex.y - primarySpark.vertex.y
         );
-
-        if (cubeSparkState.currentVertex < 0) {
-          cubeSparkState.currentVertex = highlightVertexIndex;
-          cubeSparkState.transitionStart = time - cubeSparkState.transitionDuration;
-        } else if (highlightVertexIndex !== cubeSparkState.currentVertex) {
-          cubeSparkState.previousVertex = cubeSparkState.currentVertex;
-          cubeSparkState.currentVertex = highlightVertexIndex;
-          cubeSparkState.transitionStart = time;
-        }
-
-        const rawTransition = clamp(
-          (time - cubeSparkState.transitionStart) /
-            cubeSparkState.transitionDuration,
+        const handoffRange = clamp(focal * 0.072, 12, 18);
+        const rawHandoff = clamp(
+          1 - verticalGap / handoffRange,
           0,
           1
         );
-        const transition =
-          rawTransition * rawTransition * (3 - 2 * rawTransition);
+        const handoff =
+          rawHandoff * rawHandoff * (3 - 2 * rawHandoff);
+        const primaryAlpha = 1 - handoff * 0.5;
+        const secondaryAlpha = handoff * 0.5;
         const sparkRadius = clamp(minSize * .018, 8, 16);
 
         function drawVertexSpark(vertexIndex, alpha) {
@@ -1734,18 +1728,8 @@
           ctx.fill();
         }
 
-        if (cubeSparkState.previousVertex >= 0 && transition < 1) {
-          drawVertexSpark(
-            cubeSparkState.previousVertex,
-            1 - transition
-          );
-        }
-
-        drawVertexSpark(cubeSparkState.currentVertex, transition);
-
-        if (transition >= 1) {
-          cubeSparkState.previousVertex = -1;
-        }
+        drawVertexSpark(secondarySpark.index, secondaryAlpha);
+        drawVertexSpark(primarySpark.index, primaryAlpha);
 
         ctx.restore();
       }
@@ -1816,7 +1800,7 @@
           sideCoverState.alpha = lerp(sideCoverState.alpha, target, 0.15);
         } else {
           /*
-            Fade mÃ¡s breve: recupera el impacto de apariciÃ³n. Si llega otro
+            Fade más breve: recupera el impacto de aparición. Si llega otro
             golpe durante el fade, triggerSideCovers lo reinicia.
           */
           sideCoverState.alpha = Math.max(0, sideCoverState.alpha - dt / 3.0);
@@ -1847,7 +1831,7 @@
         const glow = clamp(energy.high * 0.65 + energy.smoothedBeat * 0.55 + sideCoverState.pulse * 0.28, 0, 1);
         const spread = Math.sin(time * 0.17) * minSize * 0.012;
 
-        // La ficciÃ³n se presenta como una Ãºnica composiciÃ³n transparente a la
+        // La ficción se presenta como una única composición transparente a la
         // izquierda. Ensayos ocupa el lado derecho y el cubo queda despejado.
         drawSingleSideCover(
           collectionImage,
@@ -2191,7 +2175,7 @@
             await document.documentElement.requestFullscreen();
           }
         } catch (_) {
-          // Algunos navegadores mÃ³viles no permiten fullscreen; la animaciÃ³n continÃºa igualmente.
+          // Algunos navegadores móviles no permiten fullscreen; la animación continúa igualmente.
         }
       }
 
@@ -2361,7 +2345,7 @@
 
         /*
           El elemento permanece a volumen completo para que el analizador
-          reciba la canciÃ³n sin atenuaciÃ³n. Solo cambia la ganancia de salida.
+          reciba la canción sin atenuación. Solo cambia la ganancia de salida.
         */
         audio.volume = 1;
         audio.muted = false;
@@ -2774,7 +2758,7 @@
         const count = getAvailableTrackCount();
         const filterLabel = trackLanguageFilter === 'all'
           ? ''
-          : ` Â· ${formatLanguageLabel(trackLanguageFilter)}`;
+          : ` · ${formatLanguageLabel(trackLanguageFilter)}`;
 
         startStatus.textContent =
           `${count} ${
@@ -2784,7 +2768,7 @@
 
       function updateTrackLabels() {
         const track = localPlaylist[currentTrackIndex];
-        const name = track?.name || 'â€”';
+        const name = track?.name || '—';
 
         currentTrackName.textContent = name;
         currentTrackClone.textContent = name;
@@ -2809,7 +2793,7 @@
           startTrack.textContent = COPY.noTracks;
         }
 
-        document.title = track ? `${name} Â· Eidos` : COPY.playerTitle;
+        document.title = track ? `${name} · Eidos` : COPY.playerTitle;
 
         trackList.querySelectorAll('.track-option').forEach(button => {
           const index = Number(button.dataset.trackIndex);
@@ -3064,8 +3048,8 @@
           const playPromise = audio.play();
           await Promise.all([resumePromise, playPromise, fullscreenPromise.catch(() => {})]);
 
-          // La reproducciÃ³n ya ha arrancado: tras el fundido, retiramos
-          // completamente la carÃ¡tula de entrada para que no pueda quedar
+          // La reproducción ya ha arrancado: tras el fundido, retiramos
+          // completamente la carátula de entrada para que no pueda quedar
           // visible ni interceptar eventos.
           window.setTimeout(() => {
             if (panel.classList.contains('hidden')) panel.hidden = true;
@@ -3116,9 +3100,9 @@
 
         try {
           /*
-            En aleatorio, la pista automÃ¡tica se consume de la bolsa.
-            Una selecciÃ³n manual tambiÃ©n se marca como escuchada para
-            evitar que reaparezca poco despuÃ©s.
+            En aleatorio, la pista automática se consume de la bolsa.
+            Una selección manual también se marca como escuchada para
+            evitar que reaparezca poco después.
           */
           if (
             playbackMode === 'random' ||
@@ -3194,8 +3178,8 @@
           /Android|iPhone|iPad|iPod|Mobile/i.test(userAgent);
 
         /*
-          iPadOS puede identificarse como un Mac. Esta comprobaciÃ³n
-          permite usar el menÃº nativo en iPad sin activarlo en Windows.
+          iPadOS puede identificarse como un Mac. Esta comprobación
+          permite usar el menú nativo en iPad sin activarlo en Windows.
         */
         const iPadDesktopMode =
           navigator.platform === 'MacIntel' &&
@@ -3246,7 +3230,7 @@
             return;
           } catch (error) {
             /*
-              Si el usuario cierra voluntariamente el menÃº de compartir,
+              Si el usuario cierra voluntariamente el menú de compartir,
               no se copia nada ni se muestra un error.
             */
             if (error?.name === 'AbortError') {
@@ -3255,7 +3239,7 @@
             }
 
             console.warn(
-              'No se ha podido usar el menÃº nativo. Se copiarÃ¡ el enlace.',
+              'No se ha podido usar el menú nativo. Se copiará el enlace.',
               error
             );
           }
@@ -3495,7 +3479,7 @@
         if (playbackMode === 'random') {
           /*
             Al entrar en aleatorio se inicia un ciclo nuevo, excluyendo
-            la canciÃ³n actual para que no se repita inmediatamente.
+            la canción actual para que no se repita inmediatamente.
           */
           resetRandomQueue(currentTrackIndex);
         }
@@ -3630,7 +3614,7 @@
 
         shareLink({
           url: buildTrackShareUrl(),
-          title: track ? `${track.name} Â· Eidos` : COPY.shareTitle,
+          title: track ? `${track.name} · Eidos` : COPY.shareTitle,
           text: track
             ? COPY.shareTrack(track.name)
             : COPY.sharePlayer
@@ -3745,7 +3729,7 @@
       window.toggleMenu = function toggleMenu() {
         const opening = !menu.classList.contains('open');
 
-        // Abrir o cerrar navegaciÃ³n es una operaciÃ³n puramente visual.
+        // Abrir o cerrar navegación es una operación puramente visual.
         // Nunca llama a requestFullscreen/exitFullscreen.
         menu.classList.toggle('open', opening);
         burger.classList.toggle('active', opening);
@@ -3789,7 +3773,7 @@
             nextCompactNavigation !== compactNavigation;
 
           // Mientras estamos en fullscreen, un resize/viewport-change
-          // provocado por el navegador no debe cerrar el menÃº ni alterar
+          // provocado por el navegador no debe cerrar el menú ni alterar
           // la experiencia. Solo el usuario lo cierra.
           const keepFullscreenMenu =
             Boolean(document.fullscreenElement) &&
@@ -3855,8 +3839,8 @@
       );
 
       function syncFullscreenState() {
-        // Fullscreen solo cambia el estado visual del botÃ³n/opciÃ³n.
-        // No cerramos menÃº ni forzamos ningÃºn reajuste de navegaciÃ³n.
+        // Fullscreen solo cambia el estado visual del botón/opción.
+        // No cerramos menú ni forzamos ningún reajuste de navegación.
         document.body.classList.toggle(
           'is-fullscreen',
           Boolean(document.fullscreenElement)
