@@ -1,0 +1,14 @@
+Nombres exactos utilizados por la web:
+
+img01.jpg
+img02.jpg
+img03.jpg
+img04.jpg
+img05.jpg
+img06.jpg
+img07.jpg
+img08.jpg
+img09.jpg
+
+Ruta relativa desde el HTML: ./Imágenes de presentación/en/img01.jpg
+No cambies espacios, mayúsculas/minúsculas ni la numeración.
