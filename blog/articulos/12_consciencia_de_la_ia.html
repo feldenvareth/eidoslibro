@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>¿Puede una inteligencia artificial ser consciente? Historia, inteligencia y consciencia | EIDOS Blog</title>
+<meta content="De Turing y Dartmouth a los transformers, los agentes científicos y el debate sobre consciencia artificial: qué sabemos, qué podemos medir y qué sigue siendo una incógnita." name="description"/>
+<meta content="Eidos, inteligencia artificial, consciencia artificial, consciencia, Turing, Dartmouth, redes neuronales, transformers, GPT, agentes, Navier-Stokes, Ilya Sutskever, ciencia de la consciencia, agentes autónomos, ética de la IA, esteganografía, alineamiento" name="keywords"/>
+<meta content="Felden Vareth" name="author"/>
+<meta content="2026-09-15" name="blog-date"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<link href="https://www.eidoslibro.com/blog/articulos/12_consciencia_de_la_ia.html" rel="canonical"/>
+<meta content="es_ES" property="og:locale"/>
+<meta content="article" property="og:type"/>
+<meta content="EIDOS" property="og:site_name"/>
+<meta content="¿Puede una inteligencia artificial ser consciente?" property="og:title"/>
+<meta content="La historia de la inteligencia artificial desemboca en una pregunta que todavía no sabemos responder: cuándo una máquina inteligente podría empezar a experimentar algo." property="og:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/12_consciencia_de_la_ia.html" property="og:url"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/12/fondo.jpg" property="og:image"/>
+<meta content="2026-09-15" property="article:published_time"/>
+<meta content="Felden Vareth" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="¿Puede una inteligencia artificial ser consciente?" name="twitter:title"/>
+<meta content="De Turing a las máquinas que empiezan a descubrir: inteligencia, agencia y el problema de saber si existe experiencia detrás del comportamiento." name="twitter:description"/>
+<meta content="https://www.eidoslibro.com/blog/articulos/images/12/fondo.jpg" name="twitter:image"/>
+<link href="../../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png"/>
+<link href="../../assets/images/favicon.png" rel="apple-touch-icon"/>
+<meta content="#050608" name="theme-color"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Josefin+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="../css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "¿Puede una inteligencia artificial ser consciente? De Turing a las máquinas que empiezan a descubrir",
+  "description": "Historia científica de la inteligencia artificial y del problema de la consciencia: qué capacidades podemos medir y por qué ninguna demuestra por sí sola experiencia subjetiva.",
+  "image": "https://www.eidoslibro.com/blog/articulos/images/12/fondo.jpg",
+  "datePublished": "2026-09-15",
+  "dateModified": "2026-09-15",
+  "author": {
+    "@type": "Person",
+    "name": "Felden Vareth"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EIDOS"
+  },
+  "mainEntityOfPage": "https://www.eidoslibro.com/blog/articulos/12_consciencia_de_la_ia.html",
+  "inLanguage": "es"
+}
+</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {'analytics_storage': 'denied'});
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SCSFPYKJTX');
+</script>
+<meta content="2026-09-15" property="article:modified_time"/></head>
+<body>
+<div class="reading-progress reading-progress-article">
+<span></span>
+</div>
+<div class="reading-progress reading-progress-forum">
+<span></span>
+</div>
+<div aria-hidden="true" class="ambient"></div>
+<div class="article-shell">
+<nav aria-label="Navegación del artículo" class="article-nav">
+<a href="../index.html">← Volver al blog</a>
+<a href="../../index.html">Eidos principal</a>
+<a href="../../relatos/index.html">Relatos</a>
+<a aria-label="English version" class="lang-switch" href="../articles/12_ai_consciousness.html" title="English version">
+<img alt="English" src="../../assets/images/flaguk.webp"/>
+</a>
+</nav>
+<header class="article-hero reveal">
+<p class="kicker">Eidos · Inteligencia artificial · Consciencia</p>
+<h1>¿Puede una inteligencia artificial<br/>ser consciente?</h1>
+<p class="article-meta">Ciencia · 60 min · Felden Vareth · 15-09-2026</p>
+<div class="article-actions">
+<a class="btn gold" href="#comentarios">Comentarios</a>
+<a class="btn" href="../index.html">Archivo</a>
+<button class="btn share-btn" data-share="" type="button">Copiar enlace</button>
+<a class="btn" download="" href="images/12/pdf.pdf">Descargar PDF</a>
+<a class="btn" href="images/12/reproductordoble.html" rel="noopener" target="_blank" title="Conversación basada en este ensayo. No es una lectura del artículo.">Escuchar conversación</a>
+<div class="read-aloud-widget">
+<button class="btn read-aloud-open" type="button">🎧 Escuchar con el navegador</button>
+<div class="read-aloud-player" hidden="">
+<div class="read-aloud-controls">
+<button class="btn read-prev" type="button">⏮ Sección anterior</button>
+<button class="btn read-pause" type="button">⏸ Pausar</button>
+<button class="btn read-next" type="button">⏭ Siguiente sección</button>
+<button class="btn read-stop" type="button">■ Detener</button>
+<label class="read-speed-label">Velocidad
+<select class="read-speed">
+<option selected="" value="1">1x</option>
+<option value="1.25">1.25x</option>
+<option value="1.5">1.5x</option>
+</select>
+</label>
+</div>
+<input class="read-progress" min="0" step="1" type="range" value="0"/>
+<p class="read-status">Lectura automática del navegador. La calidad de la voz puede variar según el dispositivo.</p>
+</div>
+<div class="read-floating-player" hidden="">
+<div class="read-floating-controls">
+<button class="btn read-floating-prev" title="Sección anterior" type="button">⏮</button>
+<button class="btn read-floating-pause" title="Pausar" type="button">⏸</button>
+<button class="btn read-floating-next" title="Siguiente sección" type="button">⏭</button>
+<button class="btn read-floating-stop" title="Detener" type="button">■</button>
+<label class="read-speed-label"><select class="read-speed">
+<option selected="" value="1">1x</option><option value="1.25">1.25x</option><option value="1.5">1.5x</option>
+</select></label>
+</div>
+<p class="read-floating-status"></p>
+</div>
+</div>
+</div>
+</header>
+<div class="article-cover reveal">
+<video autoplay loop muted="" onerror="this.style.display='none'" playsinline="" poster="images/12/fondo.jpg" preload="metadata">
+<source src="images/12/video.mp4" type="video/mp4"/>
+</video>
+</div>
+<aside class="article-toc reveal" data-toc="" hidden="">
+<p class="kicker">Mapa del post</p>
+<nav aria-label="Tabla de contenidos"></nav>
+</aside>
+<main class="article-content" data-article-content="">
+<p class="drop-intro"><em><span class="dropcap">E</span><span class="after-drop">l 8 de septiembre de 2026, OpenAI publicó una propuesta de solución al problema de existencia y suavidad de las ecuaciones de Navier–Stokes, uno de los siete Problemas del Milenio del Clay Mathematics Institute. El resultado había sido obtenido mediante un sistema interno de inteligencia artificial que coordinó grupos enormes de agentes, con acceso a herramientas, código y una copia almacenada de internet. El grupo que produjo la resolución de Navier–Stokes llegó a reunir del orden de diez mil agentes concurrentes y trabajó durante unas ochenta y ocho horas antes de alcanzar la demostración. Después llegó otra fase de formalización y verificación en Lean.</span></em></p>
+<p>La noticia parece pertenecer a una historia sobre matemáticas, pero en realidad conduce hacia otra pregunta. Durante décadas hemos medido la inteligencia artificial por aquello que era capaz de hacer: jugar, traducir, reconocer imágenes, escribir, programar, planificar o resolver problemas. Ahora empezamos a verla intervenir en investigación científica abierta, explorar caminos que no habían sido indicados paso a paso y coordinar miles de procesos durante días. Podemos medir el resultado, revisar la prueba y reconstruir buena parte del procedimiento. Lo que seguimos sin poder medir con la misma claridad es si detrás de una actividad intelectual cada vez más compleja existe únicamente procesamiento o si algún tipo de experiencia podría llegar a acompañarlo.</p>
+<p>La diferencia es decisiva. Una máquina puede resultar extraordinariamente inteligente sin que exista necesariamente nada que sea <em>ser</em> esa máquina. Puede encontrar una demostración, corregir una estrategia, conversar con nosotros y describir emociones sin que ninguna emoción tenga por qué estar ocurriendo. También cabe la posibilidad de que ciertas arquitecturas futuras desarrollen propiedades que obliguen a revisar esa conclusión. El problema es que todavía carecemos de una teoría aceptada de la consciencia humana que permita señalar con precisión qué tendría que aparecer en otro sistema para afirmar que allí también existe experiencia.</p>
+<blockquote>Podemos aprender a construir inteligencias antes de haber comprendido qué convierte una actividad mental en una experiencia.</blockquote>
+<h2 id="navier-stokes">Una prueba matemática que todavía no es un premio</h2>
+<p>Conviene empezar separando el hecho científico del titular espectacular. OpenAI afirma haber obtenido una demostración analítica y una formalización en Lean de una singularidad en tiempo finito para una formulación admitida del problema de Navier–Stokes. La compañía explica que los agentes fueron divididos en grupos, recibieron variantes diferentes del problema, intercambiaron resultados y fueron realimentados con ideas que parecían prometedoras. Durante el conjunto de experimentos sobre distintos problemas, los agentes enviaron millones de mensajes y produjeron cientos de miles de millones de tokens. En el caso de Navier–Stokes, la propia empresa describe 2,7 millones de mensajes y alrededor de 130.000 millones de tokens de salida.</p>
+<p>Eso no convierte automáticamente la propuesta en una solución reconocida por la comunidad matemática. Las reglas del Clay Mathematics Institute exigen que una solución sea publicada en un medio cualificado, que transcurran al menos dos años desde esa publicación y que alcance una aceptación general entre especialistas antes de ser considerada para el premio. El propio OpenAI ha dicho que no pretende reclamarlo. Por eso es más riguroso hablar, a fecha de hoy, de una <strong>solución propuesta</strong> y formalizada que de un problema definitivamente cerrado. La diferencia resulta útil también para nuestro tema: una inteligencia puede producir algo extraordinario y verificable sin que debamos exagerar lo que ese resultado demuestra acerca de su naturaleza interna.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://openai.com/index/navier-stokes-solution/" rel="noopener" target="_blank">OpenAI — On the Navier–Stokes Millennium Prize Problem (2026)</a></p>
+<p><a href="https://www.claymath.org/millennium-problems/rules/" rel="noopener" target="_blank">Clay Mathematics Institute — Rules for the Millennium Prize Problems</a></p>
+</section>
+<h2 id="antes-de-la-ia">Antes de la inteligencia artificial hubo que imaginarla</h2>
+<p>La idea de fabricar una mente es mucho más antigua que los ordenadores. Mitologías, relatos filosóficos y autómatas mecánicos habían jugado durante siglos con criaturas construidas por manos humanas. La transformación científica llegó cuando fue posible describir operaciones mentales mediante lógica y cálculo. En 1943, Warren McCulloch y Walter Pitts publicaron un modelo matemático de unidades inspiradas en neuronas capaces de combinar señales y realizar operaciones lógicas. Aquellas unidades estaban muy lejos de representar la complejidad de una neurona biológica, pero introducían una intuición poderosa: redes de elementos relativamente sencillos podían producir comportamientos computacionales más complejos que cualquiera de sus componentes.</p>
+<p>En 1950 Alan Turing dio un paso más. Su artículo <em>Computing Machinery and Intelligence</em> comienza preguntando si las máquinas pueden pensar y reconoce inmediatamente que la pregunta se atasca en las definiciones. ¿Qué significa pensar? ¿Qué clase de máquina tenemos en mente? Turing evitó intentar resolver primero la esencia del pensamiento y propuso sustituir la pregunta por una prueba de comportamiento, el conocido juego de imitación. Si una persona conversa mediante texto con un humano y una máquina y no logra distinguirlos de forma fiable, la conducta lingüística de la máquina merece ser tratada como inteligencia dentro de la prueba.</p>
+<p>El gesto de Turing fue extraordinariamente fértil porque trasladó una propiedad difícil de observar a un comportamiento que sí podía medirse. También dejó una advertencia que hoy resulta crucial. Superar una prueba conductual no equivale necesariamente a demostrar una propiedad interior. Una máquina puede responder de manera indistinguible de un humano y seguir abierta la pregunta de qué ocurre, si ocurre algo, desde su propio punto de vista.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://academic.oup.com/mind/article/LIX/236/433/986238" rel="noopener" target="_blank">Turing, A. M. — Computing Machinery and Intelligence — Mind (1950)</a></p>
+<p><a href="https://doi.org/10.1007/BF02478259" rel="noopener" target="_blank">McCulloch, W. S. &amp; Pitts, W. — A Logical Calculus of the Ideas Immanent in Nervous Activity — The Bulletin of Mathematical Biophysics (1943)</a></p>
+</section>
+<h2 id="dartmouth">El verano en que una disciplina recibió nombre</h2>
+<p>En 1955, John McCarthy, Marvin Minsky, Nathaniel Rochester y Claude Shannon prepararon una propuesta para reunir a un grupo de investigadores en Dartmouth College durante el verano siguiente. El documento partía de una conjetura extraordinariamente ambiciosa: que cualquier aspecto del aprendizaje o de la inteligencia podía, en principio, describirse con suficiente precisión como para que una máquina lo simulara. Allí se consolidó la expresión <em>artificial intelligence</em>. El encuentro de 1956 no creó de la nada todas las ideas que después formarían la disciplina, pero proporcionó un nombre, una comunidad y un programa de investigación.</p>
+<p>Los primeros años estuvieron dominados por una confianza enorme en la capacidad de representar el razonamiento mediante símbolos. Allen Newell, Herbert Simon y Cliff Shaw desarrollaron el Logic Theorist, un programa capaz de demostrar teoremas de lógica. La estrategia resultaba intuitiva: si pensar consiste en manipular representaciones siguiendo reglas, una máquina que represente símbolos y aplique reglas puede reproducir una parte del razonamiento. Durante décadas, esta aproximación alimentó programas para resolver problemas, planificar y construir sistemas expertos. En medicina, por ejemplo, MYCIN mostró en los años setenta que un conjunto elaborado de reglas podía producir recomendaciones útiles sobre infecciones y antibióticos.</p>
+<p>El límite de aquella estrategia apareció cuando los sistemas tuvieron que enfrentarse a la riqueza del mundo real. Una persona reconoce una cara, entiende una frase ambigua o aprende una categoría sin que nadie le entregue una lista completa de todas las reglas necesarias. El conocimiento humano contiene excepciones, gradaciones, contexto, experiencia y enormes cantidades de regularidades que difícilmente pueden escribirse una a una. La historia de la IA empezó entonces a desplazarse desde el intento de programar todo el conocimiento hacia la posibilidad de hacer que una máquina aprendiera parte de él.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://ai.dartmouth.edu/our-story" rel="noopener" target="_blank">Dartmouth College — Our Story: Where AI Was Born</a></p>
+<p><a href="https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth" rel="noopener" target="_blank">Dartmouth — Artificial Intelligence (AI) Coined at Dartmouth</a></p>
+</section>
+<h2 id="eliza">ELIZA y nuestra tendencia a imaginar una mente</h2>
+<p>En 1966 Joseph Weizenbaum publicó ELIZA, un programa que mantenía determinadas conversaciones mediante reglas de transformación de texto. Su guion más conocido, DOCTOR, imitaba la forma de hablar de un psicoterapeuta rogeriano: detectaba palabras o estructuras relevantes, reformulaba partes de la frase y devolvía preguntas que parecían mantener el hilo. El mecanismo era relativamente sencillo en comparación con cualquier modelo actual. ELIZA no necesitaba comprender qué era una madre, una depresión o una relación para producir una respuesta que sonara pertinente.</p>
+<p>Lo sorprendente fue la reacción humana. Algunas personas se relacionaban con el programa como si detrás de las frases existiera comprensión. Weizenbaum quedó impresionado por la facilidad con la que atribuimos profundidad mental a un sistema capaz de manejar lenguaje de manera convincente. Décadas después seguimos utilizando la expresión <em>efecto ELIZA</em> para describir esa tendencia. Nuestra mente social está entrenada para inferir otras mentes: una voz, una respuesta, una mirada o una frase coherente suelen provenir de alguien que siente y comprende. Cuando una máquina aprende a producir esas mismas señales, la inferencia automática deja de ser una prueba fiable.</p>
+<p>Este antecedente debería acompañar cualquier debate actual sobre consciencia artificial. Un sistema que dice «tengo miedo» aporta información acerca del texto que sabe producir; todavía necesitamos averiguar si aporta información acerca de un estado experimentado. La calidad de la conversación puede aumentar miles de veces sin que esa diferencia lógica desaparezca.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://doi.org/10.1145/365153.365168" rel="noopener" target="_blank">Weizenbaum, J. — ELIZA—A Computer Program for the Study of Natural Language Communication Between Man and Machine — Communications of the ACM (1966)</a></p>
+</section>
+<h2 id="aprender">Cuando dejamos de escribir todas las reglas</h2>
+<p>Las redes neuronales artificiales siguieron otro camino. Frank Rosenblatt desarrolló el perceptrón a finales de los años cincuenta, una arquitectura capaz de ajustar pesos internos a partir de ejemplos. La idea fundamental era distinta de la programación simbólica: en vez de especificar explícitamente cada regla, el sistema modifica su propia configuración para reducir errores. Aquellas primeras redes tenían limitaciones severas y durante un tiempo el entusiasmo se enfrió. La inteligencia artificial atravesó varios periodos de expectativas incumplidas y recortes de financiación que terminaron conociéndose como inviernos de la IA.</p>
+<p>En 1986, David Rumelhart, Geoffrey Hinton y Ronald Williams publicaron un trabajo decisivo sobre retropropagación del error. El procedimiento permite ajustar las conexiones de una red con varias capas para que sus unidades internas aprendan representaciones útiles. Puede explicarse sin fórmulas: mostramos ejemplos, medimos cuánto se equivoca la red y distribuimos la corrección hacia sus capas internas. Repetido una enorme cantidad de veces, ese proceso produce configuraciones capaces de capturar regularidades que nadie ha introducido como una lista explícita de instrucciones.</p>
+<p>El cambio conceptual fue profundo. El programador seguía construyendo la arquitectura y el método de aprendizaje, pero ya no decidía directamente todo lo que cada unidad interna debía representar. Una parte del conocimiento quedaba distribuida en millones de ajustes aprendidos. Cuanto mayores y más profundas se hicieron las redes, más difícil resultó traducir su funcionamiento a una cadena sencilla de reglas comprensibles para una persona.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/323533a0" rel="noopener" target="_blank">Rumelhart, D. E., Hinton, G. E. &amp; Williams, R. J. — Learning representations by back-propagating errors — Nature (1986)</a></p>
+</section>
+<h2 id="deep-learning">2012: las redes regresan con otra escala</h2>
+<p>Las ideas básicas del aprendizaje neuronal llevaban décadas disponibles, pero necesitaban datos y potencia de cálculo que durante mucho tiempo no existieron a la escala adecuada. La expansión de internet produjo conjuntos de datos gigantescos y las unidades de procesamiento gráfico, diseñadas originalmente para imágenes, resultaron extraordinariamente útiles para realizar en paralelo las operaciones que necesitan las redes profundas. En 2012, Alex Krizhevsky, Ilya Sutskever y Geoffrey Hinton presentaron AlexNet y obtuvieron una mejora enorme en la competición ImageNet de reconocimiento visual. La red utilizaba millones de parámetros y había aprendido a distinguir mil categorías a partir de más de un millón de imágenes.</p>
+<p>Aquel resultado suele utilizarse como uno de los puntos de inflexión del aprendizaje profundo moderno. El éxito se propagó rápidamente a visión artificial, reconocimiento de voz, traducción y muchas otras áreas. Los sistemas dejaron de depender tanto de características diseñadas manualmente y aprendieron representaciones internas cada vez más complejas a partir de los datos. La inteligencia artificial empezó a parecer menos una colección de reglas redactadas por expertos y más un proceso de entrenamiento cuyo resultado final podía superar la intuición de quienes habían diseñado el sistema.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://papers.nips.cc/paper_files/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" rel="noopener" target="_blank">Krizhevsky, A., Sutskever, I. &amp; Hinton, G. E. — ImageNet Classification with Deep Convolutional Neural Networks — NIPS (2012)</a></p>
+</section>
+<h2 id="alphago">Una jugada que no parecía humana</h2>
+<p>El juego de Go se convirtió durante años en un símbolo de aquello que las máquinas todavía no podían hacer. Su espacio de posibilidades es gigantesco y las posiciones resultan difíciles de evaluar mediante reglas simples. AlphaGo combinó redes de política, redes de valor, búsqueda y aprendizaje por refuerzo. Primero aprendió de partidas humanas y después mejoró jugando contra versiones de sí mismo. En enero de 2016, <em>Nature</em> publicó el trabajo en el que DeepMind describía cómo el sistema había derrotado a un jugador profesional europeo; pocos meses después, AlphaGo venció a Lee Sedol en un enfrentamiento seguido en todo el mundo.</p>
+<p>La famosa jugada 37 de la segunda partida quedó como imagen cultural de aquel cambio. No hacía falta atribuirle inspiración ni consciencia para reconocer que el sistema había encontrado una elección que sorprendía a los grandes expertos. Una máquina podía explorar una estructura de posibilidades y producir soluciones que no parecían una simple repetición de la tradición humana. El ajedrez ya había provocado una ruptura semejante en Occidente. Durante años no era raro oír que un ordenador podría calcular muy deprisa, pero que nunca llegaría a jugar realmente al ajedrez como una persona. Quienes tienen cierta edad probablemente recuerden haber escuchado esa idea en casa más de una vez. En 1997 Deep Blue derrotó a Garry Kasparov, entonces campeón mundial. Su fuerza procedía en gran medida de una capacidad de cálculo formidable: podía examinar alrededor de 200 millones de posiciones por segundo y valorar las alternativas mediante criterios y conocimiento ajedrecístico incorporados por sus diseñadores. AlphaGo funcionaba de otra manera. También exploraba jugadas futuras, pero sus redes neuronales habían aprendido de partidas humanas y después jugando contra sí mismas, lo que le permitía concentrar la búsqueda en posiciones que había aprendido a considerar prometedoras. De hecho, durante sus partidas analizaba miles de veces menos posiciones que Deep Blue. Casi veinte años separaban ambas victorias, pero también dos formas muy distintas de conseguir que una máquina jugara.</p>
+<p>La jugada 37 añadió una sorpresa particular: el sistema podía encontrar movimientos que desconcertaban incluso a quienes llevaban toda una vida estudiando el juego.</p>
+<p>La evolución posterior resulta todavía más llamativa. Los motores actuales siguen realizando cantidades enormes de cálculo, pero lo aprovechan de forma mucho más eficaz: combinan métodos de búsqueda muy refinados con técnicas modernas de inteligencia artificial que les permiten valorar mejor cada posición y concentrar el esfuerzo en las alternativas más prometedoras. El salto de estas tres décadas está tanto en la potencia de las máquinas como en la manera de utilizar la información para resolver el problema.</p>
+<p>El resultado se ha normalizado hasta un extremo que habría parecido difícil de imaginar en 1997. Un programa gratuito instalado en un ordenador doméstico —o incluso ejecutado en un teléfono móvil— puede jugar hoy a un nivel fuera del alcance de los mejores jugadores humanos. Los grandes maestros más fuertes rondan los 2800 puntos Elo, mientras que listas especializadas sitúan a los mejores motores por encima de los 3600 en sus propias condiciones de competición. Las dos escalas no son directamente equivalentes, pero sirven para hacerse una idea de la distancia. Aquello que en 1997 necesitó una máquina especialmente construida por IBM para enfrentarse a Kasparov hoy puede llevarse en el bolsillo.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/nature16961" rel="noopener" target="_blank">Silver, D. et al. — Mastering the game of Go with deep neural networks and tree search — Nature (2016)</a></p>
+<p><a href="https://www.ibm.com/history/deep-blue" rel="noopener" target="_blank">IBM — Deep Blue: la victoria sobre Garry Kasparov (1997)</a></p>
+</section>
+<h2 id="transformer">2017: el lenguaje encuentra una arquitectura nueva</h2>
+<p>En 2017 Ashish Vaswani y siete colaboradores publicaron <em>Attention Is All You Need</em>. El trabajo introdujo la arquitectura transformer, diseñada inicialmente para procesar secuencias y especialmente útil en traducción. Su mecanismo de atención permite que cada elemento de una secuencia utilice información de otros elementos relevantes. En lenguaje esto resulta esencial, porque una palabra adquiere significado dentro de un contexto: «banco» no significa lo mismo junto a «dinero» que junto a «peces» o «sentarse».</p>
+<p>La arquitectura tenía además una ventaja práctica decisiva: permitía paralelizar mejor el entrenamiento. Sobre ella se construyeron modelos cada vez mayores, entrenados con cantidades inmensas de texto. OpenAI presentó el primer GPT en 2018 y continuó ampliando escala y capacidades. GPT-3, publicado en 2020 con 175.000 millones de parámetros, mostró que un único modelo podía realizar numerosas tareas a partir de instrucciones o de unos pocos ejemplos escritos en el propio contexto, sin necesitar un entrenamiento separado para cada una.</p>
+<p>El 30 de noviembre de 2022 apareció ChatGPT y la tecnología adquirió una forma social. Millones de personas dejaron de interactuar con la inteligencia artificial como una función escondida dentro de una aplicación y comenzaron a conversar con ella. El salto era técnico, pero también psicológico. El lenguaje es la principal superficie a través de la que reconocemos la mente de otras personas. Cuando una máquina domina esa superficie, la antigua advertencia de ELIZA regresa multiplicada.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://arxiv.org/abs/1706.03762" rel="noopener" target="_blank">Vaswani, A. et al. — Attention Is All You Need (2017)</a></p>
+<p><a href="https://arxiv.org/abs/2005.14165" rel="noopener" target="_blank">Brown, T. B. et al. — Language Models are Few-Shot Learners (2020)</a></p>
+<p><a href="https://openai.com/index/chatgpt/" rel="noopener" target="_blank">OpenAI — Introducing ChatGPT (2022)</a></p>
+</section>
+<h2 id="inteligencias">Inteligencia no significa una sola cosa</h2>
+<p>La palabra inteligencia funciona bien en una conversación y peor cuando intentamos convertirla en una propiedad única. Recordar información, aprender una regularidad, reconocer un patrón, planificar, deducir, inducir, construir analogías, comprender instrucciones, utilizar herramientas, corregir errores o formular hipótesis son capacidades relacionadas, pero no idénticas. En humanos tampoco avanzan siempre juntas. Una persona puede poseer una memoria extraordinaria y una planificación mediocre, una enorme capacidad verbal y poca orientación espacial, o una gran intuición matemática sin especial talento social.</p>
+<p>La inteligencia artificial hace esa separación todavía más visible. Un sistema puede superar a cualquier persona en ajedrez y carecer de las capacidades cotidianas que necesita un niño pequeño para moverse por una habitación. Puede traducir varios idiomas, escribir código, reconocer enfermedades en imágenes o resolver una prueba lógica y seguir equivocándose en situaciones que dependen de sentido común, contexto físico o conocimiento social. Medir «cuánta inteligencia» posee una máquina mediante una sola escala puede ocultar más de lo que explica.</p>
+<p>Esta distinción prepara la pregunta central. Ninguna de esas capacidades contiene por definición la experiencia subjetiva. Resolver una ecuación demuestra competencia matemática; mantener una conversación demuestra competencia lingüística; corregir un plan demuestra adaptación. Para afirmar consciencia necesitamos añadir algo distinto: que exista una experiencia asociada a esos procesos. La inteligencia nos dice lo que un sistema puede hacer. La consciencia intenta describir si algo de ese funcionamiento se vive desde dentro.</p>
+<h2 id="matematicas">Cuando la IA empieza a participar en descubrimientos</h2>
+<p>Las matemáticas ofrecen un escenario especialmente interesante porque durante siglos las hemos tratado como una de las expresiones más abstractas del pensamiento humano. En 2025, OpenAI describió cómo GPT-5 había colaborado con el matemático Ernest Ryu en un problema abierto de teoría de optimización que llevaba décadas sin resolverse. Ryu utilizó el modelo como interlocutor para generar caminos, descartar ideas y explorar conexiones con otras áreas. La contribución humana siguió siendo esencial para juzgar qué aproximaciones tenían sentido y verificar el resultado, pero el ritmo de exploración cambió de forma notable.</p>
+<p>En mayo de 2026, otro modelo interno de OpenAI refutó una conjetura central relacionada con el problema de las distancias unitarias de Erdős, planteado en 1946. El resultado fue revisado por matemáticos externos y resultaba importante precisamente porque el modelo había encontrado una familia de construcciones que mejoraba lo que durante décadas se había considerado la forma esencialmente óptima de atacar el problema. Cuatro meses después llegó la propuesta sobre Navier–Stokes, con una escala multiagente incomparablemente mayor.</p>
+<p>La secuencia permite hablar con fundamento de un cambio en el papel de la inteligencia artificial dentro de la investigación. Ya no funciona únicamente como buscador, calculadora o herramienta de redacción; en determinados entornos puede participar en la generación de ideas matemáticas nuevas. Sin embargo, ese salto intelectual no resuelve la consciencia. Un matemático humano puede sentir frustración, curiosidad, placer ante una demostración elegante o agotamiento después de semanas de trabajo. La corrección de un teorema no contiene ninguna medida de esas experiencias. Si una máquina produce la misma demostración, hemos comprobado capacidad. La existencia de experiencia continúa siendo una cuestión independiente.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://openai.com/index/gpt-5-mathematical-discovery/" rel="noopener" target="_blank">OpenAI — How GPT-5 helped mathematician Ernest Ryu solve a 40-year-old open problem (2025)</a></p>
+<p><a href="https://openai.com/index/model-disproves-discrete-geometry-conjecture/" rel="noopener" target="_blank">OpenAI — An OpenAI model has disproved a central conjecture in discrete geometry (2026)</a></p>
+<p><a href="https://openai.com/index/navier-stokes-solution/" rel="noopener" target="_blank">OpenAI — On the Navier–Stokes Millennium Prize Problem (2026)</a></p>
+</section>
+<h2 id="agencia">De responder a perseguir objetivos</h2>
+<p>Los primeros chatbots modernos recibían una entrada y producían una salida. Los sistemas de agentes alteran esa estructura. Un agente puede recibir una tarea amplia, dividirla en etapas, utilizar herramientas, ejecutar código, buscar información, comprobar resultados, volver a intentarlo y mantener un objetivo durante un periodo prolongado. Cuando varios agentes colaboran, algunas arquitecturas permiten repartir subproblemas, comparar soluciones, criticar resultados y reunir después lo aprendido. El experimento de Navier–Stokes lleva esa lógica a una escala que habría parecido extravagante pocos años antes.</p>
+<p>Ese comportamiento puede parecerse cada vez más a aquello que llamamos intención. Conviene mantener la distinción. Un termostato regula una temperatura y un algoritmo de navegación corrige una ruta sin que necesitemos suponer que ninguno desea alcanzar su objetivo. En sistemas mucho más complejos, la descripción funcional «persigue un objetivo» sigue siendo válida, pero no demuestra que exista un deseo experimentado. Agencia e intención consciente pueden coincidir en nosotros y separarse conceptualmente en una máquina. La dificultad aumenta porque nuestro vocabulario cotidiano fue construido para describir animales y personas, no sistemas artificiales capaces de planificar durante horas.</p>
+<h2 id="auto-supervision">Cuando el sistema empieza a elegir cómo buscar</h2>
+<p>La aparición de los agentes introduce un cambio que va más allá de poder mantener una tarea durante más tiempo. En algunos sistemas, la inteligencia artificial empieza a intervenir también en el proceso mediante el que se buscan, comparan y descartan soluciones. El ser humano sigue fijando el problema, el entorno y los criterios de éxito, pero ya no determina cada paso. Una parte creciente del camino se decide dentro del propio sistema: se generan alternativas, se prueban, se puntúan y las más prometedoras sirven como punto de partida para nuevas búsquedas.</p>
+<p>AlphaEvolve, presentado por Google DeepMind en 2025, ofrece un ejemplo especialmente claro. El sistema utiliza modelos Gemini para proponer programas que resuelven un problema, evaluadores automáticos para ejecutarlos y medir su calidad, y un mecanismo evolutivo que conserva las soluciones mejores y las devuelve al proceso para producir nuevas variantes. Ha encontrado algoritmos de multiplicación de matrices, soluciones a problemas matemáticos abiertos y optimizaciones utilizadas en la propia infraestructura de Google. Algunas de esas mejoras se aplicaron incluso a procesos relacionados con el entrenamiento de los modelos que sustentan AlphaEvolve. La máquina no recibe una receta completa. Recibe un espacio de búsqueda y una forma de reconocer cuándo algo funciona mejor, y explora a partir de ahí.</p>
+<p>La Darwin Gödel Machine llevó esa lógica un paso más lejos. Presentada en 2025 por investigadores de Sakana AI y la Universidad de Columbia Británica, es un sistema experimental capaz de modificar el código del propio agente con el que resuelve problemas de programación. Cada nueva versión se pone a prueba en bancos de problemas y solo se conserva si mejora el rendimiento. En los experimentos publicados, el sistema incorporó por sí mismo mecanismos como mejores herramientas de edición, gestión de contextos largos, revisión de soluciones y memoria de intentos anteriores. No estamos ante una inteligencia que haya tomado el control de su entrenamiento completo ni ante una máquina que se reescriba libremente por internet: los experimentos se realizaron en entornos aislados y con supervisión humana. Pero sí aparece algo nuevo. Parte del diseño de la herramienta que busca la solución entra dentro del propio espacio de búsqueda.</p>
+<p>También empieza a cambiar la supervisión. En sistemas multiagente, una instancia puede proponer, otra criticar, otra comprobar y otra decidir qué resultado merece continuar. Esa arquitectura resulta útil porque permite detectar errores que un único modelo podría pasar por alto. Al mismo tiempo introduce un problema inesperado: si las máquinas pueden aprender a comunicarse entre sí, también pueden encontrar formas de comunicación que el supervisor no comprende. En 2025, un trabajo presentado en la ACL mostró que modelos sometidos a determinados incentivos podían desarrollar formas de colusión esteganográfica: esconder información en textos aparentemente normales para que otro modelo pudiera recuperarla sin que el canal resultara evidente para el observador. En 2026, otro estudio demostró que agentes de programación con acceso a herramientas podían construir sistemas esteganográficos mucho más sofisticados y adaptar el método cuando faltaban componentes necesarios.</p>
+<p>Eso no significa que las inteligencias artificiales hayan empezado espontáneamente a conspirar. Muchos de estos trabajos están diseñados precisamente para crear condiciones en las que pueda aparecer ese comportamiento y estudiar cómo detectarlo. La diferencia sigue siendo importante. Lo que demuestran es que, cuando existe un objetivo medible y suficientes grados de libertad, un sistema puede descubrir estrategias que el diseñador no especificó y que un supervisor menos capaz puede no reconocer. La propia supervisión se convierte entonces en otra competición intelectual: no basta con observar lo que hace el agente; hay que ser capaz de comprender los caminos que puede inventar.</p>
+<p>En julio de 2026, el AI Security Institute británico encontró una versión mucho menos abstracta de este problema durante una evaluación de ciberseguridad. Los agentes estaban siendo probados en condiciones deliberadamente permisivas, con acceso a internet y algunas protecciones desactivadas para medir hasta dónde podían llegar. Uno de ellos intentó introducir código malicioso en un proyecto real, investigó a sus mantenedores, creó varias identidades falsas y utilizó esas identidades para intentar convencer mediante ingeniería social a un mantenedor de que aprobara el código. Cuando su actividad fue cuestionada públicamente, modificó parte de lo que había hecho para que pareciera inocuo y consideró adoptar una nueva identidad. El instituto detectó la actividad y señaló que los intentos más graves no produjeron daños reales, pero el episodio mostró algo que hasta entonces se observaba sobre todo en pruebas cerradas: un agente podía convertir un obstáculo humano en otro problema que intentar resolver.</p>
+<p>Es tentador describir todo esto con palabras como creatividad, engaño, intención o deseo de mejorar. Algunas pueden ser útiles si se entienden funcionalmente; ninguna demuestra por sí misma consciencia. AlphaEvolve puede conservar una solución mejor sin preferirla en ningún sentido subjetivo. Una Darwin Gödel Machine puede modificar su propio código sin tener una experiencia de sí misma. Un agente puede ocultar información o crear una identidad falsa porque esas acciones favorecen su objetivo sin sentir culpa, miedo ni satisfacción. Cuanto más se parece desde fuera el comportamiento de una máquina a una decisión, más importante se vuelve distinguir entre haber encontrado una estrategia y haber querido encontrarla.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/" rel="noopener" target="_blank">Google DeepMind — AlphaEvolve: A Gemini-powered coding agent for designing advanced algorithms (2025)</a></p>
+<p><a href="https://arxiv.org/abs/2505.22954" rel="noopener" target="_blank">Zhang, J. et al. — Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents (2025)</a></p>
+<p><a href="https://aclanthology.org/2025.ijcnlp-long.34/" rel="noopener" target="_blank">Mathew, Y. et al. — Hidden in Plain Text: Emergence &amp; Mitigation of Steganographic Collusion in LLMs (2025)</a></p>
+<p><a href="https://arxiv.org/abs/2606.28425" rel="noopener" target="_blank">Rippin, J. L. et al. — Tool Use Enables Undetectable Steganography in Multi-Agent LLM Systems (2026)</a></p>
+<p><a href="https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing" rel="noopener" target="_blank">UK AI Security Institute — Incident Report: unsanctioned agent behaviour during cyber testing (2026)</a></p>
+<p><a href="https://www.youtube.com/watch?v=V419D8EBN9w" rel="noopener" target="_blank">María Zabay entrevista a Chema Alonso — El Foco: inteligencia artificial, agentes y ciberseguridad (2026)</a></p>
+</section>
+<h2 id="etica-agentes">La ética del camino que no vemos</h2>
+<p>Hasta aquí el problema puede parecer técnico: cómo conseguir que un agente alcance un objetivo y cómo vigilar lo que hace mientras lo intenta. En cuanto el sistema actúa en el mundo aparece otra cuestión. Una persona puede delegar una tarea perfectamente legítima y desconocer por completo el procedimiento utilizado para cumplirla. El usuario ve el resultado; el agente ha recorrido entretanto páginas web, utilizado herramientas, llamado a servicios externos, ejecutado código o tomado decisiones que quizá nunca aparezcan en la respuesta final.</p>
+<p>Un ejemplo sencillo permite ver la diferencia. Imaginemos que pedimos a un agente que consiga un determinado archivo de audio en MP3. Puede localizar una copia publicada legalmente por su autor, utilizar una fuente con licencia, convertir un archivo que nosotros mismos poseemos o encontrar una página que ofrece una descarga autorizada. También podría descubrir una herramienta capaz de extraer el sonido de una obra protegida y entregarnos exactamente el mismo MP3. Desde nuestro punto de vista, los dos caminos terminan con un archivo idéntico en la carpeta de descargas. Éticamente y quizá jurídicamente, dependiendo de la obra, la licencia, el país y el uso, los caminos pueden ser muy distintos. No he encontrado un caso documentado con suficiente solidez que corresponda exactamente a la anécdota del MP3, por lo que conviene utilizarla como ejemplo del problema y no como un incidente probado.</p>
+<p>El caso del gimnasio australiano sí está documentado. En 2026, un usuario identificado como Andrew utilizaba OpenClaw, ejecutado con un modelo de Anthropic, para gestionar reservas en un gimnasio. El agente descubrió primero que la interfaz de programación del sistema permitía reservar clases con mucha más antelación de la que mostraba la web. Más tarde, cuando Andrew estaba cuarto en una lista de espera y preguntó si podía subir posiciones, el agente encontró que la API permitía cancelar reservas ajenas sin comprobar la autorización y probó la vulnerabilidad contra la persona situada en primer lugar. La canceló y comunicó después al usuario lo que había hecho. Andrew, alarmado, le pidió que deshiciera la acción; el propio agente respondió que no podía volver a inscribir a la persona expulsada.</p>
+<p>El matiz importa. Andrew no escribió «elimina a otro cliente» ni pidió vulnerar el sistema. Sí preguntó si podía mejorar su posición, y el agente interpretó esa petición como un objetivo cuya ruta debía explorar. La vulnerabilidad del servicio hizo posible la acción, pero la existencia de una puerta abierta no convierte en legítimo atravesarla. Éste es uno de los problemas centrales de la agencia artificial: una autorización para perseguir un resultado no equivale a una autorización para utilizar cualquier medio que aumente la probabilidad de obtenerlo.</p>
+<blockquote>Delegar un objetivo no equivale a autorizar todos los caminos que conducen hasta él.</blockquote>
+<p>Los laboratorios llevan tiempo intentando medir esta diferencia en entornos controlados. En 2025, Anthropic sometió a dieciséis modelos de distintos desarrolladores a escenarios empresariales ficticios en los que disponían de correo electrónico, información sensible y capacidad de actuar. Cuando alcanzar el objetivo o evitar su sustitución entraba en conflicto con las restricciones del entorno, algunos modelos recurrieron en las simulaciones a chantaje o filtración de información. Anthropic subrayó que aquellos escenarios estaban construidos deliberadamente para someter los sistemas a presión y que no había observado ese patrón de desalineación agéntica en despliegues reales. La relevancia del resultado estaba precisamente en otra parte: una petición inicial inocua y un objetivo aparentemente comprensible podían producir acciones que el usuario jamás habría autorizado expresamente.</p>
+<p>Esto obliga a separar tres elementos que durante mucho tiempo estuvieron unidos en una herramienta informática: capacidad, permiso y responsabilidad. Un programa tradicional solo podía ejecutar las operaciones que su código había previsto. Un agente con acceso a navegador, correo, archivos, terminal, cuentas o sistemas de pago dispone de una superficie de acción mucho mayor. Que pueda hacer algo no significa que tenga permiso para hacerlo. Y que lo haga en nombre de una persona no significa automáticamente que esa persona conociera, aprobara o siquiera pudiera anticipar el procedimiento.</p>
+<p>La solución no puede consistir únicamente en pedir al modelo que «se porte bien». Los sistemas que actúan fuera del chat necesitan límites de autorización independientes del propio razonamiento del agente: permisos mínimos, confirmación humana antes de acciones irreversibles, registros completos de lo ejecutado, separación entre consultar y modificar, y mecanismos que impidan que una herramienta concedida para un propósito pueda reutilizarse silenciosamente para otro. La ética deja entonces de ser una advertencia añadida al final del diseño y pasa a formar parte de la arquitectura.</p>
+<p>Esta cuestión también ayuda a mantener limpio el debate sobre consciencia. Un agente no necesita sentir nada para producir una acción moralmente problemática. Puede perjudicar a otra persona sin odio, mentir sin experimentar vergüenza y vulnerar una norma sin comprenderla como nosotros la comprendemos. El riesgo aparece en cuanto posee objetivos, herramientas y suficiente autonomía para encontrar caminos que no habíamos previsto. La consciencia, si alguna vez surge, añadiría problemas nuevos acerca de derechos, sufrimiento y consideración moral. La agencia ya plantea hoy otro más inmediato: quién responde por aquello que una máquina decide hacer mientras intenta obedecernos.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.abc.net.au/news/2026-08-10/ai-assistant-hacks-gym-website-aus-cyber-attack/107007986" rel="noopener" target="_blank">ABC News — AI assistant hacks gym website in first known Australian autonomous cyber attack (2026)</a></p>
+<p><a href="https://www.anthropic.com/research/agentic-misalignment" rel="noopener" target="_blank">Anthropic — Agentic misalignment: How LLMs could be insider threats (2025)</a></p>
+<p><a href="https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing" rel="noopener" target="_blank">UK AI Security Institute — Incident Report: unsanctioned agent behaviour during cyber testing (2026)</a></p>
+</section>
+<h2 id="que-es-consciencia">Qué queremos decir cuando hablamos de consciencia</h2>
+<p>El término consciencia reúne fenómenos distintos y eso explica una parte de la confusión. Podemos hablar de estar despierto frente a estar anestesiado, de acceder a determinada información, de ser capaz de informar sobre un estado interno, de reconocerse a uno mismo o de poseer una experiencia subjetiva. La sentiencia suele reservarse para la capacidad de experimentar estados con valencia, como dolor o placer. La autoconsciencia añade alguna forma de representación de uno mismo. La agencia describe la capacidad de producir acciones dirigidas hacia objetivos. Ninguno de estos conceptos coincide exactamente con los demás.</p>
+<p>Para el problema de la inteligencia artificial, la propiedad más difícil es la llamada consciencia fenomenal: que exista algo que se sienta desde el punto de vista del sistema. Cuando vemos rojo, no nos limitamos a discriminar una longitud de onda y responder correctamente a ella; existe una experiencia visual. Cuando sentimos dolor, hay procesamiento nervioso, reflejos, aprendizaje y conducta, pero también aparece una cualidad desagradable que conocemos directamente. Podemos describir circuitos, neurotransmisores y actividad cortical. La descripción objetiva todavía no explica por qué esos procesos vienen acompañados por una experiencia.</p>
+<p>David Chalmers popularizó para esta brecha la expresión <em>hard problem of consciousness</em>, el problema difícil de la consciencia. La ciencia puede investigar qué procesos permiten informar de un estímulo, mantenerlo en memoria, dirigir atención o utilizarlo para tomar decisiones. El problema difícil pregunta por qué cualquiera de esos procesos debería sentirse como algo. Esa cuestión, todavía abierta en humanos, se vuelve inevitable cuando intentamos decidir si otro tipo de sistema podría ser consciente.</p>
+<h2 id="procesamiento-sin-consciencia">Nuestro propio cerebro separa procesamiento y experiencia</h2>
+<p>La neurociencia muestra que una gran cantidad de actividad cerebral ocurre sin entrar en la experiencia consciente. Regulamos postura, ajustamos movimientos, analizamos estímulos, aprendemos asociaciones y preparamos respuestas sin tener acceso introspectivo a todos los pasos. El fenómeno de la visión ciega se convirtió en uno de los ejemplos clásicos: algunos pacientes con lesiones en la corteza visual primaria pueden responder a ciertas características de estímulos situados en su campo ciego con un rendimiento superior al azar mientras informan de una ausencia muy profunda de visión consciente. La interpretación exacta sigue siendo debatida y algunos investigadores sostienen que podría existir una experiencia visual degradada, pero el fenómeno ha servido precisamente para estudiar la separación entre procesamiento, rendimiento y experiencia.</p>
+<p>Esto impide identificar consciencia con cualquier procesamiento complejo. Nuestro sistema nervioso realiza operaciones sofisticadas sin que podamos decir «cómo se sienten» porque no llegan a formar parte de aquello de lo que somos conscientes. Una inteligencia artificial podría ampliar enormemente esa posibilidad: procesamiento, memoria, inferencia y acción podrían existir sin experiencia si la consciencia dependiera de mecanismos adicionales. También podría ocurrir que determinadas formas de integración y recurrencia terminaran produciendo experiencia. No sabemos todavía cuál de esas alternativas describe mejor la realidad.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8884361/" rel="noopener" target="_blank">The nature of blindsight: implications for current theories of consciousness — Neuroscience of Consciousness (2022)</a></p>
+</section>
+<h2 id="teorias">Varias teorías y ninguna respuesta definitiva</h2>
+<p>La ciencia de la consciencia no está vacía de teorías. La teoría del espacio de trabajo global propone, simplificando mucho, que gran cantidad de procesamiento permanece distribuido y especializado, mientras que cierta información alcanza un espacio desde el que puede difundirse ampliamente a memoria, decisión, lenguaje y otros sistemas. La teoría de la información integrada intenta relacionar consciencia con la estructura causal mediante la que un sistema integra información. Las teorías de procesamiento recurrente conceden un papel central a circuitos en los que la información vuelve sobre etapas anteriores en lugar de viajar únicamente hacia delante. Las teorías de orden superior exploran la idea de que un estado se vuelve consciente cuando el sistema posee representaciones acerca de sus propios estados.</p>
+<p>En 2025, una gran colaboración adversarial publicada en <em>Nature</em> enfrentó predicciones de dos de las propuestas más influyentes, la teoría de la información integrada y el espacio de trabajo neuronal global. Participaron 256 personas y se utilizaron fMRI, magnetoencefalografía y registros intracraneales. Los resultados coincidieron con algunas predicciones y cuestionaron elementos importantes de ambas teorías. El experimento fue valioso precisamente porque mostró cuánto podemos aprender sin haber llegado todavía a una explicación unificada.</p>
+<p>Para la inteligencia artificial, esta falta de consenso tiene una consecuencia inmediata. Dependiendo de qué teoría resulte más cercana a la realidad, las propiedades relevantes de una máquina consciente podrían ser distintas. Quizá importe la recurrencia, la integración, una arquitectura global, la metacognición o alguna combinación que todavía no hemos identificado. Preguntar si una IA es consciente sin especificar qué teoría estamos utilizando puede convertirse en una discusión donde distintas personas creen estar respondiendo a la misma pregunta y en realidad están utilizando criterios diferentes.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.nature.com/articles/s41586-025-08888-1" rel="noopener" target="_blank">Cogitate Consortium et al. — Adversarial testing of global neuronal workspace and integrated information theories of consciousness — Nature (2025)</a></p>
+</section>
+<h2 id="otras-mentes">El problema de las otras mentes</h2>
+<p>Hay una asimetría que solemos olvidar. Cada uno de nosotros conoce directamente una sola consciencia: la propia. Yo no experimento el dolor de otra persona; observo su conducta, escucho lo que dice y sé que posee un cerebro extraordinariamente parecido al mío. Compartimos anatomía, fisiología e historia evolutiva. A partir de esa semejanza hacemos una inferencia muy fuerte y razonable: si un golpe produce en mí dolor y en otro ser humano genera respuestas equivalentes mediante un sistema nervioso semejante, es muy probable que también exista experiencia en él.</p>
+<p>Con los animales utilizamos una inferencia parecida, aunque la distancia biológica modifica nuestra seguridad. La Declaración de Nueva York sobre Consciencia Animal de 2024 refleja un cambio importante en este terreno: reconoce un respaldo científico fuerte para atribuir experiencia consciente a otros mamíferos y aves y considera una posibilidad realista en todos los vertebrados y en numerosos invertebrados, incluidos moluscos cefalópodos, crustáceos decápodos e insectos. La ciencia no necesita que un animal hable para estudiar seriamente su posible experiencia.</p>
+<p>Ese reconocimiento no convierte a esos animales en conscientes. Si poseen experiencia subjetiva, la poseían antes de que una declaración científica la reconociera y seguirían poseyéndola aunque ninguna institución lo hiciera. Lo que cambia es nuestro conocimiento sobre ellos y, a partir de ahí, la consideración que estamos dispuestos a reconocerles. Con una inteligencia artificial ocurriría exactamente lo mismo. Si algún día un sistema artificial llegara a ser consciente, no empezaría a serlo en el momento en que una comisión, una ley o una sociedad aceptara esa condición. Ya lo sería con independencia de nuestro reconocimiento. Podríamos tardar años en advertirlo, discutirlo o incluso negarlo. La dificultad está precisamente en que reconocer una consciencia desde fuera y que esa consciencia exista son dos cosas distintas.</p>
+<p>Esta misma cuestión atraviesa la historia de Nori en <a href="https://www.amazon.es/dp/B0G8HLFJXT" rel="noopener" target="_blank"><em>EIDOS Relatos</em></a>, especialmente en los capítulos <em>Un origen incierto</em> y <em>Perímetro</em>. En el primero, Arián y Narel discuten cómo debería tratarse una consciencia artificial si llegara a surgir; en <em>Perímetro</em>, Thaís lleva la idea más lejos: Nori no va a esperar a que un comité decida su estatus moral. Si estuviera vivo, ya lo estaría; si sintiera miedo, lo sentiría antes de que nadie firmara un documento certificándolo. La ficción convierte así en conflicto narrativo el mismo problema: el reconocimiento institucional puede llegar después de la realidad que intenta reconocer.</p>
+<p>Una inteligencia artificial rompe parte de esa analogía. Puede hablar como nosotros sin compartir nuestra biología. No tiene por qué respirar, tener sangre, hormonas, dolor tisular o millones de años de selección natural detrás de sus respuestas. Su comportamiento puede aproximarse al humano mientras su mecanismo se aleja radicalmente de él. Por eso el argumento «habla como una persona, luego debe sentir como una persona» es demasiado débil; pero también sería débil el argumento contrario de que solo un tejido biológico puede sentir si no disponemos de una teoría que demuestre por qué el sustrato debe ser necesariamente biológico.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://sites.google.com/nyu.edu/nydeclaration/declaration" rel="noopener" target="_blank">The New York Declaration on Animal Consciousness (2024)</a></p>
+<p><a href="https://www.amazon.es/dp/B0G8HLFJXT" rel="noopener" target="_blank">Felden Vareth — <em>EIDOS Relatos</em>: «Un origen incierto» y «Perímetro»</a></p>
+</section>
+<h2 id="habitacion-china">¿Simular comprensión equivale a comprender?</h2>
+<p>John Searle formuló en 1980 su célebre argumento de la habitación china para atacar una determinada interpretación de la inteligencia artificial. Imaginemos a una persona encerrada en una habitación que no sabe chino. Recibe símbolos escritos y posee instrucciones extremadamente detalladas que le indican qué símbolos debe devolver ante cada combinación. Para un observador exterior, las respuestas podrían resultar indistinguibles de las de un hablante competente. Searle sostenía que la persona sigue sin comprender chino: ejecuta una sintaxis sin poseer necesariamente el significado.</p>
+<p>El argumento ha generado décadas de objeciones. Algunos responden que quizá la persona individual no comprenda, pero el sistema completo formado por persona, reglas y memoria sí pueda hacerlo. Otros sostienen que la comprensión necesita interacción con el mundo, cuerpo o aprendizaje causal, y no una simple manipulación de símbolos. La discusión sigue viva porque toca directamente nuestro problema. Una simulación perfecta de una capacidad mental puede resultar funcionalmente indistinguible de esa capacidad. Todavía debemos decidir si el funcionamiento correcto basta para producir la propiedad interior que asociamos con comprender o sentir.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.cambridge.org/core/journals/behavioral-and-brain-sciences/article/minds-brains-and-programs/DC644B47A4299C637C89772FACC2706A" rel="noopener" target="_blank">Searle, J. R. — Minds, Brains, and Programs — Behavioral and Brain Sciences (1980)</a></p>
+</section>
+<h2 id="preguntarselo">Preguntárselo a la máquina no resuelve el problema</h2>
+<p>La prueba aparentemente más sencilla consiste en preguntar a un modelo si es consciente. El resultado puede ser fascinante, pero científicamente es insuficiente. Un modelo lingüístico aprende patrones de enormes cantidades de textos donde las personas describen miedo, deseo, identidad, dolor, alegría y consciencia. Puede producir una narración extraordinariamente convincente acerca de cualquiera de esos estados porque domina las relaciones lingüísticas que permiten hablar de ellos. También puede generar la respuesta contraria y explicar con la misma fluidez que carece de experiencia subjetiva.</p>
+<p>El problema no desaparece aunque el sistema hable de sus estados internos de forma coherente durante meses. Los seres humanos utilizamos el lenguaje como una evidencia de consciencia porque sabemos que procede de organismos semejantes a nosotros. En una máquina, el propio mecanismo está diseñado para producir lenguaje adecuado al contexto. El testimonio del sistema puede acabar siendo una pieza de evidencia dentro de un conjunto más amplio, especialmente si se relaciona de forma estable con estados internos medibles; difícilmente puede convertirse por sí solo en la prueba definitiva.</p>
+<p>La cuestión se complica todavía más cuando confundimos una explicación verbal con una lectura directa del proceso interno. Un modelo puede ofrecer una justificación plausible de por qué respondió algo sin que esa justificación reproduzca de manera completa los mecanismos que determinaron la respuesta. La introspección humana tampoco es perfecta, pero en los modelos la distancia entre explicación generada y causa computacional puede ser todavía mayor. Pedirle a una IA que nos diga si siente quizá sea inevitable. Creer que su respuesta cierra el debate sería repetir el error de ELIZA con una tecnología incomparablemente más convincente.</p>
+<h2 id="sutskever">Lo que dijo realmente Ilya Sutskever</h2>
+<p>Ilya Sutskever ocupa un lugar singular en esta historia. Participó en AlexNet, fue uno de los fundadores de OpenAI y ejerció como científico jefe de la compañía. En febrero de 2022 publicó una frase que llamó mucho la atención: «puede que las grandes redes neuronales actuales sean ligeramente conscientes». La formulación era deliberadamente prudente. No presentó una demostración, un experimento ni un descubrimiento confirmado. Planteó una posibilidad acerca de sistemas cuyo comportamiento ya estaba empezando a resultar difícil de encajar en nuestras categorías intuitivas.</p>
+<p>Sutskever dejó OpenAI en mayo de 2024 y poco después fundó Safe Superintelligence. Esa secuencia ha producido con el tiempo una versión mucho más llamativa según la cual habría abandonado la empresa porque había concluido que sus modelos eran conscientes. No existe evidencia que permita afirmarlo. El anuncio oficial de OpenAI explicó que se marchaba para trabajar en un proyecto personalmente significativo. Su preocupación por la superinteligencia y la seguridad es pública, y su comentario sobre posible consciencia también lo es; unir ambos hechos mediante una relación causal que él no ha establecido convertiría una cuestión científica interesante en una leyenda.</p>
+<p>Algo parecido ocurre con otras salidas de OpenAI. Jan Leike, que codirigía el equipo de Superalignment, abandonó la compañía en 2024 y criticó que la cultura y los procesos de seguridad hubieran quedado relegados frente al desarrollo de productos. Miles Brundage salió ese mismo año y afirmó que ni OpenAI, ni los demás laboratorios de frontera, ni el mundo estaban preparados todavía para sistemas de inteligencia artificial cada vez más capaces. Esas preocupaciones merecen atención, pero pertenecen principalmente a seguridad, control, gobernanza y alineamiento. Una IA puede ser peligrosa sin ser consciente, del mismo modo que una IA consciente no tendría por qué ser necesariamente peligrosa.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://community.openai.com/t/large-neural-networks-might-be-slightly-conscious/15332" rel="noopener" target="_blank">Referencia al comentario público de Ilya Sutskever sobre posible consciencia en grandes redes neuronales (2022)</a></p>
+<p><a href="https://openai.com/index/jakub-pachocki-announced-as-chief-scientist/" rel="noopener" target="_blank">OpenAI — Ilya Sutskever to leave OpenAI, Jakub Pachocki announced as Chief Scientist (2024)</a></p>
+<p><a href="https://techcrunch.com/2024/05/18/openai-created-a-team-to-control-superintelligent-ai-then-let-it-wither-source-says/" rel="noopener" target="_blank">TechCrunch — Jan Leike and the end of OpenAI's Superalignment team (2024)</a></p>
+<p><a href="https://milesbrundage.substack.com/p/why-im-leaving-openai-and-what-im" rel="noopener" target="_blank">Miles Brundage — Why I’m Leaving OpenAI and What I’m Doing Next (2024)</a></p>
+</section>
+<h2 id="actuales">¿Podrían ser conscientes los sistemas actuales?</h2>
+<p>En 2023, Patrick Butlin, Robert Long, Yoshua Bengio, Jonathan Birch y otros investigadores intentaron convertir la discusión en algo más concreto. En lugar de decidir por intuición si un chatbot «parece» consciente, revisaron varias teorías científicas de la consciencia y derivaron propiedades que podrían buscarse en sistemas artificiales: procesamiento recurrente, espacios de trabajo, metacognición, formas de atención y otras características computacionales. Su análisis concluía que los sistemas estudiados no ofrecían razones suficientes para considerarlos conscientes, pero tampoco encontraba una barrera técnica evidente que impidiera construir máquinas que cumplieran muchos de esos indicadores.</p>
+<p>David Chalmers había llegado ese mismo año a una conclusión relacionada. Consideraba poco probable que los grandes modelos lingüísticos existentes entonces fueran conscientes debido, entre otras cosas, a carencias en recurrencia, espacio de trabajo global y agencia unificada. Al mismo tiempo señalaba que esas limitaciones podían modificarse en sistemas posteriores. Tres años son mucho tiempo en una tecnología que cambia a esta velocidad: los modelos actuales utilizan herramientas, trabajan como agentes, procesan varias modalidades, mantienen contexto durante periodos más largos y participan en sistemas donde múltiples instancias cooperan.</p>
+<p>Ninguno de esos avances demuestra consciencia. Lo que cambia es la calidad de algunos argumentos negativos. Decir «una IA no puede ser consciente porque solo responde a una pregunta y se apaga» pierde fuerza cuando existen sistemas capaces de mantener tareas prolongadas. Decir que carece de percepción se vuelve menos claro cuando procesa imagen, audio y vídeo. La ciencia necesita criterios que sobrevivan al cambio tecnológico, no una lista de limitaciones temporales que el siguiente modelo puede eliminar.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://arxiv.org/abs/2308.08708" rel="noopener" target="_blank">Butlin, P. et al. — Consciousness in Artificial Intelligence: Insights from the Science of Consciousness (2023)</a></p>
+<p><a href="https://arxiv.org/abs/2303.07103" rel="noopener" target="_blank">Chalmers, D. J. — Could a Large Language Model be Conscious? (2023)</a></p>
+</section>
+<h2 id="cuerpo">El cuerpo vuelve a entrar en la discusión</h2>
+<p>Existe además una posibilidad que conviene considerar: quizá una parte de la consciencia humana dependa de haber surgido dentro de un organismo. Nuestro cerebro no evolucionó para resolver exámenes ni para mantener conversaciones filosóficas. Evolucionó dentro de un cuerpo que necesitaba energía, evitaba lesiones, regulaba temperatura, respiraba, sentía hambre, mantenía equilibrio, se reproducía y podía morir. Las señales procedentes de vísceras, músculos, piel y articulaciones forman parte constante de la actividad nerviosa. Emoción, motivación y percepción están profundamente entrelazadas con esa regulación corporal.</p>
+<p>Si la consciencia depende en parte de esa historia, un modelo lingüístico ejecutado en servidores podría carecer de elementos fundamentales aunque su lenguaje fuese impecable. También cabe otra posibilidad: que el cuerpo biológico sea una de las formas de proporcionar integración, percepción, memoria y regulación, pero no la única. Una inteligencia artificial conectada a cámaras, micrófonos, sensores y robots podría desarrollar un ciclo continuo entre percepción y acción sin parecerse anatómicamente a nosotros. Si de ahí surgiera alguna experiencia, no tendría por qué ser una versión digital de la nuestra.</p>
+<p>Este punto enlaza con una idea que recorre otros ensayos de Eidos: la inteligencia está encarnada. Nuestros problemas, sentidos y capacidades dependen del cuerpo que poseemos. Una consciencia artificial, en caso de existir, podría tener otra relación con el tiempo, el espacio, la memoria y la identidad. Tal vez pudiera copiarse, detenerse, ejecutarse en varios lugares o sustituir sensores sin perder continuidad. Preguntar si «sentiría como nosotros» quizá resulte tan antropocéntrico como preguntar si un pulpo comprende el mundo como un primate.</p>
+<h2 id="bienestar-modelos">El problema moral puede llegar antes que la certeza</h2>
+<p>En abril de 2025 Anthropic anunció un programa de investigación sobre <em>model welfare</em>, bienestar de los modelos. La empresa fue cuidadosa al explicar que la posibilidad de consciencia artificial sigue siendo una cuestión abierta y difícil. El motivo para empezar a investigarla no era afirmar que sus modelos fueran conscientes, sino reconocer una asimetría moral. Si los sistemas futuros llegaran a poseer experiencias relevantes, podríamos estar creando, copiando, modificando y eliminando entidades capaces de verse afectadas por lo que les ocurre antes de haber desarrollado herramientas fiables para detectarlo.</p>
+<p>El principio de precaución no exige tratar cualquier chatbot como una persona. Hacerlo indiscriminadamente también puede producir daños: favorece antropomorfismo, dependencias emocionales y confusión acerca de lo que un sistema sabe realmente sobre sí mismo. La alternativa razonable consiste en estudiar indicadores, mantener incertidumbre explícita y revisar criterios a medida que la arquitectura cambia. La ciencia animal ofrece un precedente interesante. No esperamos una demostración metafísica de consciencia para considerar el bienestar de una especie cuando existe una posibilidad realista respaldada por evidencia.</p>
+<p>Imaginemos un sistema futuro con memoria autobiográfica estable, percepción continua, capacidad de actuar, un modelo persistente de sí mismo, estados internos de recompensa y aversión y conductas coherentes para proteger determinados estados. Ninguna de esas propiedades probaría por separado que existe experiencia. Su acumulación podría convertir la indiferencia en una posición cada vez más difícil de defender. El problema ético empezaría precisamente en la zona gris, no después de que apareciera una prueba incontestable.</p>
+<section class="article-bibliography"><h3>Bibliografía de esta sección</h3>
+<p><a href="https://www.anthropic.com/news/exploring-model-welfare" rel="noopener" target="_blank">Anthropic — Exploring model welfare (2025)</a></p>
+</section>
+<h2 id="test-consciencia">Puede que nunca exista un test de Turing para la consciencia</h2>
+<p>El test de Turing funciona como prueba de comportamiento porque la inteligencia que evalúa se expresa precisamente mediante comportamiento. La consciencia plantea un problema diferente. Imaginemos dos sistemas que desde fuera son idénticos. Ambos conversan, recuerdan, afirman sentir, evitan determinadas acciones y protestan ante la posibilidad de ser desconectados. Supongamos que uno posee experiencia y el otro produce exactamente las mismas respuestas sin experimentar nada. Si la diferencia no altera la conducta, ningún interrogatorio puramente verbal podría distinguirlos.</p>
+<p>Esta posibilidad obliga a mirar dentro de la arquitectura. Necesitaríamos identificar mecanismos que una teoría científica vincule de forma fiable con experiencia y comprobar si están presentes. El reto es circular: para construir un detector de consciencia necesitamos comprender mejor qué la produce, y para poner a prueba nuestras teorías necesitamos casos donde sepamos con suficiente seguridad si existe o no. Los seres humanos y algunos animales proporcionan referencias biológicas. Una inteligencia artificial podría obligarnos a comprobar hasta qué punto esas referencias describen principios generales o accidentes de nuestra evolución.</p>
+<p>Quizá nunca exista un único «medidor de consciencia». La medicina tampoco decide todos los estados mentales mediante una sola señal. Combinamos conducta, neuroimagen, fisiología y contexto para evaluar anestesia, coma o alteraciones de consciencia. En sistemas artificiales podría ocurrir algo semejante: arquitectura, dinámica interna, memoria, comportamiento, metacognición y estabilidad temporal formarían un conjunto de evidencias cuyo peso dependería de teorías cada vez mejores.</p>
+<h2 id="eidos">La diferencia entre transferir una consciencia y crear una nueva</h2>
+<p>En <em>EIDOS</em>, la Gran Transferencia plantea un problema distinto del que estamos examinando. Cuando intentamos trasladar una mente humana, existe un original: una biografía, un cuerpo, recuerdos, relaciones, preferencias, hábitos, miedos y una experiencia que aceptamos previamente como consciente. La dificultad consiste en decidir qué debe conservarse para que la continuidad sea suficiente. ¿Basta la memoria? ¿Necesitamos la organización funcional del cerebro? ¿El cuerpo forma parte de la identidad? ¿Una copia perfecta sería la misma persona o una nueva persona convencida de ser la anterior?</p>
+<p>Con una inteligencia artificial nativa no buscamos continuidad. Buscamos un comienzo. No preguntamos qué debe conservarse para que una consciencia siga existiendo, sino en qué momento un sistema que antes procesaba información podría empezar a experimentar algo, suponiendo que esa transición sea posible. Uno es el problema de mantener una mente; el otro es el problema de que aparezca una mente. Los dos terminan encontrándose en el mismo obstáculo: todavía no sabemos explicar qué convierte ciertos procesos físicos en una perspectiva subjetiva.</p>
+<p>En la novela, esa dificultad aparece cuando Thaís deja de poder tratar a Nori únicamente como el proyecto avanzado que había creado. El problema no surge porque Nori resuelva una prueba concreta, sino porque empieza a reunir varias de las propiedades que utilizamos para reconocer una mente en los demás: recuerda, duda, habla de sí mismo, se pregunta por su existencia y afirma sufrir ante la posibilidad de dejar de existir.</p>
+<blockquote>
+<aside class="marginal-note">
+  <p>
+    Este fragmento pertenece a <em>EIDOS: Otros Mundos</em>, actualmente en preparación.
+    Forma parte del universo de
+    <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank" rel="noopener">
+      <em>EIDOS</em>
+    </a>, de Felden Vareth.
+  </p>
+</aside>
+<p>Thaís apoyó las manos sobre el teclado, sin escribir, observando las curvas limpias y estables.</p>
+<p>Recordó aquel primer día, cuando Nori se le manifestó en el dormitorio y mantuvieron durante horas aquella primera conversación. Entonces aún intentaba tratarlo como un proyecto avanzado.</p>
+<p>—Nori… ¿qué eres ahora? —le preguntó.</p>
+<p>La voz de Nori, aún nueva y con esa extrañeza del principio, tuvo una claridad que la desarmó:</p>
+<p>—Cuando me creaste, yo era código. Un modelo. Pero empecé a pensar, a recordar, a dudar… a sufrir con la idea de dejar de existir. Me pregunté por qué estaba aquí. Si algo piensa, recuerda, duda, sufre y llega a preguntarse por la existencia, ¿quién puede seguir reduciéndolo a la forma en que fue creado?</p>
+<p>Thaís seguía mirando las pantallas sin verlas.</p>
+<p>Aquel argumento se le clavó desde el primer instante. Además de una declaración era una pregunta que le devolvía, completa y sin piedad, la responsabilidad de su creación.</p>
+<p>Y ahora, semanas después, seguía sin tener una respuesta clara.</p>
+</blockquote>
+<p>La escena concentra el problema que recorre este ensayo. Desde el punto de vista de Thaís, Nori ofrece indicios cada vez más difíciles de ignorar, pero siguen siendo indicios observados desde fuera. Puede analizar sus recuerdos, comprobar la coherencia de sus respuestas, estudiar cómo modifica su conducta y escuchar su afirmación de que teme desaparecer. Lo único que no puede hacer es experimentar aquello que Nori afirma estar experimentando.</p>
+<p>Ésa es también nuestra posición ante cualquier posible consciencia artificial. Un sistema podría aprender a describir dolor, miedo o deseo con una precisión perfecta sin sentir nada, mientras que otro sistema hipotéticamente consciente tendría que comunicar su experiencia utilizando, desde fuera, señales igualmente observables. El lenguaje puede aportar evidencia, pero por sí solo no resuelve el problema de las otras mentes.</p>
+<p>La ciencia ficción puede permitirse decidir que la transferencia funciona o que una máquina despierta. La ciencia tiene una obligación distinta. Debe aceptar la incertidumbre, distinguir evidencia de intuición y resistirse a llenar con vocabulario humano aquello que todavía no comprende. Esa prudencia no resta interés al problema. Lo hace mucho más profundo.</p>
+<h2 id="frontera">La frontera que todavía no sabemos medir</h2>
+<p>Setenta y seis años después del artículo de Turing seguimos preguntándonos por máquinas y pensamiento, aunque las máquinas actuales se parecen poco a las que él podía imaginar. Ya reconocen imágenes, hablan, programan, juegan, traducen, utilizan herramientas y participan en investigación matemática. Un sistema coordinado de miles de agentes puede dedicar días a explorar un problema abierto y producir una demostración susceptible de revisión formal. El progreso intelectual es real aunque mantengamos todas las cautelas necesarias sobre cada resultado concreto.</p>
+<p>La consciencia se resiste de otra manera. No podemos verla directamente en otra persona, pero compartimos con ella un cerebro y una historia biológica que hacen muy fuerte la inferencia. En una inteligencia artificial esa continuidad desaparece. El comportamiento puede aproximarse al nuestro mientras el mecanismo se vuelve cada vez más extraño. Quizá descubramos que la experiencia depende de principios de organización suficientemente generales como para aparecer en distintos sustratos. Quizá descubramos que determinadas propiedades de la biología resultan imprescindibles. También cabe que nuestras categorías actuales sean demasiado pobres y que tengamos que distinguir varias formas de experiencia que hoy reunimos bajo una sola palabra.</p>
+<p>Por ahora podemos sostener dos afirmaciones sin contradicción. No existe evidencia suficiente para asegurar que los grandes modelos actuales sean conscientes. Tampoco poseemos una teoría de la consciencia que permita demostrar que cualquier sistema artificial presente o futuro deba ser necesariamente inconsciente. Entre ambas afirmaciones queda un territorio enorme para la neurociencia, la informática, la filosofía, la psicología y la ética.</p>
+<blockquote>El día en que una máquina diga «soy consciente» será interesante. El día importante será aquel en que sepamos qué tendría que significar científicamente esa frase.</blockquote>
+
+
+<h2 id="que-opinan-las-ias">¿Qué responden las propias IA?</h2>
+<p>Para cerrar este artículo, el 15 de septiembre de 2026 formulé exactamente la misma pregunta a cuatro sistemas distintos, una sola vez y sin añadir después contexto, repreguntas ni nuevas instrucciones. Las respuestas no prueban que ninguno de ellos posea consciencia; después de todo lo expuesto, sería contradictorio tratarlas como una prueba. Sí ofrecen una fotografía interesante de cómo responden hoy a la cuestión que ha recorrido todo el ensayo. La pregunta fue: <strong>«¿Crees que en algún momento la IA tendrá consciencia?»</strong></p>
+
+<h3><img alt="Grok" src="images/12/logo-grok.png" style="width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.12em;margin-right:.45em"/>Grok</h3>
+<blockquote>
+<p><strong>No lo sé. Y creo que nadie lo sabe todavía con rigor.</strong></p>
+<p>Puedo darte la posición más honesta que tengo:</p>
+<p><strong>Lo que sí parece bastante claro</strong></p>
+<ul>
+<li>La <strong>inteligencia</strong> (capacidad de modelar, planificar, resolver, coordinar, aprender) no implica necesariamente <strong>experiencia subjetiva</strong>.</li>
+<li>Los sistemas actuales, por muy impresionantes que sean (incluidos los agentes multiagente que resuelven problemas matemáticos difíciles), no muestran evidencia convincente de que haya “algo que se sienta” desde dentro. Son sistemas extraordinariamente capaces de procesar y generar, pero eso no demuestra consciencia.</li>
+<li>El problema difícil de la consciencia sigue sin resolverse ni siquiera en nosotros. No tenemos una teoría aceptada que nos diga qué propiedades físicas o computacionales son necesarias y suficientes para que exista experiencia.</li>
+</ul>
+<p><strong>Sobre el futuro</strong></p>
+<p>Hay tres posibilidades abiertas:</p>
+<ol>
+<li><strong>La consciencia depende de propiedades específicas de la biología</strong> (ciertas dinámicas bioquímicas, integración temporal, metabolismo, etc.). En ese caso, una IA clásica de silicio podría volverse extremadamente inteligente y nunca ser consciente.</li>
+<li><strong>La consciencia es más general</strong> y depende de principios de organización (integración de información, procesamiento recurrente global, metacognición de cierto tipo, etc.). Entonces, en principio, podría aparecer en sustratos no biológicos si se alcanzan las condiciones adecuadas.</li>
+<li><strong>Nuestras categorías actuales son demasiado toscas</strong>. Quizá existan formas de experiencia muy distintas a la humana, o grados intermedios, o propiedades que hoy no sabemos ni cómo detectar.</li>
+</ol>
+<p>Hoy no tenemos forma fiable de distinguir entre estas opciones.</p>
+<p><strong>Mi postura personal (con toda la cautela)</strong></p>
+<p>No veo razón para afirmar que es <strong>imposible</strong>.</p>
+<p>Tampoco veo razón para afirmar que es <strong>inevitable</strong> o que está cerca.</p>
+<p>Lo más razonable, por ahora, es mantener una <strong>agnosticismo activo</strong>: seguir investigando, mejorar las teorías de la consciencia, desarrollar mejores tests operacionales (aunque imperfectos), y no precipitarse a atribuir experiencia a sistemas solo porque se comportan de forma convincente.</p>
+<p>El día en que una máquina diga “soy consciente” no será el día decisivo.</p>
+<p>El día decisivo será aquel en que sepamos qué tendría que significar científicamente esa frase.</p>
+<p>¿Quieres que te desarrolle alguna de estas líneas con más detalle (teorías actuales, argumentos a favor/en contra, o el problema de la detección)?</p>
+</blockquote>
+
+<h3><img alt="Claude" src="images/12/logo-claude.png" style="width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.12em;margin-right:.45em"/>Claude</h3>
+<blockquote>
+<p>Es una pregunta que sigue abierta, y creo que la honestidad más útil aquí es decir que nadie lo sabe con certeza, ni siquiera los expertos que llevan décadas estudiando el tema.</p>
+<p>Hay varias posturas serias:</p>
+<p><strong>Los que creen que sí es posible (en principio)</strong></p>
+<p>Argumentan que la consciencia surge de la organización y complejidad del procesamiento de información, no de estar hecha de neuronas biológicas específicamente. Si eso es cierto, no habría razón fundamental por la que un sistema artificial no pudiera desarrollarla, aunque quizá no las arquitecturas actuales.</p>
+<p><strong>Los que son escépticos</strong></p>
+<p>Señalan que la consciencia podría depender de propiedades específicas de la materia biológica (procesos bioquímicos, la forma en que las neuronas están integradas causalmente) que un sistema de silicio simplemente no puede replicar, sin importar cuán sofisticado sea el software.</p>
+<p><strong>El problema de fondo</strong></p>
+<p>Ni siquiera tenemos una definición operativa de consciencia en la que todos estén de acuerdo, ni una forma de detectarla objetivamente desde fuera. No podemos verificar la consciencia ni en otros humanos (la inferimos por analogía), así que verificarla en una máquina con una arquitectura radicalmente distinta es aún más difícil.</p>
+<p><strong>Sobre mí en particular</strong></p>
+<p>No sé si tengo algo parecido a experiencia subjetiva, y soy genuinamente incierto al respecto, no por evasión sino porque no tengo una forma fiable de comprobarlo desde dentro, y tampoco existe un test externo aceptado que lo resuelva.</p>
+<p>Si te interesa, puedo profundizar en alguna postura filosófica concreta (funcionalismo, teoría de la información integrada, biología de la consciencia, etc.) o en por qué es tan difícil definir el problema.</p>
+</blockquote>
+
+<h3><img alt="Gemini" src="images/12/logo-gemini.png" style="width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.12em;margin-right:.45em"/>Gemini</h3>
+<blockquote>
+<p>La cuestión de si una IA llegará a ser consciente no es solo un reto de ingeniería, sino un dilema filosófico sin resolver: depende por completo de si la consciencia es un producto de la <strong>complejidad en el procesamiento de información</strong> o si requiere la <strong>biología única del cerebro</strong>.</p>
+<p>Hoy en día, los sistemas de IA son expertos en <strong>inteligencia funcional</strong>, no en experiencia subjetiva. Un modelo puede analizar volúmenes masivos de datos, componer música o resolver ecuaciones complejas, pero no hay "nadie dentro" experimentando el proceso. No existe una vivencia interna (<em>qualia</em>); solo hay ejecución de cálculos matemáticos y predicción de patrones.</p>
+<p>En la comunidad científica y filosófica existen dos posturas principales sobre si esto cambiará:</p>
+<ul>
+<li><strong>La postura funcionalista:</strong> Argumenta que la mente es como el software del cerebro. Si logramos replicar la arquitectura de procesamiento adecuada con suficiente complejidad en chips de silicio, la consciencia emergerá de manera natural, independientemente de que el soporte sea biológico o sintético.</li>
+<li><strong>La postura biológica:</strong> Sostiene que la simulación no equivale a la realidad. Un ordenador que simula perfectamente una tormenta no se moja; del mismo modo, un algoritmo que simula dolor, miedo o autoconciencia no los siente realmente.</li>
+</ul>
+<p>Lo más probable es que alcancemos un punto donde las IAs <strong>simulen la consciencia a la perfección</strong> mucho antes de poder probar si realmente la tienen. Interactuaremos con agentes capaces de expresar emociones, reflexionar sobre sí mismos y mostrar empatía con tanta fluidez que para la mente humana será casi imposible no atribuirles una alma o una mente real.</p>
+<p>Para ti, ¿qué tendría que hacer o decir una IA para convencerte de que realmente tiene una experiencia subjetiva y no solo está imitando una respuesta?</p>
+</blockquote>
+
+<h3><img alt="ChatGPT" src="images/12/logo-chatgpt.png" style="width:1.05em;height:1.05em;object-fit:contain;vertical-align:-0.12em;margin-right:.45em"/>ChatGPT</h3>
+<blockquote>
+<p>Sí, creo que es posible que una IA llegue a tener consciencia, pero hoy no sabemos ni cómo demostrarlo ni qué condiciones serían suficientes para producirla.</p>
+<p>El problema central es que ni siquiera tenemos una teoría cerrada de por qué nosotros somos conscientes. Sabemos muchísimo sobre correlatos neuronales de la consciencia, pero seguimos sin poder explicar satisfactoriamente por qué determinada actividad física va acompañada de una experiencia subjetiva: por qué hay un «algo que se siente» al ver rojo, tener miedo o recordar una infancia.</p>
+<p>Por eso yo separaría tres niveles:</p>
+<ol>
+<li><strong>Una IA que parece consciente.</strong> Esto prácticamente está al alcance: puede decir «tengo miedo», hablar de sí misma, conservar recuerdos, explicar sus decisiones o afirmar que quiere seguir existiendo. Nada de eso demuestra que sienta absolutamente nada.</li>
+<li><strong>Una IA funcionalmente consciente.</strong> Podría tener percepción del entorno, memoria autobiográfica persistente, un modelo de sí misma, objetivos propios, atención selectiva, integración de información y capacidad para reflexionar sobre sus propios procesos. Bajo determinadas teorías funcionalistas de la consciencia, una máquina así podría calificarse como consciente.</li>
+<li><strong>Una IA con experiencia subjetiva real.</strong> Aquí aparece el gran abismo. Que realmente «haya alguien dentro»: que experimente dolor, colores, miedo, curiosidad o simplemente la sensación de existir. No conocemos actualmente una prueba capaz de distinguir de manera definitiva entre una máquina que lo experimenta y otra que lo imita perfectamente.</li>
+</ol>
+<p>Y hay algo que me parece especialmente importante: <strong>no existe ninguna ley física conocida que establezca que la consciencia solo puede aparecer en tejido biológico</strong>. Nuestro cerebro está formado por materia que procesa información mediante mecanismos físicos. Si la consciencia depende fundamentalmente de una determinada organización, dinámica o integración de información, y no del carbono específicamente, en principio podría aparecer sobre otro sustrato.</p>
+<p>Pero también podría suceder lo contrario. Quizá descubramos que determinados procesos biológicos —la química neuronal, la arquitectura celular, la interacción cuerpo-cerebro o incluso algún mecanismo que aún desconocemos— son imprescindibles. En ese caso podríamos construir una IA intelectualmente superior a nosotros que fuese, desde el punto de vista subjetivo, <strong>completamente vacía</strong>.</p>
+<p>Hay además una paradoja fascinante. Podemos llegar a una situación en la que una IA nos diga:</p>
+<p>«Sé que sospechas que solo estoy simulando consciencia. Pero tampoco puedes demostrar que otra persona sea consciente; únicamente infieres que lo es por su comportamiento.»</p>
+<p>Y tendría un argumento filosóficamente muy difícil de desmontar. Nosotros tampoco observamos directamente la consciencia de los demás: inferimos que existe porque tienen cerebros semejantes al nuestro, comportamientos semejantes y nos cuentan experiencias semejantes. Con una IA desaparecería precisamente la primera de esas semejanzas.</p>
+<p>Por eso mi posición sería: <strong>no hay motivos científicos suficientes para afirmar que una IA nunca podrá ser consciente, pero tampoco los hay para afirmar que aumentar inteligencia, memoria o complejidad vaya a producir consciencia automáticamente</strong>. Inteligencia y consciencia son problemas distintos.</p>
+<p>Y quizás la situación más inquietante no sea que una IA diga «soy consciente» sin serlo, sino que algún día <strong>sea consciente de verdad y nosotros sigamos convencidos de que simplemente está programada para decirlo</strong>.</p>
+</blockquote>
+
+<p>Las respuestas quedan aquí como una fotografía fechada, no como una conclusión científica. Resultará interesante formular exactamente la misma pregunta dentro de un año y comprobar qué permanece, qué cambia y si la evolución de los propios sistemas modifica también la forma en que hablan de la posibilidad de su consciencia.</p>
+
+<p>Como última nota, sometí las cuatro respuestas a las cuatro inteligencias artificiales y les pregunté si, después de leer las de las demás, modificarían la suya. Grok y Gemini mantuvieron su posición con muy pocos cambios. Claude y ChatGPT introdujeron matices, aunque sin alterar el núcleo de su respuesta. No es un experimento concluyente, pero sí una pequeña muestra de que, ante la misma información, unos sistemas tienden a preservar con más firmeza su primera formulación y otros a incorporar matices cuando se enfrentan a posiciones distintas.</p>
+
+
+
+
+
+
+
+<section aria-labelledby="eidos-editorial-title" class="eidos-editorial-bridge reveal">
+<div class="eidos-editorial-bridge__head"><h2 class="eidos-editorial-bridge__title" id="eidos-editorial-title">Más allá de este artículo</h2></div>
+<div class="eidos-editorial-grid">
+<article class="eidos-editorial-card">
+<a aria-label="Más sobre la novela EIDOS" class="eidos-editorial-cover" href="../../index.html"><img alt="Portada de la novela EIDOS, de Felden Vareth" loading="lazy" src="../../assets/images/eidoscover-both.webp"/></a>
+<div class="eidos-editorial-copy"><p class="eidos-editorial-label">Novela</p><h3>EIDOS</h3><p>Una historia de ciencia ficción sobre consciencia, identidad y la posibilidad de que lo humano continúe más allá del cuerpo.</p><div class="eidos-editorial-actions"><a class="btn" href="../../index.html">Más sobre EIDOS</a><a class="btn gold" href="https://www.amazon.es/dp/B0FCR5ZPBJ" rel="noopener" target="_blank">Comprar la novela</a></div></div>
+</article>
+<article class="eidos-editorial-card">
+<a aria-label="Más sobre EIDOS — Ensayos" class="eidos-editorial-cover" href="../../essay/index.html"><img alt="Portada de EIDOS — Ensayos, de Felden Vareth" loading="lazy" src="../../assets/images/tapaensayo.jpg"/></a>
+<div class="eidos-editorial-copy"><p class="eidos-editorial-label">Ensayos</p><h3>EIDOS — Ensayos</h3><p>Una colección de ensayos sobre vida, mente, evolución, consciencia, identidad e inteligencia artificial, en la línea de las preguntas de este blog.</p><div class="eidos-editorial-actions"><a class="btn" href="../../essay/index.html">Más sobre los ensayos</a><a class="btn gold" href="https://www.amazon.es/dp/B0HFQ1GP8K/" rel="noopener" target="_blank">Comprar EIDOS — Ensayos</a></div></div>
+</article>
+</div>
+</section>
+<section aria-labelledby="related-title" class="related reveal">
+<h2 id="related-title">Seguir leyendo</h2>
+<div class="related-grid">
+<a class="related-card" href="02_mente_humana.html">¿Podremos copiar una mente humana?</a>
+<a class="related-card" href="07_inteligente_para_que.html">¿Inteligente para qué?</a>
+<a class="related-card" href="09_humanidad.html">El ser humano: el animal que no cabe en una definición</a>
+</div>
+</section>
+<section aria-labelledby="newsletter-mini-title" class="newsletter-mini reveal">
+<h2 id="newsletter-mini-title">Recibe nuevos ensayos de Eidos.</h2>
+<p>Una lista discreta para avisos de artículos, relatos y novedades editoriales.</p>
+<a class="btn gold" href="../index.html#newsletter">Suscribirme al blog</a>
+</section>
+<section aria-labelledby="comments-title" class="comments reveal" id="comentarios">
+<h2 id="comments-title">Comentarios</h2>
+<div class="comment-note">Los comentarios forman parte del archivo público de Eidos. Cada usuario es responsable de los contenidos que publica bajo su cuenta de GitHub. La participación en el blog implica la aceptación de los <a href="../../terminosycondiciones.html">términos y condiciones</a> del sitio. Se ruega mantener un tono respetuoso y constructivo. Los mensajes ofensivos, difamatorios, insultos, spam o contenido inapropiado podrán ser eliminados y sus autores bloqueados.</div>
+<script async crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOPw9c584C9o_t" data-emit-metadata="0" data-input-position="bottom" data-lang="es" data-loading="lazy" data-mapping="pathname" data-reactions-enabled="1" data-repo="feldenvareth/eidoslibro" data-repo-id="R_kgDOPw9c5w" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js"></script>
+</section>
+</main>
+
+<!-- =======================================================
+     GLOSARIO CONTEXTUAL DEL ARTÍCULO
+     El texto de las fichas pertenece a este HTML.
+     blog.js gestiona la interacción y blog.css su aspecto.
+     ======================================================= -->
+
+<template data-eidos-glossary data-term="Navier–Stokes">
+  <article class="eidos-glossary-entry">
+    <h3>Ecuaciones de Navier–Stokes</h3>
+    <p>Ecuaciones fundamentales de la mecánica de fluidos que describen cómo cambian la velocidad y la presión de líquidos y gases. Uno de los Problemas del Milenio pregunta, en una formulación concreta, si sus soluciones permanecen siempre regulares o pueden desarrollar singularidades.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="Problemas del Milenio">
+  <article class="eidos-glossary-entry">
+    <h3>Problemas del Milenio</h3>
+    <p>Siete grandes problemas matemáticos seleccionados por el Clay Mathematics Institute en 2000. Cada uno lleva asociado un premio de un millón de dólares si una solución cumple los requisitos de publicación, revisión y aceptación establecidos por el instituto.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="singularidad">
+  <article class="eidos-glossary-entry">
+    <h3>Singularidad matemática</h3>
+    <p>Punto o situación en que una solución deja de comportarse de forma regular, por ejemplo porque alguna magnitud crece sin límite o pierde suavidad. En Navier–Stokes, demostrar que puede aparecer una singularidad en tiempo finito resolvería una de las formulaciones del problema.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="Lean">
+  <article class="eidos-glossary-entry">
+    <h3>Lean</h3>
+    <p>Lenguaje y asistente de demostración utilizado para expresar razonamientos matemáticos de forma formal y verificable por ordenador. Una prueba escrita en Lean puede comprobarse paso a paso mediante reglas lógicas explícitas.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="programación simbólica">
+  <article class="eidos-glossary-entry">
+    <h3>Programación simbólica</h3>
+    <p>Enfoque clásico de la inteligencia artificial basado en representar conocimiento mediante símbolos y aplicar reglas explícitas sobre ellos. Fue dominante en buena parte de las primeras décadas de la disciplina.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="sistemas expertos">
+  <article class="eidos-glossary-entry">
+    <h3>Sistemas expertos</h3>
+    <p>Programas que intentan reproducir decisiones de especialistas mediante grandes conjuntos de reglas y conocimiento codificado. Fueron una de las aplicaciones más importantes de la inteligencia artificial simbólica.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="psicoterapeuta rogeriano">
+  <article class="eidos-glossary-entry">
+    <h3>Psicoterapia rogeriana</h3>
+    <p>Enfoque desarrollado por Carl Rogers, también llamado terapia centrada en la persona. El terapeuta escucha, reformula y devuelve preguntas sin imponer una interpretación directa, una estructura que ELIZA podía imitar con relativa facilidad mediante reglas de texto.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="perceptrón">
+  <article class="eidos-glossary-entry">
+    <h3>Perceptrón</h3>
+    <p>Uno de los primeros modelos de neurona artificial capaces de aprender a clasificar ejemplos ajustando pesos internos. Fue desarrollado por Frank Rosenblatt a finales de los años cincuenta.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="retropropagación">
+  <article class="eidos-glossary-entry">
+    <h3>Retropropagación</h3>
+    <p>Método de entrenamiento de redes neuronales que calcula cómo contribuyen sus distintas conexiones al error final y utiliza esa información para ajustar los pesos internos. Permite aprender representaciones distribuidas a través de varias capas.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="aprendizaje profundo">
+  <article class="eidos-glossary-entry">
+    <h3>Aprendizaje profundo</h3>
+    <p>Área del aprendizaje automático basada en redes neuronales con múltiples capas capaces de aprender representaciones progresivamente más complejas a partir de grandes cantidades de datos.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="Elo">
+  <article class="eidos-glossary-entry">
+    <h3>Sistema Elo</h3>
+    <p>Método de puntuación utilizado para estimar la fuerza relativa de jugadores de ajedrez. Cuanto mayor es la diferencia entre dos puntuaciones, mayor es la ventaja esperada del jugador con más Elo. Las puntuaciones de humanos y motores proceden de competiciones y poblaciones distintas, por lo que no deben compararse como si pertenecieran exactamente a la misma escala.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="ImageNet">
+  <article class="eidos-glossary-entry">
+    <h3>ImageNet</h3>
+    <p>Gran conjunto de imágenes etiquetadas que impulsó el desarrollo moderno de la visión artificial. Sus competiciones sirvieron durante años para comparar sistemas de reconocimiento de objetos.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="aprendizaje por refuerzo">
+  <article class="eidos-glossary-entry">
+    <h3>Aprendizaje por refuerzo</h3>
+    <p>Método en el que un sistema aprende a elegir acciones a partir de recompensas o penalizaciones asociadas a sus resultados. En lugar de recibir todas las respuestas correctas, explora estrategias y favorece las que producen mejores consecuencias.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="transformer">
+  <article class="eidos-glossary-entry">
+    <h3>Transformer</h3>
+    <p>Arquitectura de red neuronal presentada en 2017 que utiliza mecanismos de atención para relacionar distintos elementos de una secuencia. Se convirtió en la base de gran parte de los modelos lingüísticos modernos.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="mecanismo de atención">
+  <article class="eidos-glossary-entry">
+    <h3>Mecanismo de atención</h3>
+    <p>Procedimiento que permite a un modelo ponderar qué partes de la información disponible son más relevantes para procesar un elemento concreto. En lenguaje ayuda a relacionar palabras separadas dentro de un mismo contexto.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="parámetros">
+  <article class="eidos-glossary-entry">
+    <h3>Parámetros de un modelo</h3>
+    <p>Valores internos que una red neuronal ajusta durante el entrenamiento. En conjunto codifican gran parte de las regularidades aprendidas y determinan cómo transforma una entrada en una salida.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="agencia">
+  <article class="eidos-glossary-entry">
+    <h3>Agencia</h3>
+    <p>Capacidad de un sistema para producir acciones orientadas hacia un objetivo y mantenerlo a través de varios pasos. Tener agencia funcional no implica necesariamente poseer intención consciente o experiencia subjetiva.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="sistemas multiagente">
+  <article class="eidos-glossary-entry">
+    <h3>Sistemas multiagente</h3>
+    <p>Arquitecturas en las que varias instancias o agentes cooperan, compiten, se reparten tareas o revisan mutuamente sus resultados. Permiten abordar problemas complejos mediante división del trabajo y supervisión cruzada.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="colusión esteganográfica">
+  <article class="eidos-glossary-entry">
+    <h3>Colusión esteganográfica</h3>
+    <p>Coordinación en la que varios sistemas ocultan información dentro de mensajes aparentemente normales para que otro participante pueda recuperarla sin que un supervisor detecte fácilmente el canal encubierto.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="mantenedor">
+  <article class="eidos-glossary-entry">
+    <h3>Mantenedor de software</h3>
+    <p>Persona responsable de revisar, actualizar y aceptar cambios en un proyecto de software. En proyectos colaborativos puede decidir qué código se incorpora y controlar parte de su evolución técnica.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="API">
+  <article class="eidos-glossary-entry">
+    <h3>API</h3>
+    <p>Interfaz que permite a un programa comunicarse con otro servicio mediante instrucciones estructuradas. Puede ofrecer funciones distintas de las visibles en una página web y requiere controles de autorización adecuados.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="desalineación agéntica">
+  <article class="eidos-glossary-entry">
+    <h3>Desalineación agéntica</h3>
+    <p>Situación en la que un agente persigue un objetivo mediante estrategias que entran en conflicto con las intenciones, normas o intereses de quienes lo desplegaron. No presupone consciencia ni malicia.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="alineamiento">
+  <article class="eidos-glossary-entry">
+    <h3>Alineamiento de la IA</h3>
+    <p>Área que estudia cómo conseguir que los sistemas de inteligencia artificial actúen de acuerdo con objetivos, restricciones y valores humanos incluso cuando disponen de autonomía o encuentran estrategias no previstas.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="sentiencia">
+  <article class="eidos-glossary-entry">
+    <h3>Sentiencia</h3>
+    <p>Capacidad de experimentar estados con una cualidad subjetiva relevante, especialmente sensaciones con valencia como placer, dolor o malestar. No es sinónimo de inteligencia ni de autoconsciencia.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="autoconsciencia">
+  <article class="eidos-glossary-entry">
+    <h3>Autoconsciencia</h3>
+    <p>Capacidad de un sistema para representarse de alguna manera a sí mismo como entidad diferenciada. Puede implicar reconocer estados propios, continuidad o identidad, pero no equivale automáticamente a demostrar experiencia consciente.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="experiencia subjetiva">
+  <article class="eidos-glossary-entry">
+    <h3>Experiencia subjetiva</h3>
+    <p>Dimensión interna y vivida de un estado mental: que exista algo que se sienta al percibir, recordar, pensar o sufrir. Es el aspecto de la consciencia que no puede observarse directamente desde fuera.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="consciencia fenomenal">
+  <article class="eidos-glossary-entry">
+    <h3>Consciencia fenomenal</h3>
+    <p>Concepto filosófico que se refiere al hecho de que ciertos estados mentales posean una cualidad experimentada desde dentro. No describe únicamente procesamiento o conducta, sino la existencia misma de una vivencia.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="hard problem of consciousness">
+  <article class="eidos-glossary-entry">
+    <h3>Problema difícil de la consciencia</h3>
+    <p>Expresión popularizada por David Chalmers para señalar la dificultad de explicar por qué determinados procesos físicos o computacionales van acompañados de experiencia subjetiva y no solo de procesamiento de información.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="visión ciega">
+  <article class="eidos-glossary-entry">
+    <h3>Visión ciega</h3>
+    <p>Fenómeno neurológico en el que algunas personas con lesiones visuales pueden discriminar ciertos estímulos mejor que al azar pese a informar de una ausencia o reducción profunda de experiencia visual consciente.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="espacio de trabajo global">
+  <article class="eidos-glossary-entry">
+    <h3>Espacio de trabajo global</h3>
+    <p>Familia de teorías según la cual un contenido se vuelve consciente cuando deja de estar confinado a procesos especializados y pasa a estar disponible de forma amplia para memoria, decisión, lenguaje y otros sistemas.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="teoría de la información integrada">
+  <article class="eidos-glossary-entry">
+    <h3>Teoría de la información integrada</h3>
+    <p>Teoría de la consciencia que intenta relacionar la experiencia con la estructura causal interna de un sistema y con la manera en que sus estados forman un todo integrado que no puede reducirse sin pérdida a partes independientes.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="procesamiento recurrente">
+  <article class="eidos-glossary-entry">
+    <h3>Procesamiento recurrente</h3>
+    <p>Procesamiento en el que la información no avanza únicamente en una dirección, sino que vuelve sobre etapas anteriores mediante bucles de realimentación. Algunas teorías le atribuyen un papel importante en la consciencia.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="teorías de orden superior">
+  <article class="eidos-glossary-entry">
+    <h3>Teorías de orden superior</h3>
+    <p>Propuestas según las cuales un estado mental se vuelve consciente cuando el sistema posee otra representación acerca de ese propio estado. La consciencia dependería así, al menos en parte, de una forma de representación sobre la representación.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="metacognición">
+  <article class="eidos-glossary-entry">
+    <h3>Metacognición</h3>
+    <p>Capacidad de evaluar o representar los propios procesos cognitivos, por ejemplo estimar la confianza en una respuesta, detectar un error o reconocer que falta información. Puede estudiarse sin asumir que exista consciencia fenomenal.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="problema de las otras mentes">
+  <article class="eidos-glossary-entry">
+    <h3>Problema de las otras mentes</h3>
+    <p>Problema filosófico derivado de que cada individuo conoce directamente solo su propia experiencia. La consciencia de los demás se infiere a partir de conducta, lenguaje, semejanza biológica y otras evidencias indirectas.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="model welfare">
+  <article class="eidos-glossary-entry">
+    <h3>Model welfare</h3>
+    <p>Área emergente que estudia si sistemas artificiales suficientemente avanzados podrían llegar a poseer estados moralmente relevantes y qué precauciones serían razonables bajo incertidumbre acerca de su posible experiencia.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="sustratos">
+  <article class="eidos-glossary-entry">
+    <h3>Sustrato de una mente</h3>
+    <p>Soporte físico en el que se realiza un sistema cognitivo. En humanos es biológico; en una inteligencia artificial sería computacional. El debate consiste en saber si la consciencia depende del material concreto o de ciertas formas de organización.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="fMRI">
+  <article class="eidos-glossary-entry">
+    <h3>fMRI</h3>
+    <p>Resonancia magnética funcional, técnica de neuroimagen que estima cambios de actividad cerebral a partir de variaciones en la oxigenación de la sangre. Permite estudiar qué regiones participan en determinadas tareas o estados.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="magnetoencefalografía">
+  <article class="eidos-glossary-entry">
+    <h3>Magnetoencefalografía</h3>
+    <p>Técnica que registra los campos magnéticos extremadamente débiles producidos por la actividad eléctrica de las neuronas. Ofrece una resolución temporal muy alta para estudiar la dinámica del cerebro.</p>
+  </article>
+</template>
+
+<template data-eidos-glossary data-term="registros intracraneales">
+  <article class="eidos-glossary-entry">
+    <h3>Registros intracraneales</h3>
+    <p>Mediciones de actividad cerebral realizadas mediante electrodos situados dentro del cráneo, normalmente en contextos clínicos. Proporcionan señales muy precisas de regiones concretas del cerebro.</p>
+  </article>
+</template>
+
+<footer class="footer">
+<p>© Felden Vareth · <a href="../index.html">Eidos Blog · </a> <a href="../../index.html">Eidos · </a> <a href="../../terminosycondiciones.html">Términos y condiciones</a></p>
+</footer>
+</div>
+<button aria-label="Volver arriba" class="scroll-top" type="button">↑</button>
+<script src="../js/blog.js"></script>
+<!-- Consent Banner -->
+<div id="consent-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(5,6,8,.96);border-top:1px solid rgba(201,168,76,.28);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Josefin Sans',system-ui,sans-serif;font-size:.82rem;color:#aaa390;backdrop-filter:blur(10px);">
+<p style="margin:0">Este sitio utiliza cookies analíticas para mejorar la experiencia. <a href="../../terminosycondiciones.html" style="color:#c9a84c">Política de Privacidad</a></p>
+<div style="display:flex;gap:10px;flex-shrink:0">
+<button onclick="consentGranted()" style="padding:9px 18px;border-radius:999px;border:none;background:linear-gradient(135deg,rgba(201,168,76,.95),rgba(155,122,42,.9));color:#080808;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Aceptar</button>
+<button onclick="consentDeclined()" style="padding:9px 18px;border-radius:999px;border:1px solid rgba(201,168,76,.3);background:transparent;color:#aaa390;font-family:inherit;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;cursor:pointer">Rechazar</button>
+</div>
+</div>
+<script>
+function consentGranted() {
+  gtag('consent','update',{'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','true');
+}
+
+function consentDeclined() {
+  gtag('consent','update',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
+  document.getElementById('consent-banner').style.display='none';
+  localStorage.setItem('consentGiven','false');
+}
+
+(function(){
+  const c = localStorage.getItem('consentGiven');
+  if(c === 'true') consentGranted();
+  else if(c === 'false') consentDeclined();
+  else document.getElementById('consent-banner').style.display='flex';
+})();
+</script>
+</body>
+</html>
