@@ -20,7 +20,7 @@ button,a{font:inherit;color:inherit}button{touch-action:manipulation}
 @keyframes drift{to{transform:translate(20px,-18px) scale(1.035)}}
 
 #topbar{position:relative;z-index:10;height:50px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:7px;padding:5px 8px;border-bottom:1px solid rgba(61,100,122,.36);background:rgba(4,10,15,.55);backdrop-filter:blur(7px)}
-.brand{min-width:0;font-size:15px;font-weight:850;letter-spacing:.18em;white-space:nowrap}.brand small{display:block;margin-top:1px;color:#79b8d6;font-size:6.2px;font-weight:700;letter-spacing:.13em}
+.brand{min-width:0;font-size:15px;font-weight:850;letter-spacing:.18em;white-space:nowrap}.brand small{display:block;margin-top:1px;color:#79b8d6;font-size:6.2px;font-weight:700;letter-spacing:.13em}.brand small #topLevelText{color:#d5b25d}
 .clockbox{min-width:66px;text-align:center;color:#8fa9b8;font-size:6.5px;letter-spacing:.1em}.clockbox b{display:block;margin-top:2px;color:#f5fbff;font:800 13px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.02em}.clockbox.active b{color:#9bdcff;text-shadow:0 0 10px rgba(85,189,241,.35)}
 .iconbtn{height:34px;min-width:34px;padding:0 9px;border:1px solid #31536a;border-radius:8px;background:#0a1721;display:grid;place-items:center;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:.06em}.iconbtn:active{transform:scale(.97);background:#102431}
 
