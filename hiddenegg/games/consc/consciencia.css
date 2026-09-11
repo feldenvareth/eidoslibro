@@ -14,7 +14,7 @@ button,a{font:inherit;color:inherit}button{touch-action:manipulation}
 #eidos-shared-bg img.active{opacity:var(--bg-opacity);transform:scale(1)}
 #eidos-shared-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,8,13,.22),rgba(3,8,13,.34) 52%,rgba(3,8,13,.58)),radial-gradient(circle at 50% 35%,transparent 0 32%,rgba(3,8,13,.32) 78%)}
 
-#game-shell{position:relative;z-index:2;aspect-ratio:480/710;width:min(452px,calc(100vw - 12px),calc((100dvh - 18px)*0.676));height:auto;max-height:calc(100dvh - 18px);overflow:hidden;background-image:radial-gradient(circle at 50% 31%,rgba(58,142,188,.10),transparent 38%),linear-gradient(160deg,rgba(11,25,36,.54),rgba(5,11,17,.72) 76%),var(--shared-image,none);background-size:auto,auto,cover;background-position:center,center,center;background-repeat:no-repeat;border:1px solid #315164;border-radius:10px;box-shadow:0 22px 70px rgba(0,0,0,.58)}
+#game-shell{position:relative;z-index:2;aspect-ratio:480/710;width:min(432px,calc(100vw - 16px),calc((100svh - 20px)*0.676),calc((100dvh - 20px)*0.676));height:auto;max-height:min(calc(100svh - 20px),calc(100dvh - 20px));overflow:hidden;background-image:radial-gradient(circle at 50% 31%,rgba(58,142,188,.10),transparent 38%),linear-gradient(160deg,rgba(11,25,36,.54),rgba(5,11,17,.72) 76%),var(--shared-image,none);background-size:auto,auto,cover;background-position:center,center,center;background-repeat:no-repeat;border:1px solid #315164;border-radius:10px;box-shadow:0 22px 70px rgba(0,0,0,.58)}
 #game-shell:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent 82%)}
 #game-shell:after{content:"";position:absolute;inset:-30%;z-index:0;pointer-events:none;background:repeating-radial-gradient(circle at 50% 42%,transparent 0 46px,rgba(85,189,241,.018) 47px 48px);animation:drift 18s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate(20px,-18px) scale(1.035)}}
@@ -138,4 +138,61 @@ button,a{font:inherit;color:inherit}button{touch-action:manipulation}
   #secretScreen .secret-builder .colorbtn{width:26px;height:26px}
   #secretScreen .actions .bigbtn,#difficultyScreen .actions .bigbtn{min-height:30px;padding:7px 9px;font-size:7px}
   #secretScreen .secret-note,#difficultyScreen .smallnote{font-size:6.4px;line-height:1.2;margin-top:7px}
+}
+
+@media (max-height: 780px){body{place-items:start center;padding-top:8px;padding-bottom:8px}}
+
+@media (max-height: 780px){
+  #game-shell{width:min(404px,calc(100vw - 14px),calc((100svh - 16px)*0.676),calc((100dvh - 16px)*0.676));max-height:min(calc(100svh - 16px),calc(100dvh - 16px))}
+  #topbar{height:45px;padding:6px 8px;gap:6px}
+  .brand{font-size:13px;letter-spacing:.15em}.brand small{font-size:5.6px}
+  .clockbox{min-width:58px;font-size:6px}.clockbox b{font-size:11px}
+  .iconbtn{height:32px;min-width:32px;padding:0 8px;font-size:10px}
+  #game-area{height:calc(100% - 45px);grid-template-rows:30px minmax(325px,1fr) 68px 14px 8px;gap:4px;padding:5px 7px 7px}
+  #instruction{font-size:7.8px;padding:0 8px}
+  #instruction .info{width:16px;height:16px;font-size:9px}
+  #duel-wrap{gap:5px}
+  .board-head{height:39px;padding:5px 6px 4px}.board-title{font-size:6.9px}.board-sub{font-size:5.6px}.status{font-size:5.7px}
+  .secret-bar{right:6px;top:22px;gap:2px}.secret-dot{width:7px;height:7px}.mini-secret{width:9px;height:9px}
+  .rows{height:calc(100% - 39px);padding:2px 4px 4px}
+  .attempt{grid-template-columns:11px minmax(0,1fr) 38px;gap:2px}
+  .attempt-no{font-size:5.6px}
+  .peg{width:16px;height:16px}.code-pegs{gap:2px}
+  .feedback,.feedback.positional{grid-template-columns:repeat(5,5px);grid-template-rows:5px;grid-auto-rows:5px;gap:1px}.hintpeg{width:5px;height:5px}
+  #input-panel{padding:5px 7px;grid-template-columns:minmax(0,1fr) 166px;gap:6px}
+  .input-label{margin-bottom:4px;font-size:6.1px}.input-label strong{font-size:7.6px}
+  .current-row{gap:3px}.palette{gap:3px;margin-top:4px}
+  .colorbtn{width:22px;height:22px}
+  .smallbtn{min-height:26px;padding:4px 5px;font-size:6.1px}.smallbtn span{font-size:4.8px}
+  #meter{height:4px}.meter-value{font-size:5.8px;min-width:22px}
+  #fairness-line{font-size:5.4px}
+}
+
+@media (max-height: 700px){
+  #game-shell{width:min(382px,calc(100vw - 12px),calc((100svh - 12px)*0.676),calc((100dvh - 12px)*0.676));max-height:min(calc(100svh - 12px),calc(100dvh - 12px))}
+  #topbar{height:42px;padding:5px 7px}
+  .brand{font-size:12px}.brand small{display:none}
+  .clockbox{min-width:54px}.clockbox b{font-size:10px}
+  .iconbtn{height:30px;min-width:30px}
+  #game-area{height:calc(100% - 42px);grid-template-rows:28px minmax(305px,1fr) 64px 13px 7px;gap:3px;padding:4px 6px 6px}
+  #instruction{font-size:7.2px}.board-head{height:36px;padding:4px 5px 3px}.board-title{font-size:6.4px}.board-sub{font-size:5.2px}
+  .rows{height:calc(100% - 36px);padding:2px 3px 3px}
+  .attempt{grid-template-columns:10px minmax(0,1fr) 34px}.attempt-no{font-size:5.2px}
+  .peg{width:15px;height:15px}
+  #input-panel{grid-template-columns:minmax(0,1fr) 156px;padding:4px 6px}
+  .colorbtn{width:21px;height:21px}
+  .smallbtn{min-height:24px;font-size:5.8px}
+}
+
+@media (max-height: 780px){
+  .card{width:min(356px,92%);max-height:88%;overflow-y:auto;overflow-x:hidden;padding:15px 14px 13px;border-radius:14px}
+  .card h1{font-size:22px;letter-spacing:.10em}.card h2{font-size:18px;letter-spacing:.11em}
+  .kicker{margin-bottom:4px;font-size:7px}.sub{margin:4px 0 8px;font-size:6.8px}
+  .intro{max-width:296px;font-size:8.7px;line-height:1.32;margin:0 auto 9px}
+  .rulegrid{gap:4px;margin-bottom:9px}.rule{padding:6px 4px;font-size:6.2px;line-height:1.18}.rule b{font-size:7.1px}.rule .glyph{font-size:14px}
+  .start-actions{width:min(286px,100%);gap:4px}.start-actions .bigbtn,.start-actions .start-link,.bigbtn{min-height:29px;padding:7px 8px;font-size:6.9px}
+  .collection-note,.smallnote,.secret-level-note,#difficultyScreen .smallnote,#secretScreen .smallnote,#secretScreen .secret-note{font-size:6.5px;line-height:1.22;margin-top:7px}
+  .level-cards,.secret-level-cards{gap:5px;margin:8px 0}.level-card{padding:9px 8px}.level-card b,#difficultyScreen .level-card b,#secretScreen .level-card b{font-size:8.7px}.level-card span,#difficultyScreen .level-card span,#secretScreen .level-card span{font-size:6.6px;line-height:1.22}
+  .secret-level-chooser{margin:8px auto 7px;padding:8px 9px}.secret-level-title{font-size:6.8px;margin-bottom:5px}
+  #secretScreen .secret-builder{margin-top:7px;padding:10px}#secretScreen .secret-builder .secret-slots{margin:7px 0 10px}#secretScreen .secret-builder .peg{width:27px;height:27px}#secretScreen .secret-builder .colorbtn{width:26px;height:26px}
 }
