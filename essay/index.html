@@ -865,6 +865,71 @@
       gap: 14px;
     }
 
+
+
+    /* PORTADA + VÍDEO HOVER · CTA FINAL */
+    .essay-finale-hover-media {
+      position: relative;
+      width: min(78vw, 330px);
+      margin: 0 auto 36px;
+      padding: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,.22);
+      background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
+      box-shadow: 0 28px 70px rgba(0,0,0,.46);
+    }
+
+    .essay-finale-hover-media > a {
+      display: block;
+      position: relative;
+    }
+
+    .essay-finale-hover-media img,
+    .essay-finale-hover-media video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .essay-finale-hover-media .essay-finale-hover-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+      background: #000;
+    }
+
+    .essay-finale-hover-media.is-playing .essay-finale-hover-video {
+      opacity: 1;
+    }
+
+    .essay-finale-hover-media.is-playing img {
+      opacity: 0;
+    }
+
+    .essay-finale-hover-media img {
+      transition: opacity .3s ease;
+    }
+
+    .essay-finale-hover-media:hover {
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .essay-finale-hover-media {
+        width: min(76vw, 300px);
+        margin-bottom: 30px;
+      }
+
+      .essay-finale-hover-media .essay-finale-hover-video {
+        transition: opacity .25s ease;
+      }
+    }
+
     @keyframes essayFadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: none; }
@@ -1761,6 +1826,12 @@ body.essay-preview-open { overflow: hidden; }
 <section class="essay-finale">
 <div class="container reveal">
 <span class="essay-finale-status">Ya disponible</span>
+<div class="essay-finale-hover-media" data-video="../docs/ensayos.mp4">
+<a aria-label="Comprar ENSAYOS en Amazon" href="https://www.amazon.es/dp/B0HFQ1GP8K/" rel="noopener" target="_blank">
+<img alt="Portada de ENSAYOS de Felden Vareth" src="../assets/images/tapaensayo.jpg"/>
+<video class="essay-finale-hover-video" muted playsinline loop preload="none" poster="../assets/images/tapaensayo.jpg"></video>
+</a>
+</div>
 <h2>ENSAYOS<br/><em>fuera de la ficción.</em></h2>
 <p>
         Nueve ensayos de divulgación y reflexión reunidos en un solo volumen, con referencias organizadas por capítulos. Ya disponible en Amazon.
@@ -2038,5 +2109,69 @@ body.essay-preview-open { overflow: hidden; }
       move(1);
     }
   });
-})();</script></body>
+})();</script>
+<script>
+/* PORTADA → VÍDEO HOVER · CTA FINAL */
+(function () {
+  const card = document.querySelector('.essay-finale-hover-media');
+  if (!card) return;
+
+  const video = card.querySelector('.essay-finale-hover-video');
+  const src = card.dataset.video;
+  if (!video || !src) return;
+
+  const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function loadVideo() {
+    if (video.dataset.loaded === 'true') return;
+    video.src = src;
+    video.load();
+    video.dataset.loaded = 'true';
+  }
+
+  function playVideo() {
+    loadVideo();
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {});
+    }
+    card.classList.add('is-playing');
+  }
+
+  function stopVideo() {
+    video.pause();
+    video.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          loadVideo();
+          obs.unobserve(card);
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+    observer.observe(card);
+  }
+
+  if (!isTouchDevice) {
+    card.addEventListener('mouseenter', playVideo);
+    card.addEventListener('mouseleave', stopVideo);
+  } else {
+    card.addEventListener('click', function (event) {
+      if (!card.classList.contains('is-playing')) {
+        event.preventDefault();
+        playVideo();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!card.contains(event.target)) stopVideo();
+    });
+  }
+})();
+</script>
+</body>
 </html>
