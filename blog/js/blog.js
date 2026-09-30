@@ -1534,3 +1534,154 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })();
 
+/* ==========================================================
+   SONIDO EN LAS TARJETAS DEL ÍNDICE DEL BLOG
+   - Añade un altavoz a cada .post-card con .card-preview-video.
+   - El clic no abre el artículo: solo activa/desactiva el sonido.
+   - Al activar una tarjeta, cualquier otra tarjeta audible se
+     silencia inmediatamente. Nunca hay dos vídeos con sonido.
+   - En táctil, donde no existe hover, el propio botón carga y
+     reproduce el vídeo seleccionado.
+   ========================================================== */
+(function () {
+  'use strict';
+
+  const BUTTON_CLASS = 'card-video-sound-toggle';
+
+  const ICON_MUTED = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
+    '<path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/>',
+    '<path d="m16 9 5 5M21 9l-5 5"/>',
+    '</svg>'
+  ].join('');
+
+  const ICON_SOUND = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
+    '<path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/>',
+    '<path d="M15 9.2a4 4 0 0 1 0 5.6"/>',
+    '<path d="M18 6.5a8 8 0 0 1 0 11"/>',
+    '</svg>'
+  ].join('');
+
+  function isEnglish() {
+    return (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  }
+
+  function getLabels() {
+    return isEnglish()
+      ? { enable: 'Turn sound on', disable: 'Mute' }
+      : { enable: 'Activar sonido', disable: 'Silenciar' };
+  }
+
+  function getButtonForVideo(video) {
+    const card = video ? video.closest('.post-card') : null;
+    return card ? card.querySelector('.' + BUTTON_CLASS) : null;
+  }
+
+  function updateButton(button, video) {
+    if (!button || !video) return;
+
+    const labels = getLabels();
+    const muted = video.muted;
+
+    button.innerHTML = muted ? ICON_MUTED : ICON_SOUND;
+    button.setAttribute('aria-label', muted ? labels.enable : labels.disable);
+    button.setAttribute('title', muted ? labels.enable : labels.disable);
+    button.setAttribute('aria-pressed', muted ? 'false' : 'true');
+    button.dataset.soundState = muted ? 'muted' : 'audible';
+  }
+
+  function ensureVideoLoaded(video) {
+    if (!video) return false;
+
+    if (!video.getAttribute('src')) {
+      const sourceUrl = video.dataset.videoSrc;
+      if (!sourceUrl) return false;
+
+      video.src = sourceUrl;
+      video.load();
+    }
+
+    return true;
+  }
+
+  function muteAllOtherCardVideos(activeVideo) {
+    document.querySelectorAll('.post-card .card-preview-video').forEach(function (video) {
+      if (video === activeVideo) return;
+
+      if (!video.muted) {
+        video.muted = true;
+      }
+
+      const otherCard = video.closest('.post-card');
+      if (otherCard) {
+        otherCard.classList.remove('sound-active');
+      }
+
+      updateButton(getButtonForVideo(video), video);
+    });
+  }
+
+  function initialiseCardSoundControls() {
+    document.querySelectorAll('.post-card').forEach(function (card) {
+      const video = card.querySelector('.card-preview-video');
+
+      if (!video || card.querySelector('.' + BUTTON_CLASS)) {
+        return;
+      }
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = BUTTON_CLASS;
+
+      updateButton(button, video);
+      card.appendChild(button);
+
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (video.muted) {
+          muteAllOtherCardVideos(video);
+
+          if (!ensureVideoLoaded(video)) {
+            return;
+          }
+
+          video.muted = false;
+          video.volume = 1;
+          card.classList.add('sound-active');
+          card.classList.add('video-playing');
+
+          const playPromise = video.play();
+
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(function () {
+              video.muted = true;
+              card.classList.remove('sound-active');
+              updateButton(button, video);
+            });
+          }
+        } else {
+          video.muted = true;
+          card.classList.remove('sound-active');
+        }
+
+        updateButton(button, video);
+      });
+
+      video.addEventListener('volumechange', function () {
+        if (video.muted) {
+          card.classList.remove('sound-active');
+        }
+        updateButton(button, video);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiseCardSoundControls);
+  } else {
+    initialiseCardSoundControls();
+  }
+})();
