@@ -1685,3 +1685,227 @@ document.addEventListener('DOMContentLoaded', function () {
     initialiseCardSoundControls();
   }
 })();
+
+/* ==========================================================
+   Portada destacada del índice = artículo más reciente
+   - Toma automáticamente la tarjeta con la fecha más nueva.
+   - Sincroniza enlace, vídeo y poster/fondo de la sección superior.
+   - Añade control de sonido.
+   - Garantiza que solo haya un vídeo con sonido a la vez en la página.
+   ========================================================== */
+(function () {
+  'use strict';
+
+  const FEATURE_BUTTON_CLASS = 'feature-video-sound-toggle';
+
+  const ICON_MUTED = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
+    '<path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/>',
+    '<path d="m16 9 5 5M21 9l-5 5"/>',
+    '</svg>'
+  ].join('');
+
+  const ICON_SOUND = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">',
+    '<path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Z"/>',
+    '<path d="M15 9.2a4 4 0 0 1 0 5.6"/>',
+    '<path d="M18 6.5a8 8 0 0 1 0 11"/>',
+    '</svg>'
+  ].join('');
+
+  function isEnglish() {
+    return (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  }
+
+  function labels() {
+    return isEnglish()
+      ? { enable: 'Turn sound on', disable: 'Mute' }
+      : { enable: 'Activar sonido', disable: 'Silenciar' };
+  }
+
+  function updateFeatureSoundButton(button, video) {
+    if (!button || !video) return;
+    const text = labels();
+    const muted = video.muted || video.volume === 0;
+
+    button.innerHTML = muted ? ICON_MUTED : ICON_SOUND;
+    button.setAttribute('aria-label', muted ? text.enable : text.disable);
+    button.setAttribute('title', muted ? text.enable : text.disable);
+    button.setAttribute('aria-pressed', muted ? 'false' : 'true');
+    button.dataset.soundState = muted ? 'muted' : 'audible';
+  }
+
+  function enforceSingleAudibleVideo(activeVideo) {
+    if (!activeVideo || activeVideo.muted || activeVideo.volume === 0) return;
+
+    document.querySelectorAll('video').forEach(function (otherVideo) {
+      if (otherVideo === activeVideo) return;
+      if (!otherVideo.muted) otherVideo.muted = true;
+    });
+  }
+
+  function bindExclusiveAudio(video) {
+    if (!video || video.dataset.eidosExclusiveAudioBound === '1') return;
+    video.dataset.eidosExclusiveAudioBound = '1';
+    video.addEventListener('volumechange', function () {
+      enforceSingleAudibleVideo(video);
+    });
+  }
+
+  function bindAllExistingVideos() {
+    document.querySelectorAll('video').forEach(bindExclusiveAudio);
+  }
+
+  function parseCardDate(card) {
+    const date = (card && card.dataset ? card.dataset.date : '') || '';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return 0;
+    const time = new Date(date + 'T00:00:00').getTime();
+    return Number.isFinite(time) ? time : 0;
+  }
+
+  function getLatestCard() {
+    const cards = Array.from(document.querySelectorAll('.post-card[data-date]'));
+    if (!cards.length) return null;
+
+    return cards.reduce(function (latest, card) {
+      if (!latest) return card;
+      return parseCardDate(card) > parseCardDate(latest) ? card : latest;
+    }, null);
+  }
+
+  function backgroundUrlFromCover(cover) {
+    if (!cover) return '';
+    const raw = cover.style.backgroundImage || '';
+    const match = raw.match(/^url\((['"]?)(.*?)\1\)$/i);
+    return match ? match[2] : '';
+  }
+
+  function syncLatestFeature() {
+    const feature = document.querySelector('.feature-img.feature-video');
+    const featureVideo = feature ? feature.querySelector('.feature-video-element') : null;
+    const featureLink = document.querySelector('#archivo .feature-copy .text-link');
+    const latestCard = getLatestCard();
+
+    if (!feature || !featureVideo || !featureLink || !latestCard) return;
+
+    const cardLink = latestCard.querySelector('a[href]');
+    const previewVideo = latestCard.querySelector('.card-preview-video');
+    const cover = latestCard.querySelector('.video-cover');
+
+    if (!cardLink || !previewVideo) return;
+
+    const href = cardLink.getAttribute('href') || '';
+    const videoSrc = previewVideo.dataset.videoSrc || previewVideo.getAttribute('src') || '';
+    const poster = backgroundUrlFromCover(cover);
+
+    if (href) featureLink.setAttribute('href', href);
+    if (cover && cover.style.backgroundImage) {
+      feature.style.backgroundImage = cover.style.backgroundImage;
+    }
+
+    if (poster) featureVideo.setAttribute('poster', poster);
+
+    const previousSrc = featureVideo.dataset.latestArticleVideo || '';
+    if (videoSrc && previousSrc !== videoSrc) {
+      featureVideo.muted = true;
+      featureVideo.dataset.latestArticleVideo = videoSrc;
+      featureVideo.classList.remove('is-ready');
+      featureVideo.setAttribute('src', videoSrc);
+      featureVideo.load();
+
+      const revealVideo = function () {
+        featureVideo.classList.add('is-ready');
+      };
+
+      featureVideo.addEventListener('loadeddata', revealVideo, { once: true });
+      featureVideo.addEventListener('canplay', revealVideo, { once: true });
+
+      const playPromise = featureVideo.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function () {});
+      }
+    }
+
+    feature.dataset.latestArticleHref = href;
+    feature.dataset.latestArticleDate = latestCard.dataset.date || '';
+  }
+
+  function initialiseLatestFeature() {
+    const feature = document.querySelector('.feature-img.feature-video');
+    const featureVideo = feature ? feature.querySelector('.feature-video-element') : null;
+
+    bindAllExistingVideos();
+
+    if (!feature || !featureVideo) return;
+
+    bindExclusiveAudio(featureVideo);
+    feature.removeAttribute('aria-hidden');
+    featureVideo.setAttribute('aria-hidden', 'true');
+
+    let button = feature.querySelector('.' + FEATURE_BUTTON_CLASS);
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.className = FEATURE_BUTTON_CLASS;
+      feature.appendChild(button);
+
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (featureVideo.muted || featureVideo.volume === 0) {
+          featureVideo.volume = 1;
+          featureVideo.muted = false;
+          enforceSingleAudibleVideo(featureVideo);
+
+          const playPromise = featureVideo.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(function () {
+              featureVideo.muted = true;
+              updateFeatureSoundButton(button, featureVideo);
+            });
+          }
+        } else {
+          featureVideo.muted = true;
+        }
+
+        updateFeatureSoundButton(button, featureVideo);
+      });
+
+      featureVideo.addEventListener('volumechange', function () {
+        updateFeatureSoundButton(button, featureVideo);
+      });
+    }
+
+    updateFeatureSoundButton(button, featureVideo);
+    syncLatestFeature();
+
+    /*
+       Las fechas canónicas de los artículos se leen de forma asíncrona en
+       este mismo blog.js y actualizan data-date. Observamos esos cambios para
+       que la portada destacada se recalcule sin tocar el HTML.
+    */
+    const grid = document.querySelector('#articles-grid');
+    if (grid && 'MutationObserver' in window) {
+      const observer = new MutationObserver(function (mutations) {
+        const dateChanged = mutations.some(function (mutation) {
+          return mutation.type === 'attributes' && mutation.attributeName === 'data-date';
+        });
+        if (dateChanged) syncLatestFeature();
+      });
+
+      observer.observe(grid, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['data-date']
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialiseLatestFeature);
+  } else {
+    initialiseLatestFeature();
+  }
+})();
+
