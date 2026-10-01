@@ -666,6 +666,27 @@
         setTimeout(function () { internalCancel = false; }, 200);
     }
 
+    /*
+       Coordinación de audio del artículo:
+       - cuando el lector empieza o se reanuda, avisa para silenciar los vídeos;
+       - cuando otro audio de la página empieza, pausa el lector sin perder el punto.
+    */
+    function announceReaderAudioStart() {
+        document.dispatchEvent(new CustomEvent('eidos-reader-audio-start'));
+    }
+
+    function pauseReaderForExternalAudio() {
+        if (!isReading || isPaused) return;
+
+        speechSynthesis.pause();
+        isPaused = true;
+        setStatus(T.paused);
+        updateButtons();
+        syncFloatingVisibility();
+    }
+
+    document.addEventListener('eidos-video-audio-start', pauseReaderForExternalAudio);
+
     function sectionStartIndex(fromIndex) {
         for (let i = fromIndex; i >= 0; i--) {
             if (chunks[i].tag === "h2" || chunks[i].tag === "h3") return i;
@@ -848,6 +869,7 @@
 
         if (shouldScroll) scrollToCurrentBlock();
 
+        announceReaderAudioStart();
         cancelSpeech();
 
         setTimeout(function () { speakCurrent(); }, 240);
@@ -875,6 +897,7 @@
         if (!isReading && !isPaused) return;
 
         if (isPaused) {
+            announceReaderAudioStart();
             speechSynthesis.resume();
             isPaused = false;
             setStatus(T.resumed(readingSpeed));
@@ -1503,6 +1526,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const shouldEnableSound = video.muted;
 
         if (shouldEnableSound) {
+          document.dispatchEvent(new CustomEvent('eidos-video-audio-start', {
+            detail: { source: 'article-cover' }
+          }));
           muteOtherArticleVideos(video);
           video.muted = false;
           video.volume = 1;
@@ -1642,6 +1668,9 @@ document.addEventListener('DOMContentLoaded', function () {
         event.stopPropagation();
 
         if (video.muted) {
+          document.dispatchEvent(new CustomEvent('eidos-video-audio-start', {
+            detail: { source: 'blog-card' }
+          }));
           muteAllOtherCardVideos(video);
 
           if (!ensureVideoLoaded(video)) {
@@ -1854,6 +1883,9 @@ document.addEventListener('DOMContentLoaded', function () {
         event.stopPropagation();
 
         if (featureVideo.muted || featureVideo.volume === 0) {
+          document.dispatchEvent(new CustomEvent('eidos-video-audio-start', {
+            detail: { source: 'featured-video' }
+          }));
           featureVideo.volume = 1;
           featureVideo.muted = false;
           enforceSingleAudibleVideo(featureVideo);
@@ -1909,3 +1941,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })();
 
+/* ==========================================================
+   EXCLUSIVIDAD DE AUDIO EN LAS PÁGINAS EIDOS
+   - Cuando el lector en voz alta empieza o se reanuda, silencia
+     cualquier vídeo HTML5 que estuviera sonando.
+   - Los controles de vídeo emiten eidos-video-audio-start; el
+     lector lo escucha y se pausa conservando el punto de lectura.
+   - Resultado: una sola fuente de audio a la vez.
+   ========================================================== */
+(function () {
+  'use strict';
+
+  document.addEventListener('eidos-reader-audio-start', function () {
+    document.querySelectorAll('video').forEach(function (video) {
+      if (!video.muted) {
+        video.muted = true;
+      }
+    });
+  });
+})();
