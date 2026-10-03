@@ -1,0 +1,363 @@
+/* =========================================================
+   EIDOS · ENSAYOS — RESEÑAS / REVIEWS
+   Estilos compartidos por index.html e indexeng.html.
+   Modifica este archivo una sola vez para cambiar el diseño
+   de las reseñas en ambos idiomas.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   SECCIÓN · CABECERA
+   --------------------------------------------------------- */
+.essay-reviews {
+  position: relative;
+  padding: 130px 0;
+  overflow: hidden;
+  background: var(--deep);
+}
+
+.essay-reviews::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 58% 52% at 88% 18%, rgba(201,168,76,.055), transparent 72%),
+    radial-gradient(ellipse 42% 48% at 10% 92%, rgba(58,122,110,.045), transparent 72%);
+}
+
+.essay-reviews .container {
+  position: relative;
+  z-index: 1;
+}
+
+.essay-reviews .section-title {
+  margin-bottom: 20px;
+}
+
+.essay-reviews-intro {
+  max-width: 760px;
+  margin: 0 0 34px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(212,207,198,.68);
+}
+
+.essay-reviews-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 44px;
+}
+
+.essay-reviews-summary-stars,
+.essay-review-category-stars,
+.essay-review-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.essay-reviews-summary-stars {
+  font-size: 17px;
+}
+
+.essay-review-category-stars {
+  font-size: 13px;
+}
+
+.essay-review-stars {
+  font-size: 11px;
+}
+
+.essay-reviews-summary-text,
+.essay-review-category-count {
+  font-size: 10px;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  color: rgba(212,207,198,.42);
+}
+
+/* ---------------------------------------------------------
+   NIVEL 1 · GRUPO GENERAL DE RESEÑAS
+   --------------------------------------------------------- */
+.essay-reviews-list {
+  border-top: 1px solid rgba(201,168,76,.18);
+}
+
+.essay-review-category {
+  border-bottom: 1px solid rgba(201,168,76,.12);
+}
+
+.essay-review-category-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 27px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.essay-review-category-toggle,
+.essay-review-toggle {
+  color: var(--gold);
+  transform-origin: 50% 50%;
+  transition: transform .28s ease, opacity .28s ease;
+}
+
+.essay-review-category-toggle {
+  width: 18px;
+  font-size: 13px;
+  opacity: .9;
+}
+
+.essay-review-category.is-open > .essay-review-category-button .essay-review-category-toggle,
+.essay-review.is-open .essay-review-toggle {
+  transform: rotate(45deg);
+  opacity: 1;
+}
+
+.essay-review-category-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--paper);
+  transition: color .25s ease;
+}
+
+.essay-review-category-button:hover .essay-review-category-label,
+.essay-review-category-button:focus-visible .essay-review-category-label {
+  color: var(--gold);
+}
+
+.essay-review-category-button:focus-visible,
+.essay-review-button:focus-visible {
+  outline: 1px solid rgba(201,168,76,.5);
+  outline-offset: 6px;
+}
+
+.essay-review-category-panel,
+.essay-review-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .46s cubic-bezier(.4,0,.2,1);
+}
+
+.essay-review-category.is-open > .essay-review-category-panel,
+.essay-review.is-open .essay-review-panel {
+  grid-template-rows: 1fr;
+}
+
+.essay-review-category-panel-inner,
+.essay-review-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.essay-review-items {
+  margin-left: 32px;
+  padding-bottom: 18px;
+  border-top: 1px solid rgba(201,168,76,.08);
+}
+
+/* ---------------------------------------------------------
+   NIVEL 2 · CADA RESEÑA
+   Para añadir una nueva reseña basta con copiar un bloque
+   <article class="essay-review"> en el HTML correspondiente.
+   Los contadores se actualizan desde essay-reviews.js.
+   --------------------------------------------------------- */
+.essay-review {
+  border-bottom: 1px solid rgba(201,168,76,.08);
+}
+
+.essay-review:last-child {
+  border-bottom: 0;
+}
+
+.essay-review-button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 18px 92px 118px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 21px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.essay-review-toggle {
+  width: 14px;
+  font-size: 11px;
+  opacity: .62;
+}
+
+.essay-review-date {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(212,207,198,.35);
+  white-space: nowrap;
+}
+
+.essay-review-heading {
+  min-width: 0;
+}
+
+.essay-review-title {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--paper);
+  transition: color .25s ease;
+}
+
+.essay-review-reviewer {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(212,207,198,.38);
+}
+
+.essay-review-button:hover .essay-review-title,
+.essay-review-button:focus-visible .essay-review-title {
+  color: var(--gold);
+}
+
+.essay-review-copy {
+  max-width: 860px;
+  padding: 0 0 30px 142px;
+}
+
+.essay-review-source {
+  margin: 0 0 18px;
+  font-size: 9px !important;
+  line-height: 1.5 !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.62) !important;
+}
+
+.essay-review-copy p {
+  margin: 0 0 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.78;
+  color: rgba(212,207,198,.76);
+}
+
+.essay-review-copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+@media (max-width: 900px) {
+  .essay-reviews {
+    padding: 90px 0 95px;
+  }
+
+  .essay-review-category-button {
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+  }
+
+  .essay-review-category-stars {
+    display: none;
+  }
+
+  .essay-review-button {
+    grid-template-columns: 18px 88px 1fr;
+  }
+
+  .essay-review-date {
+    display: none;
+  }
+
+  .essay-review-copy {
+    padding-left: 120px;
+  }
+}
+
+@media (max-width: 640px) {
+  .essay-reviews-intro {
+    font-size: 19px;
+  }
+
+  .essay-reviews-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .essay-review-category-button {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 14px;
+    padding: 23px 0;
+  }
+
+  .essay-review-category-label {
+    font-size: 22px;
+  }
+
+  .essay-review-category-count,
+  .essay-review-category-stars {
+    display: none;
+  }
+
+  .essay-review-items {
+    margin-left: 24px;
+  }
+
+  .essay-review-button {
+    grid-template-columns: 18px 1fr;
+    gap: 10px 12px;
+    padding: 20px 0;
+  }
+
+  .essay-review-stars {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .essay-review-heading {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .essay-review-toggle {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+    margin-top: 2px;
+  }
+
+  .essay-review-title {
+    font-size: 18px;
+  }
+
+  .essay-review-copy {
+    padding: 0 0 27px 30px;
+  }
+
+  .essay-review-copy p {
+    font-size: 17px;
+    line-height: 1.72;
+  }
+}

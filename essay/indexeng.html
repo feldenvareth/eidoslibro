@@ -590,7 +590,7 @@
       color: rgba(245,240,232,.88);
     }
 
-    /* ORIGIN / EIDOS */
+    /* ORIGEN / EIDOS */
     .essay-origin {
       position: relative;
       padding: 135px 0;
@@ -1567,7 +1567,9 @@ body.essay-preview-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .essay-topic-preview, .essay-topic-preview-dialog { animation:none; }
 }
-</style></head>
+</style><link rel="stylesheet" href="assets/css/essay-reviews.css">
+<script src="assets/js/essay-reviews.js" defer></script>
+</head>
 <body>
 <!-- Consent Banner -->
 <div id="consent-banner">
@@ -1612,6 +1614,7 @@ body.essay-preview-open { overflow: hidden; }
 <li><a href="#libro">The book</a></li>
 <li><a href="#temas">Topics</a></li>
 <li><a href="#recorrido">Journey</a></li>
+<li><a href="#reviews">Reviews</a></li>
 <li><a href="#autor">Author</a></li>
 <li><a class="essay-nav-home" href="../indexeng.html"><i class="fa-solid fa-arrow-left"></i> Back to EIDOS</a></li>
 <a aria-label="Spanish version" class="lang-switch" href="index.html">
@@ -1627,6 +1630,7 @@ body.essay-preview-open { overflow: hidden; }
 <a href="#libro" onclick="closeMenu()">The book</a>
 <a href="#temas" onclick="closeMenu()">Topics</a>
 <a href="#recorrido" onclick="closeMenu()">Journey</a>
+<a href="#reviews" onclick="closeMenu()">Reviews</a>
 <a href="#autor" onclick="closeMenu()">Author</a>
 <a class="essay-nav-home" href="../indexeng.html" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i>  Back to EIDOS</a>
 <a aria-label="Spanish version" class="lang-switch" href="index.html" onclick="closeMenu()">
@@ -1831,6 +1835,10 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+
+<div class="essay-rule"></div>
+
+
 <!-- EIDOS ORIGIN -->
 <section class="essay-origin" id="origen">
 <div class="container">
@@ -1860,6 +1868,179 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+<div class="essay-rule"></div>
+<!-- =========================================================
+     REVIEWS · START
+
+     TO ADD A NEW REVIEW:
+     1) copy one complete <article class="essay-review"> block;
+     2) paste it inside .essay-review-items;
+     3) replace date, title, reviewer and copy.
+
+     DO NOT EDIT THE COUNTERS: essay-reviews.js calculates them
+     automatically whenever the page loads.
+     Design: assets/css/essay-reviews.css.
+     Accordion: assets/js/essay-reviews.js.
+     ========================================================= -->
+<section
+  class="essay-reviews"
+  id="reviews"
+  data-review-singular="review"
+  data-review-plural="reviews"
+  data-review-summary-singular="{count} selected Amazon review"
+  data-review-summary-plural="{count} selected Amazon reviews"
+>
+<div class="container">
+
+<span class="section-tag reveal">Readers</span>
+<h2 class="section-title reveal">Some of the<br/><em>reviews</em></h2>
+<p class="essay-reviews-intro reveal">
+  A selection of reviews published by readers of <em>EIDOS — Essays</em> on Amazon Spain.
+</p>
+
+<div class="essay-reviews-summary reveal">
+<div class="essay-reviews-summary-stars" aria-label="Five stars">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+<span class="essay-reviews-summary-text" data-review-summary></span>
+</div>
+
+<!-- =======================================================
+     NIVEL 1 · GRUPO GENERAL
+     Empieza cerrado. Al abrirlo aparecen las reseñas.
+     ======================================================= -->
+<div class="essay-reviews-list reveal">
+<div class="essay-review-category">
+<button class="essay-review-category-button" type="button" aria-expanded="false">
+<span class="essay-review-category-toggle" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+<span class="essay-review-category-label">EIDOS — Essays</span>
+<span class="essay-review-category-count" data-review-category-count></span>
+<span class="essay-review-category-stars" aria-label="Five stars">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</span>
+</button>
+
+<div class="essay-review-category-panel" aria-hidden="true">
+<div class="essay-review-category-panel-inner">
+<div class="essay-review-items">
+
+<!-- =========================================================
+     REVIEW 01 · JAVIER
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Five stars" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">04/09/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">A work that invites reflection</span>
+<span class="essay-review-reviewer">Javier</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reviewed in Spain on September 4, 2026 · Format: Paperback</p>
+<p>
+  Few essays manage to bring together science, philosophy and artificial intelligence without losing clarity. EIDOS — Relatos does so with a very solid structure and research that can be felt behind every chapter, yet without becoming heavy or academic.
+</p>
+<p>
+  What impressed me most is the combination of deep scientific knowledge and enormous intellectual curiosity. The curiosity that leads you to ask those questions comes through to the reader. The author's ability to explain complex ideas and turn them into mental images and analogies makes the reading experience very visual.
+</p>
+<p>
+  While reading it, I found myself wondering whether I should have studied science instead of a humanities degree. It is surprising how it manages to awaken an interest in scientific questions and make you want to keep exploring them.
+</p>
+<p>
+  Each part develops its own thread while also contributing to a broader reflection on evolution, consciousness and the future of intelligence.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     REVIEW 02 · AMAZON CUSTOMER
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Five stars" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">31/08/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">An ambitious essay that invites you to think</span>
+<span class="essay-review-reviewer">Amazon Customer</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reviewed in Spain on August 31, 2026 · Format: Kindle edition</p>
+<p>
+  EIDOS — Essays brings together reflections on life, evolution, mind, consciousness and artificial intelligence with a clear, accessible and very well documented approach.
+</p>
+<p>
+  It is easy to read even when it tackles complex questions, and it manages to connect scientific, philosophical and technological ideas while always keeping a common thread: what we are, how we got here and where the development of new forms of intelligence may take us.
+</p>
+<p>
+  A highly recommended read for anyone who enjoys essays on science, consciousness, evolution and the technological future.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     REVIEW 03 · MARISA M.
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Five stars" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">31/08/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">Makes you think.</span>
+<span class="essay-review-reviewer">Marisa M.</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reviewed in Spain on August 31, 2026 · Format: Paperback</p>
+<p>
+  This latest work by Felden Vareth keeps surprising and fascinating me. It makes you think and draws you into a world of questions that Felden Vareth addresses intelligently and with very strong arguments. I fully recommend it. Although it is a deep book, it is an agile read, interesting in its conclusions and very enjoyable.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+<!-- =========================================================
+     REVIEWS · END
+     ========================================================= -->
 <div class="essay-rule"></div>
 <!-- AUTHOR -->
 <section class="essay-author" id="autor">
@@ -1934,6 +2115,8 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+
+
 <!-- FOOTER -->
 <footer>
 <div class="container">

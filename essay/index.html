@@ -1474,7 +1474,9 @@ body.essay-preview-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .essay-topic-preview, .essay-topic-preview-dialog { animation:none; }
 }
-</style></head>
+</style><link rel="stylesheet" href="assets/css/essay-reviews.css">
+<script src="assets/js/essay-reviews.js" defer></script>
+</head>
 <body>
 <!-- Consent Banner -->
 <div id="consent-banner">
@@ -1519,6 +1521,7 @@ body.essay-preview-open { overflow: hidden; }
 <li><a href="#libro">El libro</a></li>
 <li><a href="#temas">Temas</a></li>
 <li><a href="#recorrido">Recorrido</a></li>
+<li><a href="#resenas">Reseñas</a></li>
 <li><a href="#autor">Autor</a></li>
 <li><a class="essay-nav-home" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Volver a EIDOS</a></li>
 <a aria-label="English version" class="lang-switch" href="indexeng.html">
@@ -1534,6 +1537,7 @@ body.essay-preview-open { overflow: hidden; }
 <a href="#libro" onclick="closeMenu()">El libro</a>
 <a href="#temas" onclick="closeMenu()">Temas</a>
 <a href="#recorrido" onclick="closeMenu()">Recorrido</a>
+<a href="#resenas" onclick="closeMenu()">Reseñas</a>
 <a href="#autor" onclick="closeMenu()">Autor</a>
 <a class="essay-nav-home" href="../index.html" onclick="closeMenu()"><i class="fa-solid fa-arrow-left"></i>  Volver a EIDOS</a>
 <a aria-label="English version" class="lang-switch" href="indexeng.html" onclick="closeMenu()">
@@ -1738,6 +1742,10 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+
+<div class="essay-rule"></div>
+
+
 <!-- ORIGEN EIDOS -->
 <section class="essay-origin" id="origen">
 <div class="container">
@@ -1772,6 +1780,179 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+<div class="essay-rule"></div>
+<!-- =========================================================
+     RESEÑAS · INICIO
+
+     PARA AÑADIR UNA RESEÑA NUEVA:
+     1) copia un bloque completo <article class="essay-review">;
+     2) pégalo dentro de .essay-review-items;
+     3) cambia fecha, título, autor y texto.
+
+     NO CAMBIES LOS CONTADORES: essay-reviews.js los calcula
+     automáticamente cada vez que carga la página.
+     El diseño está en assets/css/essay-reviews.css.
+     El acordeón está en assets/js/essay-reviews.js.
+     ========================================================= -->
+<section
+  class="essay-reviews"
+  id="resenas"
+  data-review-singular="reseña"
+  data-review-plural="reseñas"
+  data-review-summary-singular="{count} reseña destacada de Amazon"
+  data-review-summary-plural="{count} reseñas destacadas de Amazon"
+>
+<div class="container">
+
+<span class="section-tag reveal">Lectores</span>
+<h2 class="section-title reveal">Algunas de las<br/><em>reseñas</em></h2>
+<p class="essay-reviews-intro reveal">
+  Una selección de reseñas publicadas por lectores de <em>EIDOS — Ensayos</em> en Amazon.
+</p>
+
+<div class="essay-reviews-summary reveal">
+<div class="essay-reviews-summary-stars" aria-label="Cinco estrellas">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+<span class="essay-reviews-summary-text" data-review-summary></span>
+</div>
+
+<!-- =======================================================
+     NIVEL 1 · GRUPO GENERAL
+     Empieza cerrado. Al abrirlo aparecen las reseñas.
+     ======================================================= -->
+<div class="essay-reviews-list reveal">
+<div class="essay-review-category">
+<button class="essay-review-category-button" type="button" aria-expanded="false">
+<span class="essay-review-category-toggle" aria-hidden="true"><i class="fa-solid fa-plus"></i></span>
+<span class="essay-review-category-label">EIDOS — Ensayos</span>
+<span class="essay-review-category-count" data-review-category-count></span>
+<span class="essay-review-category-stars" aria-label="Cinco estrellas">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</span>
+</button>
+
+<div class="essay-review-category-panel" aria-hidden="true">
+<div class="essay-review-category-panel-inner">
+<div class="essay-review-items">
+
+<!-- =========================================================
+     RESEÑA 01 · JAVIER
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Cinco estrellas" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">04/09/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">Una obra que invita a reflexionar</span>
+<span class="essay-review-reviewer">Javier</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reseñado en España el 4 de septiembre de 2026 · Formato: Tapa blanda</p>
+<p>
+  Pocas veces un ensayo consigue reunir ciencia, filosofía e inteligencia artificial sin perder claridad. EIDOS — Relatos lo hace con una estructura muy sólida y una documentación que se percibe detrás de cada capítulo, pero sin resultar pesado ni académico.
+</p>
+<p>
+  Lo que más me ha impresionado es la combinación de un profundo conocimiento científico con una enorme curiosidad intelectual. La curiosidad que te lleva a plantearte esas preguntas se transmite al lector. Su capacidad de divulgación y su facilidad para convertir ideas complejas en imágenes mentales y analogías hace que la lectura resulte muy visual.
+</p>
+<p>
+  Mientras lo leía, llegué a preguntarme si no debería haber estudiado Ciencias en lugar de una carrera de Letras. Es sorprendente cómo consigue despertar el interés por cuestiones científicas y hacer que uno quiera seguir profundizando en ellas.
+</p>
+<p>
+  Cada parte desarrolla un hilo propio y, al mismo tiempo, contribuye a una reflexión más amplia sobre la evolución, la consciencia y el futuro de la inteligencia.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     RESEÑA 02 · CLIENTE AMAZON
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Cinco estrellas" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">31/08/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">Un ensayo ambicioso que invita a pensar</span>
+<span class="essay-review-reviewer">Cliente Amazon</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reseñado en España el 31 de agosto de 2026 · Formato: Versión Kindle</p>
+<p>
+  EIDOS — Ensayos reúne reflexiones sobre vida, evolución, mente, consciencia e inteligencia artificial con un enfoque claro, accesible y muy bien documentado.
+</p>
+<p>
+  Se lee con facilidad, incluso cuando aborda cuestiones complejas, y consigue conectar ideas científicas, filosóficas y tecnológicas manteniendo siempre un hilo común: qué somos, cómo hemos llegado hasta aquí y hacia dónde puede llevarnos el desarrollo de nuevas formas de inteligencia.
+</p>
+<p>
+  Una lectura muy recomendable para quienes disfrutan de los ensayos sobre ciencia, consciencia, evolución y futuro tecnológico.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+
+<!-- =========================================================
+     RESEÑA 03 · MARISA M.
+     ========================================================= -->
+<article class="essay-review">
+<button aria-expanded="false" class="essay-review-button" type="button">
+<span aria-hidden="true" class="essay-review-toggle"><i class="fa-solid fa-plus"></i></span>
+<span aria-label="Cinco estrellas" class="essay-review-stars">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</span>
+<span class="essay-review-date">31/08/2026</span>
+<span class="essay-review-heading">
+<span class="essay-review-title">Hace pensar.</span>
+<span class="essay-review-reviewer">Marisa M.</span>
+</span>
+</button>
+<div aria-hidden="true" class="essay-review-panel" role="region">
+<div class="essay-review-panel-inner">
+<div class="essay-review-copy">
+<p class="essay-review-source">Reseñado en España el 31 de agosto de 2026 · Formato: Tapa blanda</p>
+<p>
+  Sigue sorprendiéndome y fascinado esta última obra de Felden Vareth. Hace pensar y sumergirte en un mundo de preguntas que Felden Vareth resuelve con inteligencia y muy bien argumentado. La recomiendo totalmente. Siendo un libro profundo, tiene una lectura ágil, interesante en sus conclusiones y muy ameno.
+</p>
+</div>
+</div>
+</div>
+</article>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+<!-- =========================================================
+     RESEÑAS · FIN
+     ========================================================= -->
 <div class="essay-rule"></div>
 <!-- AUTOR -->
 <section class="essay-author" id="autor">
@@ -1846,6 +2027,8 @@ body.essay-preview-open { overflow: hidden; }
 </div>
 </div>
 </section>
+
+
 <!-- FOOTER -->
 <footer>
 <div class="container">
