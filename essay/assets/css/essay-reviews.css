@@ -226,12 +226,38 @@
 }
 
 .essay-review-reviewer {
-  display: block;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 5px;
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(212,207,198,.38);
+}
+
+/* Compra verificada / Verified purchase */
+.essay-review-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 7px 2px;
+  border: 1px solid rgba(201,168,76,.34);
+  border-radius: 999px;
+  background: rgba(201,168,76,.07);
+  color: var(--gold);
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.essay-review-verified i {
+  font-size: 8px;
+  opacity: .95;
 }
 
 .essay-review-button:hover .essay-review-title,
@@ -350,6 +376,16 @@
 
   .essay-review-title {
     font-size: 18px;
+  }
+
+  .essay-review-reviewer {
+    gap: 6px;
+  }
+
+  .essay-review-verified {
+    font-size: 7px;
+    letter-spacing: .7px;
+    padding: 3px 6px 2px;
   }
 
   .essay-review-copy {
