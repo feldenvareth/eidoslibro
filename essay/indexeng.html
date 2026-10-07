@@ -328,7 +328,9 @@
       position: relative;
       padding: 130px 0;
       background: linear-gradient(180deg, var(--deep) 0%, var(--mist) 100%);
-      overflow: hidden;
+      /* clip mantiene el recorte visual sin convertir la sección en un
+         contenedor de scroll, permitiendo que el lateral sticky funcione. */
+      overflow: clip;
     }
 
     .essay-intro::before {
@@ -1667,6 +1669,9 @@ body.essay-preview-open { overflow: hidden; }
           </a>
 <a class="btn-primary" href="https://www.amazon.es/dp/B0HG9K54QH/" rel="noopener" target="_blank">
 <i class="fa-brands fa-amazon"></i> Buy on Amazon
+          </a>
+<a class="btn-outline" href="indexautoreng.html">
+<i class="fa-solid fa-signature"></i> Buy from the author
           </a>
 </div>
 </div>

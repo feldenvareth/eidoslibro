@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Purchase – EIDOS — Essays (signed copy)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Get your signed copy of EIDOS — Essays. Paperback €25, hardcover €35. Step-by-step instructions and frequently asked questions." />
+  <meta name="author" content="Felden Vareth" />
+
+  <meta property="og:title" content="EIDOS — Essays – Signed copy" />
+  <meta property="og:description" content="Order your dedicated copy of EIDOS — Essays. Paperback €25, hardcover €35." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://www.eidoslibro.com/assets/images/tapaessey.jpg" />
+
+  <link rel="preconnect" hrefToggle="https://fonts.gstatic.com" crossorigin />
+  <link rel="canonical" href="https://www.eidoslibro.com/essay/indexautoreng.html" />
+  <link rel="alternate" hreflang="es" href="https://www.eidoslibro.com/essay/indexautor.html" />
+  <link rel="alternate" hreflang="en" href="https://www.eidoslibro.com/essay/indexautoreng.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.eidoslibro.com/essay/indexautor.html" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.ico" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,400;0,600;0,700;0,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../assets/css/style-compra.css" />
+
+  <!-- ============================================================
+       Google Analytics 4 + Consent Mode v2 (Granular RGPD)
+       ============================================================ -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    // 1) Consentimiento por defecto: TODO DENEGADO (antes de cargar gtag.js)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied'
+    });
+
+    // Guardar/aplicar consentimiento
+    function applyConsentObject(obj){
+      gtag('consent', 'update', obj);
+      try { localStorage.setItem('ga_consent_v2', JSON.stringify(obj)); } catch(e){}
+    }
+
+    // 2) Restaurar preferencia guardada (si existe) ANTES de inicializar GA
+    (function applyStoredConsent(){
+      try {
+        const raw = localStorage.getItem('ga_consent_v2');
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (saved && typeof saved === 'object') {
+          applyConsentObject(saved);
+          window.__gaConsentPref = saved;
+        }
+      } catch(e){}
+    })();
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+  <script>
+    // 3) Inicializar GA4 sin enviar page_view automáticamente
+    gtag('js', new Date());
+    gtag('config', 'G-SCSFPYKJTX', { send_page_view: false });
+
+    // 4) Si ya había analytics_storage:'granted', enviar page_view ahora
+    try {
+      if (window.__gaConsentPref && window.__gaConsentPref.analytics_storage === 'granted') {
+        gtag('event', 'page_view');
+      }
+    } catch(e){}
+  </script>
+
+  <!-- Banner + Modal de consentimiento -->
+  <style>
+    #consent-banner{
+      position:fixed;left:0;right:0;bottom:0;z-index:10000;
+      background:#f7f7f7;border-top:1px solid #ddd;padding:12px
+    }
+    #consent-banner p{margin:0 0 8px}
+    #consent-banner .btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+    #consent-banner button{border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+    #consent-accept{background:#1a73e8;color:#fff}
+    #consent-reject{background:#eaeaea}
+    #consent-config{background:#fff;border:1px solid #ccc}
+
+    .consent-modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.45);
+      z-index:10001;display:none
+    }
+    .consent-modal{
+      position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+      background:#fff;z-index:10002;width:min(520px,92vw);
+      border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);
+      display:none
+    }
+    .consent-modal header{padding:14px 16px;border-bottom:1px solid #eee;font-weight:600}
+    .consent-modal .content{padding:14px 16px;max-height:60vh;overflow:auto}
+    .consent-modal .row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px dashed #eee}
+    .consent-modal .row:last-child{border-bottom:none}
+    .consent-modal h4{margin:.2rem 0}
+    .consent-modal p{margin:.2rem 0;color:#555;font-size:.95rem}
+    .consent-actions{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid #eee}
+    .consent-actions button{border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .btn-primary{background:#1a73e8;color:#fff}
+    .btn-ghost{background:#eaeaea}
+    .switch{position:relative;display:inline-block;width:44px;height:24px}
+    .switch input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;inset:0;background:#ccc;transition:.2s;border-radius:24px}
+    .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;top:3px;background:#fff;transition:.2s;border-radius:50%}
+    input:checked + .slider{background:#1a73e8}
+    input:checked + .slider:before{transform:translateX(20px)}
+  </style>
+</head>
+
+<body class="eidos-body">
+
+  <!-- Banner -->
+  <div id="consent-banner" hidden>
+    <p>
+      We use analytics cookies (Google Analytics) and you can choose your preferences.
+      More information in our <a href="../terminosycondiciones.html" rel="noopener">Privacy Policy</a>.
+    </p>
+    <div class="btns">
+      <button id="consent-accept">Accept all</button>
+      <button id="consent-reject">Reject</button>
+      <button id="consent-config">Configure</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="consent-modal-backdrop" id="consent-backdrop"></div>
+  <div class="consent-modal" id="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title">
+    <header id="consent-modal-title">Privacy preferences</header>
+    <div class="content">
+      <div class="row">
+        <div>
+          <label class="switch" title="Enable/disable analytics cookies">
+            <input type="checkbox" id="toggle-analytics" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div>
+          <h4>Analytics (Google Analytics)</h4>
+          <p>Helps us understand site usage. No advertising and no cross-site tracking.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label class="switch" title="Personalised advertising and ad measurement">
+            <input type="checkbox" id="toggle-ads" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div>
+          <h4>Advertising (optional)</h4>
+          <p>Allows ad storage, user data and personalisation. Turn it off if you do not want personalised advertising.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="consent-actions">
+      <button class="btn-ghost" id="consent-cancel">Cancel</button>
+      <button class="btn-primary" id="consent-save">Save preferences</button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const banner   = document.getElementById('consent-banner');
+      const acceptBt = document.getElementById('consent-accept');
+      const rejectBt = document.getElementById('consent-reject');
+      const configBt = document.getElementById('consent-config');
+
+      const modal    = document.getElementById('consent-modal');
+      const backdrop = document.getElementById('consent-backdrop');
+      const saveBt   = document.getElementById('consent-save');
+      const cancelBt = document.getElementById('consent-cancel');
+
+      const tgAnalytics = document.getElementById('toggle-analytics');
+      const tgAds       = document.getElementById('toggle-ads');
+
+      function showBanner(){ banner.hidden = false; }
+      function hideBanner(){ banner.hidden = true; }
+
+      function openModal(){
+        let saved = null;
+        try { saved = JSON.parse(localStorage.getItem('ga_consent_v2')); } catch(e){}
+        const anaGranted = saved?.analytics_storage === 'granted';
+        const adsGranted = (saved?.ad_storage === 'granted'
+                         && saved?.ad_user_data === 'granted'
+                         && saved?.ad_personalization === 'granted');
+
+        tgAnalytics.checked = !!anaGranted;
+        tgAds.checked       = !!adsGranted;
+
+        backdrop.style.display = 'block';
+        modal.style.display = 'block';
+      }
+
+      function closeModal(){
+        backdrop.style.display = 'none';
+        modal.style.display = 'none';
+      }
+
+      function sendPageViewIfNeeded(){
+        try {
+          const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
+          if (saved.analytics_storage === 'granted') {
+            gtag('event', 'page_view');
+          }
+        } catch(e){}
+      }
+
+      function acceptAll(){
+        const obj = {
+          analytics_storage: 'granted',
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        };
+        applyConsentObject(obj);
+        hideBanner();
+        sendPageViewIfNeeded();
+      }
+
+      function rejectAll(){
+        const obj = {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        };
+        applyConsentObject(obj);
+        hideBanner();
+      }
+
+      function saveGranular(){
+        const obj = {
+          analytics_storage: tgAnalytics.checked ? 'granted' : 'denied',
+          ad_storage:        tgAds.checked ? 'granted' : 'denied',
+          ad_user_data:      tgAds.checked ? 'granted' : 'denied',
+          ad_personalization:tgAds.checked ? 'granted' : 'denied'
+        };
+        applyConsentObject(obj);
+        closeModal();
+        hideBanner();
+        sendPageViewIfNeeded();
+      }
+
+      // Mostrar banner solo si no hay elección guardada
+      window.addEventListener('load', function(){
+        let hasChoice = false;
+        try {
+          const raw = localStorage.getItem('ga_consent_v2');
+          if (raw) hasChoice = true;
+        } catch(e){}
+        if (!hasChoice) showBanner();
+      });
+
+      acceptBt.addEventListener('click', acceptAll);
+      rejectBt.addEventListener('click', rejectAll);
+      configBt.addEventListener('click', openModal);
+      saveBt.addEventListener('click', saveGranular);
+      cancelBt.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+    })();
+  </script>
+
+  <header class="eidos-hero" role="banner" aria-label="EIDOS — Essays purchase header">
+    <div class="eidos-hero__inner">
+      <div class="eidos-hero__content">
+        <p class="eidos-overline">Signed edition</p>
+        <h1 class="eidos-hero__title">Get your signed copy of <span>EIDOS — Essays</span></h1>
+        <p class="eidos-hero__subtitle">Nine essays of science communication and reflection by Felden Vareth</p>
+      </div>
+      <div class="eidos-hero__cta">
+        <a class="eidos-btn eidos-btn--ghost" href="indexeng.html">← Back to Essays</a>
+        <a class="eidos-btn eidos-btn--secondary" href="indexautor.html" aria-label="Versión en español">Español</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <!-- Oferta + Imagen -->
+    <section class="eidos-section">
+      <div class="eidos-card eidos-card--grid">
+        <div class="eidos-offer">
+          <h2 class="eidos-h2">Your signed copy</h2>
+          <p class="eidos-lead">Choose a format and receive your book with a <strong>personalised dedication</strong>.</p>
+
+          <div class="eidos-prices">
+            <div class="eidos-price">
+              <h3 class="eidos-price__title">Paperback</h3>
+              <p class="eidos-price__amount">€25</p>
+              <p class="eidos-price__note">B/W print • 6x9 • Trade-quality paper</p>
+            </div>
+            <div class="eidos-price">
+              <h3 class="eidos-price__title">Hardcover</h3>
+              <p class="eidos-price__amount">€35</p>
+              <p class="eidos-price__note">Premium binding • Ideal for gifting</p>
+            </div>
+          </div>
+
+          <ul class="eidos-bullets">
+
+            <li>Includes a dedication (optional; specify it in your email).</li>
+            <li>Standard domestic shipping (see FAQs for international shipping).</li>
+            <li>Payment by secure SEPA bank transfer.</li>
+          </ul>
+
+          <div class="eidos-cta-row">
+            <a class="eidos-btn" href="#pasos">Order now</a>
+            <a class="eidos-btn eidos-btn--secondary" href="#faq">Frequently asked questions</a>
+          </div>
+          
+          
+           						  <p>&nbsp; </p>
+						  <p>&nbsp; </p>
+    
+          
+<h3>Life, mind, evolution, intelligence, identity and technology.</h3>
+		  <p>&nbsp; </p>
+          
+Nine essays on life, mind, evolution, intelligence, identity and technology, gathered in a single volume. 
+</div>
+
+        <figure class="eidos-cover">
+          <img src="../assets/images/tapaessey.jpg" alt="Cover of EIDOS — Essays" loading="lazy" decoding="async" />
+          <figcaption>Cover of <em>EIDOS — Essays</em></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Pasos -->
+    <section id="pasos" class="eidos-section" aria-labelledby="pasos-title">
+      <div class="eidos-card">
+        <h2 id="pasos-title" class="eidos-h2">How to order your copy</h2>
+
+        <div class="eidos-steps">
+          <!-- Paso 1 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">1</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Make the transfer</h3>
+
+              <p><strong>IBAN:</strong> <span id="iban-text">ES49 1465 0100 9617 0593 4314</span></p>
+              <p><strong>Beneficiary:</strong> Fe. Va.</p>
+              <p><strong>Reference:</strong> EIDOS ESSAYS (format: paperback or hardcover)</p>
+
+              <!-- Dos códigos QR EPC (SEPA) -->
+              <div class="eidos-qr-grid">
+                <div class="eidos-qr-card">
+                  <div class="eidos-qr__label">Paperback 25 €</div>
+                  <canvas id="qr-blanda" width="140" height="140" aria-label="QR SEPA €25 Paperback"></canvas>
+                  <button class="eidos-btn eidos-btn--secondary" data-download-qr="#qr-blanda" data-filename="EIDOS_ESSAYS_25_paperback.png">Scan the QR</button>
+                </div>
+
+
+
+
+   <!-- Paso 3 
+
+
+                <div class="eidos-qr-card">
+                  <div class="eidos-qr__label">Hardcover 35 €</div>
+                  <canvas id="qr-dura" width="140" height="140" aria-label="QR SEPA €35 Hardcover"></canvas>
+                  <button class="eidos-btn eidos-btn--secondary" data-download-qr="#qr-dura" data-filename="EIDOS_ESSAYS_35_hardcover.png">Scan the QR</button>
+                </div>
+              </div>
+
+-->
+
+
+
+
+
+
+              <div class="eidos-step__row">
+                <button class="eidos-btn eidos-btn--ghost" data-copy="#iban-text">Copy IBAN</button>
+              </div>
+
+              <p class="eidos-small">If your banking app does not support EPC QR codes, enter the details manually.</p>
+            </div>
+          </article>
+
+          <!-- Paso 2 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">2</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Send your details</h3>
+              <p>After the transfer, email <a href="mailto:feldenvareth@gmail.com">feldenvareth@gmail.com</a> with:</p>
+              <ul>
+                <li>Payment receipt</li>
+                <li>Full name</li>
+                <li>Complete shipping address</li>
+                <li>Chosen format (paperback / hardcover)</li>
+                <li>Name for the dedication (optional)</li>
+               
+              </ul>
+            </div>
+          </article>
+
+          <!-- Paso 3 -->
+          <article class="eidos-step">
+            <div class="eidos-step__num">3</div>
+            <div class="eidos-step__body">
+              <h3 class="eidos-step__title">Confirmation & shipping</h3>
+              <p>You will receive a confirmation email. We will prepare your signed copy and ship it to the address provided.</p>
+              <p class="eidos-small">Average preparation time is 3–5 business days.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="eidos-section" aria-labelledby="faq-title">
+      <div class="eidos-card">
+        <h2 id="faq-title" class="eidos-h2">Frequently asked questions</h2>
+
+        <div class="eidos-faq">
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">Is shipping included?</h3>
+            <p class="eidos-faq__a">Standard domestic shipping is included for mainland Spain. For islands or international shipping, please email us before purchasing.</p>
+          </article>
+
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">How do I request the dedication?</h3>
+            <p class="eidos-faq__a">Specify the <em>exact name</em> in your email and, if you wish, a short note (birthday, gift, etc.). If it is a surprise, we will take care of it.</p>
+          </article>
+
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">How long will it take to arrive?</h3>
+            <p class="eidos-faq__a">Preparation takes 3–5 business days, plus carrier transit time. We will let you know when it ships and provide tracking when available.</p>
+          </article>
+
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">Do you ship internationally?</h3>
+            <p class="eidos-faq__a">Yes. We can ship outside Spain, although costs and delivery times vary by country. Email us before making the transfer and we will confirm the shipping surcharge.</p>
+          </article>
+
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">Can I return a dedicated book?</h3>
+            <p class="eidos-faq__a">No. Dedicated copies are personalised for each reader and, for legal and logistical reasons, cannot be returned once signed. A replacement can only be arranged in the event of a printing defect or shipping damage.</p>
+          </article>
+
+          <article class="eidos-faq__item">
+            <h3 class="eidos-faq__q">When will I receive my order confirmation?</h3>
+            <p class="eidos-faq__a">Once we receive your transfer and your email with the details, we will send confirmation within a maximum of 24 business hours.</p>
+          </article>
+        </div>
+
+        <div class="eidos-cta-row eidos-cta-row--end">
+          <a class="eidos-btn" href="#pasos">Order now</a>
+          
+          <a class="eidos-btn eidos-btn--secondary" href="https://www.amazon.es/dp/B0HG9K54QH/" target="_blank" rel="noopener">Buy on Amazon</a>
+
+          <a class="eidos-btn eidos-btn--ghost" href="indexeng.html">← Back to Essays</a>
+          <a class="eidos-btn eidos-btn--secondary" href="../terminosycondiciones.html">Privacy policy</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="eidos-footer" role="contentinfo">
+    <p>Eidos Copyright © 2025–2026 Felden Vareth / All rights reserved.</p>
+  </footer>
+
+  <!-- Librería QR (ligera). Si no carga, se muestra fallback sin QR -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+
+  <!-- JS de la landing -->
+  <script>
+;(function () {
+  "use strict";
+
+  // -------- Utilidades UI --------
+  function flash(message){
+    const n = document.createElement("div");
+    n.textContent = message;
+    n.setAttribute("role", "status");
+    Object.assign(n.style, {
+      position:"fixed", zIndex:"9999", left:"50%", top:"18px", transform:"translateX(-50%)",
+      background:"linear-gradient(135deg,#8ab4ff,#b5ffd9)", color:"#0b1220",
+      fontWeight:"800", padding:"10px 14px", borderRadius:"12px",
+      boxShadow:"0 10px 30px rgba(0,0,0,.25)"
+    });
+    document.body.appendChild(n);
+    setTimeout(()=>{ n.style.opacity="0"; n.style.transition="opacity .35s ease"; }, 1400);
+    setTimeout(()=>{ n.remove(); }, 1900);
+  }
+
+  // Copiar texto (IBAN)
+  function copyText(selector){
+    const el = document.querySelector(selector);
+    if(!el) return;
+    const txt = (el.innerText || el.textContent || "").replace(/\u00A0/g," ");
+    if (!txt) return;
+    if (navigator.clipboard?.writeText){
+      navigator.clipboard.writeText(txt).then(()=> flash("IBAN copied")).catch(fallbackCopy);
+    } else fallbackCopy();
+    function fallbackCopy(){
+      const ta = document.createElement("textarea");
+      ta.value = txt; ta.readOnly = true;
+      ta.style.position = "absolute"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); flash("IBAN copied"); } catch(e){}
+      document.body.removeChild(ta);
+    }
+  }
+
+  // Smooth scroll interno
+  document.addEventListener("click", function(ev){
+    const a = ev.target.closest('a[href^="#"]');
+    if(!a) return;
+    const id = a.getAttribute("href");
+    if(id.length < 2) return;
+    const el = document.querySelector(id);
+    if(!el) return;
+    ev.preventDefault();
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  // Delegación: copiar IBAN
+  document.addEventListener("click", function(ev){
+    const btn = ev.target.closest("[data-copy]");
+    if(!btn) return;
+    const selector = btn.getAttribute("data-copy");
+    if(selector) copyText(selector);
+  });
+
+  // Delegación: descargar QR
+  document.addEventListener("click", function(ev){
+    const btn = ev.target.closest("[data-download-qr]");
+    if(!btn) return;
+    const canvasSel = btn.getAttribute("data-download-qr");
+    const filename = btn.getAttribute("data-filename") || "qr.png";
+    const canvas = document.querySelector(canvasSel);
+    if(!canvas) return;
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = filename;
+    link.click();
+  });
+
+  // -------- Helpers EPC / IBAN --------
+  const asciiClean = s => (s || "").toString()
+    .normalize("NFKD").replace(/[^\x20-\x7E]/g,"").trim();
+
+  // Normaliza: quita espacios, NBSP, guiones, etc. y pasa a mayúsculas
+  function normalizeIBAN(raw){
+    return (raw || "")
+      .replace(/\u00A0/g," ")      // NBSP -> espacio
+      .replace(/[\s\-]/g,"")       // espacios y guiones
+      .toUpperCase();
+  }
+
+  // Valida IBAN (módulo 97). Devuelve true/false
+  function isValidIBAN(iban){
+    const clean = normalizeIBAN(iban);
+    if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(clean)) return false;
+    const rearranged = clean.slice(4) + clean.slice(0,4);
+    const expanded = rearranged.replace(/[A-Z]/g, ch => (ch.charCodeAt(0) - 55).toString());
+    // cálculo mod 97 en bloques para no desbordar
+    let remainder = 0;
+    for (let i = 0; i < expanded.length; i += 7) {
+      remainder = parseInt(String(remainder) + expanded.substr(i, 7), 10) % 97;
+    }
+    return remainder === 1;
+  }
+
+  // EPC069-12 (sin BIC)
+  // BCD\n001\n1\nSCT\n<BIC>\n<NOMBRE>\n<IBAN>\nEUR<IMPORTE>\n\n<REMESA>
+  function epcPayload({name, iban, amount, remittance, bic=""}){
+    const lines = [
+      "BCD",
+      "001",
+      "1",
+      "SCT",
+      asciiClean(bic),
+      asciiClean(name).slice(0,70),
+      normalizeIBAN(iban),
+      "EUR" + Number(amount).toFixed(2),
+      "",
+      asciiClean(remittance).slice(0,140)
+    ];
+    return lines.join("\n");
+  }
+
+  function drawQR(canvasId, text){
+    try{
+      const canvas = document.getElementById(canvasId.replace(/^#/, ""));
+      if(!canvas) return;
+      if (window.QRCode?.toCanvas){
+        window.QRCode.toCanvas(canvas, text, { errorCorrectionLevel: "M", margin: 1, scale: 4 }, err => { if(err) console.error(err); });
+      } else {
+        const pre = document.createElement("pre");
+        pre.style.whiteSpace = "pre-wrap";
+        pre.style.textAlign = "left";
+        pre.style.fontSize = "12px";
+        pre.style.color = "#a9b3c6";
+        pre.textContent = text;
+        canvas.replaceWith(pre);
+      }
+    }catch(e){ console.error(e); }
+  }
+
+  // -------- Datos --------
+  const NAME = "FE VA"; // o "FEDERICO VALDIVIA" si lo prefieres
+  const IBAN_TEXT = (document.getElementById("iban-text")?.textContent || "").trim();
+  const IBAN = normalizeIBAN(IBAN_TEXT);
+
+  if (!isValidIBAN(IBAN)) {
+    console.warn("IBAN no válido para EPC:", IBAN);
+    flash("Warning: invalid IBAN");
+  }
+
+  // QR Paperback (25 €)
+  const payloadBlanda = epcPayload({
+    name: NAME,
+    iban: IBAN,
+    amount: 25.00,
+    remittance: "EIDOS ESSAYS PAPERBACK"
+  });
+
+  // QR Hardcover (35 €)
+  const payloadDura = epcPayload({
+    name: NAME,
+    iban: IBAN,
+    amount: 35.00,
+    remittance: "EIDOS ESSAYS HARDCOVER"
+  });
+
+  drawQR("#qr-blanda", payloadBlanda);
+  drawQR("#qr-dura", payloadDura);
+})();
+
+
+  </script>
+  <script src="../assets/js/optimize.js" defer></script>
+</body>
+</html>
