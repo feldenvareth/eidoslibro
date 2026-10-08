@@ -21,6 +21,7 @@
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image');
   const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxDownload = document.getElementById('lightbox-download');
 
   let images = [];
   let deck = null;
@@ -278,6 +279,8 @@
     lightboxImage.src = item.url;
     lightboxImage.alt = item.name;
     lightboxCaption.textContent = item.name.replace(/[-_]+/g, ' ');
+    lightboxDownload.href = item.url;
+    lightboxDownload.download = (item.path || item.url).split('/').pop();
   }
 
   function moveLightbox(direction) {

@@ -314,6 +314,33 @@ main { width: min(1500px, 100%); margin: 0 auto; padding: 0 clamp(14px, 3vw, 48p
 .lightbox__arrow { height: 100%; font-size: clamp(52px, 7vw, 96px); color: rgba(255,255,255,.65); }
 .lightbox__arrow:hover { color: white; }
 
+/* Descarga de la imagen original, sin recortes ni efectos. */
+.lightbox__figure img { max-height: 73vh; }
+.lightbox__download {
+  position: relative;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 4px;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: rgba(7,7,16,.7);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.lightbox__download:hover,
+.lightbox__download:focus-visible {
+  color: var(--bg);
+  background: var(--accent);
+}
+@media (max-height: 540px) {
+  .lightbox__figure img { max-height: 57vh; }
+}
+
 @media (max-width: 1050px) { .eidos-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 760px) {
   .topbar { min-height: 58px; padding: 12px 16px; }

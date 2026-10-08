@@ -28,6 +28,7 @@
   const root = document.getElementById('screensaver');
   const status = document.getElementById('screen-status');
   const pauseButton = document.getElementById('screen-pause');
+  const downloadLink = document.getElementById('screen-download');
   const currentImage = document.querySelector('.screen-image--current');
   const nextImage = document.querySelector('.screen-image--next');
   const currentBg = document.querySelector('.screen-bg--current');
@@ -495,8 +496,16 @@
   }
 
 
+  function updateDownload(item) {
+    if (!item) return;
+    downloadLink.href = item.url;
+    downloadLink.download = (item.path || item.url).split('/').pop();
+    downloadLink.hidden = false;
+  }
+
   function setInitial(item) {
     currentItem = item;
+    updateDownload(item);
     currentImage.src = item.url;
     currentImage.alt = item.name;
     currentBg.style.backgroundImage = cssUrl(item.url);
@@ -563,6 +572,7 @@
       });
 
       currentItem = item;
+      updateDownload(item);
       changing = false;
       schedule();
     };
