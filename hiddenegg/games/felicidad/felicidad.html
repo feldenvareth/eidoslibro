@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06100c">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.png">
+  <link rel="stylesheet" href="felicidad.css">
+  <script>
+    (function(){
+      const GA='G-SCSFPYKJTX';
+      let loaded=false;
+      window.dataLayer=window.dataLayer||[];
+      window.gtag=window.gtag||function(){dataLayer.push(arguments)};
+      window.loadEidosAnalytics=function(){
+        if(loaded)return; loaded=true;
+        const s=document.createElement('script');
+        s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;
+        document.head.appendChild(s);
+        gtag('js',new Date());gtag('config',GA);
+      };
+      try{if(localStorage.getItem('consentGiven')==='true')loadEidosAnalytics()}catch(e){}
+    })();
+  </script>
+  <meta name="description" content="SUFICIENTE?, un juego mental EIDOS sobre metas, progreso y la facilidad con la que una llegada se convierte en un nuevo comienzo.">
+  <link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/felicidad/felicidad.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="EIDOS Libro">
+  <meta property="og:title" content="EIDOS · ¿Suficiente?">
+  <meta property="og:description" content="Elige una meta. Alcánzala. Decide cuándo parar.">
+  <meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/felicidad/felicidad.html">
+  <meta property="og:image" content="https://www.eidoslibro.com/hiddenegg/games/felicidad/eidos-suficiente-compartir.jpg">
+  <meta property="og:image:secure_url" content="https://www.eidoslibro.com/hiddenegg/games/felicidad/eidos-suficiente-compartir.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta property="og:image:alt" content="EIDOS ¿Suficiente?: elige una meta, alcánzala y decide cuándo parar">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EIDOS · ¿Suficiente?">
+  <meta name="twitter:description" content="Elige una meta. Alcánzala. Decide cuándo parar.">
+  <meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/felicidad/eidos-suficiente-compartir.jpg">
+  <title>EIDOS · ¿Suficiente?</title>
+</head>
+<body>
+<div id="game-shell">
+  <div id="bg"><img id="bg-a" alt=""><img id="bg-b" alt=""></div>
+
+  <header id="topbar">
+    <div id="hud">
+      <span id="round-hud"></span>
+      <span id="target-hud"></span>
+    </div>
+    <button id="reset-btn" class="tiny" type="button" data-t="restart"></button>
+    <button id="close-btn" class="tiny close" type="button" aria-label="Cerrar">×</button>
+  </header>
+
+  <main id="game-area">
+    <div id="title-block">
+      <p class="brand">E I D O S</p>
+      <h1 data-t="gameTitle"></h1>
+      <p id="subtitle" data-t="subtitle"></p>
+    </div>
+
+    <section id="play-panel" aria-live="polite">
+      <div id="goal-line">
+        <span data-t="goal"></span>
+        <strong id="goal-value">0</strong>
+      </div>
+
+      <div id="progress-track" aria-hidden="true"><div id="progress-fill"></div></div>
+
+      <button id="gain-button" type="button" aria-label="Sumar">
+        <span class="pulse-ring ring-a"></span>
+        <span class="pulse-ring ring-b"></span>
+        <span id="lifeform" aria-hidden="true"></span>
+        <span id="total-value">0</span>
+        <small id="tap-gain">+1</small>
+      </button>
+
+      <div id="streak-wrap">
+        <span data-t="rhythm"></span>
+        <div class="streak-dots" id="streak-dots" aria-hidden="true"></div>
+        <span id="drift-status" aria-live="off"></span>
+      </div>
+
+      <p id="game-hint" data-t="gameHint"></p>
+      <div id="float-layer" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <section id="start-screen" class="screen open">
+    <div class="card">
+      <p class="kicker">E I D O S</p>
+      <h2 data-t="gameTitle"></h2>
+      <p class="card-sub" data-t="startSubtitle"></p>
+      <p class="intro" data-t="intro"></p>
+
+      <div class="choice-box">
+        <label for="enough-range" data-t="chooseEnough"></label>
+        <output id="enough-output" for="enough-range">250</output>
+        <input id="enough-range" type="range" min="100" max="1000" step="50" value="250">
+        <div class="range-labels"><span>100</span><span>1000</span></div>
+      </div>
+
+      <div class="start-actions">
+        <button id="start-button" class="primary" data-t="start"></button>
+        <button id="copy-link-button" class="secondary" data-t="copyLink"></button>
+        <a class="secondary full" href="https://www.eidoslibro.com/" target="_blank" rel="noopener" data-t="discoverEidos"></a>
+      </div>
+      <p class="note" data-t="startNote"></p>
+    </div>
+  </section>
+
+  <section id="milestone-screen" class="screen">
+    <div class="card milestone-card">
+      <p class="kicker" data-t="reached"></p>
+      <div class="milestone-number" id="milestone-number"></div>
+      <h2 id="milestone-title"></h2>
+      <p class="intro" id="milestone-text"></p>
+      <div class="decision-actions">
+        <button id="stop-button" class="decision" data-t="stopHere"></button>
+        <button id="continue-button" class="decision primary" data-t="continue"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result-screen" class="screen">
+    <div class="card result-card">
+      <p class="kicker" data-t="yourChoice"></p>
+      <h2 data-t="resultTitle"></h2>
+      <div id="result-numbers"></div>
+      <p class="intro" id="result-text"></p>
+      <div class="reflection" id="reflection-text"></div>
+      <div class="start-actions">
+        <button id="play-again" class="primary" data-t="playAgain"></button>
+        <button id="back-essay" class="secondary" data-t="backEssay"></button>
+        <button id="result-copy" class="secondary full" data-t="copyLink"></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/gallery/js/image-manifest.js"></script>
+<script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="felicidad.js"></script>
+</body>
+</html>
