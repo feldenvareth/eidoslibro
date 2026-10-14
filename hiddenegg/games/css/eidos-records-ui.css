@@ -65,3 +65,15 @@
 .eidos-records-screen[data-screen="board"] { min-height:0; display:flex; flex-direction:column; }
 .eidos-records-screen[data-screen="board"][hidden] { display:none!important; }
 .eidos-records-panel { overscroll-behavior:contain; }
+
+/* Optional milestone column, displayed only by games that supply stages. */
+.eidos-records-with-stage .eidos-records-row { grid-template-columns:34px minmax(55px,1fr) minmax(100px,1.7fr) minmax(55px,auto); gap:5px; }
+.eidos-records-stage { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; color:#a6e4b9; font-size:.88em; }
+.eidos-records-stage-entry { color:#a6e4b9; font-size:12px; letter-spacing:.045em; margin:9px 0 3px; }
+@media (max-width:430px) {
+  .eidos-records-with-stage .eidos-records-row { grid-template-columns:25px minmax(45px,.8fr) minmax(80px,1.3fr) minmax(49px,auto); gap:3px; padding:6px 5px; font-size:11px; }
+  .eidos-records-with-stage .eidos-records-stage { font-size:10px; }
+}
+
+.eidos-records-order { font-size:10px; letter-spacing:.07em; color:#9fcdaa; margin:10px 0 0; }
+.eidos-records-order[hidden] { display:none!important; }

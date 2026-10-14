@@ -4,13 +4,6 @@
       const LANG = (document.documentElement.lang || "en").toLowerCase().startsWith("es") ? "es" : "en";
       const isES = LANG === "es";
 
-      // Shared TOP 20: Spanish and English intentionally use the same game ID.
-      // Shared local/world Top 20 UI, depending on whether the universal API is configured.
-      const recordsUI = window.EidosRecordsUI?.init({ gameId: "evolution", language: LANG }) || null;
-      document.querySelectorAll(".eidos-records-trigger").forEach(button => {
-        button.addEventListener("click", () => recordsUI?.view());
-      });
-
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
       const GALLERY_MANIFEST = Array.isArray(window.EIDOS_IMAGE_MANIFEST) ? window.EIDOS_IMAGE_MANIFEST : [];
       const BG_IMAGES = GALLERY_MANIFEST.length
@@ -70,6 +63,15 @@
       ];
 
       const stageByValue = new Map(stages.map(stage => [stage.value, stage]));
+      // Both languages use the same game ID and numeric stage values.
+      // The shared ranking UI receives translated milestone names from this game.
+      const recordsUI = window.EidosRecordsUI?.init({
+        gameId: "evolution", language: LANG,
+        stages: stages.map(({value, name}) => ({value, name}))
+      }) || null;
+      document.querySelectorAll(".eidos-records-trigger").forEach(button => {
+        button.addEventListener("click", () => recordsUI?.view());
+      });
       const RETIRED_STAGE_RULES = [
         { reachedValue: 64, retiredValue: 2 },
         { reachedValue: 256, retiredValue: 4 },
@@ -991,7 +993,7 @@
         openScreen(gameOverScreen);
         // Offer registration only when this finished run qualifies for the TOP 20.
         // The game engine passes the numeric score, never text read from the page.
-        if (score > 0) recordsUI?.promptScore(score);
+        if (score > 0) recordsUI?.promptScore(score, {stage: runMaxValue});
       }
 
       function showVictory() {
