@@ -63,7 +63,12 @@
   #game-btn{display:none;padding:7px 24px;background:#c8a84b;color:#1a1a2e;border:0;border-radius:6px;cursor:pointer;font:bold 14px Georgia,serif}
   @media(max-width:430px){body{padding:6px;gap:3px}#top-bar,.canvas-wrap{width:min(480px,100%,calc((100dvh - 112px)*480/650))}#hud{gap:3px 10px;font-size:11px}#close-btn{padding:4px 7px;font-size:10px}#cadence-label{min-width:112px;font-size:10px}#cadence-label::before{font-size:9px}#msg{font-size:12px}}
   @media(max-height:720px){body{padding:4px;gap:2px}#top-bar,.canvas-wrap{width:min(480px,100%,calc((100dvh - 94px)*480/650))}#cadence-control{min-height:25px}#msg{min-height:16px;font-size:12px;line-height:16px}}
+
+  /* El botón abre la clasificación compartida; no cambia el marcador local. */
+  #records-button{border:1px solid rgba(200,168,75,.64);border-radius:5px;background:rgba(6,24,17,.70);color:#efc77d;padding:3px 7px;cursor:pointer;font:10px/1.3 Georgia,serif;white-space:nowrap}
+  #records-button:hover,#records-button:focus-visible{border-color:#f5d76e;color:#fff2c4;outline-offset:2px}
 </style>
+<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-stage1">
 
 <!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
 <script id="eidos-analytics-loader">
@@ -108,6 +113,7 @@
   <div id="hud">
     <span id="scoreEl">Puntos: 0</span>
     <span id="bestEl">Récord: 0</span>
+    <button id="records-button" class="eidos-records-trigger" type="button" aria-label="Ver clasificación mundial TOP 20">🏆 TOP 20</button>
     <span id="levelEl">Nivel 1</span>
     <span id="livesEl">♥ ♥ ♥</span>
   </div>
@@ -129,6 +135,7 @@
 <button id="game-btn" type="button">Reiniciar</button>
 <script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="../js/eidos-records-ui.js?v=20261015-stage1"></script>
 
 <script>
 const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
@@ -213,6 +220,11 @@ function getNextQuote(){
   lastQuoteIndex=quoteIndex;
   return QUOTES[quoteIndex];
 }
+
+// Misma clasificación mundial para Péndulos y Pendulums.
+// API y estilos compartidos ya instalados en /hiddenegg/games/js y /css.
+const recordsUI = window.EidosRecordsUI?.init({gameId:'pendulos',language:'es'}) || null;
+document.getElementById('records-button').addEventListener('click',()=>recordsUI?.view());
 
 const cv=document.getElementById('c');
 const ctx=cv.getContext('2d');
@@ -317,6 +329,7 @@ function resetLevel(){
   gameBtn.style.display='none';
 }
 function restart(){
+  recordsUI?.startSession(); // Nuevo intento, nuevo ticket para los récords.
   score=0;level=1;lives=3;
   bgCarousel=[];lastBgIndex=-1;selectNextBackground();
   quoteCarousel=[];lastQuoteIndex=-1;
@@ -565,6 +578,8 @@ function updatePlayerDeath(dt,now){
         gameBtn.textContent='Reiniciar';
         gameBtn.onclick=restart;
         gameBtn.style.display='inline-block';
+        // El juego termina primero; el registro mundial nunca bloquea la partida.
+        if(score>0) void recordsUI?.promptScore(score);
       }else{
         player.state='alive';
         player.deathElapsed=0;
@@ -992,7 +1007,10 @@ function loop(){
   if(running)return;running=true;
   function frame(now){
     if(!lastTime)lastTime=now;
-    const dt=Math.min(34,now-lastTime);lastTime=now;elapsed+=dt;
+    const dt=Math.min(34,now-lastTime);lastTime=now;
+    // Consultar el TOP 20 durante una partida pausa la simulación.
+    if(recordsUI?.isOpen()){requestAnimationFrame(frame);return;}
+    elapsed+=dt;
     if(!quoteVisible){update(dt,now);draw();requestAnimationFrame(frame)}else running=false;
   }
   requestAnimationFrame(frame);
@@ -1008,11 +1026,11 @@ function dismissQuote(){
   qt.classList.remove('show');qh.classList.remove('show');
   let op=.9;const id=setInterval(()=>{op=Math.max(0,op-.06);qs.style.background='rgba(5,12,8,'+op+')';if(op<=0){clearInterval(id);qs.classList.remove('visible');quoteVisible=false;selectNextBackground();resetLevel();lastTime=0;loop()}},30);
 }
-cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*W/r.width;if(!started&&!over&&!quoteVisible){started=true;msg.textContent='Divide los gusanos y destruye sus pozos gravitatorios'};});
-cv.addEventListener('mousedown',e=>{e.preventDefault();if(!started&&!over&&!quoteVisible)started=true;shoot(performance.now())});
-cv.addEventListener('touchstart',e=>{if(quoteVisible)return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width;if(!started)started=true;shoot(performance.now())},{passive:false});
-cv.addEventListener('touchmove',e=>{if(quoteVisible)return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width},{passive:false});
-window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')mouseX-=30;if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')mouseX+=30;if(e.code==='Space'||e.key==='ArrowUp'){e.preventDefault();if(!started)started=true;shoot(performance.now())}});
+cv.addEventListener('mousemove',e=>{if(recordsUI?.isOpen())return;const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*W/r.width;if(!started&&!over&&!quoteVisible){started=true;msg.textContent='Divide los gusanos y destruye sus pozos gravitatorios'};});
+cv.addEventListener('mousedown',e=>{if(recordsUI?.isOpen())return;e.preventDefault();if(!started&&!over&&!quoteVisible)started=true;shoot(performance.now())});
+cv.addEventListener('touchstart',e=>{if(quoteVisible||recordsUI?.isOpen())return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width;if(!started)started=true;shoot(performance.now())},{passive:false});
+cv.addEventListener('touchmove',e=>{if(quoteVisible||recordsUI?.isOpen())return;e.preventDefault();const r=cv.getBoundingClientRect(),t=e.touches[0];mouseX=(t.clientX-r.left)*W/r.width},{passive:false});
+window.addEventListener('keydown',e=>{if(recordsUI?.isOpen())return;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')mouseX-=30;if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')mouseX+=30;if(e.code==='Space'||e.key==='ArrowUp'){e.preventDefault();if(!started)started=true;shoot(performance.now())}});
 resetLevel();loop();
 </script>
 </body>
