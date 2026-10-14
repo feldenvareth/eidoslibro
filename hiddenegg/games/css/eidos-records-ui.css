@@ -1,4 +1,4 @@
-/* EIDOS · TOP 20 · Componente compartido de interfaz (prototipo local) */
+/* EIDOS · TOP 20 · Interfaz compartida con modo local y mundial */
 .eidos-records-trigger { cursor:pointer; }
 #eidos-records-root { position:fixed; inset:0; z-index:2147483000; display:none; align-items:center; justify-content:center; padding:18px; box-sizing:border-box; font-family:'Courier New',Courier,monospace; color:#e7f4e9; }
 #eidos-records-root.eidos-records-visible { display:flex; }

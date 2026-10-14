@@ -1,55 +1,118 @@
 /*
- * EIDOS Records UI (prototipo local, sin servidor)
- * Misma ID de juego = misma clasificación local en cualquier idioma del sitio.
- * Para récords mundiales reales falta conectar una API segura con validación de partidas.
+ * EIDOS Records UI · Universal multilingual Top 20.
+ * The same gameId always shares a WORLD ranking, regardless of language.
+ * Until the API_BASE setting below has a deployed URL, local rankings still work.
+ * To connect API after deploy, set ONE value in this shared file.
  */
 (function (global) {
   'use strict';
+
+  // SET THIS ONLY ONCE after deploying the Cloudflare Worker:
+  // Example: 'https://eidos-records-api.YOUR-SUBDOMAIN.workers.dev'
+  const DEPLOYED_API_URL = ''; // Pegar aquí la URL del Worker después de desplegarlo.
+  const API_BASE = String(global.EIDOS_RECORDS_API_URL || DEPLOYED_API_URL).trim().replace(/\/+$/, '');
   const TRANSLATIONS = {
     es: {
-      brand: 'E I D O S · ARCADE', heading: '★ NUEVO RÉCORD ★', subtitle: '¡HAS ENTRADO EN EL TOP 20!',
+      brand: 'E I D O S · ARCADE', heading: 'NUEVO RÉCORD', subtitle: '¡HAS ENTRADO EN EL TOP 20!',
       position: 'TU POSICIÓN', score: 'PUNTUACIÓN', name: 'INTRODUCE TU NOMBRE',
-      hint: 'MÁXIMO 10 CARACTERES · PULSA INTRO PARA CONFIRMAR', save: 'REGISTRAR RÉCORD →',
-      skip: 'AHORA NO', rankings: 'CLASIFICACIÓN TOP 20', close: 'CERRAR', rankingButton: 'VER CLASIFICACIÓN',
-      empty: '---', local: 'PRUEBA LOCAL: estos resultados solo se guardan en este navegador.',
-      error: 'Introduce al menos un carácter.', back: 'VOLVER', saved: '¡RÉCORD REGISTRADO!', demo: 'DATOS DE EJEMPLO · NO SON RÉCORDS MUNDIALES'
+      hint: 'MÁXIMO 10 CARACTERES · INTRO PARA CONFIRMAR', save: 'REGISTRAR RÉCORD →',
+      skip: 'AHORA NO', rankings: 'CLASIFICACIÓN TOP 20', close: 'CERRAR',
+      local: 'CLASIFICACIÓN LOCAL · Solo se guarda en este navegador.',
+      offline: 'SIN CONEXIÓN · Clasificación local de este navegador.',
+      savedLocal: 'RÉCORD LOCAL GUARDADO · No registrado en el TOP 20 mundial. Se conserva en este navegador; no se enviará automáticamente.',
+      savedTemporary: 'SIN CONEXIÓN · No se pudo guardar de forma permanente. El récord se conserva solo mientras permanezca abierta esta página.',
+      viewLocal: 'VER MIS RÉCORDS LOCALES', viewWorld: 'VER RÉCORDS MUNDIALES',
+      world: 'CAMPEONATO MUNDIAL · Español e inglés comparten puntuaciones.',
+      loading: 'CARGANDO CLASIFICACIÓN…',
+      saving: 'GUARDANDO…',
+      error: 'No se ha podido registrar. Inténtalo de nuevo.',
+      invalid: 'La API ha rechazado la puntuación. Revisa tu partida o inténtalo más tarde.',
+      outdated: 'La puntuación ya no está entre las 20 mejores.',
+      session: 'No se ha podido verificar esta partida. Inicia una nueva para participar.',
+      duplicate: 'Esta partida ya se ha registrado.',
+      limited: 'Demasiados intentos. Vuelve a intentarlo más tarde.',
+      prompt: 'Escribe al menos un carácter.',
+      demo: 'DATOS DE EJEMPLO · NO SON RÉCORDS MUNDIALES'
     },
     en: {
-      brand: 'E I D O S · ARCADE', heading: '★ NEW HIGH SCORE ★', subtitle: 'YOU MADE THE TOP 20!',
+      brand: 'E I D O S · ARCADE', heading: 'NEW HIGH SCORE', subtitle: 'YOU MADE THE TOP 20!',
       position: 'YOUR RANK', score: 'SCORE', name: 'ENTER YOUR NAME',
       hint: 'MAX 10 CHARACTERS · PRESS ENTER TO CONFIRM', save: 'SAVE HIGH SCORE →',
-      skip: 'NOT NOW', rankings: 'TOP 20 LEADERBOARD', close: 'CLOSE', rankingButton: 'VIEW LEADERBOARD',
-      empty: '---', local: 'LOCAL DEMO: scores are saved in this browser only.',
-      error: 'Enter at least one character.', back: 'BACK', saved: 'HIGH SCORE SAVED!', demo: 'SAMPLE DATA · NOT WORLD RECORDS'
+      skip: 'NOT NOW', rankings: 'TOP 20 LEADERBOARD', close: 'CLOSE',
+      local: 'LOCAL LEADERBOARD · Saved in this browser only.',
+      offline: 'OFFLINE · Showing local scores from this browser.',
+      savedLocal: 'LOCAL SCORE SAVED · Not submitted to the world Top 20. Stored in this browser; it will not be sent automatically.',
+      savedTemporary: 'OFFLINE · Could not save permanently. This score is kept only while this page stays open.',
+      viewLocal: 'MY LOCAL SCORES', viewWorld: 'WORLD LEADERBOARD',
+      world: 'WORLD CHAMPIONSHIP · Spanish and English share scores.',
+      loading: 'LOADING LEADERBOARD…',
+      saving: 'SAVING…',
+      error: 'Could not save your score. Please try again.',
+      invalid: 'The API rejected the score. Check your run or try again later.',
+      outdated: 'Your score is no longer in the Top 20.',
+      session: 'This game session could not be verified. Start a new game to participate.',
+      duplicate: 'This game session was already submitted.',
+      limited: 'Too many attempts. Please try again later.',
+      prompt: 'Enter at least one character.',
+      demo: 'SAMPLE DATA · NOT WORLD RECORDS'
     }
   };
-  const SAFE_ID = /^[a-z0-9_-]{1,64}$/;
-  const fmt = (value, language) => Number(value).toLocaleString(language === 'en' ? 'en-US' : 'es-ES');
-  const cleanName = name => String(name || '').normalize('NFKC').replace(/[^\p{L}\p{N} _.\-]/gu, '').toUpperCase().slice(0, 10).trim();
-  const cleanScore = n => Number.isSafeInteger(Number(n)) && Number(n) > 0 ? Number(n) : 0;
-  const sortScores = list => list.slice().sort((a, b) => b.score - a.score || a.time - b.time).slice(0, 20);
-  let memoryStore = {};
-  function read(key) {
-    let items;
-    try { items = JSON.parse(localStorage.getItem(key) || 'null'); }
-    catch (_) { items = memoryStore[key]; }
-    return Array.isArray(items) ? sortScores(items.filter(item => item && cleanName(item.name) && cleanScore(item.score)).map(item => ({
-      name: cleanName(item.name), score: cleanScore(item.score), time: Number(item.time) || Date.now()
-    }))) : [];
+  const SAFE_ID = /^[a-z0-9][a-z0-9_-]{0,63}$/;
+  const cleanName = value => String(value || '').normalize('NFKC').replace(/[^\p{L}\p{N} _.\-]/gu, '').toUpperCase().trim().slice(0, 10).trim();
+  const cleanScore = value => typeof value === 'number' && Number.isSafeInteger(value) && value > 0 ? value : 0;
+  const sortScores = scores => scores.filter(x => x && cleanName(x.name) && cleanScore(x.score))
+    .map(x => ({name: cleanName(x.name), score: cleanScore(x.score), at: x.at || x.time || ''}))
+    .sort((a,b) => b.score - a.score || String(a.at).localeCompare(String(b.at))).slice(0,20);
+  const format = (n, lang) => Number(n).toLocaleString(lang === 'es' ? 'es-ES' : 'en-US');
+  const qualify = (scores, s) => s > 0 && (scores.length < 20 || s > scores[scores.length - 1].score);
+  const ranking = (scores, s) => 1 + scores.filter(x => x.score >= s).length;
+  const memoryStore = {};
+  function localRead(key) {
+    try { return sortScores(JSON.parse(localStorage.getItem(key) || '[]')); }
+    catch (_) { return sortScores(memoryStore[key] || []); }
   }
-  function write(key, items) {
-    memoryStore[key] = items;
-    try { localStorage.setItem(key, JSON.stringify(items)); return true; }
-    catch (_) { return false; }
+  function localWrite(key, scores) {
+    memoryStore[key] = scores;
+    try { localStorage.setItem(key, JSON.stringify(scores)); return true; } catch (_) { return false; }
+  }
+  async function api(path, body) {
+    if (!API_BASE) throw new Error('api_not_configured');
+    const response = await fetch(API_BASE + path, {
+      method: body === undefined ? 'GET' : 'POST',
+      headers: {'Accept': 'application/json', ...(body === undefined ? {} : {'Content-Type':'application/json'})},
+      ...(body === undefined ? {} : {body: JSON.stringify(body)}),
+      cache: 'no-store',
+      signal: AbortSignal.timeout(5000)
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      const error = new Error(data?.error || 'network_error');
+      error.status = response.status;
+      throw error;
+    }
+    return data;
   }
   function init({gameId, language = 'es', demo = false, sampleScores = []} = {}) {
-    if (!SAFE_ID.test(gameId || '')) throw new Error('Debes indicar un identificador de juego válido.');
-    const lang = language.toLowerCase().startsWith('en') ? 'en' : 'es';
+    if (!SAFE_ID.test(gameId || '')) throw new Error('Identificador de juego inválido.');
+    const lang = String(language).toLowerCase().startsWith('en') ? 'en' : 'es';
     const t = TRANSLATIONS[lang];
     const storageKey = 'eidos-records-' + (demo ? 'sample-' : 'local-') + gameId + '-v1';
-    if (demo && !read(storageKey).length && sampleScores.length) {
-      write(storageKey, sortScores(sampleScores.filter(x => cleanName(x.name) && cleanScore(x.score)).map((x, i) => ({name: cleanName(x.name), score: cleanScore(x.score), time: i + 1}))));
-    }
+    if (demo && !localRead(storageKey).length && sampleScores.length) localWrite(storageKey, sortScores(sampleScores));
+    const remoteEnabled = Boolean(API_BASE && !demo);
+    let scores = localRead(storageKey);
+    let worldScores = [];
+    let online = false;
+    let boardLocal = !remoteEnabled;
+    let localSaveNotice = false;
+    let localSaveIssue = false;
+    let currentScore = 0;
+    let highlighted = '';
+    let previousFocus = null;
+    let loadId = 0;
+    let sessionPromise = null;
+    let session = null;
+    let busy = false;
+
     const root = document.createElement('div');
     root.id = 'eidos-records-root';
     root.setAttribute('role', 'presentation');
@@ -59,90 +122,216 @@
         <button class="eidos-records-close" type="button" aria-label="${t.close}">×</button>
         <p class="eidos-records-brand">${t.brand}</p>
         <div class="eidos-records-screen" data-screen="entry" hidden>
-          <h2 class="eidos-records-heading"><span class="eidos-records-star">★</span> ${lang === 'es' ? 'NUEVO RÉCORD' : 'NEW HIGH SCORE'} <span class="eidos-records-star">★</span></h2>
+          <h2 class="eidos-records-heading"><span class="eidos-records-star">★</span> ${t.heading} <span class="eidos-records-star">★</span></h2>
           <p class="eidos-records-subtitle">${t.subtitle}</p>
           <div class="eidos-records-stats"><div class="eidos-records-stat"><span class="eidos-records-stat-label">${t.position}</span><strong data-field="rank">—</strong></div>
           <div class="eidos-records-stat"><span class="eidos-records-stat-label">${t.score}</span><strong data-field="score">—</strong></div></div>
           <div class="eidos-records-rule"></div>
           <form data-form="name"><label class="eidos-records-field-label" for="eidos-records-name">${t.name}</label>
             <input class="eidos-records-input" id="eidos-records-name" type="text" autocapitalize="characters" autocomplete="off" maxlength="10" placeholder="__________" required>
-            <p class="eidos-records-hint">${t.hint}</p><button class="eidos-records-button eidos-records-button-primary" type="submit">${t.save}</button>
+            <p class="eidos-records-hint">${t.hint}</p>
+            <button class="eidos-records-button eidos-records-button-primary" data-action="submit" type="submit">${t.save}</button>
+            <p class="eidos-records-footer" data-field="submit-error" role="status" aria-live="polite"></p>
           </form>
           <div class="eidos-records-actions"><button class="eidos-records-button" data-action="skip" type="button">${t.skip}</button></div>
         </div>
         <div class="eidos-records-screen" data-screen="board" hidden>
           <h2 class="eidos-records-heading">${t.rankings}</h2>
-          <p class="eidos-records-subtitle" data-field="board-info">${demo ? t.demo : t.local}</p>
+          <p class="eidos-records-subtitle" data-field="board-info">${remoteEnabled ? t.loading : t.local}</p>
           <div class="eidos-records-board" data-field="list"></div>
-          <div class="eidos-records-actions"><button class="eidos-records-button eidos-records-button-primary" data-action="close" type="button">${t.close}</button></div>
+          <div class="eidos-records-actions"><button class="eidos-records-button" data-action="switch-board" type="button" hidden></button><button class="eidos-records-button eidos-records-button-primary" data-action="close" type="button">${t.close}</button></div>
         </div>
-        <p class="eidos-records-footer">${demo ? t.demo : t.local}</p>
+        <p class="eidos-records-footer" data-field="footer">${demo ? t.demo : remoteEnabled ? t.loading : t.local}</p>
       </section>`;
     document.body.appendChild(root);
     const entry = root.querySelector('[data-screen="entry"]');
     const board = root.querySelector('[data-screen="board"]');
     const input = root.querySelector('#eidos-records-name');
-    let activeScore = 0;
-    let previousFocus = null;
-    let highlightedSignature = null;
-    function switchTo(which) { entry.hidden = which !== 'entry'; board.hidden = which !== 'board'; }
-    function show() { previousFocus = document.activeElement; root.classList.add('eidos-records-visible'); }
+    const errorLabel = root.querySelector('[data-field="submit-error"]');
+    const saveButton = root.querySelector('[data-action="submit"]');
+    const switchBoardButton = root.querySelector('[data-action="switch-board"]');
+
+    function currentNote() {
+      if (demo) return t.demo;
+      if (!remoteEnabled) return t.local;
+      if (boardLocal) {
+        if (localSaveNotice) return localSaveIssue ? t.savedTemporary : t.savedLocal;
+        return online ? t.local : t.offline;
+      }
+      return online ? t.world : t.offline;
+    }
+    function setNote(note = currentNote()) {
+      root.querySelector('[data-field="board-info"]').textContent = note;
+      root.querySelector('[data-field="footer"]').textContent = note;
+    }
+    function show(which) {
+      entry.hidden = which !== 'entry'; board.hidden = which !== 'board';
+      if (!root.classList.contains('eidos-records-visible')) previousFocus = document.activeElement;
+      root.classList.add('eidos-records-visible');
+    }
     function close() {
+      if (busy) return;
       root.classList.remove('eidos-records-visible');
-      activeScore = 0;
+      currentScore = 0;
       if (previousFocus && previousFocus.isConnected && previousFocus.focus) previousFocus.focus();
     }
     function isOpen() { return root.classList.contains('eidos-records-visible'); }
-    function qualifies(score) { const s = cleanScore(score), values = read(storageKey); return s > 0 && (values.length < 20 || s > values[values.length - 1].score); }
-    function rankFor(score) { return 1 + read(storageKey).filter(item => item.score >= score).length; }
-    function view() {
-      const scores = read(storageKey);
+    function drawBoard(noteOverride = null) {
       const list = root.querySelector('[data-field="list"]');
       list.replaceChildren();
       for (let i = 0; i < 20; i++) {
         const result = scores[i];
-        const row = document.createElement('div');
-        row.className = 'eidos-records-row';
-        if (result && result.name + ':' + result.score + ':' + result.time === highlightedSignature) row.classList.add('eidos-records-row--highlight');
-        const place = document.createElement('span'); place.className = 'eidos-records-place' + (i === 0 ? ' eidos-records-place-first' : ''); place.textContent = String(i + 1).padStart(2, '0') + '.';
-        const name = document.createElement('span'); name.className = 'eidos-records-name'; name.textContent = result ? result.name : '··········';
-        const pts = document.createElement('span'); pts.className = 'eidos-records-points'; pts.textContent = result ? fmt(result.score, lang) : '—';
+        const row = document.createElement('div'); row.className = 'eidos-records-row';
+        if (result && result.name + ':' + result.score + ':' + result.at === highlighted) row.classList.add('eidos-records-row--highlight');
+        const place = document.createElement('span'); place.className = 'eidos-records-place' + (i === 0 ? ' eidos-records-place-first' : '');
+        place.textContent = String(i + 1).padStart(2, '0') + '.';
+        const name = document.createElement('span'); name.className = 'eidos-records-name'; name.textContent = result?.name || '··········';
+        const pts = document.createElement('span'); pts.className = 'eidos-records-points'; pts.textContent = result ? format(result.score, lang) : '—';
         row.append(place, name, pts); list.appendChild(row);
       }
-      switchTo('board'); show();
-      root.querySelector('[data-action="close"]').focus();
+      setNote(noteOverride || currentNote());
+      // The local ranking remains accessible even after connectivity returns.
+      const localAvailable = localRead(storageKey).length > 0;
+      switchBoardButton.hidden = !remoteEnabled || (!boardLocal && !localAvailable);
+      switchBoardButton.textContent = boardLocal ? t.viewWorld : t.viewLocal;
     }
-    function promptScore(score) {
+    async function refresh() {
+      if (!remoteEnabled) { scores = localRead(storageKey); online = false; return; }
+      const id = ++loadId;
+      try {
+        const result = await api('/v1/leaderboard?game=' + encodeURIComponent(gameId));
+        if (id !== loadId) return;
+        if (result?.game !== gameId || !Array.isArray(result.scores)) throw new Error('invalid_response');
+        worldScores = sortScores(result.scores); online = true;
+        if (!boardLocal) scores = worldScores;
+      } catch (error) {
+        if (id !== loadId) return;
+        console.warn('EIDOS: no se puede consultar la clasificación mundial.', error);
+        boardLocal = true;
+        scores = localRead(storageKey); online = false;
+      }
+    }
+    async function startSession() {
+      if (!remoteEnabled) return null;
+      // Starting a new run uses a new signed ticket, avoiding a second use of an old ticket.
+      sessionPromise = api('/v1/session', {game: gameId}).then(data => {
+        if (!data?.ticket) throw new Error('invalid_ticket');
+        session = data.ticket; return session;
+      }).catch(error => { session = null; console.warn('EIDOS: session unavailable', error); return null; });
+      return sessionPromise;
+    }
+    async function view() {
+      boardLocal = !remoteEnabled;
+      localSaveNotice = false;
+      show('board');
+      drawBoard(remoteEnabled ? t.loading : null);
+      await refresh();
+      if (!board.hidden && isOpen()) drawBoard();
+    }
+    function saveLocally(name) {
+      const record = {name, score: currentScore, at: new Date().toISOString()};
+      const updated = sortScores([...localRead(storageKey), record]);
+      localSaveIssue = !localWrite(storageKey, updated);
+      localSaveNotice = true;
+      boardLocal = true;
+      scores = updated;
+      highlighted = record.name + ':' + record.score + ':' + record.at;
+      currentScore = 0;
+      show('board');
+      drawBoard();
+    }
+    async function promptScore(score) {
       const s = cleanScore(score);
-      if (!qualifies(s)) return false;
-      activeScore = s;
-      root.querySelector('[data-field="rank"]').textContent = String(rankFor(s)).padStart(2,'0');
-      root.querySelector('[data-field="score"]').textContent = fmt(s, lang);
+      if (!s) return false;
+      await refresh();
+      const comparison = online ? worldScores : localRead(storageKey);
+      if (!qualify(comparison, s)) return false;
+      currentScore = s;
+      root.querySelector('[data-field="rank"]').textContent = String(ranking(comparison, s)).padStart(2, '0');
+      root.querySelector('[data-field="score"]').textContent = format(s, lang);
       input.value = '';
-      switchTo('entry'); show(); input.focus(); return true;
+      errorLabel.textContent = '';
+      show('entry');
+      setNote();
+      input.focus();
+      return true;
     }
-    root.querySelector('[data-form="name"]').addEventListener('submit', function(event) {
+    root.querySelector('[data-form="name"]').addEventListener('submit', async event => {
       event.preventDefault();
+      if (busy) return;
       const name = cleanName(input.value);
-      if (!name) { input.focus(); return; }
-      if (!qualifies(activeScore)) { view(); return; }
-      const now = Date.now();
-      const record = {name, score: activeScore, time: now};
-      write(storageKey, sortScores([...read(storageKey), record]));
-      highlightedSignature = name + ':' + activeScore + ':' + now;
-      activeScore = 0;
-      view();
+      if (!name) { errorLabel.textContent = t.prompt; input.focus(); return; }
+      busy = true; saveButton.disabled = true; saveButton.textContent = t.saving;
+      errorLabel.textContent = '';
+      try {
+        if (remoteEnabled && online) {
+          const ticket = session || await sessionPromise;
+          if (!ticket) throw new Error('invalid_or_expired_session');
+          const result = await api('/v1/scores', {game: gameId, name, score: currentScore, ticket});
+          session = null;
+          if (!result.accepted) {
+            scores = sortScores(result.scores || []);
+            errorLabel.textContent = t.outdated;
+            return;
+          }
+          worldScores = sortScores(result.scores || []);
+          scores = worldScores;
+          boardLocal = false;
+          localSaveNotice = false;
+          highlighted = '';
+          const match = scores.find(x => x.name === name && x.score === currentScore);
+          if (match) highlighted = match.name + ':' + match.score + ':' + match.at;
+        } else {
+          // No API or API unavailable: always preserve the result locally.
+          saveLocally(name);
+          return;
+        }
+        currentScore = 0;
+        show('board'); drawBoard();
+      } catch (error) {
+        const code = error?.message;
+        console.warn('EIDOS: score rejected/unavailable', error);
+        // Rejected or duplicated scores are NOT passed off as real world records.
+        // All connectivity problems (timeouts, 5xx, expired session, throttling)
+        // save locally; they never claim to have been published globally.
+        if (![400, 409, 422].includes(error?.status)) {
+          saveLocally(name);
+          return;
+        }
+        errorLabel.textContent = code === 'already_submitted' ? t.duplicate
+          : code === 'implausible_score' || code === 'implausible_duration' || code === 'invalid_score' ? t.invalid : t.error;
+      } finally {
+        busy = false; saveButton.disabled = false; saveButton.textContent = t.save;
+      }
+    });
+    switchBoardButton.addEventListener('click', async () => {
+      if (busy) return;
+      if (!boardLocal) {
+        boardLocal = true;
+        localSaveNotice = false;
+        scores = localRead(storageKey);
+        drawBoard();
+      } else {
+        boardLocal = false;
+        localSaveNotice = false;
+        drawBoard(t.loading);
+        await refresh();
+        if (!board.hidden && isOpen()) drawBoard();
+      }
     });
     root.querySelector('[data-action="skip"]').addEventListener('click', close);
     root.querySelector('[data-action="close"]').addEventListener('click', close);
     root.querySelector('.eidos-records-close').addEventListener('click', close);
     root.querySelector('.eidos-records-scrim').addEventListener('click', close);
     document.addEventListener('keydown', event => {
-      if (!root.classList.contains('eidos-records-visible')) return;
+      if (!isOpen()) return;
       if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); close(); }
-      else if (['ArrowLeft','ArrowRight','ArrowDown','ArrowUp'].includes(event.key) && document.activeElement === input) event.stopImmediatePropagation();
+      else if (['ArrowLeft','ArrowRight','ArrowDown','ArrowUp'].includes(event.key) && document.activeElement === input)
+        event.stopImmediatePropagation();
     }, true);
-    return {view, promptScore, qualifies, close, isOpen};
+    // One initial ticket covers games that already used the shared UI before adding startSession().
+    if (remoteEnabled) void startSession();
+    return {view, promptScore, startSession, qualifies: s => qualify(scores, cleanScore(s)), close, isOpen};
   }
   global.EidosRecordsUI = {init};
 })(window);

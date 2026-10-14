@@ -5,7 +5,7 @@
       const isES = LANG === "es";
 
       // Shared TOP 20: Spanish and English intentionally use the same game ID.
-      // Local browser storage for now; the shared UI module will later talk to the API.
+      // Shared local/world Top 20 UI, depending on whether the universal API is configured.
       const recordsUI = window.EidosRecordsUI?.init({ gameId: "evolution", language: LANG }) || null;
       document.querySelectorAll(".eidos-records-trigger").forEach(button => {
         button.addEventListener("click", () => recordsUI?.view());
@@ -455,6 +455,7 @@
       }
 
       function startNewGame() {
+        recordsUI?.startSession();
         animating = false;
         pendingDiscovery = null;
         gameOverPending = false;
@@ -1236,6 +1237,7 @@
       }
 
       function begin() {
+        recordsUI?.startSession();
         started = true;
         closeScreen(startScreen);
         playStartSound();
