@@ -9,7 +9,7 @@
 
   // SET THIS ONLY ONCE after deploying the Cloudflare Worker:
   // Example: 'https://eidos-records-api.YOUR-SUBDOMAIN.workers.dev'
-  const DEPLOYED_API_URL = ''; // Pegar aquí la URL del Worker después de desplegarlo.
+  const DEPLOYED_API_URL = 'https://eidos-records-api.feldenvareth.workers.dev'; // API mundial Eidos, ES y EN.
   const API_BASE = String(global.EIDOS_RECORDS_API_URL || DEPLOYED_API_URL).trim().replace(/\/+$/, '');
   const TRANSLATIONS = {
     es: {
