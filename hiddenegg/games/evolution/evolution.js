@@ -4,6 +4,13 @@
       const LANG = (document.documentElement.lang || "en").toLowerCase().startsWith("es") ? "es" : "en";
       const isES = LANG === "es";
 
+      // Shared TOP 20: Spanish and English intentionally use the same game ID.
+      // Local browser storage for now; the shared UI module will later talk to the API.
+      const recordsUI = window.EidosRecordsUI?.init({ gameId: "evolution", language: LANG }) || null;
+      document.querySelectorAll(".eidos-records-trigger").forEach(button => {
+        button.addEventListener("click", () => recordsUI?.view());
+      });
+
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
       const GALLERY_MANIFEST = Array.isArray(window.EIDOS_IMAGE_MANIFEST) ? window.EIDOS_IMAGE_MANIFEST : [];
       const BG_IMAGES = GALLERY_MANIFEST.length
@@ -981,6 +988,9 @@
         gameOverPending = false;
         clearSavedGame();
         openScreen(gameOverScreen);
+        // Offer registration only when this finished run qualifies for the TOP 20.
+        // The game engine passes the numeric score, never text read from the page.
+        if (score > 0) recordsUI?.promptScore(score);
       }
 
       function showVictory() {
@@ -1155,6 +1165,8 @@
       }
 
       function handleKey(event) {
+        // Do not intercept keys while the player enters their arcade name.
+        if (recordsUI?.isOpen()) return;
         if (event.key === "Escape") {
           window.parent.postMessage("cerrar-eidos", "*");
           return;

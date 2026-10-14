@@ -1,0 +1,67 @@
+/* EIDOS · TOP 20 · Componente compartido de interfaz (prototipo local) */
+.eidos-records-trigger { cursor:pointer; }
+#eidos-records-root { position:fixed; inset:0; z-index:2147483000; display:none; align-items:center; justify-content:center; padding:18px; box-sizing:border-box; font-family:'Courier New',Courier,monospace; color:#e7f4e9; }
+#eidos-records-root.eidos-records-visible { display:flex; }
+#eidos-records-root, #eidos-records-root * { box-sizing:border-box; }
+#eidos-records-root button, #eidos-records-root input { font:inherit; }
+.eidos-records-scrim { position:absolute; inset:0; background:rgba(2,8,7,.88); backdrop-filter:blur(7px); }
+.eidos-records-panel { --eidos-mint:#72e6ad; --eidos-gold:#efc77d; position:relative; isolation:isolate; width:min(100%,590px); max-height:min(93dvh,830px); overflow:auto; border:2px solid rgba(113,209,164,.7); border-radius:13px; background:radial-gradient(ellipse at 50% -10%,rgba(64,123,93,.24),transparent 50%),#091711; box-shadow:0 0 0 5px rgba(113,209,164,.08),0 25px 95px rgba(0,0,0,.75),inset 0 0 45px rgba(3,7,4,.7); padding:clamp(20px,4vw,32px); text-align:center; }
+.eidos-records-panel:before { content:''; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,0,0,.08) 4px); z-index:-1; }
+.eidos-records-brand { margin:3px 0 10px; color:#91c7a6; font-size:11px; font-weight:bold; letter-spacing:.42em; }
+.eidos-records-heading { margin:0; color:var(--eidos-gold); font-size:clamp(23px,5vw,35px); letter-spacing:.06em; line-height:1.14; text-shadow:0 0 21px rgba(255,189,78,.13); }
+.eidos-records-heading .eidos-records-star { color:#f4ce7b; }
+.eidos-records-subtitle { color:#cfdfd2; margin:13px auto 12px; max-width:43ch; font-size:12px; line-height:1.55; }
+.eidos-records-rule { height:1px; margin:20px 0; background:linear-gradient(to right,transparent,#5c9276,transparent); }
+.eidos-records-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:19px 0; }
+.eidos-records-stat { border:1px solid rgba(111,205,158,.3); background:rgba(104,180,130,.055); border-radius:7px; padding:12px 5px 9px; }
+.eidos-records-stat-label { font-size:10px; color:#9ebaaa; letter-spacing:.12em; }
+.eidos-records-stat strong { display:block; font-size:clamp(23px,5vw,31px); color:var(--eidos-gold); margin-top:7px; line-height:1; }
+.eidos-records-field-label { display:block; color:var(--eidos-mint); letter-spacing:.1em; font-size:12px; font-weight:bold; margin:24px 0 11px; }
+.eidos-records-input { display:block; width:100%; text-align:center; letter-spacing:.2em; text-transform:uppercase; border:1px solid #70c59a; border-radius:6px; outline:none; background:#031008; color:#ebffd6; font-size:clamp(23px,6vw,34px) !important; font-weight:bold !important; padding:13px 10px; box-shadow:inset 0 0 13px rgba(88,200,126,.08); caret-color:#eacd87; }
+.eidos-records-input:focus { outline:2px solid rgba(239,199,125,.5); outline-offset:2px; }
+.eidos-records-hint { margin:9px 0 17px; font-size:11px; color:#8fad9a; }
+.eidos-records-button { border:1px solid #a3bd97; border-radius:5px; padding:12px 15px; background:transparent; color:#dcf5df; cursor:pointer; text-transform:uppercase; font-size:12px; font-weight:bold; letter-spacing:.08em; transition:background .15s ease,transform .15s ease; }
+.eidos-records-button:hover, .eidos-records-button:focus-visible { background:rgba(126,200,160,.13); }
+.eidos-records-button:active { transform:translateY(1px); }
+.eidos-records-button-primary { width:100%; background:#98d6a2; border-color:#98d6a2; color:#07170d; font-size:14px; }
+.eidos-records-button-primary:hover, .eidos-records-button-primary:focus-visible { background:#b9f0bf; }
+.eidos-records-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:11px; margin:17px 0 2px; }
+.eidos-records-actions .eidos-records-button { flex:1 1 150px; }
+.eidos-records-close { position:absolute; right:15px; top:10px; font:25px Arial,sans-serif !important; color:#a2b7a9; border:none; background:transparent; padding:4px 8px; cursor:pointer; }
+.eidos-records-close:hover { color:white; }
+.eidos-records-board { display:grid; gap:0; text-align:left; margin:14px 0 12px; border:1px solid rgba(114,205,156,.25); border-radius:8px; overflow:hidden; }
+.eidos-records-row { display:grid; grid-template-columns:46px minmax(0,1fr) minmax(85px,auto); align-items:center; gap:6px; padding:7px 11px; min-height:36px; border-bottom:1px solid rgba(132,198,146,.08); font-size:clamp(12px,3vw,14px); }
+.eidos-records-row:last-child { border-bottom:none; }
+.eidos-records-row:nth-child(odd) { background:rgba(126,201,148,.055); }
+.eidos-records-row--highlight { color:#ffe0a0; background:rgba(230,179,97,.15)!important; font-weight:bold; }
+.eidos-records-place { color:#a3ccaf; }
+.eidos-records-place-first { color:#f5cb83; }
+.eidos-records-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; letter-spacing:.06em; }
+.eidos-records-points { color:#e9d29a; text-align:right; font-variant-numeric:tabular-nums; }
+.eidos-records-footer { font:11px/1.5 Arial,sans-serif; color:#8fada0; margin:14px 0 0; }
+.eidos-records-footer strong { color:#b2cdbd; }
+.eidos-records-screen[hidden] { display:none!important; }
+@media (max-width:430px) { .eidos-records-panel { padding:19px 14px; } .eidos-records-row { grid-template-columns:35px minmax(0,1fr) minmax(75px,auto); padding:6px 8px; } }
+
+/* Integration into the existing EIDOS evolution layouts. */
+.eidos-records-trigger { cursor:pointer; }
+#top-bar:has(.eidos-records-toolbar-button) { grid-template-columns:minmax(0,1fr) auto auto auto; }
+#top-bar .eidos-records-toolbar-button {
+  color:var(--gold-light,#dbc982); background:transparent;
+  border:1px solid var(--line,rgba(200,168,75,.45)); border-radius:4px;
+  font:700 12px/1 Georgia,serif; padding:5px 7px; min-width:34px;
+  justify-self:end; white-space:nowrap;
+}
+#top-bar .eidos-records-toolbar-button:hover { border-color:var(--gold,#c8a84b); color:#fff0bb; }
+#game-over .eidos-records-trigger { text-transform:uppercase; }
+@media (max-width:520px) {
+  #top-bar:has(.eidos-records-toolbar-button) { grid-template-columns:minmax(0,1fr) auto auto auto; gap:4px; }
+  #top-bar:has(.eidos-records-toolbar-button) { grid-template-columns:minmax(0,1fr) auto auto auto; }
+#top-bar .eidos-records-toolbar-button { padding:4px 6px; font-size:13px; }
+}
+/* Scroll the ranking rather than allowing the close button to disappear off screen. */
+.eidos-records-panel { display:flex; flex-direction:column; }
+.eidos-records-board { max-height:min(57dvh,650px); overflow-y:auto; min-height:0; }
+.eidos-records-screen[data-screen="board"] { min-height:0; display:flex; flex-direction:column; }
+.eidos-records-screen[data-screen="board"][hidden] { display:none!important; }
+.eidos-records-panel { overscroll-behavior:contain; }

@@ -60,6 +60,7 @@
   </script>
   
   <link rel="stylesheet" href="evolution.css">
+  <link rel="stylesheet" href="../css/eidos-records-ui.css">
 </head>
 <body>
 
@@ -121,6 +122,7 @@
         <span class="stage-hud" id="stage-hud">Stage 1/12</span>
           <span id="custodian-hud" hidden>Custodians: <strong id="custodian-count">0</strong></span>
       </div>
+      <button class="eidos-records-trigger eidos-records-toolbar-button" type="button" aria-label="View TOP 20 leaderboard" title="View TOP 20 leaderboard">🏆</button>
       <button id="sound-button" type="button" aria-label="Mute sound" aria-pressed="true" title="Mute sound">♪</button>
       <button id="close-btn" type="button" onclick="window.parent.postMessage('cerrar-eidos','*')">✕ Close</button>
     </div>
@@ -213,6 +215,7 @@
         <div class="start-actions" id="start-actions">
           <button class="primary-button full-start-action" id="start-button" type="button">START</button>
           <button class="secondary-button" id="resume-button" type="button" hidden>CONTINUE GAME</button>
+          <button class="secondary-button eidos-records-trigger" type="button">🏆 TOP 20</button>
           <button class="secondary-button" id="copy-link-button" type="button">COPY LINK</button>
           <a class="secondary-button" id="start-article-button" href="https://www.eidoslibro.com/blog/articles/04_digital_life_evolution.html" target="_blank" rel="noopener noreferrer">READ THE ARTICLE</a>
           <a class="secondary-button full-start-action" id="discover-eidos-button" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener noreferrer">DISCOVER EIDOS</a>
@@ -233,6 +236,7 @@
         <h2 id="game-over-stage">Eukaryote</h2>
         <p id="game-over-copy">The board is full and no combinations remain.</p>
         <div class="result-actions">
+          <button class="secondary-button eidos-records-trigger" type="button">🏆 TOP 20</button>
           <button class="primary-button" id="retry-button" type="button">NEW GAME</button>
         </div>
         <p class="result-prompt">Would you like to discover the idea behind this evolution?</p>
@@ -276,6 +280,7 @@
 
   <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content.js"></script>
+  <script src="../js/eidos-records-ui.js"></script>
   <script src="evolution.js"></script>
 </body>
 </html>
