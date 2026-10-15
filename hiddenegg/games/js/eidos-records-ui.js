@@ -15,7 +15,7 @@
     es: {
       brand: 'E I D O S · ARCADE', heading: 'NUEVO RÉCORD', subtitle: '¡HAS ENTRADO EN EL TOP 20!',
       position: 'TU POSICIÓN', score: 'PUNTUACIÓN', name: 'INTRODUCE TU NOMBRE',
-      hint: 'MÁXIMO 10 CARACTERES · INTRO PARA CONFIRMAR', save: 'REGISTRAR RÉCORD →',
+      hint: 'MÁXIMO 10 CARACTERES · INTRO PARA CONFIRMAR', countryLabel: 'PAÍS (OPCIONAL)', noFlag: 'SIN BANDERA', dateLabel: 'Fecha del récord', save: 'REGISTRAR RÉCORD →',
       skip: 'AHORA NO', rankings: 'CLASIFICACIÓN TOP 20', close: 'CERRAR',
       local: 'CLASIFICACIÓN LOCAL · Solo se guarda en este navegador.',
       offline: 'SIN CONEXIÓN · Clasificación local de este navegador.',
@@ -37,7 +37,7 @@
     en: {
       brand: 'E I D O S · ARCADE', heading: 'NEW HIGH SCORE', subtitle: 'YOU MADE THE TOP 20!',
       position: 'YOUR RANK', score: 'SCORE', name: 'ENTER YOUR NAME',
-      hint: 'MAX 10 CHARACTERS · PRESS ENTER TO CONFIRM', save: 'SAVE HIGH SCORE →',
+      hint: 'MAX 10 CHARACTERS · PRESS ENTER TO CONFIRM', countryLabel: 'COUNTRY (OPTIONAL)', noFlag: 'NO FLAG', dateLabel: 'Record date', save: 'SAVE HIGH SCORE →',
       skip: 'NOT NOW', rankings: 'TOP 20 LEADERBOARD', close: 'CLOSE',
       local: 'LOCAL LEADERBOARD · Saved in this browser only.',
       offline: 'OFFLINE · Showing local scores from this browser.',
@@ -57,13 +57,27 @@
       demo: 'SAMPLE DATA · NOT WORLD RECORDS'
     }
   };
+  // One two-letter code per country. No IP-derived location or automatic nationality.
+  const COUNTRIES = `AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW`.split(' ');
+  const COUNTRY_SET = new Set(COUNTRIES);
+  const cleanCountry = value => COUNTRY_SET.has(value) ? value : '';
+  function flagEmoji(country) {
+    const c = cleanCountry(country);
+    return c ? String.fromCodePoint(...[...c].map(letter => letter.charCodeAt(0) + 0x1F1E6 - 65)) : '';
+  }
+  function recordDate(iso, lang) {
+    const when = new Date(iso);
+    if (!iso || !Number.isFinite(when.getTime()) || when.getUTCFullYear() < 2000) return '';
+    return new Intl.DateTimeFormat(lang === 'es' ? 'es-ES' : 'en-GB',
+      {day:'2-digit',month:'2-digit',year:'numeric'}).format(when);
+  }
   const SAFE_ID = /^[a-z0-9][a-z0-9_-]{0,63}$/;
   const cleanName = value => String(value || '').normalize('NFKC').replace(/[^\p{L}\p{N} _.\-]/gu, '').toUpperCase().trim().slice(0, 10).trim();
   const cleanScore = value => typeof value === 'number' && Number.isSafeInteger(value) && value > 0 ? value : 0;
   const cleanStage = value => Number.isSafeInteger(value) && value >= 1 && value <= 1000000 ? value : null;
   const compareRecords = (a, b) => (b.stage ?? 0) - (a.stage ?? 0) || b.score - a.score || String(a.at).localeCompare(String(b.at));
   const sortScores = (scores, stageAware = false) => scores.filter(x => x && cleanName(x.name) && cleanScore(x.score))
-    .map(x => ({name: cleanName(x.name), score: cleanScore(x.score), ...(cleanStage(x.stage) ? {stage: x.stage} : {}), at: x.at || x.time || ''}))
+    .map(x => ({name: cleanName(x.name), score: cleanScore(x.score), ...(cleanStage(x.stage) ? {stage: x.stage} : {}), ...(cleanCountry(x.country) ? {country: x.country} : {}), at: x.at || x.time || ''}))
     .sort(stageAware ? compareRecords : (a,b) => b.score - a.score || String(a.at).localeCompare(String(b.at))).slice(0,20);
   const format = (n, lang) => Number(n).toLocaleString(lang === 'es' ? 'es-ES' : 'en-US');
   const qualify = (scores, s, stage, stageAware) => s > 0 && (scores.length < 20 ||
@@ -140,6 +154,8 @@
           <form data-form="name"><label class="eidos-records-field-label" for="eidos-records-name">${t.name}</label>
             <input class="eidos-records-input" id="eidos-records-name" type="text" autocapitalize="characters" autocomplete="off" maxlength="10" placeholder="__________" required>
             <p class="eidos-records-hint">${t.hint}</p>
+            <label class="eidos-records-country-label" for="eidos-records-country">${t.countryLabel}</label>
+            <select class="eidos-records-country" id="eidos-records-country"><option value="">${t.noFlag}</option></select>
             <button class="eidos-records-button eidos-records-button-primary" data-action="submit" type="submit">${t.save}</button>
             <p class="eidos-records-footer" data-field="submit-error" role="status" aria-live="polite"></p>
           </form>
@@ -158,6 +174,16 @@
     const entry = root.querySelector('[data-screen="entry"]');
     const board = root.querySelector('[data-screen="board"]');
     const input = root.querySelector('#eidos-records-name');
+    const countrySelect = root.querySelector('#eidos-records-country');
+    const displayNames = new Intl.DisplayNames([lang === 'es' ? 'es' : 'en'], {type:'region'});
+    const countryOptions = COUNTRIES.map(code => ({code, label:displayNames.of(code)}))
+      .sort((a,b) => a.label.localeCompare(b.label, lang === 'es' ? 'es' : 'en'));
+    for (const {code, label} of countryOptions) {
+      const option = document.createElement('option');
+      option.value = code;
+      option.textContent = `${flagEmoji(code)} ${label}`;
+      countrySelect.appendChild(option);
+    }
     const errorLabel = root.querySelector('[data-field="submit-error"]');
     const saveButton = root.querySelector('[data-action="submit"]');
     const switchBoardButton = root.querySelector('[data-action="switch-board"]');
@@ -197,14 +223,30 @@
         if (result && result.name + ':' + result.score + ':' + result.at === highlighted) row.classList.add('eidos-records-row--highlight');
         const place = document.createElement('span'); place.className = 'eidos-records-place' + (i === 0 ? ' eidos-records-place-first' : '');
         place.textContent = String(i + 1).padStart(2, '0') + '.';
+        const player = document.createElement('span'); player.className = 'eidos-records-player';
+        const playerLine = document.createElement('span'); playerLine.className = 'eidos-records-player-line';
+        if (result?.country) {
+          const flag = document.createElement('span'); flag.className = 'eidos-records-flag';
+          flag.textContent = flagEmoji(result.country);
+          flag.title = displayNames.of(result.country);
+          playerLine.appendChild(flag);
+        }
         const name = document.createElement('span'); name.className = 'eidos-records-name'; name.textContent = result?.name || '··········';
+        playerLine.appendChild(name);
+        player.appendChild(playerLine);
+        const date = result && recordDate(result.at, lang);
+        if (date) {
+          const when = document.createElement('span'); when.className = 'eidos-records-date';
+          when.textContent = date; when.title = t.dateLabel;
+          player.appendChild(when);
+        }
         const pts = document.createElement('span'); pts.className = 'eidos-records-points'; pts.textContent = result ? format(result.score, lang) : '—';
         if (stageAware) {
           const stage = document.createElement('span'); stage.className = 'eidos-records-stage';
           stage.textContent = result ? stageLabel(result.stage) : '—';
           if (result) stage.title = stage.textContent;
-          row.append(place, name, stage, pts);
-        } else row.append(place, name, pts);
+          row.append(place, player, stage, pts);
+        } else row.append(place, player, pts);
         list.appendChild(row);
       }
       setNote(noteOverride || currentNote());
@@ -247,7 +289,7 @@
       if (!board.hidden && isOpen()) drawBoard();
     }
     function saveLocally(name) {
-      const record = {name, score: currentScore, ...(currentStage != null ? {stage: currentStage} : {}), at: new Date().toISOString()};
+      const record = {name, score: currentScore, ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ...(currentStage != null ? {stage: currentStage} : {}), at: new Date().toISOString()};
       const updated = sortScores([...readLocal(), record], stageAware);
       localSaveIssue = !localWrite(storageKey, updated);
       localSaveNotice = true;
@@ -272,6 +314,7 @@
       root.querySelector('[data-field="rank"]').textContent = String(ranking(comparison, s, stage, stageAware)).padStart(2, '0');
       root.querySelector('[data-field="score"]').textContent = format(s, lang);
       input.value = '';
+      countrySelect.value = '';
       errorLabel.textContent = '';
       show('entry');
       setNote();
@@ -289,7 +332,7 @@
         if (remoteEnabled && online) {
           const ticket = session || await sessionPromise;
           if (!ticket) throw new Error('invalid_or_expired_session');
-          const result = await api('/v1/scores', {game: gameId, name, score: currentScore, ...(currentStage != null ? {stage: currentStage} : {}), ticket});
+          const result = await api('/v1/scores', {game: gameId, name, score: currentScore, ...(currentStage != null ? {stage: currentStage} : {}), ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ticket});
           session = null;
           if (!result.accepted) {
             scores = sortScores(result.scores || [], stageAware);
