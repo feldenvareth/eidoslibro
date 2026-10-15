@@ -5,13 +5,65 @@ const TEXT={es:{gameTitle:'REPARACIÓN',subtitle:'RESTAURA · EQUILIBRA · CONSE
 const records = window.EidosRecordsUI?.init({gameId:'reparacion',language:LANG});
 
 const GAME_URL=LANG==='es'?'https://www.eidoslibro.com/hiddenegg/games/heal/reparacion.html':'https://www.eidoslibro.com/hiddenegg/games/heal/reparacionEN.html',ARTICLE_URL=LANG==='es'?'https://www.eidoslibro.com/blog/articulos/03_inmortalidad_humana.html':'https://www.eidoslibro.com/blog/articles/03_human_immortality.html',EIDOS_URL='https://www.eidoslibro.com/';const SAVE='eidos-'+(LANG==='es'?'reparacion':'repair')+'-save-v1',PROG='eidos-'+(LANG==='es'?'reparacion':'repair')+'-progress-v1',SOUND='eidos-'+(LANG==='es'?'reparacion':'repair')+'-sound-v1';
+// Latest eligible completed mark survives starting another level or closing the game.
+// Stored separately so existing campaigns are never migrated or reset.
+const RECORD_MARK = PROG + '-completed-record-v2';
+let fallbackMark = null;
+const markText = LANG === 'es' ? {
+  available: 'REGISTRAR MARCA', unavailable: 'Completa un nivel para registrar una marca.',
+  notTop: 'Tu mejor nivel completado todavía no entra entre las 20 primeras marcas.',
+  detail: 'Tu última marca válida se conserva aunque sigas jugando o cierres la ventana.'
+} : {
+  available: 'REGISTER SCORE', unavailable: 'Complete a level before registering a score.',
+  notTop: 'Your best completed level does not currently qualify for the world Top 20.',
+  detail: 'Your last eligible result is saved, even if you continue playing or close this window.'
+};
+function isValidMark(value) {
+  return !!value && Number.isSafeInteger(value.level) && value.level >= 1 &&
+    Number.isSafeInteger(value.hints) && value.hints >= 0 &&
+    Number.isSafeInteger(value.moves) && value.moves >= 1;
+}
+function bestCompletedMark() {
+  const value = read(RECORD_MARK, null) || fallbackMark;
+  return isValidMark(value) ? value : null;
+}
+function betterMark(newMark, oldMark) {
+  return !oldMark || newMark.level > oldMark.level ||
+    (newMark.level === oldMark.level && (newMark.hints < oldMark.hints ||
+     (newMark.hints === oldMark.hints && newMark.moves < oldMark.moves)));
+}
+function saveCompletedMark() {
+  if (!state || !state.won) return;
+  const candidate = {level:state.level, hints:state.hintsUsed||0, moves:state.moves};
+  if (!isValidMark(candidate)) return;
+  if (betterMark(candidate, bestCompletedMark())) { fallbackMark = candidate; write(RECORD_MARK, candidate); }
+  updateMarkButtons();
+}
+function updateMarkButtons() {
+  const mark = bestCompletedMark();
+  for (const id of ['register-record-button','register-start-button','register-levels-button','register-inline-button']) {
+    const button = document.getElementById(id);
+    if (!button) continue;
+    button.hidden = !mark;
+    if (mark) button.title = (LANG==='es'?'Nivel ':'Level ') + mark.level + ' · ' +
+      (LANG==='es'?'Pistas: ':'Hints: ') + mark.hints + ' · ' +
+      (LANG==='es'?'Intervenciones: ':'Moves: ') + mark.moves;
+  }
+  const note = document.getElementById('saved-mark-note');
+  if (note) {
+    note.hidden = !mark;
+    if (mark) note.textContent = (LANG==='es'?'Mejor marca completada: nivel ':'Best completed mark: level ') +
+      mark.level + ' · ' + (LANG==='es'?'pistas ':'hints ') + mark.hints + ' · ' +
+      (LANG==='es'?'intervenciones ':'moves ') + mark.moves;
+  }
+}
 const SHARED=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};function galleryUrl(item){const raw=typeof item==='string'?item:String(item?.url||'').trim();if(!raw)return'';if(/^(?:https?:)?\/\//i.test(raw)||raw.startsWith('/'))return raw;return'/gallery/'+raw.replace(/^\.?\//,'')}const manifest=Array.isArray(window.EIDOS_IMAGE_MANIFEST)?window.EIDOS_IMAGE_MANIFEST.map(galleryUrl).filter(Boolean):[],images=manifest.length?manifest:(Array.isArray(SHARED.images)?SHARED.images.filter(Boolean):[]),quotes=Array.isArray(SHARED.quotes)&&SHARED.quotes.length?SHARED.quotes:T.quotes,bg=[$('bg-a'),$('bg-b')],bad=new Set();let bgDeck=[],activeBg=0,lastBg=-1,quoteDeck=[],lastQuote=-1;
 function shuffle(a,rand=Math.random){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(rand()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}function refillBg(){bgDeck=shuffle(images.map((_,i)=>i).filter(i=>!bad.has(i)));if(bgDeck.length>1&&bgDeck[0]===lastBg)[bgDeck[0],bgDeck[1]]=[bgDeck[1],bgDeck[0]]}function changeBg(attempt=0){if(!images.length||bad.size>=images.length)return;if(!bgDeck.length)refillBg();if(!bgDeck.length)return;const i=bgDeck.shift(),n=1-activeBg,img=bg[n],old=bg[activeBg];img.onload=()=>{img.onload=img.onerror=null;lastBg=i;old.classList.remove('active');img.classList.add('active');activeBg=n};img.onerror=()=>{img.onload=img.onerror=null;bad.add(i);img.removeAttribute('src');if(attempt<images.length-1)changeBg(attempt+1)};img.src=images[i]}function nextQuote(){if(!quoteDeck.length){quoteDeck=shuffle(quotes.map((_,i)=>i));if(quoteDeck.length>1&&quoteDeck[0]===lastQuote)[quoteDeck[0],quoteDeck[1]]=[quoteDeck[1],quoteDeck[0]]}const i=quoteDeck.shift();lastQuote=i;const v=quotes[i];return typeof v==='string'?v:(v?.text||v?.quote||v?.frase||T.quotes[0])}
 let sound=true,audio=null;try{sound=localStorage.getItem(SOUND)!=='off'}catch{}function tone(f,d=.08,g=.028){if(!sound)return;try{const A=window.AudioContext||window.webkitAudioContext;audio=audio||new A();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),v=audio.createGain();o.frequency.value=f;v.gain.setValueAtTime(g,audio.currentTime);v.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(v).connect(audio.destination);o.start();o.stop(audio.currentTime+d)}catch{}}function updateSound(){$('sound-button').textContent=sound?'♪':'×'}updateSound();
 function read(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch{return f}}function write(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}function remove(k){try{localStorage.removeItem(k)}catch{}}function rng(seed){let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}function hash(level){let h=2166136261;for(const ch of 'repair:'+level){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
 function config(level){if(level<=10)return{stage:0,size:4,n:3+Math.floor((level-1)*3/9)};if(level<=20)return{stage:1,size:5,n:6+Math.floor((level-11)*4/9)};if(level<=30)return{stage:2,size:5,n:10+Math.floor((level-21)*5/9)};if(level<=40)return{stage:3,size:6,n:13+Math.floor((level-31)*6/9)};if(level<=50)return{stage:4,size:6,n:17+Math.floor((level-41)*7/9)};const e=level-50,size=Math.min(10,6+Math.floor((e-1)/18)),total=size*size,base=18+(size-6)*8,growth=Math.floor((e-1)*.42)+Math.floor((e-1)/12),n=Math.min(total-2,base+growth);return{stage:4,size,n}}function neigh(i,s){const r=Math.floor(i/s),c=i%s,o=[i];if(r)o.push(i-s);if(r<s-1)o.push(i+s);if(c)o.push(i-1);if(c<s-1)o.push(i+1);return o}function toggle(arr,i,s){neigh(i,s).forEach(x=>arr[x]^=1)}function makeLevel(level){const c=config(level),rand=rng(hash(level)),total=c.size*c.size,all=shuffle([...Array(total).keys()],rand),presses=all.slice(0,Math.min(c.n,total-1)),cells=Array(total).fill(0),need=Array(total).fill(0);presses.forEach(p=>{toggle(cells,p,c.size);need[p]^=1});if(cells.every(v=>!v)){toggle(cells,0,c.size);need[0]^=1}return{level,size:c.size,stage:c.stage,cells,need,initial:[...cells],moves:0,hintsUsed:0,won:false}}
 let progress=read(PROG,{unlocked:1,best:{},completed:0,endless:0}),state=null,history=[],hintTimer=null,mapReturn='start';progress.best=progress.best||{};progress.unlocked=Math.max(1,Number(progress.unlocked)||1);progress.completed=Math.max(0,Number(progress.completed)||0);progress.endless=Math.max(0,Number(progress.endless)||0);const healthy=a=>a.reduce((n,v)=>n+(!v),0);function reveal(){if(!state||!state.cells.length)return 0;return healthy(state.cells)/state.cells.length}function updateBackgroundDefinition(){const ratio=reveal(),root=$('eidos-bg');root.style.setProperty('--bg-opacity',(.14+ratio*.58).toFixed(3));root.style.setProperty('--bg-bright',(.42+ratio*.26).toFixed(3));root.style.setProperty('--bg-blur',((1-ratio)*2.2).toFixed(2)+'px')}function render(){if(!state)return;const board=$('board');board.innerHTML='';board.style.gridTemplateColumns=`repeat(${state.size},1fr)`;board.style.gridTemplateRows=`repeat(${state.size},1fr)`;board.style.gap=(state.size>=9?'2px':state.size>=7?'4px':'7px');state.cells.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='cell '+(v?'damaged':'healthy');b.dataset.index=i;b.setAttribute('aria-label',v?T.damaged:T.healthy);b.onclick=()=>press(i);board.appendChild(b)});updateHud()}function pulse(i){const e=$('board').querySelector(`[data-index="${i}"]`);if(!e)return;e.classList.remove('pulse');void e.offsetWidth;e.classList.add('pulse');setTimeout(()=>e.classList.remove('pulse'),420)}function snap(){history.push({cells:[...state.cells],need:[...state.need],moves:state.moves});if(history.length>100)history.shift()}function press(i){if(!state||state.won)return;snap();neigh(i,state.size).forEach(x=>{state.cells[x]^=1;pulse(x)});state.need[i]^=1;state.moves++;tone(state.cells[i]?205:330,.06,.022);render();save();check()}
-function updateHud(){const total=state.cells.length,pct=Math.round(healthy(state.cells)/total*100);$('level-hud').textContent=state.level<=50?state.level:'∞'+(state.level-50);$('stage-hud').textContent=state.level>50?T.endlessTitle:T.stages[state.stage];$('moves-hud').textContent=state.moves;$('best-hud').textContent=progress.best[state.level]??'—';$('progress-number').textContent=pct+'%';$('progress-fill').style.width=pct+'%';$('stage-name').textContent=state.level>50?T.endlessTitle:T.stages[state.stage];$('stage-desc').textContent=T.stageDesc[state.stage];$('undo-button').disabled=!history.length;updateBackgroundDefinition()}function save(){if(state&&!state.won){write(SAVE,{level:state.level,size:state.size,stage:state.stage,cells:state.cells,need:state.need,initial:state.initial,moves:state.moves,hintsUsed:state.hintsUsed});updateStartUI()}}function start(level){level=Math.max(1,Math.floor(Number(level)||1));state=makeLevel(level);history=[];if(records)void records.startSession();close($('start-screen'));close($('result-screen'));close($('levels-screen'));changeBg();render();save();tone(220,.08);setTimeout(()=>tone(330,.10),65)}function load(){const s=read(SAVE,null);if(!s||!Array.isArray(s.cells))return false;state={...s,hintsUsed:Number.isSafeInteger(s.hintsUsed)&&s.hintsUsed>=0?s.hintsUsed:0,won:false};history=[];if(records)void records.startSession();close($('start-screen'));close($('levels-screen'));changeBg();render();return true}function check(){if(state.cells.some(Boolean))return;state.won=true;remove(SAVE);updateStartUI();progress.completed=Math.max(progress.completed||0,Math.min(50,state.level));progress.unlocked=Math.max(progress.unlocked||1,state.level+1);if(state.level>50)progress.endless=Math.max(progress.endless||0,state.level-50);const b=progress.best[state.level];if(b==null||state.moves<b)progress.best[state.level]=state.moves;write(PROG,progress);$('eidos-bg').style.setProperty('--bg-opacity','.72');$('eidos-bg').style.setProperty('--bg-bright','.68');$('eidos-bg').style.setProperty('--bg-blur','0px');tone(262,.2,.03);setTimeout(()=>tone(392,.25,.03),110);setTimeout(()=>tone(587,.34,.025),240);setTimeout(result,430)}function result(){if($('record-registration-note'))$('record-registration-note').hidden=true;const done=state.level===50;$('result-title').textContent=done?T.campaignDone:T.won;$('result-subtitle').textContent=done?T.campaignDoneSub:T.wonSub;$('result-stats').innerHTML=`${T.movesLabel}: <strong>${state.moves}</strong> · ${LANG==='es'?'Pistas':'Hints'}: <strong>${state.hintsUsed||0}</strong> · ${T.bestLabel}: <strong>${progress.best[state.level]}</strong> · ${T.stages[state.stage]}`;$('result-quote').textContent=nextQuote();$('next-button').textContent=done?T.infinite:T.next;open($('result-screen'))}function undo(){if(!history.length||!state||state.won)return;const p=history.pop();state.cells=p.cells;state.need=p.need;state.moves=p.moves;tone(185,.06,.018);render();save()}function hint(){if(!state||state.won)return;clearTimeout(hintTimer);$$('.cell').forEach(e=>e.classList.remove('hint'));const i=state.need.findIndex(Boolean);if(i<0){$('stage-desc').textContent=T.noHint;return}const e=$('board').querySelector(`[data-index="${i}"]`);e.classList.add('hint');$('stage-desc').textContent=T.hintText;state.hintsUsed=(state.hintsUsed||0)+1;save();tone(520,.09,.02);hintTimer=setTimeout(()=>{e.classList.remove('hint');if(state)$('stage-desc').textContent=T.stageDesc[state.stage]},1800)}function renderLevelMap(){const box=$('level-map');box.innerHTML='';const delBtn=$('delete-campaign-button');if(delBtn)delBtn.hidden=!hasCampaignProgress();const doneCount=Object.keys(progress.best).map(Number).filter(n=>n>=1&&n<=50&&progress.best[n]!=null).length,maxCampaign=Math.min(50,progress.unlocked);$('campaign-completed').innerHTML=`${T.completedLabel}: <strong>${doneCount}/50</strong>`;$('campaign-unlocked').innerHTML=`${T.unlockedLabel}: <strong>${maxCampaign}</strong>`;for(let s=0;s<5;s++){const section=document.createElement('section');section.className='stage-map';const head=document.createElement('div');head.className='stage-map-head';head.innerHTML=`<strong>${T.stages[s]}</strong><span>${s*10+1}–${s*10+10}</span>`;const grid=document.createElement('div');grid.className='level-grid';for(let n=s*10+1;n<=s*10+10;n++){const b=document.createElement('button');b.type='button';b.className='level-node';b.textContent=n;const unlocked=n<=progress.unlocked,done=progress.best[n]!=null,current=n===Math.min(progress.unlocked,50);if(done)b.classList.add('done');else if(unlocked)b.classList.add('unlocked');else b.classList.add('locked');if(current&&!done)b.classList.add('current');if(!unlocked)b.disabled=true;else{b.title=done?`${T.bestLabel}: ${progress.best[n]}`:`${T.levelLabel} ${n}`;b.addEventListener('click',()=>start(n))}grid.appendChild(b)}section.append(head,grid);box.appendChild(section)}const endless=$('endless-panel');if(progress.unlocked>50){endless.hidden=false;const max=Math.max(1,progress.unlocked-50);$('endless-description').textContent=`${T.endlessDesc} ${T.endlessMax}: ∞${max}.`;$('endless-input').min='1';$('endless-input').max=String(max);$('endless-input').value=String(max)}else endless.hidden=true}
+function updateHud(){const total=state.cells.length,pct=Math.round(healthy(state.cells)/total*100);$('level-hud').textContent=state.level<=50?state.level:'∞'+(state.level-50);$('stage-hud').textContent=state.level>50?T.endlessTitle:T.stages[state.stage];$('moves-hud').textContent=state.moves;$('best-hud').textContent=progress.best[state.level]??'—';$('progress-number').textContent=pct+'%';$('progress-fill').style.width=pct+'%';$('stage-name').textContent=state.level>50?T.endlessTitle:T.stages[state.stage];$('stage-desc').textContent=T.stageDesc[state.stage];$('undo-button').disabled=!history.length;updateBackgroundDefinition()}function save(){if(state&&!state.won){write(SAVE,{level:state.level,size:state.size,stage:state.stage,cells:state.cells,need:state.need,initial:state.initial,moves:state.moves,hintsUsed:state.hintsUsed});updateStartUI()}}function start(level){updateMarkButtons();level=Math.max(1,Math.floor(Number(level)||1));state=makeLevel(level);history=[];if(records)void records.startSession();close($('start-screen'));close($('result-screen'));close($('levels-screen'));changeBg();render();save();tone(220,.08);setTimeout(()=>tone(330,.10),65)}function load(){const s=read(SAVE,null);if(!s||!Array.isArray(s.cells))return false;state={...s,hintsUsed:Number.isSafeInteger(s.hintsUsed)&&s.hintsUsed>=0?s.hintsUsed:0,won:false};history=[];if(records)void records.startSession();close($('start-screen'));close($('levels-screen'));changeBg();render();return true}function check(){if(state.cells.some(Boolean))return;state.won=true;remove(SAVE);updateStartUI();progress.completed=Math.max(progress.completed||0,Math.min(50,state.level));progress.unlocked=Math.max(progress.unlocked||1,state.level+1);if(state.level>50)progress.endless=Math.max(progress.endless||0,state.level-50);const b=progress.best[state.level];if(b==null||state.moves<b)progress.best[state.level]=state.moves;write(PROG,progress);saveCompletedMark();$('eidos-bg').style.setProperty('--bg-opacity','.72');$('eidos-bg').style.setProperty('--bg-bright','.68');$('eidos-bg').style.setProperty('--bg-blur','0px');tone(262,.2,.03);setTimeout(()=>tone(392,.25,.03),110);setTimeout(()=>tone(587,.34,.025),240);setTimeout(result,430)}function result(){updateMarkButtons();if($('record-registration-note'))$('record-registration-note').hidden=true;const done=state.level===50;$('result-title').textContent=done?T.campaignDone:T.won;$('result-subtitle').textContent=done?T.campaignDoneSub:T.wonSub;$('result-stats').innerHTML=`${T.movesLabel}: <strong>${state.moves}</strong> · ${LANG==='es'?'Pistas':'Hints'}: <strong>${state.hintsUsed||0}</strong> · ${T.bestLabel}: <strong>${progress.best[state.level]}</strong> · ${T.stages[state.stage]}`;$('result-quote').textContent=nextQuote();$('next-button').textContent=done?T.infinite:T.next;open($('result-screen'))}function undo(){if(!history.length||!state||state.won)return;const p=history.pop();state.cells=p.cells;state.need=p.need;state.moves=p.moves;tone(185,.06,.018);render();save()}function hint(){if(!state||state.won)return;clearTimeout(hintTimer);$$('.cell').forEach(e=>e.classList.remove('hint'));const i=state.need.findIndex(Boolean);if(i<0){$('stage-desc').textContent=T.noHint;return}const e=$('board').querySelector(`[data-index="${i}"]`);e.classList.add('hint');$('stage-desc').textContent=T.hintText;state.hintsUsed=(state.hintsUsed||0)+1;save();tone(520,.09,.02);hintTimer=setTimeout(()=>{e.classList.remove('hint');if(state)$('stage-desc').textContent=T.stageDesc[state.stage]},1800)}function renderLevelMap(){updateMarkButtons();const box=$('level-map');box.innerHTML='';const delBtn=$('delete-campaign-button');if(delBtn)delBtn.hidden=!hasCampaignProgress();const doneCount=Object.keys(progress.best).map(Number).filter(n=>n>=1&&n<=50&&progress.best[n]!=null).length,maxCampaign=Math.min(50,progress.unlocked);$('campaign-completed').innerHTML=`${T.completedLabel}: <strong>${doneCount}/50</strong>`;$('campaign-unlocked').innerHTML=`${T.unlockedLabel}: <strong>${maxCampaign}</strong>`;for(let s=0;s<5;s++){const section=document.createElement('section');section.className='stage-map';const head=document.createElement('div');head.className='stage-map-head';head.innerHTML=`<strong>${T.stages[s]}</strong><span>${s*10+1}–${s*10+10}</span>`;const grid=document.createElement('div');grid.className='level-grid';for(let n=s*10+1;n<=s*10+10;n++){const b=document.createElement('button');b.type='button';b.className='level-node';b.textContent=n;const unlocked=n<=progress.unlocked,done=progress.best[n]!=null,current=n===Math.min(progress.unlocked,50);if(done)b.classList.add('done');else if(unlocked)b.classList.add('unlocked');else b.classList.add('locked');if(current&&!done)b.classList.add('current');if(!unlocked)b.disabled=true;else{b.title=done?`${T.bestLabel}: ${progress.best[n]}`:`${T.levelLabel} ${n}`;b.addEventListener('click',()=>start(n))}grid.appendChild(b)}section.append(head,grid);box.appendChild(section)}const endless=$('endless-panel');if(progress.unlocked>50){endless.hidden=false;const max=Math.max(1,progress.unlocked-50);$('endless-description').textContent=`${T.endlessDesc} ${T.endlessMax}: ∞${max}.`;$('endless-input').min='1';$('endless-input').max=String(max);$('endless-input').value=String(max)}else endless.hidden=true}
 
 function hasSavedGame(){const s=read(SAVE,null);return Boolean(s&&Array.isArray(s.cells))}
 function hasCampaignProgress(){return hasSavedGame()||(Number(progress.completed)||0)>0||(Number(progress.unlocked)||1)>1||Object.keys(progress.best||{}).length>0||(Number(progress.endless)||0)>0}
@@ -20,6 +72,7 @@ function updateStartUI(){
   if(startBtn)startBtn.textContent=hasCampaignProgress()?T.resume:T.start;
   const delBtn=$('delete-campaign-button');
   if(delBtn)delBtn.hidden=!hasCampaignProgress();
+  updateMarkButtons();
 }
 function continueCampaign(){
   if(hasSavedGame()){load();return}
@@ -27,6 +80,8 @@ function continueCampaign(){
   start(next);
 }
 function resetCampaignData(){
+  remove(RECORD_MARK);
+  fallbackMark = null;
   remove(SAVE);
   progress={unlocked:1,best:{},completed:0,endless:0};
   write(PROG,progress);
@@ -69,16 +124,31 @@ async function shareGame(){
 }
 // Leaderboard is optional; the repair puzzle always remains playable if the API is down.
 function viewRecords(){ if(records)void records.view(); }
-async function registerRepairRecord(){
-  if(!records||!state||!state.won||state.moves<1)return;
-  // Register the level just completed; hints/moves refer to this solved level.
-  const note=$('record-registration-note');if(note)note.hidden=true;
-  const accepted=await records.promptScore(state.level,{stage:state.level,hints:state.hintsUsed||0,moves:state.moves});
-  if(!accepted&&note)note.hidden=false;
+async function registerRepairRecord() {
+  const mark = bestCompletedMark();
+  if (!records || !mark) return;
+  const note = $('record-registration-note');
+  if (note) note.hidden = true;
+  // Request a fresh one-use session for late registration (for example after reopening the game).
+  // This never claims the currently unfinished level was completed.
+  try {
+    await records.startSession();
+    const qualified = await records.promptScore(mark.level, {
+      stage: mark.level, hints: mark.hints, moves: mark.moves
+    });
+    if (!qualified && note) {
+      note.hidden = false;
+      note.textContent = markText.notTop;
+    }
+  } catch (error) {
+    console.warn('EIDOS Repair: cannot open world record entry', error);
+  }
 }
 ['records-button','records-start-button','records-levels-button','records-result-button'].forEach(id=>{
   const button=$(id);if(button)button.onclick=viewRecords;
 });
-if($('register-record-button')) $('register-record-button').onclick=registerRepairRecord;
+['register-record-button','register-start-button','register-levels-button','register-inline-button'].forEach(id=>{
+  const button=$(id); if (button) button.onclick=registerRepairRecord;
+});
 $('start-button').onclick=continueCampaign;$('start-levels-button').onclick=()=>showLevels('start');$('share-button').onclick=shareGame;$('levels-button').onclick=()=>showLevels('game');$('result-levels-button').onclick=()=>showLevels('result');$('levels-back').onclick=backFromLevels;$('delete-campaign-button').onclick=openDeleteCampaign;$('confirm-delete-campaign').onclick=confirmDeleteCampaign;$('cancel-delete-campaign').onclick=cancelDeleteCampaign;$('endless-play').onclick=playEndlessSelection;$('endless-input').addEventListener('keydown',e=>{if(e.key==='Enter')playEndlessSelection()});$('next-button').onclick=()=>start(state.level+1);$('again-button').onclick=()=>start(state.level);$('undo-button').onclick=undo;$('hint-button').onclick=hint;$('restart-button').onclick=()=>{if(confirm(T.restartAsk))start(state.level)};$('close-button').onclick=()=>window.parent.postMessage('cerrar-eidos','*');$('sound-button').onclick=()=>{sound=!sound;try{localStorage.setItem(SOUND,sound?'on':'off')}catch{}updateSound();if(sound)tone(330,.08,.02)};document.addEventListener('keydown',e=>{if(e.key==='Escape' && !(records&&records.isOpen()))window.parent.postMessage('cerrar-eidos','*');if((e.key==='z'||e.key==='Z')&&(e.ctrlKey||e.metaKey))undo()});updateStartUI();changeBg();
 })();

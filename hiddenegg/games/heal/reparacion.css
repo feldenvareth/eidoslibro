@@ -111,3 +111,11 @@
 @media(max-width:430px){#topbar{gap:4px}#records-button{font-size:10px;padding-inline:5px}}
 
 .record-registration-note{margin:9px 0 0;color:#e8c77c;font-size:11px}
+
+/* La última marca resuelta puede inscribirse más tarde. Las ocultas no ocupan espacio. */
+.record-save-button[hidden],.record-inline-button[hidden],#saved-mark-note[hidden]{display:none!important}
+.record-inline-button{margin-top:7px;min-height:26px;width:100%;color:#f7d57d;background:rgba(180,150,55,.12);border:1px solid rgba(200,168,75,.38);border-radius:6px;font:700 9px/1.2 Arial,sans-serif;letter-spacing:.7px;cursor:pointer}
+.record-inline-button:hover{background:rgba(200,168,75,.22)}
+#register-levels-button{background:var(--gold);color:#10251c}
+#register-start-button{border-color:var(--gold);color:#f3d27c}
+#saved-mark-note{flex-basis:100%;width:100%;margin:4px auto;color:#bde7c9;text-align:center}
