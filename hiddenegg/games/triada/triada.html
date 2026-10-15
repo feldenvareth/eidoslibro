@@ -442,7 +442,38 @@
       .control { padding: 6px; }
       #start-button { padding: 11px 22px; }
     }
+
+    /* Botón del campeonato mundial; mantiene los estilos originales de Tríada. */
+    #records-button {
+      flex: 0 0 auto;
+      min-height: 31px;
+      padding: 0 9px;
+      color: #ead29a;
+      background: rgba(10, 29, 22, 0.76);
+      border: 1px solid rgba(209, 173, 79, 0.72);
+      border-radius: 5px;
+      font: 700 10px/1 Arial, sans-serif;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    #records-button:hover, #records-button:focus-visible {
+      color: #fff1bd;
+      border-color: var(--gold);
+      outline-offset: 2px;
+    }
+    @media (max-width: 430px) {
+      .game-topbar-actions { gap: 5px; }
+      #records-button { min-height: 29px; padding: 0 7px; font-size: 9px; }
+    }
+    @media (max-width: 360px) {
+      #game-topbar { padding-inline: 7px; gap: 6px; }
+      .game-topbar-title { letter-spacing: .8px; font-size: 8px; }
+      #shield-button { padding-inline: 6px; font-size: 8px; }
+      #close-game { padding-inline: 7px; }
+      #records-button { padding-inline: 5px; }
+    }
   </style>
+  <link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-triada1">
 
 <!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
 <script id="eidos-analytics-loader">
@@ -487,6 +518,7 @@
     <header id="game-topbar">
       <span class="game-topbar-title">EIDOS · TRÍADA</span>
       <div class="game-topbar-actions">
+        <button id="records-button" class="eidos-records-trigger" type="button" aria-label="Clasificación mundial de Tríada">🏆 TOP 20</button>
         <button id="shield-button" type="button" aria-label="Activar escudo">ESCUDO</button>
         <button id="close-game" type="button" aria-label="Cerrar el juego">× Cerrar</button>
       </div>
@@ -535,6 +567,7 @@
 
   <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content.js"></script>
+  <script src="../js/eidos-records-ui.js?v=20261015-triada1"></script>
   <script>
     (() => {
       "use strict";
@@ -544,6 +577,10 @@
       const closeGameButton = document.getElementById("close-game");
       const startCard = document.getElementById("start-card");
       const startButton = document.getElementById("start-button");
+      // Campeonato independiente para Tríada, compartido por español e inglés.
+      const recordsUI = window.EidosRecordsUI?.init({gameId: "triada", language: "es"}) || null;
+      const recordsButton = document.getElementById("records-button");
+      recordsButton.addEventListener("click", () => { void recordsUI?.view(); });
       const shieldButton = document.getElementById("shield-button");
       const unlockScreen = document.getElementById("unlock-screen");
       const unlockPhase = document.getElementById("unlock-phase");
@@ -622,6 +659,7 @@
       let cycle = 1;
       let score = 0;
       let highScore = readRecord();
+      let checkingRecord = false;
       let lives = 3;
       let nextShot = 0;
       let stageClock = 0;
@@ -855,6 +893,9 @@
       }
 
       function startGame() {
+        // Nunca reiniciar durante la comprobación ni mientras se introduce el nombre.
+        if (checkingRecord || recordsUI?.isOpen()) return;
+        recordsUI?.startSession();
         startCard.classList.add("hidden");
         shieldButton.classList.add("ready");
         resetGame();
@@ -1612,6 +1653,14 @@
         playerBullets = [];
         enemyBullets = [];
         transitionClock = 0;
+        // Las partidas sin puntos no pueden entrar en el TOP 20.
+        // La UI compartida decide si el resultado merece registrar el nombre.
+        if (recordsUI && score > 0) {
+          checkingRecord = true;
+          void recordsUI.promptScore(score)
+            .catch(error => console.warn("Tríada: no se ha podido comprobar el récord.", error))
+            .finally(() => { checkingRecord = false; });
+        }
       }
 
       function burst(x, y, color, amount = 14, speed = 120) {
@@ -2771,7 +2820,7 @@
         ctx.fillText(`${score.toLocaleString("es-ES")} puntos`, W / 2, 366);
         ctx.fillStyle = "#a7afa9";
         ctx.font = "13px Arial";
-        ctx.fillText("Pulsa o toca para volver a intentarlo", W / 2, 407);
+        ctx.fillText(checkingRecord ? "Comprobando el TOP 20…" : "Pulsa o toca para volver a intentarlo", W / 2, 407);
         ctx.textAlign = "left";
       }
 
@@ -2819,8 +2868,10 @@
       function loop(now) {
         const rawDt = Math.min(0.033, Math.max(0, (now - lastTime) / 1000));
         lastTime = now;
-        if (!paused) update(rawDt);
-        draw(paused ? 0 : rawDt);
+        // Se congela el juego al consultar los récords y al introducir el nombre.
+        const recordsOpen = recordsUI?.isOpen() || false;
+        if (!paused && !recordsOpen) update(rawDt);
+        draw(paused || recordsOpen ? 0 : rawDt);
         raf = requestAnimationFrame(loop);
       }
 
@@ -2880,6 +2931,8 @@
       });
 
       window.addEventListener("keydown", event => {
+        // Evita que INTRO al registrar un récord reinicie Tríada por detrás.
+        if (recordsUI?.isOpen()) return;
         if (["ArrowLeft", "ArrowRight", "Space"].includes(event.code)) event.preventDefault();
         if (event.code === "Escape") {
           window.parent.postMessage("cerrar-eidos", "*");
