@@ -2,21 +2,35 @@
 (()=>{'use strict';
 const LANG=document.documentElement.lang&&document.documentElement.lang.toLowerCase().startsWith('es')?'es':'en';
 const TEXT={es:{gameTitle:'REPARACIÓN',subtitle:'RESTAURA · EQUILIBRA · CONSERVA',levelLabel:'Nivel',movesLabel:'Intervenciones',bestLabel:'Récord',close:'× Cerrar',tissue:'TEJIDO RESTAURADO',hint:'PISTA',undo:'DESHACER',restart:'REINICIAR',levels:'NIVELES',shareGame:'COPIAR ENLACE',readArticle:'LEER EL ARTÍCULO',discoverEidos:'CONOCE EIDOS',cancel:'CANCELAR',deleteCampaign:'ELIMINAR CAMPAÑA',deleteCampaignSubtitle:'ESTA ACCIÓN NO SE PUEDE DESHACER',deleteCampaignIntro:'Vas a empezar desde cero. Se eliminarán los niveles completados, el nivel máximo desbloqueado, los mejores registros y la partida actual guardados en este navegador.',deleteCampaignWarningTitle:'SE BORRARÁ TODO EL PROGRESO DE ESTA CAMPAÑA.',deleteCampaignWarningText:'Solo se conservarán la configuración general y el sonido. Si quieres seguir donde estabas, usa CONTINUAR PARTIDA o entra en NIVELES sin borrar.',deleteCampaignConfirm:'ELIMINAR Y EMPEZAR DE CERO',shareNote:'El artículo desarrolla la ciencia y las preguntas que inspiran este juego.',linkCopied:'ENLACE COPIADO',copyPrompt:'Copia este enlace:',shareText:'¿Cuánto equilibrio puedes recuperar? Juega a EIDOS · Reparación.',campaign:'CAMPAÑA',campaignProgress:'PROGRESO DE NIVELES',completedLabel:'Completados',unlockedLabel:'Máximo desbloqueado',levelMapHelp:'Puedes volver a cualquier nivel desbloqueado en este navegador. El borrado total de la campaña está separado y requiere confirmación.',endlessTitle:'CONTINUIDAD INFINITA',endlessDesc:'Después del nivel 50, los tableros y los patrones siguen aumentando de dificultad.',endlessMax:'Máximo alcanzado',play:'JUGAR',back:'VOLVER',targetNote:'OBJETIVO: TODAS LAS CÉLULAS VERDES · ESTABLES',start:'INICIAR',resume:'CONTINUAR PARTIDA',again:'REPETIR',intro:'Un tejido ha perdido su equilibrio. Cada intervención cambia la célula elegida y sus cuatro vecinas. Devuelve todo el sistema a un estado sano: todas las células deben quedar verdes.',ruleTitle:'REGLA DE INTERVENCIÓN',rule:'Al actuar sobre una célula cambian también las de arriba, abajo, izquierda y derecha. La misma intervención puede reparar una zona y alterar otra.',note:'Modelo lógico inspirado en reparación, senescencia y rejuvenecimiento. No representa literalmente la biología celular.',won:'TEJIDO RESTAURADO',wonSub:'El sistema ha recuperado un estado estable.',campaignDone:'CAMPAÑA COMPLETADA',campaignDoneSub:'Has atravesado las cinco profundidades de reparación. Puedes continuar con patrones infinitos.',next:'SIGUIENTE NIVEL',infinite:'MODO INFINITO',hintText:'Prueba a intervenir aquí.',noHint:'No queda ninguna pista necesaria.',restartAsk:'¿Reiniciar el nivel actual?',healthy:'Célula estable',damaged:'Célula alterada',stages:['Regeneración','Senescencia','Epigenética','Homeostasis','Continuidad'],stageDesc:['Aprende a leer el tejido.','Más células alteradas, menos margen para improvisar.','El patrón exige anticipar varias intervenciones.','El equilibrio depende de toda la red.','La reparación se convierte en continuidad.'],quotes:['Reparar una parte cambia el sistema entero.','La estabilidad no pertenece a una célula aislada.','Conservar también exige intervenir.','Un tejido vivo es una red de dependencias.','Continuar no consiste en permanecer idéntico.']},en:{gameTitle:'REPAIR',subtitle:'RESTORE · BALANCE · PRESERVE',levelLabel:'Level',movesLabel:'Interventions',bestLabel:'Best',close:'× Close',tissue:'TISSUE RESTORED',hint:'HINT',undo:'UNDO',restart:'RESTART',levels:'LEVELS',shareGame:'COPY LINK',readArticle:'READ THE ARTICLE',discoverEidos:'DISCOVER EIDOS',cancel:'CANCEL',deleteCampaign:'DELETE CAMPAIGN',deleteCampaignSubtitle:'THIS ACTION CANNOT BE UNDONE',deleteCampaignIntro:'You are about to start from zero. Completed levels, highest unlocked level, best records and the current saved game in this browser will be deleted.',deleteCampaignWarningTitle:'ALL PROGRESS FOR THIS CAMPAIGN WILL BE ERASED.',deleteCampaignWarningText:'Only general preferences and sound settings will remain. If you want to keep going, use CONTINUE GAME or open LEVELS without deleting anything.',deleteCampaignConfirm:'DELETE AND START FROM ZERO',campaign:'CAMPAIGN',campaignProgress:'LEVEL PROGRESS',completedLabel:'Completed',unlockedLabel:'Highest unlocked',levelMapHelp:'You can return to any level unlocked in this browser. Full campaign deletion is separate and requires confirmation.',endlessTitle:'ENDLESS CONTINUITY',endlessDesc:'After level 50, boards and generated patterns keep increasing in difficulty.',endlessMax:'Highest reached',play:'PLAY',back:'BACK',targetNote:'GOAL: EVERY CELL GREEN · STABLE',start:'START',resume:'CONTINUE GAME',again:'PLAY AGAIN',intro:'A tissue has lost its balance. Each intervention changes the selected cell and its four neighbors. Return the whole system to a healthy state: every cell must end green.',ruleTitle:'INTERVENTION RULE',rule:'Acting on one cell also changes the cells above, below, left and right. The same intervention can repair one area and disturb another.',note:'A logic model inspired by repair, senescence and rejuvenation. It does not literally represent cell biology.',won:'TISSUE RESTORED',wonSub:'The system has returned to a stable state.',campaignDone:'CAMPAIGN COMPLETE',campaignDoneSub:'You crossed all five repair depths. You can continue with endless patterns.',next:'NEXT LEVEL',infinite:'ENDLESS MODE',hintText:'Try intervening here.',noHint:'No required hint remains.',restartAsk:'Restart the current level?',healthy:'Stable cell',damaged:'Altered cell',stages:['Regeneration','Senescence','Epigenetics','Homeostasis','Continuity'],stageDesc:['Learn to read the tissue.','More altered cells, less room to improvise.','The pattern demands planning several interventions ahead.','Balance depends on the whole network.','Repair becomes continuity.'],quotes:['Repairing one part changes the whole system.','Stability does not belong to an isolated cell.','Preservation also requires intervention.','Living tissue is a network of dependencies.','Continuing does not mean remaining identical.']}};const T=TEXT[LANG],$=id=>document.getElementById(id),$$=s=>[...document.querySelectorAll(s)];$$('[data-t]').forEach(el=>el.textContent=T[el.dataset.t]);
-const records = window.EidosRecordsUI?.init({gameId:'reparacion',language:LANG});
+const records = window.EidosRecordsUI?.init({
+  gameId:'reparacion',language:LANG,
+  onAccepted: record => {
+    const mark = bestCompletedMark();
+    if (mark && mark.level === record.stage && mark.hints === record.hints && mark.moves === record.moves) {
+      write(SUBMITTED_RECORD_MARK, markFingerprint(mark));
+      updateMarkButtons();
+    }
+  }
+});
 
 const GAME_URL=LANG==='es'?'https://www.eidoslibro.com/hiddenegg/games/heal/reparacion.html':'https://www.eidoslibro.com/hiddenegg/games/heal/reparacionEN.html',ARTICLE_URL=LANG==='es'?'https://www.eidoslibro.com/blog/articulos/03_inmortalidad_humana.html':'https://www.eidoslibro.com/blog/articles/03_human_immortality.html',EIDOS_URL='https://www.eidoslibro.com/';const SAVE='eidos-'+(LANG==='es'?'reparacion':'repair')+'-save-v1',PROG='eidos-'+(LANG==='es'?'reparacion':'repair')+'-progress-v1',SOUND='eidos-'+(LANG==='es'?'reparacion':'repair')+'-sound-v1';
 // Latest eligible completed mark survives starting another level or closing the game.
 // Stored separately so existing campaigns are never migrated or reset.
 const RECORD_MARK = PROG + '-completed-record-v2';
+const SUBMITTED_RECORD_MARK = RECORD_MARK + '-submitted-v1';
+const markFingerprint = m => m.level + ':' + m.hints + ':' + m.moves;
+const markAlreadySubmitted = m => !!m && read(SUBMITTED_RECORD_MARK, null) === markFingerprint(m);
 let fallbackMark = null;
 const markText = LANG === 'es' ? {
   available: 'REGISTRAR MARCA', unavailable: 'Completa un nivel para registrar una marca.',
   notTop: 'Tu mejor nivel completado todavía no entra entre las 20 primeras marcas.',
-  detail: 'Tu última marca válida se conserva aunque sigas jugando o cierres la ventana.'
+  detail: 'Tu última marca válida se conserva aunque sigas jugando o cierres la ventana.',
+  submitted: 'Esta marca ya está registrada. Supera tu mejor resultado para enviar otra.'
 } : {
   available: 'REGISTER SCORE', unavailable: 'Complete a level before registering a score.',
   notTop: 'Your best completed level does not currently qualify for the world Top 20.',
-  detail: 'Your last eligible result is saved, even if you continue playing or close this window.'
+  detail: 'Your last eligible result is saved, even if you continue playing or close this window.',
+  submitted: 'This score has already been registered. Beat your best to submit another.'
 };
 function isValidMark(value) {
   return !!value && Number.isSafeInteger(value.level) && value.level >= 1 &&
@@ -44,7 +58,7 @@ function updateMarkButtons() {
   for (const id of ['register-record-button','register-start-button','register-levels-button','register-inline-button']) {
     const button = document.getElementById(id);
     if (!button) continue;
-    button.hidden = !mark;
+    button.hidden = !mark || markAlreadySubmitted(mark);
     if (mark) button.title = (LANG==='es'?'Nivel ':'Level ') + mark.level + ' · ' +
       (LANG==='es'?'Pistas: ':'Hints: ') + mark.hints + ' · ' +
       (LANG==='es'?'Intervenciones: ':'Moves: ') + mark.moves;
@@ -54,7 +68,7 @@ function updateMarkButtons() {
     note.hidden = !mark;
     if (mark) note.textContent = (LANG==='es'?'Mejor marca completada: nivel ':'Best completed mark: level ') +
       mark.level + ' · ' + (LANG==='es'?'pistas ':'hints ') + mark.hints + ' · ' +
-      (LANG==='es'?'intervenciones ':'moves ') + mark.moves;
+      (LANG==='es'?'intervenciones ':'moves ') + mark.moves + (markAlreadySubmitted(mark) ? ' · ' + markText.submitted : '');
   }
 }
 const SHARED=window.EIDOS_SHARED_CONTENT||{images:[],quotes:[]};function galleryUrl(item){const raw=typeof item==='string'?item:String(item?.url||'').trim();if(!raw)return'';if(/^(?:https?:)?\/\//i.test(raw)||raw.startsWith('/'))return raw;return'/gallery/'+raw.replace(/^\.?\//,'')}const manifest=Array.isArray(window.EIDOS_IMAGE_MANIFEST)?window.EIDOS_IMAGE_MANIFEST.map(galleryUrl).filter(Boolean):[],images=manifest.length?manifest:(Array.isArray(SHARED.images)?SHARED.images.filter(Boolean):[]),quotes=Array.isArray(SHARED.quotes)&&SHARED.quotes.length?SHARED.quotes:T.quotes,bg=[$('bg-a'),$('bg-b')],bad=new Set();let bgDeck=[],activeBg=0,lastBg=-1,quoteDeck=[],lastQuote=-1;
@@ -81,6 +95,7 @@ function continueCampaign(){
 }
 function resetCampaignData(){
   remove(RECORD_MARK);
+  remove(SUBMITTED_RECORD_MARK);
   fallbackMark = null;
   remove(SAVE);
   progress={unlocked:1,best:{},completed:0,endless:0};
@@ -126,7 +141,7 @@ async function shareGame(){
 function viewRecords(){ if(records)void records.view(); }
 async function registerRepairRecord() {
   const mark = bestCompletedMark();
-  if (!records || !mark) return;
+  if (!records || !mark || markAlreadySubmitted(mark)) return;
   const note = $('record-registration-note');
   if (note) note.hidden = true;
   // Request a fresh one-use session for late registration (for example after reopening the game).

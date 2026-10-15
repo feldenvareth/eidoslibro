@@ -101,6 +101,9 @@ const BEST_SCORE_KEY='eidosRompemurosBestScore';
 const PROGRESS_KEY='eidosWallbreakerCampaignV3';
 const SAVE_KEY='eidosWallbreakerCurrentV3';
 const SPEED_MODE_KEY='eidosRompemurosCadenceModeV2';
+const WORLD_MARK_SUBMITTED_KEY='eidosWallbreakerWorldMarkSubmittedV1';
+const historicMarkKey=mark=>mark&&mark.stage!=null?`${mark.stage}:${mark.score}`:null;
+function historicAlreadySubmitted(mark){const key=historicMarkKey(mark);return !!key&&readJSON(WORLD_MARK_SUBMITTED_KEY,null)===key;}
 
 function readJSON(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}}
 function writeJSON(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch{}}
@@ -122,6 +125,8 @@ let gamePaused=true,mapReturn='start',lastAutoSave=0;
 let bricks=[],mouseX=W/2;
 let running=false;
 let records=null;
+// A separate playthrough may legitimately post the same number of points.
+let currentRunToken=0, lastSubmittedRunToken=-1;
 
 const SPEED_MODES={
   soft:{base:3.15,levelStep:.07,max:4.55,accel:.00024},
@@ -339,6 +344,7 @@ function loadSavedGame(){
   over=false;win=false;quoteVisible=false;gamePaused=false;
   currentBg=nextBackground()||currentBg;updateHUD();$('game-btn').style.display='none';
   $('msg').textContent=started?'':T.moveToStart;
+  currentRunToken++;
   closeAllScreens();if(records)void records.startSession();loop();return true;
 }
 function resetCampaignData(){
@@ -346,6 +352,7 @@ function resetCampaignData(){
   progress={unlocked:1,completed:{},best:{},endless:0};
   writeJSON(PROGRESS_KEY,progress);
   bestScore=0;saveBestScore(0);
+  removeKey(WORLD_MARK_SUBMITTED_KEY);
 }
 function markLevelCleared(){
   const key=String(level);
@@ -373,17 +380,18 @@ function bestWorldMark(){
 // Without a CLEARED level, stage remains absent: it must never count as level 1 completed.
 function recordMarkToOffer(){
   const completed=bestWorldMark();
-  if(completed)return completed;
-  if(over && Number.isSafeInteger(score) && score>0)return {score,stage:null};
+  if(completed && !historicAlreadySubmitted(completed))return completed;
+  if(over && lastSubmittedRunToken!==currentRunToken && Number.isSafeInteger(score) && score>0)return {score,stage:null};
   return null;
 }
 function updateRecordButtons(){
   const available=Boolean(recordMarkToOffer());
-  $('register-record-button').hidden=!Boolean(bestWorldMark());
+  $('register-record-button').hidden=!Boolean(bestWorldMark() && !historicAlreadySubmitted(bestWorldMark()));
   $('game-record-btn').hidden=!available || !over;
-  $('quote-record').hidden=!Boolean(bestWorldMark()) || !quoteVisible;
+  $('quote-record').hidden=!Boolean(bestWorldMark() && !historicAlreadySubmitted(bestWorldMark())) || !quoteVisible;
 }
 let recordRequestInProgress=false;
+let pendingSubmittedWorldMark=null;
 async function registerWorldMark(event){
   if(event){event.preventDefault();event.stopPropagation();}
   const mark=recordMarkToOffer();
@@ -393,8 +401,9 @@ async function registerWorldMark(event){
     // A fresh ticket is needed even if an older level's score was already registered.
     await records.startSession();
     // The shared module checks whether the score enters the Top 20 before showing the name form.
+    pendingSubmittedWorldMark=historicMarkKey(mark);
     const shown=await records.promptScore(mark.score, mark.stage != null ? {stage:mark.stage} : {});
-    if(!shown && over)await records.view();
+    if(!shown){pendingSubmittedWorldMark=null;if(over)await records.view();}
   } finally {
     recordRequestInProgress=false;
   }
@@ -409,6 +418,7 @@ function updateStartUI(){
   updateRecordButtons();
 }
 function startLevel(lvl){
+  currentRunToken++;
   level=Math.max(1,Math.floor(Number(lvl)||1));score=0;lives=3;over=false;win=false;started=false;quoteVisible=false;gamePaused=false;
   initBricks(level);resetBall();currentBg=nextBackground()||currentBg;setInstruction();updateHUD();closeAllScreens();saveCurrentGame();
   if(records)void records.startSession();
@@ -690,7 +700,19 @@ if(window.EidosRecordsUI && typeof window.EidosRecordsUI.init==='function'){
   });
   records=window.EidosRecordsUI.init({
     gameId:'rompemuros',language:LANG,stages,
-    labels:{stage:T.levelRecord,score:T.score,order:T.worldOrder}
+    labels:{stage:T.levelRecord,score:T.score,order:T.worldOrder,
+      unknownStage:LANG==='es'?'SIN NIVEL':'NO LEVEL CLEARED'},
+    onAccepted: record=>{
+      // A persistent campaign mark is submitted once; a new run can still
+      // post a genuinely new score, even if the player uses the same name.
+      if(pendingSubmittedWorldMark && pendingSubmittedWorldMark===historicMarkKey(record)){
+        writeJSON(WORLD_MARK_SUBMITTED_KEY,pendingSubmittedWorldMark);
+        updateRecordButtons();
+      }
+      if(record.stage == null) lastSubmittedRunToken=currentRunToken;
+      pendingSubmittedWorldMark=null;
+      updateRecordButtons();
+    }
   });
 }
 setupBackgrounds();currentBg=nextBackground();localizeStaticUI();updateSpeedControl();initBricks(1);resetBall();updateHUD();setInstruction();updateStartUI();open($('start-screen'));draw();

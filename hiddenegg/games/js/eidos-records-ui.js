@@ -106,7 +106,7 @@
       headers: {'Accept': 'application/json', ...(body === undefined ? {} : {'Content-Type':'application/json'})},
       ...(body === undefined ? {} : {body: JSON.stringify(body)}),
       cache: 'no-store',
-      signal: AbortSignal.timeout(5000)
+      signal: AbortSignal.timeout(body === undefined ? 8000 : path === '/v1/scores' ? 15000 : 8000)
     });
     const data = await response.json();
     if (!response.ok) {
@@ -116,7 +116,7 @@
     }
     return data;
   }
-  function init({gameId, language = 'es', demo = false, sampleScores = [], stages = [], labels = {}} = {}) {
+  function init({gameId, language = 'es', demo = false, sampleScores = [], stages = [], labels = {}, onAccepted = null} = {}) {
     if (!SAFE_ID.test(gameId || '')) throw new Error('Identificador de juego inválido.');
     const repairMode = gameId === 'reparacion';
     const lang = String(language).toLowerCase().startsWith('en') ? 'en' : 'es';
@@ -127,7 +127,8 @@
     const labelScore = typeof labels.score === 'string' && labels.score.trim() ? labels.score.slice(0,80) : t.score;
     const labelOrder = typeof labels.order === 'string' && labels.order.trim() ? labels.order.slice(0,160) : t.rankOrder;
     const stageLabel = value => repairMode ? (cleanStage(value) ? `${lang === 'es' ? 'Nivel' : 'Level'} ${value}` : '—') :
-      cleanStage(value) && stageNames.has(value) ? stageNames.get(value) : t.unknownStage;
+      cleanStage(value) && stageNames.has(value) ? stageNames.get(value) :
+      (typeof labels.unknownStage === 'string' && labels.unknownStage.trim() ? labels.unknownStage : t.unknownStage);
     const hintLabel = lang === 'es' ? 'PISTAS' : 'HINTS';
     const moveLabel = lang === 'es' ? 'INTERVENCIONES' : 'MOVES';
     const readLocal = () => localRead(storageKey, stageAware, repairMode);
@@ -193,8 +194,12 @@
     const board = root.querySelector('[data-screen="board"]');
     const input = root.querySelector('#eidos-records-name');
     const countrySelect = root.querySelector('#eidos-records-country');
-    const displayNames = new Intl.DisplayNames([lang === 'es' ? 'es' : 'en'], {type:'region'});
-    const countryOptions = COUNTRIES.map(code => ({code, label:displayNames.of(code)}))
+    const displayNames = typeof Intl !== 'undefined' && typeof Intl.DisplayNames === 'function'
+      ? new Intl.DisplayNames([lang === 'es' ? 'es' : 'en'], {type:'region'}) : null;
+    const countryName = code => {
+      try { return displayNames?.of(code) || code; } catch (_) { return code; }
+    };
+    const countryOptions = COUNTRIES.map(code => ({code, label:countryName(code)}))
       .sort((a,b) => a.label.localeCompare(b.label, lang === 'es' ? 'es' : 'en'));
     for (const {code, label} of countryOptions) {
       const option = document.createElement('option');
@@ -250,7 +255,7 @@
           const flag = document.createElement('span');
           flag.className = 'eidos-records-flag';
           flag.style.backgroundPosition = `${-(index % 12) * 20}px ${-Math.floor(index / 12) * 15}px`;
-          flag.title = displayNames.of(result.country);
+          flag.title = countryName(result.country);
           flag.setAttribute('role', 'img');
           flag.setAttribute('aria-label', flag.title);
           playerLine.appendChild(flag);
@@ -376,6 +381,13 @@
           highlighted = '';
           const match = scores.find(x => x.name === name && x.score === currentScore);
           if (match) highlighted = match.name + ':' + match.score + ':' + match.at;
+          // The game can mark a persistent achievement as submitted. Failure to
+          // update its local marker must never make the actual submission fail.
+          if (typeof onAccepted === 'function') {
+            try { onAccepted({gameId, name, score: currentScore, stage: currentStage,
+              hints: currentHints, moves: currentMoves, country: cleanCountry(countrySelect.value)}); }
+            catch (callbackError) { console.warn('EIDOS: post-save notification failed', callbackError); }
+          }
         } else {
           // No API or API unavailable: always preserve the result locally.
           saveLocally(name);

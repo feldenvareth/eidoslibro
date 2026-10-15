@@ -68,7 +68,7 @@
   #records-button{border:1px solid rgba(200,168,75,.64);border-radius:5px;background:rgba(6,24,17,.70);color:#efc77d;padding:3px 7px;cursor:pointer;font:10px/1.3 Georgia,serif;white-space:nowrap}
   #records-button:hover,#records-button:focus-visible{border-color:#f5d76e;color:#fff2c4;outline-offset:2px}
 </style>
-<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-country1">
+<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-mantenimiento1">
 
 <!-- Google Analytics: se carga únicamente tras aceptar las cookies -->
 <script id="eidos-analytics-loader">
@@ -135,7 +135,7 @@
 <button id="game-btn" type="button">Reiniciar</button>
 <script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content.js"></script>
-<script src="../js/eidos-records-ui.js?v=20261015-country1"></script>
+<script src="../js/eidos-records-ui.js?v=20261015-mantenimiento1"></script>
 
 <script>
 const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || {
@@ -242,12 +242,15 @@ const CADENCES=[
   {name:'Estable',factor:1,shotDelay:225,autoShotDelay:500,enemyDelay:2150,crawler:1.18},
   {name:'Intensa',factor:1.22,shotDelay:185,autoShotDelay:380,enemyDelay:1780,crawler:1.38}
 ];
+// Storage is optional: private mode or browser policy must not stop gameplay.
+function safeGetSetting(key){try{return localStorage.getItem(key)}catch(_){return null}}
+function safeSetSetting(key,value){try{localStorage.setItem(key,String(value))}catch(_){}}
 const CADENCE_KEY='eidosPendulumCrawlerCadenceV1';
-let cadenceIndex=Number(localStorage.getItem(CADENCE_KEY));
+let cadenceIndex=Number(safeGetSetting(CADENCE_KEY));
 if(!Number.isInteger(cadenceIndex)||cadenceIndex<0||cadenceIndex>=CADENCES.length)cadenceIndex=1;
 function changeCadence(dir){
   cadenceIndex=(cadenceIndex+dir+CADENCES.length)%CADENCES.length;
-  localStorage.setItem(CADENCE_KEY,String(cadenceIndex));
+  safeSetSetting(CADENCE_KEY,cadenceIndex);
   cadenceLabel.textContent=CADENCES[cadenceIndex].name;
 }
 cadenceLabel.textContent=CADENCES[cadenceIndex].name;
@@ -267,7 +270,7 @@ let bgIndex=-1,currentBg=null;
 selectNextBackground();
 let score=0,level=1,lives=3,started=false,over=false,quoteVisible=false,running=false,transitioning=false;
 const PENDULUM_COLORS=['#c8a84b','#8fd4c2','#d9895b'];
-let best=Number(localStorage.getItem('eidosPendulumCrawlerBestV1'))||0;
+let best=Number(safeGetSetting('eidosPendulumCrawlerBestV1'))||0;
 bestEl.textContent='Récord: '+best;
 let lastTime=0,elapsed=0,lastShot=-9999,lastAutoShot=-9999,lastEnemyShot=0;
 let invulnerableUntil=0;
@@ -341,7 +344,7 @@ function restart(){
 }
 function updateScore(points){
   score+=points;scoreEl.textContent='Puntos: '+score;
-  if(score>best){best=score;bestEl.textContent='Récord: '+best;localStorage.setItem('eidosPendulumCrawlerBestV1',String(best));}
+  if(score>best){best=score;bestEl.textContent='Récord: '+best;safeSetSetting('eidosPendulumCrawlerBestV1',best);}
 }
 function shoot(now){
   if(
