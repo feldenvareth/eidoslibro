@@ -75,6 +75,18 @@ const SAVE='eidos-enough-state-v2';
 const MAX_ROUNDS=5;
 const IDLE_GRACE=760;
 const BG_AUTO_MS=4200;
+// Un campeonato para ES/EN: primero metas alcanzadas, después eficiencia.
+const GOAL_STAGES = Array.from({length:5}, (_,i) => ({value:i+1, name: isES ? `${i+1}.ª meta` : `Goal ${i+1}`}));
+const recordsUI = window.EidosRecordsUI?.init({
+  gameId:'felicidad', language:LANG, stages:GOAL_STAGES,
+  labels: isES
+    ? {stage:'METAS ALCANZADAS',score:'EFICIENCIA',order:'ORDEN: METAS ALCANZADAS Y DESPUÉS EFICIENCIA'}
+    : {stage:'GOALS REACHED',score:'EFFICIENCY',order:'RANKED BY GOALS REACHED, THEN EFFICIENCY'}
+}) || null;
+// Eficiencia de 1 a 999: más puntos por alcanzar la meta en menos toques.
+// A diferencia del total nominal, no depende de la cifra inicial elegida.
+function recordEfficiency(){return Number.isSafeInteger(state.taps) && state.taps > 0 ? Math.max(1, 1000 - state.taps) : 0;}
+
 
 function fmtN(n){return new Intl.NumberFormat(LANG==='es'?'es-ES':'en-US',{maximumFractionDigits:0}).format(Math.round(n))}
 function read(k,f){try{const v=localStorage.getItem(k);return v?JSON.parse(v):f}catch(e){return f}}
@@ -82,14 +94,14 @@ function write(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function remove(k){try{localStorage.removeItem(k)}catch(e){}}
 function closeAll(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('open'))}
 function open(id){$(id).classList.add('open')}
-function hasOpenScreen(){return !!document.querySelector('.screen.open')}
+function hasOpenScreen(){return !!document.querySelector('.screen.open') || !!recordsUI?.isOpen()}
 
 document.querySelectorAll('[data-t]').forEach(el=>{const k=el.dataset.t;if(typeof T[k]==='string')el.textContent=T[k]});
 
-let state={base:250,total:0,round:1,target:250,continues:0,streak:0,lastTap:0,finished:false,active:false};
+let state={base:250,total:0,round:1,target:250,continues:0,streak:0,lastTap:0,taps:0,finished:false,active:false};
 let locked=false,lastFrame=performance.now(),lastPaint=0;
 
-function fresh(base){return {base,total:0,round:1,target:base,continues:0,streak:0,lastTap:0,finished:false,active:true}}
+function fresh(base){return {base,total:0,round:1,target:base,continues:0,streak:0,lastTap:0,taps:0,finished:false,active:true}}
 function save(){write(SAVE,state)}
 function clearSave(){remove(SAVE)}
 function stageStart(){return state.round===1?0:state.base*Math.pow(2,state.round-2)}
@@ -146,6 +158,7 @@ function tap(){
   else if(gap<1050)state.streak=Math.max(1,state.streak-1);
   else state.streak=0;
   state.lastTap=now;
+  if (Number.isSafeInteger(state.taps)) state.taps++;
   const amount=gain();state.total=Math.min(state.target,state.total+amount);
   floating(amount);
   $('gain-button').classList.add('hit');setTimeout(()=>$('gain-button').classList.remove('hit'),85);
@@ -170,6 +183,7 @@ function keepGoing(){
 }
 function stopHere(){finish(false)}
 function finish(exhausted){
+  const firstCompletion = !state.finished;
   state.finished=true;state.active=false;save();
   $('result-numbers').innerHTML=`
     <div class="result-num"><small>${T.initial}</small><strong>${fmtN(state.base)}</strong></div>
@@ -180,10 +194,12 @@ function finish(exhausted){
   else $('result-text').textContent=T.stopLater(state.base,state.total,state.continues);
   $('reflection-text').textContent=T.reflection;
   closeAll();open('result-screen');changeBackground(true);
+  // Nunca volver a presentar el mismo resultado al reanudar una partida acabada.
+  if (firstCompletion && recordEfficiency() > 0) void recordsUI?.promptScore(recordEfficiency(), {stage:state.round});
 }
 function startNew(){
   const base=Number($('enough-range').value)||250;
-  state=fresh(base);save();closeAll();render();changeBackground(true);scheduleBg();
+  state=fresh(base);save();recordsUI?.startSession();closeAll();render();changeBackground(true);scheduleBg();
 }
 function restart(){
   clearSave();state=fresh(Number($('enough-range').value)||250);state.active=false;locked=false;
@@ -192,6 +208,8 @@ function restart(){
 function resumeIfUseful(){
   const old=read(SAVE,null);if(!old||!Number.isFinite(old.base)||!Number.isFinite(old.target))return false;
   state={...fresh(old.base),...old};
+  // Las partidas antiguas no contabilizaban pulsaciones, no inventamos su eficiencia.
+  if (!Number.isSafeInteger(old.taps)) state.taps = null;
   $('enough-range').value=String(Math.max(100,Math.min(1000,state.base)));
   $('enough-output').textContent=fmtN(state.base);render();
   if(state.finished){finish(false);return true}
@@ -280,6 +298,7 @@ function gameLoop(now){
 
 $('enough-range').addEventListener('input',e=>$('enough-output').textContent=fmtN(Number(e.target.value)));
 $('start-button').onclick=startNew;$('gain-button').onclick=tap;$('stop-button').onclick=stopHere;$('continue-button').onclick=keepGoing;
+$('records-button').onclick=()=>recordsUI?.view();
 $('reset-btn').onclick=restart;$('play-again').onclick=restart;
 $('back-essay').onclick=()=>{try{window.top.location.href=ARTICLE_URL}catch(e){window.location.href=ARTICLE_URL}};$('close-btn').onclick=()=>window.parent.postMessage('cerrar-eidos','*');
 $('copy-link-button').onclick=()=>copyLink($('copy-link-button'));$('result-copy').onclick=()=>copyLink($('result-copy'));

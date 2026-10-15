@@ -110,12 +110,15 @@
     }
     return data;
   }
-  function init({gameId, language = 'es', demo = false, sampleScores = [], stages = []} = {}) {
+  function init({gameId, language = 'es', demo = false, sampleScores = [], stages = [], labels = {}} = {}) {
     if (!SAFE_ID.test(gameId || '')) throw new Error('Identificador de juego inválido.');
     const lang = String(language).toLowerCase().startsWith('en') ? 'en' : 'es';
     const t = TRANSLATIONS[lang];
     const stageNames = new Map((Array.isArray(stages) ? stages : []).filter(x => cleanStage(x?.value) && typeof x.name === 'string').map(x => [x.value, x.name]));
     const stageAware = stageNames.size > 0;
+    const labelStage = typeof labels.stage === 'string' && labels.stage.trim() ? labels.stage.slice(0,80) : t.stage;
+    const labelScore = typeof labels.score === 'string' && labels.score.trim() ? labels.score.slice(0,80) : t.score;
+    const labelOrder = typeof labels.order === 'string' && labels.order.trim() ? labels.order.slice(0,160) : t.rankOrder;
     const stageLabel = value => cleanStage(value) && stageNames.has(value) ? stageNames.get(value) : t.unknownStage;
     const readLocal = () => localRead(storageKey, stageAware);
     const storageKey = 'eidos-records-' + (demo ? 'sample-' : 'local-') + gameId + '-v1';
@@ -171,6 +174,8 @@
         <p class="eidos-records-footer" data-field="footer">${demo ? t.demo : remoteEnabled ? t.loading : t.local}</p>
       </section>`;
     document.body.appendChild(root);
+    root.querySelectorAll('.eidos-records-stat-label')[1].textContent = labelScore;
+    root.querySelector('.eidos-records-order').textContent = labelOrder;
     const entry = root.querySelector('[data-screen="entry"]');
     const board = root.querySelector('[data-screen="board"]');
     const input = root.querySelector('#eidos-records-name');
@@ -310,7 +315,7 @@
       currentScore = s; currentStage = stage;
       const stageField = root.querySelector('[data-field="entry-stage"]');
       stageField.hidden = !stageAware;
-      if (stageAware) stageField.textContent = `${t.stage}: ${stageLabel(currentStage)}`;
+      if (stageAware) stageField.textContent = `${labelStage}: ${stageLabel(currentStage)}`;
       root.querySelector('[data-field="rank"]').textContent = String(ranking(comparison, s, stage, stageAware)).padStart(2, '0');
       root.querySelector('[data-field="score"]').textContent = format(s, lang);
       input.value = '';
