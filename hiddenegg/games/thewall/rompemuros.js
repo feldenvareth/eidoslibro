@@ -369,19 +369,35 @@ function bestWorldMark(){
   if(!highest || !Number.isSafeInteger(best) || best<=0)return null;
   return {stage:highest,score:best};
 }
-function updateRecordButtons(){
-  const available=Boolean(bestWorldMark());
-  $('register-record-button').hidden=!available;
-  $('game-record-btn').hidden=!available || !over;
-  $('quote-record').hidden=!available || !quoteVisible;
+// At game over even a first-level attempt may have points to submit.
+// Without a CLEARED level, stage remains absent: it must never count as level 1 completed.
+function recordMarkToOffer(){
+  const completed=bestWorldMark();
+  if(completed)return completed;
+  if(over && Number.isSafeInteger(score) && score>0)return {score,stage:null};
+  return null;
 }
+function updateRecordButtons(){
+  const available=Boolean(recordMarkToOffer());
+  $('register-record-button').hidden=!Boolean(bestWorldMark());
+  $('game-record-btn').hidden=!available || !over;
+  $('quote-record').hidden=!Boolean(bestWorldMark()) || !quoteVisible;
+}
+let recordRequestInProgress=false;
 async function registerWorldMark(event){
   if(event){event.preventDefault();event.stopPropagation();}
-  const best=bestWorldMark();
-  if(!best || !records)return;
-  // The shared UI performs the global TOP-20 check and saves locally on network failure.
-  // Sessions are acquired when starting a level; a new one is requested for subsequent levels.
-  await records.promptScore(best.score,{stage:best.stage});
+  const mark=recordMarkToOffer();
+  if(!mark || !records || recordRequestInProgress)return;
+  recordRequestInProgress=true;
+  try{
+    // A fresh ticket is needed even if an older level's score was already registered.
+    await records.startSession();
+    // The shared module checks whether the score enters the Top 20 before showing the name form.
+    const shown=await records.promptScore(mark.score, mark.stage != null ? {stage:mark.stage} : {});
+    if(!shown && over)await records.view();
+  } finally {
+    recordRequestInProgress=false;
+  }
 }
 function viewWorldRecords(){if(records)void records.view()}
 function open(el){el.classList.add('open');el.setAttribute('aria-hidden','false')}
@@ -601,6 +617,9 @@ function loop(){
         $('msg').textContent=T.gameOver+' · '+T.score+': '+score;
         updateRecordButtons();
         $('game-btn').textContent=T.retry;$('game-btn').onclick=replayLevel;$('game-btn').style.display='inline-block';
+        // The three lives have ended: offer to record the mark now.
+        // The button remains available if the player closes the name dialog.
+        if(records && recordMarkToOffer())void registerWorldMark();
       }
       return;
     }
