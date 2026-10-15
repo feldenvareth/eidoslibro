@@ -8,6 +8,7 @@ const TEXT={
   es:{
     score:'Puntos',best:'Récord',level:'Nivel',lives:'Vidas',close:'Cerrar',levels:'NIVELES',
     cadence:'Cadencia',cadenceSoft:'Contemplativa',cadenceClassic:'Estable',cadenceFast:'Intensa',
+    top20:'🏆 TOP 20', registerRecord:'REGISTRAR MARCA', worldOrder:'ORDEN: NIVEL SUPERADO Y DESPUÉS PUNTOS', levelRecord:'NIVEL SUPERADO',
     start:'INICIAR',continue:'CONTINUAR PARTIDA',copy:'COPIAR ENLACE',copied:'ENLACE COPIADO',
     copyPrompt:'Copia este enlace:',discover:'CONOCE EIDOS',
     title:'ROMPEMUROS',subtitle:'ROMPE · RESISTE · AVANZA',
@@ -40,6 +41,7 @@ const TEXT={
   en:{
     score:'Score',best:'Best',level:'Level',lives:'Lives',close:'Close',levels:'LEVELS',
     cadence:'Cadence',cadenceSoft:'Contemplative',cadenceClassic:'Stable',cadenceFast:'Intense',
+    top20:'🏆 TOP 20', registerRecord:'SAVE HIGH SCORE', worldOrder:'RANKED BY CLEARED LEVEL, THEN SCORE', levelRecord:'LEVEL CLEARED',
     start:'START',continue:'CONTINUE GAME',copy:'COPY LINK',copied:'LINK COPIED',
     copyPrompt:'Copy this link:',discover:'DISCOVER EIDOS',
     title:'WALLBREAKER',subtitle:'BREAK · ENDURE · ADVANCE',
@@ -119,6 +121,7 @@ let currentBg=null,bgImgs=[],badBgIndices=new Set();
 let gamePaused=true,mapReturn='start',lastAutoSave=0;
 let bricks=[],mouseX=W/2;
 let running=false;
+let records=null;
 
 const SPEED_MODES={
   soft:{base:3.15,levelStep:.07,max:4.55,accel:.00024},
@@ -336,7 +339,7 @@ function loadSavedGame(){
   over=false;win=false;quoteVisible=false;gamePaused=false;
   currentBg=nextBackground()||currentBg;updateHUD();$('game-btn').style.display='none';
   $('msg').textContent=started?'':T.moveToStart;
-  closeAllScreens();loop();return true;
+  closeAllScreens();if(records)void records.startSession();loop();return true;
 }
 function resetCampaignData(){
   removeKey(SAVE_KEY);
@@ -353,18 +356,47 @@ function markLevelCleared(){
   writeJSON(PROGRESS_KEY,progress);
   removeKey(SAVE_KEY);
   updateStartUI();
+  updateRecordButtons();
 }
 
+function bestWorldMark(){
+  let highest=0;
+  for(const [k,done] of Object.entries(progress.completed)){
+    const n=Number(k);
+    if(done && Number.isSafeInteger(n) && n>highest && n<=1000000)highest=n;
+  }
+  const best=Number(progress.best[String(highest)]) || 0;
+  if(!highest || !Number.isSafeInteger(best) || best<=0)return null;
+  return {stage:highest,score:best};
+}
+function updateRecordButtons(){
+  const available=Boolean(bestWorldMark());
+  $('register-record-button').hidden=!available;
+  $('game-record-btn').hidden=!available || !over;
+  $('quote-record').hidden=!available || !quoteVisible;
+}
+async function registerWorldMark(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  const best=bestWorldMark();
+  if(!best || !records)return;
+  // The shared UI performs the global TOP-20 check and saves locally on network failure.
+  // Sessions are acquired when starting a level; a new one is requested for subsequent levels.
+  await records.promptScore(best.score,{stage:best.stage});
+}
+function viewWorldRecords(){if(records)void records.view()}
 function open(el){el.classList.add('open');el.setAttribute('aria-hidden','false')}
 function close(el){el.classList.remove('open');el.setAttribute('aria-hidden','true')}
 function closeAllScreens(){document.querySelectorAll('.screen').forEach(close)}
 function updateStartUI(){
   $('start-button').textContent=hasCampaignProgress()?T.continue:T.start;
   $('delete-campaign-button').hidden=!hasCampaignProgress();
+  updateRecordButtons();
 }
 function startLevel(lvl){
   level=Math.max(1,Math.floor(Number(lvl)||1));score=0;lives=3;over=false;win=false;started=false;quoteVisible=false;gamePaused=false;
-  initBricks(level);resetBall();currentBg=nextBackground()||currentBg;setInstruction();updateHUD();closeAllScreens();saveCurrentGame();loop();
+  initBricks(level);resetBall();currentBg=nextBackground()||currentBg;setInstruction();updateHUD();closeAllScreens();saveCurrentGame();
+  if(records)void records.startSession();
+  updateRecordButtons();loop();
 }
 function continueCampaign(){
   if(loadSavedGame())return;
@@ -405,6 +437,7 @@ function renderLevelMap(){
     $('endless-input').min='1';$('endless-input').max=String(max);$('endless-input').value=String(max);
   }else endless.hidden=true;
   $('delete-campaign-button').hidden=!hasCampaignProgress();
+  updateRecordButtons();
 }
 function showLevels(from='game'){
   mapReturn=from;
@@ -443,6 +476,7 @@ function showQuote(){
   quoteVisible=true;gamePaused=true;
   const idx=nextQuoteIndex(),qs=$('quote-screen'),qt=$('quote-text'),qh=$('quote-hint');
   const campaignFinish=level===50;
+  updateRecordButtons();
   qt.textContent=campaignFinish?T.campaignClearedQuote:(idx>=0?quoteText(QUOTES[idx]):T.levelCleared);
   qh.textContent=T.tapContinue;qh.classList.remove('show');qt.classList.remove('show');
   qs.classList.add('visible');qs.style.background='rgba(0,0,0,0)';
@@ -464,7 +498,7 @@ function dismissQuote(){
 }
 
 function update(){
-  if(gamePaused||quoteVisible||over||win)return;
+  if(gamePaused||quoteVisible||over||win||(records&&records.isOpen()))return;
   pad.prevX=pad.x;pad.x=Math.max(0,Math.min(W-pad.w,mouseX-pad.w/2));
   for(const brick of bricks){
     if(!brick.alive||!brick.moving)continue;
@@ -565,6 +599,7 @@ function loop(){
         quoteNextLevel=level+1;showQuote();
       }else{
         $('msg').textContent=T.gameOver+' · '+T.score+': '+score;
+        updateRecordButtons();
         $('game-btn').textContent=T.retry;$('game-btn').onclick=replayLevel;$('game-btn').style.display='inline-block';
       }
       return;
@@ -576,6 +611,10 @@ function loop(){
 
 function localizeStaticUI(){
   $('scoreEl').textContent=T.score+': 0';$('bestEl').textContent=T.best+': '+bestScore;$('levelEl').textContent=T.level+' 1';
+  $('records-btn').textContent=T.top20;$('start-records-button').textContent=T.top20;
+  $('levels-records-button').textContent=T.top20;
+  $('quote-record').textContent=T.registerRecord;$('game-record-btn').textContent=T.registerRecord;
+  $('register-record-button').textContent=T.registerRecord;
   $('levels-btn').textContent=T.levels;$('levels-btn').setAttribute('aria-label',T.levelsAria);
   $('close-btn').textContent='✕ '+T.close;$('close-btn').setAttribute('aria-label',T.closeAria);
   $('speed-down').setAttribute('aria-label',T.speedDown);$('speed-up').setAttribute('aria-label',T.speedUp);
@@ -592,14 +631,20 @@ function localizeStaticUI(){
   $('quote-hint').textContent=T.tapContinue;
 }
 
-cv.addEventListener('mousemove',e=>{if(quoteVisible||gamePaused)return;const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);started=true});
-cv.addEventListener('touchmove',e=>{if(quoteVisible||gamePaused)return;e.preventDefault();const r=cv.getBoundingClientRect();mouseX=(e.touches[0].clientX-r.left)*(W/r.width);started=true},{passive:false});
-cv.addEventListener('click',()=>{if(!quoteVisible&&!gamePaused)started=true});
+cv.addEventListener('mousemove',e=>{if(quoteVisible||gamePaused||(records&&records.isOpen()))return;const r=cv.getBoundingClientRect();mouseX=(e.clientX-r.left)*(W/r.width);started=true});
+cv.addEventListener('touchmove',e=>{if(quoteVisible||gamePaused||(records&&records.isOpen()))return;e.preventDefault();const r=cv.getBoundingClientRect();mouseX=(e.touches[0].clientX-r.left)*(W/r.width);started=true},{passive:false});
+cv.addEventListener('click',()=>{if(!quoteVisible&&!gamePaused&&!(records&&records.isOpen()))started=true});
 $('quote-screen').addEventListener('click',dismissQuote);
 $('speed-down').addEventListener('click',()=>changeSpeedMode(-1));
 $('speed-up').addEventListener('click',()=>changeSpeedMode(1));
 $('close-btn').addEventListener('click',()=>window.parent.postMessage('cerrar-eidos','*'));
 $('levels-btn').addEventListener('click',()=>showLevels('game'));
+$('records-btn').addEventListener('click',viewWorldRecords);
+$('start-records-button').addEventListener('click',viewWorldRecords);
+$('levels-records-button').addEventListener('click',viewWorldRecords);
+$('register-record-button').addEventListener('click',registerWorldMark);
+$('game-record-btn').addEventListener('click',registerWorldMark);
+$('quote-record').addEventListener('click',registerWorldMark);
 $('start-button').addEventListener('click',continueCampaign);
 $('start-levels-button').addEventListener('click',()=>showLevels('start'));
 $('copy-link-button').addEventListener('click',copyGameLink);
@@ -616,6 +661,19 @@ document.addEventListener('keydown',e=>{
   if(!$('start-screen').classList.contains('open'))showLevels('game');
 });
 
+// Universal EIDOS records. Both languages share the same championship id.
+// Highest completed level takes precedence; points on that level break ties.
+if(window.EidosRecordsUI && typeof window.EidosRecordsUI.init==='function'){
+  const knownLevels=Math.min(100000,Math.max(1500,progress.unlocked+250,progress.endless+350));
+  const stages=Array.from({length:knownLevels},(_,i)=>{
+    const n=i+1;
+    return {value:n,name:n<=50?`${T.level} ${n}`:`${T.endlessLabel} ∞${n-50}`};
+  });
+  records=window.EidosRecordsUI.init({
+    gameId:'rompemuros',language:LANG,stages,
+    labels:{stage:T.levelRecord,score:T.score,order:T.worldOrder}
+  });
+}
 setupBackgrounds();currentBg=nextBackground();localizeStaticUI();updateSpeedControl();initBricks(1);resetBall();updateHUD();setInstruction();updateStartUI();open($('start-screen'));draw();
 
 })();

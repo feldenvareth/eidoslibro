@@ -27,6 +27,7 @@
 <meta name="twitter:image" content="https://www.eidoslibro.com/hiddenegg/games/thewall/eidos-rompemuros-compartir.png">
 <title>EIDOS · Rompemuros</title>
 <link rel="stylesheet" href="rompemuros.css">
+<link rel="stylesheet" href="../css/eidos-records-ui.css">
 <script id="eidos-analytics-loader">
 (function(){
   const GA_MEASUREMENT_ID='G-SCSFPYKJTX';
@@ -64,6 +65,7 @@
     <span id="levelEl"></span>
     <span id="livesEl"></span>
   </div>
+  <button id="records-btn" class="top-btn" type="button" aria-label="Top 20">🏆 TOP 20</button>
   <button id="levels-btn" class="top-btn" type="button"></button>
   <button id="close-btn" class="top-btn" type="button"></button>
   <div id="speed-control" role="group">
@@ -78,11 +80,13 @@
   <div id="quote-screen">
     <div id="quote-text"></div>
     <div id="quote-hint"></div>
+    <button id="quote-record" class="record-level-button" type="button" hidden></button>
   </div>
 </div>
 <div id="spin"></div>
 <div id="msg"></div>
 <button id="game-btn" type="button"></button>
+<button id="game-record-btn" class="record-level-button" type="button" hidden></button>
 
 <section id="start-screen" class="screen open" aria-hidden="false">
   <div class="card">
@@ -103,6 +107,7 @@
     <div class="start-actions">
       <button id="start-button" class="primary" type="button"></button>
       <button id="start-levels-button" class="secondary" type="button"></button>
+      <button id="start-records-button" class="secondary" type="button"></button>
       <button id="copy-link-button" class="secondary" type="button"></button>
       <a id="discover-eidos" class="secondary start-link" target="_blank" rel="noopener noreferrer"></a>
     </div>
@@ -127,6 +132,8 @@
     </div>
     <p id="levels-help" class="levels-help"></p>
     <div class="levels-footer-actions">
+      <button id="register-record-button" class="secondary record-level-button" type="button" hidden></button>
+      <button id="levels-records-button" class="secondary" type="button"></button>
       <button id="levels-back" class="secondary" type="button"></button>
       <button id="delete-campaign-button" class="secondary danger-button" type="button" hidden></button>
     </div>
@@ -149,6 +156,7 @@
 
 <script src="/gallery/js/image-manifest.js"></script>
 <script src="/hiddenegg/games/eidos-content.js"></script>
-<script src="rompemuros.js"></script>
+<script src="../js/eidos-records-ui.js?v=20261015-flags"></script>
+<script src="rompemuros.js?v=20261015-top20"></script>
 </body>
 </html>
