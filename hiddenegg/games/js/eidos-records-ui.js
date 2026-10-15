@@ -75,19 +75,25 @@
   const cleanName = value => String(value || '').normalize('NFKC').replace(/[^\p{L}\p{N} _.\-]/gu, '').toUpperCase().trim().slice(0, 10).trim();
   const cleanScore = value => typeof value === 'number' && Number.isSafeInteger(value) && value > 0 ? value : 0;
   const cleanStage = value => Number.isSafeInteger(value) && value >= 1 && value <= 1000000 ? value : null;
-  const compareRecords = (a, b) => (b.stage ?? 0) - (a.stage ?? 0) || b.score - a.score || String(a.at).localeCompare(String(b.at));
-  const sortScores = (scores, stageAware = false) => scores.filter(x => x && cleanName(x.name) && cleanScore(x.score))
-    .map(x => ({name: cleanName(x.name), score: cleanScore(x.score), ...(cleanStage(x.stage) ? {stage: x.stage} : {}), ...(cleanCountry(x.country) ? {country: x.country} : {}), at: x.at || x.time || ''}))
-    .sort(stageAware ? compareRecords : (a,b) => b.score - a.score || String(a.at).localeCompare(String(b.at))).slice(0,20);
+  const compareRecords = (a, b, repair = false) => repair ?
+    (b.stage ?? 0) - (a.stage ?? 0) || (a.hints ?? Infinity) - (b.hints ?? Infinity) ||
+    (a.moves ?? Infinity) - (b.moves ?? Infinity) || String(a.at).localeCompare(String(b.at)) :
+    (b.stage ?? 0) - (a.stage ?? 0) || b.score - a.score || String(a.at).localeCompare(String(b.at));
+  const sortScores = (scores, stageAware = false, repair = false) => scores.filter(x => x && cleanName(x.name) && cleanScore(x.score))
+    .map(x => ({name: cleanName(x.name), score: cleanScore(x.score), ...(cleanStage(x.stage) ? {stage: x.stage} : {}),
+      ...(repair && Number.isSafeInteger(x.hints) && x.hints >= 0 ? {hints: x.hints} : {}),
+      ...(repair && Number.isSafeInteger(x.moves) && x.moves >= 1 ? {moves: x.moves} : {}),
+      ...(cleanCountry(x.country) ? {country: x.country} : {}), at: x.at || x.time || ''}))
+    .sort(stageAware ? (a,b) => compareRecords(a,b,repair) : (a,b) => b.score - a.score || String(a.at).localeCompare(String(b.at))).slice(0,20);
   const format = (n, lang) => Number(n).toLocaleString(lang === 'es' ? 'es-ES' : 'en-US');
-  const qualify = (scores, s, stage, stageAware) => s > 0 && (scores.length < 20 ||
-    (stageAware ? compareRecords({score:s,stage,at:'9999'}, scores[scores.length - 1]) < 0 : s > scores[scores.length - 1].score));
-  const ranking = (scores, s, stage, stageAware) => 1 + scores.filter(x => stageAware
-    ? compareRecords(x, {score:s,stage,at:'9999'}) <= 0 : x.score >= s).length;
+  const qualify = (scores, s, stage, stageAware, repair = false, hints = null, moves = null) => s > 0 && (scores.length < 20 ||
+    (stageAware ? compareRecords({score:s,stage,hints,moves,at:'9999'}, scores[scores.length - 1], repair) < 0 : s > scores[scores.length - 1].score));
+  const ranking = (scores, s, stage, stageAware, repair = false, hints = null, moves = null) => 1 + scores.filter(x => stageAware
+    ? compareRecords(x, {score:s,stage,hints,moves,at:'9999'}, repair) <= 0 : x.score >= s).length;
   const memoryStore = {};
-  function localRead(key, stageAware = false) {
-    try { return sortScores(JSON.parse(localStorage.getItem(key) || '[]'), stageAware); }
-    catch (_) { return sortScores(memoryStore[key] || [], stageAware); }
+  function localRead(key, stageAware = false, repair = false) {
+    try { return sortScores(JSON.parse(localStorage.getItem(key) || '[]'), stageAware, repair); }
+    catch (_) { return sortScores(memoryStore[key] || [], stageAware, repair); }
   }
   function localWrite(key, scores) {
     memoryStore[key] = scores;
@@ -112,17 +118,21 @@
   }
   function init({gameId, language = 'es', demo = false, sampleScores = [], stages = [], labels = {}} = {}) {
     if (!SAFE_ID.test(gameId || '')) throw new Error('Identificador de juego inválido.');
+    const repairMode = gameId === 'reparacion';
     const lang = String(language).toLowerCase().startsWith('en') ? 'en' : 'es';
     const t = TRANSLATIONS[lang];
     const stageNames = new Map((Array.isArray(stages) ? stages : []).filter(x => cleanStage(x?.value) && typeof x.name === 'string').map(x => [x.value, x.name]));
-    const stageAware = stageNames.size > 0;
+    const stageAware = stageNames.size > 0 || repairMode;
     const labelStage = typeof labels.stage === 'string' && labels.stage.trim() ? labels.stage.slice(0,80) : t.stage;
     const labelScore = typeof labels.score === 'string' && labels.score.trim() ? labels.score.slice(0,80) : t.score;
     const labelOrder = typeof labels.order === 'string' && labels.order.trim() ? labels.order.slice(0,160) : t.rankOrder;
-    const stageLabel = value => cleanStage(value) && stageNames.has(value) ? stageNames.get(value) : t.unknownStage;
-    const readLocal = () => localRead(storageKey, stageAware);
+    const stageLabel = value => repairMode ? (cleanStage(value) ? `${lang === 'es' ? 'Nivel' : 'Level'} ${value}` : '—') :
+      cleanStage(value) && stageNames.has(value) ? stageNames.get(value) : t.unknownStage;
+    const hintLabel = lang === 'es' ? 'PISTAS' : 'HINTS';
+    const moveLabel = lang === 'es' ? 'INTERVENCIONES' : 'MOVES';
+    const readLocal = () => localRead(storageKey, stageAware, repairMode);
     const storageKey = 'eidos-records-' + (demo ? 'sample-' : 'local-') + gameId + '-v1';
-    if (demo && !readLocal().length && sampleScores.length) localWrite(storageKey, sortScores(sampleScores, stageAware));
+    if (demo && !readLocal().length && sampleScores.length) localWrite(storageKey, sortScores(sampleScores, stageAware, repairMode));
     const remoteEnabled = Boolean(API_BASE && !demo);
     let scores = readLocal();
     let worldScores = [];
@@ -132,6 +142,8 @@
     let localSaveIssue = false;
     let currentScore = 0;
     let currentStage = null;
+    let currentHints = null;
+    let currentMoves = null;
     let highlighted = '';
     let previousFocus = null;
     let loadId = 0;
@@ -174,8 +186,9 @@
         <p class="eidos-records-footer" data-field="footer">${demo ? t.demo : remoteEnabled ? t.loading : t.local}</p>
       </section>`;
     document.body.appendChild(root);
-    root.querySelectorAll('.eidos-records-stat-label')[1].textContent = labelScore;
-    root.querySelector('.eidos-records-order').textContent = labelOrder;
+    root.querySelectorAll('.eidos-records-stat-label')[1].textContent = repairMode ? moveLabel : labelScore;
+    root.querySelector('.eidos-records-order').textContent = repairMode ?
+      (lang === 'es' ? 'ORDEN: NIVEL · MENOS PISTAS · MENOS INTERVENCIONES' : 'ORDER: LEVEL · FEWER HINTS · FEWER MOVES') : labelOrder;
     const entry = root.querySelector('[data-screen="entry"]');
     const board = root.querySelector('[data-screen="board"]');
     const input = root.querySelector('#eidos-records-name');
@@ -186,13 +199,14 @@
     for (const {code, label} of countryOptions) {
       const option = document.createElement('option');
       option.value = code;
-      option.textContent = `${flagEmoji(code)} ${label}`;
+      option.textContent = `${code} · ${label}`; // Country picker: native <option> cannot display images reliably on Windows.
       countrySelect.appendChild(option);
     }
     const errorLabel = root.querySelector('[data-field="submit-error"]');
     const saveButton = root.querySelector('[data-action="submit"]');
     const switchBoardButton = root.querySelector('[data-action="switch-board"]');
     if (stageAware) root.classList.add('eidos-records-with-stage');
+    if (repairMode) root.classList.add('eidos-records-repair');
 
     function currentNote() {
       if (demo) return t.demo;
@@ -215,7 +229,7 @@
     function close() {
       if (busy) return;
       root.classList.remove('eidos-records-visible');
-      currentScore = 0; currentStage = null;
+      currentScore = 0; currentStage = null; currentHints = null; currentMoves = null;
       if (previousFocus && previousFocus.isConnected && previousFocus.focus) previousFocus.focus();
     }
     function isOpen() { return root.classList.contains('eidos-records-visible'); }
@@ -230,10 +244,15 @@
         place.textContent = String(i + 1).padStart(2, '0') + '.';
         const player = document.createElement('span'); player.className = 'eidos-records-player';
         const playerLine = document.createElement('span'); playerLine.className = 'eidos-records-player-line';
-        if (result?.country) {
-          const flag = document.createElement('span'); flag.className = 'eidos-records-flag';
-          flag.textContent = flagEmoji(result.country);
+        if (result?.country && cleanCountry(result.country)) {
+          // A locally hosted image sprite avoids Windows showing flag emoji as "ES", "GB", etc.
+          const index = COUNTRIES.indexOf(result.country);
+          const flag = document.createElement('span');
+          flag.className = 'eidos-records-flag';
+          flag.style.backgroundPosition = `${-(index % 12) * 20}px ${-Math.floor(index / 12) * 15}px`;
           flag.title = displayNames.of(result.country);
+          flag.setAttribute('role', 'img');
+          flag.setAttribute('aria-label', flag.title);
           playerLine.appendChild(flag);
         }
         const name = document.createElement('span'); name.className = 'eidos-records-name'; name.textContent = result?.name || '··········';
@@ -245,7 +264,9 @@
           when.textContent = date; when.title = t.dateLabel;
           player.appendChild(when);
         }
-        const pts = document.createElement('span'); pts.className = 'eidos-records-points'; pts.textContent = result ? format(result.score, lang) : '—';
+        const pts = document.createElement('span'); pts.className = 'eidos-records-points'; pts.textContent = result ? (repairMode ?
+          `${lang === 'es' ? 'P' : 'H'}:${result.hints ?? '—'} · ${lang === 'es' ? 'I' : 'M'}:${result.moves ?? '—'}` : format(result.score, lang)) : '—';
+        if (repairMode && result) pts.title = `${hintLabel}: ${result.hints ?? '—'} · ${moveLabel}: ${result.moves ?? '—'}`;
         if (stageAware) {
           const stage = document.createElement('span'); stage.className = 'eidos-records-stage';
           stage.textContent = result ? stageLabel(result.stage) : '—';
@@ -267,7 +288,7 @@
         const result = await api('/v1/leaderboard?game=' + encodeURIComponent(gameId));
         if (id !== loadId) return;
         if (result?.game !== gameId || !Array.isArray(result.scores)) throw new Error('invalid_response');
-        worldScores = sortScores(result.scores, stageAware); online = true;
+        worldScores = sortScores(result.scores, stageAware, repairMode); online = true;
         if (!boardLocal) scores = worldScores;
       } catch (error) {
         if (id !== loadId) return;
@@ -294,30 +315,34 @@
       if (!board.hidden && isOpen()) drawBoard();
     }
     function saveLocally(name) {
-      const record = {name, score: currentScore, ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ...(currentStage != null ? {stage: currentStage} : {}), at: new Date().toISOString()};
-      const updated = sortScores([...readLocal(), record], stageAware);
+      const record = {name, score: currentScore, ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ...(currentStage != null ? {stage: currentStage} : {}), ...(repairMode ? {hints: currentHints, moves: currentMoves} : {}), at: new Date().toISOString()};
+      const updated = sortScores([...readLocal(), record], stageAware, repairMode);
       localSaveIssue = !localWrite(storageKey, updated);
       localSaveNotice = true;
       boardLocal = true;
       scores = updated;
       highlighted = record.name + ':' + record.score + ':' + record.at;
-      currentScore = 0; currentStage = null;
+      currentScore = 0; currentStage = null; currentHints = null; currentMoves = null;
       show('board');
       drawBoard();
     }
     async function promptScore(score, details = {}) {
       const s = cleanScore(score);
       const stage = stageAware ? cleanStage(details.stage) : null;
-      if (!s) return false;
+      const hints = repairMode ? details.hints : null;
+      const moves = repairMode ? details.moves : null;
+      if (!s || (repairMode && (!Number.isSafeInteger(hints) || hints < 0 || !Number.isSafeInteger(moves) || moves < 1 || stage !== s))) return false;
       await refresh();
       const comparison = online ? worldScores : readLocal();
-      if (!qualify(comparison, s, stage, stageAware)) return false;
-      currentScore = s; currentStage = stage;
+      if (!qualify(comparison, s, stage, stageAware, repairMode, hints, moves)) return false;
+      currentScore = s; currentStage = stage; currentHints = hints; currentMoves = moves;
       const stageField = root.querySelector('[data-field="entry-stage"]');
       stageField.hidden = !stageAware;
-      if (stageAware) stageField.textContent = `${labelStage}: ${stageLabel(currentStage)}`;
-      root.querySelector('[data-field="rank"]').textContent = String(ranking(comparison, s, stage, stageAware)).padStart(2, '0');
-      root.querySelector('[data-field="score"]').textContent = format(s, lang);
+      if (stageAware) stageField.textContent = repairMode ?
+        `${stageLabel(currentStage)} · ${hintLabel}: ${hints} · ${moveLabel}: ${moves}` :
+        `${labelStage}: ${stageLabel(currentStage)}`;
+      root.querySelector('[data-field="rank"]').textContent = String(ranking(comparison, s, stage, stageAware, repairMode, hints, moves)).padStart(2, '0');
+      root.querySelector('[data-field="score"]').textContent = repairMode ? format(moves, lang) : format(s, lang);
       input.value = '';
       countrySelect.value = '';
       errorLabel.textContent = '';
@@ -337,14 +362,14 @@
         if (remoteEnabled && online) {
           const ticket = session || await sessionPromise;
           if (!ticket) throw new Error('invalid_or_expired_session');
-          const result = await api('/v1/scores', {game: gameId, name, score: currentScore, ...(currentStage != null ? {stage: currentStage} : {}), ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ticket});
+          const result = await api('/v1/scores', {game: gameId, name, score: currentScore, ...(currentStage != null ? {stage: currentStage} : {}), ...(repairMode ? {hints: currentHints, moves: currentMoves} : {}), ...(cleanCountry(countrySelect.value) ? {country: countrySelect.value} : {}), ticket});
           session = null;
           if (!result.accepted) {
-            scores = sortScores(result.scores || [], stageAware);
+            scores = sortScores(result.scores || [], stageAware, repairMode);
             errorLabel.textContent = t.outdated;
             return;
           }
-          worldScores = sortScores(result.scores || [], stageAware);
+          worldScores = sortScores(result.scores || [], stageAware, repairMode);
           scores = worldScores;
           boardLocal = false;
           localSaveNotice = false;
@@ -401,7 +426,7 @@
     }, true);
     // One initial ticket covers games that already used the shared UI before adding startSession().
     if (remoteEnabled) void startSession();
-    return {view, promptScore, startSession, qualifies: (s, stage = null) => qualify(scores, cleanScore(s), cleanStage(stage), stageAware), close, isOpen};
+    return {view, promptScore, startSession, qualifies: (s, details = {}) => qualify(scores, cleanScore(s), cleanStage(details.stage), stageAware, repairMode, details.hints, details.moves), close, isOpen};
   }
   global.EidosRecordsUI = {init};
 })(window);
