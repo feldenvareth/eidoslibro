@@ -4,6 +4,7 @@
       const LANG=(document.documentElement.lang||"en").toLowerCase().startsWith("es")?"es":"en";
       const isES=LANG==="es";
       const L=(en,es)=>isES?es:en;
+      const arcade=window.EidosArcadeBridge?.create({gameId:'transferencia',language:LANG,stages:Array.from({length:7},(_,i)=>({value:i+1,name:L('Stage ','Fase ')+(i+1)})),stageLabel:L('STAGES COMPLETED','FASES COMPLETADAS'),scoreLabel:L('POINTS','PUNTOS')});
 
       const EIDOS_CONTENT = window.EIDOS_SHARED_CONTENT || { images: [], quotes: [] };
 
@@ -662,7 +663,7 @@
         else startButton.textContent=hasCampaignProgress()?L("CONTINUE GAME","CONTINUAR PARTIDA"):L("START","INICIAR");
         const del=document.getElementById("delete-campaign-button");if(del)del.hidden=!hasCampaignProgress();
       }
-      function beginNewRun(preserveHistory=false){
+      function beginNewRun(preserveHistory=false){arcade?.start();
         cancelTransferAnimation();if(hasStartedBefore)changeBackground();hasStartedBefore=true;
         runSeed=(Date.now()^Math.floor(Math.random()*0xffffffff))>>>0;score=0;transferTimeRemaining=GAME_DURATION_MS;syncFromRemainingTime();lastTimerTick=performance.now();lastDisplayedSecond=-1;completedStages=0;playing=true;transitioning=false;
         if(!preserveHistory){progress=defaultProgress();writeProgress()}removeKey(SAVE_KEY);prepareStage(0,false);saveCheckpoint(0,true);saveCurrentGame(true);closeScreens();getAudioContext();playStart();boardWrap.focus({preventScroll:true});updateStartUI();
@@ -1004,6 +1005,7 @@
         changeBackground();
 
         if (stageIndex === TOTAL_STAGES - 1) {
+          if(score>0)arcade?.capture(TOTAL_STAGES,Math.floor(score));
           showPhase(L("AUTONOMY","AUTONOMÍA"), L("The copy no longer waits for the next instruction.","La copia ya no espera la siguiente instrucción."), 1450, showVictory);
           return;
         }
@@ -1020,6 +1022,7 @@
       }
 
       function endGame() {
+        if(score>0 && completedStages>0)arcade?.capture(completedStages,Math.max(1,Math.floor(score)));
         playing = false;
         transitioning = false;
         saveBest();
@@ -1342,6 +1345,7 @@
       }
 
       function finishGame() {
+        if(score>0 && completedStages>0)arcade?.capture(completedStages,Math.max(1,Math.floor(score)));
         if (!playing || animating || transitioning) return;
         saveCurrentGame(true);
         playing = false;

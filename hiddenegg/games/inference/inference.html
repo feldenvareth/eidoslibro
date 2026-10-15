@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06100c">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.ico" sizes="any">
+  <link rel="icon" href="https://www.eidoslibro.com/assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://www.eidoslibro.com/assets/images/favicon.png">
+  <link rel="stylesheet" href="inferencia.css">
+<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-5juegos1">
+  <script>
+    (function(){
+      const GA='G-SCSFPYKJTX';
+      let loaded=false;
+      window.dataLayer=window.dataLayer||[];
+      window.gtag=window.gtag||function(){dataLayer.push(arguments)};
+      window.loadEidosAnalytics=function(){
+        if(loaded)return; loaded=true;
+        const s=document.createElement('script');
+        s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA;
+        document.head.appendChild(s);
+        gtag('js',new Date());gtag('config',GA);
+      };
+      try{if(localStorage.getItem('consentGiven')==='true')loadEidosAnalytics()}catch(e){}
+    })();
+  </script>
+
+  <meta name="description" content="INFERENCE, an EIDOS logic game about reconstructing hidden patterns from row and column clues.">
+  <link rel="canonical" href="https://www.eidoslibro.com/hiddenegg/games/inferencia/inference.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EIDOS Book">
+  <meta property="og:title" content="EIDOS · Inference">
+  <meta property="og:description" content="Reconstruct what is hidden from its traces.">
+  <meta property="og:url" content="https://www.eidoslibro.com/hiddenegg/games/inferencia/inference.html">
+  <title>EIDOS · Inference</title>
+</head>
+
+<body>
+<div id="game-shell">
+  <div id="bg"><img id="bg-a" alt=""><img id="bg-b" alt=""></div>
+
+  <header id="topbar">
+    <div id="hud">
+      <span id="level-hud"></span>
+      <span id="mode-hud"></span>
+      <span id="time-hud"></span>
+    </div>
+    <button type="button" class="secondary" data-eidos-view>🏆 TOP 20</button><button id="levels-btn" class="tiny" data-t="levels"></button>
+    <button id="close-btn" class="tiny" type="button">×</button>
+  </header>
+
+  <main id="game-area">
+    <div id="title-block">
+      <p class="brand">E I D O S</p>
+      <h1 data-t="gameTitle"></h1>
+      <p id="subtitle" data-t="subtitle"></p>
+    </div>
+
+    <section id="puzzle-wrap">
+      <div id="corner"></div>
+      <div id="col-clues"></div>
+      <div id="row-clues"></div>
+      <div id="grid"></div>
+    </section>
+
+    <div id="game-tools">
+      <button id="fill-mode" class="tool active" type="button" data-t="fill"></button>
+      <button id="mark-mode" class="tool" type="button" data-t="mark"></button>
+      <button id="undo-btn" class="tool" type="button" data-t="undo"></button>
+    </div>
+
+    <p id="game-message"></p>
+  </main>
+
+  <section id="start-screen" class="screen open">
+    <div class="card">
+      <p class="kicker">E I D O S</p>
+      <h2 data-t="gameTitle"></h2>
+      <p class="card-sub" data-t="startSubtitle"></p>
+      <p class="intro" data-t="intro"></p>
+
+      <div class="mini-demo" aria-hidden="true">
+        <div><span>3</span><b>■■■□□</b></div>
+        <div><span>2·1</span><b>■■□■□</b></div>
+      </div>
+
+      <div class="rule-box">
+        <strong data-t="campaignRule"></strong>
+        <span data-t="campaignRuleText"></span>
+      </div>
+
+      <div class="start-actions">
+        <button type="button" class="secondary" data-eidos-view>🏆 TOP 20</button><button type="button" class="secondary" data-eidos-register hidden>🏆 SAVE SCORE</button><button id="start-button" class="primary" data-t="start"></button>
+        <button id="start-levels-button" class="secondary" data-t="levels"></button>
+        <button id="copy-link-button" class="secondary" data-t="copyLink"></button>
+        <a class="secondary full" id="discover-eidos" href="https://www.eidoslibro.com/" target="_blank" rel="noopener" data-t="discoverEidos"></a>
+      </div>
+      <p class="note" data-t="startNote"></p>
+    </div>
+  </section>
+
+  <section id="levels-screen" class="screen">
+    <div class="card levels-card">
+      <p class="kicker">E I D O S</p>
+      <h2 data-t="levels"></h2>
+      <p class="card-sub" data-t="levelsSubtitle"></p>
+      <div id="levels-summary"></div>
+      <div id="level-map"></div>
+      <div id="endless-panel" hidden>
+        <h3 data-t="endless"></h3>
+        <p data-t="endlessText"></p>
+        <div class="endless-jump">
+          <input id="endless-input" type="number" min="1" step="1" value="1">
+          <button id="endless-play" class="primary" data-t="play"></button>
+        </div>
+      </div>
+      <div class="levels-footer">
+        <button type="button" class="secondary" data-eidos-view>🏆 TOP 20</button><button type="button" class="secondary" data-eidos-register hidden>🏆 SAVE SCORE</button><button id="levels-back" class="secondary" data-t="back"></button>
+        <button id="delete-campaign-button" class="secondary danger" data-t="deleteCampaign" hidden></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="delete-screen" class="screen">
+    <div class="card">
+      <p class="kicker">E I D O S</p>
+      <h2 data-t="deleteCampaign"></h2>
+      <p class="card-sub danger-text" data-t="deleteSubtitle"></p>
+      <p class="intro" data-t="deleteText"></p>
+      <div class="delete-warning" data-t="deleteWarning"></div>
+      <div class="levels-footer">
+        <button id="confirm-delete" class="secondary danger" data-t="deleteConfirm"></button>
+        <button id="cancel-delete" class="secondary" data-t="cancel"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="win-screen" class="screen">
+    <div class="card">
+      <p class="kicker" data-t="solved"></p>
+      <h2 id="win-title"></h2>
+      <p id="win-stats"></p>
+      <div class="win-actions">
+        <button type="button" class="secondary" data-eidos-register hidden>🏆 SAVE SCORE</button><button id="next-button" class="primary" data-t="next"></button>
+        <button id="win-levels-button" class="secondary" data-t="levels"></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/gallery/js/image-manifest.js"></script>
+<script src="/hiddenegg/games/eidos-content.js"></script>
+<script src="../js/eidos-records-ui.js?v=20261015-5juegos1"></script>
+<script src="../js/eidos-arcade-bridge.js?v=20261015-5juegos1"></script>
+<script src="inferencia.js?v=20261015-5juegos1"></script>
+</body>
+
+</html>

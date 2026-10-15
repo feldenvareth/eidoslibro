@@ -61,6 +61,7 @@
     })();
   </script>
   <link rel="stylesheet" href="transfer.css">
+<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-5juegos1">
 </head>
 <body>
 
@@ -123,7 +124,7 @@
         <span id="stage-hud">Stage 1/7</span>
         <span id="sync-hud">Window 10:00</span>
       </div>
-      <button id="levels-button" type="button">LEVELS</button>
+      <button type="button" class="game-button" data-eidos-view>🏆 TOP 20</button><button id="levels-button" type="button">LEVELS</button>
       <button id="sound-button" type="button" aria-label="Mute sound" aria-pressed="true" title="Mute sound">♪</button>
       <button id="close-btn" type="button">✕ Close</button>
     </header>
@@ -168,16 +169,16 @@
       </div>
     </section>
 
-    <section class="screen open" id="start-screen" aria-labelledby="start-title"><div class="card"><p class="card-kicker">E I D O S</p><h2 id="start-title">TRANSFER</h2><p class="card-subtitle">CAN YOU COPY A MIND WITHOUT LOSING IT?</p><p class="intro"><strong>One move controls both minds.</strong> Guide the original and the copy to each memory at the same time. Their circuits begin identical and diverge as the transfer advances.</p><div id="copy-example" aria-hidden="true"><div class="example-mind"><span><span class="example-symbol">◉</span><span class="example-label">ORIGINAL</span></span></div><span class="example-link">⇄</span><div class="example-mind copy"><span><span class="example-symbol">◇</span><span class="example-label">COPY</span></span></div></div><div class="control-grid"><div class="control-item"><strong>MOVE</strong>Arrow keys</div><div class="control-item"><strong>MOBILE</strong>Swipe</div><div class="control-item"><strong>GOAL</strong>Complete all 7 stages within 10 minutes</div><div class="control-item"><strong>RISK</strong>Mines reduce the transfer window</div></div><div class="start-actions"><button class="primary-button" id="start-button" type="button">START</button><button class="secondary-button" id="start-levels-button" type="button">LEVELS</button><button class="secondary-button" id="copy-link-button" type="button">COPY LINK</button><a class="secondary-button" href="https://www.eidoslibro.com/blog/articles/02_human_mind.html" target="_blank" rel="noopener">READ THE ARTICLE</a><a class="secondary-button full-start-action" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener">DISCOVER EIDOS</a></div><p class="silent-note" id="sound-note">Sound begins with the first move.</p><p class="collection-note">The seven stages form a single transfer. Progress and the remaining transfer window are saved in this browser.</p></div></section>
+    <section class="screen open" id="start-screen" aria-labelledby="start-title"><div class="card"><p class="card-kicker">E I D O S</p><h2 id="start-title">TRANSFER</h2><p class="card-subtitle">CAN YOU COPY A MIND WITHOUT LOSING IT?</p><p class="intro"><strong>One move controls both minds.</strong> Guide the original and the copy to each memory at the same time. Their circuits begin identical and diverge as the transfer advances.</p><div id="copy-example" aria-hidden="true"><div class="example-mind"><span><span class="example-symbol">◉</span><span class="example-label">ORIGINAL</span></span></div><span class="example-link">⇄</span><div class="example-mind copy"><span><span class="example-symbol">◇</span><span class="example-label">COPY</span></span></div></div><div class="control-grid"><div class="control-item"><strong>MOVE</strong>Arrow keys</div><div class="control-item"><strong>MOBILE</strong>Swipe</div><div class="control-item"><strong>GOAL</strong>Complete all 7 stages within 10 minutes</div><div class="control-item"><strong>RISK</strong>Mines reduce the transfer window</div></div><div class="start-actions"><button type="button" class="secondary-button" data-eidos-view>🏆 TOP 20</button><button type="button" class="secondary-button" data-eidos-register hidden>🏆 SAVE SCORE</button><button class="primary-button" id="start-button" type="button">START</button><button class="secondary-button" id="start-levels-button" type="button">LEVELS</button><button class="secondary-button" id="copy-link-button" type="button">COPY LINK</button><a class="secondary-button" href="https://www.eidoslibro.com/blog/articles/02_human_mind.html" target="_blank" rel="noopener">READ THE ARTICLE</a><a class="secondary-button full-start-action" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener">DISCOVER EIDOS</a></div><p class="silent-note" id="sound-note">Sound begins with the first move.</p><p class="collection-note">The seven stages form a single transfer. Progress and the remaining transfer window are saved in this browser.</p></div></section>
 
-    <section class="screen" id="levels-screen" aria-hidden="true"><div class="card levels-card"><p class="card-kicker">E I D O S</p><h2>STAGES</h2><p class="card-subtitle">TRANSFER PROGRESS</p><div id="campaign-summary"><span id="campaign-completed"></span><span id="campaign-unlocked"></span></div><div id="level-map"></div><p class="collection-note">You can return to any unlocked stage from the checkpoint at which it was reached, preserving the transfer window available at that moment.</p><div class="levels-footer-actions"><button id="levels-back" class="secondary-button" type="button">BACK</button><button id="delete-campaign-button" class="secondary-button danger-button" type="button" hidden>DELETE CAMPAIGN</button></div></div></section><section class="screen" id="delete-campaign-screen" aria-hidden="true"><div class="card delete-campaign-card"><p class="card-kicker">CAMPAIGN</p><h2>DELETE CAMPAIGN</h2><p class="card-subtitle danger-subtitle">THIS ACTION CANNOT BE UNDONE</p><p class="intro">You are about to start from zero. Completed and unlocked stages, checkpoints, the saved game and the transfer record in this browser will be deleted.</p><div class="delete-warning"><strong>YOUR ENTIRE CAMPAIGN HISTORY WILL BE ERASED.</strong><span>The new transfer will begin again at Perception with a full ten-minute window.</span></div><div class="delete-actions"><button id="confirm-delete-campaign" class="primary-button danger-confirm" type="button">DELETE AND START FROM ZERO</button><button id="cancel-delete-campaign" class="secondary-button" type="button">CANCEL</button></div></div></section><section class="screen" id="game-over-screen" aria-labelledby="game-over-title" aria-hidden="true">
+    <section class="screen" id="levels-screen" aria-hidden="true"><div class="card levels-card"><p class="card-kicker">E I D O S</p><h2>STAGES</h2><p class="card-subtitle">TRANSFER PROGRESS</p><div id="campaign-summary"><span id="campaign-completed"></span><span id="campaign-unlocked"></span></div><div id="level-map"></div><p class="collection-note">You can return to any unlocked stage from the checkpoint at which it was reached, preserving the transfer window available at that moment.</p><div class="levels-footer-actions"><button type="button" class="secondary-button" data-eidos-register hidden>🏆 SAVE SCORE</button><button id="levels-back" class="secondary-button" type="button">BACK</button><button id="delete-campaign-button" class="secondary-button danger-button" type="button" hidden>DELETE CAMPAIGN</button></div></div></section><section class="screen" id="delete-campaign-screen" aria-hidden="true"><div class="card delete-campaign-card"><p class="card-kicker">CAMPAIGN</p><h2>DELETE CAMPAIGN</h2><p class="card-subtitle danger-subtitle">THIS ACTION CANNOT BE UNDONE</p><p class="intro">You are about to start from zero. Completed and unlocked stages, checkpoints, the saved game and the transfer record in this browser will be deleted.</p><div class="delete-warning"><strong>YOUR ENTIRE CAMPAIGN HISTORY WILL BE ERASED.</strong><span>The new transfer will begin again at Perception with a full ten-minute window.</span></div><div class="delete-actions"><button id="confirm-delete-campaign" class="primary-button danger-confirm" type="button">DELETE AND START FROM ZERO</button><button id="cancel-delete-campaign" class="secondary-button" type="button">CANCEL</button></div></div></section><section class="screen" id="game-over-screen" aria-labelledby="game-over-title" aria-hidden="true">
       <div class="card result-card">
         <p class="card-kicker">THE WINDOW HAS CLOSED</p>
         <h2 id="game-over-title">TRANSFER INTERRUPTED</h2>
         <p class="result-lead">The transfer stopped at:</p>
         <p class="result-value" id="failure-stage">Memory</p>
         <p class="result-copy">The ten-minute window expired before the pattern was completed. You can begin a new transfer and try again.</p>
-        <button class="primary-button" id="retry-button" type="button">RETRY STAGE</button>
+        <button type="button" class="secondary-button" data-eidos-register hidden>🏆 SAVE SCORE</button><button class="primary-button" id="retry-button" type="button">RETRY STAGE</button>
         <nav class="result-links">
           <a class="result-link" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener">DISCOVER EIDOS</a>
           <a class="result-link" href="https://www.eidoslibro.com/blog/articles/02_human_mind.html" target="_blank" rel="noopener">READ THE ARTICLE</a>
@@ -198,7 +199,7 @@
           <p class="result-lead">Window remaining:</p>
           <p class="result-value" id="final-sync">87 %</p>
           <p class="result-copy" id="victory-copy"></p>
-          <button class="primary-button" id="victory-retry-button" type="button">NEW TRANSFER</button>
+          <button type="button" class="secondary-button" data-eidos-register hidden>🏆 SAVE SCORE</button><button class="primary-button" id="victory-retry-button" type="button">NEW TRANSFER</button>
           <nav class="result-links">
             <a class="result-link" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener">DISCOVER EIDOS</a>
             <a class="result-link" href="https://www.eidoslibro.com/blog/articles/02_human_mind.html" target="_blank" rel="noopener">READ THE ARTICLE THAT INSPIRED THIS GAME</a>
@@ -222,7 +223,7 @@
         <p class="result-lead">You managed to preserve the mind up to:</p>
         <p class="result-value" id="finish-stage">Perception</p>
         <p class="result-copy" id="finish-progress">0 of 7 stages completed.</p>
-        <button class="primary-button" id="finish-retry-button" type="button">CONTINUE TRANSFER</button>
+        <button type="button" class="secondary-button" data-eidos-register hidden>🏆 SAVE SCORE</button><button class="primary-button" id="finish-retry-button" type="button">CONTINUE TRANSFER</button>
         <nav class="result-links" aria-label="EIDOS links">
           <a class="result-link" href="https://www.eidoslibro.com/indexeng.html" target="_blank" rel="noopener">DISCOVER EIDOS</a>
           <a class="result-link" href="https://www.eidoslibro.com/blog/articles/02_human_mind.html" target="_blank" rel="noopener">READ THE ARTICLE THAT INSPIRED THIS GAME</a>
@@ -233,6 +234,8 @@
 
   <script src="/gallery/js/image-manifest.js"></script>
   <script src="/hiddenegg/games/eidos-content.js"></script>
-  <script src="transfer.js"></script>
+  <script src="../js/eidos-records-ui.js?v=20261015-5juegos1"></script>
+<script src="../js/eidos-arcade-bridge.js?v=20261015-5juegos1"></script>
+<script src="transfer.js?v=20261015-5juegos1"></script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 
 
   <link rel="stylesheet" href="forma.css">
+<link rel="stylesheet" href="../css/eidos-records-ui.css?v=20261015-5juegos1">
 </head>
 <body>
 <aside id="consent-banner" role="dialog" aria-label="Preferencias de cookies" hidden>
@@ -74,7 +75,7 @@
     <div class="brand">FORMA<small>EL CUERPO DE LA INTELIGENCIA</small></div>
     <div class="hudbox">NIVEL<b id="levelN">1</b><em id="difficulty">FÁCIL</em></div>
     <div class="hudbox">MOV.<b id="movesN">0</b></div>
-    <button id="menuButton" class="iconbtn" aria-label="Menú">☰</button>
+    <button type="button" class="bigbtn" data-eidos-view>🏆 TOP 20</button><button id="menuButton" class="iconbtn" aria-label="Menú">☰</button>
   </header>
 
   <main id="game-area">
@@ -117,7 +118,7 @@
         <div class="rule"><span class="glyph">△</span><b>COMPLETA</b>Puedes probar solapes; la solución final no los admite.</div>
       </div>
       <div class="start-actions">
-        <button id="newBtn" class="bigbtn primary" type="button">INICIAR</button>
+        <button type="button" class="bigbtn" data-eidos-view>🏆 TOP 20</button><button type="button" class="bigbtn" data-eidos-register hidden>🏆 REGISTRAR MARCA</button><button id="newBtn" class="bigbtn primary" type="button">INICIAR</button>
         <button id="levelSelectBtn" class="bigbtn" type="button">NIVELES</button>
         <button id="copyLinkBtn" class="bigbtn" type="button">COPIAR ENLACE</button>
         <a id="startArticleBtn" class="start-link" href="https://www.eidoslibro.com/blog/articulos/07_inteligente_para_que.html" target="_blank" rel="noopener noreferrer">LEER EL ARTÍCULO</a>
@@ -135,7 +136,7 @@
       <p class="sub" id="menuProgress">PROGRESO 1 / 60</p>
       <div id="levelGrid"></div>
       <div class="menurow">
-        <button id="resumeBtn" class="bigbtn primary">VOLVER</button>
+        <button type="button" class="bigbtn" data-eidos-register hidden>🏆 REGISTRAR MARCA</button><button id="resumeBtn" class="bigbtn primary">VOLVER</button>
         <button id="soundBtn" class="bigbtn">SONIDO: SÍ</button>
       </div>
       <div class="menurow">
@@ -167,7 +168,7 @@
       <p class="sub" id="winLevel">NIVEL 1 SUPERADO</p>
       <div id="winStats"><div class="statcard">MOVIMIENTOS<b id="winMoves">0</b></div><div class="statcard">MEJOR MARCA<b id="winBest">0</b></div></div>
       <p class="intro" id="winCopy">Has reconstruido una totalidad a partir de fragmentos que podían desplazarse y cambiar de orientación.</p>
-      <div class="actions"><button id="nextLevelBtn" class="bigbtn primary">SIGUIENTE NIVEL</button><button id="winMenuBtn" class="bigbtn">VER NIVELES</button></div>
+      <div class="actions"><button type="button" class="bigbtn" data-eidos-register hidden>🏆 REGISTRAR MARCA</button><button id="nextLevelBtn" class="bigbtn primary">SIGUIENTE NIVEL</button><button id="winMenuBtn" class="bigbtn">VER NIVELES</button></div>
       <!-- ARTÍCULO FORMA ES: sustituir únicamente href="#" por la URL del artículo español -->
       <a class="article-link" href="https://www.eidoslibro.com/blog/articulos/07_inteligente_para_que.html" target="_blank" rel="noopener noreferrer"><span>LA IDEA CONTINÚA FUERA DEL PUZLE</span><b>LEER EL ARTÍCULO →</b></a>
       <div class="quote" id="winQuote">La inteligencia espacial no ve únicamente piezas. Ve relaciones posibles entre ellas.</div>
@@ -237,6 +238,8 @@
 document.write('<script src="/hiddenegg/games/eidos-content.js?v=' + Date.now() + '"><' + '/script>');
 </script>
 
-<script src="forma.js"></script>
+<script src="../js/eidos-records-ui.js?v=20261015-5juegos1"></script>
+<script src="../js/eidos-arcade-bridge.js?v=20261015-5juegos1"></script>
+<script src="forma.js?v=20261015-5juegos1"></script>
 </body>
 </html>

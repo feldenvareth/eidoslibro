@@ -5,6 +5,7 @@ const ES_TEXT={"You rebuilt a whole from fragments that could move and change or
 function tr(value){return isES?(ES_TEXT[value]??value):value}
 
 const $=id=>document.getElementById(id);
+const arcade=window.EidosArcadeBridge?.create({gameId:'forma',language:LANG,scoreLabel:isES?'EFICIENCIA':'EFFICIENCY'});
 const SQ3=Math.sqrt(3), HUNIT=SQ3/2;
 const SAVE_KEY='eidos-forma-save-v4', SOUND_KEY='eidos-forma-sound-v1';
 const COLORS=['#2da7e8','#f0b83d','#78c751','#ef624f','#a779e7','#41c2ae','#e887c2','#e89b4a','#7b99f2'];
@@ -259,7 +260,7 @@ function pieceCountFor(n,cells){
   const base=[3,4,5,5,6,7][tier],extra=pos>=6?1:0;
   return Math.min(base+extra,Math.max(3,Math.floor(cells/3.6)));
 }
-function startLevel(n,inf=false,remember=true){
+function startLevel(n,inf=false,remember=true){arcade?.start();
   won=false;surrendered=false;infinite=inf;
   if(infinite){if(!infiniteRunSeed)infiniteRunSeed=hash((Date.now()^Math.floor(Math.random()*0xffffffff))>>>0);infiniteIndex=Math.max(1,n);level=60+infiniteIndex}else{level=Math.max(1,Math.min(60,n));}
   moves=0;hints=3;occupied.clear();selected=null;active=null;hintPiece=null;clearTimeout(hintTimer);
@@ -511,6 +512,7 @@ function revealSolution(){
   updateHUD();drawAll();play('hint');setTimeout(()=>openScreen('solutionScreen'),520);
 }
 function winLevel(){
+  arcade?.capture(infinite?60+infiniteIndex:level,Math.max(1,999-Math.min(998,moves)));
   play('win');const key=String(level),old=progress.best[key];if(!infinite){if(!old||moves<old)progress.best[key]=moves;markCampaignResult('win')}
   $('winLevel').textContent=infinite?tr('ENDLESS PUZZLE ')+infiniteIndex+' CLEARED':tr('LEVEL ')+level+' CLEARED';$('winMoves').textContent=moves;$('winBest').textContent=infinite?'—':progress.best[key]||moves;$('winCopy').textContent=WIN_COPY[(level-1)%WIN_COPY.length];applyLevelQuote(level);$('nextLevelBtn').textContent=!infinite&&level===60?tr('FINISH CAMPAIGN'):(!infinite&&level<60&&level%10===0?tr('NEXT PHASE'):tr('NEXT LEVEL'));openScreen('winScreen')
 }
