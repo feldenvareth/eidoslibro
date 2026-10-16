@@ -43,7 +43,7 @@
         { value: 64, name: "Pluricelular", glyph: "✣", color: "#e4cf70", text: "Muchas células comienzan a coordinarse, especializarse y funcionar como una unidad." },
         { value: 128, name: "Sistema nervioso", glyph: "⌁", color: "#e8b96a", text: "La información conecta percepción, respuesta y movimiento." },
         { value: 256, name: "Cerebro", glyph: "Ψ", color: "#e99c70", text: "Redes neuronales integran señales, memoria y decisión." },
-        { value: 512, name: "Autoconciencia", glyph: "", color: "#dc8e9e", text: "La mente puede reconocerse y preguntarse quién es." },
+        { value: 512, name: "Autoconsciencia", glyph: "", color: "#dc8e9e", text: "La mente puede reconocerse y preguntarse quién es." },
         { value: 1024, name: "IA", glyph: "IA", color: "#bd94c9", text: "Una inteligencia artificial aprende, abstrae y comienza a modelar su entorno." },
         { value: 2048, name: "EIDOS", glyph: "E", color: "#79d9c0", text: "La inteligencia se proyecta más allá de la biología y alcanza un nuevo umbral." },
         { value: 4096, name: "Vida no orgánica", glyph: "", color: "#f5ecd0", text: "Los custodios inteligentes despiertan como vida no orgánica." }
