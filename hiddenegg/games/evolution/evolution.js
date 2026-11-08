@@ -63,11 +63,19 @@
       ];
 
       const stageByValue = new Map(stages.map(stage => [stage.value, stage]));
+      const CUSTODIAN_NAMES = ["Orfeo", "Tessalon", "IVN-3", "Ciran", "Kheron", "Eramus", "Kael", "Eras", "Lyron", "Talion", "Nemor", "Sorel", "Aster", "Nexar", "Veyron", "Sael"];
+      // World leaderboard encoding: historical 4096 = generic non-organic life;
+      // 4097..4112 identify Orfeo, Tessalon, IVN-3 ... Sael in this single run.
+      // Keep these values separate from the 2048-style board tiles and milestones.
+      const recordStages = [
+        ...stages.map(({value, name}) => ({value, name})),
+        ...CUSTODIAN_NAMES.map((name, index) => ({value: 4097 + index, name}))
+      ];
       // Both languages use the same game ID and numeric stage values.
       // The shared ranking UI receives translated milestone names from this game.
       const recordsUI = window.EidosRecordsUI?.init({
         gameId: "evolution", language: LANG,
-        stages: stages.map(({value, name}) => ({value, name}))
+        stages: recordStages
       }) || null;
       document.querySelectorAll(".eidos-records-trigger").forEach(button => {
         button.addEventListener("click", () => recordsUI?.view());
@@ -91,7 +99,43 @@
       const CUSTODIAN_ICON = `<svg class="custodian-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M7.5 27.2c2.1-4.4 5.2-6.8 9.3-7.3 2.9-.3 5.7.6 8.1 2.6"/><path d="M12.2 22.1c-1.2-2.2-1.4-4.8-.5-7.3 1.4-4.1 5-6.8 8.9-6.8 2.6 0 4.9 1.2 6.1 3.1"/><path d="M15.3 10.3c-1.8 1.6-2.8 3.7-2.8 6 0 2.1.9 4 2.5 5.5"/><path d="M18.7 9.1c1.3-.8 2.8-1.2 4.3-1.2"/><circle cx="24.3" cy="10.6" r="3.2"/><path d="M18.1 13.1c1.4.2 2.7.8 3.7 1.8"/></svg>`;
       const SHIP_ICON = `<svg class="ship-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 19.5 16 8l12 11.5-4.5 1.4-2.6 5H11.1l-2.6-5Z"/><path d="M10.6 19.1h10.8"/><path d="M13.1 24.3 16 27l2.9-2.7"/><circle cx="16" cy="16.3" r="1.8"/></svg>`;
       const TERMINAL_STAGE_VALUE = 4096;
-      const CUSTODIAN_NAMES = ["Orfeo", "Tessalon", "IVN-3", "Ciran", "Kheron", "Eramus", "Kael", "Eras", "Lyron", "Talion", "Nemor", "Sorel", "Aster", "Nexar", "Veyron", "Sael"];
+      // The twelve evolutionary milestones stay intact. Once life reaches 4096,
+      // every newly awakened Custodian receives a persistent, unique identity.
+      // Its artwork and serial number deliberately differ from the next one.
+      const CUSTODIAN_ART = [
+        `<circle cx="24" cy="12" r="6"/><path d="M13 39v-7c0-7 5-12 11-12s11 5 11 12v7M10 41h28M18 13h12"/>`,
+        `<path d="M24 5 41 14v20L24 43 7 34V14Z"/><circle cx="24" cy="24" r="7"/><path d="M17 24h14M24 17v14"/>`,
+        `<rect x="10" y="11" width="28" height="28" rx="5"/><path d="M24 11V5M19 5h10M5 21h5M38 21h5"/><rect x="16" y="19" width="5" height="5" rx="1"/><rect x="27" y="19" width="5" height="5" rx="1"/><path d="M18 32h12"/>`,
+        `<path d="M24 4 42 36H6Z"/><circle cx="24" cy="25" r="7"/><circle cx="24" cy="25" r="2"/><path d="M24 4v11M14 37h20"/>`,
+        `<path d="M24 8v32M8 24h32M12 12l24 24M36 12 12 36"/><circle cx="24" cy="24" r="8"/><circle cx="24" cy="24" r="3"/>`,
+        `<path d="M4 31 24 7l20 24-8 3-5 8H17l-5-8Z"/><path d="M15 30h18M24 14v16"/><circle cx="24" cy="24" r="4"/>`,
+        `<path d="M9 9 20 19l4-7 4 7L39 9l-6 19-9 12-9-12Z"/><path d="M17 28h14M24 19v15"/><circle cx="24" cy="25" r="3"/>`,
+        `<path d="M11 7h26M11 41h26M15 8c0 10 18 12 18 16S15 30 15 40M33 8c0 10-18 12-18 16s18 6 18 16"/><circle cx="24" cy="24" r="3"/>`,
+        `<circle cx="24" cy="24" r="17"/><path d="M11 28c-1-11 16-20 25-8 7 10-2 21-12 17-7-2-8-12 1-14 5-1 9 7 2 10"/>`,
+        `<path d="M24 5 39 11v13c0 10-6 15-15 19C15 39 9 34 9 24V11Z"/><path d="m16 24 6 6 12-14"/>`,
+        `<path d="M9 36c-5-9 3-14 12-15 10-1 18-6 13-14M37 12c5 11-3 14-12 15-10 1-18 6-13 14"/><circle cx="12" cy="38" r="4"/><circle cx="36" cy="10" r="4"/>`,
+        `<path d="M8 39V20c0-9 7-15 16-15s16 6 16 15v19M14 37h20M14 24h20M19 19l5-5 5 5"/><circle cx="24" cy="29" r="3"/>`,
+        `<path d="m24 4 5 14 15 1-12 9 4 15-12-9-12 9 4-15-12-9 15-1Z"/><circle cx="24" cy="24" r="4"/>`,
+        `<circle cx="24" cy="8" r="5"/><circle cx="8" cy="36" r="5"/><circle cx="40" cy="36" r="5"/><circle cx="24" cy="26" r="5"/><path d="m24 13 0 8M20 29 12 34m16-5 8 5M12 35h24"/>`,
+        `<path d="m27 4-16 23h12l-2 17 17-24H26Z"/><path d="M7 9h8M34 39h8"/>`,
+        `<circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="4"/><path d="M24 3v9m0 24v9M3 24h9m24 0h9M9 9l7 7m16 16 7 7M39 9l-7 7M16 32l-7 7"/>`
+      ];
+      const CUSTODIAN_COLORS = [
+        "#8de6cd", "#e2c074", "#90baff", "#f5aa85",
+        "#ceb0ff", "#f3d58b", "#ef9ed3", "#a7dada",
+        "#91dca9", "#ffbc89", "#e5b1fa", "#aad3ed",
+        "#ffe195", "#95e1d5", "#ffadac", "#c0d990"
+      ];
+
+      function custodianGlyphMarkup(index) {
+        const drawing = CUSTODIAN_ART[(index - 1) % CUSTODIAN_ART.length];
+        return `<svg class="unique-custodian-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">${drawing}</svg>`;
+      }
+
+      function custodianColorFor(index) {
+        return CUSTODIAN_COLORS[(index - 1) % CUSTODIAN_COLORS.length];
+      }
+
       const gameShell = document.getElementById("game-shell");
       const tilesElement = document.getElementById("tiles");
       const scoreElement = document.getElementById("score");
@@ -165,9 +209,6 @@
         return CUSTODIAN_NAMES[count - 1] || `${isES ? "Custodio" : "Custodian"} ${count}`;
       }
 
-      function custodianGlyphMarkup(name) {
-        return String(name).toLowerCase() === "eramus" ? SHIP_ICON : CUSTODIAN_ICON;
-      }
 
       function announceCustodianBirth() {
         custodianCount += 1;
@@ -175,7 +216,7 @@
         try { localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount)); }
         catch (_) {}
         const name = custodianNameFor(custodianCount);
-        pendingCustodianAnnouncements.push({ count: custodianCount, name, icon: custodianGlyphMarkup(name) });
+        pendingCustodianAnnouncements.push({ count: custodianCount, name, icon: custodianGlyphMarkup(custodianCount) });
       }
 
       function updateSoundUI() {
@@ -313,8 +354,35 @@
         catch (_) { return 0; }
       }
 
-      function createTile(value, row, col) {
-        return { id: ++uid, value, row, col };
+      function createTile(value, row, col, custodianIndex = 0) {
+        return { id: ++uid, value, row, col,
+          custodianIndex: value === TERMINAL_STAGE_VALUE ? custodianIndex : 0 };
+      }
+
+      // Old saved games store only numeric tile values. New games also store the
+      // Custodian IDs, so individual names and artwork survive a reload or Undo.
+      // When restoring an older game, assign deterministic distinct IDs.
+      function hydrateGrid(values, savedIds) {
+        const used = new Set();
+        let nextFree = 1;
+        return values.map((row, r) => row.map((rawValue, c) => {
+          const value = Number(rawValue);
+          if (!value) return null;
+          if (value !== TERMINAL_STAGE_VALUE) return createTile(value, r, c);
+          const preferred = Number(savedIds?.[r]?.[c]);
+          let index = Number.isInteger(preferred) && preferred >= 1 &&
+            preferred <= SIZE * SIZE && !used.has(preferred) ? preferred : 0;
+          if (!index) {
+            while (used.has(nextFree)) nextFree++;
+            index = nextFree;
+          }
+          used.add(index);
+          return createTile(value, r, c, index);
+        }));
+      }
+
+      function gridCustodianIds() {
+        return grid.map(row => row.map(tile => tile?.custodianIndex || 0));
       }
 
       function normalizedRecordedStage(value, hasCustodianRecord = false) {
@@ -356,10 +424,7 @@
               row.every(value => validValues.has(Number(value))));
           if (!validGrid) return false;
 
-          grid = saved.grid.map((row, r) => row.map((value, c) => {
-            const numericValue = Number(value);
-            return numericValue ? createTile(numericValue, r, c) : null;
-          }));
+          grid = hydrateGrid(saved.grid, saved.custodianIds);
           if (!grid.flat().some(Boolean)) return false;
 
           score = Math.max(0, Number(saved.score) || 0);
@@ -385,7 +450,8 @@
       function saveGame() {
         try {
           const values = grid.map(row => row.map(tile => tile ? tile.value : 0));
-          localStorage.setItem(SAVE_KEY, JSON.stringify({ grid: values, score, runMaxValue, custodianCount }));
+          localStorage.setItem(SAVE_KEY, JSON.stringify({ grid: values,
+            custodianIds: gridCustodianIds(), score, runMaxValue, custodianCount }));
           localStorage.setItem(BEST_KEY, String(best));
           localStorage.setItem(MAX_STAGE_KEY, String(maxEverValue));
           localStorage.setItem(BEST_CUSTODIANS_KEY, String(bestCustodianCount));
@@ -485,6 +551,7 @@
       function cloneState() {
         return {
           values: grid.map(row => row.map(tile => tile ? tile.value : 0)),
+          custodianIds: gridCustodianIds(),
           score,
           runMaxValue,
           custodianCount,
@@ -497,7 +564,7 @@
         pendingDiscovery = null;
         pendingCustodianAnnouncements = [];
         gameOverPending = false;
-        grid = state.values.map((row, r) => row.map((value, c) => value ? createTile(value, r, c) : null));
+        grid = hydrateGrid(state.values, state.custodianIds);
         score = state.score;
         custodianCount = state.values.flat().filter(value => Number(value) === TERMINAL_STAGE_VALUE).length;
         newIds.clear();
@@ -580,7 +647,8 @@
               grid[r][c] = null;
               if (nr !== r || nc !== c) grid[nr][nc] = null;
               const value = tile.value * 2;
-              const merged = createTile(value, targetRow, targetCol);
+              const merged = createTile(value, targetRow, targetCol,
+                value === TERMINAL_STAGE_VALUE ? custodianCount + 1 : 0);
               grid[targetRow][targetCol] = merged;
               mergedPositions.add(targetKey);
               mergedIds.add(merged.id);
@@ -969,7 +1037,9 @@
         gameOverKicker.textContent = voluntary
           ? (isES ? "TU EVOLUCIÓN SE DETIENE AQUÍ" : "YOUR EVOLUTION STOPS HERE")
           : (isES ? "TU PLANETA HA COLAPSADO" : "YOUR PLANET HAS COLLAPSED");
-        gameOverStage.textContent = stageByValue.get(runMaxValue)?.name || highestStage().name;
+        gameOverStage.textContent = custodianCount > 0
+          ? custodianNameFor(custodianCount)
+          : (stageByValue.get(runMaxValue)?.name || highestStage().name);
         if (voluntary) {
           document.getElementById("game-over-copy").textContent = custodianCount
             ? (isES
@@ -993,7 +1063,12 @@
         openScreen(gameOverScreen);
         // Offer registration only when this finished run qualifies for the TOP 20.
         // The game engine passes the numeric score, never text read from the page.
-        if (score > 0) recordsUI?.promptScore(score, {stage: runMaxValue});
+        // Record the latest Custodian reached, not just the last board tile value 4096.
+        // This is a leaderboard-only value: the board itself keeps the original 12 stages.
+        const recordStage = custodianCount > 0
+          ? TERMINAL_STAGE_VALUE + Math.min(custodianCount, CUSTODIAN_NAMES.length)
+          : runMaxValue;
+        if (score > 0) recordsUI?.promptScore(score, {stage: recordStage});
       }
 
       function showVictory() {
@@ -1116,8 +1191,24 @@
           if (mergedIds.has(tile.id)) element.classList.add("merged");
           element.style.setProperty("--x", tile.col);
           element.style.setProperty("--y", tile.row);
-          element.style.setProperty("--tile", stage.color);
-          element.innerHTML = `<span class="glyph">${stageGlyphMarkup(stage)}</span><span class="tile-name">${stage.name}</span><span class="tile-value">${tile.value}</span>`;
+          if (tile.value === TERMINAL_STAGE_VALUE) {
+            const index = tile.custodianIndex || 1;
+            const name = custodianNameFor(index);
+            element.classList.add("custodian-tile");
+            element.style.setProperty("--tile", custodianColorFor(index));
+            element.title = isES
+              ? `${name} · Custodio ${index}. No se fusiona con otras piezas.`
+              : `${name} · Custodian ${index}. Cannot merge with other tiles.`;
+            element.setAttribute("aria-label", element.title);
+            element.innerHTML = `<span class="custodian-number">${String(index).padStart(2, "0")}</span>` +
+              `<span class="glyph">${custodianGlyphMarkup(index)}</span>` +
+              `<span class="tile-name">${name}</span>` +
+              `<span class="tile-value">${isES ? "NO FUSIONA" : "NO MERGE"}</span>`;
+          } else {
+            element.style.setProperty("--tile", stage.color);
+            element.innerHTML = `<span class="glyph">${stageGlyphMarkup(stage)}</span>` +
+              `<span class="tile-name">${stage.name}</span><span class="tile-value">${tile.value}</span>`;
+          }
           fragment.appendChild(element);
         });
 
@@ -1130,17 +1221,23 @@
         const currentIndex = Math.min(stages.indexOf(currentStage), stages.length - 1);
         stageHud.textContent = `${isES ? "Hito" : "Stage"} ${currentIndex + 1}/${stages.length}`;
         custodianHud.hidden = custodianCount <= 0;
-        custodianCountElement.textContent = custodianCount.toLocaleString(isES ? "es-ES" : "en-US");
+        custodianCountElement.textContent = `${custodianCount}/${SIZE * SIZE}`;
 
         const followingStage = stages[currentIndex + 1];
         setStageGlyph(discoveryGlyph, currentStage);
         discoveryGlyph.style.color = currentStage.color;
         discoveryName.textContent = currentStage.name;
-        discoveryText.textContent = currentStage.text;
+        discoveryText.textContent = custodianCount > 0
+          ? (isES
+              ? "Cada Custodio tiene su identidad y ocupa una casilla que no puede fusionarse."
+              : "Every Custodian has its own identity and occupies a tile that cannot merge.")
+          : currentStage.text;
         progressFill.style.width = `${(currentIndex / (stages.length - 1)) * 100}%`;
         nextStage.textContent = followingStage
           ? `${isES ? "Próximo hito" : "Next milestone"}: ${followingStage.name}`
-          : (isES ? "Todos los hitos alcanzados" : "All milestones reached");
+          : (isES
+              ? `Fase Custodios: ${custodianCount}/${SIZE * SIZE} · Las piezas no se fusionan`
+              : `Custodian phase: ${custodianCount}/${SIZE * SIZE} · Tiles cannot merge`);
 
         const maximumStage = stageByValue.get(maxEverValue) || stages[stages.length - 1];
         if (bestCustodianCount > 0) {

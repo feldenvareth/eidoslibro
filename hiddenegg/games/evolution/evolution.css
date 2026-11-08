@@ -1196,3 +1196,107 @@
     padding-inline:8px;
   }
 }
+
+/* v20261108: fixed-size top bar with a dedicated score/stage line.
+   All four indicators remain visible as Custodians begin to appear. */
+#top-bar {
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  grid-template-rows: 22px 18px;
+  column-gap: 7px;
+  row-gap: 1px;
+  padding: 3px 10px 3px;
+}
+#top-bar > #hud {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 3px 13px;
+  font-size: 11px;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+#top-bar > .eidos-records-toolbar-button {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+}
+#top-bar > #sound-button { grid-column: 3; grid-row: 1; align-self: center; }
+#top-bar > #close-btn { grid-column: 4; grid-row: 1; align-self: center; }
+#hud .stage-hud { margin-left: auto; }
+#hud #custodian-hud { margin-left: 2px; }
+.hud-label-short { display: none; }
+
+/* Each terminal tile has its own silhouette, color, serial number and name.
+   Terminal tiles are intentionally never merged by the game rules. */
+.tile.custodian-tile {
+  background:
+    radial-gradient(circle at 44% 24%, color-mix(in srgb, var(--tile) 28%, transparent), transparent 56%),
+    linear-gradient(150deg, #213831, #101e1a 80%);
+  border: 2px solid var(--tile);
+  box-shadow: inset 0 0 11px color-mix(in srgb, var(--tile) 16%, transparent),
+    0 0 13px color-mix(in srgb, var(--tile) 29%, transparent);
+  gap: 1px;
+}
+.tile.custodian-tile::before { display: none; }
+.tile.custodian-tile .glyph {
+  font-size: clamp(25px, 7vw, 37px);
+  line-height: 1;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--tile) 38%, transparent));
+}
+.unique-custodian-icon {
+  display: block;
+  width: .85em;
+  height: .85em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.tile.custodian-tile .tile-name {
+  max-width: 100%;
+  font-size: clamp(8px, 2.25vw, 11px);
+  font-weight: 800;
+  color: var(--cream);
+  text-shadow: 0 1px 2px rgba(0,0,0,.75);
+}
+.tile.custodian-tile .tile-value {
+  color: var(--tile);
+  font-size: clamp(6px, 1.6vw, 8px);
+  font-weight: 800;
+  letter-spacing: .15px;
+  opacity: 1;
+}
+.tile.custodian-tile .custodian-number {
+  position: absolute;
+  z-index: 2;
+  right: 4px;
+  top: 3px;
+  padding: 1px 2px;
+  border-radius: 3px;
+  color: #081712;
+  background: var(--tile);
+  font-size: clamp(7px, 1.65vw, 9px);
+  line-height: 1;
+  font-weight: 800;
+}
+@media (max-width: 430px) {
+  #top-bar { padding: 2px 7px 2px; grid-template-rows: 21px 16px; column-gap: 6px; }
+  #top-bar > #hud { gap: 2px 8px; font-size: clamp(9px, 2.7vw, 11px); }
+  .hud-label-full { display: none; }
+  .hud-label-short { display: inline; }
+  #hud #custodian-hud { margin-left: 0; }
+  .tile.custodian-tile .glyph { font-size: clamp(22px, 7vw, 30px); }
+  .tile.custodian-tile .tile-name { font-size: clamp(7px, 2.3vw, 9px); }
+  .tile.custodian-tile .tile-value { font-size: 6px; }
+}
+@media (max-height: 570px) {
+  #top-bar { padding-top: 0; padding-bottom: 0; grid-template-rows: 20px 16px; }
+}
