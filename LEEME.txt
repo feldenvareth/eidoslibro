@@ -1,0 +1,12 @@
+RELATOS: MUESTRAS RECORTADAS EN ESPAÑOL E INGLÉS
+
+1. Copia los archivos de este ZIP a la carpeta de tu web, respetando las carpetas y sustituyendo los existentes.
+2. Para retirar también las imágenes antiguas del servidor, borra los archivos pagina-063.webp a pagina-070.webp, ambos incluidos, en estas dos carpetas:
+   assets/reader/relatos-es/
+   assets/reader/relatos-en/
+   Estos nombres corresponden a los archivos, no a los números que mostraba el visor.
+
+El visor ya no solicita las imágenes retiradas. Los PDF incluidos también están recortados.
+En español se han quitado las antiguas páginas 66 a 73 del visor y se conservan las antiguas 74 y 75. En inglés se ha retirado el tramo equivalente, incluida una ilustración que revelaba el desenlace. Las dos muestras tienen ahora 67 páginas en el visor.
+El recorte termina en el mismo punto de la escena: Thomas esperó. / Thomas waited.
+Se conservan las portadas, el hojeado automático y los capítulos a la derecha.

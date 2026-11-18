@@ -1,43 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leer Eidos Relatos</title>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+<html lang="es"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,follow">
+  <title>Eidos Relatos · Primeros capítulos</title><link rel="stylesheet" href="assets/css/eidos-reader.css?v=2">
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-
-    function hasAnalyticsConsent(){
-      try {
-        const saved = JSON.parse(localStorage.getItem('ga_consent_v2') || '{}');
-        return saved.analytics_storage === 'granted';
-      } catch(e){
-        return false;
-      }
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'G-SCSFPYKJTX', { send_page_view: true });
-
-    if (hasAnalyticsConsent()) {
-      try {
-        localStorage.setItem('opened_chapter_eidos_relatos', 'yes');
-        gtag('event', 'chapter_open', {
-          book: 'eidos_relatos'
-        });
-      } catch(e){}
-    }
-  </script>
-</head>
-<body style="margin:0;">
-  <iframe
-    src="docs/eidosrelatosprimercapitulo.pdf"
-    style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;"
-    width="100%"
-    height="100%">
-  </iframe>
-</body>
-</html>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+    gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+    try{var saved=JSON.parse(localStorage.getItem('ga_consent_v2')||'{}');if(localStorage.getItem('consentGiven')==='true'||saved.analytics_storage==='granted')gtag('consent','update',{analytics_storage:'granted'});}catch(e){}
+    gtag('js',new Date());gtag('config','G-SCSFPYKJTX');
+  </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SCSFPYKJTX"></script>
+</head><body class="er-standalone" data-eidos-reader-auto>
+  <main class="er-standalone-main"><a class="er-return" href="index.html#download">← Volver a Eidos</a><h1>Eidos Relatos · Primeros capítulos</h1><p>Pulsa la portada para abrir el libro. También puedes consultar el PDF original.</p>
+    <a class="er-teaser" href="docs/eidosrelatosprimercapitulo.pdf?v=2" data-eidos-reader="relatos" aria-label="Leer las primeras páginas · Eidos Relatos">
+      <span class="er-mini-stage" aria-hidden="true"><span class="er-mini-book"><span class="er-mini-back"></span><span class="er-mini-edge"></span><span class="er-mini-spine">EIDOS</span><span class="er-mini-front"><img src="assets/images/taparelatos.jpg" alt="" width="520" height="780" loading="lazy" decoding="async"></span></span></span>
+      <span class="er-teaser-copy"><span class="er-teaser-kicker">Eidos Relatos · Felden Vareth</span><span class="er-teaser-title">Leer las primeras páginas</span><span class="er-teaser-action">Abrir el libro →</span></span>
+    </a><p><a href="docs/eidosrelatosprimercapitulo.pdf?v=2" target="_blank" rel="noopener">Abrir el PDF original</a></p><noscript><iframe class="er-nojs-pdf" title="Eidos Relatos · Primeros capítulos" src="docs/eidosrelatosprimercapitulo.pdf?v=2"></iframe></noscript>
+  </main><script defer src="assets/js/eidos-reader.js?v=5"></script>
+</body></html>

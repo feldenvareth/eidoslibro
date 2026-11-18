@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Una entrada al índice sin sección debe comenzar en la cabecera.
+    if (!window.location.hash) {
+      if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+      window.addEventListener('pageshow', function (event) {
+        if (!event.persisted && !window.location.hash) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }
+      }, { once: true });
+    }
+  </script>
 
   <title>EIDOS | Novela de ciencia ficción filosófica de Felden Vareth</title>
   <meta name="description" content="EIDOS, novela de ciencia ficción sobre la consciencia de Felden Vareth. Una historia sobre transferencia digital de la consciencia, colapso ecológico, inteligencia artificial e identidad humana.">
@@ -91,6 +102,7 @@
   
   
   
+  <link rel="stylesheet" href="assets/css/eidos-reader.css?v=2">
 </head>
 <body>
 
@@ -746,8 +758,14 @@
           <cite>– Eidos Relatos</cite>
         </div>
 
-        <a class="btn-outline" href="leer-eidos.html" target="_blank">
-          <i class="fa-regular fa-file-lines"></i> Descargar primeros capítulos
+        <a class="er-teaser" href="leer-eidos.html" data-eidos-reader aria-label="Leer los primeros capítulos de Eidos">
+          <span class="er-mini-stage" aria-hidden="true">
+            <span class="er-mini-book">
+              <span class="er-mini-back"></span><span class="er-mini-edge"></span><span class="er-mini-spine">EIDOS</span>
+              <span class="er-mini-front"><img src="assets/reader/eidos-es/cubierta.webp" alt="" width="520" height="780" loading="lazy" decoding="async"></span>
+            </span>
+          </span>
+          <span class="er-teaser-copy"><span class="er-teaser-kicker">Eidos · Felden Vareth</span><span class="er-teaser-title">Leer las primeras páginas</span><span class="er-teaser-action">Abrir el libro →</span></span>
         </a>
       </div>
     </div>
@@ -1811,25 +1829,31 @@
       
       
       
-      <div class="download-ctas">
-        <a class="btn-primary" href=" https://www.amazon.es/dp/B0FCR5ZPBJ  " target="_blank">
-          <i class="fa-brands fa-amazon"></i>Comprar Eidos 
-        </a>
-        <a class="btn-outline" href="leer-eidos.html" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Capítulos gratuitos
-        </a>
-        
-
-        <a class="btn-primary" href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank">
-          <i class="fa-brands fa-amazon"></i>Comprar Eidos Relatos 
-        </a>
-        <a class="btn-outline" href="leer-eidos-relatos.html" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Capítulos gratuitos
-        </a>
-
-
-        
-        
+      <div class="er-download-books">
+        <article class="er-download-book">
+          <a class="er-download-cover" href="leer-eidos.html" data-eidos-reader="novel" aria-label="Leer primeras páginas · Eidos">
+            <span class="er-mini-stage" aria-hidden="true"><span class="er-mini-book">
+              <span class="er-mini-back"></span><span class="er-mini-edge"></span><span class="er-mini-spine">EIDOS</span>
+              <span class="er-mini-front"><img src="assets/reader/eidos-es/cubierta.webp" alt="" width="520" height="780" loading="lazy" decoding="async"></span>
+            </span></span>
+          </a>
+          <div class="er-download-copy"><h3>Eidos</h3><div class="er-download-actions">
+            <a class="btn-primary" href=" https://www.amazon.es/dp/B0FCR5ZPBJ  " target="_blank"><i class="fa-brands fa-amazon" aria-hidden="true"></i>Comprar Eidos</a>
+            <a class="btn-outline" href="leer-eidos.html" data-eidos-reader="novel"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Leer primeras páginas</a>
+          </div></div>
+        </article>
+        <article class="er-download-book">
+          <a class="er-download-cover" href="leer-eidos-relatos.html" data-eidos-reader="relatos" aria-label="Leer primeras páginas · Eidos Relatos">
+            <span class="er-mini-stage" aria-hidden="true"><span class="er-mini-book">
+              <span class="er-mini-back"></span><span class="er-mini-edge"></span><span class="er-mini-spine">EIDOS</span>
+              <span class="er-mini-front"><img src="assets/images/taparelatos.jpg" alt="" width="520" height="780" loading="lazy" decoding="async"></span>
+            </span></span>
+          </a>
+          <div class="er-download-copy"><h3>Eidos Relatos</h3><div class="er-download-actions">
+            <a class="btn-primary" href="https://www.amazon.es/dp/B0G8HLFJXT" target="_blank"><i class="fa-brands fa-amazon" aria-hidden="true"></i>Comprar Eidos Relatos</a>
+            <a class="btn-outline" href="leer-eidos-relatos.html" data-eidos-reader="relatos"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Leer primeras páginas</a>
+          </div></div>
+        </article>
       </div>
     </div>
   </div>
@@ -3729,7 +3753,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <p class="footer-logo">EIDOS</p>
   <div class="footer-links">
     <a href="index.html">Inicio</a>
-    <a href="docs/eidosprimeroscapitulos.pdf" target="_blank">Capítulos gratis</a>
+    <a href="leer-eidos.html" data-eidos-reader>Capítulos gratis</a>
     <a href="https://www.amazon.es/dp/B0FCR5ZPBJ" target="_blank">Amazon</a>
     <a href="indexautor.html" target="_blank">Copia firmada</a>
     <a href="terminosycondiciones.html">Términos y condiciones</a>
@@ -4127,55 +4151,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const langLinks = document.querySelectorAll(".lang-switch");
+  const langLinks = Array.from(document.querySelectorAll(".lang-switch"));
+  const targetBases = langLinks.map(link => link.getAttribute("href").split("#")[0]);
   const sections = Array.from(document.querySelectorAll("section[id]"));
   const navbar = document.getElementById("navbar");
 
   function getCurrentSection() {
-    const navHeight = navbar ? navbar.offsetHeight : 0;
-    const triggerY = navHeight + 120;
-
+    const navHeight = navbar ? navbar.getBoundingClientRect().bottom : 0;
+    const triggerY = navHeight + Math.min(120, (window.innerHeight - navHeight) / 3);
     let current = "hero";
+    let closestTop = -Infinity;
 
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
-      if (rect.top <= triggerY) {
+      if (rect.height > 0 && rect.width > 0 && rect.top <= triggerY && rect.top > closestTop) {
         current = section.id;
+        closestTop = rect.top;
       }
     });
-
     return current;
   }
 
-  function saveCurrentSection() {
-    const current = getCurrentSection();
-    sessionStorage.setItem("eidosCurrentSection", current);
+  // Se calcula desde la página visible, sin reutilizar una sección guardada.
+  function updateLanguageLinks() {
+    const hash = "#" + encodeURIComponent(getCurrentSection());
+    langLinks.forEach((link, index) => {
+      link.setAttribute("href", targetBases[index] + hash);
+    });
   }
 
-  saveCurrentSection();
-  window.addEventListener("scroll", saveCurrentSection, { passive: true });
-  window.addEventListener("resize", saveCurrentSection);
-
-  langLinks.forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetBase = this.getAttribute("href");
-      const currentSection = sessionStorage.getItem("eidosCurrentSection") || "hero";
-
-      window.location.href = targetBase + "#" + currentSection;
+  let framePending = false;
+  function scheduleUpdate() {
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(() => {
+      framePending = false;
+      updateLanguageLinks();
     });
+  }
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  window.addEventListener("pageshow", scheduleUpdate);
+  langLinks.forEach(link => {
+    // Captura antes de cerrar el menú móvil; conserva también Ctrl/clic y nueva pestaña.
+    link.addEventListener("pointerdown", updateLanguageLinks, true);
+    link.addEventListener("click", updateLanguageLinks, true);
+    link.addEventListener("contextmenu", updateLanguageLinks, true);
   });
+  updateLanguageLinks();
 
   const targetHash = window.location.hash.replace("#", "");
   if (targetHash) {
     const targetEl = document.getElementById(targetHash);
     if (targetEl) {
-      requestAnimationFrame(() => {
+      function alignTarget() {
         const navHeight = navbar ? navbar.offsetHeight : 0;
         const y = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight;
-        window.scrollTo({ top: y, behavior: "auto" });
-      });
+        window.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+        updateLanguageLinks();
+      }
+      requestAnimationFrame(alignTarget);
+      window.addEventListener("pageshow", event => {
+        if (!event.persisted) alignTarget();
+      }, { once: true });
     } else {
       history.replaceState(null, "", window.location.pathname);
     }
@@ -4184,5 +4223,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
+<script defer src="assets/js/eidos-reader.js?v=5"></script>
 </body>
 </html>
